@@ -48,4 +48,13 @@ Append-only. One line per task start/end: task ID, outcome, commit SHA.
   mildest common pattern (a plain subtype alias) is enough to exclude a program.
   Wrote `tests/corpus/IN_GRAMMAR.txt` (195 files, explicitly NOT the pre-registered
   corpus, header says so). Report: `docs/reports/night01-T5-grammar.md`. Commit:
-  (pending)
+  70f79a0
+- T6 start — P2 scaling sweep, three columns, prerequisite T1 (passed).
+- T6 end — outcome: done, complete. All 6 sizes (250..8000) ran clean, no DNF, no
+  abort. `T_souffle/T_guard` grows from 157x at n=250 to 4,244x at n=8,000 --
+  roughly doubling with n, consistent with linear growth in the ratio (T_none
+  quadratic, T_guard linear, T_souffle tracks T_none). Reported as integers, not
+  asserted as a general theorem (n=6 points, one fixture shape). Built
+  `harness/fixtures_lib.py` (T7 item 4 deliverable), validated byte-identical
+  against the original committed P1/P2 fixtures before use. Report:
+  `docs/reports/night01-T6-scaling.md`. Commit: (pending)
