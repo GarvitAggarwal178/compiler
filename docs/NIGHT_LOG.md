@@ -40,4 +40,12 @@ Append-only. One line per task start/end: task ID, outcome, commit SHA.
   57/86 (66%). `E_recoverable=0` on 29/86 (34%, agrees with T3's 37% on the smaller
   pre-registered subset). Found and fixed two harness bugs before trusting results
   (duplicated-candidate-set bug, missing-key crash in tuple_report.py). Report:
-  `docs/reports/night01-T4-exploratory.md`. Commit: (pending)
+  `docs/reports/night01-T4-exploratory.md`. Commit: 83fe5f4
+- T5 start — grammar coverage census, no prerequisite, full tree.
+- T5 end — outcome: done. 622 `.dl` files scanned, 195 (31.4%) fully in-grammar
+  against blueprint §4. `.type` declarations are the dominant exclusion factor
+  (68.1% of out-of-grammar files, ~4x the next most common feature) — even the
+  mildest common pattern (a plain subtype alias) is enough to exclude a program.
+  Wrote `tests/corpus/IN_GRAMMAR.txt` (195 files, explicitly NOT the pre-registered
+  corpus, header says so). Report: `docs/reports/night01-T5-grammar.md`. Commit:
+  (pending)
