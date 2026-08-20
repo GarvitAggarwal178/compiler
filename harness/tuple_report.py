@@ -64,7 +64,7 @@ def analyze(log_path: Path):
         doc = json.load(f)
     input_names = set()
     cfg = doc["root"]["program"].get("configuration", {})
-    relations = doc["root"]["program"]["relation"]
+    relations = doc["root"]["program"].get("relation", {})
 
     per_relation = {}
     for name, rel in relations.items():

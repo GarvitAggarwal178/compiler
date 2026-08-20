@@ -1,0 +1,783 @@
+{
+ "root": {
+  "program": {
+   "configuration": {
+    "": "/root/souffle-src/tests/example/flights/flights.dl",
+    "fact-dir": "/root/souffle-src/tests/example/flights",
+    "include-dir": ".",
+    "jobs": "1",
+    "libraries": "functors",
+    "library-dir": ".",
+    "magic-transform": "*",
+    "output-dir": "/root/compiler/measurements/night01-t4/runs/example__flights",
+    "profile": "prof.log",
+    "relationCount": "4",
+    "ruleCount": "36",
+    "version": "2.5",
+    "warn": "all",
+    "wno": "none"
+   },
+   "relation": {
+    "@interm_out.QAflies.{bf}": {
+     "iteration": {
+      "0": {
+       "maxRSS": {
+        "post": 16384,
+        "pre": 16384
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "@interm_out.QAflies.{bf}(X,Y) :- \n   @magic.@interm_out.QAflies.{bf}(X),\n   flight(@abdul0,X,Z),\n   @interm_out.QAflies.{bf}(Z,Y),\n   @abdul0 = \"QA\".": {
+         "0": {
+          "atom-frequency": {
+           "@new_@interm_out.QAflies.{bf}(X,Y) :- \n   @magic.@interm_out.QAflies.{bf}(X),\n   flight(@abdul0,X,Z),\n   @delta_@interm_out.QAflies.{bf}(Z,Y),\n   @abdul0 = \"QA\".": {
+            "@delta_@interm_out.QAflies.{bf}": {
+             "level": 2,
+             "num-tuples": 0
+            },
+            "@magic.@interm_out.QAflies.{bf}": {
+             "level": 0,
+             "num-tuples": 0
+            },
+            "flight": {
+             "level": 1,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 16384,
+           "pre": 16384
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 22626503626, "end": 22626503628},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 22626503618, "end": 22626503642}
+      }
+     },
+     "maxRSS": {
+      "post": 16384,
+      "pre": 16384
+     },
+     "non-recursive-rule": {
+      "@interm_out.QAflies.{bf}(X,Y) :- \n   @magic.@interm_out.QAflies.{bf}(X),\n   flight(@abdul0,X,Y),\n   @abdul0 = \"QA\".": {
+       "atom-frequency": {
+        "@interm_out.QAflies.{bf}(X,Y) :- \n   @magic.@interm_out.QAflies.{bf}(X),\n   flight(@abdul0,X,Y),\n   @abdul0 = \"QA\".": {
+         "@magic.@interm_out.QAflies.{bf}": {
+          "level": 0,
+          "num-tuples": 0
+         },
+         "flight": {
+          "level": 1,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 16384,
+        "pre": 16384
+       },
+       "num-tuples": 2,
+       "runtime": { "start": 22626503605, "end": 22626503606},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 2,
+     "runtime": { "start": 22626503604, "end": 22626503614},
+     "source-locator": " [1:1-1:1]"
+    },
+    "@interm_out.QAflies.{ff}": {
+     "maxRSS": {
+      "post": 16384,
+      "pre": 16384
+     },
+     "non-recursive-rule": {
+      "@interm_out.QAflies.{ff}(X,Y) :- \n   @magic.@interm_out.QAflies.{ff}(),\n   flight(@abdul0,X,Y),\n   @abdul0 = \"QA\".": {
+       "atom-frequency": {
+        "@interm_out.QAflies.{ff}(X,Y) :- \n   @magic.@interm_out.QAflies.{ff}(),\n   flight(@abdul0,X,Y),\n   @abdul0 = \"QA\".": {
+         "flight": {
+          "level": 1,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 16384,
+        "pre": 16384
+       },
+       "num-tuples": 4,
+       "runtime": { "start": 22626503714, "end": 22626503715},
+       "source-locator": " [1:1-1:1]"
+      },
+      "@interm_out.QAflies.{ff}(X,Y) :- \n   @magic.@interm_out.QAflies.{ff}(),\n   flight(@abdul0,X,Z),\n   @interm_out.QAflies.{bf}(Z,Y),\n   @abdul0 = \"QA\".": {
+       "atom-frequency": {
+        "@interm_out.QAflies.{ff}(X,Y) :- \n   @magic.@interm_out.QAflies.{ff}(),\n   flight(@abdul0,X,Z),\n   @interm_out.QAflies.{bf}(Z,Y),\n   @abdul0 = \"QA\".": {
+         "@interm_out.QAflies.{bf}": {
+          "level": 2,
+          "num-tuples": 0
+         },
+         "flight": {
+          "level": 1,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 16384,
+        "pre": 16384
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 22626503721, "end": 22626503731},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 5,
+     "runtime": { "start": 22626503713, "end": 22626503740},
+     "source-locator": " [1:1-1:1]"
+    },
+    "@interm_out.VAflies.{bf}": {
+     "iteration": {
+      "0": {
+       "maxRSS": {
+        "post": 16384,
+        "pre": 16384
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "@interm_out.VAflies.{bf}(X,Y) :- \n   @magic.@interm_out.VAflies.{bf}(X),\n   flight(@abdul0,X,Z),\n   @interm_out.VAflies.{bf}(Z,Y),\n   @abdul0 = \"VA\".": {
+         "0": {
+          "atom-frequency": {
+           "@new_@interm_out.VAflies.{bf}(X,Y) :- \n   @magic.@interm_out.VAflies.{bf}(X),\n   flight(@abdul0,X,Z),\n   @delta_@interm_out.VAflies.{bf}(Z,Y),\n   @abdul0 = \"VA\".": {
+            "@delta_@interm_out.VAflies.{bf}": {
+             "level": 2,
+             "num-tuples": 0
+            },
+            "@magic.@interm_out.VAflies.{bf}": {
+             "level": 0,
+             "num-tuples": 0
+            },
+            "flight": {
+             "level": 1,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 16384,
+           "pre": 16384
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 22626503683, "end": 22626503685},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 22626503674, "end": 22626503693}
+      }
+     },
+     "maxRSS": {
+      "post": 16384,
+      "pre": 16384
+     },
+     "non-recursive-rule": {
+      "@interm_out.VAflies.{bf}(X,Y) :- \n   @magic.@interm_out.VAflies.{bf}(X),\n   flight(@abdul0,X,Y),\n   @abdul0 = \"VA\".": {
+       "atom-frequency": {
+        "@interm_out.VAflies.{bf}(X,Y) :- \n   @magic.@interm_out.VAflies.{bf}(X),\n   flight(@abdul0,X,Y),\n   @abdul0 = \"VA\".": {
+         "@magic.@interm_out.VAflies.{bf}": {
+          "level": 0,
+          "num-tuples": 0
+         },
+         "flight": {
+          "level": 1,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 16384,
+        "pre": 16384
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 22626503661, "end": 22626503663},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 1,
+     "runtime": { "start": 22626503661, "end": 22626503670},
+     "source-locator": " [1:1-1:1]"
+    },
+    "@interm_out.VAflies.{ff}": {
+     "maxRSS": {
+      "post": 16384,
+      "pre": 16384
+     },
+     "non-recursive-rule": {
+      "@interm_out.VAflies.{ff}(X,Y) :- \n   @magic.@interm_out.QAflies.{ff}(),\n   flight(@abdul0,X,Y),\n   @abdul0 = \"VA\".": {
+       "atom-frequency": {
+        "@interm_out.VAflies.{ff}(X,Y) :- \n   @magic.@interm_out.QAflies.{ff}(),\n   flight(@abdul0,X,Y),\n   @abdul0 = \"VA\".": {
+         "flight": {
+          "level": 1,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 16384,
+        "pre": 16384
+       },
+       "num-tuples": 4,
+       "runtime": { "start": 22626503753, "end": 22626503754},
+       "source-locator": " [1:1-1:1]"
+      },
+      "@interm_out.VAflies.{ff}(X,Y) :- \n   @magic.@interm_out.QAflies.{ff}(),\n   flight(@abdul0,X,Z),\n   @interm_out.VAflies.{bf}(Z,Y),\n   @abdul0 = \"VA\".": {
+       "atom-frequency": {
+        "@interm_out.VAflies.{ff}(X,Y) :- \n   @magic.@interm_out.QAflies.{ff}(),\n   flight(@abdul0,X,Z),\n   @interm_out.VAflies.{bf}(Z,Y),\n   @abdul0 = \"VA\".": {
+         "@interm_out.VAflies.{bf}": {
+          "level": 2,
+          "num-tuples": 0
+         },
+         "flight": {
+          "level": 1,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 16384,
+        "pre": 16384
+       },
+       "num-tuples": 0,
+       "runtime": { "start": 22626503762, "end": 22626503763},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 4,
+     "runtime": { "start": 22626503744, "end": 22626503771},
+     "source-locator": " [1:1-1:1]"
+    },
+    "@magic.@interm_out.QAflies.{bf}": {
+     "iteration": {
+      "0": {
+       "maxRSS": {
+        "post": 16384,
+        "pre": 16384
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "@magic.@interm_out.QAflies.{bf}(Z) :- \n   @magic.@interm_out.QAflies.{bf}(X),\n   flight(@abdul0,X,Z),\n   @abdul0 = \"QA\".": {
+         "0": {
+          "atom-frequency": {
+           "@new_@magic.@interm_out.QAflies.{bf}(Z) :- \n   @delta_@magic.@interm_out.QAflies.{bf}(X),\n   flight(@abdul0,X,Z),\n   @abdul0 = \"QA\".": {
+            "@delta_@magic.@interm_out.QAflies.{bf}": {
+             "level": 0,
+             "num-tuples": 0
+            },
+            "flight": {
+             "level": 1,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 16384,
+           "pre": 16384
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 22626503454, "end": 22626503459},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 22626503445, "end": 22626503470}
+      }
+     },
+     "maxRSS": {
+      "post": 16384,
+      "pre": 16384
+     },
+     "non-recursive-rule": {
+      "@magic.@interm_out.QAflies.{bf}(Z) :- \n   @magic.@interm_out.QAflies.{ff}(),\n   flight(@abdul0,_,Z),\n   @abdul0 = \"QA\".": {
+       "atom-frequency": {
+        "@magic.@interm_out.QAflies.{bf}(Z) :- \n   @magic.@interm_out.QAflies.{ff}(),\n   flight(@abdul0,_,Z),\n   @abdul0 = \"QA\".": {
+         "flight": {
+          "level": 1,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 16384,
+        "pre": 16384
+       },
+       "num-tuples": 3,
+       "runtime": { "start": 22626503426, "end": 22626503431},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 3,
+     "runtime": { "start": 22626503416, "end": 22626503439},
+     "source-locator": " [1:1-1:1]"
+    },
+    "@magic.@interm_out.QAflies.{ff}": {
+     "maxRSS": {
+      "post": 16384,
+      "pre": 16384
+     },
+     "non-recursive-rule": {
+      "@magic.@interm_out.QAflies.{ff}().": {
+       "maxRSS": {
+        "post": 16384,
+        "pre": 16384
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 22626503289, "end": 22626503292},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 1,
+     "runtime": { "start": 22626503286, "end": 22626503302},
+     "source-locator": " [1:1-1:1]"
+    },
+    "@magic.@interm_out.VAflies.{bf}": {
+     "iteration": {
+      "0": {
+       "maxRSS": {
+        "post": 16384,
+        "pre": 16384
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "@magic.@interm_out.VAflies.{bf}(Z) :- \n   @magic.@interm_out.VAflies.{bf}(X),\n   flight(@abdul0,X,Z),\n   @abdul0 = \"VA\".": {
+         "0": {
+          "atom-frequency": {
+           "@new_@magic.@interm_out.VAflies.{bf}(Z) :- \n   @delta_@magic.@interm_out.VAflies.{bf}(X),\n   flight(@abdul0,X,Z),\n   @abdul0 = \"VA\".": {
+            "@delta_@magic.@interm_out.VAflies.{bf}": {
+             "level": 0,
+             "num-tuples": 0
+            },
+            "flight": {
+             "level": 1,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 16384,
+           "pre": 16384
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 22626503513, "end": 22626503515},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 22626503504, "end": 22626503525}
+      }
+     },
+     "maxRSS": {
+      "post": 16384,
+      "pre": 16384
+     },
+     "non-recursive-rule": {
+      "@magic.@interm_out.VAflies.{bf}(Z) :- \n   @magic.@interm_out.QAflies.{ff}(),\n   flight(@abdul0,_,Z),\n   @abdul0 = \"VA\".": {
+       "atom-frequency": {
+        "@magic.@interm_out.VAflies.{bf}(Z) :- \n   @magic.@interm_out.QAflies.{ff}(),\n   flight(@abdul0,_,Z),\n   @abdul0 = \"VA\".": {
+         "flight": {
+          "level": 1,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 16384,
+        "pre": 16384
+       },
+       "num-tuples": 3,
+       "runtime": { "start": 22626503492, "end": 22626503493},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 3,
+     "runtime": { "start": 22626503491, "end": 22626503500},
+     "source-locator": " [1:1-1:1]"
+    },
+    "@neglabel.@interm_out.VAflies": {
+     "iteration": {
+      "0": {
+       "maxRSS": {
+        "post": 16384,
+        "pre": 16384
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "@neglabel.@interm_out.VAflies(X,Y) :- \n   flight(@abdul0,X,Z),\n   @neglabel.@interm_out.VAflies(Z,Y),\n   @abdul0 = \"VA\".": {
+         "0": {
+          "atom-frequency": {
+           "@new_@neglabel.@interm_out.VAflies(X,Y) :- \n   flight(@abdul0,X,Z),\n   @delta_@neglabel.@interm_out.VAflies(Z,Y),\n   @abdul0 = \"VA\".": {
+            "@delta_@neglabel.@interm_out.VAflies": {
+             "level": 1,
+             "num-tuples": 0
+            },
+            "flight": {
+             "level": 0,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 16384,
+           "pre": 16384
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 22626503571, "end": 22626503574},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 22626503559, "end": 22626503584}
+      }
+     },
+     "maxRSS": {
+      "post": 16384,
+      "pre": 16384
+     },
+     "non-recursive-rule": {
+      "@neglabel.@interm_out.VAflies(X,Y) :- \n   flight(@abdul0,X,Y),\n   @abdul0 = \"VA\".": {
+       "atom-frequency": {
+        "@neglabel.@interm_out.VAflies(X,Y) :- \n   flight(@abdul0,X,Y),\n   @abdul0 = \"VA\".": {
+         "flight": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 16384,
+        "pre": 16384
+       },
+       "num-tuples": 4,
+       "runtime": { "start": 22626503545, "end": 22626503546},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 4,
+     "runtime": { "start": 22626503544, "end": 22626503554},
+     "source-locator": "/root/souffle-src/tests/example/flights/flights.dl [6:7-6:14]"
+    },
+    "QAflies": {
+     "maxRSS": {
+      "post": 16384,
+      "pre": 16384
+     },
+     "non-recursive-rule": {
+      "QAflies(@query_x0,@query_x1) :- \n   @interm_out.QAflies.{ff}(@query_x0,@query_x1).": {
+       "atom-frequency": {
+        "QAflies(@query_x0,@query_x1) :- \n   @interm_out.QAflies.{ff}(@query_x0,@query_x1).": {
+         "@interm_out.QAflies.{ff}": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 16384,
+        "pre": 16384
+       },
+       "num-tuples": 5,
+       "runtime": { "start": 22626503788, "end": 22626503789},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 5,
+     "reads": 0,
+     "runtime": { "start": 22626503777, "end": 22626503798},
+     "savetime": { "start": 22626503803, "end": 22626503883},
+     "source-locator": "/root/souffle-src/tests/example/flights/flights.dl [4:7-4:14]"
+    },
+    "QAonly": {
+     "maxRSS": {
+      "post": 16384,
+      "pre": 16384
+     },
+     "non-recursive-rule": {
+      "QAonly(X,Y) :- \n   @interm_out.QAflies.{ff}(X,Y),\n   !@neglabel.@interm_out.VAflies(X,Y).": {
+       "atom-frequency": {
+        "QAonly(X,Y) :- \n   @interm_out.QAflies.{ff}(X,Y),\n   !@neglabel.@interm_out.VAflies(X,Y).": {
+         "@interm_out.QAflies.{ff}": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 16384,
+        "pre": 16384
+       },
+       "num-tuples": 3,
+       "runtime": { "start": 22626503898, "end": 22626503900},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 3,
+     "reads": 0,
+     "runtime": { "start": 22626503888, "end": 22626503908},
+     "savetime": { "start": 22626503912, "end": 22626503940},
+     "source-locator": "/root/souffle-src/tests/example/flights/flights.dl [8:7-8:13]"
+    },
+    "VAflies": {
+     "maxRSS": {
+      "post": 16384,
+      "pre": 16384
+     },
+     "non-recursive-rule": {
+      "VAflies(@query_x0,@query_x1) :- \n   @interm_out.VAflies.{ff}(@query_x0,@query_x1).": {
+       "atom-frequency": {
+        "VAflies(@query_x0,@query_x1) :- \n   @interm_out.VAflies.{ff}(@query_x0,@query_x1).": {
+         "@interm_out.VAflies.{ff}": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 16384,
+        "pre": 16384
+       },
+       "num-tuples": 4,
+       "runtime": { "start": 22626503953, "end": 22626503954},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 4,
+     "reads": 0,
+     "runtime": { "start": 22626503944, "end": 22626503963},
+     "savetime": { "start": 22626503967, "end": 22626503991},
+     "source-locator": "/root/souffle-src/tests/example/flights/flights.dl [6:7-6:14]"
+    },
+    "flight": {
+     "maxRSS": {
+      "post": 16384,
+      "pre": 16384
+     },
+     "non-recursive-rule": {
+      "flight(\"QA\",\"AU\",\"CHI\").": {
+       "maxRSS": {
+        "post": 16384,
+        "pre": 16384
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 22626503316, "end": 22626503320},
+       "source-locator": " [1:1-1:1]"
+      },
+      "flight(\"QA\",\"AU\",\"JPN\").": {
+       "maxRSS": {
+        "post": 16384,
+        "pre": 16384
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 22626503328, "end": 22626503338},
+       "source-locator": " [1:1-1:1]"
+      },
+      "flight(\"QA\",\"JPN\",\"CHI\").": {
+       "maxRSS": {
+        "post": 16384,
+        "pre": 16384
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 22626503349, "end": 22626503358},
+       "source-locator": " [1:1-1:1]"
+      },
+      "flight(\"QA\",\"JPN\",\"DEN\").": {
+       "maxRSS": {
+        "post": 16384,
+        "pre": 16384
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 22626503345, "end": 22626503346},
+       "source-locator": " [1:1-1:1]"
+      },
+      "flight(\"VA\",\"AU\",\"CHI\").": {
+       "maxRSS": {
+        "post": 16384,
+        "pre": 16384
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 22626503365, "end": 22626503366},
+       "source-locator": " [1:1-1:1]"
+      },
+      "flight(\"VA\",\"DEN\",\"ZA\").": {
+       "maxRSS": {
+        "post": 16384,
+        "pre": 16384
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 22626503394, "end": 22626503403},
+       "source-locator": " [1:1-1:1]"
+      },
+      "flight(\"VA\",\"JPN\",\"DEN\").": {
+       "maxRSS": {
+        "post": 16384,
+        "pre": 16384
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 22626503388, "end": 22626503389},
+       "source-locator": " [1:1-1:1]"
+      },
+      "flight(\"VA\",\"JPN\",\"ZA\").": {
+       "maxRSS": {
+        "post": 16384,
+        "pre": 16384
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 22626503372, "end": 22626503381},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 8,
+     "reads": 0,
+     "runtime": { "start": 22626503307, "end": 22626503411},
+     "source-locator": "/root/souffle-src/tests/example/flights/flights.dl [3:7-3:13]"
+    }
+   },
+   "runtime": { "start": 22626503269, "end": 22626503994},
+   "starttime": { "time": 22626503220},
+   "usage": {
+    "timepoint": {
+     "22626503251": {
+      "maxRSS": 16384,
+      "systemtime": 0,
+      "usertime": 3644
+     },
+     "22626503295": {
+      "maxRSS": 16384,
+      "systemtime": 0,
+      "usertime": 6936
+     },
+     "22626503323": {
+      "maxRSS": 16384,
+      "systemtime": 0,
+      "usertime": 6969
+     },
+     "22626503344": {
+      "maxRSS": 16384,
+      "systemtime": 0,
+      "usertime": 6992
+     },
+     "22626503365": {
+      "maxRSS": 16384,
+      "systemtime": 0,
+      "usertime": 7018
+     },
+     "22626503387": {
+      "maxRSS": 16384,
+      "systemtime": 0,
+      "usertime": 7046
+     },
+     "22626503409": {
+      "maxRSS": 16384,
+      "systemtime": 0,
+      "usertime": 7073
+     },
+     "22626503432": {
+      "maxRSS": 16384,
+      "systemtime": 0,
+      "usertime": 7107
+     },
+     "22626503461": {
+      "maxRSS": 16384,
+      "systemtime": 0,
+      "usertime": 7141
+     },
+     "22626503491": {
+      "maxRSS": 16384,
+      "systemtime": 0,
+      "usertime": 7179
+     },
+     "22626503520": {
+      "maxRSS": 16384,
+      "systemtime": 0,
+      "usertime": 7207
+     },
+     "22626503544": {
+      "maxRSS": 16384,
+      "systemtime": 0,
+      "usertime": 7242
+     },
+     "22626503578": {
+      "maxRSS": 16384,
+      "systemtime": 0,
+      "usertime": 7276
+     },
+     "22626503604": {
+      "maxRSS": 16384,
+      "systemtime": 0,
+      "usertime": 7305
+     },
+     "22626503633": {
+      "maxRSS": 16384,
+      "systemtime": 0,
+      "usertime": 7346
+     },
+     "22626503661": {
+      "maxRSS": 16384,
+      "systemtime": 0,
+      "usertime": 7385
+     },
+     "22626503690": {
+      "maxRSS": 16384,
+      "systemtime": 0,
+      "usertime": 7414
+     },
+     "22626503714": {
+      "maxRSS": 16384,
+      "systemtime": 0,
+      "usertime": 7449
+     },
+     "22626503736": {
+      "maxRSS": 16384,
+      "systemtime": 0,
+      "usertime": 7471
+     },
+     "22626503759": {
+      "maxRSS": 16384,
+      "systemtime": 0,
+      "usertime": 7499
+     },
+     "22626503794": {
+      "maxRSS": 16384,
+      "systemtime": 0,
+      "usertime": 7540
+     },
+     "22626503818": {
+      "maxRSS": 16384,
+      "systemtime": 0,
+      "usertime": 7560
+     },
+     "22626503904": {
+      "maxRSS": 16384,
+      "systemtime": 0,
+      "usertime": 7662
+     },
+     "22626503928": {
+      "maxRSS": 16384,
+      "systemtime": 0,
+      "usertime": 7680
+     },
+     "22626503960": {
+      "maxRSS": 16384,
+      "systemtime": 0,
+      "usertime": 7727
+     },
+     "22626503982": {
+      "maxRSS": 16384,
+      "systemtime": 0,
+      "usertime": 7745
+     }
+    }
+   }
+  }
+ }
+}

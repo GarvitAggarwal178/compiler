@@ -1,0 +1,384 @@
+{
+ "root": {
+  "program": {
+   "configuration": {
+    "": "/root/souffle-src/tests/evaluation/magic_neglabel/magic_neglabel.dl",
+    "fact-dir": "/root/souffle-src/tests/evaluation/magic_neglabel/facts",
+    "include-dir": ".",
+    "jobs": "1",
+    "libraries": "functors",
+    "library-dir": ".",
+    "magic-transform": "*",
+    "output-dir": "/root/compiler/measurements/night01-t4/runs/evaluation__magic_neglabel",
+    "profile": "prof.log",
+    "relationCount": "5",
+    "ruleCount": "17",
+    "version": "2.5",
+    "warn": "all",
+    "wno": "none"
+   },
+   "relation": {
+    "@magic.C.{f}": {
+     "maxRSS": {
+      "post": 14820,
+      "pre": 14820
+     },
+     "non-recursive-rule": {
+      "@magic.C.{f}().": {
+       "maxRSS": {
+        "post": 14820,
+        "pre": 14820
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 22624903587, "end": 22624903591},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 1,
+     "runtime": { "start": 22624903587, "end": 22624903598},
+     "source-locator": " [1:1-1:1]"
+    },
+    "@neglabel.A": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 22624904125, "end": 22624904126},
+       "maxRSS": {
+        "post": 14820,
+        "pre": 14820
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "@neglabel.A(X) :- \n   @neglabel.B(X),\n   Base(X).": {
+         "0": {
+          "atom-frequency": {
+           "@new_@neglabel.A(X) :- \n   @delta_@neglabel.B(X),\n   Base(X).": {
+            "@delta_@neglabel.B": {
+             "level": 0,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 14820,
+           "pre": 14820
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 22624904091, "end": 22624904092},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 22624904091, "end": 22624904099}
+      },
+      "1": {
+       "maxRSS": {
+        "post": 14820,
+        "pre": 14820
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "@neglabel.A(X) :- \n   @neglabel.B(X),\n   Base(X).": {
+         "0": {
+          "maxRSS": {
+           "post": 14820,
+           "pre": 14820
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 22624904133, "end": 22624904134},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 22624904132, "end": 22624904139}
+      }
+     },
+     "maxRSS": {
+      "post": 14820,
+      "pre": 14820
+     },
+     "non-recursive-rule": {
+      "@neglabel.A(X) :- \n   Base(X).": {
+       "atom-frequency": {
+        "@neglabel.A(X) :- \n   Base(X).": {
+         "Base": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 14820,
+        "pre": 14820
+       },
+       "num-tuples": 6,
+       "runtime": { "start": 22624904071, "end": 22624904076},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 6,
+     "runtime": { "start": 22624904067, "end": 22624904083},
+     "source-locator": "/root/souffle-src/tests/evaluation/magic_neglabel/magic_neglabel.dl [27:7-27:8]"
+    },
+    "@neglabel.B": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 22624904129, "end": 22624904130},
+       "maxRSS": {
+        "post": 14820,
+        "pre": 14820
+       },
+       "num-tuples": 5,
+       "recursive-rule": {
+        "@neglabel.B(X) :- \n   @neglabel.A(X),\n   X != 0.": {
+         "0": {
+          "atom-frequency": {
+           "@new_@neglabel.B(X) :- \n   @delta_@neglabel.A(X),\n   X != 0.": {
+            "@delta_@neglabel.A": {
+             "level": 0,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 14820,
+           "pre": 14820
+          },
+          "num-tuples": 5,
+          "runtime": { "start": 22624904104, "end": 22624904111},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 22624904103, "end": 22624904116}
+      },
+      "1": {
+       "maxRSS": {
+        "post": 14820,
+        "pre": 14820
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "@neglabel.B(X) :- \n   @neglabel.A(X),\n   X != 0.": {
+         "0": {
+          "maxRSS": {
+           "post": 14820,
+           "pre": 14820
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 22624904142, "end": 22624904142},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 22624904141, "end": 22624904147}
+      }
+     },
+     "num-tuples": 0,
+     "source-locator": "/root/souffle-src/tests/evaluation/magic_neglabel/magic_neglabel.dl [28:7-28:8]"
+    },
+    "A.{b}": {
+     "iteration": {
+      "0": {
+       "maxRSS": {
+        "post": 14820,
+        "pre": 14820
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "A.{b}(X) :- \n   C.{f}(X),\n   B.{b}(X),\n   Base(X).": {
+         "0": {
+          "atom-frequency": {
+           "@new_A.{b}(X) :- \n   C.{f}(X),\n   @delta_B.{b}(X),\n   Base(X).": {
+            "C.{f}": {
+             "level": 0,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 14820,
+           "pre": 14820
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 22624904202, "end": 22624904203},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 22624904193, "end": 22624904211}
+      }
+     },
+     "maxRSS": {
+      "post": 14820,
+      "pre": 14820
+     },
+     "non-recursive-rule": {
+      "A.{b}(X) :- \n   C.{f}(X),\n   Base(X).": {
+       "atom-frequency": {
+        "A.{b}(X) :- \n   C.{f}(X),\n   Base(X).": {
+         "C.{f}": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 14820,
+        "pre": 14820
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 22624904182, "end": 22624904183},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 1,
+     "reads": 1,
+     "runtime": { "start": 22624904181, "end": 22624904188},
+     "source-locator": " [1:1-1:1]"
+    },
+    "B.{b}": {
+     "iteration": {
+      "0": {
+       "maxRSS": {
+        "post": 14820,
+        "pre": 14820
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "B.{b}(X) :- \n   C.{f}(X),\n   A.{b}(X),\n   X != 0.": {
+         "0": {
+          "atom-frequency": {
+           "@new_B.{b}(X) :- \n   C.{f}(X),\n   @delta_A.{b}(X),\n   X != 0.": {
+            "C.{f}": {
+             "level": 0,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 14820,
+           "pre": 14820
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 22624904215, "end": 22624904217},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 22624904215, "end": 22624904221}
+      }
+     },
+     "num-tuples": 0,
+     "reads": 0,
+     "source-locator": " [1:1-1:1]"
+    },
+    "Base": {
+     "loadtime": { "start": 22624903602, "end": 22624904057},
+     "num-tuples": 6,
+     "reads": 6,
+     "source-locator": "/root/souffle-src/tests/evaluation/magic_neglabel/magic_neglabel.dl [23:7-23:11]"
+    },
+    "C.{f}": {
+     "maxRSS": {
+      "post": 14820,
+      "pre": 14820
+     },
+     "non-recursive-rule": {
+      "C.{f}(X) :- \n   @magic.C.{f}(),\n   Base(X),\n   !@neglabel.B(X).": {
+       "atom-frequency": {
+        "C.{f}(X) :- \n   @magic.C.{f}(),\n   Base(X),\n   !@neglabel.B(X).": {
+         "Base": {
+          "level": 1,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 14820,
+        "pre": 14820
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 22624904168, "end": 22624904169},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 1,
+     "reads": 0,
+     "runtime": { "start": 22624904157, "end": 22624904176},
+     "source-locator": " [1:1-1:1]"
+    },
+    "Query": {
+     "maxRSS": {
+      "post": 14820,
+      "pre": 14820
+     },
+     "non-recursive-rule": {
+      "Query(X) :- \n   C.{f}(X),\n   A.{b}(X).": {
+       "atom-frequency": {
+        "Query(X) :- \n   C.{f}(X),\n   A.{b}(X).": {
+         "C.{f}": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 14820,
+        "pre": 14820
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 22624904243, "end": 22624904244},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 1,
+     "reads": 0,
+     "runtime": { "start": 22624904243, "end": 22624904250},
+     "savetime": { "start": 22624904253, "end": 22624904319},
+     "source-locator": "/root/souffle-src/tests/evaluation/magic_neglabel/magic_neglabel.dl [38:7-38:12]"
+    }
+   },
+   "runtime": { "start": 22624903582, "end": 22624904324},
+   "starttime": { "time": 22624903553},
+   "usage": {
+    "timepoint": {
+     "22624903601": {
+      "maxRSS": 14820,
+      "systemtime": 0,
+      "usertime": 4535
+     },
+     "22624904139": {
+      "maxRSS": 14820,
+      "systemtime": 0,
+      "usertime": 4760
+     },
+     "22624904152": {
+      "maxRSS": 14820,
+      "systemtime": 0,
+      "usertime": 4782
+     },
+     "22624904182": {
+      "maxRSS": 14820,
+      "systemtime": 0,
+      "usertime": 4819
+     },
+     "22624904217": {
+      "maxRSS": 14820,
+      "systemtime": 0,
+      "usertime": 4863
+     },
+     "22624904242": {
+      "maxRSS": 14820,
+      "systemtime": 0,
+      "usertime": 4894
+     },
+     "22624904275": {
+      "maxRSS": 14820,
+      "systemtime": 0,
+      "usertime": 4918
+     }
+    }
+   }
+  }
+ }
+}

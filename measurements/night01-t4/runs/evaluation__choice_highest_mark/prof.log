@@ -1,0 +1,410 @@
+{
+ "root": {
+  "program": {
+   "configuration": {
+    "": "/root/souffle-src/tests/evaluation/choice_highest_mark/choice_highest_mark.dl",
+    "fact-dir": "/root/souffle-src/tests/evaluation/choice_highest_mark/facts",
+    "include-dir": ".",
+    "jobs": "1",
+    "libraries": "functors",
+    "library-dir": ".",
+    "magic-transform": "*",
+    "output-dir": "/root/compiler/measurements/night01-t4/runs/evaluation__choice_highest_mark",
+    "profile": "prof.log",
+    "relationCount": "5",
+    "ruleCount": "26",
+    "version": "2.5",
+    "warn": "all",
+    "wno": "none"
+   },
+   "relation": {
+    "+disconnected0": {
+     "maxRSS": {
+      "post": 12624,
+      "pre": 12496
+     },
+     "non-recursive-rule": {
+      "+disconnected0() :- \n   solution(a,b,c,d),\n   !@neglabel.highest_mark(a,b,c,d).": {
+       "atom-frequency": {
+        "+disconnected0() :- \n   solution(a,b,c,d),\n   !@neglabel.highest_mark(a,b,c,d).": {
+         "solution": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12624,
+        "pre": 12496
+       },
+       "num-tuples": 0,
+       "runtime": { "start": 22624465350, "end": 22624465355},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 0,
+     "reads": 0,
+     "runtime": { "start": 22624465340, "end": 22624465363},
+     "source-locator": " [1:1-1:1]"
+    },
+    "+disconnected1": {
+     "maxRSS": {
+      "post": 12624,
+      "pre": 12624
+     },
+     "non-recursive-rule": {
+      "+disconnected1() :- \n   @neglabel.highest_mark(a,b,c,d),\n   !solution(a,b,c,d).": {
+       "atom-frequency": {
+        "+disconnected1() :- \n   @neglabel.highest_mark(a,b,c,d),\n   !solution(a,b,c,d).": {
+         "@neglabel.highest_mark": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12624,
+        "pre": 12624
+       },
+       "num-tuples": 0,
+       "runtime": { "start": 22624465376, "end": 22624465378},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 0,
+     "reads": 0,
+     "runtime": { "start": 22624465366, "end": 22624465386},
+     "source-locator": " [1:1-1:1]"
+    },
+    "@interm_out.incorrect": {
+     "maxRSS": {
+      "post": 12624,
+      "pre": 12624
+     },
+     "non-recursive-rule": {
+      "@interm_out.incorrect() :- \n   +disconnected0().": {
+       "maxRSS": {
+        "post": 12624,
+        "pre": 12624
+       },
+       "num-tuples": 0,
+       "runtime": { "start": 22624465400, "end": 22624465400},
+       "source-locator": " [1:1-1:1]"
+      },
+      "@interm_out.incorrect() :- \n   +disconnected1().": {
+       "maxRSS": {
+        "post": 12624,
+        "pre": 12624
+       },
+       "num-tuples": 0,
+       "runtime": { "start": 22624465408, "end": 22624465408},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 0,
+     "runtime": { "start": 22624465390, "end": 22624465413},
+     "source-locator": "/root/souffle-src/tests/evaluation/choice_highest_mark/choice_highest_mark.dl [14:7-14:16]"
+    },
+    "@neglabel.highest_mark": {
+     "maxRSS": {
+      "post": 12496,
+      "pre": 12240
+     },
+     "non-recursive-rule": {
+      "@neglabel.highest_mark(st,@generator_0,g,sex) :- \n   mark(st,@generator_0,g,sex),\n   @generator_0 = max n : { mark(+underscore_0,n,g,sex) }.": {
+       "atom-frequency": {
+        "@neglabel.highest_mark(st,@generator_0,g,sex) :- \n   mark(st,@generator_0,g,sex),\n   @generator_0 = max n : { mark(+underscore_0,n,g,sex) }.": {
+         "mark": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12496,
+        "pre": 12240
+       },
+       "num-tuples": 20,
+       "runtime": { "start": 22624465206, "end": 22624465327},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 20,
+     "runtime": { "start": 22624465206, "end": 22624465334},
+     "source-locator": "/root/souffle-src/tests/evaluation/choice_highest_mark/choice_highest_mark.dl [12:7-12:19]"
+    },
+    "incorrect": {
+     "maxRSS": {
+      "post": 12624,
+      "pre": 12624
+     },
+     "non-recursive-rule": {
+      "incorrect() :- \n   @interm_out.incorrect().": {
+       "maxRSS": {
+        "post": 12624,
+        "pre": 12624
+       },
+       "num-tuples": 0,
+       "runtime": { "start": 22624465427, "end": 22624465428},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 0,
+     "reads": 0,
+     "runtime": { "start": 22624465418, "end": 22624465435},
+     "savetime": { "start": 22624465439, "end": 22624465459},
+     "source-locator": "/root/souffle-src/tests/evaluation/choice_highest_mark/choice_highest_mark.dl [14:7-14:16]"
+    },
+    "mark": {
+     "loadtime": { "start": 22624464521, "end": 22624465064},
+     "num-tuples": 300,
+     "reads": 0,
+     "source-locator": "/root/souffle-src/tests/evaluation/choice_highest_mark/choice_highest_mark.dl [10:7-10:11]"
+    },
+    "solution": {
+     "maxRSS": {
+      "post": 12240,
+      "pre": 12240
+     },
+     "non-recursive-rule": {
+      "solution(\"Allen\",79,1,\"m\").": {
+       "maxRSS": {
+        "post": 12240,
+        "pre": 12240
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 22624465088, "end": 22624465091},
+       "source-locator": " [1:1-1:1]"
+      },
+      "solution(\"Chad\",93,2,\"m\").": {
+       "maxRSS": {
+        "post": 12240,
+        "pre": 12240
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 22624465104, "end": 22624465105},
+       "source-locator": " [1:1-1:1]"
+      },
+      "solution(\"Dolores\",100,3,\"f\").": {
+       "maxRSS": {
+        "post": 12240,
+        "pre": 12240
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 22624465117, "end": 22624465117},
+       "source-locator": " [1:1-1:1]"
+      },
+      "solution(\"Dolores\",93,2,\"f\").": {
+       "maxRSS": {
+        "post": 12240,
+        "pre": 12240
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 22624465109, "end": 22624465109},
+       "source-locator": " [1:1-1:1]"
+      },
+      "solution(\"Earl\",100,7,\"m\").": {
+       "maxRSS": {
+        "post": 12240,
+        "pre": 12240
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 22624465143, "end": 22624465143},
+       "source-locator": " [1:1-1:1]"
+      },
+      "solution(\"Enrique\",97,5,\"m\").": {
+       "maxRSS": {
+        "post": 12240,
+        "pre": 12240
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 22624465128, "end": 22624465129},
+       "source-locator": " [1:1-1:1]"
+      },
+      "solution(\"Hope\",100,5,\"f\").": {
+       "maxRSS": {
+        "post": 12240,
+        "pre": 12240
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 22624465132, "end": 22624465133},
+       "source-locator": " [1:1-1:1]"
+      },
+      "solution(\"John\",97,4,\"m\").": {
+       "maxRSS": {
+        "post": 12240,
+        "pre": 12240
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 22624465120, "end": 22624465121},
+       "source-locator": " [1:1-1:1]"
+      },
+      "solution(\"Judith\",91,1,\"f\").": {
+       "maxRSS": {
+        "post": 12240,
+        "pre": 12240
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 22624465099, "end": 22624465100},
+       "source-locator": " [1:1-1:1]"
+      },
+      "solution(\"Katrina\",92,8,\"f\").": {
+       "maxRSS": {
+        "post": 12240,
+        "pre": 12240
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 22624465154, "end": 22624465154},
+       "source-locator": " [1:1-1:1]"
+      },
+      "solution(\"Mary\",98,9,\"f\").": {
+       "maxRSS": {
+        "post": 12240,
+        "pre": 12240
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 22624465161, "end": 22624465172},
+       "source-locator": " [1:1-1:1]"
+      },
+      "solution(\"Michele\",94,4,\"f\").": {
+       "maxRSS": {
+        "post": 12240,
+        "pre": 12240
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 22624465124, "end": 22624465125},
+       "source-locator": " [1:1-1:1]"
+      },
+      "solution(\"Norma\",97,10,\"f\").": {
+       "maxRSS": {
+        "post": 12240,
+        "pre": 12240
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 22624465184, "end": 22624465193},
+       "source-locator": " [1:1-1:1]"
+      },
+      "solution(\"Patricia\",94,6,\"f\").": {
+       "maxRSS": {
+        "post": 12240,
+        "pre": 12240
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 22624465139, "end": 22624465140},
+       "source-locator": " [1:1-1:1]"
+      },
+      "solution(\"Robert\",97,6,\"m\").": {
+       "maxRSS": {
+        "post": 12240,
+        "pre": 12240
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 22624465136, "end": 22624465136},
+       "source-locator": " [1:1-1:1]"
+      },
+      "solution(\"Santos\",93,10,\"m\").": {
+       "maxRSS": {
+        "post": 12240,
+        "pre": 12240
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 22624465179, "end": 22624465179},
+       "source-locator": " [1:1-1:1]"
+      },
+      "solution(\"Tawanda\",91,7,\"f\").": {
+       "maxRSS": {
+        "post": 12240,
+        "pre": 12240
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 22624465147, "end": 22624465147},
+       "source-locator": " [1:1-1:1]"
+      },
+      "solution(\"Timothy\",86,3,\"m\").": {
+       "maxRSS": {
+        "post": 12240,
+        "pre": 12240
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 22624465113, "end": 22624465114},
+       "source-locator": " [1:1-1:1]"
+      },
+      "solution(\"Wayne\",83,8,\"m\").": {
+       "maxRSS": {
+        "post": 12240,
+        "pre": 12240
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 22624465150, "end": 22624465151},
+       "source-locator": " [1:1-1:1]"
+      },
+      "solution(\"Wes\",96,9,\"m\").": {
+       "maxRSS": {
+        "post": 12240,
+        "pre": 12240
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 22624465158, "end": 22624465158},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 20,
+     "reads": 20,
+     "runtime": { "start": 22624465074, "end": 22624465200},
+     "source-locator": "/root/souffle-src/tests/evaluation/choice_highest_mark/choice_highest_mark.dl [13:7-13:15]"
+    }
+   },
+   "runtime": { "start": 22624464516, "end": 22624465464},
+   "starttime": { "time": 22624464489},
+   "usage": {
+    "timepoint": {
+     "22624464541": {
+      "maxRSS": 11700,
+      "systemtime": 0,
+      "usertime": 6359
+     },
+     "22624465155": {
+      "maxRSS": 12240,
+      "systemtime": 0,
+      "usertime": 6728
+     },
+     "22624465179": {
+      "maxRSS": 12240,
+      "systemtime": 0,
+      "usertime": 6760
+     },
+     "22624465202": {
+      "maxRSS": 12240,
+      "systemtime": 0,
+      "usertime": 6792
+     },
+     "22624465358": {
+      "maxRSS": 12624,
+      "systemtime": 0,
+      "usertime": 6974
+     },
+     "22624465384": {
+      "maxRSS": 12624,
+      "systemtime": 0,
+      "usertime": 7004
+     },
+     "22624465407": {
+      "maxRSS": 12624,
+      "systemtime": 0,
+      "usertime": 7032
+     },
+     "22624465434": {
+      "maxRSS": 12624,
+      "systemtime": 0,
+      "usertime": 7070
+     },
+     "22624465456": {
+      "maxRSS": 12624,
+      "systemtime": 0,
+      "usertime": 7088
+     }
+    }
+   }
+  }
+ }
+}

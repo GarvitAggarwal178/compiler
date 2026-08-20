@@ -1,0 +1,162 @@
+{
+ "root": {
+  "program": {
+   "configuration": {
+    "": "/root/souffle-src/tests/semantic/inline_cycle2/inline_cycle2.dl",
+    "fact-dir": "/root/souffle-src/tests/semantic/inline_cycle2/facts",
+    "include-dir": ".",
+    "jobs": "1",
+    "libraries": "functors",
+    "library-dir": ".",
+    "magic-transform": "*",
+    "output-dir": "/root/compiler/measurements/night01-t4/runs/semantic__inline_cycle2",
+    "profile": "prof.log",
+    "relationCount": "5",
+    "ruleCount": "4",
+    "version": "2.5",
+    "warn": "all",
+    "wno": "none"
+   },
+   "relation": {
+    "B3": {
+     "maxRSS": {
+      "post": 20036,
+      "pre": 20036
+     },
+     "non-recursive-rule": {
+      "B3(1,2).": {
+       "maxRSS": {
+        "post": 20036,
+        "pre": 20036
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 23164386781, "end": 23164386786},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 1,
+     "reads": 0,
+     "runtime": { "start": 23164386778, "end": 23164386794},
+     "source-locator": "/root/souffle-src/tests/semantic/inline_cycle2/inline_cycle2.dl [51:7-51:9]"
+    },
+    "C3": {
+     "maxRSS": {
+      "post": 20036,
+      "pre": 20036
+     },
+     "non-recursive-rule": {
+      "C3(x,y) :- \n   B3(x,y),\n   y != x.": {
+       "atom-frequency": {
+        "C3(x,y) :- \n   B3(x,y),\n   y != x.": {
+         "B3": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 20036,
+        "pre": 20036
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 23164387672, "end": 23164387677},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 1,
+     "reads": 0,
+     "runtime": { "start": 23164387659, "end": 23164387686},
+     "savetime": { "start": 23164387691, "end": 23164387746},
+     "source-locator": "/root/souffle-src/tests/semantic/inline_cycle2/inline_cycle2.dl [51:10-51:12]"
+    },
+    "a": {
+     "loadtime": { "start": 23164386799, "end": 23164387649},
+     "num-tuples": 5,
+     "reads": 0,
+     "source-locator": "/root/souffle-src/tests/semantic/inline_cycle2/inline_cycle2.dl [13:7-13:8]"
+    },
+    "c2": {
+     "maxRSS": {
+      "post": 20036,
+      "pre": 20036
+     },
+     "non-recursive-rule": {
+      "c2(x,y) :- \n   B3(x,y),\n   x != y.": {
+       "atom-frequency": {
+        "c2(x,y) :- \n   B3(x,y),\n   x != y.": {
+         "B3": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 20036,
+        "pre": 20036
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 23164387765, "end": 23164387766},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 1,
+     "reads": 0,
+     "runtime": { "start": 23164387750, "end": 23164387774},
+     "savetime": { "start": 23164387778, "end": 23164387934},
+     "source-locator": "/root/souffle-src/tests/semantic/inline_cycle2/inline_cycle2.dl [37:7-37:9]"
+    },
+    "f": {
+     "maxRSS": {
+      "post": 20036,
+      "pre": 20036
+     },
+     "non-recursive-rule": {
+      "f(x) :- \n   a(x).": {
+       "atom-frequency": {
+        "f(x) :- \n   a(x).": {
+         "a": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 20036,
+        "pre": 20036
+       },
+       "num-tuples": 5,
+       "runtime": { "start": 23164387950, "end": 23164387952},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 5,
+     "reads": 0,
+     "runtime": { "start": 23164387939, "end": 23164387959},
+     "savetime": { "start": 23164387964, "end": 23164387985},
+     "source-locator": "/root/souffle-src/tests/semantic/inline_cycle2/inline_cycle2.dl [21:7-21:8]"
+    }
+   },
+   "runtime": { "start": 23164386772, "end": 23164387988},
+   "starttime": { "time": 23164386742},
+   "usage": {
+    "timepoint": {
+     "23164386820": {
+      "maxRSS": 20036,
+      "systemtime": 0,
+      "usertime": 5156
+     },
+     "23164387734": {
+      "maxRSS": 20036,
+      "systemtime": 0,
+      "usertime": 5482
+     },
+     "23164387782": {
+      "maxRSS": 20036,
+      "systemtime": 0,
+      "usertime": 5582
+     }
+    }
+   }
+  }
+ }
+}

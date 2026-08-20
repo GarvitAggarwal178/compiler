@@ -1,0 +1,1026 @@
+{
+ "root": {
+  "program": {
+   "configuration": {
+    "": "/root/souffle-src/tests/example/centroids/centroids.dl",
+    "fact-dir": "/root/souffle-src/tests/example/centroids/facts",
+    "include-dir": ".",
+    "jobs": "1",
+    "libraries": "functors",
+    "library-dir": ".",
+    "magic-transform": "*",
+    "output-dir": "/root/compiler/measurements/night01-t4/runs/example__centroids",
+    "profile": "prof.log",
+    "relationCount": "2",
+    "ruleCount": "35",
+    "version": "2.5",
+    "warn": "all",
+    "wno": "none"
+   },
+   "relation": {
+    "@interm_in.Edge.{ff}": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 22625219617, "end": 22625219619},
+       "maxRSS": {
+        "post": 15140,
+        "pre": 15140
+       },
+       "num-tuples": 21,
+       "recursive-rule": {
+        "@interm_in.Edge.{ff}(m,n) :- \n   @magic.@interm_in.Edge.{ff}(),\n   @interm_in.Edge.{ff}(n,m).": {
+         "0": {
+          "atom-frequency": {
+           "@new_@interm_in.Edge.{ff}(m,n) :- \n   @magic.@interm_in.Edge.{ff}(),\n   @delta_@interm_in.Edge.{ff}(n,m).": {
+            "@delta_@interm_in.Edge.{ff}": {
+             "level": 1,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 15140,
+           "pre": 15140
+          },
+          "num-tuples": 21,
+          "runtime": { "start": 22625219595, "end": 22625219601},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 22625219594, "end": 22625219609}
+      },
+      "1": {
+       "maxRSS": {
+        "post": 15140,
+        "pre": 15140
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "@interm_in.Edge.{ff}(m,n) :- \n   @magic.@interm_in.Edge.{ff}(),\n   @interm_in.Edge.{ff}(n,m).": {
+         "0": {
+          "maxRSS": {
+           "post": 15140,
+           "pre": 15140
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 22625219623, "end": 22625219625},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 22625219623, "end": 22625219632}
+      }
+     },
+     "maxRSS": {
+      "post": 15140,
+      "pre": 15140
+     },
+     "non-recursive-rule": {
+      "@interm_in.Edge.{ff}(@query_x0,@query_x1) :- \n   @magic.@interm_in.Edge.{ff}(),\n   Edge(@query_x0,@query_x1).": {
+       "atom-frequency": {
+        "@interm_in.Edge.{ff}(@query_x0,@query_x1) :- \n   @magic.@interm_in.Edge.{ff}(),\n   Edge(@query_x0,@query_x1).": {
+         "Edge": {
+          "level": 1,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 15140,
+        "pre": 15140
+       },
+       "num-tuples": 21,
+       "runtime": { "start": 22625219563, "end": 22625219566},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 21,
+     "runtime": { "start": 22625219549, "end": 22625219575},
+     "source-locator": " [1:1-1:1]"
+    },
+    "@magic.@interm_in.Edge.{ff}": {
+     "maxRSS": {
+      "post": 15140,
+      "pre": 15140
+     },
+     "non-recursive-rule": {
+      "@magic.@interm_in.Edge.{ff}().": {
+       "maxRSS": {
+        "post": 15140,
+        "pre": 15140
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 22625218959, "end": 22625218963},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 1,
+     "runtime": { "start": 22625218958, "end": 22625218972},
+     "source-locator": " [1:1-1:1]"
+    },
+    "@magic.@poscopy_1.SubtreeCard.{fff}": {
+     "maxRSS": {
+      "post": 15140,
+      "pre": 15140
+     },
+     "non-recursive-rule": {
+      "@magic.@poscopy_1.SubtreeCard.{fff}() :- \n   @poscopy_1.TreeCard.{f}(_).": {
+       "maxRSS": {
+        "post": 15140,
+        "pre": 15140
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 22625220408, "end": 22625220408},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 1,
+     "runtime": { "start": 22625220407, "end": 22625220413},
+     "source-locator": " [1:1-1:1]"
+    },
+    "@magic.@poscopy_1.__agg_single0.{f}": {
+     "maxRSS": {
+      "post": 15140,
+      "pre": 15140
+     },
+     "non-recursive-rule": {
+      "@magic.@poscopy_1.__agg_single0.{f}() :- \n   @magic.@interm_in.Edge.{ff}(),\n   @poscopy_1.__agg_single.{f}(_).": {
+       "maxRSS": {
+        "post": 15140,
+        "pre": 15140
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 22625220375, "end": 22625220376},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 1,
+     "runtime": { "start": 22625220375, "end": 22625220381},
+     "source-locator": " [1:1-1:1]"
+    },
+    "@neglabel.InSubtree": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 22625219922, "end": 22625219932},
+       "maxRSS": {
+        "post": 15140,
+        "pre": 15140
+       },
+       "num-tuples": 68,
+       "recursive-rule": {
+        "@neglabel.InSubtree(m,n,a) :- \n   @poscopy_3.@interm_in.Edge(m,n),\n   @poscopy_3.@interm_in.Edge(n,p),\n   @neglabel.InSubtree(n,p,a),\n   m != p.": {
+         "0": {
+          "atom-frequency": {
+           "@new_@neglabel.InSubtree(m,n,a) :- \n   @poscopy_3.@interm_in.Edge(m,n),\n   @poscopy_3.@interm_in.Edge(n,p),\n   @delta_@neglabel.InSubtree(n,p,a),\n   m != p.": {
+            "@delta_@neglabel.InSubtree": {
+             "level": 2,
+             "num-tuples": 0
+            },
+            "@poscopy_3.@interm_in.Edge": {
+             "level": 0,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 15140,
+           "pre": 15140
+          },
+          "num-tuples": 68,
+          "runtime": { "start": 22625219864, "end": 22625219893},
+          "source-locator": "/root/souffle-src/tests/example/centroids/centroids.dl [24:1-24:74]"
+         }
+        }
+       },
+       "runtime": { "start": 22625219854, "end": 22625219902}
+      },
+      "1": {
+       "copytime": { "start": 22625219973, "end": 22625219982},
+       "maxRSS": {
+        "post": 15140,
+        "pre": 15140
+       },
+       "num-tuples": 82,
+       "recursive-rule": {
+        "@neglabel.InSubtree(m,n,a) :- \n   @poscopy_3.@interm_in.Edge(m,n),\n   @poscopy_3.@interm_in.Edge(n,p),\n   @neglabel.InSubtree(n,p,a),\n   m != p.": {
+         "0": {
+          "maxRSS": {
+           "post": 15140,
+           "pre": 15140
+          },
+          "num-tuples": 82,
+          "runtime": { "start": 22625219936, "end": 22625219959},
+          "source-locator": "/root/souffle-src/tests/example/centroids/centroids.dl [24:1-24:74]"
+         }
+        }
+       },
+       "runtime": { "start": 22625219935, "end": 22625219966}
+      },
+      "2": {
+       "copytime": { "start": 22625220047, "end": 22625220063},
+       "maxRSS": {
+        "post": 15140,
+        "pre": 15140
+       },
+       "num-tuples": 76,
+       "recursive-rule": {
+        "@neglabel.InSubtree(m,n,a) :- \n   @poscopy_3.@interm_in.Edge(m,n),\n   @poscopy_3.@interm_in.Edge(n,p),\n   @neglabel.InSubtree(n,p,a),\n   m != p.": {
+         "0": {
+          "maxRSS": {
+           "post": 15140,
+           "pre": 15140
+          },
+          "num-tuples": 76,
+          "runtime": { "start": 22625219985, "end": 22625220021},
+          "source-locator": "/root/souffle-src/tests/example/centroids/centroids.dl [24:1-24:74]"
+         }
+        }
+       },
+       "runtime": { "start": 22625219985, "end": 22625220029}
+      },
+      "3": {
+       "copytime": { "start": 22625220115, "end": 22625220126},
+       "maxRSS": {
+        "post": 15140,
+        "pre": 15140
+       },
+       "num-tuples": 78,
+       "recursive-rule": {
+        "@neglabel.InSubtree(m,n,a) :- \n   @poscopy_3.@interm_in.Edge(m,n),\n   @poscopy_3.@interm_in.Edge(n,p),\n   @neglabel.InSubtree(n,p,a),\n   m != p.": {
+         "0": {
+          "maxRSS": {
+           "post": 15140,
+           "pre": 15140
+          },
+          "num-tuples": 78,
+          "runtime": { "start": 22625220067, "end": 22625220089},
+          "source-locator": "/root/souffle-src/tests/example/centroids/centroids.dl [24:1-24:74]"
+         }
+        }
+       },
+       "runtime": { "start": 22625220067, "end": 22625220096}
+      },
+      "4": {
+       "copytime": { "start": 22625220166, "end": 22625220175},
+       "maxRSS": {
+        "post": 15140,
+        "pre": 15140
+       },
+       "num-tuples": 64,
+       "recursive-rule": {
+        "@neglabel.InSubtree(m,n,a) :- \n   @poscopy_3.@interm_in.Edge(m,n),\n   @poscopy_3.@interm_in.Edge(n,p),\n   @neglabel.InSubtree(n,p,a),\n   m != p.": {
+         "0": {
+          "maxRSS": {
+           "post": 15140,
+           "pre": 15140
+          },
+          "num-tuples": 64,
+          "runtime": { "start": 22625220130, "end": 22625220151},
+          "source-locator": "/root/souffle-src/tests/example/centroids/centroids.dl [24:1-24:74]"
+         }
+        }
+       },
+       "runtime": { "start": 22625220130, "end": 22625220158}
+      },
+      "5": {
+       "copytime": { "start": 22625220203, "end": 22625220207},
+       "maxRSS": {
+        "post": 15140,
+        "pre": 15140
+       },
+       "num-tuples": 40,
+       "recursive-rule": {
+        "@neglabel.InSubtree(m,n,a) :- \n   @poscopy_3.@interm_in.Edge(m,n),\n   @poscopy_3.@interm_in.Edge(n,p),\n   @neglabel.InSubtree(n,p,a),\n   m != p.": {
+         "0": {
+          "maxRSS": {
+           "post": 15140,
+           "pre": 15140
+          },
+          "num-tuples": 40,
+          "runtime": { "start": 22625220178, "end": 22625220191},
+          "source-locator": "/root/souffle-src/tests/example/centroids/centroids.dl [24:1-24:74]"
+         }
+        }
+       },
+       "runtime": { "start": 22625220178, "end": 22625220197}
+      },
+      "6": {
+       "copytime": { "start": 22625220259, "end": 22625220271},
+       "maxRSS": {
+        "post": 15140,
+        "pre": 15140
+       },
+       "num-tuples": 12,
+       "recursive-rule": {
+        "@neglabel.InSubtree(m,n,a) :- \n   @poscopy_3.@interm_in.Edge(m,n),\n   @poscopy_3.@interm_in.Edge(n,p),\n   @neglabel.InSubtree(n,p,a),\n   m != p.": {
+         "0": {
+          "maxRSS": {
+           "post": 15140,
+           "pre": 15140
+          },
+          "num-tuples": 12,
+          "runtime": { "start": 22625220210, "end": 22625220218},
+          "source-locator": "/root/souffle-src/tests/example/centroids/centroids.dl [24:1-24:74]"
+         }
+        }
+       },
+       "runtime": { "start": 22625220210, "end": 22625220223}
+      },
+      "7": {
+       "maxRSS": {
+        "post": 15140,
+        "pre": 15140
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "@neglabel.InSubtree(m,n,a) :- \n   @poscopy_3.@interm_in.Edge(m,n),\n   @poscopy_3.@interm_in.Edge(n,p),\n   @neglabel.InSubtree(n,p,a),\n   m != p.": {
+         "0": {
+          "maxRSS": {
+           "post": 15140,
+           "pre": 15140
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 22625220276, "end": 22625220283},
+          "source-locator": "/root/souffle-src/tests/example/centroids/centroids.dl [24:1-24:74]"
+         }
+        }
+       },
+       "runtime": { "start": 22625220276, "end": 22625220291}
+      }
+     },
+     "maxRSS": {
+      "post": 15140,
+      "pre": 15140
+     },
+     "non-recursive-rule": {
+      "@neglabel.InSubtree(m,n,n) :- \n   @poscopy_3.@interm_in.Edge(m,n).": {
+       "atom-frequency": {
+        "@neglabel.InSubtree(m,n,n) :- \n   @poscopy_3.@interm_in.Edge(m,n).": {
+         "@poscopy_3.@interm_in.Edge": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 15140,
+        "pre": 15140
+       },
+       "num-tuples": 42,
+       "runtime": { "start": 22625219839, "end": 22625219843},
+       "source-locator": "/root/souffle-src/tests/example/centroids/centroids.dl [23:1-23:34]"
+      }
+     },
+     "num-tuples": 42,
+     "runtime": { "start": 22625219838, "end": 22625219848},
+     "source-locator": "/root/souffle-src/tests/example/centroids/centroids.dl [21:7-21:16]"
+    },
+    "@neglabel.Leaf": {
+     "maxRSS": {
+      "post": 15140,
+      "pre": 15140
+     },
+     "non-recursive-rule": {
+      "@neglabel.Leaf(n) :- \n   @poscopy_2.@interm_in.Edge(_,n),\n   !@neglabel.NotLeaf(n).": {
+       "atom-frequency": {
+        "@neglabel.Leaf(n) :- \n   @poscopy_2.@interm_in.Edge(_,n),\n   !@neglabel.NotLeaf(n).": {
+         "@poscopy_2.@interm_in.Edge": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 15140,
+        "pre": 15140
+       },
+       "num-tuples": 11,
+       "runtime": { "start": 22625220336, "end": 22625220339},
+       "source-locator": "/root/souffle-src/tests/example/centroids/centroids.dl [19:1-19:36]"
+      }
+     },
+     "num-tuples": 11,
+     "runtime": { "start": 22625220336, "end": 22625220352},
+     "source-locator": "/root/souffle-src/tests/example/centroids/centroids.dl [15:7-15:11]"
+    },
+    "@neglabel.NotCentroid": {
+     "maxRSS": {
+      "post": 15140,
+      "pre": 15140
+     },
+     "non-recursive-rule": {
+      "@neglabel.NotCentroid(n) :- \n   @poscopy_1.TreeCard.{f}(c),\n   @poscopy_1.SubtreeCard.{fff}(n,_,d),\n   d > (c/2).": {
+       "atom-frequency": {
+        "@neglabel.NotCentroid(n) :- \n   @poscopy_1.TreeCard.{f}(c),\n   @poscopy_1.SubtreeCard.{fff}(n,_,d),\n   d > (c/2).": {
+         "@poscopy_1.SubtreeCard.{fff}": {
+          "level": 1,
+          "num-tuples": 0
+         },
+         "@poscopy_1.TreeCard.{f}": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 15140,
+        "pre": 15140
+       },
+       "num-tuples": 20,
+       "runtime": { "start": 22625220551, "end": 22625220554},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 20,
+     "runtime": { "start": 22625220551, "end": 22625220560},
+     "source-locator": "/root/souffle-src/tests/example/centroids/centroids.dl [34:7-34:18]"
+    },
+    "@neglabel.NotLeaf": {
+     "maxRSS": {
+      "post": 15140,
+      "pre": 15140
+     },
+     "non-recursive-rule": {
+      "@neglabel.NotLeaf(n) :- \n   @poscopy_1.@interm_in.Edge(a,n),\n   @poscopy_1.@interm_in.Edge(b,n),\n   a != b.": {
+       "atom-frequency": {
+        "@neglabel.NotLeaf(n) :- \n   @poscopy_1.@interm_in.Edge(a,n),\n   @poscopy_1.@interm_in.Edge(b,n),\n   a != b.": {
+         "@poscopy_1.@interm_in.Edge": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 15140,
+        "pre": 15140
+       },
+       "num-tuples": 11,
+       "runtime": { "start": 22625220311, "end": 22625220320},
+       "source-locator": "/root/souffle-src/tests/example/centroids/centroids.dl [18:1-18:46]"
+      }
+     },
+     "num-tuples": 11,
+     "runtime": { "start": 22625220311, "end": 22625220332},
+     "source-locator": "/root/souffle-src/tests/example/centroids/centroids.dl [16:7-16:14]"
+    },
+    "@poscopy_1.@interm_in.Edge": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 22625219688, "end": 22625219691},
+       "maxRSS": {
+        "post": 15140,
+        "pre": 15140
+       },
+       "num-tuples": 21,
+       "recursive-rule": {
+        "@poscopy_1.@interm_in.Edge(m,n) :- \n   @poscopy_1.@interm_in.Edge(n,m).": {
+         "0": {
+          "atom-frequency": {
+           "@new_@poscopy_1.@interm_in.Edge(m,n) :- \n   @delta_@poscopy_1.@interm_in.Edge(n,m).": {
+            "@delta_@poscopy_1.@interm_in.Edge": {
+             "level": 0,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 15140,
+           "pre": 15140
+          },
+          "num-tuples": 21,
+          "runtime": { "start": 22625219667, "end": 22625219670},
+          "source-locator": "/root/souffle-src/tests/example/centroids/centroids.dl [13:1-13:26]"
+         }
+        }
+       },
+       "runtime": { "start": 22625219657, "end": 22625219680}
+      },
+      "1": {
+       "maxRSS": {
+        "post": 15140,
+        "pre": 15140
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "@poscopy_1.@interm_in.Edge(m,n) :- \n   @poscopy_1.@interm_in.Edge(n,m).": {
+         "0": {
+          "maxRSS": {
+           "post": 15140,
+           "pre": 15140
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 22625219703, "end": 22625219706},
+          "source-locator": "/root/souffle-src/tests/example/centroids/centroids.dl [13:1-13:26]"
+         }
+        }
+       },
+       "runtime": { "start": 22625219694, "end": 22625219714}
+      }
+     },
+     "maxRSS": {
+      "post": 15140,
+      "pre": 15140
+     },
+     "non-recursive-rule": {
+      "@poscopy_1.@interm_in.Edge(@query_x0,@query_x1) :- \n   Edge(@query_x0,@query_x1).": {
+       "atom-frequency": {
+        "@poscopy_1.@interm_in.Edge(@query_x0,@query_x1) :- \n   Edge(@query_x0,@query_x1).": {
+         "Edge": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 15140,
+        "pre": 15140
+       },
+       "num-tuples": 21,
+       "runtime": { "start": 22625219642, "end": 22625219643},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 21,
+     "runtime": { "start": 22625219639, "end": 22625219649},
+     "source-locator": "/root/souffle-src/tests/example/centroids/centroids.dl [10:7-10:11]"
+    },
+    "@poscopy_1.SubtreeCard.{fff}": {
+     "maxRSS": {
+      "post": 15140,
+      "pre": 15140
+     },
+     "non-recursive-rule": {
+      "@poscopy_1.SubtreeCard.{fff}(m,n,@generator_0) :- \n   @magic.@poscopy_1.SubtreeCard.{fff}(),\n   @poscopy_4.@interm_in.Edge.{ff}(m,n),\n   @generator_0 = sum 1 : { @neglabel.InSubtree(m,n,+underscore_3),1 = 1 }.": {
+       "atom-frequency": {
+        "@poscopy_1.SubtreeCard.{fff}(m,n,@generator_0) :- \n   @magic.@poscopy_1.SubtreeCard.{fff}(),\n   @poscopy_4.@interm_in.Edge.{ff}(m,n),\n   @generator_0 = sum 1 : { @neglabel.InSubtree(m,n,+underscore_3),1 = 1 }.": {
+         "@poscopy_4.@interm_in.Edge.{ff}": {
+          "level": 1,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 15140,
+        "pre": 15140
+       },
+       "num-tuples": 42,
+       "runtime": { "start": 22625220508, "end": 22625220537},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 42,
+     "runtime": { "start": 22625220508, "end": 22625220545},
+     "source-locator": " [1:1-1:1]"
+    },
+    "@poscopy_1.TreeCard.{f}": {
+     "maxRSS": {
+      "post": 15140,
+      "pre": 15140
+     },
+     "non-recursive-rule": {
+      "@poscopy_1.TreeCard.{f}((z+z0)) :- \n   @magic.@interm_in.Edge.{ff}(),\n   @poscopy_1.__agg_single.{f}(z),\n   @poscopy_1.__agg_single0.{f}(z0).": {
+       "atom-frequency": {
+        "@poscopy_1.TreeCard.{f}((z+z0)) :- \n   @magic.@interm_in.Edge.{ff}(),\n   @poscopy_1.__agg_single.{f}(z),\n   @poscopy_1.__agg_single0.{f}(z0).": {
+         "@poscopy_1.__agg_single.{f}": {
+          "level": 1,
+          "num-tuples": 0
+         },
+         "@poscopy_1.__agg_single0.{f}": {
+          "level": 2,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 15140,
+        "pre": 15140
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 22625220397, "end": 22625220398},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 1,
+     "runtime": { "start": 22625220395, "end": 22625220405},
+     "source-locator": " [1:1-1:1]"
+    },
+    "@poscopy_1.__agg_single.{f}": {
+     "maxRSS": {
+      "post": 15140,
+      "pre": 15140
+     },
+     "non-recursive-rule": {
+      "@poscopy_1.__agg_single.{f}(@generator_0) :- \n   @magic.@interm_in.Edge.{ff}(),\n   @generator_0 = sum 1 : { @neglabel.Leaf(+underscore_4),1 = 1 }.": {
+       "maxRSS": {
+        "post": 15140,
+        "pre": 15140
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 22625220356, "end": 22625220365},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 1,
+     "runtime": { "start": 22625220356, "end": 22625220370},
+     "source-locator": " [1:1-1:1]"
+    },
+    "@poscopy_1.__agg_single0.{f}": {
+     "maxRSS": {
+      "post": 15140,
+      "pre": 15140
+     },
+     "non-recursive-rule": {
+      "@poscopy_1.__agg_single0.{f}(@generator_0) :- \n   @magic.@poscopy_1.__agg_single0.{f}(),\n   @generator_0 = sum 1 : { @neglabel.NotLeaf(+underscore_5),1 = 1 }.": {
+       "maxRSS": {
+        "post": 15140,
+        "pre": 15140
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 22625220385, "end": 22625220386},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 1,
+     "runtime": { "start": 22625220384, "end": 22625220392},
+     "source-locator": " [1:1-1:1]"
+    },
+    "@poscopy_2.@interm_in.Edge": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 22625219765, "end": 22625219768},
+       "maxRSS": {
+        "post": 15140,
+        "pre": 15140
+       },
+       "num-tuples": 21,
+       "recursive-rule": {
+        "@poscopy_2.@interm_in.Edge(m,n) :- \n   @poscopy_2.@interm_in.Edge(n,m).": {
+         "0": {
+          "atom-frequency": {
+           "@new_@poscopy_2.@interm_in.Edge(m,n) :- \n   @delta_@poscopy_2.@interm_in.Edge(n,m).": {
+            "@delta_@poscopy_2.@interm_in.Edge": {
+             "level": 0,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 15140,
+           "pre": 15140
+          },
+          "num-tuples": 21,
+          "runtime": { "start": 22625219745, "end": 22625219747},
+          "source-locator": "/root/souffle-src/tests/example/centroids/centroids.dl [13:1-13:26]"
+         }
+        }
+       },
+       "runtime": { "start": 22625219735, "end": 22625219755}
+      },
+      "1": {
+       "maxRSS": {
+        "post": 15140,
+        "pre": 15140
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "@poscopy_2.@interm_in.Edge(m,n) :- \n   @poscopy_2.@interm_in.Edge(n,m).": {
+         "0": {
+          "maxRSS": {
+           "post": 15140,
+           "pre": 15140
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 22625219772, "end": 22625219773},
+          "source-locator": "/root/souffle-src/tests/example/centroids/centroids.dl [13:1-13:26]"
+         }
+        }
+       },
+       "runtime": { "start": 22625219771, "end": 22625219778}
+      }
+     },
+     "maxRSS": {
+      "post": 15140,
+      "pre": 15140
+     },
+     "non-recursive-rule": {
+      "@poscopy_2.@interm_in.Edge(@query_x0,@query_x1) :- \n   Edge(@query_x0,@query_x1).": {
+       "atom-frequency": {
+        "@poscopy_2.@interm_in.Edge(@query_x0,@query_x1) :- \n   Edge(@query_x0,@query_x1).": {
+         "Edge": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 15140,
+        "pre": 15140
+       },
+       "num-tuples": 21,
+       "runtime": { "start": 22625219724, "end": 22625219725},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 21,
+     "runtime": { "start": 22625219723, "end": 22625219731},
+     "source-locator": "/root/souffle-src/tests/example/centroids/centroids.dl [10:7-10:11]"
+    },
+    "@poscopy_3.@interm_in.Edge": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 22625219821, "end": 22625219823},
+       "maxRSS": {
+        "post": 15140,
+        "pre": 15140
+       },
+       "num-tuples": 21,
+       "recursive-rule": {
+        "@poscopy_3.@interm_in.Edge(m,n) :- \n   @poscopy_3.@interm_in.Edge(n,m).": {
+         "0": {
+          "atom-frequency": {
+           "@new_@poscopy_3.@interm_in.Edge(m,n) :- \n   @delta_@poscopy_3.@interm_in.Edge(n,m).": {
+            "@delta_@poscopy_3.@interm_in.Edge": {
+             "level": 0,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 15140,
+           "pre": 15140
+          },
+          "num-tuples": 21,
+          "runtime": { "start": 22625219809, "end": 22625219810},
+          "source-locator": "/root/souffle-src/tests/example/centroids/centroids.dl [13:1-13:26]"
+         }
+        }
+       },
+       "runtime": { "start": 22625219808, "end": 22625219815}
+      },
+      "1": {
+       "maxRSS": {
+        "post": 15140,
+        "pre": 15140
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "@poscopy_3.@interm_in.Edge(m,n) :- \n   @poscopy_3.@interm_in.Edge(n,m).": {
+         "0": {
+          "maxRSS": {
+           "post": 15140,
+           "pre": 15140
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 22625219826, "end": 22625219827},
+          "source-locator": "/root/souffle-src/tests/example/centroids/centroids.dl [13:1-13:26]"
+         }
+        }
+       },
+       "runtime": { "start": 22625219826, "end": 22625219832}
+      }
+     },
+     "maxRSS": {
+      "post": 15140,
+      "pre": 15140
+     },
+     "non-recursive-rule": {
+      "@poscopy_3.@interm_in.Edge(@query_x0,@query_x1) :- \n   Edge(@query_x0,@query_x1).": {
+       "atom-frequency": {
+        "@poscopy_3.@interm_in.Edge(@query_x0,@query_x1) :- \n   Edge(@query_x0,@query_x1).": {
+         "Edge": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 15140,
+        "pre": 15140
+       },
+       "num-tuples": 21,
+       "runtime": { "start": 22625219797, "end": 22625219798},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 21,
+     "runtime": { "start": 22625219797, "end": 22625219804},
+     "source-locator": "/root/souffle-src/tests/example/centroids/centroids.dl [10:7-10:11]"
+    },
+    "@poscopy_4.@interm_in.Edge.{ff}": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 22625220470, "end": 22625220473},
+       "maxRSS": {
+        "post": 15140,
+        "pre": 15140
+       },
+       "num-tuples": 21,
+       "recursive-rule": {
+        "@poscopy_4.@interm_in.Edge.{ff}(m,n) :- \n   @magic.@poscopy_1.SubtreeCard.{fff}(),\n   @poscopy_4.@interm_in.Edge.{ff}(n,m).": {
+         "0": {
+          "atom-frequency": {
+           "@new_@poscopy_4.@interm_in.Edge.{ff}(m,n) :- \n   @magic.@poscopy_1.SubtreeCard.{fff}(),\n   @delta_@poscopy_4.@interm_in.Edge.{ff}(n,m).": {
+            "@delta_@poscopy_4.@interm_in.Edge.{ff}": {
+             "level": 1,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 15140,
+           "pre": 15140
+          },
+          "num-tuples": 21,
+          "runtime": { "start": 22625220443, "end": 22625220445},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 22625220442, "end": 22625220453}
+      },
+      "1": {
+       "maxRSS": {
+        "post": 15140,
+        "pre": 15140
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "@poscopy_4.@interm_in.Edge.{ff}(m,n) :- \n   @magic.@poscopy_1.SubtreeCard.{fff}(),\n   @poscopy_4.@interm_in.Edge.{ff}(n,m).": {
+         "0": {
+          "maxRSS": {
+           "post": 15140,
+           "pre": 15140
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 22625220479, "end": 22625220482},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 22625220477, "end": 22625220490}
+      }
+     },
+     "maxRSS": {
+      "post": 15140,
+      "pre": 15140
+     },
+     "non-recursive-rule": {
+      "@poscopy_4.@interm_in.Edge.{ff}(@query_x0,@query_x1) :- \n   @magic.@poscopy_1.SubtreeCard.{fff}(),\n   Edge(@query_x0,@query_x1).": {
+       "atom-frequency": {
+        "@poscopy_4.@interm_in.Edge.{ff}(@query_x0,@query_x1) :- \n   @magic.@poscopy_1.SubtreeCard.{fff}(),\n   Edge(@query_x0,@query_x1).": {
+         "Edge": {
+          "level": 1,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 15140,
+        "pre": 15140
+       },
+       "num-tuples": 21,
+       "runtime": { "start": 22625220426, "end": 22625220429},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 21,
+     "runtime": { "start": 22625220417, "end": 22625220437},
+     "source-locator": " [1:1-1:1]"
+    },
+    "Centroid": {
+     "maxRSS": {
+      "post": 15140,
+      "pre": 15140
+     },
+     "non-recursive-rule": {
+      "Centroid(n) :- \n   @interm_in.Edge.{ff}(n,_),\n   !@neglabel.NotCentroid(n).": {
+       "atom-frequency": {
+        "Centroid(n) :- \n   @interm_in.Edge.{ff}(n,_),\n   !@neglabel.NotCentroid(n).": {
+         "@interm_in.Edge.{ff}": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 15140,
+        "pre": 15140
+       },
+       "num-tuples": 2,
+       "runtime": { "start": 22625220573, "end": 22625220576},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 2,
+     "reads": 0,
+     "runtime": { "start": 22625220564, "end": 22625220584},
+     "savetime": { "start": 22625220589, "end": 22625220703},
+     "source-locator": "/root/souffle-src/tests/example/centroids/centroids.dl [33:7-33:15]"
+    },
+    "Edge": {
+     "loadtime": { "start": 22625218977, "end": 22625219537},
+     "num-tuples": 21,
+     "reads": 0,
+     "source-locator": "/root/souffle-src/tests/example/centroids/centroids.dl [10:7-10:11]"
+    }
+   },
+   "runtime": { "start": 22625218953, "end": 22625220710},
+   "starttime": { "time": 22625218909},
+   "usage": {
+    "timepoint": {
+     "22625218965": {
+      "maxRSS": 15140,
+      "systemtime": 4115,
+      "usertime": 4115
+     },
+     "22625219627": {
+      "maxRSS": 15140,
+      "systemtime": 4249,
+      "usertime": 4249
+     },
+     "22625219636": {
+      "maxRSS": 15140,
+      "systemtime": 4258,
+      "usertime": 4258
+     },
+     "22625219644": {
+      "maxRSS": 15140,
+      "systemtime": 4264,
+      "usertime": 4264
+     },
+     "22625219684": {
+      "maxRSS": 15140,
+      "systemtime": 4286,
+      "usertime": 4286
+     },
+     "22625219721": {
+      "maxRSS": 15140,
+      "systemtime": 4310,
+      "usertime": 4310
+     },
+     "22625219829": {
+      "maxRSS": 15140,
+      "systemtime": 4371,
+      "usertime": 4371
+     },
+     "22625219884": {
+      "maxRSS": 15140,
+      "systemtime": 4398,
+      "usertime": 4398
+     },
+     "22625219986": {
+      "maxRSS": 15140,
+      "systemtime": 4465,
+      "usertime": 4465
+     },
+     "22625220068": {
+      "maxRSS": 15140,
+      "systemtime": 4499,
+      "usertime": 4525
+     },
+     "22625220224": {
+      "maxRSS": 15140,
+      "systemtime": 4499,
+      "usertime": 4694
+     },
+     "22625220279": {
+      "maxRSS": 15140,
+      "systemtime": 4499,
+      "usertime": 4754
+     },
+     "22625220384": {
+      "maxRSS": 15140,
+      "systemtime": 4499,
+      "usertime": 4876
+     },
+     "22625220407": {
+      "maxRSS": 15140,
+      "systemtime": 4499,
+      "usertime": 4907
+     },
+     "22625220440": {
+      "maxRSS": 15140,
+      "systemtime": 4499,
+      "usertime": 4950
+     },
+     "22625220542": {
+      "maxRSS": 15140,
+      "systemtime": 4499,
+      "usertime": 5063
+     },
+     "22625220583": {
+      "maxRSS": 15140,
+      "systemtime": 4499,
+      "usertime": 5119
+     },
+     "22625220606": {
+      "maxRSS": 15140,
+      "systemtime": 4499,
+      "usertime": 5139
+     }
+    }
+   }
+  }
+ }
+}

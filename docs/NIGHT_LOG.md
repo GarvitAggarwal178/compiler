@@ -30,4 +30,14 @@ Append-only. One line per task start/end: task ID, outcome, commit SHA.
   27/31 clean. 1 crash (`tic-tac-toe`, `std::bad_alloc`). 1 diverged (escalated,
   not investigated further). 2 never reached (queue truncated). `E_recoverable=0`
   on 10/27 (37%). Distribution and full table:
-  `docs/reports/night01-T3-envelope.md`. Commit: (pending)
+  `docs/reports/night01-T3-envelope.md`. Commit: f21f200
+- T4 start — whole-tree exploratory sweep (EXPLORATORY, not reportable as a result).
+- T4 end — outcome: done. Fast pass (no execution) covered the full tree: 612
+  `.dl`-bearing dirs, 107 (17.5%) with negated IDB literals, 242 (39.5%) seedable,
+  36 both (= the pre-registered corpus, confirms internal consistency). Slow pass
+  (107 negated-IDB candidates, capped at 150 -- didn't need the cap) under
+  `--magic-transform=*`: 86 ok, 21 errored/crashed/DNF. `@neglabel.` produced on
+  57/86 (66%). `E_recoverable=0` on 29/86 (34%, agrees with T3's 37% on the smaller
+  pre-registered subset). Found and fixed two harness bugs before trusting results
+  (duplicated-candidate-set bug, missing-key crash in tuple_report.py). Report:
+  `docs/reports/night01-T4-exploratory.md`. Commit: (pending)

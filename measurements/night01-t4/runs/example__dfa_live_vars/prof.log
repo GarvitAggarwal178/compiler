@@ -1,0 +1,654 @@
+{
+ "root": {
+  "program": {
+   "configuration": {
+    "": "/root/souffle-src/tests/example/dfa_live_vars/dfa_live_vars.dl",
+    "fact-dir": "/root/souffle-src/tests/example/dfa_live_vars",
+    "include-dir": ".",
+    "jobs": "1",
+    "libraries": "functors",
+    "library-dir": ".",
+    "magic-transform": "*",
+    "output-dir": "/root/compiler/measurements/night01-t4/runs/example__dfa_live_vars",
+    "profile": "prof.log",
+    "relationCount": "5",
+    "ruleCount": "34",
+    "version": "2.5",
+    "warn": "all",
+    "wno": "none"
+   },
+   "relation": {
+    "@interm_out.live_vars_in.{bf}": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 22626161325, "end": 22626161325},
+       "maxRSS": {
+        "post": 16720,
+        "pre": 16720
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "@interm_out.live_vars_in.{bf}(x,v) :- \n   @magic.@interm_out.live_vars_in.{bf}(x),\n   !def(x,v),\n   @interm_out.live_vars_out.{bf}(x,v).": {
+         "0": {
+          "atom-frequency": {
+           "@new_@interm_out.live_vars_in.{bf}(x,v) :- \n   @magic.@interm_out.live_vars_in.{bf}(x),\n   !def(x,v),\n   @delta_@interm_out.live_vars_out.{bf}(x,v).": {
+            "@delta_@interm_out.live_vars_out.{bf}": {
+             "level": 1,
+             "num-tuples": 0
+            },
+            "@magic.@interm_out.live_vars_in.{bf}": {
+             "level": 0,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 16720,
+           "pre": 16720
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 22626161296, "end": 22626161297},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 22626161296, "end": 22626161304}
+      },
+      "1": {
+       "maxRSS": {
+        "post": 16720,
+        "pre": 16720
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "@interm_out.live_vars_in.{bf}(x,v) :- \n   @magic.@interm_out.live_vars_in.{bf}(x),\n   !def(x,v),\n   @interm_out.live_vars_out.{bf}(x,v).": {
+         "0": {
+          "maxRSS": {
+           "post": 16720,
+           "pre": 16720
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 22626161332, "end": 22626161334},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 22626161332, "end": 22626161340}
+      }
+     },
+     "maxRSS": {
+      "post": 16720,
+      "pre": 16720
+     },
+     "non-recursive-rule": {
+      "@interm_out.live_vars_in.{bf}(x,v) :- \n   @magic.@interm_out.live_vars_in.{bf}(x),\n   use(x,v).": {
+       "atom-frequency": {
+        "@interm_out.live_vars_in.{bf}(x,v) :- \n   @magic.@interm_out.live_vars_in.{bf}(x),\n   use(x,v).": {
+         "@magic.@interm_out.live_vars_in.{bf}": {
+          "level": 0,
+          "num-tuples": 0
+         },
+         "use": {
+          "level": 1,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 16720,
+        "pre": 16720
+       },
+       "num-tuples": 5,
+       "runtime": { "start": 22626161281, "end": 22626161282},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 5,
+     "runtime": { "start": 22626161280, "end": 22626161288},
+     "source-locator": " [1:1-1:1]"
+    },
+    "@interm_out.live_vars_in.{ff}": {
+     "maxRSS": {
+      "post": 16720,
+      "pre": 16720
+     },
+     "non-recursive-rule": {
+      "@interm_out.live_vars_in.{ff}(x,v) :- \n   @magic.@interm_out.live_vars_in.{ff}(),\n   !def(x,v),\n   @interm_out.live_vars_out.{ff}(x,v).": {
+       "atom-frequency": {
+        "@interm_out.live_vars_in.{ff}(x,v) :- \n   @magic.@interm_out.live_vars_in.{ff}(),\n   !def(x,v),\n   @interm_out.live_vars_out.{ff}(x,v).": {
+         "@interm_out.live_vars_out.{ff}": {
+          "level": 1,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 16720,
+        "pre": 16720
+       },
+       "num-tuples": 0,
+       "runtime": { "start": 22626161408, "end": 22626161409},
+       "source-locator": " [1:1-1:1]"
+      },
+      "@interm_out.live_vars_in.{ff}(x,v) :- \n   @magic.@interm_out.live_vars_in.{ff}(),\n   use(x,v).": {
+       "atom-frequency": {
+        "@interm_out.live_vars_in.{ff}(x,v) :- \n   @magic.@interm_out.live_vars_in.{ff}(),\n   use(x,v).": {
+         "use": {
+          "level": 1,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 16720,
+        "pre": 16720
+       },
+       "num-tuples": 5,
+       "runtime": { "start": 22626161399, "end": 22626161400},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 5,
+     "runtime": { "start": 22626161389, "end": 22626161415},
+     "source-locator": " [1:1-1:1]"
+    },
+    "@interm_out.live_vars_out.{bf}": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 22626161328, "end": 22626161329},
+       "maxRSS": {
+        "post": 16720,
+        "pre": 16720
+       },
+       "num-tuples": 4,
+       "recursive-rule": {
+        "@interm_out.live_vars_out.{bf}(x,v) :- \n   @magic.@interm_out.live_vars_in.{bf}(x),\n   cf_edge(x,y),\n   @interm_out.live_vars_in.{bf}(y,v).": {
+         "0": {
+          "atom-frequency": {
+           "@new_@interm_out.live_vars_out.{bf}(x,v) :- \n   @magic.@interm_out.live_vars_in.{bf}(x),\n   cf_edge(x,y),\n   @delta_@interm_out.live_vars_in.{bf}(y,v).": {
+            "@delta_@interm_out.live_vars_in.{bf}": {
+             "level": 2,
+             "num-tuples": 0
+            },
+            "@magic.@interm_out.live_vars_in.{bf}": {
+             "level": 0,
+             "num-tuples": 0
+            },
+            "cf_edge": {
+             "level": 1,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 16720,
+           "pre": 16720
+          },
+          "num-tuples": 4,
+          "runtime": { "start": 22626161307, "end": 22626161310},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 22626161307, "end": 22626161316}
+      },
+      "1": {
+       "maxRSS": {
+        "post": 16720,
+        "pre": 16720
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "@interm_out.live_vars_out.{bf}(x,v) :- \n   @magic.@interm_out.live_vars_in.{bf}(x),\n   cf_edge(x,y),\n   @interm_out.live_vars_in.{bf}(y,v).": {
+         "0": {
+          "maxRSS": {
+           "post": 16720,
+           "pre": 16720
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 22626161353, "end": 22626161353},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 22626161343, "end": 22626161361}
+      }
+     },
+     "num-tuples": 0,
+     "source-locator": " [1:1-1:1]"
+    },
+    "@interm_out.live_vars_out.{ff}": {
+     "maxRSS": {
+      "post": 16720,
+      "pre": 16720
+     },
+     "non-recursive-rule": {
+      "@interm_out.live_vars_out.{ff}(x,v) :- \n   @magic.@interm_out.live_vars_out.{ff}(),\n   cf_edge(x,y),\n   @interm_out.live_vars_in.{bf}(y,v).": {
+       "atom-frequency": {
+        "@interm_out.live_vars_out.{ff}(x,v) :- \n   @magic.@interm_out.live_vars_out.{ff}(),\n   cf_edge(x,y),\n   @interm_out.live_vars_in.{bf}(y,v).": {
+         "@interm_out.live_vars_in.{bf}": {
+          "level": 2,
+          "num-tuples": 0
+         },
+         "cf_edge": {
+          "level": 1,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 16720,
+        "pre": 16720
+       },
+       "num-tuples": 5,
+       "runtime": { "start": 22626161378, "end": 22626161379},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 5,
+     "runtime": { "start": 22626161376, "end": 22626161386},
+     "source-locator": " [1:1-1:1]"
+    },
+    "@magic.@interm_out.live_vars_in.{bf}": {
+     "iteration": {
+      "0": {
+       "maxRSS": {
+        "post": 16720,
+        "pre": 16720
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "@magic.@interm_out.live_vars_in.{bf}(y) :- \n   @magic.@interm_out.live_vars_in.{bf}(x),\n   cf_edge(x,y).": {
+         "0": {
+          "atom-frequency": {
+           "@new_@magic.@interm_out.live_vars_in.{bf}(y) :- \n   @delta_@magic.@interm_out.live_vars_in.{bf}(x),\n   cf_edge(x,y).": {
+            "@delta_@magic.@interm_out.live_vars_in.{bf}": {
+             "level": 0,
+             "num-tuples": 0
+            },
+            "cf_edge": {
+             "level": 1,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 16720,
+           "pre": 16720
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 22626161252, "end": 22626161261},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 22626161244, "end": 22626161271}
+      }
+     },
+     "maxRSS": {
+      "post": 16720,
+      "pre": 16720
+     },
+     "non-recursive-rule": {
+      "@magic.@interm_out.live_vars_in.{bf}(y) :- \n   @magic.@interm_out.live_vars_out.{ff}(),\n   cf_edge(_,y).": {
+       "atom-frequency": {
+        "@magic.@interm_out.live_vars_in.{bf}(y) :- \n   @magic.@interm_out.live_vars_out.{ff}(),\n   cf_edge(_,y).": {
+         "cf_edge": {
+          "level": 1,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 16720,
+        "pre": 16720
+       },
+       "num-tuples": 4,
+       "runtime": { "start": 22626161229, "end": 22626161231},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 4,
+     "runtime": { "start": 22626161228, "end": 22626161238},
+     "source-locator": " [1:1-1:1]"
+    },
+    "@magic.@interm_out.live_vars_in.{ff}": {
+     "maxRSS": {
+      "post": 16720,
+      "pre": 16720
+     },
+     "non-recursive-rule": {
+      "@magic.@interm_out.live_vars_in.{ff}().": {
+       "maxRSS": {
+        "post": 16720,
+        "pre": 16720
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 22626161089, "end": 22626161092},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 1,
+     "runtime": { "start": 22626161088, "end": 22626161101},
+     "source-locator": " [1:1-1:1]"
+    },
+    "@magic.@interm_out.live_vars_out.{ff}": {
+     "maxRSS": {
+      "post": 16720,
+      "pre": 16720
+     },
+     "non-recursive-rule": {
+      "@magic.@interm_out.live_vars_out.{ff}() :- \n   @magic.@interm_out.live_vars_in.{ff}().": {
+       "maxRSS": {
+        "post": 16720,
+        "pre": 16720
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 22626161194, "end": 22626161194},
+       "source-locator": " [1:1-1:1]"
+      },
+      "@magic.@interm_out.live_vars_out.{ff}().": {
+       "maxRSS": {
+        "post": 16720,
+        "pre": 16720
+       },
+       "num-tuples": 0,
+       "runtime": { "start": 22626161200, "end": 22626161212},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 1,
+     "runtime": { "start": 22626161192, "end": 22626161224},
+     "source-locator": " [1:1-1:1]"
+    },
+    "cf_edge": {
+     "maxRSS": {
+      "post": 16720,
+      "pre": 16720
+     },
+     "non-recursive-rule": {
+      "cf_edge(\"A\",\"B\").": {
+       "maxRSS": {
+        "post": 16720,
+        "pre": 16720
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 22626161106, "end": 22626161108},
+       "source-locator": " [1:1-1:1]"
+      },
+      "cf_edge(\"B\",\"C\").": {
+       "maxRSS": {
+        "post": 16720,
+        "pre": 16720
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 22626161113, "end": 22626161114},
+       "source-locator": " [1:1-1:1]"
+      },
+      "cf_edge(\"B\",\"D\").": {
+       "maxRSS": {
+        "post": 16720,
+        "pre": 16720
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 22626161124, "end": 22626161125},
+       "source-locator": " [1:1-1:1]"
+      },
+      "cf_edge(\"C\",\"C\").": {
+       "maxRSS": {
+        "post": 16720,
+        "pre": 16720
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 22626161118, "end": 22626161118},
+       "source-locator": " [1:1-1:1]"
+      },
+      "cf_edge(\"C\",\"D\").": {
+       "maxRSS": {
+        "post": 16720,
+        "pre": 16720
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 22626161121, "end": 22626161122},
+       "source-locator": " [1:1-1:1]"
+      },
+      "cf_edge(\"D\",\"E\").": {
+       "maxRSS": {
+        "post": 16720,
+        "pre": 16720
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 22626161131, "end": 22626161132},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 6,
+     "reads": 0,
+     "runtime": { "start": 22626161105, "end": 22626161135},
+     "source-locator": "/root/souffle-src/tests/example/dfa_live_vars/dfa_live_vars.dl [13:7-13:14]"
+    },
+    "def": {
+     "maxRSS": {
+      "post": 16720,
+      "pre": 16720
+     },
+     "non-recursive-rule": {
+      "def(\"A\",\"x1\").": {
+       "maxRSS": {
+        "post": 16720,
+        "pre": 16720
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 22626161139, "end": 22626161140},
+       "source-locator": " [1:1-1:1]"
+      },
+      "def(\"B\",\"x2\").": {
+       "maxRSS": {
+        "post": 16720,
+        "pre": 16720
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 22626161145, "end": 22626161145},
+       "source-locator": " [1:1-1:1]"
+      },
+      "def(\"C\",\"x2\").": {
+       "maxRSS": {
+        "post": 16720,
+        "pre": 16720
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 22626161148, "end": 22626161149},
+       "source-locator": " [1:1-1:1]"
+      },
+      "def(\"D\",\"x3\").": {
+       "maxRSS": {
+        "post": 16720,
+        "pre": 16720
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 22626161151, "end": 22626161152},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 4,
+     "reads": 9,
+     "runtime": { "start": 22626161139, "end": 22626161156},
+     "source-locator": "/root/souffle-src/tests/example/dfa_live_vars/dfa_live_vars.dl [20:7-20:10]"
+    },
+    "live_vars_in": {
+     "maxRSS": {
+      "post": 16720,
+      "pre": 16720
+     },
+     "non-recursive-rule": {
+      "live_vars_in(@query_x0,@query_x1) :- \n   @interm_out.live_vars_in.{ff}(@query_x0,@query_x1).": {
+       "atom-frequency": {
+        "live_vars_in(@query_x0,@query_x1) :- \n   @interm_out.live_vars_in.{ff}(@query_x0,@query_x1).": {
+         "@interm_out.live_vars_in.{ff}": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 16720,
+        "pre": 16720
+       },
+       "num-tuples": 5,
+       "runtime": { "start": 22626161509, "end": 22626161510},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 5,
+     "reads": 0,
+     "runtime": { "start": 22626161508, "end": 22626161515},
+     "savetime": { "start": 22626161519, "end": 22626161538},
+     "source-locator": "/root/souffle-src/tests/example/dfa_live_vars/dfa_live_vars.dl [24:7-24:19]"
+    },
+    "live_vars_out": {
+     "maxRSS": {
+      "post": 16720,
+      "pre": 16720
+     },
+     "non-recursive-rule": {
+      "live_vars_out(@query_x0,@query_x1) :- \n   @interm_out.live_vars_out.{ff}(@query_x0,@query_x1).": {
+       "atom-frequency": {
+        "live_vars_out(@query_x0,@query_x1) :- \n   @interm_out.live_vars_out.{ff}(@query_x0,@query_x1).": {
+         "@interm_out.live_vars_out.{ff}": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 16720,
+        "pre": 16720
+       },
+       "num-tuples": 5,
+       "runtime": { "start": 22626161427, "end": 22626161428},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 5,
+     "reads": 0,
+     "runtime": { "start": 22626161419, "end": 22626161437},
+     "savetime": { "start": 22626161441, "end": 22626161505},
+     "source-locator": "/root/souffle-src/tests/example/dfa_live_vars/dfa_live_vars.dl [26:7-26:20]"
+    },
+    "use": {
+     "maxRSS": {
+      "post": 16720,
+      "pre": 16720
+     },
+     "non-recursive-rule": {
+      "use(\"B\",\"x1\").": {
+       "maxRSS": {
+        "post": 16720,
+        "pre": 16720
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 22626161160, "end": 22626161161},
+       "source-locator": " [1:1-1:1]"
+      },
+      "use(\"C\",\"x2\").": {
+       "maxRSS": {
+        "post": 16720,
+        "pre": 16720
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 22626161164, "end": 22626161164},
+       "source-locator": " [1:1-1:1]"
+      },
+      "use(\"D\",\"x2\").": {
+       "maxRSS": {
+        "post": 16720,
+        "pre": 16720
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 22626161168, "end": 22626161169},
+       "source-locator": " [1:1-1:1]"
+      },
+      "use(\"E\",\"x2\").": {
+       "maxRSS": {
+        "post": 16720,
+        "pre": 16720
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 22626161172, "end": 22626161172},
+       "source-locator": " [1:1-1:1]"
+      },
+      "use(\"E\",\"x3\").": {
+       "maxRSS": {
+        "post": 16720,
+        "pre": 16720
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 22626161175, "end": 22626161175},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 5,
+     "reads": 0,
+     "runtime": { "start": 22626161160, "end": 22626161178},
+     "source-locator": "/root/souffle-src/tests/example/dfa_live_vars/dfa_live_vars.dl [19:7-19:10]"
+    }
+   },
+   "runtime": { "start": 22626161084, "end": 22626161541},
+   "starttime": { "time": 22626161049},
+   "usage": {
+    "timepoint": {
+     "22626161160": {
+      "maxRSS": 16720,
+      "systemtime": 0,
+      "usertime": 5824
+     },
+     "22626161195": {
+      "maxRSS": 16720,
+      "systemtime": 0,
+      "usertime": 5889
+     },
+     "22626161227": {
+      "maxRSS": 16720,
+      "systemtime": 0,
+      "usertime": 5925
+     },
+     "22626161331": {
+      "maxRSS": 16720,
+      "systemtime": 0,
+      "usertime": 6043
+     },
+     "22626161367": {
+      "maxRSS": 16720,
+      "systemtime": 0,
+      "usertime": 6092
+     },
+     "22626161373": {
+      "maxRSS": 16720,
+      "systemtime": 0,
+      "usertime": 6103
+     },
+     "22626161381": {
+      "maxRSS": 16720,
+      "systemtime": 0,
+      "usertime": 6115
+     },
+     "22626161406": {
+      "maxRSS": 16720,
+      "systemtime": 0,
+      "usertime": 6143
+     },
+     "22626161509": {
+      "maxRSS": 16720,
+      "systemtime": 0,
+      "usertime": 6266
+     },
+     "22626161524": {
+      "maxRSS": 16720,
+      "systemtime": 0,
+      "usertime": 6285
+     }
+    }
+   }
+  }
+ }
+}

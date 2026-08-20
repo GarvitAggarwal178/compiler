@@ -1,0 +1,386 @@
+{
+ "root": {
+  "program": {
+   "configuration": {
+    "": "/root/souffle-src/tests/semantic/rel_redundant/rel_redundant.dl",
+    "fact-dir": "/root/souffle-src/tests/semantic/rel_redundant",
+    "include-dir": ".",
+    "jobs": "1",
+    "libraries": "functors",
+    "library-dir": ".",
+    "magic-transform": "*",
+    "output-dir": "/root/compiler/measurements/night01-t4/runs/semantic__rel_redundant",
+    "profile": "prof.log",
+    "relationCount": "10",
+    "ruleCount": "15",
+    "version": "2.5",
+    "warn": "all",
+    "wno": "none"
+   },
+   "relation": {
+    "@magic.B.{ff}": {
+     "maxRSS": {
+      "post": 23164,
+      "pre": 23164
+     },
+     "non-recursive-rule": {
+      "@magic.B.{ff}().": {
+       "maxRSS": {
+        "post": 23164,
+        "pre": 23164
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 23167798877, "end": 23167798880},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 1,
+     "runtime": { "start": 23167798874, "end": 23167798888},
+     "source-locator": " [1:1-1:1]"
+    },
+    "A": {
+     "maxRSS": {
+      "post": 23164,
+      "pre": 23164
+     },
+     "non-recursive-rule": {
+      "A(0,0).": {
+       "maxRSS": {
+        "post": 23164,
+        "pre": 23164
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 23167798893, "end": 23167798897},
+       "source-locator": " [1:1-1:1]"
+      },
+      "A(1,0).": {
+       "maxRSS": {
+        "post": 23164,
+        "pre": 23164
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 23167798901, "end": 23167798902},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 2,
+     "reads": 0,
+     "runtime": { "start": 23167798893, "end": 23167798906},
+     "source-locator": "/root/souffle-src/tests/semantic/rel_redundant/rel_redundant.dl [3:7-3:8]"
+    },
+    "B.{ff}": {
+     "maxRSS": {
+      "post": 23164,
+      "pre": 23164
+     },
+     "non-recursive-rule": {
+      "B.{ff}(z,z) :- \n   @magic.B.{ff}(),\n   A(z,z).": {
+       "atom-frequency": {
+        "B.{ff}(z,z) :- \n   @magic.B.{ff}(),\n   A(z,z).": {
+         "A": {
+          "level": 1,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 23164,
+        "pre": 23164
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 23167799379, "end": 23167799386},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 1,
+     "reads": 0,
+     "runtime": { "start": 23167799365, "end": 23167799394},
+     "source-locator": " [1:1-1:1]"
+    },
+    "C": {
+     "maxRSS": {
+      "post": 23164,
+      "pre": 23164
+     },
+     "non-recursive-rule": {
+      "C(a,b) :- \n   B.{ff}(a,b).": {
+       "atom-frequency": {
+        "C(a,b) :- \n   B.{ff}(a,b).": {
+         "B.{ff}": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 23164,
+        "pre": 23164
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 23167799422, "end": 23167799422},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 1,
+     "reads": 0,
+     "runtime": { "start": 23167799421, "end": 23167799427},
+     "savetime": { "start": 23167799431, "end": 23167800772},
+     "source-locator": "/root/souffle-src/tests/semantic/rel_redundant/rel_redundant.dl [10:7-10:8]"
+    },
+    "d": {
+     "maxRSS": {
+      "post": 23164,
+      "pre": 23164
+     },
+     "non-recursive-rule": {
+      "d(0,[0,1]).": {
+       "maxRSS": {
+        "post": 23164,
+        "pre": 23164
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 23167798910, "end": 23167798913},
+       "source-locator": " [1:1-1:1]"
+      },
+      "d(0,[1,0]).": {
+       "maxRSS": {
+        "post": 23164,
+        "pre": 23164
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 23167798917, "end": 23167798918},
+       "source-locator": " [1:1-1:1]"
+      },
+      "d(1,[1,1]).": {
+       "maxRSS": {
+        "post": 23164,
+        "pre": 23164
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 23167798921, "end": 23167798921},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 3,
+     "reads": 0,
+     "runtime": { "start": 23167798909, "end": 23167798924},
+     "source-locator": "/root/souffle-src/tests/semantic/rel_redundant/rel_redundant.dl [16:7-16:8]"
+    },
+    "e.{ff}": {
+     "maxRSS": {
+      "post": 23164,
+      "pre": 23164
+     },
+     "non-recursive-rule": {
+      "e.{ff}(x0,[x,x]) :- \n   @magic.B.{ff}(),\n   d(x0,[x,x]).": {
+       "atom-frequency": {
+        "e.{ff}(x0,[x,x]) :- \n   @magic.B.{ff}(),\n   d(x0,[x,x]).": {
+         "d": {
+          "level": 1,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 23164,
+        "pre": 23164
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 23167799399, "end": 23167799404},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 1,
+     "reads": 0,
+     "runtime": { "start": 23167799399, "end": 23167799409},
+     "source-locator": " [1:1-1:1]"
+    },
+    "f": {
+     "maxRSS": {
+      "post": 23164,
+      "pre": 23164
+     },
+     "non-recursive-rule": {
+      "f(0,[0]).": {
+       "maxRSS": {
+        "post": 23164,
+        "pre": 23164
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 23167798938, "end": 23167798940},
+       "source-locator": " [1:1-1:1]"
+      },
+      "f(0,[1]).": {
+       "maxRSS": {
+        "post": 23164,
+        "pre": 23164
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 23167798945, "end": 23167798946},
+       "source-locator": " [1:1-1:1]"
+      },
+      "f(1,[1]).": {
+       "maxRSS": {
+        "post": 23164,
+        "pre": 23164
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 23167798949, "end": 23167798950},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 3,
+     "reads": 0,
+     "runtime": { "start": 23167798927, "end": 23167798953},
+     "source-locator": "/root/souffle-src/tests/semantic/rel_redundant/rel_redundant.dl [28:7-28:8]"
+    },
+    "g.{ff}": {
+     "maxRSS": {
+      "post": 23164,
+      "pre": 23164
+     },
+     "non-recursive-rule": {
+      "g.{ff}(x,[x]) :- \n   @magic.B.{ff}(),\n   f(x,[x]).": {
+       "atom-frequency": {
+        "g.{ff}(x,[x]) :- \n   @magic.B.{ff}(),\n   f(x,[x]).": {
+         "f": {
+          "level": 1,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 23164,
+        "pre": 23164
+       },
+       "num-tuples": 2,
+       "runtime": { "start": 23167799412, "end": 23167799414},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 2,
+     "reads": 0,
+     "runtime": { "start": 23167799412, "end": 23167799418},
+     "source-locator": " [1:1-1:1]"
+    },
+    "outX": {
+     "num-tuples": 0,
+     "reads": 0,
+     "savetime": { "start": 23167798960, "end": 23167799358},
+     "source-locator": "/root/souffle-src/tests/semantic/rel_redundant/rel_redundant.dl [57:7-57:11]"
+    },
+    "record0": {
+     "maxRSS": {
+      "post": 23164,
+      "pre": 23164
+     },
+     "non-recursive-rule": {
+      "record0(x,y) :- \n   e.{ff}(x,[y,_<unnamed_1>]).": {
+       "atom-frequency": {
+        "record0(x,y) :- \n   e.{ff}(x,[y,_<unnamed_1>]).": {
+         "e.{ff}": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 23164,
+        "pre": 23164
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 23167800791, "end": 23167800794},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 1,
+     "reads": 0,
+     "runtime": { "start": 23167800779, "end": 23167800802},
+     "savetime": { "start": 23167800807, "end": 23167800853},
+     "source-locator": "/root/souffle-src/tests/semantic/rel_redundant/rel_redundant.dl [17:7-17:14]"
+    },
+    "record1": {
+     "maxRSS": {
+      "post": 23164,
+      "pre": 23164
+     },
+     "non-recursive-rule": {
+      "record1(x,y) :- \n   g.{ff}(x,[y]).": {
+       "atom-frequency": {
+        "record1(x,y) :- \n   g.{ff}(x,[y]).": {
+         "g.{ff}": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 23164,
+        "pre": 23164
+       },
+       "num-tuples": 2,
+       "runtime": { "start": 23167800866, "end": 23167800868},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 2,
+     "reads": 0,
+     "runtime": { "start": 23167800857, "end": 23167800875},
+     "savetime": { "start": 23167800879, "end": 23167800912},
+     "source-locator": "/root/souffle-src/tests/semantic/rel_redundant/rel_redundant.dl [29:7-29:14]"
+    }
+   },
+   "runtime": { "start": 23167798868, "end": 23167800915},
+   "starttime": { "time": 23167798833},
+   "usage": {
+    "timepoint": {
+     "23167798901": {
+      "maxRSS": 23164,
+      "systemtime": 3810,
+      "usertime": 3810
+     },
+     "23167798948": {
+      "maxRSS": 23164,
+      "systemtime": 3847,
+      "usertime": 3847
+     },
+     "23167798978": {
+      "maxRSS": 23164,
+      "systemtime": 3858,
+      "usertime": 3858
+     },
+     "23167799426": {
+      "maxRSS": 23164,
+      "systemtime": 4094,
+      "usertime": 4094
+     },
+     "23167800560": {
+      "maxRSS": 23164,
+      "systemtime": 4106,
+      "usertime": 4106
+     },
+     "23167800800": {
+      "maxRSS": 23164,
+      "systemtime": 5481,
+      "usertime": 4106
+     },
+     "23167800825": {
+      "maxRSS": 23164,
+      "systemtime": 5502,
+      "usertime": 4106
+     },
+     "23167800874": {
+      "maxRSS": 23164,
+      "systemtime": 5573,
+      "usertime": 4106
+     },
+     "23167800900": {
+      "maxRSS": 23164,
+      "systemtime": 5591,
+      "usertime": 4106
+     }
+    }
+   }
+  }
+ }
+}

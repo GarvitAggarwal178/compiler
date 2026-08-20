@@ -1,0 +1,322 @@
+{
+ "root": {
+  "program": {
+   "configuration": {
+    "": "/root/souffle-src/tests/example/disconnected/disconnected.dl",
+    "fact-dir": "/root/souffle-src/tests/example/disconnected/facts",
+    "include-dir": ".",
+    "jobs": "1",
+    "libraries": "functors",
+    "library-dir": ".",
+    "magic-transform": "*",
+    "output-dir": "/root/compiler/measurements/night01-t4/runs/example__disconnected",
+    "profile": "prof.log",
+    "relationCount": "2",
+    "ruleCount": "10",
+    "version": "2.5",
+    "warn": "all",
+    "wno": "none"
+   },
+   "relation": {
+    "@interm_out.DisConnected.{ff}": {
+     "maxRSS": {
+      "post": 16384,
+      "pre": 16384
+     },
+     "non-recursive-rule": {
+      "@interm_out.DisConnected.{ff}(n,m) :- \n   @magic.@interm_out.DisConnected.{ff}(),\n   Edge(n,_,_),\n   Edge(_,m,_),\n   !@neglabel.Connected(n,m).": {
+       "atom-frequency": {
+        "@interm_out.DisConnected.{ff}(n,m) :- \n   @magic.@interm_out.DisConnected.{ff}(),\n   Edge(n,_,_),\n   Edge(_,m,_),\n   !@neglabel.Connected(n,m).": {
+         "Edge": {
+          "level": 1,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 16384,
+        "pre": 16384
+       },
+       "num-tuples": 22,
+       "runtime": { "start": 22626229615, "end": 22626229621},
+       "source-locator": " [1:1-1:1]"
+      },
+      "@interm_out.DisConnected.{ff}(n,m) :- \n   @magic.@interm_out.DisConnected.{ff}(),\n   Edge(n,_,_),\n   Edge(m,_,_),\n   !@neglabel.Connected(n,m).": {
+       "atom-frequency": {
+        "@interm_out.DisConnected.{ff}(n,m) :- \n   @magic.@interm_out.DisConnected.{ff}(),\n   Edge(n,_,_),\n   Edge(m,_,_),\n   !@neglabel.Connected(n,m).": {
+         "Edge": {
+          "level": 1,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 16384,
+        "pre": 16384
+       },
+       "num-tuples": 5,
+       "runtime": { "start": 22626229627, "end": 22626229632},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 27,
+     "runtime": { "start": 22626229615, "end": 22626229636},
+     "source-locator": " [1:1-1:1]"
+    },
+    "@magic.@interm_out.DisConnected.{ff}": {
+     "maxRSS": {
+      "post": 16384,
+      "pre": 16384
+     },
+     "non-recursive-rule": {
+      "@magic.@interm_out.DisConnected.{ff}().": {
+       "maxRSS": {
+        "post": 16384,
+        "pre": 16384
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 22626222862, "end": 22626222865},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 1,
+     "runtime": { "start": 22626222861, "end": 22626222873},
+     "source-locator": " [1:1-1:1]"
+    },
+    "@neglabel.Connected": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 22626229557, "end": 22626229559},
+       "maxRSS": {
+        "post": 16384,
+        "pre": 16384
+       },
+       "num-tuples": 5,
+       "recursive-rule": {
+        "@neglabel.Connected(n,m) :- \n   Edge(n,z,_),\n   @neglabel.Connected(z,m).": {
+         "0": {
+          "atom-frequency": {
+           "@new_@neglabel.Connected(n,m) :- \n   Edge(n,z,_),\n   @delta_@neglabel.Connected(z,m).": {
+            "@delta_@neglabel.Connected": {
+             "level": 1,
+             "num-tuples": 0
+            },
+            "Edge": {
+             "level": 0,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 16384,
+           "pre": 16384
+          },
+          "num-tuples": 5,
+          "runtime": { "start": 22626229518, "end": 22626229527},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 22626229506, "end": 22626229536}
+      },
+      "1": {
+       "copytime": { "start": 22626229592, "end": 22626229595},
+       "maxRSS": {
+        "post": 16384,
+        "pre": 16384
+       },
+       "num-tuples": 1,
+       "recursive-rule": {
+        "@neglabel.Connected(n,m) :- \n   Edge(n,z,_),\n   @neglabel.Connected(z,m).": {
+         "0": {
+          "maxRSS": {
+           "post": 16384,
+           "pre": 16384
+          },
+          "num-tuples": 1,
+          "runtime": { "start": 22626229564, "end": 22626229566},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 22626229563, "end": 22626229573}
+      },
+      "2": {
+       "maxRSS": {
+        "post": 16384,
+        "pre": 16384
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "@neglabel.Connected(n,m) :- \n   Edge(n,z,_),\n   @neglabel.Connected(z,m).": {
+         "0": {
+          "maxRSS": {
+           "post": 16384,
+           "pre": 16384
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 22626229599, "end": 22626229600},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 22626229599, "end": 22626229607}
+      }
+     },
+     "maxRSS": {
+      "post": 16384,
+      "pre": 16384
+     },
+     "non-recursive-rule": {
+      "@neglabel.Connected(n,m) :- \n   Edge(n,m,_).": {
+       "atom-frequency": {
+        "@neglabel.Connected(n,m) :- \n   Edge(n,m,_).": {
+         "Edge": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 16384,
+        "pre": 16384
+       },
+       "num-tuples": 9,
+       "runtime": { "start": 22626229490, "end": 22626229496},
+       "source-locator": " [1:1-1:1]"
+      },
+      "@neglabel.Connected(n,n) :- \n   Edge(_,n,_).": {
+       "atom-frequency": {
+        "@neglabel.Connected(n,n) :- \n   Edge(_,n,_).": {
+         "Edge": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 16384,
+        "pre": 16384
+       },
+       "num-tuples": 2,
+       "runtime": { "start": 22626229484, "end": 22626229486},
+       "source-locator": " [1:1-1:1]"
+      },
+      "@neglabel.Connected(n,n) :- \n   Edge(n,_,_).": {
+       "atom-frequency": {
+        "@neglabel.Connected(n,n) :- \n   Edge(n,_,_).": {
+         "Edge": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 16384,
+        "pre": 16384
+       },
+       "num-tuples": 6,
+       "runtime": { "start": 22626229473, "end": 22626229476},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 17,
+     "runtime": { "start": 22626229457, "end": 22626229500},
+     "source-locator": "/root/souffle-src/tests/example/disconnected/disconnected.dl [14:7-14:16]"
+    },
+    "DisConnected": {
+     "maxRSS": {
+      "post": 16384,
+      "pre": 16384
+     },
+     "non-recursive-rule": {
+      "DisConnected(@query_x0,@query_x1) :- \n   @interm_out.DisConnected.{ff}(@query_x0,@query_x1).": {
+       "atom-frequency": {
+        "DisConnected(@query_x0,@query_x1) :- \n   @interm_out.DisConnected.{ff}(@query_x0,@query_x1).": {
+         "@interm_out.DisConnected.{ff}": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 16384,
+        "pre": 16384
+       },
+       "num-tuples": 27,
+       "runtime": { "start": 22626229641, "end": 22626229643},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 27,
+     "reads": 0,
+     "runtime": { "start": 22626229640, "end": 22626229648},
+     "savetime": { "start": 22626229651, "end": 22626229708},
+     "source-locator": "/root/souffle-src/tests/example/disconnected/disconnected.dl [21:7-21:19]"
+    },
+    "Edge": {
+     "loadtime": { "start": 22626222877, "end": 22626229447},
+     "num-tuples": 9,
+     "reads": 0,
+     "source-locator": "/root/souffle-src/tests/example/disconnected/disconnected.dl [10:7-10:11]"
+    }
+   },
+   "runtime": { "start": 22626222857, "end": 22626229711},
+   "starttime": { "time": 22626222831},
+   "usage": {
+    "timepoint": {
+     "22626222943": {
+      "maxRSS": 16384,
+      "systemtime": 0,
+      "usertime": 4483
+     },
+     "22626224151": {
+      "maxRSS": 16384,
+      "systemtime": 0,
+      "usertime": 4582
+     },
+     "22626225332": {
+      "maxRSS": 16384,
+      "systemtime": 0,
+      "usertime": 4598
+     },
+     "22626226522": {
+      "maxRSS": 16384,
+      "systemtime": 0,
+      "usertime": 4613
+     },
+     "22626227713": {
+      "maxRSS": 16384,
+      "systemtime": 0,
+      "usertime": 4629
+     },
+     "22626228912": {
+      "maxRSS": 16384,
+      "systemtime": 0,
+      "usertime": 4643
+     },
+     "22626229492": {
+      "maxRSS": 16384,
+      "systemtime": 0,
+      "usertime": 4741
+     },
+     "22626229523": {
+      "maxRSS": 16384,
+      "systemtime": 0,
+      "usertime": 4784
+     },
+     "22626229564": {
+      "maxRSS": 16384,
+      "systemtime": 0,
+      "usertime": 4843
+     },
+     "22626229660": {
+      "maxRSS": 16384,
+      "systemtime": 0,
+      "usertime": 4947
+     }
+    }
+   }
+  }
+ }
+}

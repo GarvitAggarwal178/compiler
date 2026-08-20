@@ -46,6 +46,7 @@ the "Derived" section below the table.
 
 | night01-t2-summary | 2026-08-20 | `python3 harness/night01_t2_corpus.py` | 36 pre-registered programs | untransformed | 31 ok, 4 rejected, 1 crash, 0 DNF; `T_none≥1000` on 3/31; floor of 8 not met | Full table `docs/reports/night01-T2-corpus.md`; per-program provenance `measurements/night01-t2/`. |
 | night01-t3-summary | 2026-08-20 | `python3 harness/night01_t3_envelope.py` | 31 T2-ok+seedable programs | `--magic-transform=*` | 27 clean, 1 crash, 1 diverged (abort), 2 not reached; `E_recoverable/T_souffle`: min 0, median 0.026, max 0.571; `E_recoverable=0` on 10/27 | Full table + distribution `docs/reports/night01-T3-envelope.md`; abort detail `docs/ESCALATIONS.md`; per-program provenance `measurements/night01-t3/`. |
+| night01-t4-summary | 2026-08-20 | `python3 harness/night01_t4_exploratory.py` | whole `tests/` tree (612) fast pass; 107 negated-IDB programs slow pass | untransformed (fast, structural only) / `--magic-transform=*` (slow) | fast: 107/612 (17.5%) negated IDB, 242/612 (39.5%) seedable, 36/612 both; slow: 86 ok, `@neglabel.` on 57/86 (66%), `E_recoverable=0` on 29/86 (34%) | **EXPLORATORY, not a headline result.** Full counts `docs/reports/night01-T4-exploratory.md`; raw `measurements/night01-t4/`. |
 
 **Non-determinism found, not fixed (T1, hard prohibition #2 applies):**
 `tests/corpus/detail.json`'s `matched_output_relation` diagnostic field varies

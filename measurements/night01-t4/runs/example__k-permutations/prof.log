@@ -1,0 +1,208 @@
+{
+ "root": {
+  "program": {
+   "configuration": {
+    "": "/root/souffle-src/tests/example/k-permutations/k-permutations.dl",
+    "fact-dir": "/root/souffle-src/tests/example/k-permutations/facts",
+    "include-dir": ".",
+    "jobs": "1",
+    "libraries": "functors",
+    "library-dir": ".",
+    "magic-transform": "*",
+    "output-dir": "/root/compiler/measurements/night01-t4/runs/example__k-permutations",
+    "profile": "prof.log",
+    "relationCount": "2",
+    "ruleCount": "6",
+    "version": "2.5",
+    "warn": "all",
+    "wno": "none"
+   },
+   "relation": {
+    "@interm_out.P.{f}": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 22926815570, "end": 22926815571},
+       "maxRSS": {
+        "post": 18836,
+        "pre": 18836
+       },
+       "num-tuples": 6,
+       "recursive-rule": {
+        "@interm_out.P.{f}(cat(x,cat(\",\",y))) :- \n   @magic.@interm_out.P.{f}(),\n   S(x),\n   @interm_out.P.{f}(y),\n   not_contains(x, y).": {
+         "0": {
+          "atom-frequency": {
+           "@new_@interm_out.P.{f}(cat(x,cat(\",\",y))) :- \n   @magic.@interm_out.P.{f}(),\n   S(x),\n   @delta_@interm_out.P.{f}(y),\n   not_contains(x, y).": {
+            "@delta_@interm_out.P.{f}": {
+             "level": 2,
+             "num-tuples": 0
+            },
+            "S": {
+             "level": 1,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 18836,
+           "pre": 18836
+          },
+          "num-tuples": 6,
+          "runtime": { "start": 22926815528, "end": 22926815553},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 22926815527, "end": 22926815562}
+      },
+      "1": {
+       "copytime": { "start": 22926815606, "end": 22926815607},
+       "maxRSS": {
+        "post": 18836,
+        "pre": 18836
+       },
+       "num-tuples": 6,
+       "recursive-rule": {
+        "@interm_out.P.{f}(cat(x,cat(\",\",y))) :- \n   @magic.@interm_out.P.{f}(),\n   S(x),\n   @interm_out.P.{f}(y),\n   not_contains(x, y).": {
+         "0": {
+          "maxRSS": {
+           "post": 18836,
+           "pre": 18836
+          },
+          "num-tuples": 6,
+          "runtime": { "start": 22926815575, "end": 22926815583},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 22926815574, "end": 22926815588}
+      },
+      "2": {
+       "maxRSS": {
+        "post": 18836,
+        "pre": 18836
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "@interm_out.P.{f}(cat(x,cat(\",\",y))) :- \n   @magic.@interm_out.P.{f}(),\n   S(x),\n   @interm_out.P.{f}(y),\n   not_contains(x, y).": {
+         "0": {
+          "maxRSS": {
+           "post": 18836,
+           "pre": 18836
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 22926815611, "end": 22926815613},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 22926815611, "end": 22926815620}
+      }
+     },
+     "maxRSS": {
+      "post": 18836,
+      "pre": 18836
+     },
+     "non-recursive-rule": {
+      "@interm_out.P.{f}(x) :- \n   @magic.@interm_out.P.{f}(),\n   S(x).": {
+       "atom-frequency": {
+        "@interm_out.P.{f}(x) :- \n   @magic.@interm_out.P.{f}(),\n   S(x).": {
+         "S": {
+          "level": 1,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 18836,
+        "pre": 18836
+       },
+       "num-tuples": 3,
+       "runtime": { "start": 22926815513, "end": 22926815515},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 3,
+     "runtime": { "start": 22926815496, "end": 22926815523},
+     "source-locator": " [1:1-1:1]"
+    },
+    "@magic.@interm_out.P.{f}": {
+     "maxRSS": {
+      "post": 18836,
+      "pre": 18836
+     },
+     "non-recursive-rule": {
+      "@magic.@interm_out.P.{f}().": {
+       "maxRSS": {
+        "post": 18836,
+        "pre": 18836
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 22926814988, "end": 22926814991},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 1,
+     "runtime": { "start": 22926814985, "end": 22926815000},
+     "source-locator": " [1:1-1:1]"
+    },
+    "P": {
+     "maxRSS": {
+      "post": 18836,
+      "pre": 18836
+     },
+     "non-recursive-rule": {
+      "P(@query_x0) :- \n   @interm_out.P.{f}(@query_x0).": {
+       "atom-frequency": {
+        "P(@query_x0) :- \n   @interm_out.P.{f}(@query_x0).": {
+         "@interm_out.P.{f}": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 18836,
+        "pre": 18836
+       },
+       "num-tuples": 15,
+       "runtime": { "start": 22926815639, "end": 22926815644},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 15,
+     "reads": 0,
+     "runtime": { "start": 22926815639, "end": 22926815651},
+     "savetime": { "start": 22926815654, "end": 22926815709},
+     "source-locator": "/root/souffle-src/tests/example/k-permutations/k-permutations.dl [8:7-8:8]"
+    },
+    "S": {
+     "loadtime": { "start": 22926815005, "end": 22926815487},
+     "num-tuples": 3,
+     "reads": 0,
+     "source-locator": "/root/souffle-src/tests/example/k-permutations/k-permutations.dl [7:7-7:8]"
+    }
+   },
+   "runtime": { "start": 22926814979, "end": 22926815712},
+   "starttime": { "time": 22926814927},
+   "usage": {
+    "timepoint": {
+     "22926815005": {
+      "maxRSS": 18836,
+      "systemtime": 0,
+      "usertime": 4608
+     },
+     "22926815578": {
+      "maxRSS": 18836,
+      "systemtime": 0,
+      "usertime": 4901
+     },
+     "22926815613": {
+      "maxRSS": 18836,
+      "systemtime": 0,
+      "usertime": 4946
+     }
+    }
+   }
+  }
+ }
+}

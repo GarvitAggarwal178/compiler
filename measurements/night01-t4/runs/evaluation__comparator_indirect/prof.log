@@ -1,0 +1,116 @@
+{
+ "root": {
+  "program": {
+   "configuration": {
+    "": "/root/souffle-src/tests/evaluation/comparator_indirect/comparator_indirect.dl",
+    "fact-dir": "/root/souffle-src/tests/evaluation/comparator_indirect",
+    "include-dir": ".",
+    "jobs": "1",
+    "libraries": "functors",
+    "library-dir": ".",
+    "magic-transform": "*",
+    "output-dir": "/root/compiler/measurements/night01-t4/runs/evaluation__comparator_indirect",
+    "profile": "prof.log",
+    "relationCount": "3",
+    "ruleCount": "4",
+    "version": "2.5",
+    "warn": "all",
+    "wno": "none"
+   },
+   "relation": {
+    "A": {
+     "maxRSS": {
+      "post": 13760,
+      "pre": 13760
+     },
+     "non-recursive-rule": {
+      "A(1,5,\"\",\"X\",0,0,0).": {
+       "maxRSS": {
+        "post": 13760,
+        "pre": 13760
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 22624566925, "end": 22624566929},
+       "source-locator": " [1:1-1:1]"
+      },
+      "A(2,5,\"\",\"Y\",0,0,0).": {
+       "maxRSS": {
+        "post": 13760,
+        "pre": 13760
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 22624566937, "end": 22624566938},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 2,
+     "reads": 1,
+     "runtime": { "start": 22624566924, "end": 22624566942},
+     "source-locator": "/root/souffle-src/tests/evaluation/comparator_indirect/comparator_indirect.dl [12:7-12:8]"
+    },
+    "B": {
+     "maxRSS": {
+      "post": 13760,
+      "pre": 13760
+     },
+     "non-recursive-rule": {
+      "B(1,2).": {
+       "maxRSS": {
+        "post": 13760,
+        "pre": 13760
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 22624566947, "end": 22624566950},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 1,
+     "reads": 0,
+     "runtime": { "start": 22624566947, "end": 22624566955},
+     "source-locator": "/root/souffle-src/tests/evaluation/comparator_indirect/comparator_indirect.dl [16:7-16:8]"
+    },
+    "C": {
+     "maxRSS": {
+      "post": 13760,
+      "pre": 13760
+     },
+     "non-recursive-rule": {
+      "C(x,y) :- \n   B(x,y),\n   !A(y,_,_,_,_,_,_).": {
+       "atom-frequency": {
+        "C(x,y) :- \n   B(x,y),\n   !A(y,_,_,_,_,_,_).": {
+         "B": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 13760,
+        "pre": 13760
+       },
+       "num-tuples": 0,
+       "runtime": { "start": 22624566958, "end": 22624566963},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 0,
+     "reads": 0,
+     "runtime": { "start": 22624566958, "end": 22624566967},
+     "savetime": { "start": 22624566973, "end": 22624567024},
+     "source-locator": "/root/souffle-src/tests/evaluation/comparator_indirect/comparator_indirect.dl [19:7-19:8]"
+    }
+   },
+   "runtime": { "start": 22624566919, "end": 22624567028},
+   "starttime": { "time": 22624566893},
+   "usage": {
+    "timepoint": {
+     "22624567003": {
+      "maxRSS": 13760,
+      "systemtime": 4196,
+      "usertime": 0
+     }
+    }
+   }
+  }
+ }
+}

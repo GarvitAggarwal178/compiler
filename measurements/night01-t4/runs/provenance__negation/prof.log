@@ -1,0 +1,288 @@
+{
+ "root": {
+  "program": {
+   "configuration": {
+    "": "/root/souffle-src/tests/provenance/negation/negation.dl",
+    "fact-dir": "/root/souffle-src/tests/provenance/negation",
+    "include-dir": ".",
+    "jobs": "1",
+    "libraries": "functors",
+    "library-dir": ".",
+    "magic-transform": "*",
+    "output-dir": "/root/compiler/measurements/night01-t4/runs/provenance__negation",
+    "profile": "prof.log",
+    "provenance": "explain",
+    "relationCount": "7",
+    "ruleCount": "28",
+    "version": "2.5",
+    "warn": "all",
+    "wno": "none"
+   },
+   "relation": {
+    "@magic.being.{f}": {
+     "maxRSS": {
+      "post": 14636,
+      "pre": 14636
+     },
+     "non-recursive-rule": {
+      "@magic.being.{f}().": {
+       "maxRSS": {
+        "post": 14636,
+        "pre": 14636
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 23164026354, "end": 23164026359},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 1,
+     "runtime": { "start": 23164026352, "end": 23164026367},
+     "source-locator": " [1:1-1:1]"
+    },
+    "animal": {
+     "maxRSS": {
+      "post": 14636,
+      "pre": 14636
+     },
+     "non-recursive-rule": {
+      "animal(x) :- \n   being.{f}(x),\n   !person(x).": {
+       "atom-frequency": {
+        "animal(x) :- \n   being.{f}(x),\n   !person(x).": {
+         "being.{f}": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 14636,
+        "pre": 14636
+       },
+       "num-tuples": 2,
+       "runtime": { "start": 23164026464, "end": 23164026471},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 2,
+     "reads": 0,
+     "runtime": { "start": 23164026454, "end": 23164026479},
+     "savetime": { "start": 23164026483, "end": 23164026724},
+     "source-locator": "/root/souffle-src/tests/provenance/negation/negation.dl [21:7-21:13]"
+    },
+    "animal.@info.1": {
+     "non-recursive-rule": {
+      "@info.clause[animal(x) :- \n   being.{f}(x),\n   !person(x).]": {
+       "maxRSS": {
+        "post": 14636,
+        "pre": 14636
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 23164026732, "end": 23164026751},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "reads": 0
+    },
+    "being.{f}": {
+     "maxRSS": {
+      "post": 14636,
+      "pre": 14636
+     },
+     "non-recursive-rule": {
+      "being.{f}(\"ollie_the_doggo\") :- \n   @magic.being.{f}().": {
+       "atom-frequency": {
+        "being.{f}(\"ollie_the_doggo\") :- \n   @magic.being.{f}().": {
+         "@magic.being.{f}": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 14636,
+        "pre": 14636
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 23164026445, "end": 23164026446},
+       "source-locator": " [1:1-1:1]"
+      },
+      "being.{f}(\"tomothy_the_cat\") :- \n   @magic.being.{f}().": {
+       "atom-frequency": {
+        "being.{f}(\"tomothy_the_cat\") :- \n   @magic.being.{f}().": {
+         "@magic.being.{f}": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 14636,
+        "pre": 14636
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 23164026428, "end": 23164026438},
+       "source-locator": " [1:1-1:1]"
+      },
+      "being.{f}(x) :- \n   @magic.being.{f}(),\n   person(x).": {
+       "atom-frequency": {
+        "being.{f}(x) :- \n   @magic.being.{f}(),\n   person(x).": {
+         "@magic.being.{f}": {
+          "level": 0,
+          "num-tuples": 0
+         },
+         "person": {
+          "level": 1,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 14636,
+        "pre": 14636
+       },
+       "num-tuples": 3,
+       "runtime": { "start": 23164026416, "end": 23164026421},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 5,
+     "reads": 0,
+     "runtime": { "start": 23164026406, "end": 23164026451},
+     "source-locator": " [1:1-1:1]"
+    },
+    "being.{f}.@info.1": {
+     "non-recursive-rule": {
+      "@info.clause[being.{f}(x) :- \n   @magic.being.{f}(),\n   person(x).]": {
+       "maxRSS": {
+        "post": 14636,
+        "pre": 14636
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 23164026759, "end": 23164026769},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "reads": 0
+    },
+    "being.{f}.@info.2": {
+     "non-recursive-rule": {
+      "@info.clause[being.{f}(\"tomothy_the_cat\") :- \n   @magic.being.{f}().]": {
+       "maxRSS": {
+        "post": 14636,
+        "pre": 14636
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 23164026777, "end": 23164026778},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "reads": 0
+    },
+    "being.{f}.@info.3": {
+     "non-recursive-rule": {
+      "@info.clause[being.{f}(\"ollie_the_doggo\") :- \n   @magic.being.{f}().]": {
+       "maxRSS": {
+        "post": 14636,
+        "pre": 14636
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 23164026783, "end": 23164026793},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "reads": 0
+    },
+    "person": {
+     "maxRSS": {
+      "post": 14636,
+      "pre": 14636
+     },
+     "non-recursive-rule": {
+      "person(\"jim\").": {
+       "maxRSS": {
+        "post": 14636,
+        "pre": 14636
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 23164026381, "end": 23164026392},
+       "source-locator": " [1:1-1:1]"
+      },
+      "person(\"john\").": {
+       "maxRSS": {
+        "post": 14636,
+        "pre": 14636
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 23164026375, "end": 23164026376},
+       "source-locator": " [1:1-1:1]"
+      },
+      "person(\"tim\").": {
+       "maxRSS": {
+        "post": 14636,
+        "pre": 14636
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 23164026397, "end": 23164026398},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 3,
+     "reads": 5,
+     "runtime": { "start": 23164026374, "end": 23164026402},
+     "source-locator": "/root/souffle-src/tests/provenance/negation/negation.dl [11:7-11:13]"
+    }
+   },
+   "runtime": { "start": 23164026346, "end": 23164026730},
+   "starttime": { "time": 23164026304},
+   "usage": {
+    "timepoint": {
+     "23164026354": {
+      "maxRSS": 14636,
+      "systemtime": 0,
+      "usertime": 5621
+     },
+     "23164026400": {
+      "maxRSS": 14636,
+      "systemtime": 0,
+      "usertime": 5691
+     },
+     "23164026424": {
+      "maxRSS": 14636,
+      "systemtime": 0,
+      "usertime": 5720
+     },
+     "23164026446": {
+      "maxRSS": 14636,
+      "systemtime": 0,
+      "usertime": 5752
+     },
+     "23164026471": {
+      "maxRSS": 14636,
+      "systemtime": 0,
+      "usertime": 5785
+     },
+     "23164026500": {
+      "maxRSS": 14636,
+      "systemtime": 0,
+      "usertime": 5804
+     },
+     "23164026751": {
+      "maxRSS": 14636,
+      "systemtime": 0,
+      "usertime": 6077
+     },
+     "23164026776": {
+      "maxRSS": 14636,
+      "systemtime": 0,
+      "usertime": 6104
+     },
+     "23164026800": {
+      "maxRSS": 14636,
+      "systemtime": 0,
+      "usertime": 6135
+     }
+    }
+   }
+  }
+ }
+}
