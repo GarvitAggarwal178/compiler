@@ -1,0 +1,28 @@
+.decl edge(a:number, b:number)   .input edge
+.decl node(a:number)             .input node
+
+.decl radj(a:number, b:number)
+radj(y,x) :- edge(x,y).
+
+.decl m_reach_bf(a:number)
+m_reach_bf(1).
+
+.decl reach_bf(a:number, b:number)
+reach_bf(x,y) :- m_reach_bf(x), edge(x,y).
+reach_bf(x,y) :- m_reach_bf(x), reach_bf(x,z), edge(z,y).
+
+.decl m_reach_fb(b:number)
+m_reach_fb(5).
+
+.decl reach_fb(a:number, b:number)
+reach_fb(x,y) :- m_reach_fb(y), radj(y,x).
+reach_fb(x,y) :- m_reach_fb(y), reach_fb(z,y), radj(z,x).
+
+.decl far_from_1(b:number)
+far_from_1(y) :- node(y), !reach_bf(1,y).
+
+.decl cant_reach_5(a:number)
+cant_reach_5(x) :- node(x), !reach_fb(x,5).
+
+.decl ans(b:number)   .output ans
+ans(y) :- far_from_1(y), cant_reach_5(y).

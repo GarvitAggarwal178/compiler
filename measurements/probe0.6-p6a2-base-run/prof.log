@@ -1,0 +1,801 @@
+{
+ "root": {
+  "program": {
+   "configuration": {
+    "": "/root/compiler/tests/programs/p6a2_base.dl",
+    "fact-dir": "/root/compiler/fixtures/p2",
+    "include-dir": ".",
+    "jobs": "1",
+    "libraries": "functors",
+    "library-dir": ".",
+    "output-dir": "/root/compiler/measurements/probe0.6-p6a2-base-run",
+    "profile": "prof.log",
+    "relationCount": "6",
+    "ruleCount": "7",
+    "version": "2.5",
+    "warn": "all",
+    "wno": "none"
+   },
+   "relation": {
+    "ans": {
+     "maxRSS": {
+      "post": 13424,
+      "pre": 13424
+     },
+     "non-recursive-rule": {
+      "ans(y) :- \n   far_from_1(y),\n   cant_reach_5(y).": {
+       "atom-frequency": {
+        "ans(y) :- \n   far_from_1(y),\n   cant_reach_5(y).": {
+         "far_from_1": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 13424,
+        "pre": 13424
+       },
+       "num-tuples": 9,
+       "runtime": { "start": 18352341248, "end": 18352341251},
+       "source-locator": "/root/compiler/tests/programs/p6a2_base.dl [15:1-15:42]"
+      }
+     },
+     "num-tuples": 9,
+     "reads": 0,
+     "runtime": { "start": 18352341238, "end": 18352341260},
+     "savetime": { "start": 18352341268, "end": 18352341420},
+     "source-locator": "/root/compiler/tests/programs/p6a2_base.dl [14:7-14:10]"
+    },
+    "cant_reach_5": {
+     "maxRSS": {
+      "post": 13424,
+      "pre": 13424
+     },
+     "non-recursive-rule": {
+      "cant_reach_5(x) :- \n   node(x),\n   !reach(x,5).": {
+       "atom-frequency": {
+        "cant_reach_5(x) :- \n   node(x),\n   !reach(x,5).": {
+         "node": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 13424,
+        "pre": 13424
+       },
+       "num-tuples": 43,
+       "runtime": { "start": 18352341110, "end": 18352341135},
+       "source-locator": "/root/compiler/tests/programs/p6a2_base.dl [12:1-12:41]"
+      }
+     },
+     "num-tuples": 43,
+     "reads": 30,
+     "runtime": { "start": 18352341109, "end": 18352341142},
+     "source-locator": "/root/compiler/tests/programs/p6a2_base.dl [11:7-11:19]"
+    },
+    "edge": {
+     "loadtime": { "start": 18352328505, "end": 18352328660},
+     "num-tuples": 400,
+     "reads": 0,
+     "source-locator": "/root/compiler/tests/programs/p6a2_base.dl [1:7-1:11]"
+    },
+    "far_from_1": {
+     "maxRSS": {
+      "post": 13424,
+      "pre": 13424
+     },
+     "non-recursive-rule": {
+      "far_from_1(y) :- \n   node(y),\n   !reach(1,y).": {
+       "atom-frequency": {
+        "far_from_1(y) :- \n   node(y),\n   !reach(1,y).": {
+         "node": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 13424,
+        "pre": 13424
+       },
+       "num-tuples": 30,
+       "runtime": { "start": 18352341155, "end": 18352341170},
+       "source-locator": "/root/compiler/tests/programs/p6a2_base.dl [9:1-9:39]"
+      }
+     },
+     "num-tuples": 30,
+     "reads": 0,
+     "runtime": { "start": 18352341146, "end": 18352341177},
+     "source-locator": "/root/compiler/tests/programs/p6a2_base.dl [8:7-8:17]"
+    },
+    "node": {
+     "loadtime": { "start": 18352328667, "end": 18352328719},
+     "num-tuples": 200,
+     "reads": 0,
+     "source-locator": "/root/compiler/tests/programs/p6a2_base.dl [2:7-2:11]"
+    },
+    "reach": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 18352328959, "end": 18352329012},
+       "maxRSS": {
+        "post": 13424,
+        "pre": 13424
+       },
+       "num-tuples": 758,
+       "recursive-rule": {
+        "reach(x,y) :- \n   reach(x,z),\n   edge(z,y).": {
+         "0": {
+          "atom-frequency": {
+           "@new_reach(x,y) :- \n   @delta_reach(x,z),\n   edge(z,y).": {
+            "@delta_reach": {
+             "level": 0,
+             "num-tuples": 0
+            },
+            "edge": {
+             "level": 1,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 13424,
+           "pre": 13424
+          },
+          "num-tuples": 758,
+          "runtime": { "start": 18352328785, "end": 18352328928},
+          "source-locator": "/root/compiler/tests/programs/p6a2_base.dl [6:1-6:37]"
+         }
+        }
+       },
+       "runtime": { "start": 18352328776, "end": 18352328938}
+      },
+      "1": {
+       "copytime": { "start": 18352329288, "end": 18352329403},
+       "maxRSS": {
+        "post": 13424,
+        "pre": 13424
+       },
+       "num-tuples": 1333,
+       "recursive-rule": {
+        "reach(x,y) :- \n   reach(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 13424,
+           "pre": 13424
+          },
+          "num-tuples": 1333,
+          "runtime": { "start": 18352329019, "end": 18352329262},
+          "source-locator": "/root/compiler/tests/programs/p6a2_base.dl [6:1-6:37]"
+         }
+        }
+       },
+       "runtime": { "start": 18352329016, "end": 18352329270}
+      },
+      "10": {
+       "copytime": { "start": 18352340318, "end": 18352340393},
+       "maxRSS": {
+        "post": 13424,
+        "pre": 13424
+       },
+       "num-tuples": 602,
+       "recursive-rule": {
+        "reach(x,y) :- \n   reach(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 13424,
+           "pre": 13424
+          },
+          "num-tuples": 602,
+          "runtime": { "start": 18352339868, "end": 18352340285},
+          "source-locator": "/root/compiler/tests/programs/p6a2_base.dl [6:1-6:37]"
+         }
+        }
+       },
+       "runtime": { "start": 18352339858, "end": 18352340296}
+      },
+      "11": {
+       "copytime": { "start": 18352340615, "end": 18352340656},
+       "maxRSS": {
+        "post": 13424,
+        "pre": 13424
+       },
+       "num-tuples": 315,
+       "recursive-rule": {
+        "reach(x,y) :- \n   reach(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 13424,
+           "pre": 13424
+          },
+          "num-tuples": 315,
+          "runtime": { "start": 18352340399, "end": 18352340586},
+          "source-locator": "/root/compiler/tests/programs/p6a2_base.dl [6:1-6:37]"
+         }
+        }
+       },
+       "runtime": { "start": 18352340398, "end": 18352340595}
+      },
+      "12": {
+       "copytime": { "start": 18352340798, "end": 18352340821},
+       "maxRSS": {
+        "post": 13424,
+        "pre": 13424
+       },
+       "num-tuples": 165,
+       "recursive-rule": {
+        "reach(x,y) :- \n   reach(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 13424,
+           "pre": 13424
+          },
+          "num-tuples": 165,
+          "runtime": { "start": 18352340669, "end": 18352340770},
+          "source-locator": "/root/compiler/tests/programs/p6a2_base.dl [6:1-6:37]"
+         }
+        }
+       },
+       "runtime": { "start": 18352340660, "end": 18352340780}
+      },
+      "13": {
+       "copytime": { "start": 18352340903, "end": 18352340915},
+       "maxRSS": {
+        "post": 13424,
+        "pre": 13424
+       },
+       "num-tuples": 74,
+       "recursive-rule": {
+        "reach(x,y) :- \n   reach(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 13424,
+           "pre": 13424
+          },
+          "num-tuples": 74,
+          "runtime": { "start": 18352340825, "end": 18352340878},
+          "source-locator": "/root/compiler/tests/programs/p6a2_base.dl [6:1-6:37]"
+         }
+        }
+       },
+       "runtime": { "start": 18352340824, "end": 18352340886}
+      },
+      "14": {
+       "copytime": { "start": 18352340961, "end": 18352340965},
+       "maxRSS": {
+        "post": 13424,
+        "pre": 13424
+       },
+       "num-tuples": 32,
+       "recursive-rule": {
+        "reach(x,y) :- \n   reach(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 13424,
+           "pre": 13424
+          },
+          "num-tuples": 32,
+          "runtime": { "start": 18352340921, "end": 18352340947},
+          "source-locator": "/root/compiler/tests/programs/p6a2_base.dl [6:1-6:37]"
+         }
+        }
+       },
+       "runtime": { "start": 18352340919, "end": 18352340954}
+      },
+      "15": {
+       "copytime": { "start": 18352341004, "end": 18352341008},
+       "maxRSS": {
+        "post": 13424,
+        "pre": 13424
+       },
+       "num-tuples": 19,
+       "recursive-rule": {
+        "reach(x,y) :- \n   reach(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 13424,
+           "pre": 13424
+          },
+          "num-tuples": 19,
+          "runtime": { "start": 18352340968, "end": 18352340987},
+          "source-locator": "/root/compiler/tests/programs/p6a2_base.dl [6:1-6:37]"
+         }
+        }
+       },
+       "runtime": { "start": 18352340967, "end": 18352340996}
+      },
+      "16": {
+       "copytime": { "start": 18352341045, "end": 18352341047},
+       "maxRSS": {
+        "post": 13424,
+        "pre": 13424
+       },
+       "num-tuples": 8,
+       "recursive-rule": {
+        "reach(x,y) :- \n   reach(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 13424,
+           "pre": 13424
+          },
+          "num-tuples": 8,
+          "runtime": { "start": 18352341013, "end": 18352341021},
+          "source-locator": "/root/compiler/tests/programs/p6a2_base.dl [6:1-6:37]"
+         }
+        }
+       },
+       "runtime": { "start": 18352341011, "end": 18352341027}
+      },
+      "17": {
+       "copytime": { "start": 18352341069, "end": 18352341070},
+       "maxRSS": {
+        "post": 13424,
+        "pre": 13424
+       },
+       "num-tuples": 3,
+       "recursive-rule": {
+        "reach(x,y) :- \n   reach(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 13424,
+           "pre": 13424
+          },
+          "num-tuples": 3,
+          "runtime": { "start": 18352341051, "end": 18352341054},
+          "source-locator": "/root/compiler/tests/programs/p6a2_base.dl [6:1-6:37]"
+         }
+        }
+       },
+       "runtime": { "start": 18352341050, "end": 18352341061}
+      },
+      "18": {
+       "copytime": { "start": 18352341088, "end": 18352341089},
+       "maxRSS": {
+        "post": 13424,
+        "pre": 13424
+       },
+       "num-tuples": 1,
+       "recursive-rule": {
+        "reach(x,y) :- \n   reach(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 13424,
+           "pre": 13424
+          },
+          "num-tuples": 1,
+          "runtime": { "start": 18352341072, "end": 18352341074},
+          "source-locator": "/root/compiler/tests/programs/p6a2_base.dl [6:1-6:37]"
+         }
+        }
+       },
+       "runtime": { "start": 18352341072, "end": 18352341079}
+      },
+      "19": {
+       "maxRSS": {
+        "post": 13424,
+        "pre": 13424
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "reach(x,y) :- \n   reach(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 13424,
+           "pre": 13424
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 18352341092, "end": 18352341093},
+          "source-locator": "/root/compiler/tests/programs/p6a2_base.dl [6:1-6:37]"
+         }
+        }
+       },
+       "runtime": { "start": 18352341091, "end": 18352341097}
+      },
+      "2": {
+       "copytime": { "start": 18352329891, "end": 18352330072},
+       "maxRSS": {
+        "post": 13424,
+        "pre": 13424
+       },
+       "num-tuples": 2180,
+       "recursive-rule": {
+        "reach(x,y) :- \n   reach(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 13424,
+           "pre": 13424
+          },
+          "num-tuples": 2180,
+          "runtime": { "start": 18352329416, "end": 18352329859},
+          "source-locator": "/root/compiler/tests/programs/p6a2_base.dl [6:1-6:37]"
+         }
+        }
+       },
+       "runtime": { "start": 18352329407, "end": 18352329871}
+      },
+      "3": {
+       "copytime": { "start": 18352330898, "end": 18352331188},
+       "maxRSS": {
+        "post": 13424,
+        "pre": 13424
+       },
+       "num-tuples": 3169,
+       "recursive-rule": {
+        "reach(x,y) :- \n   reach(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 13424,
+           "pre": 13424
+          },
+          "num-tuples": 3169,
+          "runtime": { "start": 18352330085, "end": 18352330867},
+          "source-locator": "/root/compiler/tests/programs/p6a2_base.dl [6:1-6:37]"
+         }
+        }
+       },
+       "runtime": { "start": 18352330076, "end": 18352330876}
+      },
+      "4": {
+       "copytime": { "start": 18352332350, "end": 18352332733},
+       "maxRSS": {
+        "post": 13424,
+        "pre": 13424
+       },
+       "num-tuples": 3934,
+       "recursive-rule": {
+        "reach(x,y) :- \n   reach(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 13424,
+           "pre": 13424
+          },
+          "num-tuples": 3934,
+          "runtime": { "start": 18352331202, "end": 18352332318},
+          "source-locator": "/root/compiler/tests/programs/p6a2_base.dl [6:1-6:37]"
+         }
+        }
+       },
+       "runtime": { "start": 18352331192, "end": 18352332328}
+      },
+      "5": {
+       "copytime": { "start": 18352334155, "end": 18352334573},
+       "maxRSS": {
+        "post": 13424,
+        "pre": 13424
+       },
+       "num-tuples": 4096,
+       "recursive-rule": {
+        "reach(x,y) :- \n   reach(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 13424,
+           "pre": 13424
+          },
+          "num-tuples": 4096,
+          "runtime": { "start": 18352332751, "end": 18352334124},
+          "source-locator": "/root/compiler/tests/programs/p6a2_base.dl [6:1-6:37]"
+         }
+        }
+       },
+       "runtime": { "start": 18352332738, "end": 18352334134}
+      },
+      "6": {
+       "copytime": { "start": 18352335963, "end": 18352336323},
+       "maxRSS": {
+        "post": 13424,
+        "pre": 13424
+       },
+       "num-tuples": 3639,
+       "recursive-rule": {
+        "reach(x,y) :- \n   reach(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 13424,
+           "pre": 13424
+          },
+          "num-tuples": 3639,
+          "runtime": { "start": 18352334588, "end": 18352335933},
+          "source-locator": "/root/compiler/tests/programs/p6a2_base.dl [6:1-6:37]"
+         }
+        }
+       },
+       "runtime": { "start": 18352334578, "end": 18352335942}
+      },
+      "7": {
+       "copytime": { "start": 18352337546, "end": 18352337866},
+       "maxRSS": {
+        "post": 13424,
+        "pre": 13424
+       },
+       "num-tuples": 2781,
+       "recursive-rule": {
+        "reach(x,y) :- \n   reach(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 13424,
+           "pre": 13424
+          },
+          "num-tuples": 2781,
+          "runtime": { "start": 18352336338, "end": 18352337513},
+          "source-locator": "/root/compiler/tests/programs/p6a2_base.dl [6:1-6:37]"
+         }
+        }
+       },
+       "runtime": { "start": 18352336328, "end": 18352337524}
+      },
+      "8": {
+       "copytime": { "start": 18352338896, "end": 18352339088},
+       "maxRSS": {
+        "post": 13424,
+        "pre": 13424
+       },
+       "num-tuples": 1791,
+       "recursive-rule": {
+        "reach(x,y) :- \n   reach(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 13424,
+           "pre": 13424
+          },
+          "num-tuples": 1791,
+          "runtime": { "start": 18352337887, "end": 18352338866},
+          "source-locator": "/root/compiler/tests/programs/p6a2_base.dl [6:1-6:37]"
+         }
+        }
+       },
+       "runtime": { "start": 18352337872, "end": 18352338876}
+      },
+      "9": {
+       "copytime": { "start": 18352339733, "end": 18352339853},
+       "maxRSS": {
+        "post": 13424,
+        "pre": 13424
+       },
+       "num-tuples": 1104,
+       "recursive-rule": {
+        "reach(x,y) :- \n   reach(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 13424,
+           "pre": 13424
+          },
+          "num-tuples": 1104,
+          "runtime": { "start": 18352339104, "end": 18352339703},
+          "source-locator": "/root/compiler/tests/programs/p6a2_base.dl [6:1-6:37]"
+         }
+        }
+       },
+       "runtime": { "start": 18352339093, "end": 18352339712}
+      }
+     },
+     "maxRSS": {
+      "post": 13424,
+      "pre": 13424
+     },
+     "non-recursive-rule": {
+      "reach(x,y) :- \n   edge(x,y).": {
+       "atom-frequency": {
+        "reach(x,y) :- \n   edge(x,y).": {
+         "edge": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 13424,
+        "pre": 13424
+       },
+       "num-tuples": 400,
+       "runtime": { "start": 18352328726, "end": 18352328748},
+       "source-locator": "/root/compiler/tests/programs/p6a2_base.dl [5:1-5:25]"
+      }
+     },
+     "num-tuples": 400,
+     "reads": 52229,
+     "runtime": { "start": 18352328725, "end": 18352328755},
+     "source-locator": "/root/compiler/tests/programs/p6a2_base.dl [4:7-4:12]"
+    }
+   },
+   "runtime": { "start": 18352328501, "end": 18352341426},
+   "starttime": { "time": 18352328474},
+   "usage": {
+    "timepoint": {
+     "18352328539": {
+      "maxRSS": 13424,
+      "systemtime": 3396,
+      "usertime": 0
+     },
+     "18352328737": {
+      "maxRSS": 13424,
+      "systemtime": 3647,
+      "usertime": 0
+     },
+     "18352328845": {
+      "maxRSS": 13424,
+      "systemtime": 3724,
+      "usertime": 0
+     },
+     "18352329007": {
+      "maxRSS": 13424,
+      "systemtime": 3913,
+      "usertime": 0
+     },
+     "18352329022": {
+      "maxRSS": 13424,
+      "systemtime": 3983,
+      "usertime": 0
+     },
+     "18352329360": {
+      "maxRSS": 13424,
+      "systemtime": 4279,
+      "usertime": 0
+     },
+     "18352329478": {
+      "maxRSS": 13424,
+      "systemtime": 4424,
+      "usertime": 0
+     },
+     "18352329975": {
+      "maxRSS": 13424,
+      "systemtime": 4918,
+      "usertime": 0
+     },
+     "18352330138": {
+      "maxRSS": 13424,
+      "systemtime": 5129,
+      "usertime": 0
+     },
+     "18352330930": {
+      "maxRSS": 13424,
+      "systemtime": 5960,
+      "usertime": 0
+     },
+     "18352331207": {
+      "maxRSS": 13424,
+      "systemtime": 6271,
+      "usertime": 0
+     },
+     "18352332272": {
+      "maxRSS": 13424,
+      "systemtime": 6271,
+      "usertime": 806
+     },
+     "18352332349": {
+      "maxRSS": 13424,
+      "systemtime": 6271,
+      "usertime": 1155
+     },
+     "18352332787": {
+      "maxRSS": 13424,
+      "systemtime": 6271,
+      "usertime": 1578
+     },
+     "18352333885": {
+      "maxRSS": 13424,
+      "systemtime": 6271,
+      "usertime": 1588
+     },
+     "18352334154": {
+      "maxRSS": 13424,
+      "systemtime": 6271,
+      "usertime": 2992
+     },
+     "18352334593": {
+      "maxRSS": 13424,
+      "systemtime": 6472,
+      "usertime": 3236
+     },
+     "18352335688": {
+      "maxRSS": 13424,
+      "systemtime": 6477,
+      "usertime": 3238
+     },
+     "18352335961": {
+      "maxRSS": 13424,
+      "systemtime": 7392,
+      "usertime": 3696
+     },
+     "18352336345": {
+      "maxRSS": 13424,
+      "systemtime": 7397,
+      "usertime": 4081
+     },
+     "18352337416": {
+      "maxRSS": 13424,
+      "systemtime": 7397,
+      "usertime": 4090
+     },
+     "18352337546": {
+      "maxRSS": 13424,
+      "systemtime": 7397,
+      "usertime": 5300
+     },
+     "18352337892": {
+      "maxRSS": 13424,
+      "systemtime": 7397,
+      "usertime": 5654
+     },
+     "18352338896": {
+      "maxRSS": 13424,
+      "systemtime": 7397,
+      "usertime": 6664
+     },
+     "18352339109": {
+      "maxRSS": 13424,
+      "systemtime": 7397,
+      "usertime": 6884
+     },
+     "18352339744": {
+      "maxRSS": 13424,
+      "systemtime": 7461,
+      "usertime": 7461
+     },
+     "18352339874": {
+      "maxRSS": 13424,
+      "systemtime": 7536,
+      "usertime": 7536
+     },
+     "18352340390": {
+      "maxRSS": 13424,
+      "systemtime": 7536,
+      "usertime": 7999
+     },
+     "18352340400": {
+      "maxRSS": 13424,
+      "systemtime": 7536,
+      "usertime": 8090
+     },
+     "18352340639": {
+      "maxRSS": 13424,
+      "systemtime": 7536,
+      "usertime": 8315
+     },
+     "18352340684": {
+      "maxRSS": 13424,
+      "systemtime": 7536,
+      "usertime": 8387
+     },
+     "18352340857": {
+      "maxRSS": 13424,
+      "systemtime": 7536,
+      "usertime": 8560
+     },
+     "18352340996": {
+      "maxRSS": 13424,
+      "systemtime": 7536,
+      "usertime": 8763
+     },
+     "18352341007": {
+      "maxRSS": 13424,
+      "systemtime": 7536,
+      "usertime": 8782
+     },
+     "18352341016": {
+      "maxRSS": 13424,
+      "systemtime": 7536,
+      "usertime": 8797
+     },
+     "18352341119": {
+      "maxRSS": 13424,
+      "systemtime": 7536,
+      "usertime": 8901
+     },
+     "18352341218": {
+      "maxRSS": 13424,
+      "systemtime": 7536,
+      "usertime": 8976
+     },
+     "18352341306": {
+      "maxRSS": 13424,
+      "systemtime": 7536,
+      "usertime": 9076
+     }
+    }
+   }
+  }
+ }
+}

@@ -1,0 +1,726 @@
+{
+ "root": {
+  "program": {
+   "configuration": {
+    "": "/root/compiler/tests/programs/p6a1b_hand_naive.dl",
+    "fact-dir": "/root/compiler/fixtures/p2",
+    "include-dir": ".",
+    "jobs": "1",
+    "libraries": "functors",
+    "library-dir": ".",
+    "output-dir": "/root/compiler/measurements/probe0.6-p6a1b-hand-naive-run",
+    "profile": "prof.log",
+    "relationCount": "8",
+    "ruleCount": "9",
+    "version": "2.5",
+    "warn": "all",
+    "wno": "none"
+   },
+   "relation": {
+    "ans": {
+     "maxRSS": {
+      "post": 13424,
+      "pre": 13424
+     },
+     "non-recursive-rule": {
+      "ans(y) :- \n   blocked_from(y).": {
+       "atom-frequency": {
+        "ans(y) :- \n   blocked_from(y).": {
+         "blocked_from": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 13424,
+        "pre": 13424
+       },
+       "num-tuples": 200,
+       "runtime": { "start": 18352410611, "end": 18352410617},
+       "source-locator": "/root/compiler/tests/programs/p6a1b_hand_naive.dl [21:1-21:27]"
+      }
+     },
+     "num-tuples": 200,
+     "reads": 0,
+     "runtime": { "start": 18352410603, "end": 18352410625},
+     "savetime": { "start": 18352410629, "end": 18352411263},
+     "source-locator": "/root/compiler/tests/programs/p6a1b_hand_naive.dl [20:7-20:10]"
+    },
+    "aux": {
+     "maxRSS": {
+      "post": 13424,
+      "pre": 13424
+     },
+     "non-recursive-rule": {
+      "aux(y) :- \n   seed(x),\n   reach_bf(x,y).": {
+       "atom-frequency": {
+        "aux(y) :- \n   seed(x),\n   reach_bf(x,y).": {
+         "reach_bf": {
+          "level": 1,
+          "num-tuples": 0
+         },
+         "seed": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 13424,
+        "pre": 13424
+       },
+       "num-tuples": 0,
+       "runtime": { "start": 18352410552, "end": 18352410557},
+       "source-locator": "/root/compiler/tests/programs/p6a1b_hand_naive.dl [15:1-15:34]"
+      }
+     },
+     "num-tuples": 0,
+     "reads": 200,
+     "runtime": { "start": 18352410543, "end": 18352410564},
+     "source-locator": "/root/compiler/tests/programs/p6a1b_hand_naive.dl [14:7-14:10]"
+    },
+    "blocked_from": {
+     "maxRSS": {
+      "post": 13424,
+      "pre": 13424
+     },
+     "non-recursive-rule": {
+      "blocked_from(y) :- \n   node(y),\n   !aux(y).": {
+       "atom-frequency": {
+        "blocked_from(y) :- \n   node(y),\n   !aux(y).": {
+         "node": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 13424,
+        "pre": 13424
+       },
+       "num-tuples": 200,
+       "runtime": { "start": 18352410579, "end": 18352410590},
+       "source-locator": "/root/compiler/tests/programs/p6a1b_hand_naive.dl [18:1-18:37]"
+      }
+     },
+     "num-tuples": 200,
+     "reads": 0,
+     "runtime": { "start": 18352410570, "end": 18352410598},
+     "source-locator": "/root/compiler/tests/programs/p6a1b_hand_naive.dl [17:7-17:19]"
+    },
+    "edge": {
+     "loadtime": { "start": 18352409603, "end": 18352409760},
+     "num-tuples": 400,
+     "reads": 0,
+     "source-locator": "/root/compiler/tests/programs/p6a1b_hand_naive.dl [1:7-1:11]"
+    },
+    "m_reach": {
+     "maxRSS": {
+      "post": 13424,
+      "pre": 13424
+     },
+     "non-recursive-rule": {
+      "m_reach(1).": {
+       "maxRSS": {
+        "post": 13424,
+        "pre": 13424
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 18352409781, "end": 18352409784},
+       "source-locator": "/root/compiler/tests/programs/p6a1b_hand_naive.dl [5:1-5:12]"
+      }
+     },
+     "num-tuples": 1,
+     "reads": 0,
+     "runtime": { "start": 18352409768, "end": 18352409792},
+     "source-locator": "/root/compiler/tests/programs/p6a1b_hand_naive.dl [4:7-4:14]"
+    },
+    "node": {
+     "loadtime": { "start": 18352409797, "end": 18352409839},
+     "num-tuples": 200,
+     "reads": 0,
+     "source-locator": "/root/compiler/tests/programs/p6a1b_hand_naive.dl [2:7-2:11]"
+    },
+    "reach_bf": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 18352409921, "end": 18352409922},
+       "maxRSS": {
+        "post": 13424,
+        "pre": 13424
+       },
+       "num-tuples": 7,
+       "recursive-rule": {
+        "reach_bf(x,y) :- \n   m_reach(x),\n   reach_bf(x,z),\n   edge(z,y).": {
+         "0": {
+          "atom-frequency": {
+           "@new_reach_bf(x,y) :- \n   m_reach(x),\n   @delta_reach_bf(x,z),\n   edge(z,y).": {
+            "@delta_reach_bf": {
+             "level": 1,
+             "num-tuples": 0
+            },
+            "edge": {
+             "level": 2,
+             "num-tuples": 0
+            },
+            "m_reach": {
+             "level": 0,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 13424,
+           "pre": 13424
+          },
+          "num-tuples": 7,
+          "runtime": { "start": 18352409886, "end": 18352409892},
+          "source-locator": "/root/compiler/tests/programs/p6a1b_hand_naive.dl [9:1-9:55]"
+         }
+        }
+       },
+       "runtime": { "start": 18352409877, "end": 18352409902}
+      },
+      "1": {
+       "copytime": { "start": 18352409966, "end": 18352409967},
+       "maxRSS": {
+        "post": 13424,
+        "pre": 13424
+       },
+       "num-tuples": 10,
+       "recursive-rule": {
+        "reach_bf(x,y) :- \n   m_reach(x),\n   reach_bf(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 13424,
+           "pre": 13424
+          },
+          "num-tuples": 10,
+          "runtime": { "start": 18352409935, "end": 18352409939},
+          "source-locator": "/root/compiler/tests/programs/p6a1b_hand_naive.dl [9:1-9:55]"
+         }
+        }
+       },
+       "runtime": { "start": 18352409927, "end": 18352409947}
+      },
+      "10": {
+       "copytime": { "start": 18352410400, "end": 18352410402},
+       "maxRSS": {
+        "post": 13424,
+        "pre": 13424
+       },
+       "num-tuples": 5,
+       "recursive-rule": {
+        "reach_bf(x,y) :- \n   m_reach(x),\n   reach_bf(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 13424,
+           "pre": 13424
+          },
+          "num-tuples": 5,
+          "runtime": { "start": 18352410370, "end": 18352410374},
+          "source-locator": "/root/compiler/tests/programs/p6a1b_hand_naive.dl [9:1-9:55]"
+         }
+        }
+       },
+       "runtime": { "start": 18352410362, "end": 18352410382}
+      },
+      "11": {
+       "copytime": { "start": 18352410443, "end": 18352410444},
+       "maxRSS": {
+        "post": 13424,
+        "pre": 13424
+       },
+       "num-tuples": 1,
+       "recursive-rule": {
+        "reach_bf(x,y) :- \n   m_reach(x),\n   reach_bf(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 13424,
+           "pre": 13424
+          },
+          "num-tuples": 1,
+          "runtime": { "start": 18352410413, "end": 18352410417},
+          "source-locator": "/root/compiler/tests/programs/p6a1b_hand_naive.dl [9:1-9:55]"
+         }
+        }
+       },
+       "runtime": { "start": 18352410405, "end": 18352410424}
+      },
+      "12": {
+       "copytime": { "start": 18352410483, "end": 18352410484},
+       "maxRSS": {
+        "post": 13424,
+        "pre": 13424
+       },
+       "num-tuples": 1,
+       "recursive-rule": {
+        "reach_bf(x,y) :- \n   m_reach(x),\n   reach_bf(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 13424,
+           "pre": 13424
+          },
+          "num-tuples": 1,
+          "runtime": { "start": 18352410456, "end": 18352410457},
+          "source-locator": "/root/compiler/tests/programs/p6a1b_hand_naive.dl [9:1-9:55]"
+         }
+        }
+       },
+       "runtime": { "start": 18352410447, "end": 18352410465}
+      },
+      "13": {
+       "maxRSS": {
+        "post": 13424,
+        "pre": 13424
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "reach_bf(x,y) :- \n   m_reach(x),\n   reach_bf(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 13424,
+           "pre": 13424
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 18352410496, "end": 18352410497},
+          "source-locator": "/root/compiler/tests/programs/p6a1b_hand_naive.dl [9:1-9:55]"
+         }
+        }
+       },
+       "runtime": { "start": 18352410487, "end": 18352410505}
+      },
+      "2": {
+       "copytime": { "start": 18352410011, "end": 18352410013},
+       "maxRSS": {
+        "post": 13424,
+        "pre": 13424
+       },
+       "num-tuples": 18,
+       "recursive-rule": {
+        "reach_bf(x,y) :- \n   m_reach(x),\n   reach_bf(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 13424,
+           "pre": 13424
+          },
+          "num-tuples": 18,
+          "runtime": { "start": 18352409979, "end": 18352409985},
+          "source-locator": "/root/compiler/tests/programs/p6a1b_hand_naive.dl [9:1-9:55]"
+         }
+        }
+       },
+       "runtime": { "start": 18352409971, "end": 18352409993}
+      },
+      "3": {
+       "copytime": { "start": 18352410061, "end": 18352410064},
+       "maxRSS": {
+        "post": 13424,
+        "pre": 13424
+       },
+       "num-tuples": 31,
+       "recursive-rule": {
+        "reach_bf(x,y) :- \n   m_reach(x),\n   reach_bf(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 13424,
+           "pre": 13424
+          },
+          "num-tuples": 31,
+          "runtime": { "start": 18352410025, "end": 18352410035},
+          "source-locator": "/root/compiler/tests/programs/p6a1b_hand_naive.dl [9:1-9:55]"
+         }
+        }
+       },
+       "runtime": { "start": 18352410017, "end": 18352410043}
+      },
+      "4": {
+       "copytime": { "start": 18352410115, "end": 18352410118},
+       "maxRSS": {
+        "post": 13424,
+        "pre": 13424
+       },
+       "num-tuples": 29,
+       "recursive-rule": {
+        "reach_bf(x,y) :- \n   m_reach(x),\n   reach_bf(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 13424,
+           "pre": 13424
+          },
+          "num-tuples": 29,
+          "runtime": { "start": 18352410076, "end": 18352410088},
+          "source-locator": "/root/compiler/tests/programs/p6a1b_hand_naive.dl [9:1-9:55]"
+         }
+        }
+       },
+       "runtime": { "start": 18352410067, "end": 18352410096}
+      },
+      "5": {
+       "copytime": { "start": 18352410169, "end": 18352410172},
+       "maxRSS": {
+        "post": 13424,
+        "pre": 13424
+       },
+       "num-tuples": 25,
+       "recursive-rule": {
+        "reach_bf(x,y) :- \n   m_reach(x),\n   reach_bf(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 13424,
+           "pre": 13424
+          },
+          "num-tuples": 25,
+          "runtime": { "start": 18352410130, "end": 18352410143},
+          "source-locator": "/root/compiler/tests/programs/p6a1b_hand_naive.dl [9:1-9:55]"
+         }
+        }
+       },
+       "runtime": { "start": 18352410121, "end": 18352410150}
+      },
+      "6": {
+       "copytime": { "start": 18352410220, "end": 18352410222},
+       "maxRSS": {
+        "post": 13424,
+        "pre": 13424
+       },
+       "num-tuples": 16,
+       "recursive-rule": {
+        "reach_bf(x,y) :- \n   m_reach(x),\n   reach_bf(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 13424,
+           "pre": 13424
+          },
+          "num-tuples": 16,
+          "runtime": { "start": 18352410184, "end": 18352410194},
+          "source-locator": "/root/compiler/tests/programs/p6a1b_hand_naive.dl [9:1-9:55]"
+         }
+        }
+       },
+       "runtime": { "start": 18352410175, "end": 18352410202}
+      },
+      "7": {
+       "copytime": { "start": 18352410268, "end": 18352410270},
+       "maxRSS": {
+        "post": 13424,
+        "pre": 13424
+       },
+       "num-tuples": 14,
+       "recursive-rule": {
+        "reach_bf(x,y) :- \n   m_reach(x),\n   reach_bf(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 13424,
+           "pre": 13424
+          },
+          "num-tuples": 14,
+          "runtime": { "start": 18352410234, "end": 18352410242},
+          "source-locator": "/root/compiler/tests/programs/p6a1b_hand_naive.dl [9:1-9:55]"
+         }
+        }
+       },
+       "runtime": { "start": 18352410225, "end": 18352410250}
+      },
+      "8": {
+       "copytime": { "start": 18352410314, "end": 18352410315},
+       "maxRSS": {
+        "post": 13424,
+        "pre": 13424
+       },
+       "num-tuples": 6,
+       "recursive-rule": {
+        "reach_bf(x,y) :- \n   m_reach(x),\n   reach_bf(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 13424,
+           "pre": 13424
+          },
+          "num-tuples": 6,
+          "runtime": { "start": 18352410282, "end": 18352410288},
+          "source-locator": "/root/compiler/tests/programs/p6a1b_hand_naive.dl [9:1-9:55]"
+         }
+        }
+       },
+       "runtime": { "start": 18352410273, "end": 18352410296}
+      },
+      "9": {
+       "copytime": { "start": 18352410357, "end": 18352410359},
+       "maxRSS": {
+        "post": 13424,
+        "pre": 13424
+       },
+       "num-tuples": 4,
+       "recursive-rule": {
+        "reach_bf(x,y) :- \n   m_reach(x),\n   reach_bf(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 13424,
+           "pre": 13424
+          },
+          "num-tuples": 4,
+          "runtime": { "start": 18352410327, "end": 18352410330},
+          "source-locator": "/root/compiler/tests/programs/p6a1b_hand_naive.dl [9:1-9:55]"
+         }
+        }
+       },
+       "runtime": { "start": 18352410318, "end": 18352410338}
+      }
+     },
+     "maxRSS": {
+      "post": 13424,
+      "pre": 13424
+     },
+     "non-recursive-rule": {
+      "reach_bf(x,y) :- \n   m_reach(x),\n   edge(x,y).": {
+       "atom-frequency": {
+        "reach_bf(x,y) :- \n   m_reach(x),\n   edge(x,y).": {
+         "edge": {
+          "level": 1,
+          "num-tuples": 0
+         },
+         "m_reach": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 13424,
+        "pre": 13424
+       },
+       "num-tuples": 3,
+       "runtime": { "start": 18352409855, "end": 18352409860},
+       "source-locator": "/root/compiler/tests/programs/p6a1b_hand_naive.dl [8:1-8:40]"
+      }
+     },
+     "num-tuples": 3,
+     "reads": 335,
+     "runtime": { "start": 18352409845, "end": 18352409871},
+     "source-locator": "/root/compiler/tests/programs/p6a1b_hand_naive.dl [7:7-7:15]"
+    },
+    "seed": {
+     "maxRSS": {
+      "post": 13424,
+      "pre": 13424
+     },
+     "non-recursive-rule": {
+      "seed(x) :- \n   reach_bf(1,x).": {
+       "atom-frequency": {
+        "seed(x) :- \n   reach_bf(1,x).": {
+         "reach_bf": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 13424,
+        "pre": 13424
+       },
+       "num-tuples": 170,
+       "runtime": { "start": 18352410526, "end": 18352410532},
+       "source-locator": "/root/compiler/tests/programs/p6a1b_hand_naive.dl [12:1-12:26]"
+      }
+     },
+     "num-tuples": 170,
+     "reads": 0,
+     "runtime": { "start": 18352410526, "end": 18352410539},
+     "source-locator": "/root/compiler/tests/programs/p6a1b_hand_naive.dl [11:7-11:11]"
+    }
+   },
+   "runtime": { "start": 18352409598, "end": 18352411270},
+   "starttime": { "time": 18352409559},
+   "usage": {
+    "timepoint": {
+     "18352409578": {
+      "maxRSS": 13424,
+      "systemtime": 0,
+      "usertime": 2176
+     },
+     "18352409606": {
+      "maxRSS": 13424,
+      "systemtime": 0,
+      "usertime": 3779
+     },
+     "18352409787": {
+      "maxRSS": 13424,
+      "systemtime": 0,
+      "usertime": 3966
+     },
+     "18352409811": {
+      "maxRSS": 13424,
+      "systemtime": 0,
+      "usertime": 3986
+     },
+     "18352409859": {
+      "maxRSS": 13424,
+      "systemtime": 0,
+      "usertime": 4055
+     },
+     "18352409890": {
+      "maxRSS": 13424,
+      "systemtime": 0,
+      "usertime": 4088
+     },
+     "18352409920": {
+      "maxRSS": 13424,
+      "systemtime": 0,
+      "usertime": 4124
+     },
+     "18352409940": {
+      "maxRSS": 13424,
+      "systemtime": 0,
+      "usertime": 4155
+     },
+     "18352409965": {
+      "maxRSS": 13424,
+      "systemtime": 0,
+      "usertime": 4183
+     },
+     "18352409984": {
+      "maxRSS": 13424,
+      "systemtime": 0,
+      "usertime": 4208
+     },
+     "18352410010": {
+      "maxRSS": 13424,
+      "systemtime": 0,
+      "usertime": 4241
+     },
+     "18352410030": {
+      "maxRSS": 13424,
+      "systemtime": 0,
+      "usertime": 4267
+     },
+     "18352410060": {
+      "maxRSS": 13424,
+      "systemtime": 0,
+      "usertime": 4303
+     },
+     "18352410080": {
+      "maxRSS": 13424,
+      "systemtime": 0,
+      "usertime": 4330
+     },
+     "18352410114": {
+      "maxRSS": 13424,
+      "systemtime": 0,
+      "usertime": 4371
+     },
+     "18352410134": {
+      "maxRSS": 13424,
+      "systemtime": 0,
+      "usertime": 4398
+     },
+     "18352410168": {
+      "maxRSS": 13424,
+      "systemtime": 0,
+      "usertime": 4438
+     },
+     "18352410188": {
+      "maxRSS": 13424,
+      "systemtime": 0,
+      "usertime": 4464
+     },
+     "18352410219": {
+      "maxRSS": 13424,
+      "systemtime": 0,
+      "usertime": 4501
+     },
+     "18352410238": {
+      "maxRSS": 13424,
+      "systemtime": 0,
+      "usertime": 4527
+     },
+     "18352410267": {
+      "maxRSS": 13424,
+      "systemtime": 0,
+      "usertime": 4563
+     },
+     "18352410287": {
+      "maxRSS": 13424,
+      "systemtime": 0,
+      "usertime": 4589
+     },
+     "18352410313": {
+      "maxRSS": 13424,
+      "systemtime": 0,
+      "usertime": 4622
+     },
+     "18352410332": {
+      "maxRSS": 13424,
+      "systemtime": 0,
+      "usertime": 4650
+     },
+     "18352410356": {
+      "maxRSS": 13424,
+      "systemtime": 0,
+      "usertime": 4677
+     },
+     "18352410375": {
+      "maxRSS": 13424,
+      "systemtime": 0,
+      "usertime": 4706
+     },
+     "18352410399": {
+      "maxRSS": 13424,
+      "systemtime": 0,
+      "usertime": 4735
+     },
+     "18352410418": {
+      "maxRSS": 13424,
+      "systemtime": 0,
+      "usertime": 4762
+     },
+     "18352410442": {
+      "maxRSS": 13424,
+      "systemtime": 0,
+      "usertime": 4790
+     },
+     "18352410460": {
+      "maxRSS": 13424,
+      "systemtime": 0,
+      "usertime": 4815
+     },
+     "18352410482": {
+      "maxRSS": 13424,
+      "systemtime": 0,
+      "usertime": 4842
+     },
+     "18352410500": {
+      "maxRSS": 13424,
+      "systemtime": 0,
+      "usertime": 4868
+     },
+     "18352410523": {
+      "maxRSS": 13424,
+      "systemtime": 0,
+      "usertime": 4897
+     },
+     "18352410556": {
+      "maxRSS": 13424,
+      "systemtime": 0,
+      "usertime": 4942
+     },
+     "18352410583": {
+      "maxRSS": 13424,
+      "systemtime": 0,
+      "usertime": 4971
+     },
+     "18352410616": {
+      "maxRSS": 13424,
+      "systemtime": 0,
+      "usertime": 5010
+     },
+     "18352410642": {
+      "maxRSS": 13424,
+      "systemtime": 0,
+      "usertime": 5034
+     }
+    }
+   }
+  }
+ }
+}

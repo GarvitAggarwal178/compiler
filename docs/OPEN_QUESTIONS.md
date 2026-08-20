@@ -2,6 +2,29 @@
 
 Append-only. Things noticed and not acted on, with the date noticed.
 
+## 2026-08-20 — Q5 (blueprint §10), resolved
+
+"Which Soufflé `tests/` subdirectory is the pre-registered corpus?" — **The whole
+`tests/` tree, filtered by a mechanical predicate, not a hand-picked subdirectory.**
+36 of 612 `.dl`-bearing directories qualify (`harness/corpus_predicate.py` via
+`harness/build_corpus.py`, `tests/corpus/PREREGISTERED.txt`,
+`docs/reports/probe0_6.md`). No test in it has been run yet — that's M1/M2/M3's job
+as each becomes relevant, not Phase 0.6's.
+
+## 2026-08-20 — P6: no counterexample to the (a)/(b) independence found (bounded search)
+
+Five constructions, one ~1hr session (`docs/reports/probe0_6.md` §3): the given
+starting point, a derived-binding case (two variants, one degenerate), an
+incompatible-bf/fb-pattern case, and a structural argument that the fourth planned
+shape can't be stratified at all. None produced a program where correctly-seeded
+(including fixpoint-propagated) restriction of a negated relation gave a wrong
+answer. Working hypothesis per blueprint v1.2 §6: clause (b) collapses into correct
+seed collection + clause (a), M3 re-scopes to ~2 weeks. **Not enacted by this report**
+— it's a recommendation for the human, and the search was bounded (five
+constructions), not exhaustive. If M3 finds a sixth construction that breaks this,
+the collapse hypothesis is wrong and the two-week re-scoping decision needs revisiting
+before M3's schedule is finalized around it.
+
 ## 2026-08-20 — Q1 (blueprint §10), empirical answer
 
 "Does Soufflé's magic transform still decline negation, empirically?" — **No, not on

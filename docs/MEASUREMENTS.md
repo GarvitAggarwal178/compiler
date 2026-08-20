@@ -30,6 +30,22 @@ the "Derived" section below the table.
 | probe0.5-p4-extract | 2026-08-20 | `python3 harness/parse_profile.py measurements/probe0.5-p4-run/prof.log` | p4.dl | n/a | `reach_bf.total=170`, `m_reach.total=1`, `unreach_bf.total=30`, `q2.total=30` | Hand-restricted `reach_bf` vs Soufflé's unrestricted `reach`=26,404 (`probe0-p2-off-extract`). |
 | probe0.5-p4-diff | 2026-08-20 | `diff -q measurements/probe0.5-p4-run/q2.csv measurements/probe0-p2-{off,on}-run/q2.csv` | p4.dl vs p2.dl | hand-transformed vs both P2 configs | 0 differences (both) | P4's answer bit-identical to P2's, in both configurations. |
 | probe0.5-p2-bfs-check | 2026-08-20 | `python3 -c "<inline BFS over fixtures/p2/edge.facts from node 1>"` | p2 fixture | n/a | `reachable_from_1_incl_self=171` | Independent cross-check of `reach_bf`=170 (171 minus the source node itself, which `reach_bf` never reflexively includes). |
+| probe0.6-p4prime-run / -extract | 2026-08-20 | `souffle -F fixtures/p2 -D measurements/probe0.6-p4prime-run -p prof.log tests/programs/p4prime.dl`; `python3 harness/parse_profile.py measurements/probe0.6-p4prime-run/prof.log` | p4prime.dl | fixed hand-transform (query constant moved out of the rule head into the seed only) | `m_reach.total=1`, `reach_bf.total=170`, `unreach_bf.total=30`, `q2.total=30` | Same numbers as the original (buggy) P4 — the head-hardcoding bug didn't change the answer, only the artifact's shape. |
+| probe0.6-p4prime-diff | 2026-08-20 | `diff -q measurements/probe0.6-p4prime-run/q2.csv measurements/probe0.5-p4-run/q2.csv measurements/probe0-p2-off-run/q2.csv` | p4prime.dl vs p4.dl vs p2.dl | — | 0 differences (all pairs) | P4' answer bit-identical to the original P4 and to P2. |
+| probe0.6-p6start-{base,hand}-run | 2026-08-20 | `souffle ... tests/programs/p6start_{base,hand}.dl` (fixtures/p2) | p6start | untransformed vs hand-transformed, seeds `{1,2}` | `ans` 2 = 2, `diff -q` clean | Confirms the directive's stated non-counterexample prediction empirically. |
+| probe0.6-p6a1-{base,hand-naive,hand}-run | 2026-08-20 | `souffle ... tests/programs/p6a1_*.dl` (fixtures/p2) | p6a1 | ∃-quantified derived binding | `ans` 200 = 200 = 200 | Degenerate: saturates to the full node domain regardless of correct/incorrect seeding — not evidence either way (`docs/reports/probe0_6.md` §3). |
+| probe0.6-p6a1b-{base,hand-naive,hand}-run | 2026-08-20 | `souffle ... tests/programs/p6a1b_*.dl` (fixtures/p2) | p6a1b | ∀-quantified derived binding (fixed version of p6a1) | `ans`: base=31, naive=200, correct=31 | Naive under-seeding diverges; fixpoint-complete seeding (`m_reach(x):-seed(x).`) matches baseline exactly. |
+| probe0.6-p6a2-{base,hand}-run | 2026-08-20 | `souffle ... tests/programs/p6a2_*.dl` (fixtures/p2) | p6a2 | independent bf/fb adornments on the same relation | `ans` 9 = 9, `diff -q` clean | Non-degenerate match; two independently-seeded adorned versions of the same relation agree with baseline. |
+| probe0.6-q5-eval-only | 2026-08-20 | `python3 harness/corpus_predicate.py /root/souffle-src/tests/evaluation` | souffle tests/evaluation | n/a | `total_tests=149`, `included_count=11` | Superseded below — scope was narrower than the directive asked for. |
+| probe0.6-q5-corpus | 2026-08-20 | `python3 harness/build_corpus.py /root/souffle-src/tests` | souffle tests/ (whole tree) | n/a | `total_dl_bearing_dirs=612`, `included_count=36` | Pre-registered corpus (`tests/corpus/PREREGISTERED.txt`); same unmodified predicate as the row above, correct scope. |
+
+Three-column headline metric (blueprint §7, v1.2). `T_none` = no transform,
+`T_souffle` = Soufflé `--magic-transform=*`, `T_guard` = completeness-guarded hand
+restriction (P4'). Contribution is `T_souffle / T_guard`, not `T_none / T_guard`:
+
+| Program | `T_none` | `T_souffle` | `T_guard` | `T_none/T_souffle` | `T_souffle/T_guard` |
+|---|---|---|---|---|---|
+| P2 | 40,030 (26,404+13,596+30) | 26,465 (26,404+30+30+1) | **231** (1+170+30+30, P4') | ≈1.5× | **≈114.6×** |
 
 Derived (not independently committed, arithmetic only, from the rows above). Per
 Phase 0.5 §3, `COPY_T` relations are reported under both conventions rather than one

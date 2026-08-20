@@ -1,0 +1,23 @@
+.decl edge(a:number, b:number)   .input edge
+.decl node(a:number)             .input node
+
+.decl m_reach(a:number)
+m_reach(1).
+
+.decl reach_bf(a:number, b:number)
+reach_bf(x,y) :- m_reach(x), edge(x,y).
+reach_bf(x,y) :- m_reach(x), reach_bf(x,z), edge(z,y).
+
+.decl seed(x:number)
+seed(x) :- reach_bf(1,x).
+
+m_reach(x) :- seed(x).
+
+.decl aux(b:number)
+aux(y) :- seed(x), reach_bf(x,y).
+
+.decl blocked_from(b:number)
+blocked_from(y) :- node(y), !aux(y).
+
+.decl ans(b:number)   .output ans
+ans(y) :- blocked_from(y).

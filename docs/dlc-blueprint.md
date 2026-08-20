@@ -4,7 +4,7 @@
 **Team:** 2
 **Budget:** 15 weeks from 2026-08-20 → 2026-12-03. Realistically ~10 productive weeks.
 **Status:** selected 2026-08-20, pending Probe 0. Not started.
-**Blueprint version:** v1.1
+**Blueprint version:** v1.2
 
 ---
 
@@ -133,6 +133,18 @@ program.
 
 **Guard(P, Q) permits transformation of SCC `C` iff:**
 
+**The independence of clauses (a) and (b) is unverified.** Phase 0.6's P6
+(`docs/dlc-blueprint.md` §12, `docs/reports/probe0_6.md`) tests this directly by
+attempting to construct a program where the source is stratified, the magic
+transform seeds the negated relation *correctly* (every binding every negated
+occurrence demands appears in its magic set), the transformed program is stratified,
+and the restricted answer still differs from the untransformed one. If no such
+program exists after a bounded search, the working hypothesis is: **clause (b)
+collapses into correct seed collection over negated occurrences plus clause (a)**,
+and M3 re-scopes from five weeks to roughly two (correct adornment over negated
+occurrences + culprit-cycle detection), with the remaining weeks going to corpus
+breadth and the writeup. See `docs/reports/probe0_6.md` for the result.
+
 **Clause (b) is primary.** Probe 0 / 0.5 located the actual gap in Soufflé's
 behavior on clause (b), not (a): Soufflé already isolates negated relations soundly
 (no observed stratification breakage), it simply refuses to demand-restrict them,
@@ -209,29 +221,35 @@ seeing results reintroduces the defect that killed bounds-check elimination.
 
 ### Headline metric (Filter 3)
 
-**Primary metric, as of v1.1:**
+**Primary metric, as of v1.2 — three columns, always:**
 
-> Tuples materialized in negated relations under Soufflé's transform, against tuples
-> required under a completeness-guarded restriction. Exact integer pair per program.
+| Column | Meaning |
+|---|---|
+| `T_none` | no transform |
+| `T_souffle` | Soufflé `--magic-transform=*` |
+| `T_guard` | completeness-guarded restriction |
 
-This targets clause (b) directly (§6) — it is the number that isolates exactly what
-Soufflé's blanket-isolate-and-fully-materialize handling of negated relations costs,
-independent of whatever else the surrounding program does. Report as a pair
-(Soufflé's materialized count, our guarded-restriction count), not a ratio, when
-either side is below ~10³ (§3, `docs/reports/probe0_5.md`) — ratios on noise-scale
-totals are not evidence.
+**The contribution is `T_souffle / T_guard`.** `T_souffle` is the baseline that
+matters, not `T_none`: Soufflé's own transform already buys a real reduction on
+programs with negation (it restricts the *negating* relation even when it leaves the
+negated one fully materialized, §2). Reporting `T_none / T_guard` as the headline
+credits the guard with the part of the reduction Soufflé's own transform already
+delivers — it is claiming credit for Beeri–Ramakrishnan. **Reporting `T_none /
+T_guard` as the headline ratio is prohibited.**
+
+Worked example, P2 (`docs/reports/probe0_6.md`): 40,030 / 26,465 / 231. Soufflé's
+transform buys 1.5×; the guard buys 114× *on top of that*. `docs/MEASUREMENTS.md`
+carries the full three-column derived table; existing rows are not edited
+(append-only), new derived blocks are added instead.
+
+Report a pair, not a ratio, when either side of the comparison is below ~10³ (§3,
+`docs/reports/probe0_5.md`) — ratios on noise-scale totals are not evidence.
 
 **Secondary metric — total derived tuples** = Σ over relations of tuples inserted
 into Δ across all fixpoint iterations, for a bound query. Exact integer.
-Deterministic. Hardware-free.
-
-Reported as three numbers per program:
-
-| Configuration | Symbol |
-|---|---|
-| semi-naive, no magic | `T_base` |
-| semi-naive + magic (positive fragment) | `T_magic` |
-| semi-naive + guarded magic (negation present) | `T_guard` |
+Deterministic. Hardware-free. Same three configurations as above, same column names
+(`T_none`/`T_souffle`/`T_guard` supersede the v1.0 `T_base`/`T_magic`/`T_guard`
+naming — `T_none` = old `T_base`, `T_souffle` = old `T_magic`).
 
 **What good looks like numerically:**
 
@@ -258,6 +276,12 @@ was chosen to not need it.
 
 Milestone 1 already contains an optimization pass (Filter 6). Every milestone is
 submittable.
+
+**M1 and Phase 0.6 run in parallel, as of v1.2.** M1's content does not depend on
+Phase 0.6's outcome: the lexer, parser, type checker, allowedness check, naive
+fixpoint and semi-naive rewrite are required under every surviving framing of the
+project (whether M3 stays at five weeks or re-scopes to two per §6). M1's start date
+is unchanged by the Phase 0.5/0.6 detour — see `docs/SESSION_LOG.md`.
 
 **M1 — weeks 1–3. Front end + first optimization.**
 Lexer, precedence parser, decl/type check, allowedness, naive fixpoint evaluator,
@@ -331,7 +355,7 @@ long, M3 wins.
 | Q2 | What is the blast radius — one relation, or the whole SCC? | Probe 0, tonight | Run culprit-cycle program |
 | Q3 | Does *Extended Magic for Negation* (~2019) ship a downloadable artifact? If yes, Filter 1 verdict must be re-run. | end of week 2 | Search + check for repo |
 | Q4 | Chen (1997) labeling algorithm vs Balbin (1991): which is implementable in 5 weeks? | end of week 4 | Read Chen first |
-| Q5 | Which Soufflé `tests/` subdirectory is the pre-registered corpus? | end of week 3, **before** any corpus run | Decide and commit to repo |
+| Q5 | Which Soufflé `tests/` subdirectory is the pre-registered corpus? | **Moved to Phase 0.6** (was: end of week 3). Intuitions formed during hand-probing (Phase 0/0.5/0.6's P1'–P6) contaminate later pre-registration; fixing it now removes that risk. | Mechanical structural predicate, no execution — `tests/corpus/PREREGISTERED.txt`, `docs/reports/probe0_6.md` |
 
 ---
 

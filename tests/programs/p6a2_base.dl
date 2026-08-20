@@ -1,0 +1,15 @@
+.decl edge(a:number, b:number)   .input edge
+.decl node(a:number)             .input node
+
+.decl reach(a:number, b:number)
+reach(x,y) :- edge(x,y).
+reach(x,y) :- reach(x,z), edge(z,y).
+
+.decl far_from_1(b:number)
+far_from_1(y) :- node(y), !reach(1,y).
+
+.decl cant_reach_5(a:number)
+cant_reach_5(x) :- node(x), !reach(x,5).
+
+.decl ans(b:number)   .output ans
+ans(y) :- far_from_1(y), cant_reach_5(y).

@@ -1,0 +1,18 @@
+.decl edge(a:number, b:number)
+.input edge
+.decl node(a:number)
+.input node
+
+.decl m_reach(a:number)
+m_reach(1).
+
+.decl reach_bf(a:number, b:number)
+reach_bf(x,y) :- m_reach(x), edge(x,y).
+reach_bf(x,y) :- m_reach(x), reach_bf(x,z), edge(z,y).
+
+.decl unreach_bf(a:number, b:number)
+unreach_bf(x,y) :- m_reach(x), node(x), node(y), !reach_bf(x,y).
+
+.decl q2(b:number)
+.output q2
+q2(y) :- unreach_bf(1,y).

@@ -65,3 +65,45 @@ escalation is resolved by the human ruling, not by further investigation.
 type/allowedness checks, naive + semi-naive fixpoint, Lane A) or to run P5 first as an
 M3 pre-check. `--inline-exclude=q` is now a stated P5 prerequisite
 (`docs/OPEN_QUESTIONS.md`), not a standalone experiment to schedule separately.
+
+## 2026-08-20 — Phase 0.6: P4' fix, P6 counterexample hunt, Q5 pre-registration
+
+**What changed:** Applied the Phase 0.6 directive. Blueprint amended to v1.2
+(`docs/dlc-blueprint.md`): three-column headline metric (`T_none`/`T_souffle`/
+`T_guard`, contribution = `T_souffle/T_guard`, `T_none/T_guard` prohibited as
+headline), clause-(a)/(b)-independence note added to §6, Q5 deadline moved to now
+(§10), M1/Phase-0.6-parallel note added to §8. Fixed `p4.dl`'s query-constant-in-
+rule-head bug as `tests/programs/p4prime.dl`. Ran a bounded (~1hr) counterexample
+search for P6 across five constructions (`tests/programs/p6start_*.dl`,
+`p6a1_*.dl`, `p6a1b_*.dl`, `p6a2_*.dl`). Pre-registered the M1-M3 corpus: wrote
+`harness/corpus_predicate.py` + `harness/build_corpus.py`, sparse-checked-out
+Soufflé 2.5's `tests/` tree (not vendored), applied the predicate, committed
+`tests/corpus/PREREGISTERED.txt` + `detail.json` + `SOURCE.md`.
+
+**Did not touch `src/` or write any Lane A code.** M1 (lexer, parser, type/
+allowedness checks, naive + semi-naive fixpoint) is the human's work, running in
+parallel per §8 v1.2 — this session's scope was Phase 0.6 (Lane B) only.
+
+**Measurement IDs produced:** `probe0.6-p4prime-{run,profile,extract,diff}`,
+`probe0.6-p6start-{base,hand}-{run,profile}`, `probe0.6-p6a1-{base,hand-naive,
+hand}-{run,profile}`, `probe0.6-p6a1b-{base,hand-naive,hand}-{run,profile}`,
+`probe0.6-p6a2-{base,hand}-{run,profile}`, `probe0.6-q5-eval-only`,
+`probe0.6-q5-corpus`. Full table in `docs/MEASUREMENTS.md`.
+
+**Result:** P4' confirmed sound (byte-identical to P2 and to the original buggy P4);
+`@neglabel.reach` confirmed `REC_T` (genuine re-derivation), not `COPY_T`. P2's
+three-column table: 40,030 / 26,465 / 231 — contribution is 114.6×
+(`T_souffle/T_guard`), not the 173× a `T_none/T_guard` framing would have claimed.
+P6: no counterexample found in five bounded attempts (one initially degenerate,
+fixed and rerun); working hypothesis is clause (b) collapses into correct seed
+collection + clause (a), M3 candidate re-scope to ~2 weeks, pending human
+confirmation. Q5: 36 of 612 tests pre-registered, full-tree scope (not the
+narrower 11-of-149 first framing, which is disclosed not discarded). Full writeup:
+`docs/reports/probe0_6.md`.
+
+**What is now blocked:** Nothing on the Lane B side. M1 continues independently.
+
+**Single next action:** Human confirms (or overturns) the M3 re-scope-to-~2-weeks
+recommendation from the P6 result, and decides whether/when to run the 36-program
+pre-registered corpus (not yet run — that's an M1/M2/M3-relevant future step, not
+Phase 0.6's).
