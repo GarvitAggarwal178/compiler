@@ -75,4 +75,8 @@ Append-only. One line per task start/end: task ID, outcome, commit SHA.
   1909.08246). No downloadable/installable artifact found after two targeted
   searches and one page fetch. Filter 1 verdict unchanged (cite-and-avoid). No
   Filter-1-event escalation needed (only required if an artifact was found).
-  Recorded: `docs/OPEN_QUESTIONS.md` (Q3). Commit: (pending)
+  Recorded: `docs/OPEN_QUESTIONS.md` (Q3). Commit: 002180f
+- BATCH END — all 8 tasks reached a defined outcome (done/aborted/exploratory-cap).
+  `src/` never touched. 2 escalations logged in full. Morning summary:
+  `docs/reports/night01-summary.md`. CLAUDE.md §5 reverts to normal STOP-and-wait
+  semantics as of this line, per the batch directive §0.
