@@ -57,4 +57,16 @@ Append-only. One line per task start/end: task ID, outcome, commit SHA.
   asserted as a general theorem (n=6 points, one fixture shape). Built
   `harness/fixtures_lib.py` (T7 item 4 deliverable), validated byte-identical
   against the original committed P1/P2 fixtures before use. Report:
-  `docs/reports/night01-T6-scaling.md`. Commit: (pending)
+  `docs/reports/night01-T6-scaling.md`. Commit: b369cbd
+- T7 start — M1 harness build-out, no prerequisite, Lane B only.
+- T7 end — outcome: done. Delivered all 5 items: differential runner
+  (`harness/differential.py`, dlc stubbed to always report not_implemented),
+  golden-generation guard + 3/3 passing tests (`harness/golden.py`,
+  `harness/test_golden_guard.py`), 12 rejection-test cases across 4 grounds
+  (`tests/rejection/`, each independently cross-checked against real Soufflé
+  tonight and confirmed rejected for the matching reason), fixture generator
+  library and generalized tuple extraction (already delivered in T6/T2, formally
+  written up here). Two bugs found and fixed by validating against known-good
+  data before trusting anything (a tuple_report.py false-positive, a
+  differential.py relative-path bug — same class as T2's). Nothing under `src/`
+  touched. Report: `docs/reports/night01-T7-harness.md`. Commit: (pending)
