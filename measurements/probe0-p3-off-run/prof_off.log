@@ -1,0 +1,199 @@
+{
+ "root": {
+  "program": {
+   "configuration": {
+    "": "/root/compiler/tests/programs/p3.dl",
+    "fact-dir": "/root/compiler/fixtures/p3",
+    "include-dir": ".",
+    "jobs": "1",
+    "libraries": "functors",
+    "library-dir": ".",
+    "output-dir": "/root/compiler/measurements/probe0-p3-off-run",
+    "profile": "prof_off.log",
+    "relationCount": "5",
+    "ruleCount": "6",
+    "version": "2.5",
+    "warn": "all",
+    "wno": "none"
+   },
+   "relation": {
+    "base": {
+     "loadtime": { "start": 3112909020, "end": 3112909103},
+     "num-tuples": 30,
+     "reads": 0,
+     "source-locator": "/root/compiler/tests/programs/p3.dl [1:7-1:11]"
+    },
+    "e": {
+     "loadtime": { "start": 3112909113, "end": 3112909145},
+     "num-tuples": 30,
+     "reads": 0,
+     "source-locator": "/root/compiler/tests/programs/p3.dl [3:7-3:8]"
+    },
+    "out": {
+     "maxRSS": {
+      "post": 14436,
+      "pre": 14436
+     },
+     "non-recursive-rule": {
+      "out(y) :- \n   p(1,y).": {
+       "atom-frequency": {
+        "out(y) :- \n   p(1,y).": {
+         "p": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 14436,
+        "pre": 14436
+       },
+       "num-tuples": 2,
+       "runtime": { "start": 3112909260, "end": 3112909261},
+       "source-locator": "/root/compiler/tests/programs/p3.dl [16:1-16:18]"
+      }
+     },
+     "num-tuples": 2,
+     "reads": 0,
+     "runtime": { "start": 3112909259, "end": 3112909267},
+     "savetime": { "start": 3112909271, "end": 3112909318},
+     "source-locator": "/root/compiler/tests/programs/p3.dl [14:7-14:10]"
+    },
+    "p": {
+     "iteration": {
+      "0": {
+       "maxRSS": {
+        "post": 14436,
+        "pre": 14436
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "p(x,y) :- \n   p(x,z),\n   !s(z),\n   base(z,y).": {
+         "0": {
+          "atom-frequency": {
+           "@new_p(x,y) :- \n   @delta_p(x,z),\n   !s(z),\n   base(z,y).": {
+            "@delta_p": {
+             "level": 0,
+             "num-tuples": 0
+            },
+            "base": {
+             "level": 1,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 14436,
+           "pre": 14436
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 3112909212, "end": 3112909220},
+          "source-locator": "/root/compiler/tests/programs/p3.dl [12:1-12:33]"
+         }
+        }
+       },
+       "runtime": { "start": 3112909203, "end": 3112909239}
+      }
+     },
+     "maxRSS": {
+      "post": 14436,
+      "pre": 14436
+     },
+     "non-recursive-rule": {
+      "p(x,y) :- \n   e(x,y).": {
+       "atom-frequency": {
+        "p(x,y) :- \n   e(x,y).": {
+         "e": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 14436,
+        "pre": 14436
+       },
+       "num-tuples": 30,
+       "runtime": { "start": 3112909188, "end": 3112909191},
+       "source-locator": "/root/compiler/tests/programs/p3.dl [11:1-11:18]"
+      }
+     },
+     "num-tuples": 30,
+     "reads": 0,
+     "runtime": { "start": 3112909179, "end": 3112909198},
+     "source-locator": "/root/compiler/tests/programs/p3.dl [7:7-7:8]"
+    },
+    "s": {
+     "maxRSS": {
+      "post": 14436,
+      "pre": 14436
+     },
+     "non-recursive-rule": {
+      "s(x) :- \n   base(x,_).": {
+       "atom-frequency": {
+        "s(x) :- \n   base(x,_).": {
+         "base": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 14436,
+        "pre": 14436
+       },
+       "num-tuples": 19,
+       "runtime": { "start": 3112909161, "end": 3112909167},
+       "source-locator": "/root/compiler/tests/programs/p3.dl [10:1-10:16]"
+      }
+     },
+     "num-tuples": 19,
+     "reads": 30,
+     "runtime": { "start": 3112909151, "end": 3112909175},
+     "source-locator": "/root/compiler/tests/programs/p3.dl [6:7-6:8]"
+    }
+   },
+   "runtime": { "start": 3112909016, "end": 3112909322},
+   "starttime": { "time": 3112908993},
+   "usage": {
+    "timepoint": {
+     "3112909039": {
+      "maxRSS": 14436,
+      "systemtime": 0,
+      "usertime": 3085
+     },
+     "3112909131": {
+      "maxRSS": 14436,
+      "systemtime": 0,
+      "usertime": 3207
+     },
+     "3112909165": {
+      "maxRSS": 14436,
+      "systemtime": 0,
+      "usertime": 3261
+     },
+     "3112909193": {
+      "maxRSS": 14436,
+      "systemtime": 0,
+      "usertime": 3297
+     },
+     "3112909217": {
+      "maxRSS": 14436,
+      "systemtime": 0,
+      "usertime": 3326
+     },
+     "3112909258": {
+      "maxRSS": 14436,
+      "systemtime": 0,
+      "usertime": 3373
+     },
+     "3112909284": {
+      "maxRSS": 14436,
+      "systemtime": 0,
+      "usertime": 3397
+     }
+    }
+   }
+  }
+ }
+}

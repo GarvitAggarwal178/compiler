@@ -1,0 +1,227 @@
+{
+ "root": {
+  "program": {
+   "configuration": {
+    "": "/root/compiler/tests/programs/p3.dl",
+    "fact-dir": "/root/compiler/fixtures/p3",
+    "include-dir": ".",
+    "jobs": "1",
+    "libraries": "functors",
+    "library-dir": ".",
+    "magic-transform": "*",
+    "output-dir": "/root/compiler/measurements/probe0-p3-on-run",
+    "profile": "prof_on.log",
+    "relationCount": "4",
+    "ruleCount": "7",
+    "version": "2.5",
+    "warn": "all",
+    "wno": "none"
+   },
+   "relation": {
+    "@magic.p.{bf}": {
+     "maxRSS": {
+      "post": 14436,
+      "pre": 14436
+     },
+     "non-recursive-rule": {
+      "@magic.p.{bf}(1).": {
+       "maxRSS": {
+        "post": 14436,
+        "pre": 14436
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 3112919641, "end": 3112919646},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 1,
+     "runtime": { "start": 3112919640, "end": 3112919657},
+     "source-locator": " [1:1-1:1]"
+    },
+    "@neglabel.s": {
+     "maxRSS": {
+      "post": 14436,
+      "pre": 14436
+     },
+     "non-recursive-rule": {
+      "@neglabel.s(x) :- \n   base(x,_).": {
+       "atom-frequency": {
+        "@neglabel.s(x) :- \n   base(x,_).": {
+         "base": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 14436,
+        "pre": 14436
+       },
+       "num-tuples": 19,
+       "runtime": { "start": 3112919834, "end": 3112919837},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 19,
+     "runtime": { "start": 3112919820, "end": 3112919845},
+     "source-locator": "/root/compiler/tests/programs/p3.dl [6:7-6:8]"
+    },
+    "base": {
+     "loadtime": { "start": 3112919663, "end": 3112919764},
+     "num-tuples": 30,
+     "reads": 0,
+     "source-locator": "/root/compiler/tests/programs/p3.dl [1:7-1:11]"
+    },
+    "e": {
+     "loadtime": { "start": 3112919770, "end": 3112919814},
+     "num-tuples": 30,
+     "reads": 0,
+     "source-locator": "/root/compiler/tests/programs/p3.dl [3:7-3:8]"
+    },
+    "out": {
+     "maxRSS": {
+      "post": 14436,
+      "pre": 14436
+     },
+     "non-recursive-rule": {
+      "out(y) :- \n   p.{bf}(@abdul0,y),\n   @abdul0 = 1.": {
+       "atom-frequency": {
+        "out(y) :- \n   p.{bf}(@abdul0,y),\n   @abdul0 = 1.": {
+         "p.{bf}": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 14436,
+        "pre": 14436
+       },
+       "num-tuples": 2,
+       "runtime": { "start": 3112919920, "end": 3112919921},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 2,
+     "reads": 0,
+     "runtime": { "start": 3112919919, "end": 3112919927},
+     "savetime": { "start": 3112919931, "end": 3112919992},
+     "source-locator": "/root/compiler/tests/programs/p3.dl [14:7-14:10]"
+    },
+    "p.{bf}": {
+     "iteration": {
+      "0": {
+       "maxRSS": {
+        "post": 14436,
+        "pre": 14436
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "p.{bf}(x,y) :- \n   @magic.p.{bf}(x),\n   p.{bf}(x,z),\n   !@neglabel.s(z),\n   base(z,y).": {
+         "0": {
+          "atom-frequency": {
+           "@new_p.{bf}(x,y) :- \n   @magic.p.{bf}(x),\n   @delta_p.{bf}(x,z),\n   !@neglabel.s(z),\n   base(z,y).": {
+            "@delta_p.{bf}": {
+             "level": 1,
+             "num-tuples": 0
+            },
+            "@magic.p.{bf}": {
+             "level": 0,
+             "num-tuples": 0
+            },
+            "base": {
+             "level": 2,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 14436,
+           "pre": 14436
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 3112919886, "end": 3112919890},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 3112919877, "end": 3112919900}
+      }
+     },
+     "maxRSS": {
+      "post": 14436,
+      "pre": 14436
+     },
+     "non-recursive-rule": {
+      "p.{bf}(x,y) :- \n   @magic.p.{bf}(x),\n   e(x,y).": {
+       "atom-frequency": {
+        "p.{bf}(x,y) :- \n   @magic.p.{bf}(x),\n   e(x,y).": {
+         "@magic.p.{bf}": {
+          "level": 0,
+          "num-tuples": 0
+         },
+         "e": {
+          "level": 1,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 14436,
+        "pre": 14436
+       },
+       "num-tuples": 2,
+       "runtime": { "start": 3112919859, "end": 3112919863},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 2,
+     "reads": 0,
+     "runtime": { "start": 3112919850, "end": 3112919873},
+     "source-locator": " [1:1-1:1]"
+    }
+   },
+   "runtime": { "start": 3112919634, "end": 3112919996},
+   "starttime": { "time": 3112919599},
+   "usage": {
+    "timepoint": {
+     "3112919648": {
+      "maxRSS": 14436,
+      "systemtime": 0,
+      "usertime": 3473
+     },
+     "3112919795": {
+      "maxRSS": 14436,
+      "systemtime": 0,
+      "usertime": 3634
+     },
+     "3112919840": {
+      "maxRSS": 14436,
+      "systemtime": 0,
+      "usertime": 3712
+     },
+     "3112919866": {
+      "maxRSS": 14436,
+      "systemtime": 0,
+      "usertime": 3746
+     },
+     "3112919892": {
+      "maxRSS": 14436,
+      "systemtime": 0,
+      "usertime": 3781
+     },
+     "3112919921": {
+      "maxRSS": 14436,
+      "systemtime": 0,
+      "usertime": 3821
+     },
+     "3112919946": {
+      "maxRSS": 14436,
+      "systemtime": 0,
+      "usertime": 3839
+     }
+    }
+   }
+  }
+ }
+}
