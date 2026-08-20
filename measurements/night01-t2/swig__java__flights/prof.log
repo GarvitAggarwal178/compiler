@@ -1,0 +1,325 @@
+{
+ "root": {
+  "program": {
+   "configuration": {
+    "": "/root/souffle-src/tests/swig/java/flights/flights.dl",
+    "fact-dir": "/root/souffle-src/tests/swig/java/flights",
+    "include-dir": ".",
+    "jobs": "1",
+    "libraries": "functors",
+    "library-dir": ".",
+    "output-dir": "/root/compiler/measurements/night01-t2/swig__java__flights",
+    "profile": "prof.log",
+    "relationCount": "4",
+    "ruleCount": "17",
+    "version": "2.5",
+    "warn": "all",
+    "wno": "none"
+   },
+   "relation": {
+    "QAflies": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 21272607513, "end": 21272607514},
+       "maxRSS": {
+        "post": 12092,
+        "pre": 11964
+       },
+       "num-tuples": 1,
+       "recursive-rule": {
+        "QAflies(X,Y) :- \n   flight(\"QA\",X,Z),\n   QAflies(Z,Y).": {
+         "0": {
+          "atom-frequency": {
+           "@new_QAflies(X,Y) :- \n   flight(\"QA\",X,Z),\n   @delta_QAflies(Z,Y).": {
+            "@delta_QAflies": {
+             "level": 1,
+             "num-tuples": 0
+            },
+            "flight": {
+             "level": 0,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 12092,
+           "pre": 11964
+          },
+          "num-tuples": 1,
+          "runtime": { "start": 21272607481, "end": 21272607485},
+          "source-locator": "/root/souffle-src/tests/swig/java/flights/flights.dl [19:1-19:48]"
+         }
+        }
+       },
+       "runtime": { "start": 21272607481, "end": 21272607493}
+      },
+      "1": {
+       "maxRSS": {
+        "post": 12092,
+        "pre": 12092
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "QAflies(X,Y) :- \n   flight(\"QA\",X,Z),\n   QAflies(Z,Y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12092,
+           "pre": 12092
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272607518, "end": 21272607520},
+          "source-locator": "/root/souffle-src/tests/swig/java/flights/flights.dl [19:1-19:48]"
+         }
+        }
+       },
+       "runtime": { "start": 21272607518, "end": 21272607527}
+      }
+     },
+     "maxRSS": {
+      "post": 11964,
+      "pre": 11944
+     },
+     "non-recursive-rule": {
+      "QAflies(X,Y) :- \n   flight(\"QA\",X,Y).": {
+       "atom-frequency": {
+        "QAflies(X,Y) :- \n   flight(\"QA\",X,Y).": {
+         "flight": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 11964,
+        "pre": 11944
+       },
+       "num-tuples": 4,
+       "runtime": { "start": 21272607463, "end": 21272607469},
+       "source-locator": "/root/souffle-src/tests/swig/java/flights/flights.dl [18:1-18:34]"
+      }
+     },
+     "num-tuples": 4,
+     "reads": 2,
+     "runtime": { "start": 21272607463, "end": 21272607475},
+     "savetime": { "start": 21272607545, "end": 21272607603},
+     "source-locator": "/root/souffle-src/tests/swig/java/flights/flights.dl [11:7-11:14]"
+    },
+    "QAonly": {
+     "maxRSS": {
+      "post": 12092,
+      "pre": 12092
+     },
+     "non-recursive-rule": {
+      "QAonly(X,Y) :- \n   QAflies(X,Y),\n   !VAflies(X,Y).": {
+       "atom-frequency": {
+        "QAonly(X,Y) :- \n   QAflies(X,Y),\n   !VAflies(X,Y).": {
+         "QAflies": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12092,
+        "pre": 12092
+       },
+       "num-tuples": 3,
+       "runtime": { "start": 21272607680, "end": 21272607681},
+       "source-locator": "/root/souffle-src/tests/swig/java/flights/flights.dl [24:1-24:45]"
+      }
+     },
+     "num-tuples": 3,
+     "reads": 0,
+     "runtime": { "start": 21272607679, "end": 21272607686},
+     "savetime": { "start": 21272607689, "end": 21272607734},
+     "source-locator": "/root/souffle-src/tests/swig/java/flights/flights.dl [15:7-15:13]"
+    },
+    "VAflies": {
+     "iteration": {
+      "0": {
+       "maxRSS": {
+        "post": 12092,
+        "pre": 12092
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "VAflies(X,Y) :- \n   flight(\"VA\",X,Z),\n   VAflies(Z,Y).": {
+         "0": {
+          "atom-frequency": {
+           "@new_VAflies(X,Y) :- \n   flight(\"VA\",X,Z),\n   @delta_VAflies(Z,Y).": {
+            "@delta_VAflies": {
+             "level": 1,
+             "num-tuples": 0
+            },
+            "flight": {
+             "level": 0,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 12092,
+           "pre": 12092
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272607631, "end": 21272607632},
+          "source-locator": "/root/souffle-src/tests/swig/java/flights/flights.dl [22:1-22:48]"
+         }
+        }
+       },
+       "runtime": { "start": 21272607630, "end": 21272607650}
+      }
+     },
+     "maxRSS": {
+      "post": 12092,
+      "pre": 12092
+     },
+     "non-recursive-rule": {
+      "VAflies(X,Y) :- \n   flight(\"VA\",X,Y).": {
+       "atom-frequency": {
+        "VAflies(X,Y) :- \n   flight(\"VA\",X,Y).": {
+         "flight": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12092,
+        "pre": 12092
+       },
+       "num-tuples": 4,
+       "runtime": { "start": 21272607617, "end": 21272607619},
+       "source-locator": "/root/souffle-src/tests/swig/java/flights/flights.dl [21:1-21:34]"
+      }
+     },
+     "num-tuples": 4,
+     "reads": 6,
+     "runtime": { "start": 21272607608, "end": 21272607626},
+     "savetime": { "start": 21272607656, "end": 21272607676},
+     "source-locator": "/root/souffle-src/tests/swig/java/flights/flights.dl [13:7-13:14]"
+    },
+    "flight": {
+     "maxRSS": {
+      "post": 11944,
+      "pre": 11944
+     },
+     "non-recursive-rule": {
+      "flight(\"QA\",\"AU\",\"CHI\").": {
+       "maxRSS": {
+        "post": 11944,
+        "pre": 11944
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 21272607398, "end": 21272607403},
+       "source-locator": "/root/souffle-src/tests/swig/java/flights/flights.dl [26:1-26:25]"
+      },
+      "flight(\"QA\",\"AU\",\"JPN\").": {
+       "maxRSS": {
+        "post": 11944,
+        "pre": 11944
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 21272607411, "end": 21272607412},
+       "source-locator": "/root/souffle-src/tests/swig/java/flights/flights.dl [27:1-27:25]"
+      },
+      "flight(\"QA\",\"JPN\",\"CHI\").": {
+       "maxRSS": {
+        "post": 11944,
+        "pre": 11944
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 21272607420, "end": 21272607420},
+       "source-locator": "/root/souffle-src/tests/swig/java/flights/flights.dl [29:1-29:26]"
+      },
+      "flight(\"QA\",\"JPN\",\"DEN\").": {
+       "maxRSS": {
+        "post": 11944,
+        "pre": 11944
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 21272607416, "end": 21272607417},
+       "source-locator": "/root/souffle-src/tests/swig/java/flights/flights.dl [28:1-28:26]"
+      },
+      "flight(\"VA\",\"AU\",\"CHI\").": {
+       "maxRSS": {
+        "post": 11944,
+        "pre": 11944
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 21272607424, "end": 21272607424},
+       "source-locator": "/root/souffle-src/tests/swig/java/flights/flights.dl [31:1-31:25]"
+      },
+      "flight(\"VA\",\"DEN\",\"ZA\").": {
+       "maxRSS": {
+        "post": 11944,
+        "pre": 11944
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 21272607449, "end": 21272607450},
+       "source-locator": "/root/souffle-src/tests/swig/java/flights/flights.dl [34:1-34:25]"
+      },
+      "flight(\"VA\",\"JPN\",\"DEN\").": {
+       "maxRSS": {
+        "post": 11944,
+        "pre": 11944
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 21272607433, "end": 21272607443},
+       "source-locator": "/root/souffle-src/tests/swig/java/flights/flights.dl [33:1-33:26]"
+      },
+      "flight(\"VA\",\"JPN\",\"ZA\").": {
+       "maxRSS": {
+        "post": 11944,
+        "pre": 11944
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 21272607429, "end": 21272607430},
+       "source-locator": "/root/souffle-src/tests/swig/java/flights/flights.dl [32:1-32:25]"
+      }
+     },
+     "num-tuples": 8,
+     "reads": 0,
+     "runtime": { "start": 21272607397, "end": 21272607455},
+     "source-locator": "/root/souffle-src/tests/swig/java/flights/flights.dl [10:7-10:13]"
+    }
+   },
+   "runtime": { "start": 21272607393, "end": 21272607738},
+   "starttime": { "time": 21272607366},
+   "usage": {
+    "timepoint": {
+     "21272607411": {
+      "maxRSS": 11944,
+      "systemtime": 0,
+      "usertime": 4155
+     },
+     "21272607484": {
+      "maxRSS": 12092,
+      "systemtime": 0,
+      "usertime": 4258
+     },
+     "21272607520": {
+      "maxRSS": 12092,
+      "systemtime": 0,
+      "usertime": 4302
+     },
+     "21272607554": {
+      "maxRSS": 12092,
+      "systemtime": 0,
+      "usertime": 4336
+     },
+     "21272607678": {
+      "maxRSS": 12092,
+      "systemtime": 0,
+      "usertime": 4479
+     },
+     "21272607713": {
+      "maxRSS": 12092,
+      "systemtime": 0,
+      "usertime": 4502
+     }
+    }
+   }
+  }
+ }
+}

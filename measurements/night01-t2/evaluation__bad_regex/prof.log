@@ -1,0 +1,102 @@
+{
+ "root": {
+  "program": {
+   "configuration": {
+    "": "/root/souffle-src/tests/evaluation/bad_regex/bad_regex.dl",
+    "fact-dir": "/root/souffle-src/tests/evaluation/bad_regex/facts",
+    "include-dir": ".",
+    "jobs": "1",
+    "libraries": "functors",
+    "library-dir": ".",
+    "output-dir": "/root/compiler/measurements/night01-t2/evaluation__bad_regex",
+    "profile": "prof.log",
+    "relationCount": "2",
+    "ruleCount": "2",
+    "version": "2.5",
+    "warn": "all",
+    "wno": "none"
+   },
+   "relation": {
+    "A": {
+     "loadtime": { "start": 21272060906, "end": 21272061037},
+     "num-tuples": 2,
+     "reads": 0,
+     "source-locator": "/root/souffle-src/tests/evaluation/bad_regex/bad_regex.dl [1:7-1:8]"
+    },
+    "B": {
+     "maxRSS": {
+      "post": 12820,
+      "pre": 12692
+     },
+     "non-recursive-rule": {
+      "B(x) :- \n   A(x),\n   match(\"fo{2}b.*\", x).": {
+       "atom-frequency": {
+        "B(x) :- \n   A(x),\n   match(\"fo{2}b.*\", x).": {
+         "A": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12820,
+        "pre": 12692
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 21272061065, "end": 21272061088},
+       "source-locator": "/root/souffle-src/tests/evaluation/bad_regex/bad_regex.dl [7:1-7:34]"
+      },
+      "B(x) :- \n   A(x),\n   not_match(\"fo{x}b.*\", x).": {
+       "atom-frequency": {
+        "B(x) :- \n   A(x),\n   not_match(\"fo{x}b.*\", x).": {
+         "A": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12820,
+        "pre": 12820
+       },
+       "num-tuples": 0,
+       "runtime": { "start": 21272061097, "end": 21272061107},
+       "source-locator": "/root/souffle-src/tests/evaluation/bad_regex/bad_regex.dl [8:1-8:35]"
+      }
+     },
+     "num-tuples": 1,
+     "reads": 0,
+     "runtime": { "start": 21272061053, "end": 21272061114},
+     "savetime": { "start": 21272061119, "end": 21272061217},
+     "source-locator": "/root/souffle-src/tests/evaluation/bad_regex/bad_regex.dl [4:7-4:8]"
+    }
+   },
+   "runtime": { "start": 21272060901, "end": 21272061222},
+   "starttime": { "time": 21272060861},
+   "usage": {
+    "timepoint": {
+     "21272060923": {
+      "maxRSS": 12400,
+      "systemtime": 5447,
+      "usertime": 0
+     },
+     "21272061073": {
+      "maxRSS": 12820,
+      "systemtime": 5668,
+      "usertime": 0
+     },
+     "21272061114": {
+      "maxRSS": 12820,
+      "systemtime": 5715,
+      "usertime": 0
+     },
+     "21272061135": {
+      "maxRSS": 12820,
+      "systemtime": 5735,
+      "usertime": 0
+     }
+    }
+   }
+  }
+ }
+}

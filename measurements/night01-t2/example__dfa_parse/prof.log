@@ -1,0 +1,501 @@
+{
+ "root": {
+  "program": {
+   "configuration": {
+    "": "/root/souffle-src/tests/example/dfa_parse/dfa_parse.dl",
+    "fact-dir": "/root/souffle-src/tests/example/dfa_parse/facts",
+    "include-dir": ".",
+    "jobs": "1",
+    "libraries": "functors",
+    "library-dir": ".",
+    "output-dir": "/root/compiler/measurements/night01-t2/example__dfa_parse",
+    "profile": "prof.log",
+    "relationCount": "7",
+    "ruleCount": "7",
+    "version": "2.5",
+    "warn": "all",
+    "wno": "none"
+   },
+   "relation": {
+    "accept": {
+     "maxRSS": {
+      "post": 12260,
+      "pre": 12260
+     },
+     "non-recursive-rule": {
+      "accept(in) :- \n   parse(in,cur, _tmp_0),\n   accepting(cur),\n    _tmp_0 = strlen(in).": {
+       "atom-frequency": {
+        "accept(in) :- \n   parse(in,cur, _tmp_0),\n   accepting(cur),\n    _tmp_0 = strlen(in).": {
+         "parse": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12260,
+        "pre": 12260
+       },
+       "num-tuples": 9,
+       "runtime": { "start": 21272246418, "end": 21272246424},
+       "source-locator": "/root/souffle-src/tests/example/dfa_parse/dfa_parse.dl [36:1-36:56]"
+      }
+     },
+     "num-tuples": 9,
+     "reads": 15,
+     "runtime": { "start": 21272246418, "end": 21272246431},
+     "source-locator": "/root/souffle-src/tests/example/dfa_parse/dfa_parse.dl [35:7-35:13]"
+    },
+    "accepting": {
+     "loadtime": { "start": 21272245874, "end": 21272245943},
+     "num-tuples": 2,
+     "reads": 15,
+     "source-locator": "/root/souffle-src/tests/example/dfa_parse/dfa_parse.dl [16:7-16:16]"
+    },
+    "out": {
+     "maxRSS": {
+      "post": 12260,
+      "pre": 12260
+     },
+     "non-recursive-rule": {
+      "out(s,\"Accept\") :- \n   accept(s).": {
+       "atom-frequency": {
+        "out(s,\"Accept\") :- \n   accept(s).": {
+         "accept": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12260,
+        "pre": 12260
+       },
+       "num-tuples": 9,
+       "runtime": { "start": 21272246435, "end": 21272246437},
+       "source-locator": "/root/souffle-src/tests/example/dfa_parse/dfa_parse.dl [39:1-39:31]"
+      },
+      "out(s,\"Reject\") :- \n   toparse(s),\n   !accept(s).": {
+       "atom-frequency": {
+        "out(s,\"Reject\") :- \n   toparse(s),\n   !accept(s).": {
+         "toparse": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12260,
+        "pre": 12260
+       },
+       "num-tuples": 6,
+       "runtime": { "start": 21272246442, "end": 21272246445},
+       "source-locator": "/root/souffle-src/tests/example/dfa_parse/dfa_parse.dl [40:1-40:44]"
+      }
+     },
+     "num-tuples": 15,
+     "reads": 0,
+     "runtime": { "start": 21272246435, "end": 21272246449},
+     "savetime": { "start": 21272246452, "end": 21272246503},
+     "source-locator": "/root/souffle-src/tests/example/dfa_parse/dfa_parse.dl [38:7-38:10]"
+    },
+    "parse": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 21272246071, "end": 21272246073},
+       "maxRSS": {
+        "post": 12260,
+        "pre": 12132
+       },
+       "num-tuples": 15,
+       "recursive-rule": {
+        "parse(in,new,(i+strlen(diff))) :- \n   parse(in,old,i),\n   transition(old,diff,new),\n   diff = substr(in,i,strlen(diff)).": {
+         "0": {
+          "atom-frequency": {
+           "@new_parse(in,new,(i+strlen(diff))) :- \n   @delta_parse(in,old,i),\n   transition(old,diff,new),\n   diff = substr(in,i,strlen(diff)).": {
+            "@delta_parse": {
+             "level": 0,
+             "num-tuples": 0
+            },
+            "transition": {
+             "level": 1,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 12260,
+           "pre": 12132
+          },
+          "num-tuples": 15,
+          "runtime": { "start": 21272246041, "end": 21272246055},
+          "source-locator": "/root/souffle-src/tests/example/dfa_parse/dfa_parse.dl [28:1-32:25]"
+         }
+        }
+       },
+       "runtime": { "start": 21272246041, "end": 21272246063}
+      },
+      "1": {
+       "copytime": { "start": 21272246122, "end": 21272246125},
+       "maxRSS": {
+        "post": 12260,
+        "pre": 12260
+       },
+       "num-tuples": 15,
+       "recursive-rule": {
+        "parse(in,new,(i+strlen(diff))) :- \n   parse(in,old,i),\n   transition(old,diff,new),\n   diff = substr(in,i,strlen(diff)).": {
+         "0": {
+          "maxRSS": {
+           "post": 12260,
+           "pre": 12260
+          },
+          "num-tuples": 15,
+          "runtime": { "start": 21272246087, "end": 21272246096},
+          "source-locator": "/root/souffle-src/tests/example/dfa_parse/dfa_parse.dl [28:1-32:25]"
+         }
+        }
+       },
+       "runtime": { "start": 21272246077, "end": 21272246104}
+      },
+      "10": {
+       "copytime": { "start": 21272246333, "end": 21272246334},
+       "maxRSS": {
+        "post": 12260,
+        "pre": 12260
+       },
+       "num-tuples": 2,
+       "recursive-rule": {
+        "parse(in,new,(i+strlen(diff))) :- \n   parse(in,old,i),\n   transition(old,diff,new),\n   diff = substr(in,i,strlen(diff)).": {
+         "0": {
+          "maxRSS": {
+           "post": 12260,
+           "pre": 12260
+          },
+          "num-tuples": 2,
+          "runtime": { "start": 21272246319, "end": 21272246322},
+          "source-locator": "/root/souffle-src/tests/example/dfa_parse/dfa_parse.dl [28:1-32:25]"
+         }
+        }
+       },
+       "runtime": { "start": 21272246319, "end": 21272246327}
+      },
+      "11": {
+       "copytime": { "start": 21272246386, "end": 21272246395},
+       "maxRSS": {
+        "post": 12260,
+        "pre": 12260
+       },
+       "num-tuples": 2,
+       "recursive-rule": {
+        "parse(in,new,(i+strlen(diff))) :- \n   parse(in,old,i),\n   transition(old,diff,new),\n   diff = substr(in,i,strlen(diff)).": {
+         "0": {
+          "maxRSS": {
+           "post": 12260,
+           "pre": 12260
+          },
+          "num-tuples": 2,
+          "runtime": { "start": 21272246337, "end": 21272246338},
+          "source-locator": "/root/souffle-src/tests/example/dfa_parse/dfa_parse.dl [28:1-32:25]"
+         }
+        }
+       },
+       "runtime": { "start": 21272246336, "end": 21272246344}
+      },
+      "12": {
+       "maxRSS": {
+        "post": 12260,
+        "pre": 12260
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "parse(in,new,(i+strlen(diff))) :- \n   parse(in,old,i),\n   transition(old,diff,new),\n   diff = substr(in,i,strlen(diff)).": {
+         "0": {
+          "maxRSS": {
+           "post": 12260,
+           "pre": 12260
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272246401, "end": 21272246403},
+          "source-locator": "/root/souffle-src/tests/example/dfa_parse/dfa_parse.dl [28:1-32:25]"
+         }
+        }
+       },
+       "runtime": { "start": 21272246400, "end": 21272246410}
+      },
+      "2": {
+       "copytime": { "start": 21272246151, "end": 21272246154},
+       "maxRSS": {
+        "post": 12260,
+        "pre": 12260
+       },
+       "num-tuples": 15,
+       "recursive-rule": {
+        "parse(in,new,(i+strlen(diff))) :- \n   parse(in,old,i),\n   transition(old,diff,new),\n   diff = substr(in,i,strlen(diff)).": {
+         "0": {
+          "maxRSS": {
+           "post": 12260,
+           "pre": 12260
+          },
+          "num-tuples": 15,
+          "runtime": { "start": 21272246129, "end": 21272246139},
+          "source-locator": "/root/souffle-src/tests/example/dfa_parse/dfa_parse.dl [28:1-32:25]"
+         }
+        }
+       },
+       "runtime": { "start": 21272246129, "end": 21272246146}
+      },
+      "3": {
+       "copytime": { "start": 21272246174, "end": 21272246176},
+       "maxRSS": {
+        "post": 12260,
+        "pre": 12260
+       },
+       "num-tuples": 10,
+       "recursive-rule": {
+        "parse(in,new,(i+strlen(diff))) :- \n   parse(in,old,i),\n   transition(old,diff,new),\n   diff = substr(in,i,strlen(diff)).": {
+         "0": {
+          "maxRSS": {
+           "post": 12260,
+           "pre": 12260
+          },
+          "num-tuples": 10,
+          "runtime": { "start": 21272246156, "end": 21272246164},
+          "source-locator": "/root/souffle-src/tests/example/dfa_parse/dfa_parse.dl [28:1-32:25]"
+         }
+        }
+       },
+       "runtime": { "start": 21272246156, "end": 21272246168}
+      },
+      "4": {
+       "copytime": { "start": 21272246193, "end": 21272246195},
+       "maxRSS": {
+        "post": 12260,
+        "pre": 12260
+       },
+       "num-tuples": 8,
+       "recursive-rule": {
+        "parse(in,new,(i+strlen(diff))) :- \n   parse(in,old,i),\n   transition(old,diff,new),\n   diff = substr(in,i,strlen(diff)).": {
+         "0": {
+          "maxRSS": {
+           "post": 12260,
+           "pre": 12260
+          },
+          "num-tuples": 8,
+          "runtime": { "start": 21272246178, "end": 21272246183},
+          "source-locator": "/root/souffle-src/tests/example/dfa_parse/dfa_parse.dl [28:1-32:25]"
+         }
+        }
+       },
+       "runtime": { "start": 21272246178, "end": 21272246188}
+      },
+      "5": {
+       "copytime": { "start": 21272246222, "end": 21272246227},
+       "maxRSS": {
+        "post": 12260,
+        "pre": 12260
+       },
+       "num-tuples": 6,
+       "recursive-rule": {
+        "parse(in,new,(i+strlen(diff))) :- \n   parse(in,old,i),\n   transition(old,diff,new),\n   diff = substr(in,i,strlen(diff)).": {
+         "0": {
+          "maxRSS": {
+           "post": 12260,
+           "pre": 12260
+          },
+          "num-tuples": 6,
+          "runtime": { "start": 21272246197, "end": 21272246201},
+          "source-locator": "/root/souffle-src/tests/example/dfa_parse/dfa_parse.dl [28:1-32:25]"
+         }
+        }
+       },
+       "runtime": { "start": 21272246197, "end": 21272246206}
+      },
+      "6": {
+       "copytime": { "start": 21272246258, "end": 21272246259},
+       "maxRSS": {
+        "post": 12260,
+        "pre": 12260
+       },
+       "num-tuples": 6,
+       "recursive-rule": {
+        "parse(in,new,(i+strlen(diff))) :- \n   parse(in,old,i),\n   transition(old,diff,new),\n   diff = substr(in,i,strlen(diff)).": {
+         "0": {
+          "maxRSS": {
+           "post": 12260,
+           "pre": 12260
+          },
+          "num-tuples": 6,
+          "runtime": { "start": 21272246230, "end": 21272246235},
+          "source-locator": "/root/souffle-src/tests/example/dfa_parse/dfa_parse.dl [28:1-32:25]"
+         }
+        }
+       },
+       "runtime": { "start": 21272246230, "end": 21272246241}
+      },
+      "7": {
+       "copytime": { "start": 21272246282, "end": 21272246283},
+       "maxRSS": {
+        "post": 12260,
+        "pre": 12260
+       },
+       "num-tuples": 6,
+       "recursive-rule": {
+        "parse(in,new,(i+strlen(diff))) :- \n   parse(in,old,i),\n   transition(old,diff,new),\n   diff = substr(in,i,strlen(diff)).": {
+         "0": {
+          "maxRSS": {
+           "post": 12260,
+           "pre": 12260
+          },
+          "num-tuples": 6,
+          "runtime": { "start": 21272246263, "end": 21272246268},
+          "source-locator": "/root/souffle-src/tests/example/dfa_parse/dfa_parse.dl [28:1-32:25]"
+         }
+        }
+       },
+       "runtime": { "start": 21272246263, "end": 21272246275}
+      },
+      "8": {
+       "copytime": { "start": 21272246300, "end": 21272246301},
+       "maxRSS": {
+        "post": 12260,
+        "pre": 12260
+       },
+       "num-tuples": 5,
+       "recursive-rule": {
+        "parse(in,new,(i+strlen(diff))) :- \n   parse(in,old,i),\n   transition(old,diff,new),\n   diff = substr(in,i,strlen(diff)).": {
+         "0": {
+          "maxRSS": {
+           "post": 12260,
+           "pre": 12260
+          },
+          "num-tuples": 5,
+          "runtime": { "start": 21272246286, "end": 21272246289},
+          "source-locator": "/root/souffle-src/tests/example/dfa_parse/dfa_parse.dl [28:1-32:25]"
+         }
+        }
+       },
+       "runtime": { "start": 21272246285, "end": 21272246294}
+      },
+      "9": {
+       "copytime": { "start": 21272246316, "end": 21272246317},
+       "maxRSS": {
+        "post": 12260,
+        "pre": 12260
+       },
+       "num-tuples": 5,
+       "recursive-rule": {
+        "parse(in,new,(i+strlen(diff))) :- \n   parse(in,old,i),\n   transition(old,diff,new),\n   diff = substr(in,i,strlen(diff)).": {
+         "0": {
+          "maxRSS": {
+           "post": 12260,
+           "pre": 12260
+          },
+          "num-tuples": 5,
+          "runtime": { "start": 21272246303, "end": 21272246306},
+          "source-locator": "/root/souffle-src/tests/example/dfa_parse/dfa_parse.dl [28:1-32:25]"
+         }
+        }
+       },
+       "runtime": { "start": 21272246303, "end": 21272246311}
+      }
+     },
+     "maxRSS": {
+      "post": 12132,
+      "pre": 12004
+     },
+     "non-recursive-rule": {
+      "parse(in,cur,0) :- \n   toparse(in),\n   start(cur).": {
+       "atom-frequency": {
+        "parse(in,cur,0) :- \n   toparse(in),\n   start(cur).": {
+         "start": {
+          "level": 1,
+          "num-tuples": 0
+         },
+         "toparse": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12132,
+        "pre": 12004
+       },
+       "num-tuples": 15,
+       "runtime": { "start": 21272246024, "end": 21272246028},
+       "source-locator": "/root/souffle-src/tests/example/dfa_parse/dfa_parse.dl [27:1-27:44]"
+      }
+     },
+     "num-tuples": 15,
+     "reads": 95,
+     "runtime": { "start": 21272246024, "end": 21272246035},
+     "source-locator": "/root/souffle-src/tests/example/dfa_parse/dfa_parse.dl [26:7-26:12]"
+    },
+    "start": {
+     "loadtime": { "start": 21272245950, "end": 21272245974},
+     "num-tuples": 1,
+     "reads": 0,
+     "source-locator": "/root/souffle-src/tests/example/dfa_parse/dfa_parse.dl [19:7-19:12]"
+    },
+    "toparse": {
+     "loadtime": { "start": 21272245981, "end": 21272245994},
+     "num-tuples": 15,
+     "reads": 0,
+     "source-locator": "/root/souffle-src/tests/example/dfa_parse/dfa_parse.dl [22:7-22:14]"
+    },
+    "transition": {
+     "loadtime": { "start": 21272245998, "end": 21272246019},
+     "num-tuples": 23,
+     "reads": 0,
+     "source-locator": "/root/souffle-src/tests/example/dfa_parse/dfa_parse.dl [13:7-13:17]"
+    }
+   },
+   "runtime": { "start": 21272245869, "end": 21272246506},
+   "starttime": { "time": 21272245830},
+   "usage": {
+    "timepoint": {
+     "21272245908": {
+      "maxRSS": 11728,
+      "systemtime": 0,
+      "usertime": 4493
+     },
+     "21272246067": {
+      "maxRSS": 12260,
+      "systemtime": 0,
+      "usertime": 4724
+     },
+     "21272246090": {
+      "maxRSS": 12260,
+      "systemtime": 0,
+      "usertime": 4755
+     },
+     "21272246192": {
+      "maxRSS": 12260,
+      "systemtime": 0,
+      "usertime": 4871
+     },
+     "21272246228": {
+      "maxRSS": 12260,
+      "systemtime": 0,
+      "usertime": 4918
+     },
+     "21272246332": {
+      "maxRSS": 12260,
+      "systemtime": 0,
+      "usertime": 5035
+     },
+     "21272246367": {
+      "maxRSS": 12260,
+      "systemtime": 0,
+      "usertime": 5071
+     },
+     "21272246476": {
+      "maxRSS": 12260,
+      "systemtime": 0,
+      "usertime": 5184
+     }
+    }
+   }
+  }
+ }
+}

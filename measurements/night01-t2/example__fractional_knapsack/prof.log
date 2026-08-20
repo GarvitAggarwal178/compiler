@@ -1,0 +1,539 @@
+{
+ "root": {
+  "program": {
+   "configuration": {
+    "": "/root/souffle-src/tests/example/fractional_knapsack/fractional_knapsack.dl",
+    "fact-dir": "/root/souffle-src/tests/example/fractional_knapsack/facts",
+    "include-dir": ".",
+    "jobs": "1",
+    "libraries": "functors",
+    "library-dir": ".",
+    "output-dir": "/root/compiler/measurements/night01-t2/example__fractional_knapsack",
+    "profile": "prof.log",
+    "relationCount": "9",
+    "ruleCount": "15",
+    "version": "2.5",
+    "warn": "all",
+    "wno": "none"
+   },
+   "relation": {
+    "capacity": {
+     "loadtime": { "start": 21272276200, "end": 21272276286},
+     "num-tuples": 1,
+     "reads": 0,
+     "source-locator": "/root/souffle-src/tests/example/fractional_knapsack/fractional_knapsack.dl [10:7-10:15]"
+    },
+    "first": {
+     "maxRSS": {
+      "post": 12588,
+      "pre": 12588
+     },
+     "non-recursive-rule": {
+      "first(value,weight) :- \n   item(value,weight),\n   !next(_,_,value,weight).": {
+       "atom-frequency": {
+        "first(value,weight) :- \n   item(value,weight),\n   !next(_,_,value,weight).": {
+         "item": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12588,
+        "pre": 12588
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 21272276458, "end": 21272276460},
+       "source-locator": "/root/souffle-src/tests/example/fractional_knapsack/fractional_knapsack.dl [27:1-27:68]"
+      }
+     },
+     "num-tuples": 1,
+     "reads": 0,
+     "runtime": { "start": 21272276458, "end": 21272276465},
+     "source-locator": "/root/souffle-src/tests/example/fractional_knapsack/fractional_knapsack.dl [19:7-19:12]"
+    },
+    "fractional_knapsack": {
+     "maxRSS": {
+      "post": 12716,
+      "pre": 12716
+     },
+     "non-recursive-rule": {
+      "fractional_knapsack(val) :- \n   knapsack_iteration(_,-1,_,val).": {
+       "atom-frequency": {
+        "fractional_knapsack(val) :- \n   knapsack_iteration(_,-1,_,val).": {
+         "knapsack_iteration": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12716,
+        "pre": 12716
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 21272276702, "end": 21272276703},
+       "source-locator": "/root/souffle-src/tests/example/fractional_knapsack/fractional_knapsack.dl [67:1-67:60]"
+      }
+     },
+     "num-tuples": 1,
+     "reads": 0,
+     "runtime": { "start": 21272276702, "end": 21272276709},
+     "savetime": { "start": 21272276712, "end": 21272276790},
+     "source-locator": "/root/souffle-src/tests/example/fractional_knapsack/fractional_knapsack.dl [64:7-64:26]"
+    },
+    "item": {
+     "loadtime": { "start": 21272276294, "end": 21272276323},
+     "num-tuples": 3,
+     "reads": 0,
+     "source-locator": "/root/souffle-src/tests/example/fractional_knapsack/fractional_knapsack.dl [13:7-13:11]"
+    },
+    "item_array": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 21272276501, "end": 21272276502},
+       "maxRSS": {
+        "post": 12716,
+        "pre": 12588
+       },
+       "num-tuples": 1,
+       "recursive-rule": {
+        "item_array((i+1),[v2,w2]) :- \n   item_array(i,[v1,w1]),\n   next(v1,w1,v2,w2).": {
+         "0": {
+          "atom-frequency": {
+           "@new_item_array((i+1),[v2,w2]) :- \n   @delta_item_array(i,[v1,w1]),\n   next(v1,w1,v2,w2).": {
+            "@delta_item_array": {
+             "level": 0,
+             "num-tuples": 0
+            },
+            "next": {
+             "level": 2,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 12716,
+           "pre": 12588
+          },
+          "num-tuples": 1,
+          "runtime": { "start": 21272276482, "end": 21272276486},
+          "source-locator": "/root/souffle-src/tests/example/fractional_knapsack/fractional_knapsack.dl [45:1-45:69]"
+         }
+        }
+       },
+       "runtime": { "start": 21272276481, "end": 21272276493}
+      },
+      "1": {
+       "copytime": { "start": 21272276533, "end": 21272276534},
+       "maxRSS": {
+        "post": 12716,
+        "pre": 12716
+       },
+       "num-tuples": 1,
+       "recursive-rule": {
+        "item_array((i+1),[v2,w2]) :- \n   item_array(i,[v1,w1]),\n   next(v1,w1,v2,w2).": {
+         "0": {
+          "maxRSS": {
+           "post": 12716,
+           "pre": 12716
+          },
+          "num-tuples": 1,
+          "runtime": { "start": 21272276508, "end": 21272276510},
+          "source-locator": "/root/souffle-src/tests/example/fractional_knapsack/fractional_knapsack.dl [45:1-45:69]"
+         }
+        }
+       },
+       "runtime": { "start": 21272276505, "end": 21272276515}
+      },
+      "2": {
+       "maxRSS": {
+        "post": 12716,
+        "pre": 12716
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "item_array((i+1),[v2,w2]) :- \n   item_array(i,[v1,w1]),\n   next(v1,w1,v2,w2).": {
+         "0": {
+          "maxRSS": {
+           "post": 12716,
+           "pre": 12716
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272276538, "end": 21272276539},
+          "source-locator": "/root/souffle-src/tests/example/fractional_knapsack/fractional_knapsack.dl [45:1-45:69]"
+         }
+        }
+       },
+       "runtime": { "start": 21272276538, "end": 21272276546}
+      }
+     },
+     "maxRSS": {
+      "post": 12588,
+      "pre": 12588
+     },
+     "non-recursive-rule": {
+      "item_array(0,[v,w]) :- \n   first(v,w).": {
+       "atom-frequency": {
+        "item_array(0,[v,w]) :- \n   first(v,w).": {
+         "first": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12588,
+        "pre": 12588
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 21272276468, "end": 21272276472},
+       "source-locator": "/root/souffle-src/tests/example/fractional_knapsack/fractional_knapsack.dl [44:1-44:35]"
+      }
+     },
+     "num-tuples": 1,
+     "reads": 2,
+     "runtime": { "start": 21272276468, "end": 21272276478},
+     "source-locator": "/root/souffle-src/tests/example/fractional_knapsack/fractional_knapsack.dl [43:7-43:17]"
+    },
+    "item_ratio": {
+     "maxRSS": {
+      "post": 12076,
+      "pre": 12076
+     },
+     "non-recursive-rule": {
+      "item_ratio((value/weight),value,weight) :- \n   item(value,weight).": {
+       "atom-frequency": {
+        "item_ratio((value/weight),value,weight) :- \n   item(value,weight).": {
+         "item": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12076,
+        "pre": 12076
+       },
+       "num-tuples": 3,
+       "runtime": { "start": 21272276341, "end": 21272276346},
+       "source-locator": "/root/souffle-src/tests/example/fractional_knapsack/fractional_knapsack.dl [17:1-17:64]"
+      }
+     },
+     "num-tuples": 3,
+     "reads": 0,
+     "runtime": { "start": 21272276341, "end": 21272276354},
+     "source-locator": "/root/souffle-src/tests/example/fractional_knapsack/fractional_knapsack.dl [16:7-16:17]"
+    },
+    "knapsack_iteration": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 21272276631, "end": 21272276632},
+       "maxRSS": {
+        "post": 12716,
+        "pre": 12716
+       },
+       "num-tuples": 1,
+       "recursive-rule": {
+        "knapsack_iteration([[val,weight],min(cap,weight),rest],(index-1),(cap-min(cap,weight)),(value+((val/weight)*min(cap,weight)))) :- \n   knapsack_iteration(rest,index,cap,value),\n   item_array(index,[val,weight]),\n   index >= 0,\n   cap > 0.": {
+         "0": {
+          "atom-frequency": {
+           "@new_knapsack_iteration([[val,weight],min(cap,weight),rest],(index-1),(cap-min(cap,weight)),(value+((val/weight)*min(cap,weight)))) :- \n   @delta_knapsack_iteration(rest,index,cap,value),\n   item_array(index,[val,weight]),\n   index >= 0,\n   cap > 0.": {
+            "@delta_knapsack_iteration": {
+             "level": 0,
+             "num-tuples": 0
+            },
+            "item_array": {
+             "level": 1,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 12716,
+           "pre": 12716
+          },
+          "num-tuples": 1,
+          "runtime": { "start": 21272276588, "end": 21272276602},
+          "source-locator": "/root/souffle-src/tests/example/fractional_knapsack/fractional_knapsack.dl [55:1-61:10]"
+         }
+        },
+        "knapsack_iteration(list,(index-1),0,value) :- \n   knapsack_iteration(list,index,0,value),\n   index >= 0.": {
+         "0": {
+          "atom-frequency": {
+           "@new_knapsack_iteration(list,(index-1),0,value) :- \n   @delta_knapsack_iteration(list,index,0,value),\n   index >= 0.": {
+            "@delta_knapsack_iteration": {
+             "level": 0,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 12716,
+           "pre": 12716
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272276581, "end": 21272276582},
+          "source-locator": "/root/souffle-src/tests/example/fractional_knapsack/fractional_knapsack.dl [52:1-52:102]"
+         }
+        }
+       },
+       "runtime": { "start": 21272276580, "end": 21272276611}
+      },
+      "1": {
+       "copytime": { "start": 21272276660, "end": 21272276660},
+       "maxRSS": {
+        "post": 12716,
+        "pre": 12716
+       },
+       "num-tuples": 1,
+       "recursive-rule": {
+        "knapsack_iteration([[val,weight],min(cap,weight),rest],(index-1),(cap-min(cap,weight)),(value+((val/weight)*min(cap,weight)))) :- \n   knapsack_iteration(rest,index,cap,value),\n   item_array(index,[val,weight]),\n   index >= 0,\n   cap > 0.": {
+         "0": {
+          "maxRSS": {
+           "post": 12716,
+           "pre": 12716
+          },
+          "num-tuples": 1,
+          "runtime": { "start": 21272276644, "end": 21272276647},
+          "source-locator": "/root/souffle-src/tests/example/fractional_knapsack/fractional_knapsack.dl [55:1-61:10]"
+         }
+        },
+        "knapsack_iteration(list,(index-1),0,value) :- \n   knapsack_iteration(list,index,0,value),\n   index >= 0.": {
+         "0": {
+          "maxRSS": {
+           "post": 12716,
+           "pre": 12716
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272276636, "end": 21272276637},
+          "source-locator": "/root/souffle-src/tests/example/fractional_knapsack/fractional_knapsack.dl [52:1-52:102]"
+         }
+        }
+       },
+       "runtime": { "start": 21272276636, "end": 21272276653}
+      },
+      "2": {
+       "copytime": { "start": 21272276682, "end": 21272276682},
+       "maxRSS": {
+        "post": 12716,
+        "pre": 12716
+       },
+       "num-tuples": 1,
+       "recursive-rule": {
+        "knapsack_iteration([[val,weight],min(cap,weight),rest],(index-1),(cap-min(cap,weight)),(value+((val/weight)*min(cap,weight)))) :- \n   knapsack_iteration(rest,index,cap,value),\n   item_array(index,[val,weight]),\n   index >= 0,\n   cap > 0.": {
+         "0": {
+          "maxRSS": {
+           "post": 12716,
+           "pre": 12716
+          },
+          "num-tuples": 1,
+          "runtime": { "start": 21272276669, "end": 21272276670},
+          "source-locator": "/root/souffle-src/tests/example/fractional_knapsack/fractional_knapsack.dl [55:1-61:10]"
+         }
+        },
+        "knapsack_iteration(list,(index-1),0,value) :- \n   knapsack_iteration(list,index,0,value),\n   index >= 0.": {
+         "0": {
+          "maxRSS": {
+           "post": 12716,
+           "pre": 12716
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272276663, "end": 21272276664},
+          "source-locator": "/root/souffle-src/tests/example/fractional_knapsack/fractional_knapsack.dl [52:1-52:102]"
+         }
+        }
+       },
+       "runtime": { "start": 21272276663, "end": 21272276676}
+      },
+      "3": {
+       "maxRSS": {
+        "post": 12716,
+        "pre": 12716
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "knapsack_iteration([[val,weight],min(cap,weight),rest],(index-1),(cap-min(cap,weight)),(value+((val/weight)*min(cap,weight)))) :- \n   knapsack_iteration(rest,index,cap,value),\n   item_array(index,[val,weight]),\n   index >= 0,\n   cap > 0.": {
+         "0": {
+          "maxRSS": {
+           "post": 12716,
+           "pre": 12716
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272276690, "end": 21272276690},
+          "source-locator": "/root/souffle-src/tests/example/fractional_knapsack/fractional_knapsack.dl [55:1-61:10]"
+         }
+        },
+        "knapsack_iteration(list,(index-1),0,value) :- \n   knapsack_iteration(list,index,0,value),\n   index >= 0.": {
+         "0": {
+          "maxRSS": {
+           "post": 12716,
+           "pre": 12716
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272276685, "end": 21272276685},
+          "source-locator": "/root/souffle-src/tests/example/fractional_knapsack/fractional_knapsack.dl [52:1-52:102]"
+         }
+        }
+       },
+       "runtime": { "start": 21272276684, "end": 21272276695}
+      }
+     },
+     "maxRSS": {
+      "post": 12716,
+      "pre": 12716
+     },
+     "non-recursive-rule": {
+      "knapsack_iteration(nil,(@generator_0-1),cap,0) :- \n   capacity(cap),\n   @generator_0 = count : { item_array(+underscore_2,+underscore_3) }.": {
+       "atom-frequency": {
+        "knapsack_iteration(nil,(@generator_0-1),cap,0) :- \n   capacity(cap),\n   @generator_0 = count : { item_array(+underscore_2,+underscore_3) }.": {
+         "capacity": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12716,
+        "pre": 12716
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 21272276565, "end": 21272276567},
+       "source-locator": "/root/souffle-src/tests/example/fractional_knapsack/fractional_knapsack.dl [49:1-49:79]"
+      }
+     },
+     "num-tuples": 1,
+     "reads": 3,
+     "runtime": { "start": 21272276565, "end": 21272276575},
+     "source-locator": "/root/souffle-src/tests/example/fractional_knapsack/fractional_knapsack.dl [48:7-48:25]"
+    },
+    "next": {
+     "maxRSS": {
+      "post": 12588,
+      "pre": 12332
+     },
+     "non-recursive-rule": {
+      "next(v1,w1,v2,@generator_1) :- \n   item_ratio(r1,v1,w1),\n   item_ratio(@generator_0,v2,@generator_1),\n   !next_candidate(v1,w1,_,_),\n   @generator_0 = min r0 : { item_ratio(r0,+underscore_4,+underscore_5),r0 > r1 },\n   @generator_1 = min w : { item_ratio(@generator_0,+underscore_6,w),@generator_0 = @generator_0,w >= 0 }.": {
+       "atom-frequency": {
+        "next(v1,w1,v2,@generator_1) :- \n   item_ratio(r1,v1,w1),\n   item_ratio(@generator_0,v2,@generator_1),\n   !next_candidate(v1,w1,_,_),\n   @generator_0 = min r0 : { item_ratio(r0,+underscore_4,+underscore_5),r0 > r1 },\n   @generator_1 = min w : { item_ratio(@generator_0,+underscore_6,w),@generator_0 = @generator_0,w >= 0 }.": {
+         "item_ratio": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12588,
+        "pre": 12332
+       },
+       "num-tuples": 2,
+       "runtime": { "start": 21272276425, "end": 21272276444},
+       "source-locator": "/root/souffle-src/tests/example/fractional_knapsack/fractional_knapsack.dl [35:1-38:64]"
+      },
+      "next(v1,w1,v2,w2) :- \n   next_candidate(v1,w1,v2,w2).": {
+       "atom-frequency": {
+        "next(v1,w1,v2,w2) :- \n   next_candidate(v1,w1,v2,w2).": {
+         "next_candidate": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12332,
+        "pre": 12332
+       },
+       "num-tuples": 0,
+       "runtime": { "start": 21272276416, "end": 21272276417},
+       "source-locator": "/root/souffle-src/tests/example/fractional_knapsack/fractional_knapsack.dl [40:1-40:50]"
+      }
+     },
+     "num-tuples": 2,
+     "reads": 3,
+     "runtime": { "start": 21272276406, "end": 21272276453},
+     "source-locator": "/root/souffle-src/tests/example/fractional_knapsack/fractional_knapsack.dl [23:7-23:11]"
+    },
+    "next_candidate": {
+     "maxRSS": {
+      "post": 12332,
+      "pre": 12076
+     },
+     "non-recursive-rule": {
+      "next_candidate(v1,w1,v2,@generator_0) :- \n   item_ratio(r1,v1,w1),\n   item_ratio(r1,v2,@generator_0),\n   @generator_0 = min w : { item_ratio(r1,+underscore_7,w),r1 = r1,w > w1 }.": {
+       "atom-frequency": {
+        "next_candidate(v1,w1,v2,@generator_0) :- \n   item_ratio(r1,v1,w1),\n   item_ratio(r1,v2,@generator_0),\n   @generator_0 = min w : { item_ratio(r1,+underscore_7,w),r1 = r1,w > w1 }.": {
+         "item_ratio": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12332,
+        "pre": 12076
+       },
+       "num-tuples": 0,
+       "runtime": { "start": 21272276359, "end": 21272276393},
+       "source-locator": "/root/souffle-src/tests/example/fractional_knapsack/fractional_knapsack.dl [32:1-32:127]"
+      }
+     },
+     "num-tuples": 0,
+     "reads": 3,
+     "runtime": { "start": 21272276359, "end": 21272276402},
+     "source-locator": "/root/souffle-src/tests/example/fractional_knapsack/fractional_knapsack.dl [24:7-24:21]"
+    }
+   },
+   "runtime": { "start": 21272276195, "end": 21272276793},
+   "starttime": { "time": 21272276155},
+   "usage": {
+    "timepoint": {
+     "21272276194": {
+      "maxRSS": 11796,
+      "systemtime": 2632,
+      "usertime": 5264
+     },
+     "21272276371": {
+      "maxRSS": 12332,
+      "systemtime": 2762,
+      "usertime": 5525
+     },
+     "21272276497": {
+      "maxRSS": 12716,
+      "systemtime": 2812,
+      "usertime": 5625
+     },
+     "21272276512": {
+      "maxRSS": 12716,
+      "systemtime": 2821,
+      "usertime": 5643
+     },
+     "21272276540": {
+      "maxRSS": 12716,
+      "systemtime": 2833,
+      "usertime": 5666
+     },
+     "21272276575": {
+      "maxRSS": 12716,
+      "systemtime": 2848,
+      "usertime": 5696
+     },
+     "21272276581": {
+      "maxRSS": 12716,
+      "systemtime": 2852,
+      "usertime": 5704
+     },
+     "21272276606": {
+      "maxRSS": 12716,
+      "systemtime": 2861,
+      "usertime": 5723
+     },
+     "21272276712": {
+      "maxRSS": 12716,
+      "systemtime": 2903,
+      "usertime": 5806
+     }
+    }
+   }
+  }
+ }
+}

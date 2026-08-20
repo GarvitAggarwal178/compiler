@@ -1,0 +1,218 @@
+{
+ "root": {
+  "program": {
+   "configuration": {
+    "": "/root/souffle-src/tests/evaluation/neg3/neg3.dl",
+    "fact-dir": "/root/souffle-src/tests/evaluation/neg3",
+    "include-dir": ".",
+    "jobs": "1",
+    "libraries": "functors",
+    "library-dir": ".",
+    "output-dir": "/root/compiler/measurements/night01-t2/evaluation__neg3",
+    "profile": "prof.log",
+    "relationCount": "3",
+    "ruleCount": "8",
+    "version": "2.5",
+    "warn": "all",
+    "wno": "none"
+   },
+   "relation": {
+    "X": {
+     "maxRSS": {
+      "post": 11940,
+      "pre": 11812
+     },
+     "non-recursive-rule": {
+      "X(\"a\",\"b\").": {
+       "maxRSS": {
+        "post": 11940,
+        "pre": 11812
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 21272184405, "end": 21272184409},
+       "source-locator": "/root/souffle-src/tests/evaluation/neg3/neg3.dl [15:1-15:12]"
+      },
+      "X(\"b\",\"c\").": {
+       "maxRSS": {
+        "post": 11940,
+        "pre": 11940
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 21272184417, "end": 21272184418},
+       "source-locator": "/root/souffle-src/tests/evaluation/neg3/neg3.dl [16:1-16:12]"
+      },
+      "X(\"c\",\"d\").": {
+       "maxRSS": {
+        "post": 11940,
+        "pre": 11940
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 21272184422, "end": 21272184422},
+       "source-locator": "/root/souffle-src/tests/evaluation/neg3/neg3.dl [17:1-17:12]"
+      }
+     },
+     "num-tuples": 3,
+     "reads": 6,
+     "runtime": { "start": 21272184405, "end": 21272184426},
+     "savetime": { "start": 21272184430, "end": 21272184516},
+     "source-locator": "/root/souffle-src/tests/evaluation/neg3/neg3.dl [3:7-3:8]"
+    },
+    "Y": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 21272184566, "end": 21272184567},
+       "maxRSS": {
+        "post": 12068,
+        "pre": 11940
+       },
+       "num-tuples": 2,
+       "recursive-rule": {
+        "Y(a,c) :- \n   X(a,b),\n   Y(b,c).": {
+         "0": {
+          "atom-frequency": {
+           "@new_Y(a,c) :- \n   X(a,b),\n   @delta_Y(b,c).": {
+            "@delta_Y": {
+             "level": 1,
+             "num-tuples": 0
+            },
+            "X": {
+             "level": 0,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 12068,
+           "pre": 11940
+          },
+          "num-tuples": 2,
+          "runtime": { "start": 21272184546, "end": 21272184552},
+          "source-locator": "/root/souffle-src/tests/evaluation/neg3/neg3.dl [12:1-12:26]"
+         }
+        }
+       },
+       "runtime": { "start": 21272184545, "end": 21272184559}
+      },
+      "1": {
+       "copytime": { "start": 21272184582, "end": 21272184582},
+       "maxRSS": {
+        "post": 12068,
+        "pre": 12068
+       },
+       "num-tuples": 1,
+       "recursive-rule": {
+        "Y(a,c) :- \n   X(a,b),\n   Y(b,c).": {
+         "0": {
+          "maxRSS": {
+           "post": 12068,
+           "pre": 12068
+          },
+          "num-tuples": 1,
+          "runtime": { "start": 21272184571, "end": 21272184572},
+          "source-locator": "/root/souffle-src/tests/evaluation/neg3/neg3.dl [12:1-12:26]"
+         }
+        }
+       },
+       "runtime": { "start": 21272184570, "end": 21272184577}
+      },
+      "2": {
+       "maxRSS": {
+        "post": 12068,
+        "pre": 12068
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "Y(a,c) :- \n   X(a,b),\n   Y(b,c).": {
+         "0": {
+          "maxRSS": {
+           "post": 12068,
+           "pre": 12068
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272184585, "end": 21272184586},
+          "source-locator": "/root/souffle-src/tests/evaluation/neg3/neg3.dl [12:1-12:26]"
+         }
+        }
+       },
+       "runtime": { "start": 21272184584, "end": 21272184590}
+      }
+     },
+     "maxRSS": {
+      "post": 11940,
+      "pre": 11940
+     },
+     "non-recursive-rule": {
+      "Y(a,b) :- \n   X(a,b).": {
+       "atom-frequency": {
+        "Y(a,b) :- \n   X(a,b).": {
+         "X": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 11940,
+        "pre": 11940
+       },
+       "num-tuples": 3,
+       "runtime": { "start": 21272184531, "end": 21272184533},
+       "source-locator": "/root/souffle-src/tests/evaluation/neg3/neg3.dl [11:1-11:18]"
+      }
+     },
+     "num-tuples": 3,
+     "reads": 3,
+     "runtime": { "start": 21272184520, "end": 21272184540},
+     "savetime": { "start": 21272184597, "end": 21272184617},
+     "source-locator": "/root/souffle-src/tests/evaluation/neg3/neg3.dl [5:7-5:8]"
+    },
+    "Z": {
+     "maxRSS": {
+      "post": 12068,
+      "pre": 12068
+     },
+     "non-recursive-rule": {
+      "Z(a,b) :- \n   !X(\"a\",b),\n   Y(a,b).": {
+       "atom-frequency": {
+        "Z(a,b) :- \n   !X(\"a\",b),\n   Y(a,b).": {
+         "Y": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12068,
+        "pre": 12068
+       },
+       "num-tuples": 5,
+       "runtime": { "start": 21272184630, "end": 21272184632},
+       "source-locator": "/root/souffle-src/tests/evaluation/neg3/neg3.dl [13:1-13:29]"
+      }
+     },
+     "num-tuples": 5,
+     "reads": 0,
+     "runtime": { "start": 21272184620, "end": 21272184639},
+     "savetime": { "start": 21272184643, "end": 21272184658},
+     "source-locator": "/root/souffle-src/tests/evaluation/neg3/neg3.dl [7:7-7:8]"
+    }
+   },
+   "runtime": { "start": 21272184401, "end": 21272184661},
+   "starttime": { "time": 21272184365},
+   "usage": {
+    "timepoint": {
+     "21272184438": {
+      "maxRSS": 11940,
+      "systemtime": 0,
+      "usertime": 3519
+     },
+     "21272184590": {
+      "maxRSS": 12068,
+      "systemtime": 0,
+      "usertime": 3711
+     }
+    }
+   }
+  }
+ }
+}

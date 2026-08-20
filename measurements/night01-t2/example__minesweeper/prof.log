@@ -1,0 +1,1469 @@
+{
+ "root": {
+  "program": {
+   "configuration": {
+    "": "/root/souffle-src/tests/example/minesweeper/grid.dl",
+    "fact-dir": "/root/souffle-src/tests/example/minesweeper/facts",
+    "include-dir": ".",
+    "jobs": "1",
+    "libraries": "functors",
+    "library-dir": ".",
+    "output-dir": "/root/compiler/measurements/night01-t2/example__minesweeper",
+    "profile": "prof.log",
+    "relationCount": "14",
+    "ruleCount": "24",
+    "version": "2.5",
+    "warn": "all",
+    "wno": "none"
+   },
+   "relation": {
+    "default": {
+     "loadtime": { "start": 21272312126, "end": 21272312213},
+     "num-tuples": 1,
+     "reads": 0,
+     "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [11:7-11:14]"
+    },
+    "down": {
+     "maxRSS": {
+      "post": 13028,
+      "pre": 13028
+     },
+     "non-recursive-rule": {
+      "down(i,j,NULL) :- \n   element(i,j,_),\n   !element((i+1),j,_),\n   default(NULL).": {
+       "atom-frequency": {
+        "down(i,j,NULL) :- \n   element(i,j,_),\n   !element((i+1),j,_),\n   default(NULL).": {
+         "default": {
+          "level": 1,
+          "num-tuples": 0
+         },
+         "element": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 13028,
+        "pre": 13028
+       },
+       "num-tuples": 10,
+       "runtime": { "start": 21272313293, "end": 21272313308},
+       "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [42:1-42:74]"
+      },
+      "down(i,j,x) :- \n   element(i,j,_),\n   element( _tmp_0,j,x),\n    _tmp_0 = (i+1).": {
+       "atom-frequency": {
+        "down(i,j,x) :- \n   element(i,j,_),\n   element( _tmp_0,j,x),\n    _tmp_0 = (i+1).": {
+         "element": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 13028,
+        "pre": 13028
+       },
+       "num-tuples": 90,
+       "runtime": { "start": 21272313316, "end": 21272313343},
+       "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [43:1-43:55]"
+      }
+     },
+     "num-tuples": 100,
+     "reads": 0,
+     "runtime": { "start": 21272313283, "end": 21272313354},
+     "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [41:7-41:11]"
+    },
+    "down_left": {
+     "maxRSS": {
+      "post": 13028,
+      "pre": 13028
+     },
+     "non-recursive-rule": {
+      "down_left(i,j,NULL) :- \n   element(i,j,_),\n   !element((i+1),(j-1),_),\n   default(NULL).": {
+       "atom-frequency": {
+        "down_left(i,j,NULL) :- \n   element(i,j,_),\n   !element((i+1),(j-1),_),\n   default(NULL).": {
+         "default": {
+          "level": 1,
+          "num-tuples": 0
+         },
+         "element": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 13028,
+        "pre": 13028
+       },
+       "num-tuples": 19,
+       "runtime": { "start": 21272313367, "end": 21272313382},
+       "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [67:1-67:81]"
+      },
+      "down_left(i,j,x) :- \n   element(i,j,_),\n   element( _tmp_1, _tmp_2,x),\n    _tmp_1 = (i+1),\n    _tmp_2 = (j-1).": {
+       "atom-frequency": {
+        "down_left(i,j,x) :- \n   element(i,j,_),\n   element( _tmp_1, _tmp_2,x),\n    _tmp_1 = (i+1),\n    _tmp_2 = (j-1).": {
+         "element": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 13028,
+        "pre": 13028
+       },
+       "num-tuples": 81,
+       "runtime": { "start": 21272313390, "end": 21272313418},
+       "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [68:1-68:62]"
+      }
+     },
+     "num-tuples": 100,
+     "reads": 0,
+     "runtime": { "start": 21272313358, "end": 21272313426},
+     "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [66:7-66:16]"
+    },
+    "down_right": {
+     "maxRSS": {
+      "post": 13028,
+      "pre": 13028
+     },
+     "non-recursive-rule": {
+      "down_right(i,j,NULL) :- \n   element(i,j,_),\n   !element((i+1),(j+1),_),\n   default(NULL).": {
+       "atom-frequency": {
+        "down_right(i,j,NULL) :- \n   element(i,j,_),\n   !element((i+1),(j+1),_),\n   default(NULL).": {
+         "default": {
+          "level": 1,
+          "num-tuples": 0
+         },
+         "element": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 13028,
+        "pre": 13028
+       },
+       "num-tuples": 19,
+       "runtime": { "start": 21272313439, "end": 21272313454},
+       "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [72:1-72:82]"
+      },
+      "down_right(i,j,x) :- \n   element(i,j,_),\n   element( _tmp_3, _tmp_4,x),\n    _tmp_3 = (i+1),\n    _tmp_4 = (j+1).": {
+       "atom-frequency": {
+        "down_right(i,j,x) :- \n   element(i,j,_),\n   element( _tmp_3, _tmp_4,x),\n    _tmp_3 = (i+1),\n    _tmp_4 = (j+1).": {
+         "element": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 13028,
+        "pre": 13028
+       },
+       "num-tuples": 81,
+       "runtime": { "start": 21272313462, "end": 21272313501},
+       "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [73:1-73:63]"
+      }
+     },
+     "num-tuples": 100,
+     "reads": 0,
+     "runtime": { "start": 21272313430, "end": 21272313509},
+     "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [71:7-71:17]"
+    },
+    "element": {
+     "maxRSS": {
+      "post": 13028,
+      "pre": 13028
+     },
+     "non-recursive-rule": {
+      "element(i,j,0) :- \n   indices(i,j),\n   !values(i,j,_).": {
+       "atom-frequency": {
+        "element(i,j,0) :- \n   indices(i,j),\n   !values(i,j,_).": {
+         "indices": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 13028,
+        "pre": 13028
+       },
+       "num-tuples": 92,
+       "runtime": { "start": 21272313142, "end": 21272313156},
+       "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [32:1-32:53]"
+      },
+      "element(i,j,x) :- \n   indices(i,j),\n   values(i,j,x).": {
+       "atom-frequency": {
+        "element(i,j,x) :- \n   indices(i,j),\n   values(i,j,x).": {
+         "indices": {
+          "level": 0,
+          "num-tuples": 0
+         },
+         "values": {
+          "level": 1,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 13028,
+        "pre": 13028
+       },
+       "num-tuples": 8,
+       "runtime": { "start": 21272313164, "end": 21272313180},
+       "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [33:1-33:52]"
+      }
+     },
+     "num-tuples": 100,
+     "reads": 800,
+     "runtime": { "start": 21272313132, "end": 21272313188},
+     "savetime": { "start": 21272313193, "end": 21272313278},
+     "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [30:7-30:14]"
+    },
+    "indices": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 21272312345, "end": 21272312355},
+       "maxRSS": {
+        "post": 12900,
+        "pre": 12772
+       },
+       "num-tuples": 2,
+       "recursive-rule": {
+        "indices((i+1),j) :- \n   indices(i,j),\n   parameters(I,J),\n   i >= 0,\n   (i+1) < I,\n   j >= 0,\n   j < J.": {
+         "0": {
+          "atom-frequency": {
+           "@new_indices((i+1),j) :- \n   @delta_indices(i,j),\n   parameters(I,J),\n   i >= 0,\n   (i+1) < I,\n   j >= 0,\n   j < J.": {
+            "@delta_indices": {
+             "level": 0,
+             "num-tuples": 0
+            },
+            "parameters": {
+             "level": 1,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 12900,
+           "pre": 12772
+          },
+          "num-tuples": 1,
+          "runtime": { "start": 21272312312, "end": 21272312321},
+          "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [26:1-26:84]"
+         }
+        },
+        "indices(i,(j+1)) :- \n   indices(i,j),\n   parameters(I,J),\n   i >= 0,\n   i < I,\n   j >= 0,\n   (j+1) < J.": {
+         "0": {
+          "atom-frequency": {
+           "@new_indices(i,(j+1)) :- \n   @delta_indices(i,j),\n   parameters(I,J),\n   i >= 0,\n   i < I,\n   j >= 0,\n   (j+1) < J.": {
+            "@delta_indices": {
+             "level": 0,
+             "num-tuples": 0
+            },
+            "parameters": {
+             "level": 1,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 12900,
+           "pre": 12900
+          },
+          "num-tuples": 1,
+          "runtime": { "start": 21272312328, "end": 21272312332},
+          "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [27:1-27:84]"
+         }
+        }
+       },
+       "runtime": { "start": 21272312311, "end": 21272312337}
+      },
+      "1": {
+       "copytime": { "start": 21272312397, "end": 21272312398},
+       "maxRSS": {
+        "post": 12900,
+        "pre": 12900
+       },
+       "num-tuples": 3,
+       "recursive-rule": {
+        "indices((i+1),j) :- \n   indices(i,j),\n   parameters(I,J),\n   i >= 0,\n   (i+1) < I,\n   j >= 0,\n   j < J.": {
+         "0": {
+          "maxRSS": {
+           "post": 12900,
+           "pre": 12900
+          },
+          "num-tuples": 2,
+          "runtime": { "start": 21272312362, "end": 21272312364},
+          "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [26:1-26:84]"
+         }
+        },
+        "indices(i,(j+1)) :- \n   indices(i,j),\n   parameters(I,J),\n   i >= 0,\n   i < I,\n   j >= 0,\n   (j+1) < J.": {
+         "0": {
+          "maxRSS": {
+           "post": 12900,
+           "pre": 12900
+          },
+          "num-tuples": 1,
+          "runtime": { "start": 21272312371, "end": 21272312373},
+          "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [27:1-27:84]"
+         }
+        }
+       },
+       "runtime": { "start": 21272312361, "end": 21272312378}
+      },
+      "10": {
+       "copytime": { "start": 21272312736, "end": 21272312737},
+       "maxRSS": {
+        "post": 13028,
+        "pre": 13028
+       },
+       "num-tuples": 8,
+       "recursive-rule": {
+        "indices((i+1),j) :- \n   indices(i,j),\n   parameters(I,J),\n   i >= 0,\n   (i+1) < I,\n   j >= 0,\n   j < J.": {
+         "0": {
+          "maxRSS": {
+           "post": 13028,
+           "pre": 13028
+          },
+          "num-tuples": 8,
+          "runtime": { "start": 21272312695, "end": 21272312699},
+          "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [26:1-26:84]"
+         }
+        },
+        "indices(i,(j+1)) :- \n   indices(i,j),\n   parameters(I,J),\n   i >= 0,\n   i < I,\n   j >= 0,\n   (j+1) < J.": {
+         "0": {
+          "maxRSS": {
+           "post": 13028,
+           "pre": 13028
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272312707, "end": 21272312720},
+          "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [27:1-27:84]"
+         }
+        }
+       },
+       "runtime": { "start": 21272312695, "end": 21272312728}
+      },
+      "11": {
+       "copytime": { "start": 21272312803, "end": 21272312804},
+       "maxRSS": {
+        "post": 13028,
+        "pre": 13028
+       },
+       "num-tuples": 7,
+       "recursive-rule": {
+        "indices((i+1),j) :- \n   indices(i,j),\n   parameters(I,J),\n   i >= 0,\n   (i+1) < I,\n   j >= 0,\n   j < J.": {
+         "0": {
+          "maxRSS": {
+           "post": 13028,
+           "pre": 13028
+          },
+          "num-tuples": 7,
+          "runtime": { "start": 21272312749, "end": 21272312753},
+          "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [26:1-26:84]"
+         }
+        },
+        "indices(i,(j+1)) :- \n   indices(i,j),\n   parameters(I,J),\n   i >= 0,\n   i < I,\n   j >= 0,\n   (j+1) < J.": {
+         "0": {
+          "maxRSS": {
+           "post": 13028,
+           "pre": 13028
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272312762, "end": 21272312775},
+          "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [27:1-27:84]"
+         }
+        }
+       },
+       "runtime": { "start": 21272312740, "end": 21272312784}
+      },
+      "12": {
+       "copytime": { "start": 21272312844, "end": 21272312845},
+       "maxRSS": {
+        "post": 13028,
+        "pre": 13028
+       },
+       "num-tuples": 6,
+       "recursive-rule": {
+        "indices((i+1),j) :- \n   indices(i,j),\n   parameters(I,J),\n   i >= 0,\n   (i+1) < I,\n   j >= 0,\n   j < J.": {
+         "0": {
+          "maxRSS": {
+           "post": 13028,
+           "pre": 13028
+          },
+          "num-tuples": 6,
+          "runtime": { "start": 21272312807, "end": 21272312811},
+          "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [26:1-26:84]"
+         }
+        },
+        "indices(i,(j+1)) :- \n   indices(i,j),\n   parameters(I,J),\n   i >= 0,\n   i < I,\n   j >= 0,\n   (j+1) < J.": {
+         "0": {
+          "maxRSS": {
+           "post": 13028,
+           "pre": 13028
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272312818, "end": 21272312821},
+          "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [27:1-27:84]"
+         }
+        }
+       },
+       "runtime": { "start": 21272312807, "end": 21272312826}
+      },
+      "13": {
+       "copytime": { "start": 21272312873, "end": 21272312874},
+       "maxRSS": {
+        "post": 13028,
+        "pre": 13028
+       },
+       "num-tuples": 5,
+       "recursive-rule": {
+        "indices((i+1),j) :- \n   indices(i,j),\n   parameters(I,J),\n   i >= 0,\n   (i+1) < I,\n   j >= 0,\n   j < J.": {
+         "0": {
+          "maxRSS": {
+           "post": 13028,
+           "pre": 13028
+          },
+          "num-tuples": 5,
+          "runtime": { "start": 21272312849, "end": 21272312852},
+          "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [26:1-26:84]"
+         }
+        },
+        "indices(i,(j+1)) :- \n   indices(i,j),\n   parameters(I,J),\n   i >= 0,\n   i < I,\n   j >= 0,\n   (j+1) < J.": {
+         "0": {
+          "maxRSS": {
+           "post": 13028,
+           "pre": 13028
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272312858, "end": 21272312861},
+          "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [27:1-27:84]"
+         }
+        }
+       },
+       "runtime": { "start": 21272312848, "end": 21272312867}
+      },
+      "14": {
+       "copytime": { "start": 21272312894, "end": 21272312895},
+       "maxRSS": {
+        "post": 13028,
+        "pre": 13028
+       },
+       "num-tuples": 4,
+       "recursive-rule": {
+        "indices((i+1),j) :- \n   indices(i,j),\n   parameters(I,J),\n   i >= 0,\n   (i+1) < I,\n   j >= 0,\n   j < J.": {
+         "0": {
+          "maxRSS": {
+           "post": 13028,
+           "pre": 13028
+          },
+          "num-tuples": 4,
+          "runtime": { "start": 21272312877, "end": 21272312878},
+          "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [26:1-26:84]"
+         }
+        },
+        "indices(i,(j+1)) :- \n   indices(i,j),\n   parameters(I,J),\n   i >= 0,\n   i < I,\n   j >= 0,\n   (j+1) < J.": {
+         "0": {
+          "maxRSS": {
+           "post": 13028,
+           "pre": 13028
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272312883, "end": 21272312884},
+          "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [27:1-27:84]"
+         }
+        }
+       },
+       "runtime": { "start": 21272312876, "end": 21272312889}
+      },
+      "15": {
+       "copytime": { "start": 21272312914, "end": 21272312914},
+       "maxRSS": {
+        "post": 13028,
+        "pre": 13028
+       },
+       "num-tuples": 3,
+       "recursive-rule": {
+        "indices((i+1),j) :- \n   indices(i,j),\n   parameters(I,J),\n   i >= 0,\n   (i+1) < I,\n   j >= 0,\n   j < J.": {
+         "0": {
+          "maxRSS": {
+           "post": 13028,
+           "pre": 13028
+          },
+          "num-tuples": 3,
+          "runtime": { "start": 21272312897, "end": 21272312899},
+          "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [26:1-26:84]"
+         }
+        },
+        "indices(i,(j+1)) :- \n   indices(i,j),\n   parameters(I,J),\n   i >= 0,\n   i < I,\n   j >= 0,\n   (j+1) < J.": {
+         "0": {
+          "maxRSS": {
+           "post": 13028,
+           "pre": 13028
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272312903, "end": 21272312904},
+          "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [27:1-27:84]"
+         }
+        }
+       },
+       "runtime": { "start": 21272312897, "end": 21272312908}
+      },
+      "16": {
+       "copytime": { "start": 21272312934, "end": 21272312935},
+       "maxRSS": {
+        "post": 13028,
+        "pre": 13028
+       },
+       "num-tuples": 2,
+       "recursive-rule": {
+        "indices((i+1),j) :- \n   indices(i,j),\n   parameters(I,J),\n   i >= 0,\n   (i+1) < I,\n   j >= 0,\n   j < J.": {
+         "0": {
+          "maxRSS": {
+           "post": 13028,
+           "pre": 13028
+          },
+          "num-tuples": 2,
+          "runtime": { "start": 21272312917, "end": 21272312918},
+          "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [26:1-26:84]"
+         }
+        },
+        "indices(i,(j+1)) :- \n   indices(i,j),\n   parameters(I,J),\n   i >= 0,\n   i < I,\n   j >= 0,\n   (j+1) < J.": {
+         "0": {
+          "maxRSS": {
+           "post": 13028,
+           "pre": 13028
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272312922, "end": 21272312924},
+          "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [27:1-27:84]"
+         }
+        }
+       },
+       "runtime": { "start": 21272312917, "end": 21272312928}
+      },
+      "17": {
+       "copytime": { "start": 21272312980, "end": 21272312981},
+       "maxRSS": {
+        "post": 13028,
+        "pre": 13028
+       },
+       "num-tuples": 1,
+       "recursive-rule": {
+        "indices((i+1),j) :- \n   indices(i,j),\n   parameters(I,J),\n   i >= 0,\n   (i+1) < I,\n   j >= 0,\n   j < J.": {
+         "0": {
+          "maxRSS": {
+           "post": 13028,
+           "pre": 13028
+          },
+          "num-tuples": 1,
+          "runtime": { "start": 21272312938, "end": 21272312939},
+          "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [26:1-26:84]"
+         }
+        },
+        "indices(i,(j+1)) :- \n   indices(i,j),\n   parameters(I,J),\n   i >= 0,\n   i < I,\n   j >= 0,\n   (j+1) < J.": {
+         "0": {
+          "maxRSS": {
+           "post": 13028,
+           "pre": 13028
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272312943, "end": 21272312953},
+          "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [27:1-27:84]"
+         }
+        }
+       },
+       "runtime": { "start": 21272312937, "end": 21272312961}
+      },
+      "18": {
+       "maxRSS": {
+        "post": 13028,
+        "pre": 13028
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "indices((i+1),j) :- \n   indices(i,j),\n   parameters(I,J),\n   i >= 0,\n   (i+1) < I,\n   j >= 0,\n   j < J.": {
+         "0": {
+          "maxRSS": {
+           "post": 13028,
+           "pre": 13028
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272312984, "end": 21272312986},
+          "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [26:1-26:84]"
+         }
+        },
+        "indices(i,(j+1)) :- \n   indices(i,j),\n   parameters(I,J),\n   i >= 0,\n   i < I,\n   j >= 0,\n   (j+1) < J.": {
+         "0": {
+          "maxRSS": {
+           "post": 13028,
+           "pre": 13028
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272312992, "end": 21272313004},
+          "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [27:1-27:84]"
+         }
+        }
+       },
+       "runtime": { "start": 21272312984, "end": 21272313014}
+      },
+      "2": {
+       "copytime": { "start": 21272312438, "end": 21272312439},
+       "maxRSS": {
+        "post": 12900,
+        "pre": 12900
+       },
+       "num-tuples": 4,
+       "recursive-rule": {
+        "indices((i+1),j) :- \n   indices(i,j),\n   parameters(I,J),\n   i >= 0,\n   (i+1) < I,\n   j >= 0,\n   j < J.": {
+         "0": {
+          "maxRSS": {
+           "post": 12900,
+           "pre": 12900
+          },
+          "num-tuples": 3,
+          "runtime": { "start": 21272312402, "end": 21272312405},
+          "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [26:1-26:84]"
+         }
+        },
+        "indices(i,(j+1)) :- \n   indices(i,j),\n   parameters(I,J),\n   i >= 0,\n   i < I,\n   j >= 0,\n   (j+1) < J.": {
+         "0": {
+          "maxRSS": {
+           "post": 12900,
+           "pre": 12900
+          },
+          "num-tuples": 1,
+          "runtime": { "start": 21272312411, "end": 21272312423},
+          "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [27:1-27:84]"
+         }
+        }
+       },
+       "runtime": { "start": 21272312402, "end": 21272312431}
+      },
+      "3": {
+       "copytime": { "start": 21272312477, "end": 21272312482},
+       "maxRSS": {
+        "post": 12900,
+        "pre": 12900
+       },
+       "num-tuples": 5,
+       "recursive-rule": {
+        "indices((i+1),j) :- \n   indices(i,j),\n   parameters(I,J),\n   i >= 0,\n   (i+1) < I,\n   j >= 0,\n   j < J.": {
+         "0": {
+          "maxRSS": {
+           "post": 12900,
+           "pre": 12900
+          },
+          "num-tuples": 4,
+          "runtime": { "start": 21272312442, "end": 21272312444},
+          "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [26:1-26:84]"
+         }
+        },
+        "indices(i,(j+1)) :- \n   indices(i,j),\n   parameters(I,J),\n   i >= 0,\n   i < I,\n   j >= 0,\n   (j+1) < J.": {
+         "0": {
+          "maxRSS": {
+           "post": 12900,
+           "pre": 12900
+          },
+          "num-tuples": 1,
+          "runtime": { "start": 21272312449, "end": 21272312461},
+          "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [27:1-27:84]"
+         }
+        }
+       },
+       "runtime": { "start": 21272312442, "end": 21272312469}
+      },
+      "4": {
+       "copytime": { "start": 21272312532, "end": 21272312533},
+       "maxRSS": {
+        "post": 13028,
+        "pre": 13028
+       },
+       "num-tuples": 6,
+       "recursive-rule": {
+        "indices((i+1),j) :- \n   indices(i,j),\n   parameters(I,J),\n   i >= 0,\n   (i+1) < I,\n   j >= 0,\n   j < J.": {
+         "0": {
+          "maxRSS": {
+           "post": 13028,
+           "pre": 13028
+          },
+          "num-tuples": 5,
+          "runtime": { "start": 21272312494, "end": 21272312498},
+          "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [26:1-26:84]"
+         }
+        },
+        "indices(i,(j+1)) :- \n   indices(i,j),\n   parameters(I,J),\n   i >= 0,\n   i < I,\n   j >= 0,\n   (j+1) < J.": {
+         "0": {
+          "maxRSS": {
+           "post": 13028,
+           "pre": 13028
+          },
+          "num-tuples": 1,
+          "runtime": { "start": 21272312506, "end": 21272312508},
+          "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [27:1-27:84]"
+         }
+        }
+       },
+       "runtime": { "start": 21272312485, "end": 21272312513}
+      },
+      "5": {
+       "copytime": { "start": 21272312560, "end": 21272312561},
+       "maxRSS": {
+        "post": 13028,
+        "pre": 13028
+       },
+       "num-tuples": 7,
+       "recursive-rule": {
+        "indices((i+1),j) :- \n   indices(i,j),\n   parameters(I,J),\n   i >= 0,\n   (i+1) < I,\n   j >= 0,\n   j < J.": {
+         "0": {
+          "maxRSS": {
+           "post": 13028,
+           "pre": 13028
+          },
+          "num-tuples": 6,
+          "runtime": { "start": 21272312536, "end": 21272312539},
+          "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [26:1-26:84]"
+         }
+        },
+        "indices(i,(j+1)) :- \n   indices(i,j),\n   parameters(I,J),\n   i >= 0,\n   i < I,\n   j >= 0,\n   (j+1) < J.": {
+         "0": {
+          "maxRSS": {
+           "post": 13028,
+           "pre": 13028
+          },
+          "num-tuples": 1,
+          "runtime": { "start": 21272312546, "end": 21272312550},
+          "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [27:1-27:84]"
+         }
+        }
+       },
+       "runtime": { "start": 21272312536, "end": 21272312554}
+      },
+      "6": {
+       "copytime": { "start": 21272312583, "end": 21272312584},
+       "maxRSS": {
+        "post": 13028,
+        "pre": 13028
+       },
+       "num-tuples": 8,
+       "recursive-rule": {
+        "indices((i+1),j) :- \n   indices(i,j),\n   parameters(I,J),\n   i >= 0,\n   (i+1) < I,\n   j >= 0,\n   j < J.": {
+         "0": {
+          "maxRSS": {
+           "post": 13028,
+           "pre": 13028
+          },
+          "num-tuples": 7,
+          "runtime": { "start": 21272312563, "end": 21272312565},
+          "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [26:1-26:84]"
+         }
+        },
+        "indices(i,(j+1)) :- \n   indices(i,j),\n   parameters(I,J),\n   i >= 0,\n   i < I,\n   j >= 0,\n   (j+1) < J.": {
+         "0": {
+          "maxRSS": {
+           "post": 13028,
+           "pre": 13028
+          },
+          "num-tuples": 1,
+          "runtime": { "start": 21272312569, "end": 21272312574},
+          "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [27:1-27:84]"
+         }
+        }
+       },
+       "runtime": { "start": 21272312563, "end": 21272312577}
+      },
+      "7": {
+       "copytime": { "start": 21272312605, "end": 21272312606},
+       "maxRSS": {
+        "post": 13028,
+        "pre": 13028
+       },
+       "num-tuples": 9,
+       "recursive-rule": {
+        "indices((i+1),j) :- \n   indices(i,j),\n   parameters(I,J),\n   i >= 0,\n   (i+1) < I,\n   j >= 0,\n   j < J.": {
+         "0": {
+          "maxRSS": {
+           "post": 13028,
+           "pre": 13028
+          },
+          "num-tuples": 8,
+          "runtime": { "start": 21272312587, "end": 21272312589},
+          "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [26:1-26:84]"
+         }
+        },
+        "indices(i,(j+1)) :- \n   indices(i,j),\n   parameters(I,J),\n   i >= 0,\n   i < I,\n   j >= 0,\n   (j+1) < J.": {
+         "0": {
+          "maxRSS": {
+           "post": 13028,
+           "pre": 13028
+          },
+          "num-tuples": 1,
+          "runtime": { "start": 21272312593, "end": 21272312596},
+          "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [27:1-27:84]"
+         }
+        }
+       },
+       "runtime": { "start": 21272312586, "end": 21272312600}
+      },
+      "8": {
+       "copytime": { "start": 21272312628, "end": 21272312629},
+       "maxRSS": {
+        "post": 13028,
+        "pre": 13028
+       },
+       "num-tuples": 10,
+       "recursive-rule": {
+        "indices((i+1),j) :- \n   indices(i,j),\n   parameters(I,J),\n   i >= 0,\n   (i+1) < I,\n   j >= 0,\n   j < J.": {
+         "0": {
+          "maxRSS": {
+           "post": 13028,
+           "pre": 13028
+          },
+          "num-tuples": 9,
+          "runtime": { "start": 21272312608, "end": 21272312611},
+          "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [26:1-26:84]"
+         }
+        },
+        "indices(i,(j+1)) :- \n   indices(i,j),\n   parameters(I,J),\n   i >= 0,\n   i < I,\n   j >= 0,\n   (j+1) < J.": {
+         "0": {
+          "maxRSS": {
+           "post": 13028,
+           "pre": 13028
+          },
+          "num-tuples": 1,
+          "runtime": { "start": 21272312615, "end": 21272312618},
+          "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [27:1-27:84]"
+         }
+        }
+       },
+       "runtime": { "start": 21272312608, "end": 21272312622}
+      },
+      "9": {
+       "copytime": { "start": 21272312679, "end": 21272312689},
+       "maxRSS": {
+        "post": 13028,
+        "pre": 13028
+       },
+       "num-tuples": 9,
+       "recursive-rule": {
+        "indices((i+1),j) :- \n   indices(i,j),\n   parameters(I,J),\n   i >= 0,\n   (i+1) < I,\n   j >= 0,\n   j < J.": {
+         "0": {
+          "maxRSS": {
+           "post": 13028,
+           "pre": 13028
+          },
+          "num-tuples": 9,
+          "runtime": { "start": 21272312640, "end": 21272312644},
+          "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [26:1-26:84]"
+         }
+        },
+        "indices(i,(j+1)) :- \n   indices(i,j),\n   parameters(I,J),\n   i >= 0,\n   i < I,\n   j >= 0,\n   (j+1) < J.": {
+         "0": {
+          "maxRSS": {
+           "post": 13028,
+           "pre": 13028
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272312651, "end": 21272312664},
+          "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [27:1-27:84]"
+         }
+        }
+       },
+       "runtime": { "start": 21272312631, "end": 21272312672}
+      }
+     },
+     "maxRSS": {
+      "post": 12772,
+      "pre": 12596
+     },
+     "non-recursive-rule": {
+      "indices(0,0).": {
+       "maxRSS": {
+        "post": 12772,
+        "pre": 12596
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 21272312293, "end": 21272312296},
+       "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [25:1-25:15]"
+      }
+     },
+     "num-tuples": 1,
+     "reads": 200,
+     "runtime": { "start": 21272312283, "end": 21272312305},
+     "savetime": { "start": 21272313034, "end": 21272313127},
+     "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [23:7-23:14]"
+    },
+    "left": {
+     "maxRSS": {
+      "post": 13028,
+      "pre": 13028
+     },
+     "non-recursive-rule": {
+      "left(i,j,NULL) :- \n   element(i,j,_),\n   !element(i,(j-1),_),\n   default(NULL).": {
+       "atom-frequency": {
+        "left(i,j,NULL) :- \n   element(i,j,_),\n   !element(i,(j-1),_),\n   default(NULL).": {
+         "default": {
+          "level": 1,
+          "num-tuples": 0
+         },
+         "element": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 13028,
+        "pre": 13028
+       },
+       "num-tuples": 10,
+       "runtime": { "start": 21272313523, "end": 21272313536},
+       "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [47:1-47:74]"
+      },
+      "left(i,j,x) :- \n   element(i,j,_),\n   element(i, _tmp_5,x),\n    _tmp_5 = (j-1).": {
+       "atom-frequency": {
+        "left(i,j,x) :- \n   element(i,j,_),\n   element(i, _tmp_5,x),\n    _tmp_5 = (j-1).": {
+         "element": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 13028,
+        "pre": 13028
+       },
+       "num-tuples": 90,
+       "runtime": { "start": 21272313543, "end": 21272313569},
+       "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [48:1-48:55]"
+      }
+     },
+     "num-tuples": 100,
+     "reads": 0,
+     "runtime": { "start": 21272313514, "end": 21272313577},
+     "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [46:7-46:11]"
+    },
+    "neighbourhood": {
+     "maxRSS": {
+      "post": 13284,
+      "pre": 13156
+     },
+     "non-recursive-rule": {
+      "neighbourhood(i,j,ul,u,ur,l,x,r,dl,d,dr) :- \n   up_left(i,j,ul),\n   up(i,j,u),\n   up_right(i,j,ur),\n   left(i,j,l),\n   element(i,j,x),\n   right(i,j,r),\n   down_left(i,j,dl),\n   down(i,j,d),\n   down_right(i,j,dr).": {
+       "atom-frequency": {
+        "neighbourhood(i,j,ul,u,ur,l,x,r,dl,d,dr) :- \n   up_left(i,j,ul),\n   up(i,j,u),\n   up_right(i,j,ur),\n   left(i,j,l),\n   element(i,j,x),\n   right(i,j,r),\n   down_left(i,j,dl),\n   down(i,j,d),\n   down_right(i,j,dr).": {
+         "down": {
+          "level": 7,
+          "num-tuples": 0
+         },
+         "down_left": {
+          "level": 6,
+          "num-tuples": 0
+         },
+         "down_right": {
+          "level": 8,
+          "num-tuples": 0
+         },
+         "element": {
+          "level": 4,
+          "num-tuples": 0
+         },
+         "left": {
+          "level": 3,
+          "num-tuples": 0
+         },
+         "right": {
+          "level": 5,
+          "num-tuples": 0
+         },
+         "up": {
+          "level": 1,
+          "num-tuples": 0
+         },
+         "up_left": {
+          "level": 0,
+          "num-tuples": 0
+         },
+         "up_right": {
+          "level": 2,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 13284,
+        "pre": 13156
+       },
+       "num-tuples": 100,
+       "runtime": { "start": 21272313876, "end": 21272313960},
+       "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [81:1-84:59]"
+      }
+     },
+     "num-tuples": 100,
+     "reads": 0,
+     "runtime": { "start": 21272313867, "end": 21272313971},
+     "savetime": { "start": 21272313977, "end": 21272314048},
+     "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [76:7-76:20]"
+    },
+    "parameters": {
+     "loadtime": { "start": 21272312222, "end": 21272312261},
+     "num-tuples": 1,
+     "reads": 0,
+     "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [15:7-15:17]"
+    },
+    "right": {
+     "maxRSS": {
+      "post": 13156,
+      "pre": 13028
+     },
+     "non-recursive-rule": {
+      "right(i,j,NULL) :- \n   element(i,j,_),\n   !element(i,(j+1),_),\n   default(NULL).": {
+       "atom-frequency": {
+        "right(i,j,NULL) :- \n   element(i,j,_),\n   !element(i,(j+1),_),\n   default(NULL).": {
+         "default": {
+          "level": 1,
+          "num-tuples": 0
+         },
+         "element": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 13028,
+        "pre": 13028
+       },
+       "num-tuples": 10,
+       "runtime": { "start": 21272313593, "end": 21272313604},
+       "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [52:1-52:75]"
+      },
+      "right(i,j,x) :- \n   element(i,j,_),\n   element(i, _tmp_6,x),\n    _tmp_6 = (j+1).": {
+       "atom-frequency": {
+        "right(i,j,x) :- \n   element(i,j,_),\n   element(i, _tmp_6,x),\n    _tmp_6 = (j+1).": {
+         "element": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 13028,
+        "pre": 13028
+       },
+       "num-tuples": 90,
+       "runtime": { "start": 21272313611, "end": 21272313637},
+       "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [53:1-53:56]"
+      }
+     },
+     "num-tuples": 100,
+     "reads": 0,
+     "runtime": { "start": 21272313584, "end": 21272313648},
+     "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [51:7-51:12]"
+    },
+    "up": {
+     "maxRSS": {
+      "post": 13156,
+      "pre": 13156
+     },
+     "non-recursive-rule": {
+      "up(i,j,NULL) :- \n   element(i,j,_),\n   !element((i-1),j,_),\n   default(NULL).": {
+       "atom-frequency": {
+        "up(i,j,NULL) :- \n   element(i,j,_),\n   !element((i-1),j,_),\n   default(NULL).": {
+         "default": {
+          "level": 1,
+          "num-tuples": 0
+         },
+         "element": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 13156,
+        "pre": 13156
+       },
+       "num-tuples": 10,
+       "runtime": { "start": 21272313661, "end": 21272313673},
+       "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [37:1-37:72]"
+      },
+      "up(i,j,x) :- \n   element(i,j,_),\n   element( _tmp_7,j,x),\n    _tmp_7 = (i-1).": {
+       "atom-frequency": {
+        "up(i,j,x) :- \n   element(i,j,_),\n   element( _tmp_7,j,x),\n    _tmp_7 = (i-1).": {
+         "element": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 13156,
+        "pre": 13156
+       },
+       "num-tuples": 90,
+       "runtime": { "start": 21272313683, "end": 21272313710},
+       "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [38:1-38:53]"
+      }
+     },
+     "num-tuples": 100,
+     "reads": 0,
+     "runtime": { "start": 21272313652, "end": 21272313718},
+     "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [36:7-36:9]"
+    },
+    "up_left": {
+     "maxRSS": {
+      "post": 13156,
+      "pre": 13156
+     },
+     "non-recursive-rule": {
+      "up_left(i,j,NULL) :- \n   element(i,j,_),\n   !element((i-1),(j-1),_),\n   default(NULL).": {
+       "atom-frequency": {
+        "up_left(i,j,NULL) :- \n   element(i,j,_),\n   !element((i-1),(j-1),_),\n   default(NULL).": {
+         "default": {
+          "level": 1,
+          "num-tuples": 0
+         },
+         "element": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 13156,
+        "pre": 13156
+       },
+       "num-tuples": 19,
+       "runtime": { "start": 21272313731, "end": 21272313744},
+       "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [57:1-57:79]"
+      },
+      "up_left(i,j,x) :- \n   element(i,j,_),\n   element( _tmp_8, _tmp_9,x),\n    _tmp_8 = (i-1),\n    _tmp_9 = (j-1).": {
+       "atom-frequency": {
+        "up_left(i,j,x) :- \n   element(i,j,_),\n   element( _tmp_8, _tmp_9,x),\n    _tmp_8 = (i-1),\n    _tmp_9 = (j-1).": {
+         "element": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 13156,
+        "pre": 13156
+       },
+       "num-tuples": 81,
+       "runtime": { "start": 21272313762, "end": 21272313788},
+       "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [58:1-58:60]"
+      }
+     },
+     "num-tuples": 100,
+     "reads": 0,
+     "runtime": { "start": 21272313722, "end": 21272313796},
+     "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [56:7-56:14]"
+    },
+    "up_right": {
+     "maxRSS": {
+      "post": 13156,
+      "pre": 13156
+     },
+     "non-recursive-rule": {
+      "up_right(i,j,NULL) :- \n   element(i,j,_),\n   !element((i-1),(j+1),_),\n   default(NULL).": {
+       "atom-frequency": {
+        "up_right(i,j,NULL) :- \n   element(i,j,_),\n   !element((i-1),(j+1),_),\n   default(NULL).": {
+         "default": {
+          "level": 1,
+          "num-tuples": 0
+         },
+         "element": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 13156,
+        "pre": 13156
+       },
+       "num-tuples": 19,
+       "runtime": { "start": 21272313809, "end": 21272313821},
+       "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [62:1-62:80]"
+      },
+      "up_right(i,j,x) :- \n   element(i,j,_),\n   element( _tmp_10, _tmp_11,x),\n    _tmp_10 = (i-1),\n    _tmp_11 = (j+1).": {
+       "atom-frequency": {
+        "up_right(i,j,x) :- \n   element(i,j,_),\n   element( _tmp_10, _tmp_11,x),\n    _tmp_10 = (i-1),\n    _tmp_11 = (j+1).": {
+         "element": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 13156,
+        "pre": 13156
+       },
+       "num-tuples": 81,
+       "runtime": { "start": 21272313829, "end": 21272313854},
+       "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [63:1-63:61]"
+      }
+     },
+     "num-tuples": 100,
+     "reads": 0,
+     "runtime": { "start": 21272313800, "end": 21272313863},
+     "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [61:7-61:15]"
+    },
+    "values": {
+     "loadtime": { "start": 21272312267, "end": 21272312279},
+     "num-tuples": 8,
+     "reads": 100,
+     "source-locator": "/root/souffle-src/tests/example/minesweeper/grid.dl [19:7-19:13]"
+    }
+   },
+   "runtime": { "start": 21272312109, "end": 21272314055},
+   "starttime": { "time": 21272311983},
+   "usage": {
+    "timepoint": {
+     "21272312079": {
+      "maxRSS": 12200,
+      "systemtime": 0,
+      "usertime": 9501
+     },
+     "21272312137": {
+      "maxRSS": 12328,
+      "systemtime": 0,
+      "usertime": 9646
+     },
+     "21272312268": {
+      "maxRSS": 12596,
+      "systemtime": 0,
+      "usertime": 9803
+     },
+     "21272312318": {
+      "maxRSS": 12900,
+      "systemtime": 0,
+      "usertime": 9864
+     },
+     "21272312340": {
+      "maxRSS": 12900,
+      "systemtime": 0,
+      "usertime": 9901
+     },
+     "21272312368": {
+      "maxRSS": 12900,
+      "systemtime": 0,
+      "usertime": 9933
+     },
+     "21272312372": {
+      "maxRSS": 12900,
+      "systemtime": 0,
+      "usertime": 9945
+     },
+     "21272312402": {
+      "maxRSS": 12900,
+      "systemtime": 0,
+      "usertime": 9986
+     },
+     "21272312438": {
+      "maxRSS": 12900,
+      "systemtime": 0,
+      "usertime": 10030
+     },
+     "21272312475": {
+      "maxRSS": 12900,
+      "systemtime": 0,
+      "usertime": 10079
+     },
+     "21272312504": {
+      "maxRSS": 13028,
+      "systemtime": 0,
+      "usertime": 10112
+     },
+     "21272312615": {
+      "maxRSS": 13028,
+      "systemtime": 0,
+      "usertime": 10243
+     },
+     "21272312627": {
+      "maxRSS": 13028,
+      "systemtime": 0,
+      "usertime": 10263
+     },
+     "21272312643": {
+      "maxRSS": 13028,
+      "systemtime": 0,
+      "usertime": 10284
+     },
+     "21272312674": {
+      "maxRSS": 13028,
+      "systemtime": 0,
+      "usertime": 10326
+     },
+     "21272312696": {
+      "maxRSS": 13028,
+      "systemtime": 0,
+      "usertime": 10356
+     },
+     "21272312731": {
+      "maxRSS": 13028,
+      "systemtime": 0,
+      "usertime": 10398
+     },
+     "21272312756": {
+      "maxRSS": 13028,
+      "systemtime": 0,
+      "usertime": 10432
+     },
+     "21272312779": {
+      "maxRSS": 13028,
+      "systemtime": 0,
+      "usertime": 10461
+     },
+     "21272312812": {
+      "maxRSS": 13028,
+      "systemtime": 0,
+      "usertime": 10506
+     },
+     "21272312926": {
+      "maxRSS": 13028,
+      "systemtime": 0,
+      "usertime": 10635
+     },
+     "21272312936": {
+      "maxRSS": 13028,
+      "systemtime": 0,
+      "usertime": 10657
+     },
+     "21272312955": {
+      "maxRSS": 13028,
+      "systemtime": 0,
+      "usertime": 10681
+     },
+     "21272312983": {
+      "maxRSS": 13028,
+      "systemtime": 0,
+      "usertime": 10715
+     },
+     "21272313010": {
+      "maxRSS": 13028,
+      "systemtime": 0,
+      "usertime": 10747
+     },
+     "21272313036": {
+      "maxRSS": 13028,
+      "systemtime": 0,
+      "usertime": 10784
+     },
+     "21272313150": {
+      "maxRSS": 13028,
+      "systemtime": 0,
+      "usertime": 10904
+     },
+     "21272313181": {
+      "maxRSS": 13028,
+      "systemtime": 0,
+      "usertime": 10948
+     },
+     "21272313210": {
+      "maxRSS": 13028,
+      "systemtime": 0,
+      "usertime": 10968
+     },
+     "21272313300": {
+      "maxRSS": 13028,
+      "systemtime": 0,
+      "usertime": 11076
+     },
+     "21272313333": {
+      "maxRSS": 13028,
+      "systemtime": 0,
+      "usertime": 11105
+     },
+     "21272313371": {
+      "maxRSS": 13028,
+      "systemtime": 0,
+      "usertime": 11163
+     },
+     "21272313406": {
+      "maxRSS": 13028,
+      "systemtime": 0,
+      "usertime": 11194
+     },
+     "21272313447": {
+      "maxRSS": 13028,
+      "systemtime": 0,
+      "usertime": 11251
+     },
+     "21272313486": {
+      "maxRSS": 13028,
+      "systemtime": 0,
+      "usertime": 11280
+     },
+     "21272313530": {
+      "maxRSS": 13028,
+      "systemtime": 0,
+      "usertime": 11348
+     },
+     "21272313559": {
+      "maxRSS": 13028,
+      "systemtime": 0,
+      "usertime": 11376
+     },
+     "21272313601": {
+      "maxRSS": 13028,
+      "systemtime": 0,
+      "usertime": 11433
+     },
+     "21272313639": {
+      "maxRSS": 13028,
+      "systemtime": 0,
+      "usertime": 11484
+     },
+     "21272313670": {
+      "maxRSS": 13156,
+      "systemtime": 0,
+      "usertime": 11517
+     },
+     "21272313702": {
+      "maxRSS": 13156,
+      "systemtime": 0,
+      "usertime": 11545
+     },
+     "21272313742": {
+      "maxRSS": 13156,
+      "systemtime": 0,
+      "usertime": 11603
+     },
+     "21272313779": {
+      "maxRSS": 13156,
+      "systemtime": 0,
+      "usertime": 11641
+     },
+     "21272313815": {
+      "maxRSS": 13156,
+      "systemtime": 0,
+      "usertime": 11694
+     },
+     "21272313846": {
+      "maxRSS": 13156,
+      "systemtime": 0,
+      "usertime": 11722
+     },
+     "21272313896": {
+      "maxRSS": 13284,
+      "systemtime": 0,
+      "usertime": 11776
+     },
+     "21272313994": {
+      "maxRSS": 13284,
+      "systemtime": 0,
+      "usertime": 11885
+     }
+    }
+   }
+  }
+ }
+}

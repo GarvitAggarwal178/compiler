@@ -1,0 +1,944 @@
+{
+ "root": {
+  "program": {
+   "configuration": {
+    "": "/root/souffle-src/tests/example/earley/earley.dl",
+    "fact-dir": "/root/souffle-src/tests/example/earley/facts",
+    "include-dir": ".",
+    "jobs": "1",
+    "libraries": "functors",
+    "library-dir": ".",
+    "output-dir": "/root/compiler/measurements/night01-t2/example__earley",
+    "profile": "prof.log",
+    "relationCount": "9",
+    "ruleCount": "13",
+    "version": "2.5",
+    "warn": "all",
+    "wno": "none"
+   },
+   "relation": {
+    "+disconnected0": {
+     "maxRSS": {
+      "post": 12480,
+      "pre": 12480
+     },
+     "non-recursive-rule": {
+      "+disconnected0() :- \n   State(c,1,q,1),\n   EndString(c),\n   EndProd(1,q).": {
+       "atom-frequency": {
+        "+disconnected0() :- \n   State(c,1,q,1),\n   EndString(c),\n   EndProd(1,q).": {
+         "State": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12480,
+        "pre": 12480
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 21272256538, "end": 21272256539},
+       "source-locator": "/root/souffle-src/tests/example/earley/earley.dl [54:1-54:65]"
+      }
+     },
+     "num-tuples": 1,
+     "reads": 0,
+     "runtime": { "start": 21272256537, "end": 21272256545},
+     "source-locator": " [1:1-1:1]"
+    },
+    "Accept": {
+     "maxRSS": {
+      "post": 12480,
+      "pre": 12480
+     },
+     "non-recursive-rule": {
+      "Accept(\"Yes\") :- \n   +disconnected0().": {
+       "maxRSS": {
+        "post": 12480,
+        "pre": 12480
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 21272256550, "end": 21272256551},
+       "source-locator": "/root/souffle-src/tests/example/earley/earley.dl [54:1-54:65]"
+      }
+     },
+     "num-tuples": 1,
+     "reads": 0,
+     "runtime": { "start": 21272256550, "end": 21272256556},
+     "savetime": { "start": 21272256559, "end": 21272256721},
+     "source-locator": "/root/souffle-src/tests/example/earley/earley.dl [52:7-52:13]"
+    },
+    "EndProd": {
+     "maxRSS": {
+      "post": 12224,
+      "pre": 12096
+     },
+     "non-recursive-rule": {
+      "EndProd(x,(p+1)) :- \n   Prod(x,p,_),\n   !NotEndProd(x,p).": {
+       "atom-frequency": {
+        "EndProd(x,(p+1)) :- \n   Prod(x,p,_),\n   !NotEndProd(x,p).": {
+         "Prod": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12224,
+        "pre": 12096
+       },
+       "num-tuples": 2,
+       "runtime": { "start": 21272255914, "end": 21272255919},
+       "source-locator": "/root/souffle-src/tests/example/earley/earley.dl [28:1-28:55]"
+      }
+     },
+     "num-tuples": 2,
+     "reads": 99,
+     "runtime": { "start": 21272255914, "end": 21272255923},
+     "source-locator": "/root/souffle-src/tests/example/earley/earley.dl [21:7-21:14]"
+    },
+    "EndString": {
+     "maxRSS": {
+      "post": 12224,
+      "pre": 12224
+     },
+     "non-recursive-rule": {
+      "EndString((c+1)) :- \n   String(c,_),\n   !NotEndString(c).": {
+       "atom-frequency": {
+        "EndString((c+1)) :- \n   String(c,_),\n   !NotEndString(c).": {
+         "String": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12224,
+        "pre": 12224
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 21272255965, "end": 21272255966},
+       "source-locator": "/root/souffle-src/tests/example/earley/earley.dl [31:1-31:52]"
+      }
+     },
+     "num-tuples": 1,
+     "reads": 1,
+     "runtime": { "start": 21272255955, "end": 21272255974},
+     "source-locator": "/root/souffle-src/tests/example/earley/earley.dl [22:7-22:16]"
+    },
+    "NotEndProd": {
+     "maxRSS": {
+      "post": 12096,
+      "pre": 11968
+     },
+     "non-recursive-rule": {
+      "NotEndProd(x,p) :- \n   Prod(x,p,_),\n   Prod(x,q,_),\n   p < q.": {
+       "atom-frequency": {
+        "NotEndProd(x,p) :- \n   Prod(x,p,_),\n   Prod(x,q,_),\n   p < q.": {
+         "Prod": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12096,
+        "pre": 11968
+       },
+       "num-tuples": 5,
+       "runtime": { "start": 21272255881, "end": 21272255890},
+       "source-locator": "/root/souffle-src/tests/example/earley/earley.dl [27:1-27:57]"
+      }
+     },
+     "num-tuples": 5,
+     "reads": 7,
+     "runtime": { "start": 21272255881, "end": 21272255898},
+     "source-locator": "/root/souffle-src/tests/example/earley/earley.dl [24:7-24:17]"
+    },
+    "NotEndString": {
+     "maxRSS": {
+      "post": 12096,
+      "pre": 12096
+     },
+     "non-recursive-rule": {
+      "NotEndString(c) :- \n   String(c,_),\n   String(d,_),\n   c < d.": {
+       "atom-frequency": {
+        "NotEndString(c) :- \n   String(c,_),\n   String(d,_),\n   c < d.": {
+         "String": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12096,
+        "pre": 12096
+       },
+       "num-tuples": 5,
+       "runtime": { "start": 21272255903, "end": 21272255905},
+       "source-locator": "/root/souffle-src/tests/example/earley/earley.dl [30:1-30:54]"
+      }
+     },
+     "num-tuples": 5,
+     "reads": 6,
+     "runtime": { "start": 21272255903, "end": 21272255910},
+     "source-locator": "/root/souffle-src/tests/example/earley/earley.dl [25:7-25:19]"
+    },
+    "Prod": {
+     "loadtime": { "start": 21272255731, "end": 21272255837},
+     "num-tuples": 7,
+     "reads": 45,
+     "source-locator": "/root/souffle-src/tests/example/earley/earley.dl [16:7-16:11]"
+    },
+    "State": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 21272256092, "end": 21272256095},
+       "maxRSS": {
+        "post": 12352,
+        "pre": 12224
+       },
+       "num-tuples": 1,
+       "recursive-rule": {
+        "State((c+1),x,(p+1),j) :- \n   String(c,a),\n   State(c,x,p,j),\n   Prod(x,p,a).": {
+         "0": {
+          "atom-frequency": {
+           "@new_State((c+1),x,(p+1),j) :- \n   String(c,a),\n   @delta_State(c,x,p,j),\n   Prod(x,p,a).": {
+            "@delta_State": {
+             "level": 1,
+             "num-tuples": 0
+            },
+            "String": {
+             "level": 0,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 12352,
+           "pre": 12352
+          },
+          "num-tuples": 1,
+          "runtime": { "start": 21272256040, "end": 21272256052},
+          "source-locator": "/root/souffle-src/tests/example/earley/earley.dl [46:1-46:77]"
+         }
+        },
+        "State(c,x,(p+1),j) :- \n   State(c,y,q,k),\n   EndProd(y,q),\n   Prod(y,0,n),\n   State(k,x,p,j),\n   Prod(x,p,n).": {
+         "0": {
+          "atom-frequency": {
+           "@new_State(c,x,(p+1),j) :- \n   @delta_State(c,y,q,k),\n   EndProd(y,q),\n   Prod(y,0,n),\n   State(k,x,p,j),\n   Prod(x,p,n).": {
+            "@delta_State": {
+             "level": 0,
+             "num-tuples": 0
+            },
+            "Prod": {
+             "level": 2,
+             "num-tuples": 0
+            },
+            "State": {
+             "level": 3,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 12352,
+           "pre": 12352
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272256060, "end": 21272256062},
+          "source-locator": "/root/souffle-src/tests/example/earley/earley.dl [49:1-49:108]"
+         },
+         "1": {
+          "atom-frequency": {
+           "@new_State(c,x,(p+1),j) :- \n   State(c,y,q,k),\n   EndProd(y,q),\n   Prod(y,0,n),\n   @delta_State(k,x,p,j),\n   Prod(x,p,n).": {
+            "@delta_State": {
+             "level": 3,
+             "num-tuples": 0
+            },
+            "Prod": {
+             "level": 2,
+             "num-tuples": 0
+            },
+            "State": {
+             "level": 0,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 12352,
+           "pre": 12352
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272256067, "end": 21272256068},
+          "source-locator": "/root/souffle-src/tests/example/earley/earley.dl [49:1-49:108]"
+         }
+        },
+        "State(c,x,1,c) :- \n   State(c,y,p,_),\n   Prod(x,0,n),\n   Prod(y,p,n).": {
+         "0": {
+          "atom-frequency": {
+           "@new_State(c,x,1,c) :- \n   @delta_State(c,y,p,_),\n   Prod(x,0,n),\n   Prod(y,p,n).": {
+            "@delta_State": {
+             "level": 0,
+             "num-tuples": 0
+            },
+            "Prod": {
+             "level": 1,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 12352,
+           "pre": 12224
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272256025, "end": 21272256030},
+          "source-locator": "/root/souffle-src/tests/example/earley/earley.dl [43:1-43:70]"
+         }
+        }
+       },
+       "runtime": { "start": 21272255993, "end": 21272256073}
+      },
+      "1": {
+       "copytime": { "start": 21272256130, "end": 21272256131},
+       "maxRSS": {
+        "post": 12352,
+        "pre": 12352
+       },
+       "num-tuples": 2,
+       "recursive-rule": {
+        "State((c+1),x,(p+1),j) :- \n   String(c,a),\n   State(c,x,p,j),\n   Prod(x,p,a).": {
+         "0": {
+          "maxRSS": {
+           "post": 12352,
+           "pre": 12352
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272256108, "end": 21272256109},
+          "source-locator": "/root/souffle-src/tests/example/earley/earley.dl [46:1-46:77]"
+         }
+        },
+        "State(c,x,(p+1),j) :- \n   State(c,y,q,k),\n   EndProd(y,q),\n   Prod(y,0,n),\n   State(k,x,p,j),\n   Prod(x,p,n).": {
+         "0": {
+          "maxRSS": {
+           "post": 12352,
+           "pre": 12352
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272256113, "end": 21272256116},
+          "source-locator": "/root/souffle-src/tests/example/earley/earley.dl [49:1-49:108]"
+         },
+         "1": {
+          "maxRSS": {
+           "post": 12352,
+           "pre": 12352
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272256120, "end": 21272256121},
+          "source-locator": "/root/souffle-src/tests/example/earley/earley.dl [49:1-49:108]"
+         }
+        },
+        "State(c,x,1,c) :- \n   State(c,y,p,_),\n   Prod(x,0,n),\n   Prod(y,p,n).": {
+         "0": {
+          "maxRSS": {
+           "post": 12352,
+           "pre": 12352
+          },
+          "num-tuples": 2,
+          "runtime": { "start": 21272256100, "end": 21272256101},
+          "source-locator": "/root/souffle-src/tests/example/earley/earley.dl [43:1-43:70]"
+         }
+        }
+       },
+       "runtime": { "start": 21272256099, "end": 21272256125}
+      },
+      "10": {
+       "maxRSS": {
+        "post": 12480,
+        "pre": 12480
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "State((c+1),x,(p+1),j) :- \n   String(c,a),\n   State(c,x,p,j),\n   Prod(x,p,a).": {
+         "0": {
+          "maxRSS": {
+           "post": 12480,
+           "pre": 12480
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272256495, "end": 21272256496},
+          "source-locator": "/root/souffle-src/tests/example/earley/earley.dl [46:1-46:77]"
+         }
+        },
+        "State(c,x,(p+1),j) :- \n   State(c,y,q,k),\n   EndProd(y,q),\n   Prod(y,0,n),\n   State(k,x,p,j),\n   Prod(x,p,n).": {
+         "0": {
+          "maxRSS": {
+           "post": 12480,
+           "pre": 12480
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272256503, "end": 21272256514},
+          "source-locator": "/root/souffle-src/tests/example/earley/earley.dl [49:1-49:108]"
+         },
+         "1": {
+          "maxRSS": {
+           "post": 12480,
+           "pre": 12480
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272256522, "end": 21272256524},
+          "source-locator": "/root/souffle-src/tests/example/earley/earley.dl [49:1-49:108]"
+         }
+        },
+        "State(c,x,1,c) :- \n   State(c,y,p,_),\n   Prod(x,0,n),\n   Prod(y,p,n).": {
+         "0": {
+          "maxRSS": {
+           "post": 12480,
+           "pre": 12480
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272256474, "end": 21272256475},
+          "source-locator": "/root/souffle-src/tests/example/earley/earley.dl [43:1-43:70]"
+         }
+        }
+       },
+       "runtime": { "start": 21272256473, "end": 21272256530}
+      },
+      "2": {
+       "copytime": { "start": 21272256160, "end": 21272256161},
+       "maxRSS": {
+        "post": 12352,
+        "pre": 12352
+       },
+       "num-tuples": 1,
+       "recursive-rule": {
+        "State((c+1),x,(p+1),j) :- \n   String(c,a),\n   State(c,x,p,j),\n   Prod(x,p,a).": {
+         "0": {
+          "maxRSS": {
+           "post": 12352,
+           "pre": 12352
+          },
+          "num-tuples": 1,
+          "runtime": { "start": 21272256139, "end": 21272256140},
+          "source-locator": "/root/souffle-src/tests/example/earley/earley.dl [46:1-46:77]"
+         }
+        },
+        "State(c,x,(p+1),j) :- \n   State(c,y,q,k),\n   EndProd(y,q),\n   Prod(y,0,n),\n   State(k,x,p,j),\n   Prod(x,p,n).": {
+         "0": {
+          "maxRSS": {
+           "post": 12352,
+           "pre": 12352
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272256145, "end": 21272256146},
+          "source-locator": "/root/souffle-src/tests/example/earley/earley.dl [49:1-49:108]"
+         },
+         "1": {
+          "maxRSS": {
+           "post": 12352,
+           "pre": 12352
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272256150, "end": 21272256151},
+          "source-locator": "/root/souffle-src/tests/example/earley/earley.dl [49:1-49:108]"
+         }
+        },
+        "State(c,x,1,c) :- \n   State(c,y,p,_),\n   Prod(x,0,n),\n   Prod(y,p,n).": {
+         "0": {
+          "maxRSS": {
+           "post": 12352,
+           "pre": 12352
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272256134, "end": 21272256135},
+          "source-locator": "/root/souffle-src/tests/example/earley/earley.dl [43:1-43:70]"
+         }
+        }
+       },
+       "runtime": { "start": 21272256134, "end": 21272256155}
+      },
+      "3": {
+       "copytime": { "start": 21272256188, "end": 21272256189},
+       "maxRSS": {
+        "post": 12352,
+        "pre": 12352
+       },
+       "num-tuples": 2,
+       "recursive-rule": {
+        "State((c+1),x,(p+1),j) :- \n   String(c,a),\n   State(c,x,p,j),\n   Prod(x,p,a).": {
+         "0": {
+          "maxRSS": {
+           "post": 12352,
+           "pre": 12352
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272256169, "end": 21272256169},
+          "source-locator": "/root/souffle-src/tests/example/earley/earley.dl [46:1-46:77]"
+         }
+        },
+        "State(c,x,(p+1),j) :- \n   State(c,y,q,k),\n   EndProd(y,q),\n   Prod(y,0,n),\n   State(k,x,p,j),\n   Prod(x,p,n).": {
+         "0": {
+          "maxRSS": {
+           "post": 12352,
+           "pre": 12352
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272256173, "end": 21272256174},
+          "source-locator": "/root/souffle-src/tests/example/earley/earley.dl [49:1-49:108]"
+         },
+         "1": {
+          "maxRSS": {
+           "post": 12352,
+           "pre": 12352
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272256178, "end": 21272256178},
+          "source-locator": "/root/souffle-src/tests/example/earley/earley.dl [49:1-49:108]"
+         }
+        },
+        "State(c,x,1,c) :- \n   State(c,y,p,_),\n   Prod(x,0,n),\n   Prod(y,p,n).": {
+         "0": {
+          "maxRSS": {
+           "post": 12352,
+           "pre": 12352
+          },
+          "num-tuples": 2,
+          "runtime": { "start": 21272256163, "end": 21272256165},
+          "source-locator": "/root/souffle-src/tests/example/earley/earley.dl [43:1-43:70]"
+         }
+        }
+       },
+       "runtime": { "start": 21272256163, "end": 21272256182}
+      },
+      "4": {
+       "copytime": { "start": 21272256244, "end": 21272256250},
+       "maxRSS": {
+        "post": 12352,
+        "pre": 12352
+       },
+       "num-tuples": 1,
+       "recursive-rule": {
+        "State((c+1),x,(p+1),j) :- \n   String(c,a),\n   State(c,x,p,j),\n   Prod(x,p,a).": {
+         "0": {
+          "maxRSS": {
+           "post": 12352,
+           "pre": 12352
+          },
+          "num-tuples": 1,
+          "runtime": { "start": 21272256196, "end": 21272256197},
+          "source-locator": "/root/souffle-src/tests/example/earley/earley.dl [46:1-46:77]"
+         }
+        },
+        "State(c,x,(p+1),j) :- \n   State(c,y,q,k),\n   EndProd(y,q),\n   Prod(y,0,n),\n   State(k,x,p,j),\n   Prod(x,p,n).": {
+         "0": {
+          "maxRSS": {
+           "post": 12352,
+           "pre": 12352
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272256201, "end": 21272256211},
+          "source-locator": "/root/souffle-src/tests/example/earley/earley.dl [49:1-49:108]"
+         },
+         "1": {
+          "maxRSS": {
+           "post": 12352,
+           "pre": 12352
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272256219, "end": 21272256220},
+          "source-locator": "/root/souffle-src/tests/example/earley/earley.dl [49:1-49:108]"
+         }
+        },
+        "State(c,x,1,c) :- \n   State(c,y,p,_),\n   Prod(x,0,n),\n   Prod(y,p,n).": {
+         "0": {
+          "maxRSS": {
+           "post": 12352,
+           "pre": 12352
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272256191, "end": 21272256192},
+          "source-locator": "/root/souffle-src/tests/example/earley/earley.dl [43:1-43:70]"
+         }
+        }
+       },
+       "runtime": { "start": 21272256191, "end": 21272256225}
+      },
+      "5": {
+       "copytime": { "start": 21272256296, "end": 21272256297},
+       "maxRSS": {
+        "post": 12480,
+        "pre": 12480
+       },
+       "num-tuples": 1,
+       "recursive-rule": {
+        "State((c+1),x,(p+1),j) :- \n   String(c,a),\n   State(c,x,p,j),\n   Prod(x,p,a).": {
+         "0": {
+          "maxRSS": {
+           "post": 12480,
+           "pre": 12480
+          },
+          "num-tuples": 1,
+          "runtime": { "start": 21272256272, "end": 21272256273},
+          "source-locator": "/root/souffle-src/tests/example/earley/earley.dl [46:1-46:77]"
+         }
+        },
+        "State(c,x,(p+1),j) :- \n   State(c,y,q,k),\n   EndProd(y,q),\n   Prod(y,0,n),\n   State(k,x,p,j),\n   Prod(x,p,n).": {
+         "0": {
+          "maxRSS": {
+           "post": 12480,
+           "pre": 12480
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272256278, "end": 21272256279},
+          "source-locator": "/root/souffle-src/tests/example/earley/earley.dl [49:1-49:108]"
+         },
+         "1": {
+          "maxRSS": {
+           "post": 12480,
+           "pre": 12480
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272256284, "end": 21272256285},
+          "source-locator": "/root/souffle-src/tests/example/earley/earley.dl [49:1-49:108]"
+         }
+        },
+        "State(c,x,1,c) :- \n   State(c,y,p,_),\n   Prod(x,0,n),\n   Prod(y,p,n).": {
+         "0": {
+          "maxRSS": {
+           "post": 12480,
+           "pre": 12480
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272256263, "end": 21272256264},
+          "source-locator": "/root/souffle-src/tests/example/earley/earley.dl [43:1-43:70]"
+         }
+        }
+       },
+       "runtime": { "start": 21272256253, "end": 21272256289}
+      },
+      "6": {
+       "copytime": { "start": 21272256326, "end": 21272256327},
+       "maxRSS": {
+        "post": 12480,
+        "pre": 12480
+       },
+       "num-tuples": 1,
+       "recursive-rule": {
+        "State((c+1),x,(p+1),j) :- \n   String(c,a),\n   State(c,x,p,j),\n   Prod(x,p,a).": {
+         "0": {
+          "maxRSS": {
+           "post": 12480,
+           "pre": 12480
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272256304, "end": 21272256305},
+          "source-locator": "/root/souffle-src/tests/example/earley/earley.dl [46:1-46:77]"
+         }
+        },
+        "State(c,x,(p+1),j) :- \n   State(c,y,q,k),\n   EndProd(y,q),\n   Prod(y,0,n),\n   State(k,x,p,j),\n   Prod(x,p,n).": {
+         "0": {
+          "maxRSS": {
+           "post": 12480,
+           "pre": 12480
+          },
+          "num-tuples": 1,
+          "runtime": { "start": 21272256309, "end": 21272256311},
+          "source-locator": "/root/souffle-src/tests/example/earley/earley.dl [49:1-49:108]"
+         },
+         "1": {
+          "maxRSS": {
+           "post": 12480,
+           "pre": 12480
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272256315, "end": 21272256316},
+          "source-locator": "/root/souffle-src/tests/example/earley/earley.dl [49:1-49:108]"
+         }
+        },
+        "State(c,x,1,c) :- \n   State(c,y,p,_),\n   Prod(x,0,n),\n   Prod(y,p,n).": {
+         "0": {
+          "maxRSS": {
+           "post": 12480,
+           "pre": 12480
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272256300, "end": 21272256300},
+          "source-locator": "/root/souffle-src/tests/example/earley/earley.dl [43:1-43:70]"
+         }
+        }
+       },
+       "runtime": { "start": 21272256299, "end": 21272256320}
+      },
+      "7": {
+       "copytime": { "start": 21272256369, "end": 21272256370},
+       "maxRSS": {
+        "post": 12480,
+        "pre": 12480
+       },
+       "num-tuples": 1,
+       "recursive-rule": {
+        "State((c+1),x,(p+1),j) :- \n   String(c,a),\n   State(c,x,p,j),\n   Prod(x,p,a).": {
+         "0": {
+          "maxRSS": {
+           "post": 12480,
+           "pre": 12480
+          },
+          "num-tuples": 1,
+          "runtime": { "start": 21272256334, "end": 21272256336},
+          "source-locator": "/root/souffle-src/tests/example/earley/earley.dl [46:1-46:77]"
+         }
+        },
+        "State(c,x,(p+1),j) :- \n   State(c,y,q,k),\n   EndProd(y,q),\n   Prod(y,0,n),\n   State(k,x,p,j),\n   Prod(x,p,n).": {
+         "0": {
+          "maxRSS": {
+           "post": 12480,
+           "pre": 12480
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272256340, "end": 21272256343},
+          "source-locator": "/root/souffle-src/tests/example/earley/earley.dl [49:1-49:108]"
+         },
+         "1": {
+          "maxRSS": {
+           "post": 12480,
+           "pre": 12480
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272256347, "end": 21272256348},
+          "source-locator": "/root/souffle-src/tests/example/earley/earley.dl [49:1-49:108]"
+         }
+        },
+        "State(c,x,1,c) :- \n   State(c,y,p,_),\n   Prod(x,0,n),\n   Prod(y,p,n).": {
+         "0": {
+          "maxRSS": {
+           "post": 12480,
+           "pre": 12480
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272256329, "end": 21272256330},
+          "source-locator": "/root/souffle-src/tests/example/earley/earley.dl [43:1-43:70]"
+         }
+        }
+       },
+       "runtime": { "start": 21272256329, "end": 21272256352}
+      },
+      "8": {
+       "copytime": { "start": 21272256434, "end": 21272256436},
+       "maxRSS": {
+        "post": 12480,
+        "pre": 12480
+       },
+       "num-tuples": 1,
+       "recursive-rule": {
+        "State((c+1),x,(p+1),j) :- \n   String(c,a),\n   State(c,x,p,j),\n   Prod(x,p,a).": {
+         "0": {
+          "maxRSS": {
+           "post": 12480,
+           "pre": 12480
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272256382, "end": 21272256384},
+          "source-locator": "/root/souffle-src/tests/example/earley/earley.dl [46:1-46:77]"
+         }
+        },
+        "State(c,x,(p+1),j) :- \n   State(c,y,q,k),\n   EndProd(y,q),\n   Prod(y,0,n),\n   State(k,x,p,j),\n   Prod(x,p,n).": {
+         "0": {
+          "maxRSS": {
+           "post": 12480,
+           "pre": 12480
+          },
+          "num-tuples": 1,
+          "runtime": { "start": 21272256388, "end": 21272256401},
+          "source-locator": "/root/souffle-src/tests/example/earley/earley.dl [49:1-49:108]"
+         },
+         "1": {
+          "maxRSS": {
+           "post": 12480,
+           "pre": 12480
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272256410, "end": 21272256411},
+          "source-locator": "/root/souffle-src/tests/example/earley/earley.dl [49:1-49:108]"
+         }
+        },
+        "State(c,x,1,c) :- \n   State(c,y,p,_),\n   Prod(x,0,n),\n   Prod(y,p,n).": {
+         "0": {
+          "maxRSS": {
+           "post": 12480,
+           "pre": 12480
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272256373, "end": 21272256374},
+          "source-locator": "/root/souffle-src/tests/example/earley/earley.dl [43:1-43:70]"
+         }
+        }
+       },
+       "runtime": { "start": 21272256373, "end": 21272256416}
+      },
+      "9": {
+       "copytime": { "start": 21272256471, "end": 21272256471},
+       "maxRSS": {
+        "post": 12480,
+        "pre": 12480
+       },
+       "num-tuples": 1,
+       "recursive-rule": {
+        "State((c+1),x,(p+1),j) :- \n   String(c,a),\n   State(c,x,p,j),\n   Prod(x,p,a).": {
+         "0": {
+          "maxRSS": {
+           "post": 12480,
+           "pre": 12480
+          },
+          "num-tuples": 1,
+          "runtime": { "start": 21272256448, "end": 21272256449},
+          "source-locator": "/root/souffle-src/tests/example/earley/earley.dl [46:1-46:77]"
+         }
+        },
+        "State(c,x,(p+1),j) :- \n   State(c,y,q,k),\n   EndProd(y,q),\n   Prod(y,0,n),\n   State(k,x,p,j),\n   Prod(x,p,n).": {
+         "0": {
+          "maxRSS": {
+           "post": 12480,
+           "pre": 12480
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272256454, "end": 21272256455},
+          "source-locator": "/root/souffle-src/tests/example/earley/earley.dl [49:1-49:108]"
+         },
+         "1": {
+          "maxRSS": {
+           "post": 12480,
+           "pre": 12480
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272256459, "end": 21272256461},
+          "source-locator": "/root/souffle-src/tests/example/earley/earley.dl [49:1-49:108]"
+         }
+        },
+        "State(c,x,1,c) :- \n   State(c,y,p,_),\n   Prod(x,0,n),\n   Prod(y,p,n).": {
+         "0": {
+          "maxRSS": {
+           "post": 12480,
+           "pre": 12480
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272256439, "end": 21272256440},
+          "source-locator": "/root/souffle-src/tests/example/earley/earley.dl [43:1-43:70]"
+         }
+        }
+       },
+       "runtime": { "start": 21272256439, "end": 21272256465}
+      }
+     },
+     "maxRSS": {
+      "post": 12224,
+      "pre": 12224
+     },
+     "non-recursive-rule": {
+      "State(1,1,1,1).": {
+       "maxRSS": {
+        "post": 12224,
+        "pre": 12224
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 21272255979, "end": 21272255982},
+       "source-locator": "/root/souffle-src/tests/example/earley/earley.dl [40:1-40:19]"
+      }
+     },
+     "num-tuples": 1,
+     "reads": 12,
+     "runtime": { "start": 21272255978, "end": 21272255988},
+     "source-locator": "/root/souffle-src/tests/example/earley/earley.dl [37:7-37:12]"
+    },
+    "String": {
+     "loadtime": { "start": 21272255846, "end": 21272255874},
+     "num-tuples": 6,
+     "reads": 0,
+     "source-locator": "/root/souffle-src/tests/example/earley/earley.dl [17:7-17:13]"
+    }
+   },
+   "runtime": { "start": 21272255726, "end": 21272256736},
+   "starttime": { "time": 21272255690},
+   "usage": {
+    "timepoint": {
+     "21272255730": {
+      "maxRSS": 11572,
+      "systemtime": 5913,
+      "usertime": 0
+     },
+     "21272255937": {
+      "maxRSS": 12224,
+      "systemtime": 6148,
+      "usertime": 0
+     },
+     "21272255986": {
+      "maxRSS": 12224,
+      "systemtime": 6217,
+      "usertime": 0
+     },
+     "21272256026": {
+      "maxRSS": 12224,
+      "systemtime": 6270,
+      "usertime": 0
+     },
+     "21272256060": {
+      "maxRSS": 12352,
+      "systemtime": 6318,
+      "usertime": 0
+     },
+     "21272256189": {
+      "maxRSS": 12352,
+      "systemtime": 6462,
+      "usertime": 0
+     },
+     "21272256213": {
+      "maxRSS": 12352,
+      "systemtime": 6496,
+      "usertime": 0
+     },
+     "21272256247": {
+      "maxRSS": 12480,
+      "systemtime": 6541,
+      "usertime": 0
+     },
+     "21272256326": {
+      "maxRSS": 12480,
+      "systemtime": 6636,
+      "usertime": 0
+     },
+     "21272256336": {
+      "maxRSS": 12480,
+      "systemtime": 6655,
+      "usertime": 0
+     },
+     "21272256346": {
+      "maxRSS": 12480,
+      "systemtime": 6667,
+      "usertime": 0
+     },
+     "21272256382": {
+      "maxRSS": 12480,
+      "systemtime": 6707,
+      "usertime": 0
+     },
+     "21272256408": {
+      "maxRSS": 12480,
+      "systemtime": 6742,
+      "usertime": 0
+     },
+     "21272256489": {
+      "maxRSS": 12480,
+      "systemtime": 6875,
+      "usertime": 0
+     },
+     "21272256586": {
+      "maxRSS": 12480,
+      "systemtime": 6980,
+      "usertime": 0
+     }
+    }
+   }
+  }
+ }
+}

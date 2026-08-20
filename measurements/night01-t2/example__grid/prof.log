@@ -1,0 +1,857 @@
+{
+ "root": {
+  "program": {
+   "configuration": {
+    "": "/root/souffle-src/tests/example/grid/grid.dl",
+    "fact-dir": "/root/souffle-src/tests/example/grid/facts",
+    "include-dir": ".",
+    "jobs": "1",
+    "libraries": "functors",
+    "library-dir": ".",
+    "output-dir": "/root/compiler/measurements/night01-t2/example__grid",
+    "profile": "prof.log",
+    "relationCount": "14",
+    "ruleCount": "24",
+    "version": "2.5",
+    "warn": "all",
+    "wno": "none"
+   },
+   "relation": {
+    "default": {
+     "loadtime": { "start": 21272298162, "end": 21272298245},
+     "num-tuples": 1,
+     "reads": 0,
+     "source-locator": "/root/souffle-src/tests/example/grid/grid.dl [11:7-11:14]"
+    },
+    "down": {
+     "maxRSS": {
+      "post": 12692,
+      "pre": 12692
+     },
+     "non-recursive-rule": {
+      "down(i,j,NULL) :- \n   element(i,j,_),\n   !element((i+1),j,_),\n   default(NULL).": {
+       "atom-frequency": {
+        "down(i,j,NULL) :- \n   element(i,j,_),\n   !element((i+1),j,_),\n   default(NULL).": {
+         "default": {
+          "level": 1,
+          "num-tuples": 0
+         },
+         "element": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12692,
+        "pre": 12692
+       },
+       "num-tuples": 3,
+       "runtime": { "start": 21272298633, "end": 21272298636},
+       "source-locator": "/root/souffle-src/tests/example/grid/grid.dl [42:1-42:74]"
+      },
+      "down(i,j,x) :- \n   element(i,j,_),\n   element( _tmp_0,j,x),\n    _tmp_0 = (i+1).": {
+       "atom-frequency": {
+        "down(i,j,x) :- \n   element(i,j,_),\n   element( _tmp_0,j,x),\n    _tmp_0 = (i+1).": {
+         "element": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12692,
+        "pre": 12692
+       },
+       "num-tuples": 6,
+       "runtime": { "start": 21272298641, "end": 21272298644},
+       "source-locator": "/root/souffle-src/tests/example/grid/grid.dl [43:1-43:55]"
+      }
+     },
+     "num-tuples": 9,
+     "reads": 0,
+     "runtime": { "start": 21272298633, "end": 21272298648},
+     "source-locator": "/root/souffle-src/tests/example/grid/grid.dl [41:7-41:11]"
+    },
+    "down_left": {
+     "maxRSS": {
+      "post": 12692,
+      "pre": 12692
+     },
+     "non-recursive-rule": {
+      "down_left(i,j,NULL) :- \n   element(i,j,_),\n   !element((i+1),(j-1),_),\n   default(NULL).": {
+       "atom-frequency": {
+        "down_left(i,j,NULL) :- \n   element(i,j,_),\n   !element((i+1),(j-1),_),\n   default(NULL).": {
+         "default": {
+          "level": 1,
+          "num-tuples": 0
+         },
+         "element": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12692,
+        "pre": 12692
+       },
+       "num-tuples": 5,
+       "runtime": { "start": 21272298652, "end": 21272298654},
+       "source-locator": "/root/souffle-src/tests/example/grid/grid.dl [67:1-67:81]"
+      },
+      "down_left(i,j,x) :- \n   element(i,j,_),\n   element( _tmp_1, _tmp_2,x),\n    _tmp_1 = (i+1),\n    _tmp_2 = (j-1).": {
+       "atom-frequency": {
+        "down_left(i,j,x) :- \n   element(i,j,_),\n   element( _tmp_1, _tmp_2,x),\n    _tmp_1 = (i+1),\n    _tmp_2 = (j-1).": {
+         "element": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12692,
+        "pre": 12692
+       },
+       "num-tuples": 4,
+       "runtime": { "start": 21272298659, "end": 21272298671},
+       "source-locator": "/root/souffle-src/tests/example/grid/grid.dl [68:1-68:62]"
+      }
+     },
+     "num-tuples": 9,
+     "reads": 0,
+     "runtime": { "start": 21272298652, "end": 21272298678},
+     "source-locator": "/root/souffle-src/tests/example/grid/grid.dl [66:7-66:16]"
+    },
+    "down_right": {
+     "maxRSS": {
+      "post": 12692,
+      "pre": 12692
+     },
+     "non-recursive-rule": {
+      "down_right(i,j,NULL) :- \n   element(i,j,_),\n   !element((i+1),(j+1),_),\n   default(NULL).": {
+       "atom-frequency": {
+        "down_right(i,j,NULL) :- \n   element(i,j,_),\n   !element((i+1),(j+1),_),\n   default(NULL).": {
+         "default": {
+          "level": 1,
+          "num-tuples": 0
+         },
+         "element": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12692,
+        "pre": 12692
+       },
+       "num-tuples": 5,
+       "runtime": { "start": 21272298691, "end": 21272298694},
+       "source-locator": "/root/souffle-src/tests/example/grid/grid.dl [72:1-72:82]"
+      },
+      "down_right(i,j,x) :- \n   element(i,j,_),\n   element( _tmp_3, _tmp_4,x),\n    _tmp_3 = (i+1),\n    _tmp_4 = (j+1).": {
+       "atom-frequency": {
+        "down_right(i,j,x) :- \n   element(i,j,_),\n   element( _tmp_3, _tmp_4,x),\n    _tmp_3 = (i+1),\n    _tmp_4 = (j+1).": {
+         "element": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12692,
+        "pre": 12692
+       },
+       "num-tuples": 4,
+       "runtime": { "start": 21272298701, "end": 21272298704},
+       "source-locator": "/root/souffle-src/tests/example/grid/grid.dl [73:1-73:63]"
+      }
+     },
+     "num-tuples": 9,
+     "reads": 0,
+     "runtime": { "start": 21272298682, "end": 21272298708},
+     "source-locator": "/root/souffle-src/tests/example/grid/grid.dl [71:7-71:17]"
+    },
+    "element": {
+     "maxRSS": {
+      "post": 12692,
+      "pre": 12692
+     },
+     "non-recursive-rule": {
+      "element(i,j,0) :- \n   indices(i,j),\n   !values(i,j,_).": {
+       "atom-frequency": {
+        "element(i,j,0) :- \n   indices(i,j),\n   !values(i,j,_).": {
+         "indices": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12692,
+        "pre": 12692
+       },
+       "num-tuples": 7,
+       "runtime": { "start": 21272298589, "end": 21272298592},
+       "source-locator": "/root/souffle-src/tests/example/grid/grid.dl [32:1-32:53]"
+      },
+      "element(i,j,x) :- \n   indices(i,j),\n   values(i,j,x).": {
+       "atom-frequency": {
+        "element(i,j,x) :- \n   indices(i,j),\n   values(i,j,x).": {
+         "indices": {
+          "level": 0,
+          "num-tuples": 0
+         },
+         "values": {
+          "level": 1,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12692,
+        "pre": 12692
+       },
+       "num-tuples": 2,
+       "runtime": { "start": 21272298600, "end": 21272298602},
+       "source-locator": "/root/souffle-src/tests/example/grid/grid.dl [33:1-33:52]"
+      }
+     },
+     "num-tuples": 9,
+     "reads": 72,
+     "runtime": { "start": 21272298578, "end": 21272298607},
+     "savetime": { "start": 21272298611, "end": 21272298630},
+     "source-locator": "/root/souffle-src/tests/example/grid/grid.dl [30:7-30:14]"
+    },
+    "indices": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 21272298367, "end": 21272298369},
+       "maxRSS": {
+        "post": 12692,
+        "pre": 12436
+       },
+       "num-tuples": 2,
+       "recursive-rule": {
+        "indices((i+1),j) :- \n   indices(i,j),\n   parameters(I,J),\n   i >= 0,\n   (i+1) < I,\n   j >= 0,\n   j < J.": {
+         "0": {
+          "atom-frequency": {
+           "@new_indices((i+1),j) :- \n   @delta_indices(i,j),\n   parameters(I,J),\n   i >= 0,\n   (i+1) < I,\n   j >= 0,\n   j < J.": {
+            "@delta_indices": {
+             "level": 0,
+             "num-tuples": 0
+            },
+            "parameters": {
+             "level": 1,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 12692,
+           "pre": 12436
+          },
+          "num-tuples": 1,
+          "runtime": { "start": 21272298336, "end": 21272298346},
+          "source-locator": "/root/souffle-src/tests/example/grid/grid.dl [26:1-26:84]"
+         }
+        },
+        "indices(i,(j+1)) :- \n   indices(i,j),\n   parameters(I,J),\n   i >= 0,\n   i < I,\n   j >= 0,\n   (j+1) < J.": {
+         "0": {
+          "atom-frequency": {
+           "@new_indices(i,(j+1)) :- \n   @delta_indices(i,j),\n   parameters(I,J),\n   i >= 0,\n   i < I,\n   j >= 0,\n   (j+1) < J.": {
+            "@delta_indices": {
+             "level": 0,
+             "num-tuples": 0
+            },
+            "parameters": {
+             "level": 1,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 12692,
+           "pre": 12692
+          },
+          "num-tuples": 1,
+          "runtime": { "start": 21272298353, "end": 21272298355},
+          "source-locator": "/root/souffle-src/tests/example/grid/grid.dl [27:1-27:84]"
+         }
+        }
+       },
+       "runtime": { "start": 21272298335, "end": 21272298360}
+      },
+      "1": {
+       "copytime": { "start": 21272298390, "end": 21272298391},
+       "maxRSS": {
+        "post": 12692,
+        "pre": 12692
+       },
+       "num-tuples": 3,
+       "recursive-rule": {
+        "indices((i+1),j) :- \n   indices(i,j),\n   parameters(I,J),\n   i >= 0,\n   (i+1) < I,\n   j >= 0,\n   j < J.": {
+         "0": {
+          "maxRSS": {
+           "post": 12692,
+           "pre": 12692
+          },
+          "num-tuples": 2,
+          "runtime": { "start": 21272298372, "end": 21272298374},
+          "source-locator": "/root/souffle-src/tests/example/grid/grid.dl [26:1-26:84]"
+         }
+        },
+        "indices(i,(j+1)) :- \n   indices(i,j),\n   parameters(I,J),\n   i >= 0,\n   i < I,\n   j >= 0,\n   (j+1) < J.": {
+         "0": {
+          "maxRSS": {
+           "post": 12692,
+           "pre": 12692
+          },
+          "num-tuples": 1,
+          "runtime": { "start": 21272298378, "end": 21272298380},
+          "source-locator": "/root/souffle-src/tests/example/grid/grid.dl [27:1-27:84]"
+         }
+        }
+       },
+       "runtime": { "start": 21272298372, "end": 21272298384}
+      },
+      "2": {
+       "copytime": { "start": 21272298425, "end": 21272298426},
+       "maxRSS": {
+        "post": 12692,
+        "pre": 12692
+       },
+       "num-tuples": 2,
+       "recursive-rule": {
+        "indices((i+1),j) :- \n   indices(i,j),\n   parameters(I,J),\n   i >= 0,\n   (i+1) < I,\n   j >= 0,\n   j < J.": {
+         "0": {
+          "maxRSS": {
+           "post": 12692,
+           "pre": 12692
+          },
+          "num-tuples": 2,
+          "runtime": { "start": 21272298394, "end": 21272298396},
+          "source-locator": "/root/souffle-src/tests/example/grid/grid.dl [26:1-26:84]"
+         }
+        },
+        "indices(i,(j+1)) :- \n   indices(i,j),\n   parameters(I,J),\n   i >= 0,\n   i < I,\n   j >= 0,\n   (j+1) < J.": {
+         "0": {
+          "maxRSS": {
+           "post": 12692,
+           "pre": 12692
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272298400, "end": 21272298404},
+          "source-locator": "/root/souffle-src/tests/example/grid/grid.dl [27:1-27:84]"
+         }
+        }
+       },
+       "runtime": { "start": 21272298394, "end": 21272298408}
+      },
+      "3": {
+       "copytime": { "start": 21272298464, "end": 21272298474},
+       "maxRSS": {
+        "post": 12692,
+        "pre": 12692
+       },
+       "num-tuples": 1,
+       "recursive-rule": {
+        "indices((i+1),j) :- \n   indices(i,j),\n   parameters(I,J),\n   i >= 0,\n   (i+1) < I,\n   j >= 0,\n   j < J.": {
+         "0": {
+          "maxRSS": {
+           "post": 12692,
+           "pre": 12692
+          },
+          "num-tuples": 1,
+          "runtime": { "start": 21272298430, "end": 21272298432},
+          "source-locator": "/root/souffle-src/tests/example/grid/grid.dl [26:1-26:84]"
+         }
+        },
+        "indices(i,(j+1)) :- \n   indices(i,j),\n   parameters(I,J),\n   i >= 0,\n   i < I,\n   j >= 0,\n   (j+1) < J.": {
+         "0": {
+          "maxRSS": {
+           "post": 12692,
+           "pre": 12692
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272298438, "end": 21272298449},
+          "source-locator": "/root/souffle-src/tests/example/grid/grid.dl [27:1-27:84]"
+         }
+        }
+       },
+       "runtime": { "start": 21272298429, "end": 21272298457}
+      },
+      "4": {
+       "maxRSS": {
+        "post": 12692,
+        "pre": 12692
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "indices((i+1),j) :- \n   indices(i,j),\n   parameters(I,J),\n   i >= 0,\n   (i+1) < I,\n   j >= 0,\n   j < J.": {
+         "0": {
+          "maxRSS": {
+           "post": 12692,
+           "pre": 12692
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272298479, "end": 21272298481},
+          "source-locator": "/root/souffle-src/tests/example/grid/grid.dl [26:1-26:84]"
+         }
+        },
+        "indices(i,(j+1)) :- \n   indices(i,j),\n   parameters(I,J),\n   i >= 0,\n   i < I,\n   j >= 0,\n   (j+1) < J.": {
+         "0": {
+          "maxRSS": {
+           "post": 12692,
+           "pre": 12692
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272298488, "end": 21272298499},
+          "source-locator": "/root/souffle-src/tests/example/grid/grid.dl [27:1-27:84]"
+         }
+        }
+       },
+       "runtime": { "start": 21272298479, "end": 21272298506}
+      }
+     },
+     "maxRSS": {
+      "post": 12436,
+      "pre": 12248
+     },
+     "non-recursive-rule": {
+      "indices(0,0).": {
+       "maxRSS": {
+        "post": 12436,
+        "pre": 12248
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 21272298319, "end": 21272298323},
+       "source-locator": "/root/souffle-src/tests/example/grid/grid.dl [25:1-25:15]"
+      }
+     },
+     "num-tuples": 1,
+     "reads": 18,
+     "runtime": { "start": 21272298318, "end": 21272298330},
+     "savetime": { "start": 21272298514, "end": 21272298575},
+     "source-locator": "/root/souffle-src/tests/example/grid/grid.dl [23:7-23:14]"
+    },
+    "left": {
+     "maxRSS": {
+      "post": 12692,
+      "pre": 12692
+     },
+     "non-recursive-rule": {
+      "left(i,j,NULL) :- \n   element(i,j,_),\n   !element(i,(j-1),_),\n   default(NULL).": {
+       "atom-frequency": {
+        "left(i,j,NULL) :- \n   element(i,j,_),\n   !element(i,(j-1),_),\n   default(NULL).": {
+         "default": {
+          "level": 1,
+          "num-tuples": 0
+         },
+         "element": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12692,
+        "pre": 12692
+       },
+       "num-tuples": 3,
+       "runtime": { "start": 21272298721, "end": 21272298724},
+       "source-locator": "/root/souffle-src/tests/example/grid/grid.dl [47:1-47:74]"
+      },
+      "left(i,j,x) :- \n   element(i,j,_),\n   element(i, _tmp_5,x),\n    _tmp_5 = (j-1).": {
+       "atom-frequency": {
+        "left(i,j,x) :- \n   element(i,j,_),\n   element(i, _tmp_5,x),\n    _tmp_5 = (j-1).": {
+         "element": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12692,
+        "pre": 12692
+       },
+       "num-tuples": 6,
+       "runtime": { "start": 21272298731, "end": 21272298733},
+       "source-locator": "/root/souffle-src/tests/example/grid/grid.dl [48:1-48:55]"
+      }
+     },
+     "num-tuples": 9,
+     "reads": 0,
+     "runtime": { "start": 21272298712, "end": 21272298737},
+     "source-locator": "/root/souffle-src/tests/example/grid/grid.dl [46:7-46:11]"
+    },
+    "neighbourhood": {
+     "maxRSS": {
+      "post": 12820,
+      "pre": 12692
+     },
+     "non-recursive-rule": {
+      "neighbourhood(i,j,ul,u,ur,l,x,r,dl,d,dr) :- \n   up_left(i,j,ul),\n   up(i,j,u),\n   up_right(i,j,ur),\n   left(i,j,l),\n   element(i,j,x),\n   right(i,j,r),\n   down_left(i,j,dl),\n   down(i,j,d),\n   down_right(i,j,dr).": {
+       "atom-frequency": {
+        "neighbourhood(i,j,ul,u,ur,l,x,r,dl,d,dr) :- \n   up_left(i,j,ul),\n   up(i,j,u),\n   up_right(i,j,ur),\n   left(i,j,l),\n   element(i,j,x),\n   right(i,j,r),\n   down_left(i,j,dl),\n   down(i,j,d),\n   down_right(i,j,dr).": {
+         "down": {
+          "level": 7,
+          "num-tuples": 0
+         },
+         "down_left": {
+          "level": 6,
+          "num-tuples": 0
+         },
+         "down_right": {
+          "level": 8,
+          "num-tuples": 0
+         },
+         "element": {
+          "level": 4,
+          "num-tuples": 0
+         },
+         "left": {
+          "level": 3,
+          "num-tuples": 0
+         },
+         "right": {
+          "level": 5,
+          "num-tuples": 0
+         },
+         "up": {
+          "level": 1,
+          "num-tuples": 0
+         },
+         "up_left": {
+          "level": 0,
+          "num-tuples": 0
+         },
+         "up_right": {
+          "level": 2,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12820,
+        "pre": 12692
+       },
+       "num-tuples": 9,
+       "runtime": { "start": 21272298835, "end": 21272298848},
+       "source-locator": "/root/souffle-src/tests/example/grid/grid.dl [81:1-84:59]"
+      }
+     },
+     "num-tuples": 9,
+     "reads": 0,
+     "runtime": { "start": 21272298835, "end": 21272298854},
+     "savetime": { "start": 21272298857, "end": 21272298915},
+     "source-locator": "/root/souffle-src/tests/example/grid/grid.dl [76:7-76:20]"
+    },
+    "parameters": {
+     "loadtime": { "start": 21272298253, "end": 21272298283},
+     "num-tuples": 1,
+     "reads": 0,
+     "source-locator": "/root/souffle-src/tests/example/grid/grid.dl [15:7-15:17]"
+    },
+    "right": {
+     "maxRSS": {
+      "post": 12692,
+      "pre": 12692
+     },
+     "non-recursive-rule": {
+      "right(i,j,NULL) :- \n   element(i,j,_),\n   !element(i,(j+1),_),\n   default(NULL).": {
+       "atom-frequency": {
+        "right(i,j,NULL) :- \n   element(i,j,_),\n   !element(i,(j+1),_),\n   default(NULL).": {
+         "default": {
+          "level": 1,
+          "num-tuples": 0
+         },
+         "element": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12692,
+        "pre": 12692
+       },
+       "num-tuples": 3,
+       "runtime": { "start": 21272298742, "end": 21272298744},
+       "source-locator": "/root/souffle-src/tests/example/grid/grid.dl [52:1-52:75]"
+      },
+      "right(i,j,x) :- \n   element(i,j,_),\n   element(i, _tmp_6,x),\n    _tmp_6 = (j+1).": {
+       "atom-frequency": {
+        "right(i,j,x) :- \n   element(i,j,_),\n   element(i, _tmp_6,x),\n    _tmp_6 = (j+1).": {
+         "element": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12692,
+        "pre": 12692
+       },
+       "num-tuples": 6,
+       "runtime": { "start": 21272298748, "end": 21272298752},
+       "source-locator": "/root/souffle-src/tests/example/grid/grid.dl [53:1-53:56]"
+      }
+     },
+     "num-tuples": 9,
+     "reads": 0,
+     "runtime": { "start": 21272298741, "end": 21272298756},
+     "source-locator": "/root/souffle-src/tests/example/grid/grid.dl [51:7-51:12]"
+    },
+    "up": {
+     "maxRSS": {
+      "post": 12692,
+      "pre": 12692
+     },
+     "non-recursive-rule": {
+      "up(i,j,NULL) :- \n   element(i,j,_),\n   !element((i-1),j,_),\n   default(NULL).": {
+       "atom-frequency": {
+        "up(i,j,NULL) :- \n   element(i,j,_),\n   !element((i-1),j,_),\n   default(NULL).": {
+         "default": {
+          "level": 1,
+          "num-tuples": 0
+         },
+         "element": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12692,
+        "pre": 12692
+       },
+       "num-tuples": 3,
+       "runtime": { "start": 21272298768, "end": 21272298770},
+       "source-locator": "/root/souffle-src/tests/example/grid/grid.dl [37:1-37:72]"
+      },
+      "up(i,j,x) :- \n   element(i,j,_),\n   element( _tmp_7,j,x),\n    _tmp_7 = (i-1).": {
+       "atom-frequency": {
+        "up(i,j,x) :- \n   element(i,j,_),\n   element( _tmp_7,j,x),\n    _tmp_7 = (i-1).": {
+         "element": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12692,
+        "pre": 12692
+       },
+       "num-tuples": 6,
+       "runtime": { "start": 21272298778, "end": 21272298780},
+       "source-locator": "/root/souffle-src/tests/example/grid/grid.dl [38:1-38:53]"
+      }
+     },
+     "num-tuples": 9,
+     "reads": 0,
+     "runtime": { "start": 21272298759, "end": 21272298785},
+     "source-locator": "/root/souffle-src/tests/example/grid/grid.dl [36:7-36:9]"
+    },
+    "up_left": {
+     "maxRSS": {
+      "post": 12692,
+      "pre": 12692
+     },
+     "non-recursive-rule": {
+      "up_left(i,j,NULL) :- \n   element(i,j,_),\n   !element((i-1),(j-1),_),\n   default(NULL).": {
+       "atom-frequency": {
+        "up_left(i,j,NULL) :- \n   element(i,j,_),\n   !element((i-1),(j-1),_),\n   default(NULL).": {
+         "default": {
+          "level": 1,
+          "num-tuples": 0
+         },
+         "element": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12692,
+        "pre": 12692
+       },
+       "num-tuples": 5,
+       "runtime": { "start": 21272298798, "end": 21272298800},
+       "source-locator": "/root/souffle-src/tests/example/grid/grid.dl [57:1-57:79]"
+      },
+      "up_left(i,j,x) :- \n   element(i,j,_),\n   element( _tmp_8, _tmp_9,x),\n    _tmp_8 = (i-1),\n    _tmp_9 = (j-1).": {
+       "atom-frequency": {
+        "up_left(i,j,x) :- \n   element(i,j,_),\n   element( _tmp_8, _tmp_9,x),\n    _tmp_8 = (i-1),\n    _tmp_9 = (j-1).": {
+         "element": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12692,
+        "pre": 12692
+       },
+       "num-tuples": 4,
+       "runtime": { "start": 21272298808, "end": 21272298810},
+       "source-locator": "/root/souffle-src/tests/example/grid/grid.dl [58:1-58:60]"
+      }
+     },
+     "num-tuples": 9,
+     "reads": 0,
+     "runtime": { "start": 21272298789, "end": 21272298815},
+     "source-locator": "/root/souffle-src/tests/example/grid/grid.dl [56:7-56:14]"
+    },
+    "up_right": {
+     "maxRSS": {
+      "post": 12692,
+      "pre": 12692
+     },
+     "non-recursive-rule": {
+      "up_right(i,j,NULL) :- \n   element(i,j,_),\n   !element((i-1),(j+1),_),\n   default(NULL).": {
+       "atom-frequency": {
+        "up_right(i,j,NULL) :- \n   element(i,j,_),\n   !element((i-1),(j+1),_),\n   default(NULL).": {
+         "default": {
+          "level": 1,
+          "num-tuples": 0
+         },
+         "element": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12692,
+        "pre": 12692
+       },
+       "num-tuples": 5,
+       "runtime": { "start": 21272298819, "end": 21272298821},
+       "source-locator": "/root/souffle-src/tests/example/grid/grid.dl [62:1-62:80]"
+      },
+      "up_right(i,j,x) :- \n   element(i,j,_),\n   element( _tmp_10, _tmp_11,x),\n    _tmp_10 = (i-1),\n    _tmp_11 = (j+1).": {
+       "atom-frequency": {
+        "up_right(i,j,x) :- \n   element(i,j,_),\n   element( _tmp_10, _tmp_11,x),\n    _tmp_10 = (i-1),\n    _tmp_11 = (j+1).": {
+         "element": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12692,
+        "pre": 12692
+       },
+       "num-tuples": 4,
+       "runtime": { "start": 21272298826, "end": 21272298827},
+       "source-locator": "/root/souffle-src/tests/example/grid/grid.dl [63:1-63:61]"
+      }
+     },
+     "num-tuples": 9,
+     "reads": 0,
+     "runtime": { "start": 21272298819, "end": 21272298831},
+     "source-locator": "/root/souffle-src/tests/example/grid/grid.dl [61:7-61:15]"
+    },
+    "values": {
+     "loadtime": { "start": 21272298287, "end": 21272298312},
+     "num-tuples": 2,
+     "reads": 9,
+     "source-locator": "/root/souffle-src/tests/example/grid/grid.dl [19:7-19:13]"
+    }
+   },
+   "runtime": { "start": 21272298156, "end": 21272298919},
+   "starttime": { "time": 21272298116},
+   "usage": {
+    "timepoint": {
+     "21272298240": {
+      "maxRSS": 12248,
+      "systemtime": 3174,
+      "usertime": 6348
+     },
+     "21272298383": {
+      "maxRSS": 12692,
+      "systemtime": 3259,
+      "usertime": 6519
+     },
+     "21272298392": {
+      "maxRSS": 12692,
+      "systemtime": 3266,
+      "usertime": 6532
+     },
+     "21272298396": {
+      "maxRSS": 12692,
+      "systemtime": 3269,
+      "usertime": 6538
+     },
+     "21272298405": {
+      "maxRSS": 12692,
+      "systemtime": 3273,
+      "usertime": 6546
+     },
+     "21272298433": {
+      "maxRSS": 12692,
+      "systemtime": 3284,
+      "usertime": 6569
+     },
+     "21272298455": {
+      "maxRSS": 12692,
+      "systemtime": 3292,
+      "usertime": 6584
+     },
+     "21272298481": {
+      "maxRSS": 12692,
+      "systemtime": 3306,
+      "usertime": 6612
+     },
+     "21272298513": {
+      "maxRSS": 12692,
+      "systemtime": 3319,
+      "usertime": 6638
+     },
+     "21272298649": {
+      "maxRSS": 12692,
+      "systemtime": 3369,
+      "usertime": 6739
+     },
+     "21272298672": {
+      "maxRSS": 12692,
+      "systemtime": 3380,
+      "usertime": 6761
+     },
+     "21272298702": {
+      "maxRSS": 12692,
+      "systemtime": 3393,
+      "usertime": 6787
+     },
+     "21272298736": {
+      "maxRSS": 12692,
+      "systemtime": 3407,
+      "usertime": 6814
+     },
+     "21272298742": {
+      "maxRSS": 12692,
+      "systemtime": 3412,
+      "usertime": 6824
+     },
+     "21272298753": {
+      "maxRSS": 12692,
+      "systemtime": 3418,
+      "usertime": 6836
+     },
+     "21272298777": {
+      "maxRSS": 12692,
+      "systemtime": 3426,
+      "usertime": 6852
+     },
+     "21272298879": {
+      "maxRSS": 12820,
+      "systemtime": 3459,
+      "usertime": 6919
+     }
+    }
+   }
+  }
+ }
+}

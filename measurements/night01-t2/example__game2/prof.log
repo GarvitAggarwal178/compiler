@@ -1,0 +1,294 @@
+{
+ "root": {
+  "program": {
+   "configuration": {
+    "": "/root/souffle-src/tests/example/game2/game2.dl",
+    "fact-dir": "/root/souffle-src/tests/example/game2",
+    "include-dir": ".",
+    "jobs": "1",
+    "libraries": "functors",
+    "library-dir": ".",
+    "output-dir": "/root/compiler/measurements/night01-t2/example__game2",
+    "profile": "prof.log",
+    "relationCount": "5",
+    "ruleCount": "12",
+    "version": "2.5",
+    "warn": "all",
+    "wno": "none"
+   },
+   "relation": {
+    "canMove": {
+     "maxRSS": {
+      "post": 11840,
+      "pre": 11840
+     },
+     "non-recursive-rule": {
+      "canMove(X) :- \n   move(X,_).": {
+       "atom-frequency": {
+        "canMove(X) :- \n   move(X,_).": {
+         "move": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 11840,
+        "pre": 11840
+       },
+       "num-tuples": 3,
+       "runtime": { "start": 21272285265, "end": 21272285269},
+       "source-locator": "/root/souffle-src/tests/example/game2/game2.dl [26:1-26:24]"
+      }
+     },
+     "num-tuples": 3,
+     "reads": 6,
+     "runtime": { "start": 21272285249, "end": 21272285277},
+     "savetime": { "start": 21272285281, "end": 21272285322},
+     "source-locator": "/root/souffle-src/tests/example/game2/game2.dl [13:7-13:14]"
+    },
+    "move": {
+     "maxRSS": {
+      "post": 11712,
+      "pre": 11584
+     },
+     "non-recursive-rule": {
+      "move(\"1\",\"2\").": {
+       "maxRSS": {
+        "post": 11712,
+        "pre": 11584
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 21272285130, "end": 21272285134},
+       "source-locator": "/root/souffle-src/tests/example/game2/game2.dl [20:1-20:15]"
+      },
+      "move(\"1\",\"3\").": {
+       "maxRSS": {
+        "post": 11712,
+        "pre": 11712
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 21272285164, "end": 21272285164},
+       "source-locator": "/root/souffle-src/tests/example/game2/game2.dl [23:1-23:15]"
+      },
+      "move(\"1\",\"5\").": {
+       "maxRSS": {
+        "post": 11712,
+        "pre": 11712
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 21272285168, "end": 21272285168},
+       "source-locator": "/root/souffle-src/tests/example/game2/game2.dl [24:1-24:15]"
+      },
+      "move(\"2\",\"3\").": {
+       "maxRSS": {
+        "post": 11712,
+        "pre": 11712
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 21272285153, "end": 21272285154},
+       "source-locator": "/root/souffle-src/tests/example/game2/game2.dl [21:1-21:15]"
+      },
+      "move(\"3\",\"4\").": {
+       "maxRSS": {
+        "post": 11712,
+        "pre": 11712
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 21272285159, "end": 21272285160},
+       "source-locator": "/root/souffle-src/tests/example/game2/game2.dl [22:1-22:15]"
+      }
+     },
+     "num-tuples": 5,
+     "reads": 0,
+     "runtime": { "start": 21272285129, "end": 21272285172},
+     "savetime": { "start": 21272285176, "end": 21272285245},
+     "source-locator": "/root/souffle-src/tests/example/game2/game2.dl [9:7-9:11]"
+    },
+    "odd_move": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 21272285372, "end": 21272285373},
+       "maxRSS": {
+        "post": 11968,
+        "pre": 11840
+       },
+       "num-tuples": 1,
+       "recursive-rule": {
+        "odd_move(X,Y) :- \n   move(X,Z1),\n   move(Z1,Z2),\n   odd_move(Z2,Y).": {
+         "0": {
+          "atom-frequency": {
+           "@new_odd_move(X,Y) :- \n   move(X,Z1),\n   move(Z1,Z2),\n   @delta_odd_move(Z2,Y).": {
+            "@delta_odd_move": {
+             "level": 2,
+             "num-tuples": 0
+            },
+            "move": {
+             "level": 0,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 11968,
+           "pre": 11840
+          },
+          "num-tuples": 1,
+          "runtime": { "start": 21272285350, "end": 21272285356},
+          "source-locator": "/root/souffle-src/tests/example/game2/game2.dl [34:1-34:58]"
+         }
+        }
+       },
+       "runtime": { "start": 21272285349, "end": 21272285364}
+      },
+      "1": {
+       "maxRSS": {
+        "post": 11968,
+        "pre": 11968
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "odd_move(X,Y) :- \n   move(X,Z1),\n   move(Z1,Z2),\n   odd_move(Z2,Y).": {
+         "0": {
+          "maxRSS": {
+           "post": 11968,
+           "pre": 11968
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272285376, "end": 21272285377},
+          "source-locator": "/root/souffle-src/tests/example/game2/game2.dl [34:1-34:58]"
+         }
+        }
+       },
+       "runtime": { "start": 21272285376, "end": 21272285383}
+      }
+     },
+     "maxRSS": {
+      "post": 11840,
+      "pre": 11840
+     },
+     "non-recursive-rule": {
+      "odd_move(X,Y) :- \n   move(X,Y).": {
+       "atom-frequency": {
+        "odd_move(X,Y) :- \n   move(X,Y).": {
+         "move": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 11840,
+        "pre": 11840
+       },
+       "num-tuples": 5,
+       "runtime": { "start": 21272285335, "end": 21272285337},
+       "source-locator": "/root/souffle-src/tests/example/game2/game2.dl [32:1-32:28]"
+      }
+     },
+     "num-tuples": 5,
+     "reads": 1,
+     "runtime": { "start": 21272285326, "end": 21272285344},
+     "savetime": { "start": 21272285388, "end": 21272285405},
+     "source-locator": "/root/souffle-src/tests/example/game2/game2.dl [11:7-11:15]"
+    },
+    "possible_winning": {
+     "maxRSS": {
+      "post": 11968,
+      "pre": 11968
+     },
+     "non-recursive-rule": {
+      "possible_winning(X) :- \n   odd_move(X,Y),\n   !canMove(Y).": {
+       "atom-frequency": {
+        "possible_winning(X) :- \n   odd_move(X,Y),\n   !canMove(Y).": {
+         "odd_move": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 11968,
+        "pre": 11968
+       },
+       "num-tuples": 2,
+       "runtime": { "start": 21272285408, "end": 21272285409},
+       "source-locator": "/root/souffle-src/tests/example/game2/game2.dl [28:1-28:50]"
+      }
+     },
+     "num-tuples": 2,
+     "reads": 5,
+     "runtime": { "start": 21272285407, "end": 21272285415},
+     "savetime": { "start": 21272285418, "end": 21272285442},
+     "source-locator": "/root/souffle-src/tests/example/game2/game2.dl [15:7-15:23]"
+    },
+    "winning": {
+     "maxRSS": {
+      "post": 11968,
+      "pre": 11968
+     },
+     "non-recursive-rule": {
+      "winning(X) :- \n   move(X,Y),\n   !possible_winning(Y).": {
+       "atom-frequency": {
+        "winning(X) :- \n   move(X,Y),\n   !possible_winning(Y).": {
+         "move": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 11968,
+        "pre": 11968
+       },
+       "num-tuples": 2,
+       "runtime": { "start": 21272285457, "end": 21272285459},
+       "source-locator": "/root/souffle-src/tests/example/game2/game2.dl [30:1-30:46]"
+      }
+     },
+     "num-tuples": 2,
+     "reads": 0,
+     "runtime": { "start": 21272285447, "end": 21272285467},
+     "savetime": { "start": 21272285470, "end": 21272285494},
+     "source-locator": "/root/souffle-src/tests/example/game2/game2.dl [17:7-17:14]"
+    }
+   },
+   "runtime": { "start": 21272285125, "end": 21272285498},
+   "starttime": { "time": 21272285097},
+   "usage": {
+    "timepoint": {
+     "21272285214": {
+      "maxRSS": 11712,
+      "systemtime": 2518,
+      "usertime": 2518
+     },
+     "21272285286": {
+      "maxRSS": 11840,
+      "systemtime": 2587,
+      "usertime": 2587
+     },
+     "21272285406": {
+      "maxRSS": 11968,
+      "systemtime": 2656,
+      "usertime": 2656
+     },
+     "21272285442": {
+      "maxRSS": 11968,
+      "systemtime": 2668,
+      "usertime": 2668
+     },
+     "21272285465": {
+      "maxRSS": 11968,
+      "systemtime": 2692,
+      "usertime": 2692
+     },
+     "21272285487": {
+      "maxRSS": 11968,
+      "systemtime": 2701,
+      "usertime": 2701
+     }
+    }
+   }
+  }
+ }
+}

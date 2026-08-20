@@ -1,0 +1,141 @@
+{
+ "root": {
+  "program": {
+   "configuration": {
+    "": "/root/souffle-src/tests/provenance/constraints/constraints.dl",
+    "fact-dir": "/root/souffle-src/tests/provenance/constraints/facts",
+    "include-dir": ".",
+    "jobs": "1",
+    "libraries": "functors",
+    "library-dir": ".",
+    "output-dir": "/root/compiler/measurements/night01-t2/provenance__constraints",
+    "profile": "prof.log",
+    "provenance": "explain",
+    "relationCount": "5",
+    "ruleCount": "15",
+    "version": "2.5",
+    "warn": "all",
+    "wno": "none"
+   },
+   "relation": {
+    "Patient": {
+     "loadtime": { "start": 21272543186, "end": 21272543281},
+     "num-tuples": 3,
+     "reads": 0,
+     "source-locator": "/root/souffle-src/tests/provenance/constraints/constraints.dl [17:7-17:14]"
+    },
+    "Rule": {
+     "maxRSS": {
+      "post": 12108,
+      "pre": 12108
+     },
+     "non-recursive-rule": {
+      "Rule(0).": {
+       "maxRSS": {
+        "post": 12108,
+        "pre": 12108
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 21272543302, "end": 21272543305},
+       "source-locator": "/root/souffle-src/tests/provenance/constraints/constraints.dl [12:1-12:9]"
+      }
+     },
+     "num-tuples": 1,
+     "reads": 0,
+     "runtime": { "start": 21272543290, "end": 21272543314},
+     "source-locator": "/root/souffle-src/tests/provenance/constraints/constraints.dl [11:7-11:11]"
+    },
+    "Violation": {
+     "maxRSS": {
+      "post": 12420,
+      "pre": 12108
+     },
+     "non-recursive-rule": {
+      "Violation(ssn,p1,p2) :- \n   Patient(ssn,p1),\n   !neg(ssn),\n   Patient(ssn,p2),\n   p1 != p2,\n   Rule(0).": {
+       "atom-frequency": {
+        "Violation(ssn,p1,p2) :- \n   Patient(ssn,p1),\n   !neg(ssn),\n   Patient(ssn,p2),\n   p1 != p2,\n   Rule(0).": {
+         "Patient": {
+          "level": 1,
+          "num-tuples": 0
+         },
+         "Rule": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12420,
+        "pre": 12108
+       },
+       "num-tuples": 2,
+       "runtime": { "start": 21272543329, "end": 21272543359},
+       "source-locator": "/root/souffle-src/tests/provenance/constraints/constraints.dl [23:1-23:92]"
+      }
+     },
+     "num-tuples": 2,
+     "reads": 0,
+     "runtime": { "start": 21272543329, "end": 21272543368},
+     "savetime": { "start": 21272543373, "end": 21272543442},
+     "source-locator": "/root/souffle-src/tests/provenance/constraints/constraints.dl [20:7-20:16]"
+    },
+    "Violation.@info.1": {
+     "non-recursive-rule": {
+      "@info.clause[Violation(ssn,p1,p2) :- \n   Patient(ssn,p1),\n   !neg(ssn),\n   Patient(ssn,p2),\n   p1 != p2,\n   Rule(0).]": {
+       "maxRSS": {
+        "post": 12548,
+        "pre": 12420
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 21272543449, "end": 21272543474},
+       "source-locator": "/root/souffle-src/tests/provenance/constraints/constraints.dl [23:1-23:92]"
+      }
+     },
+     "reads": 0
+    },
+    "neg": {
+     "maxRSS": {
+      "post": 12108,
+      "pre": 12108
+     },
+     "non-recursive-rule": {
+      "neg(121).": {
+       "maxRSS": {
+        "post": 12108,
+        "pre": 12108
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 21272543320, "end": 21272543321},
+       "source-locator": "/root/souffle-src/tests/provenance/constraints/constraints.dl [15:1-15:10]"
+      }
+     },
+     "num-tuples": 1,
+     "reads": 3,
+     "runtime": { "start": 21272543320, "end": 21272543325},
+     "source-locator": "/root/souffle-src/tests/provenance/constraints/constraints.dl [14:7-14:10]"
+    }
+   },
+   "runtime": { "start": 21272543182, "end": 21272543447},
+   "starttime": { "time": 21272543154},
+   "usage": {
+    "timepoint": {
+     "21272543227": {
+      "maxRSS": 11968,
+      "systemtime": 0,
+      "usertime": 4114
+     },
+     "21272543360": {
+      "maxRSS": 12420,
+      "systemtime": 0,
+      "usertime": 4317
+     },
+     "21272543400": {
+      "maxRSS": 12420,
+      "systemtime": 0,
+      "usertime": 4342
+     }
+    }
+   }
+  }
+ }
+}

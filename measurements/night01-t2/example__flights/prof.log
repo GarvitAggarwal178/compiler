@@ -1,0 +1,315 @@
+{
+ "root": {
+  "program": {
+   "configuration": {
+    "": "/root/souffle-src/tests/example/flights/flights.dl",
+    "fact-dir": "/root/souffle-src/tests/example/flights",
+    "include-dir": ".",
+    "jobs": "1",
+    "libraries": "functors",
+    "library-dir": ".",
+    "output-dir": "/root/compiler/measurements/night01-t2/example__flights",
+    "profile": "prof.log",
+    "relationCount": "4",
+    "ruleCount": "17",
+    "version": "2.5",
+    "warn": "all",
+    "wno": "none"
+   },
+   "relation": {
+    "QAflies": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 21272264912, "end": 21272264913},
+       "maxRSS": {
+        "post": 12092,
+        "pre": 11964
+       },
+       "num-tuples": 1,
+       "recursive-rule": {
+        "QAflies(X,Y) :- \n   flight(\"QA\",X,Z),\n   QAflies(Z,Y).": {
+         "0": {
+          "atom-frequency": {
+           "@new_QAflies(X,Y) :- \n   flight(\"QA\",X,Z),\n   @delta_QAflies(Z,Y).": {
+            "@delta_QAflies": {
+             "level": 1,
+             "num-tuples": 0
+            },
+            "flight": {
+             "level": 0,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 12092,
+           "pre": 11964
+          },
+          "num-tuples": 1,
+          "runtime": { "start": 21272264881, "end": 21272264886},
+          "source-locator": "/root/souffle-src/tests/example/flights/flights.dl [12:1-12:48]"
+         }
+        }
+       },
+       "runtime": { "start": 21272264881, "end": 21272264905}
+      },
+      "1": {
+       "maxRSS": {
+        "post": 12092,
+        "pre": 12092
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "QAflies(X,Y) :- \n   flight(\"QA\",X,Z),\n   QAflies(Z,Y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12092,
+           "pre": 12092
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272264920, "end": 21272264921},
+          "source-locator": "/root/souffle-src/tests/example/flights/flights.dl [12:1-12:48]"
+         }
+        }
+       },
+       "runtime": { "start": 21272264919, "end": 21272264926}
+      }
+     },
+     "maxRSS": {
+      "post": 11964,
+      "pre": 11964
+     },
+     "non-recursive-rule": {
+      "QAflies(X,Y) :- \n   flight(\"QA\",X,Y).": {
+       "atom-frequency": {
+        "QAflies(X,Y) :- \n   flight(\"QA\",X,Y).": {
+         "flight": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 11964,
+        "pre": 11964
+       },
+       "num-tuples": 4,
+       "runtime": { "start": 21272264860, "end": 21272264865},
+       "source-locator": "/root/souffle-src/tests/example/flights/flights.dl [11:1-11:34]"
+      }
+     },
+     "num-tuples": 4,
+     "reads": 2,
+     "runtime": { "start": 21272264850, "end": 21272264876},
+     "savetime": { "start": 21272264931, "end": 21272264992},
+     "source-locator": "/root/souffle-src/tests/example/flights/flights.dl [4:7-4:14]"
+    },
+    "QAonly": {
+     "maxRSS": {
+      "post": 12092,
+      "pre": 12092
+     },
+     "non-recursive-rule": {
+      "QAonly(X,Y) :- \n   QAflies(X,Y),\n   !VAflies(X,Y).": {
+       "atom-frequency": {
+        "QAonly(X,Y) :- \n   QAflies(X,Y),\n   !VAflies(X,Y).": {
+         "QAflies": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12092,
+        "pre": 12092
+       },
+       "num-tuples": 3,
+       "runtime": { "start": 21272265060, "end": 21272265061},
+       "source-locator": "/root/souffle-src/tests/example/flights/flights.dl [17:1-17:45]"
+      }
+     },
+     "num-tuples": 3,
+     "reads": 0,
+     "runtime": { "start": 21272265059, "end": 21272265066},
+     "savetime": { "start": 21272265069, "end": 21272265082},
+     "source-locator": "/root/souffle-src/tests/example/flights/flights.dl [8:7-8:13]"
+    },
+    "VAflies": {
+     "iteration": {
+      "0": {
+       "maxRSS": {
+        "post": 12092,
+        "pre": 12092
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "VAflies(X,Y) :- \n   flight(\"VA\",X,Z),\n   VAflies(Z,Y).": {
+         "0": {
+          "atom-frequency": {
+           "@new_VAflies(X,Y) :- \n   flight(\"VA\",X,Z),\n   @delta_VAflies(Z,Y).": {
+            "@delta_VAflies": {
+             "level": 1,
+             "num-tuples": 0
+            },
+            "flight": {
+             "level": 0,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 12092,
+           "pre": 12092
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272265021, "end": 21272265022},
+          "source-locator": "/root/souffle-src/tests/example/flights/flights.dl [15:1-15:48]"
+         }
+        }
+       },
+       "runtime": { "start": 21272265020, "end": 21272265029}
+      }
+     },
+     "maxRSS": {
+      "post": 12092,
+      "pre": 12092
+     },
+     "non-recursive-rule": {
+      "VAflies(X,Y) :- \n   flight(\"VA\",X,Y).": {
+       "atom-frequency": {
+        "VAflies(X,Y) :- \n   flight(\"VA\",X,Y).": {
+         "flight": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12092,
+        "pre": 12092
+       },
+       "num-tuples": 4,
+       "runtime": { "start": 21272265006, "end": 21272265007},
+       "source-locator": "/root/souffle-src/tests/example/flights/flights.dl [14:1-14:34]"
+      }
+     },
+     "num-tuples": 4,
+     "reads": 6,
+     "runtime": { "start": 21272264996, "end": 21272265015},
+     "savetime": { "start": 21272265036, "end": 21272265057},
+     "source-locator": "/root/souffle-src/tests/example/flights/flights.dl [6:7-6:14]"
+    },
+    "flight": {
+     "maxRSS": {
+      "post": 11964,
+      "pre": 11836
+     },
+     "non-recursive-rule": {
+      "flight(\"QA\",\"AU\",\"CHI\").": {
+       "maxRSS": {
+        "post": 11964,
+        "pre": 11836
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 21272264784, "end": 21272264789},
+       "source-locator": "/root/souffle-src/tests/example/flights/flights.dl [19:1-19:25]"
+      },
+      "flight(\"QA\",\"AU\",\"JPN\").": {
+       "maxRSS": {
+        "post": 11964,
+        "pre": 11964
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 21272264797, "end": 21272264798},
+       "source-locator": "/root/souffle-src/tests/example/flights/flights.dl [20:1-20:25]"
+      },
+      "flight(\"QA\",\"JPN\",\"CHI\").": {
+       "maxRSS": {
+        "post": 11964,
+        "pre": 11964
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 21272264808, "end": 21272264823},
+       "source-locator": "/root/souffle-src/tests/example/flights/flights.dl [22:1-22:26]"
+      },
+      "flight(\"QA\",\"JPN\",\"DEN\").": {
+       "maxRSS": {
+        "post": 11964,
+        "pre": 11964
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 21272264804, "end": 21272264805},
+       "source-locator": "/root/souffle-src/tests/example/flights/flights.dl [21:1-21:26]"
+      },
+      "flight(\"VA\",\"AU\",\"CHI\").": {
+       "maxRSS": {
+        "post": 11964,
+        "pre": 11964
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 21272264829, "end": 21272264830},
+       "source-locator": "/root/souffle-src/tests/example/flights/flights.dl [24:1-24:25]"
+      },
+      "flight(\"VA\",\"DEN\",\"ZA\").": {
+       "maxRSS": {
+        "post": 11964,
+        "pre": 11964
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 21272264842, "end": 21272264842},
+       "source-locator": "/root/souffle-src/tests/example/flights/flights.dl [27:1-27:25]"
+      },
+      "flight(\"VA\",\"JPN\",\"DEN\").": {
+       "maxRSS": {
+        "post": 11964,
+        "pre": 11964
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 21272264838, "end": 21272264838},
+       "source-locator": "/root/souffle-src/tests/example/flights/flights.dl [26:1-26:26]"
+      },
+      "flight(\"VA\",\"JPN\",\"ZA\").": {
+       "maxRSS": {
+        "post": 11964,
+        "pre": 11964
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 21272264834, "end": 21272264834},
+       "source-locator": "/root/souffle-src/tests/example/flights/flights.dl [25:1-25:25]"
+      }
+     },
+     "num-tuples": 8,
+     "reads": 0,
+     "runtime": { "start": 21272264783, "end": 21272264846},
+     "source-locator": "/root/souffle-src/tests/example/flights/flights.dl [3:7-3:13]"
+    }
+   },
+   "runtime": { "start": 21272264778, "end": 21272265084},
+   "starttime": { "time": 21272264751},
+   "usage": {
+    "timepoint": {
+     "21272264784": {
+      "maxRSS": 11836,
+      "systemtime": 2115,
+      "usertime": 2115
+     },
+     "21272264839": {
+      "maxRSS": 11964,
+      "systemtime": 2159,
+      "usertime": 2159
+     },
+     "21272264935": {
+      "maxRSS": 12092,
+      "systemtime": 2213,
+      "usertime": 2213
+     },
+     "21272265068": {
+      "maxRSS": 12092,
+      "systemtime": 2289,
+      "usertime": 2289
+     }
+    }
+   }
+  }
+ }
+}

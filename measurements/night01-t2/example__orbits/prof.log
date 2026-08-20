@@ -1,0 +1,284 @@
+{
+ "root": {
+  "program": {
+   "configuration": {
+    "": "/root/souffle-src/tests/example/orbits/orbits.dl",
+    "fact-dir": "/root/souffle-src/tests/example/orbits",
+    "include-dir": ".",
+    "jobs": "1",
+    "libraries": "functors",
+    "library-dir": ".",
+    "output-dir": "/root/compiler/measurements/night01-t2/example__orbits",
+    "profile": "prof.log",
+    "relationCount": "5",
+    "ruleCount": "10",
+    "version": "2.5",
+    "warn": "all",
+    "wno": "none"
+   },
+   "relation": {
+    "intermediate": {
+     "maxRSS": {
+      "post": 12040,
+      "pre": 12040
+     },
+     "non-recursive-rule": {
+      "intermediate(X,Y) :- \n   orbits(X,Z),\n   orbits(Z,Y).": {
+       "atom-frequency": {
+        "intermediate(X,Y) :- \n   orbits(X,Z),\n   orbits(Z,Y).": {
+         "orbits": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12040,
+        "pre": 12040
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 21272322518, "end": 21272322520},
+       "source-locator": "/root/souffle-src/tests/example/orbits/orbits.dl [36:1-38:15]"
+      }
+     },
+     "num-tuples": 1,
+     "reads": 3,
+     "runtime": { "start": 21272322518, "end": 21272322526},
+     "savetime": { "start": 21272322529, "end": 21272322541},
+     "source-locator": "/root/souffle-src/tests/example/orbits/orbits.dl [13:7-13:19]"
+    },
+    "orbits": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 21272322367, "end": 21272322368},
+       "maxRSS": {
+        "post": 12040,
+        "pre": 11784
+       },
+       "num-tuples": 1,
+       "recursive-rule": {
+        "orbits(X,Y) :- \n   orbits(X,Z),\n   orbits(Z,Y).": {
+         "0": {
+          "atom-frequency": {
+           "@new_orbits(X,Y) :- \n   @delta_orbits(X,Z),\n   orbits(Z,Y).": {
+            "@delta_orbits": {
+             "level": 0,
+             "num-tuples": 0
+            },
+            "orbits": {
+             "level": 1,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 12040,
+           "pre": 11784
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272322334, "end": 21272322342},
+          "source-locator": "/root/souffle-src/tests/example/orbits/orbits.dl [22:1-24:15]"
+         },
+         "1": {
+          "atom-frequency": {
+           "@new_orbits(X,Y) :- \n   orbits(X,Z),\n   @delta_orbits(Z,Y).": {
+            "@delta_orbits": {
+             "level": 1,
+             "num-tuples": 0
+            },
+            "orbits": {
+             "level": 0,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 12040,
+           "pre": 12040
+          },
+          "num-tuples": 1,
+          "runtime": { "start": 21272322353, "end": 21272322354},
+          "source-locator": "/root/souffle-src/tests/example/orbits/orbits.dl [22:1-24:15]"
+         }
+        }
+       },
+       "runtime": { "start": 21272322334, "end": 21272322359}
+      },
+      "1": {
+       "maxRSS": {
+        "post": 12040,
+        "pre": 12040
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "orbits(X,Y) :- \n   orbits(X,Z),\n   orbits(Z,Y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12040,
+           "pre": 12040
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272322371, "end": 21272322373},
+          "source-locator": "/root/souffle-src/tests/example/orbits/orbits.dl [22:1-24:15]"
+         },
+         "1": {
+          "maxRSS": {
+           "post": 12040,
+           "pre": 12040
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272322377, "end": 21272322378},
+          "source-locator": "/root/souffle-src/tests/example/orbits/orbits.dl [22:1-24:15]"
+         }
+        }
+       },
+       "runtime": { "start": 21272322371, "end": 21272322382}
+      }
+     },
+     "maxRSS": {
+      "post": 11784,
+      "pre": 11656
+     },
+     "non-recursive-rule": {
+      "orbits(\"earth\",\"sun\").": {
+       "maxRSS": {
+        "post": 11784,
+        "pre": 11656
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 21272322308, "end": 21272322312},
+       "source-locator": "/root/souffle-src/tests/example/orbits/orbits.dl [19:1-19:24]"
+      },
+      "orbits(\"moon\",\"earth\").": {
+       "maxRSS": {
+        "post": 11784,
+        "pre": 11784
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 21272322321, "end": 21272322322},
+       "source-locator": "/root/souffle-src/tests/example/orbits/orbits.dl [20:1-20:25]"
+      }
+     },
+     "num-tuples": 2,
+     "reads": 2,
+     "runtime": { "start": 21272322307, "end": 21272322326},
+     "savetime": { "start": 21272322388, "end": 21272322468},
+     "source-locator": "/root/souffle-src/tests/example/orbits/orbits.dl [9:7-9:13]"
+    },
+    "planet": {
+     "maxRSS": {
+      "post": 12040,
+      "pre": 12040
+     },
+     "non-recursive-rule": {
+      "planet(X) :- \n   orbits(X,Y),\n   star(Y),\n   !intermediate(X,Y).": {
+       "atom-frequency": {
+        "planet(X) :- \n   orbits(X,Y),\n   star(Y),\n   !intermediate(X,Y).": {
+         "orbits": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12040,
+        "pre": 12040
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 21272322544, "end": 21272322545},
+       "source-locator": "/root/souffle-src/tests/example/orbits/orbits.dl [31:1-34:22]"
+      }
+     },
+     "num-tuples": 1,
+     "reads": 0,
+     "runtime": { "start": 21272322543, "end": 21272322551},
+     "savetime": { "start": 21272322555, "end": 21272322567},
+     "source-locator": "/root/souffle-src/tests/example/orbits/orbits.dl [11:7-11:13]"
+    },
+    "satellite": {
+     "maxRSS": {
+      "post": 12040,
+      "pre": 12040
+     },
+     "non-recursive-rule": {
+      "satellite(X,Y) :- \n   orbits(X,Y),\n   !intermediate(X,Y),\n   !star(Y).": {
+       "atom-frequency": {
+        "satellite(X,Y) :- \n   orbits(X,Y),\n   !intermediate(X,Y),\n   !star(Y).": {
+         "orbits": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12040,
+        "pre": 12040
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 21272322571, "end": 21272322572},
+       "source-locator": "/root/souffle-src/tests/example/orbits/orbits.dl [26:1-29:12]"
+      }
+     },
+     "num-tuples": 1,
+     "reads": 0,
+     "runtime": { "start": 21272322570, "end": 21272322577},
+     "savetime": { "start": 21272322580, "end": 21272323460},
+     "source-locator": "/root/souffle-src/tests/example/orbits/orbits.dl [15:7-15:16]"
+    },
+    "star": {
+     "maxRSS": {
+      "post": 12040,
+      "pre": 12040
+     },
+     "non-recursive-rule": {
+      "star(\"sun\").": {
+       "maxRSS": {
+        "post": 12040,
+        "pre": 12040
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 21272322484, "end": 21272322485},
+       "source-locator": "/root/souffle-src/tests/example/orbits/orbits.dl [18:1-18:13]"
+      }
+     },
+     "num-tuples": 1,
+     "reads": 6,
+     "runtime": { "start": 21272322471, "end": 21272322492},
+     "savetime": { "start": 21272322497, "end": 21272322515},
+     "source-locator": "/root/souffle-src/tests/example/orbits/orbits.dl [7:7-7:11]"
+    }
+   },
+   "runtime": { "start": 21272322301, "end": 21272323466},
+   "starttime": { "time": 21272322260},
+   "usage": {
+    "timepoint": {
+     "21272322383": {
+      "maxRSS": 12040,
+      "systemtime": 0,
+      "usertime": 4134
+     },
+     "21272322544": {
+      "maxRSS": 12040,
+      "systemtime": 0,
+      "usertime": 4338
+     },
+     "21272322566": {
+      "maxRSS": 12040,
+      "systemtime": 0,
+      "usertime": 4360
+     },
+     "21272322571": {
+      "maxRSS": 12040,
+      "systemtime": 0,
+      "usertime": 4381
+     },
+     "21272322599": {
+      "maxRSS": 12040,
+      "systemtime": 0,
+      "usertime": 4395
+     }
+    }
+   }
+  }
+ }
+}

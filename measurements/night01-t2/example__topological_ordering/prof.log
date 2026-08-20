@@ -1,0 +1,1018 @@
+{
+ "root": {
+  "program": {
+   "configuration": {
+    "": "/root/souffle-src/tests/example/topological_ordering/topological_ordering.dl",
+    "fact-dir": "/root/souffle-src/tests/example/topological_ordering/facts",
+    "include-dir": ".",
+    "jobs": "1",
+    "libraries": "functors",
+    "library-dir": ".",
+    "output-dir": "/root/compiler/measurements/night01-t2/example__topological_ordering",
+    "profile": "prof.log",
+    "relationCount": "8",
+    "ruleCount": "18",
+    "version": "2.5",
+    "warn": "all",
+    "wno": "none"
+   },
+   "relation": {
+    "edge": {
+     "maxRSS": {
+      "post": 12548,
+      "pre": 12548
+     },
+     "non-recursive-rule": {
+      "edge(v1,v2) :- \n   vertex(v1),\n   vertex(v2),\n   edges(v1,v2).": {
+       "atom-frequency": {
+        "edge(v1,v2) :- \n   vertex(v1),\n   vertex(v2),\n   edges(v1,v2).": {
+         "vertex": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12548,
+        "pre": 12548
+       },
+       "num-tuples": 17,
+       "runtime": { "start": 21272525371, "end": 21272525384},
+       "source-locator": "/root/souffle-src/tests/example/topological_ordering/topological_ordering.dl [25:1-25:55]"
+      }
+     },
+     "num-tuples": 17,
+     "reads": 42,
+     "runtime": { "start": 21272525361, "end": 21272525392},
+     "savetime": { "start": 21272525396, "end": 21272525425},
+     "source-locator": "/root/souffle-src/tests/example/topological_ordering/topological_ordering.dl [23:7-23:11]"
+    },
+    "edges": {
+     "loadtime": { "start": 21272525116, "end": 21272525200},
+     "num-tuples": 17,
+     "reads": 196,
+     "source-locator": "/root/souffle-src/tests/example/topological_ordering/topological_ordering.dl [21:7-21:12]"
+    },
+    "index": {
+     "maxRSS": {
+      "post": 12676,
+      "pre": 12676
+     },
+     "non-recursive-rule": {
+      "index(x,i) :- \n   indices(x,i),\n   !indices(x,(i+1)).": {
+       "atom-frequency": {
+        "index(x,i) :- \n   indices(x,i),\n   !indices(x,(i+1)).": {
+         "indices": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12676,
+        "pre": 12676
+       },
+       "num-tuples": 14,
+       "runtime": { "start": 21272526793, "end": 21272526800},
+       "source-locator": "/root/souffle-src/tests/example/topological_ordering/topological_ordering.dl [81:1-83:22]"
+      }
+     },
+     "num-tuples": 14,
+     "reads": 0,
+     "runtime": { "start": 21272526777, "end": 21272526808},
+     "savetime": { "start": 21272526812, "end": 21272527841},
+     "source-locator": "/root/souffle-src/tests/example/topological_ordering/topological_ordering.dl [40:7-40:12]"
+    },
+    "indices": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 21272526354, "end": 21272526355},
+       "maxRSS": {
+        "post": 12676,
+        "pre": 12676
+       },
+       "num-tuples": 12,
+       "recursive-rule": {
+        "indices(x,(i+1)) :- \n   is_before(y,x),\n   !is_before(x,y),\n   is_after(x,y),\n   indices(y,i).": {
+         "0": {
+          "atom-frequency": {
+           "@new_indices(x,(i+1)) :- \n   is_before(y,x),\n   !is_before(x,y),\n   is_after(x,y),\n   @delta_indices(y,i).": {
+            "@delta_indices": {
+             "level": 2,
+             "num-tuples": 0
+            },
+            "is_before": {
+             "level": 0,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 12676,
+           "pre": 12676
+          },
+          "num-tuples": 12,
+          "runtime": { "start": 21272526315, "end": 21272526326},
+          "source-locator": "/root/souffle-src/tests/example/topological_ordering/topological_ordering.dl [74:1-78:19]"
+         }
+        }
+       },
+       "runtime": { "start": 21272526305, "end": 21272526335}
+      },
+      "1": {
+       "copytime": { "start": 21272526404, "end": 21272526406},
+       "maxRSS": {
+        "post": 12676,
+        "pre": 12676
+       },
+       "num-tuples": 11,
+       "recursive-rule": {
+        "indices(x,(i+1)) :- \n   is_before(y,x),\n   !is_before(x,y),\n   is_after(x,y),\n   indices(y,i).": {
+         "0": {
+          "maxRSS": {
+           "post": 12676,
+           "pre": 12676
+          },
+          "num-tuples": 11,
+          "runtime": { "start": 21272526359, "end": 21272526379},
+          "source-locator": "/root/souffle-src/tests/example/topological_ordering/topological_ordering.dl [74:1-78:19]"
+         }
+        }
+       },
+       "runtime": { "start": 21272526358, "end": 21272526386}
+      },
+      "2": {
+       "copytime": { "start": 21272526463, "end": 21272526464},
+       "maxRSS": {
+        "post": 12676,
+        "pre": 12676
+       },
+       "num-tuples": 10,
+       "recursive-rule": {
+        "indices(x,(i+1)) :- \n   is_before(y,x),\n   !is_before(x,y),\n   is_after(x,y),\n   indices(y,i).": {
+         "0": {
+          "maxRSS": {
+           "post": 12676,
+           "pre": 12676
+          },
+          "num-tuples": 10,
+          "runtime": { "start": 21272526420, "end": 21272526435},
+          "source-locator": "/root/souffle-src/tests/example/topological_ordering/topological_ordering.dl [74:1-78:19]"
+         }
+        }
+       },
+       "runtime": { "start": 21272526410, "end": 21272526443}
+      },
+      "3": {
+       "copytime": { "start": 21272526518, "end": 21272526520},
+       "maxRSS": {
+        "post": 12676,
+        "pre": 12676
+       },
+       "num-tuples": 9,
+       "recursive-rule": {
+        "indices(x,(i+1)) :- \n   is_before(y,x),\n   !is_before(x,y),\n   is_after(x,y),\n   indices(y,i).": {
+         "0": {
+          "maxRSS": {
+           "post": 12676,
+           "pre": 12676
+          },
+          "num-tuples": 9,
+          "runtime": { "start": 21272526477, "end": 21272526491},
+          "source-locator": "/root/souffle-src/tests/example/topological_ordering/topological_ordering.dl [74:1-78:19]"
+         }
+        }
+       },
+       "runtime": { "start": 21272526468, "end": 21272526499}
+      },
+      "4": {
+       "copytime": { "start": 21272526562, "end": 21272526563},
+       "maxRSS": {
+        "post": 12676,
+        "pre": 12676
+       },
+       "num-tuples": 8,
+       "recursive-rule": {
+        "indices(x,(i+1)) :- \n   is_before(y,x),\n   !is_before(x,y),\n   is_after(x,y),\n   indices(y,i).": {
+         "0": {
+          "maxRSS": {
+           "post": 12676,
+           "pre": 12676
+          },
+          "num-tuples": 8,
+          "runtime": { "start": 21272526524, "end": 21272526536},
+          "source-locator": "/root/souffle-src/tests/example/topological_ordering/topological_ordering.dl [74:1-78:19]"
+         }
+        }
+       },
+       "runtime": { "start": 21272526523, "end": 21272526544}
+      },
+      "5": {
+       "copytime": { "start": 21272526607, "end": 21272526609},
+       "maxRSS": {
+        "post": 12676,
+        "pre": 12676
+       },
+       "num-tuples": 7,
+       "recursive-rule": {
+        "indices(x,(i+1)) :- \n   is_before(y,x),\n   !is_before(x,y),\n   is_after(x,y),\n   indices(y,i).": {
+         "0": {
+          "maxRSS": {
+           "post": 12676,
+           "pre": 12676
+          },
+          "num-tuples": 7,
+          "runtime": { "start": 21272526569, "end": 21272526581},
+          "source-locator": "/root/souffle-src/tests/example/topological_ordering/topological_ordering.dl [74:1-78:19]"
+         }
+        }
+       },
+       "runtime": { "start": 21272526567, "end": 21272526589}
+      },
+      "6": {
+       "copytime": { "start": 21272526648, "end": 21272526649},
+       "maxRSS": {
+        "post": 12676,
+        "pre": 12676
+       },
+       "num-tuples": 4,
+       "recursive-rule": {
+        "indices(x,(i+1)) :- \n   is_before(y,x),\n   !is_before(x,y),\n   is_after(x,y),\n   indices(y,i).": {
+         "0": {
+          "maxRSS": {
+           "post": 12676,
+           "pre": 12676
+          },
+          "num-tuples": 4,
+          "runtime": { "start": 21272526613, "end": 21272526623},
+          "source-locator": "/root/souffle-src/tests/example/topological_ordering/topological_ordering.dl [74:1-78:19]"
+         }
+        }
+       },
+       "runtime": { "start": 21272526612, "end": 21272526630}
+      },
+      "7": {
+       "copytime": { "start": 21272526701, "end": 21272526702},
+       "maxRSS": {
+        "post": 12676,
+        "pre": 12676
+       },
+       "num-tuples": 1,
+       "recursive-rule": {
+        "indices(x,(i+1)) :- \n   is_before(y,x),\n   !is_before(x,y),\n   is_after(x,y),\n   indices(y,i).": {
+         "0": {
+          "maxRSS": {
+           "post": 12676,
+           "pre": 12676
+          },
+          "num-tuples": 1,
+          "runtime": { "start": 21272526664, "end": 21272526673},
+          "source-locator": "/root/souffle-src/tests/example/topological_ordering/topological_ordering.dl [74:1-78:19]"
+         }
+        }
+       },
+       "runtime": { "start": 21272526653, "end": 21272526681}
+      },
+      "8": {
+       "maxRSS": {
+        "post": 12676,
+        "pre": 12676
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "indices(x,(i+1)) :- \n   is_before(y,x),\n   !is_before(x,y),\n   is_after(x,y),\n   indices(y,i).": {
+         "0": {
+          "maxRSS": {
+           "post": 12676,
+           "pre": 12676
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272526715, "end": 21272526725},
+          "source-locator": "/root/souffle-src/tests/example/topological_ordering/topological_ordering.dl [74:1-78:19]"
+         }
+        }
+       },
+       "runtime": { "start": 21272526705, "end": 21272526732}
+      }
+     },
+     "maxRSS": {
+      "post": 12676,
+      "pre": 12676
+     },
+     "non-recursive-rule": {
+      "indices(x,0) :- \n   vertex(x),\n   !edge(_,x),\n   !edge(x,_).": {
+       "atom-frequency": {
+        "indices(x,0) :- \n   vertex(x),\n   !edge(_,x),\n   !edge(x,_).": {
+         "vertex": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12676,
+        "pre": 12676
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 21272526283, "end": 21272526286},
+       "source-locator": "/root/souffle-src/tests/example/topological_ordering/topological_ordering.dl [62:1-65:17]"
+      },
+      "indices(x,1) :- \n   vertex(x),\n   !edge(_,x),\n   edge(x,_).": {
+       "atom-frequency": {
+        "indices(x,1) :- \n   vertex(x),\n   !edge(_,x),\n   edge(x,_).": {
+         "vertex": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12676,
+        "pre": 12676
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 21272526294, "end": 21272526297},
+       "source-locator": "/root/souffle-src/tests/example/topological_ordering/topological_ordering.dl [68:1-71:16]"
+      }
+     },
+     "num-tuples": 2,
+     "reads": 258,
+     "runtime": { "start": 21272526274, "end": 21272526301},
+     "savetime": { "start": 21272526751, "end": 21272526773},
+     "source-locator": "/root/souffle-src/tests/example/topological_ordering/topological_ordering.dl [36:7-36:14]"
+    },
+    "is_after": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 21272525503, "end": 21272525505},
+       "maxRSS": {
+        "post": 12676,
+        "pre": 12548
+       },
+       "num-tuples": 17,
+       "recursive-rule": {
+        "is_after(x,y) :- \n   is_after(z,x),\n   is_after(y,z).": {
+         "0": {
+          "atom-frequency": {
+           "@new_is_after(x,y) :- \n   @delta_is_after(z,x),\n   is_after(y,z).": {
+            "@delta_is_after": {
+             "level": 0,
+             "num-tuples": 0
+            },
+            "is_after": {
+             "level": 1,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 12676,
+           "pre": 12548
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272525467, "end": 21272525474},
+          "source-locator": "/root/souffle-src/tests/example/topological_ordering/topological_ordering.dl [57:1-59:20]"
+         },
+         "1": {
+          "atom-frequency": {
+           "@new_is_after(x,y) :- \n   is_after(z,x),\n   @delta_is_after(y,z).": {
+            "@delta_is_after": {
+             "level": 1,
+             "num-tuples": 0
+            },
+            "is_after": {
+             "level": 0,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 12676,
+           "pre": 12676
+          },
+          "num-tuples": 17,
+          "runtime": { "start": 21272525485, "end": 21272525489},
+          "source-locator": "/root/souffle-src/tests/example/topological_ordering/topological_ordering.dl [57:1-59:20]"
+         }
+        }
+       },
+       "runtime": { "start": 21272525456, "end": 21272525494}
+      },
+      "1": {
+       "copytime": { "start": 21272525584, "end": 21272525587},
+       "maxRSS": {
+        "post": 12676,
+        "pre": 12676
+       },
+       "num-tuples": 36,
+       "recursive-rule": {
+        "is_after(x,y) :- \n   is_after(z,x),\n   is_after(y,z).": {
+         "0": {
+          "maxRSS": {
+           "post": 12676,
+           "pre": 12676
+          },
+          "num-tuples": 11,
+          "runtime": { "start": 21272525531, "end": 21272525541},
+          "source-locator": "/root/souffle-src/tests/example/topological_ordering/topological_ordering.dl [57:1-59:20]"
+         },
+         "1": {
+          "maxRSS": {
+           "post": 12676,
+           "pre": 12676
+          },
+          "num-tuples": 25,
+          "runtime": { "start": 21272525550, "end": 21272525559},
+          "source-locator": "/root/souffle-src/tests/example/topological_ordering/topological_ordering.dl [57:1-59:20]"
+         }
+        }
+       },
+       "runtime": { "start": 21272525521, "end": 21272525564}
+      },
+      "2": {
+       "copytime": { "start": 21272525653, "end": 21272525658},
+       "maxRSS": {
+        "post": 12676,
+        "pre": 12676
+       },
+       "num-tuples": 47,
+       "recursive-rule": {
+        "is_after(x,y) :- \n   is_after(z,x),\n   is_after(y,z).": {
+         "0": {
+          "maxRSS": {
+           "post": 12676,
+           "pre": 12676
+          },
+          "num-tuples": 28,
+          "runtime": { "start": 21272525591, "end": 21272525612},
+          "source-locator": "/root/souffle-src/tests/example/topological_ordering/topological_ordering.dl [57:1-59:20]"
+         },
+         "1": {
+          "maxRSS": {
+           "post": 12676,
+           "pre": 12676
+          },
+          "num-tuples": 19,
+          "runtime": { "start": 21272525619, "end": 21272525640},
+          "source-locator": "/root/souffle-src/tests/example/topological_ordering/topological_ordering.dl [57:1-59:20]"
+         }
+        }
+       },
+       "runtime": { "start": 21272525591, "end": 21272525646}
+      },
+      "3": {
+       "copytime": { "start": 21272525781, "end": 21272525786},
+       "maxRSS": {
+        "post": 12676,
+        "pre": 12676
+       },
+       "num-tuples": 52,
+       "recursive-rule": {
+        "is_after(x,y) :- \n   is_after(z,x),\n   is_after(y,z).": {
+         "0": {
+          "maxRSS": {
+           "post": 12676,
+           "pre": 12676
+          },
+          "num-tuples": 52,
+          "runtime": { "start": 21272525661, "end": 21272525709},
+          "source-locator": "/root/souffle-src/tests/example/topological_ordering/topological_ordering.dl [57:1-59:20]"
+         },
+         "1": {
+          "maxRSS": {
+           "post": 12676,
+           "pre": 12676
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272525713, "end": 21272525754},
+          "source-locator": "/root/souffle-src/tests/example/topological_ordering/topological_ordering.dl [57:1-59:20]"
+         }
+        }
+       },
+       "runtime": { "start": 21272525660, "end": 21272525761}
+      },
+      "4": {
+       "maxRSS": {
+        "post": 12676,
+        "pre": 12676
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "is_after(x,y) :- \n   is_after(z,x),\n   is_after(y,z).": {
+         "0": {
+          "maxRSS": {
+           "post": 12676,
+           "pre": 12676
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272525799, "end": 21272525840},
+          "source-locator": "/root/souffle-src/tests/example/topological_ordering/topological_ordering.dl [57:1-59:20]"
+         },
+         "1": {
+          "maxRSS": {
+           "post": 12676,
+           "pre": 12676
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272525847, "end": 21272525900},
+          "source-locator": "/root/souffle-src/tests/example/topological_ordering/topological_ordering.dl [57:1-59:20]"
+         }
+        }
+       },
+       "runtime": { "start": 21272525790, "end": 21272525907}
+      }
+     },
+     "maxRSS": {
+      "post": 12548,
+      "pre": 12548
+     },
+     "non-recursive-rule": {
+      "is_after(x,y) :- \n   edge(y,x).": {
+       "atom-frequency": {
+        "is_after(x,y) :- \n   edge(y,x).": {
+         "edge": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12548,
+        "pre": 12548
+       },
+       "num-tuples": 17,
+       "runtime": { "start": 21272525441, "end": 21272525443},
+       "source-locator": "/root/souffle-src/tests/example/topological_ordering/topological_ordering.dl [53:1-54:16]"
+      }
+     },
+     "num-tuples": 17,
+     "reads": 3249,
+     "runtime": { "start": 21272525429, "end": 21272525451},
+     "savetime": { "start": 21272525927, "end": 21272525970},
+     "source-locator": "/root/souffle-src/tests/example/topological_ordering/topological_ordering.dl [32:7-32:15]"
+    },
+    "is_before": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 21272526061, "end": 21272526063},
+       "maxRSS": {
+        "post": 12676,
+        "pre": 12676
+       },
+       "num-tuples": 15,
+       "recursive-rule": {
+        "is_before(x,y) :- \n   is_before(x,z),\n   is_before(z,y).": {
+         "0": {
+          "atom-frequency": {
+           "@new_is_before(x,y) :- \n   @delta_is_before(x,z),\n   is_before(z,y).": {
+            "@delta_is_before": {
+             "level": 0,
+             "num-tuples": 0
+            },
+            "is_before": {
+             "level": 1,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 12676,
+           "pre": 12676
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272526008, "end": 21272526013},
+          "source-locator": "/root/souffle-src/tests/example/topological_ordering/topological_ordering.dl [48:1-50:21]"
+         },
+         "1": {
+          "atom-frequency": {
+           "@new_is_before(x,y) :- \n   is_before(x,z),\n   @delta_is_before(z,y).": {
+            "@delta_is_before": {
+             "level": 1,
+             "num-tuples": 0
+            },
+            "is_before": {
+             "level": 0,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 12676,
+           "pre": 12676
+          },
+          "num-tuples": 15,
+          "runtime": { "start": 21272526021, "end": 21272526034},
+          "source-locator": "/root/souffle-src/tests/example/topological_ordering/topological_ordering.dl [48:1-50:21]"
+         }
+        }
+       },
+       "runtime": { "start": 21272525998, "end": 21272526041}
+      },
+      "1": {
+       "copytime": { "start": 21272526121, "end": 21272526123},
+       "maxRSS": {
+        "post": 12676,
+        "pre": 12676
+       },
+       "num-tuples": 27,
+       "recursive-rule": {
+        "is_before(x,y) :- \n   is_before(x,z),\n   is_before(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12676,
+           "pre": 12676
+          },
+          "num-tuples": 14,
+          "runtime": { "start": 21272526067, "end": 21272526073},
+          "source-locator": "/root/souffle-src/tests/example/topological_ordering/topological_ordering.dl [48:1-50:21]"
+         },
+         "1": {
+          "maxRSS": {
+           "post": 12676,
+           "pre": 12676
+          },
+          "num-tuples": 13,
+          "runtime": { "start": 21272526079, "end": 21272526095},
+          "source-locator": "/root/souffle-src/tests/example/topological_ordering/topological_ordering.dl [48:1-50:21]"
+         }
+        }
+       },
+       "runtime": { "start": 21272526066, "end": 21272526102}
+      },
+      "2": {
+       "copytime": { "start": 21272526193, "end": 21272526195},
+       "maxRSS": {
+        "post": 12676,
+        "pre": 12676
+       },
+       "num-tuples": 7,
+       "recursive-rule": {
+        "is_before(x,y) :- \n   is_before(x,z),\n   is_before(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12676,
+           "pre": 12676
+          },
+          "num-tuples": 7,
+          "runtime": { "start": 21272526136, "end": 21272526143},
+          "source-locator": "/root/souffle-src/tests/example/topological_ordering/topological_ordering.dl [48:1-50:21]"
+         },
+         "1": {
+          "maxRSS": {
+           "post": 12676,
+           "pre": 12676
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272526151, "end": 21272526167},
+          "source-locator": "/root/souffle-src/tests/example/topological_ordering/topological_ordering.dl [48:1-50:21]"
+         }
+        }
+       },
+       "runtime": { "start": 21272526126, "end": 21272526174}
+      },
+      "3": {
+       "maxRSS": {
+        "post": 12676,
+        "pre": 12676
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "is_before(x,y) :- \n   is_before(x,z),\n   is_before(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12676,
+           "pre": 12676
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272526201, "end": 21272526203},
+          "source-locator": "/root/souffle-src/tests/example/topological_ordering/topological_ordering.dl [48:1-50:21]"
+         },
+         "1": {
+          "maxRSS": {
+           "post": 12676,
+           "pre": 12676
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272526209, "end": 21272526222},
+          "source-locator": "/root/souffle-src/tests/example/topological_ordering/topological_ordering.dl [48:1-50:21]"
+         }
+        }
+       },
+       "runtime": { "start": 21272526199, "end": 21272526229}
+      }
+     },
+     "maxRSS": {
+      "post": 12676,
+      "pre": 12676
+     },
+     "non-recursive-rule": {
+      "is_before(x,y) :- \n   edge(x,y).": {
+       "atom-frequency": {
+        "is_before(x,y) :- \n   edge(x,y).": {
+         "edge": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12676,
+        "pre": 12676
+       },
+       "num-tuples": 17,
+       "runtime": { "start": 21272525983, "end": 21272525985},
+       "source-locator": "/root/souffle-src/tests/example/topological_ordering/topological_ordering.dl [44:1-45:16]"
+      }
+     },
+     "num-tuples": 17,
+     "reads": 811,
+     "runtime": { "start": 21272525974, "end": 21272525993},
+     "savetime": { "start": 21272526249, "end": 21272526270},
+     "source-locator": "/root/souffle-src/tests/example/topological_ordering/topological_ordering.dl [28:7-28:16]"
+    },
+    "vertex": {
+     "maxRSS": {
+      "post": 12548,
+      "pre": 12420
+     },
+     "non-recursive-rule": {
+      "vertex(v) :- \n   vertices(v).": {
+       "atom-frequency": {
+        "vertex(v) :- \n   vertices(v).": {
+         "vertices": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12548,
+        "pre": 12420
+       },
+       "num-tuples": 14,
+       "runtime": { "start": 21272525275, "end": 21272525279},
+       "source-locator": "/root/souffle-src/tests/example/topological_ordering/topological_ordering.dl [18:1-18:26]"
+      }
+     },
+     "num-tuples": 14,
+     "reads": 0,
+     "runtime": { "start": 21272525265, "end": 21272525288},
+     "savetime": { "start": 21272525293, "end": 21272525356},
+     "source-locator": "/root/souffle-src/tests/example/topological_ordering/topological_ordering.dl [16:7-16:13]"
+    },
+    "vertices": {
+     "loadtime": { "start": 21272525212, "end": 21272525258},
+     "num-tuples": 14,
+     "reads": 0,
+     "source-locator": "/root/souffle-src/tests/example/topological_ordering/topological_ordering.dl [14:7-14:15]"
+    }
+   },
+   "runtime": { "start": 21272525112, "end": 21272527848},
+   "starttime": { "time": 21272525079},
+   "usage": {
+    "timepoint": {
+     "21272525135": {
+      "maxRSS": 11976,
+      "systemtime": 0,
+      "usertime": 5384
+     },
+     "21272525244": {
+      "maxRSS": 12420,
+      "systemtime": 0,
+      "usertime": 5508
+     },
+     "21272525282": {
+      "maxRSS": 12548,
+      "systemtime": 0,
+      "usertime": 5582
+     },
+     "21272525314": {
+      "maxRSS": 12548,
+      "systemtime": 0,
+      "usertime": 5607
+     },
+     "21272525378": {
+      "maxRSS": 12548,
+      "systemtime": 0,
+      "usertime": 5692
+     },
+     "21272525413": {
+      "maxRSS": 12548,
+      "systemtime": 0,
+      "usertime": 5724
+     },
+     "21272525448": {
+      "maxRSS": 12548,
+      "systemtime": 0,
+      "usertime": 5777
+     },
+     "21272525504": {
+      "maxRSS": 12676,
+      "systemtime": 0,
+      "usertime": 5845
+     },
+     "21272525551": {
+      "maxRSS": 12676,
+      "systemtime": 0,
+      "usertime": 5911
+     },
+     "21272525628": {
+      "maxRSS": 12676,
+      "systemtime": 0,
+      "usertime": 6006
+     },
+     "21272525656": {
+      "maxRSS": 12676,
+      "systemtime": 0,
+      "usertime": 6066
+     },
+     "21272525733": {
+      "maxRSS": 12676,
+      "systemtime": 0,
+      "usertime": 6139
+     },
+     "21272525782": {
+      "maxRSS": 12676,
+      "systemtime": 0,
+      "usertime": 6214
+     },
+     "21272525807": {
+      "maxRSS": 12676,
+      "systemtime": 0,
+      "usertime": 6239
+     },
+     "21272525864": {
+      "maxRSS": 12676,
+      "systemtime": 0,
+      "usertime": 6295
+     },
+     "21272525928": {
+      "maxRSS": 12676,
+      "systemtime": 0,
+      "usertime": 6381
+     },
+     "21272525990": {
+      "maxRSS": 12676,
+      "systemtime": 0,
+      "usertime": 6446
+     },
+     "21272526015": {
+      "maxRSS": 12676,
+      "systemtime": 0,
+      "usertime": 6480
+     },
+     "21272526037": {
+      "maxRSS": 12676,
+      "systemtime": 0,
+      "usertime": 6507
+     },
+     "21272526063": {
+      "maxRSS": 12676,
+      "systemtime": 0,
+      "usertime": 6543
+     },
+     "21272526095": {
+      "maxRSS": 12676,
+      "systemtime": 0,
+      "usertime": 6582
+     },
+     "21272526122": {
+      "maxRSS": 12676,
+      "systemtime": 0,
+      "usertime": 6615
+     },
+     "21272526143": {
+      "maxRSS": 12676,
+      "systemtime": 0,
+      "usertime": 6644
+     },
+     "21272526167": {
+      "maxRSS": 12676,
+      "systemtime": 0,
+      "usertime": 6674
+     },
+     "21272526195": {
+      "maxRSS": 12676,
+      "systemtime": 0,
+      "usertime": 6709
+     },
+     "21272526204": {
+      "maxRSS": 12676,
+      "systemtime": 0,
+      "usertime": 6722
+     },
+     "21272526226": {
+      "maxRSS": 12676,
+      "systemtime": 0,
+      "usertime": 6748
+     },
+     "21272526250": {
+      "maxRSS": 12676,
+      "systemtime": 0,
+      "usertime": 6782
+     },
+     "21272526290": {
+      "maxRSS": 12676,
+      "systemtime": 0,
+      "usertime": 6825
+     },
+     "21272526322": {
+      "maxRSS": 12676,
+      "systemtime": 0,
+      "usertime": 6861
+     },
+     "21272526355": {
+      "maxRSS": 12676,
+      "systemtime": 0,
+      "usertime": 6907
+     },
+     "21272526361": {
+      "maxRSS": 12676,
+      "systemtime": 0,
+      "usertime": 6917
+     },
+     "21272526406": {
+      "maxRSS": 12676,
+      "systemtime": 0,
+      "usertime": 6969
+     },
+     "21272526427": {
+      "maxRSS": 12676,
+      "systemtime": 0,
+      "usertime": 6991
+     },
+     "21272526463": {
+      "maxRSS": 12676,
+      "systemtime": 0,
+      "usertime": 7041
+     },
+     "21272526484": {
+      "maxRSS": 12676,
+      "systemtime": 0,
+      "usertime": 7062
+     },
+     "21272526519": {
+      "maxRSS": 12676,
+      "systemtime": 0,
+      "usertime": 7110
+     },
+     "21272526525": {
+      "maxRSS": 12676,
+      "systemtime": 0,
+      "usertime": 7120
+     },
+     "21272526563": {
+      "maxRSS": 12676,
+      "systemtime": 0,
+      "usertime": 7166
+     },
+     "21272526573": {
+      "maxRSS": 12676,
+      "systemtime": 0,
+      "usertime": 7179
+     },
+     "21272526610": {
+      "maxRSS": 12676,
+      "systemtime": 0,
+      "usertime": 7223
+     },
+     "21272526649": {
+      "maxRSS": 12676,
+      "systemtime": 0,
+      "usertime": 7270
+     },
+     "21272526671": {
+      "maxRSS": 12676,
+      "systemtime": 0,
+      "usertime": 7292
+     },
+     "21272526701": {
+      "maxRSS": 12676,
+      "systemtime": 0,
+      "usertime": 7335
+     },
+     "21272526722": {
+      "maxRSS": 12676,
+      "systemtime": 0,
+      "usertime": 7355
+     },
+     "21272526753": {
+      "maxRSS": 12676,
+      "systemtime": 0,
+      "usertime": 7400
+     },
+     "21272526801": {
+      "maxRSS": 12676,
+      "systemtime": 0,
+      "usertime": 7454
+     },
+     "21272526832": {
+      "maxRSS": 12676,
+      "systemtime": 0,
+      "usertime": 7477
+     }
+    }
+   }
+  }
+ }
+}

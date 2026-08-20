@@ -2,6 +2,20 @@
 
 Append-only. Things noticed and not acted on, with the date noticed.
 
+## 2026-08-20 — pre-registered corpus contains negative (rejection) tests
+
+T2 (NIGHT-BATCH-01, `docs/reports/night01-T2-corpus.md`) found 4 of 36
+pre-registered programs (`semantic/plan1`, `semantic/plan2`,
+`semantic/rel_stratification`, `semantic/witness_check`) are Soufflé's own
+negative tests — deliberately invalid programs used to test Soufflé's error
+diagnostics, not executable programs. `corpus_predicate.py`'s mechanical predicate
+(negated IDB literal + constant-bearing `.output`) has no way to distinguish these
+from real programs. Not fixed (NIGHT-BATCH-01 prohibition #2, predicate frozen for
+the batch's duration). Consider for daylight: either exclude programs whose
+`.err`/`.out` sidecar files indicate an expected failure, or accept the ~11%
+contamination rate as a known corpus property and report coverage as
+`accepted / (total - known-negative)`.
+
 ## 2026-08-20 — `corpus_predicate.py` non-determinism in a diagnostic field only
 
 `check_program()` iterates `output_names` (a Python `set`) and records the first

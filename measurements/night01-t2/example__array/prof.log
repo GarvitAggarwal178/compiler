@@ -1,0 +1,540 @@
+{
+ "root": {
+  "program": {
+   "configuration": {
+    "": "/root/souffle-src/tests/example/array/array.dl",
+    "fact-dir": "/root/souffle-src/tests/example/array/facts",
+    "include-dir": ".",
+    "jobs": "1",
+    "libraries": "functors",
+    "library-dir": ".",
+    "output-dir": "/root/compiler/measurements/night01-t2/example__array",
+    "profile": "prof.log",
+    "relationCount": "8",
+    "ruleCount": "11",
+    "version": "2.5",
+    "warn": "all",
+    "wno": "none"
+   },
+   "relation": {
+    "default": {
+     "loadtime": { "start": 21272226910, "end": 21272226994},
+     "num-tuples": 1,
+     "reads": 0,
+     "source-locator": "/root/souffle-src/tests/example/array/array.dl [11:7-11:14]"
+    },
+    "element": {
+     "maxRSS": {
+      "post": 12252,
+      "pre": 12252
+     },
+     "non-recursive-rule": {
+      "element(i,NULL) :- \n   indices(i),\n   !values(i,_),\n   default(NULL).": {
+       "atom-frequency": {
+        "element(i,NULL) :- \n   indices(i),\n   !values(i,_),\n   default(NULL).": {
+         "default": {
+          "level": 1,
+          "num-tuples": 0
+         },
+         "indices": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12252,
+        "pre": 12252
+       },
+       "num-tuples": 5,
+       "runtime": { "start": 21272227400, "end": 21272227403},
+       "source-locator": "/root/souffle-src/tests/example/array/array.dl [31:1-31:62]"
+      },
+      "element(i,x) :- \n   indices(i),\n   values(i,x).": {
+       "atom-frequency": {
+        "element(i,x) :- \n   indices(i),\n   values(i,x).": {
+         "indices": {
+          "level": 0,
+          "num-tuples": 0
+         },
+         "values": {
+          "level": 1,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12252,
+        "pre": 12252
+       },
+       "num-tuples": 5,
+       "runtime": { "start": 21272227410, "end": 21272227413},
+       "source-locator": "/root/souffle-src/tests/example/array/array.dl [32:1-32:43]"
+      }
+     },
+     "num-tuples": 10,
+     "reads": 20,
+     "runtime": { "start": 21272227386, "end": 21272227428},
+     "savetime": { "start": 21272227432, "end": 21272227449},
+     "source-locator": "/root/souffle-src/tests/example/array/array.dl [29:7-29:14]"
+    },
+    "indices": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 21272227128, "end": 21272227129},
+       "maxRSS": {
+        "post": 12252,
+        "pre": 11996
+       },
+       "num-tuples": 1,
+       "recursive-rule": {
+        "indices((i+1)) :- \n   indices(i),\n   parameters(l),\n   i >= 0,\n   (i+1) < l.": {
+         "0": {
+          "atom-frequency": {
+           "@new_indices((i+1)) :- \n   @delta_indices(i),\n   parameters(l),\n   i >= 0,\n   (i+1) < l.": {
+            "@delta_indices": {
+             "level": 0,
+             "num-tuples": 0
+            },
+            "parameters": {
+             "level": 1,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 12252,
+           "pre": 11996
+          },
+          "num-tuples": 1,
+          "runtime": { "start": 21272227104, "end": 21272227112},
+          "source-locator": "/root/souffle-src/tests/example/array/array.dl [26:1-26:60]"
+         }
+        }
+       },
+       "runtime": { "start": 21272227103, "end": 21272227120}
+      },
+      "1": {
+       "copytime": { "start": 21272227157, "end": 21272227158},
+       "maxRSS": {
+        "post": 12252,
+        "pre": 12252
+       },
+       "num-tuples": 1,
+       "recursive-rule": {
+        "indices((i+1)) :- \n   indices(i),\n   parameters(l),\n   i >= 0,\n   (i+1) < l.": {
+         "0": {
+          "maxRSS": {
+           "post": 12252,
+           "pre": 12252
+          },
+          "num-tuples": 1,
+          "runtime": { "start": 21272227133, "end": 21272227134},
+          "source-locator": "/root/souffle-src/tests/example/array/array.dl [26:1-26:60]"
+         }
+        }
+       },
+       "runtime": { "start": 21272227132, "end": 21272227140}
+      },
+      "2": {
+       "copytime": { "start": 21272227188, "end": 21272227188},
+       "maxRSS": {
+        "post": 12252,
+        "pre": 12252
+       },
+       "num-tuples": 1,
+       "recursive-rule": {
+        "indices((i+1)) :- \n   indices(i),\n   parameters(l),\n   i >= 0,\n   (i+1) < l.": {
+         "0": {
+          "maxRSS": {
+           "post": 12252,
+           "pre": 12252
+          },
+          "num-tuples": 1,
+          "runtime": { "start": 21272227162, "end": 21272227163},
+          "source-locator": "/root/souffle-src/tests/example/array/array.dl [26:1-26:60]"
+         }
+        }
+       },
+       "runtime": { "start": 21272227161, "end": 21272227170}
+      },
+      "3": {
+       "copytime": { "start": 21272227219, "end": 21272227220},
+       "maxRSS": {
+        "post": 12252,
+        "pre": 12252
+       },
+       "num-tuples": 1,
+       "recursive-rule": {
+        "indices((i+1)) :- \n   indices(i),\n   parameters(l),\n   i >= 0,\n   (i+1) < l.": {
+         "0": {
+          "maxRSS": {
+           "post": 12252,
+           "pre": 12252
+          },
+          "num-tuples": 1,
+          "runtime": { "start": 21272227193, "end": 21272227194},
+          "source-locator": "/root/souffle-src/tests/example/array/array.dl [26:1-26:60]"
+         }
+        }
+       },
+       "runtime": { "start": 21272227192, "end": 21272227200}
+      },
+      "4": {
+       "copytime": { "start": 21272227250, "end": 21272227251},
+       "maxRSS": {
+        "post": 12252,
+        "pre": 12252
+       },
+       "num-tuples": 1,
+       "recursive-rule": {
+        "indices((i+1)) :- \n   indices(i),\n   parameters(l),\n   i >= 0,\n   (i+1) < l.": {
+         "0": {
+          "maxRSS": {
+           "post": 12252,
+           "pre": 12252
+          },
+          "num-tuples": 1,
+          "runtime": { "start": 21272227224, "end": 21272227225},
+          "source-locator": "/root/souffle-src/tests/example/array/array.dl [26:1-26:60]"
+         }
+        }
+       },
+       "runtime": { "start": 21272227224, "end": 21272227232}
+      },
+      "5": {
+       "copytime": { "start": 21272227272, "end": 21272227272},
+       "maxRSS": {
+        "post": 12252,
+        "pre": 12252
+       },
+       "num-tuples": 1,
+       "recursive-rule": {
+        "indices((i+1)) :- \n   indices(i),\n   parameters(l),\n   i >= 0,\n   (i+1) < l.": {
+         "0": {
+          "maxRSS": {
+           "post": 12252,
+           "pre": 12252
+          },
+          "num-tuples": 1,
+          "runtime": { "start": 21272227255, "end": 21272227256},
+          "source-locator": "/root/souffle-src/tests/example/array/array.dl [26:1-26:60]"
+         }
+        }
+       },
+       "runtime": { "start": 21272227255, "end": 21272227263}
+      },
+      "6": {
+       "copytime": { "start": 21272227285, "end": 21272227285},
+       "maxRSS": {
+        "post": 12252,
+        "pre": 12252
+       },
+       "num-tuples": 1,
+       "recursive-rule": {
+        "indices((i+1)) :- \n   indices(i),\n   parameters(l),\n   i >= 0,\n   (i+1) < l.": {
+         "0": {
+          "maxRSS": {
+           "post": 12252,
+           "pre": 12252
+          },
+          "num-tuples": 1,
+          "runtime": { "start": 21272227275, "end": 21272227275},
+          "source-locator": "/root/souffle-src/tests/example/array/array.dl [26:1-26:60]"
+         }
+        }
+       },
+       "runtime": { "start": 21272227274, "end": 21272227280}
+      },
+      "7": {
+       "copytime": { "start": 21272227298, "end": 21272227298},
+       "maxRSS": {
+        "post": 12252,
+        "pre": 12252
+       },
+       "num-tuples": 1,
+       "recursive-rule": {
+        "indices((i+1)) :- \n   indices(i),\n   parameters(l),\n   i >= 0,\n   (i+1) < l.": {
+         "0": {
+          "maxRSS": {
+           "post": 12252,
+           "pre": 12252
+          },
+          "num-tuples": 1,
+          "runtime": { "start": 21272227288, "end": 21272227288},
+          "source-locator": "/root/souffle-src/tests/example/array/array.dl [26:1-26:60]"
+         }
+        }
+       },
+       "runtime": { "start": 21272227287, "end": 21272227292}
+      },
+      "8": {
+       "copytime": { "start": 21272227313, "end": 21272227313},
+       "maxRSS": {
+        "post": 12252,
+        "pre": 12252
+       },
+       "num-tuples": 1,
+       "recursive-rule": {
+        "indices((i+1)) :- \n   indices(i),\n   parameters(l),\n   i >= 0,\n   (i+1) < l.": {
+         "0": {
+          "maxRSS": {
+           "post": 12252,
+           "pre": 12252
+          },
+          "num-tuples": 1,
+          "runtime": { "start": 21272227302, "end": 21272227303},
+          "source-locator": "/root/souffle-src/tests/example/array/array.dl [26:1-26:60]"
+         }
+        }
+       },
+       "runtime": { "start": 21272227300, "end": 21272227308}
+      },
+      "9": {
+       "maxRSS": {
+        "post": 12252,
+        "pre": 12252
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "indices((i+1)) :- \n   indices(i),\n   parameters(l),\n   i >= 0,\n   (i+1) < l.": {
+         "0": {
+          "maxRSS": {
+           "post": 12252,
+           "pre": 12252
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21272227316, "end": 21272227317},
+          "source-locator": "/root/souffle-src/tests/example/array/array.dl [26:1-26:60]"
+         }
+        }
+       },
+       "runtime": { "start": 21272227316, "end": 21272227321}
+      }
+     },
+     "maxRSS": {
+      "post": 11996,
+      "pre": 11808
+     },
+     "non-recursive-rule": {
+      "indices(0).": {
+       "maxRSS": {
+        "post": 11996,
+        "pre": 11808
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 21272227078, "end": 21272227082},
+       "source-locator": "/root/souffle-src/tests/example/array/array.dl [25:1-25:12]"
+      }
+     },
+     "num-tuples": 1,
+     "reads": 10,
+     "runtime": { "start": 21272227077, "end": 21272227090},
+     "savetime": { "start": 21272227326, "end": 21272227383},
+     "source-locator": "/root/souffle-src/tests/example/array/array.dl [23:7-23:14]"
+    },
+    "left": {
+     "maxRSS": {
+      "post": 12252,
+      "pre": 12252
+     },
+     "non-recursive-rule": {
+      "left(i,NULL) :- \n   !element((i-1),_),\n   element(i,_),\n   default(NULL).": {
+       "atom-frequency": {
+        "left(i,NULL) :- \n   !element((i-1),_),\n   element(i,_),\n   default(NULL).": {
+         "default": {
+          "level": 1,
+          "num-tuples": 0
+         },
+         "element": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12252,
+        "pre": 12252
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 21272227453, "end": 21272227456},
+       "source-locator": "/root/souffle-src/tests/example/array/array.dl [36:1-36:65]"
+      },
+      "left(i,x) :- \n   element( _tmp_0,x),\n   element(i,_),\n    _tmp_0 = (i-1).": {
+       "atom-frequency": {
+        "left(i,x) :- \n   element( _tmp_0,x),\n   element(i,_),\n    _tmp_0 = (i-1).": {
+         "element": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12252,
+        "pre": 12252
+       },
+       "num-tuples": 9,
+       "runtime": { "start": 21272227461, "end": 21272227465},
+       "source-locator": "/root/souffle-src/tests/example/array/array.dl [37:1-37:46]"
+      }
+     },
+     "num-tuples": 10,
+     "reads": 0,
+     "runtime": { "start": 21272227453, "end": 21272227469},
+     "source-locator": "/root/souffle-src/tests/example/array/array.dl [35:7-35:11]"
+    },
+    "neighbourhood": {
+     "maxRSS": {
+      "post": 12380,
+      "pre": 12252
+     },
+     "non-recursive-rule": {
+      "neighbourhood(i,l,c,r) :- \n   left(i,l),\n   element(i,c),\n   right(i,r).": {
+       "atom-frequency": {
+        "neighbourhood(i,l,c,r) :- \n   left(i,l),\n   element(i,c),\n   right(i,r).": {
+         "element": {
+          "level": 1,
+          "num-tuples": 0
+         },
+         "left": {
+          "level": 0,
+          "num-tuples": 0
+         },
+         "right": {
+          "level": 2,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12380,
+        "pre": 12252
+       },
+       "num-tuples": 10,
+       "runtime": { "start": 21272227508, "end": 21272227516},
+       "source-locator": "/root/souffle-src/tests/example/array/array.dl [48:1-49:42]"
+      }
+     },
+     "num-tuples": 10,
+     "reads": 0,
+     "runtime": { "start": 21272227507, "end": 21272227522},
+     "savetime": { "start": 21272227526, "end": 21272227555},
+     "source-locator": "/root/souffle-src/tests/example/array/array.dl [45:7-45:20]"
+    },
+    "parameters": {
+     "loadtime": { "start": 21272227003, "end": 21272227025},
+     "num-tuples": 1,
+     "reads": 0,
+     "source-locator": "/root/souffle-src/tests/example/array/array.dl [15:7-15:17]"
+    },
+    "right": {
+     "maxRSS": {
+      "post": 12252,
+      "pre": 12252
+     },
+     "non-recursive-rule": {
+      "right(i,NULL) :- \n   !element((i+1),_),\n   element(i,_),\n   default(NULL).": {
+       "atom-frequency": {
+        "right(i,NULL) :- \n   !element((i+1),_),\n   element(i,_),\n   default(NULL).": {
+         "default": {
+          "level": 1,
+          "num-tuples": 0
+         },
+         "element": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12252,
+        "pre": 12252
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 21272227475, "end": 21272227477},
+       "source-locator": "/root/souffle-src/tests/example/array/array.dl [41:1-41:66]"
+      },
+      "right(i,x) :- \n   element( _tmp_1,x),\n   element(i,_),\n    _tmp_1 = (i+1).": {
+       "atom-frequency": {
+        "right(i,x) :- \n   element( _tmp_1,x),\n   element(i,_),\n    _tmp_1 = (i+1).": {
+         "element": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12252,
+        "pre": 12252
+       },
+       "num-tuples": 9,
+       "runtime": { "start": 21272227481, "end": 21272227495},
+       "source-locator": "/root/souffle-src/tests/example/array/array.dl [42:1-42:47]"
+      }
+     },
+     "num-tuples": 10,
+     "reads": 0,
+     "runtime": { "start": 21272227472, "end": 21272227502},
+     "source-locator": "/root/souffle-src/tests/example/array/array.dl [40:7-40:12]"
+    },
+    "values": {
+     "loadtime": { "start": 21272227031, "end": 21272227071},
+     "num-tuples": 5,
+     "reads": 10,
+     "source-locator": "/root/souffle-src/tests/example/array/array.dl [19:7-19:13]"
+    }
+   },
+   "runtime": { "start": 21272226904, "end": 21272227559},
+   "starttime": { "time": 21272226868},
+   "usage": {
+    "timepoint": {
+     "21272226991": {
+      "maxRSS": 11808,
+      "systemtime": 0,
+      "usertime": 5654
+     },
+     "21272227130": {
+      "maxRSS": 12252,
+      "systemtime": 0,
+      "usertime": 5907
+     },
+     "21272227164": {
+      "maxRSS": 12252,
+      "systemtime": 0,
+      "usertime": 5951
+     },
+     "21272227198": {
+      "maxRSS": 12252,
+      "systemtime": 0,
+      "usertime": 5990
+     },
+     "21272227222": {
+      "maxRSS": 12252,
+      "systemtime": 0,
+      "usertime": 6023
+     },
+     "21272227344": {
+      "maxRSS": 12252,
+      "systemtime": 0,
+      "usertime": 6141
+     },
+     "21272227459": {
+      "maxRSS": 12252,
+      "systemtime": 0,
+      "usertime": 6285
+     },
+     "21272227477": {
+      "maxRSS": 12252,
+      "systemtime": 0,
+      "usertime": 6319
+     },
+     "21272227505": {
+      "maxRSS": 12252,
+      "systemtime": 0,
+      "usertime": 6349
+     }
+    }
+   }
+  }
+ }
+}
