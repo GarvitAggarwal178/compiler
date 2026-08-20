@@ -1,0 +1,244 @@
+{
+ "root": {
+  "program": {
+   "configuration": {
+    "": "/root/compiler/tests/programs/p1prime.dl",
+    "fact-dir": "/root/compiler/fixtures/p1",
+    "include-dir": ".",
+    "jobs": "1",
+    "libraries": "functors",
+    "library-dir": ".",
+    "magic-transform": "*",
+    "output-dir": "/root/compiler/measurements/probe0.5-p1prime-on-run",
+    "profile": "prof_on.log",
+    "relationCount": "3",
+    "ruleCount": "6",
+    "version": "2.5",
+    "warn": "all",
+    "wno": "none"
+   },
+   "relation": {
+    "@magic.path.{bf}": {
+     "maxRSS": {
+      "post": 13336,
+      "pre": 13336
+     },
+     "non-recursive-rule": {
+      "@magic.path.{bf}(1).": {
+       "maxRSS": {
+        "post": 13336,
+        "pre": 13336
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 7297294312, "end": 7297294316},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 1,
+     "runtime": { "start": 7297294311, "end": 7297294325},
+     "source-locator": " [1:1-1:1]"
+    },
+    "edge": {
+     "loadtime": { "start": 7297294329, "end": 7297295276},
+     "num-tuples": 4000,
+     "reads": 0,
+     "source-locator": "/root/compiler/tests/programs/p1prime.dl [1:7-1:11]"
+    },
+    "path.{bf}": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 7297295338, "end": 7297295340},
+       "maxRSS": {
+        "post": 13336,
+        "pre": 13336
+       },
+       "num-tuples": 13,
+       "recursive-rule": {
+        "path.{bf}(x,y) :- \n   @magic.path.{bf}(x),\n   path.{bf}(x,z),\n   edge(z,y).": {
+         "0": {
+          "atom-frequency": {
+           "@new_path.{bf}(x,y) :- \n   @magic.path.{bf}(x),\n   @delta_path.{bf}(x,z),\n   edge(z,y).": {
+            "@delta_path.{bf}": {
+             "level": 1,
+             "num-tuples": 0
+            },
+            "@magic.path.{bf}": {
+             "level": 0,
+             "num-tuples": 0
+            },
+            "edge": {
+             "level": 2,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 13336,
+           "pre": 13336
+          },
+          "num-tuples": 13,
+          "runtime": { "start": 7297295317, "end": 7297295323},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 7297295317, "end": 7297295331}
+      },
+      "1": {
+       "copytime": { "start": 7297295362, "end": 7297295364},
+       "maxRSS": {
+        "post": 13336,
+        "pre": 13336
+       },
+       "num-tuples": 27,
+       "recursive-rule": {
+        "path.{bf}(x,y) :- \n   @magic.path.{bf}(x),\n   path.{bf}(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 13336,
+           "pre": 13336
+          },
+          "num-tuples": 27,
+          "runtime": { "start": 7297295343, "end": 7297295351},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 7297295343, "end": 7297295357}
+      },
+      "2": {
+       "copytime": { "start": 7297295386, "end": 7297295387},
+       "maxRSS": {
+        "post": 13336,
+        "pre": 13336
+       },
+       "num-tuples": 8,
+       "recursive-rule": {
+        "path.{bf}(x,y) :- \n   @magic.path.{bf}(x),\n   path.{bf}(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 13336,
+           "pre": 13336
+          },
+          "num-tuples": 8,
+          "runtime": { "start": 7297295366, "end": 7297295376},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 7297295366, "end": 7297295381}
+      },
+      "3": {
+       "maxRSS": {
+        "post": 13336,
+        "pre": 13336
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "path.{bf}(x,y) :- \n   @magic.path.{bf}(x),\n   path.{bf}(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 13336,
+           "pre": 13336
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 7297295389, "end": 7297295392},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 7297295389, "end": 7297295396}
+      }
+     },
+     "maxRSS": {
+      "post": 13336,
+      "pre": 13336
+     },
+     "non-recursive-rule": {
+      "path.{bf}(x,y) :- \n   @magic.path.{bf}(x),\n   edge(x,y).": {
+       "atom-frequency": {
+        "path.{bf}(x,y) :- \n   @magic.path.{bf}(x),\n   edge(x,y).": {
+         "@magic.path.{bf}": {
+          "level": 0,
+          "num-tuples": 0
+         },
+         "edge": {
+          "level": 1,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 13336,
+        "pre": 13336
+       },
+       "num-tuples": 2,
+       "runtime": { "start": 7297295297, "end": 7297295304},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 2,
+     "reads": 149,
+     "runtime": { "start": 7297295283, "end": 7297295312},
+     "source-locator": " [1:1-1:1]"
+    },
+    "q": {
+     "maxRSS": {
+      "post": 13336,
+      "pre": 13336
+     },
+     "non-recursive-rule": {
+      "q(y) :- \n   path.{bf}(@abdul0,y),\n   @abdul0 = 1.": {
+       "atom-frequency": {
+        "q(y) :- \n   path.{bf}(@abdul0,y),\n   @abdul0 = 1.": {
+         "path.{bf}": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 13336,
+        "pre": 13336
+       },
+       "num-tuples": 50,
+       "runtime": { "start": 7297295412, "end": 7297295415},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 50,
+     "reads": 0,
+     "runtime": { "start": 7297295411, "end": 7297295421},
+     "savetime": { "start": 7297295425, "end": 7297295526},
+     "source-locator": "/root/compiler/tests/programs/p1prime.dl [6:7-6:8]"
+    }
+   },
+   "runtime": { "start": 7297294306, "end": 7297295532},
+   "starttime": { "time": 7297294278},
+   "usage": {
+    "timepoint": {
+     "7297294409": {
+      "maxRSS": 13336,
+      "systemtime": 0,
+      "usertime": 3976
+     },
+     "7297295402": {
+      "maxRSS": 13336,
+      "systemtime": 0,
+      "usertime": 5086
+     },
+     "7297295413": {
+      "maxRSS": 13336,
+      "systemtime": 0,
+      "usertime": 5109
+     },
+     "7297295446": {
+      "maxRSS": 13336,
+      "systemtime": 0,
+      "usertime": 5127
+     }
+    }
+   }
+  }
+ }
+}

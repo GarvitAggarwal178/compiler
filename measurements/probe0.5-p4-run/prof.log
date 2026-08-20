@@ -1,0 +1,544 @@
+{
+ "root": {
+  "program": {
+   "configuration": {
+    "": "/root/compiler/tests/programs/p4.dl",
+    "fact-dir": "/root/compiler/fixtures/p2",
+    "include-dir": ".",
+    "jobs": "1",
+    "libraries": "functors",
+    "library-dir": ".",
+    "output-dir": "/root/compiler/measurements/probe0.5-p4-run",
+    "profile": "prof.log",
+    "relationCount": "6",
+    "ruleCount": "7",
+    "version": "2.5",
+    "warn": "all",
+    "wno": "none"
+   },
+   "relation": {
+    "edge": {
+     "loadtime": { "start": 7297309543, "end": 7297309738},
+     "num-tuples": 400,
+     "reads": 0,
+     "source-locator": "/root/compiler/tests/programs/p4.dl [1:7-1:11]"
+    },
+    "m_reach": {
+     "maxRSS": {
+      "post": 13336,
+      "pre": 13336
+     },
+     "non-recursive-rule": {
+      "m_reach(1).": {
+       "maxRSS": {
+        "post": 13336,
+        "pre": 13336
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 7297309758, "end": 7297309762},
+       "source-locator": "/root/compiler/tests/programs/p4.dl [7:1-7:12]"
+      }
+     },
+     "num-tuples": 1,
+     "reads": 0,
+     "runtime": { "start": 7297309746, "end": 7297309769},
+     "source-locator": "/root/compiler/tests/programs/p4.dl [6:7-6:14]"
+    },
+    "node": {
+     "loadtime": { "start": 7297309774, "end": 7297309820},
+     "num-tuples": 200,
+     "reads": 1,
+     "source-locator": "/root/compiler/tests/programs/p4.dl [3:7-3:11]"
+    },
+    "q2": {
+     "maxRSS": {
+      "post": 13336,
+      "pre": 13336
+     },
+     "non-recursive-rule": {
+      "q2(y) :- \n   unreach_bf(1,y).": {
+       "atom-frequency": {
+        "q2(y) :- \n   unreach_bf(1,y).": {
+         "unreach_bf": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 13336,
+        "pre": 13336
+       },
+       "num-tuples": 30,
+       "runtime": { "start": 7297310279, "end": 7297310282},
+       "source-locator": "/root/compiler/tests/programs/p4.dl [18:1-18:26]"
+      }
+     },
+     "num-tuples": 30,
+     "reads": 0,
+     "runtime": { "start": 7297310271, "end": 7297310290},
+     "savetime": { "start": 7297310294, "end": 7297310552},
+     "source-locator": "/root/compiler/tests/programs/p4.dl [16:7-16:9]"
+    },
+    "reach_bf": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 7297309869, "end": 7297309881},
+       "maxRSS": {
+        "post": 13336,
+        "pre": 13336
+       },
+       "num-tuples": 7,
+       "recursive-rule": {
+        "reach_bf(x,y) :- \n   m_reach(x),\n   reach_bf(x,z),\n   edge(z,y).": {
+         "0": {
+          "atom-frequency": {
+           "@new_reach_bf(x,y) :- \n   m_reach(x),\n   @delta_reach_bf(x,z),\n   edge(z,y).": {
+            "@delta_reach_bf": {
+             "level": 1,
+             "num-tuples": 0
+            },
+            "edge": {
+             "level": 2,
+             "num-tuples": 0
+            },
+            "m_reach": {
+             "level": 0,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 13336,
+           "pre": 13336
+          },
+          "num-tuples": 7,
+          "runtime": { "start": 7297309847, "end": 7297309852},
+          "source-locator": "/root/compiler/tests/programs/p4.dl [11:1-11:55]"
+         }
+        }
+       },
+       "runtime": { "start": 7297309846, "end": 7297309861}
+      },
+      "1": {
+       "copytime": { "start": 7297309919, "end": 7297309921},
+       "maxRSS": {
+        "post": 13336,
+        "pre": 13336
+       },
+       "num-tuples": 10,
+       "recursive-rule": {
+        "reach_bf(x,y) :- \n   m_reach(x),\n   reach_bf(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 13336,
+           "pre": 13336
+          },
+          "num-tuples": 10,
+          "runtime": { "start": 7297309889, "end": 7297309892},
+          "source-locator": "/root/compiler/tests/programs/p4.dl [11:1-11:55]"
+         }
+        }
+       },
+       "runtime": { "start": 7297309888, "end": 7297309900}
+      },
+      "10": {
+       "copytime": { "start": 7297310164, "end": 7297310165},
+       "maxRSS": {
+        "post": 13336,
+        "pre": 13336
+       },
+       "num-tuples": 5,
+       "recursive-rule": {
+        "reach_bf(x,y) :- \n   m_reach(x),\n   reach_bf(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 13336,
+           "pre": 13336
+          },
+          "num-tuples": 5,
+          "runtime": { "start": 7297310150, "end": 7297310152},
+          "source-locator": "/root/compiler/tests/programs/p4.dl [11:1-11:55]"
+         }
+        }
+       },
+       "runtime": { "start": 7297310149, "end": 7297310158}
+      },
+      "11": {
+       "copytime": { "start": 7297310180, "end": 7297310181},
+       "maxRSS": {
+        "post": 13336,
+        "pre": 13336
+       },
+       "num-tuples": 1,
+       "recursive-rule": {
+        "reach_bf(x,y) :- \n   m_reach(x),\n   reach_bf(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 13336,
+           "pre": 13336
+          },
+          "num-tuples": 1,
+          "runtime": { "start": 7297310167, "end": 7297310170},
+          "source-locator": "/root/compiler/tests/programs/p4.dl [11:1-11:55]"
+         }
+        }
+       },
+       "runtime": { "start": 7297310167, "end": 7297310174}
+      },
+      "12": {
+       "copytime": { "start": 7297310197, "end": 7297310198},
+       "maxRSS": {
+        "post": 13336,
+        "pre": 13336
+       },
+       "num-tuples": 1,
+       "recursive-rule": {
+        "reach_bf(x,y) :- \n   m_reach(x),\n   reach_bf(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 13336,
+           "pre": 13336
+          },
+          "num-tuples": 1,
+          "runtime": { "start": 7297310186, "end": 7297310187},
+          "source-locator": "/root/compiler/tests/programs/p4.dl [11:1-11:55]"
+         }
+        }
+       },
+       "runtime": { "start": 7297310183, "end": 7297310192}
+      },
+      "13": {
+       "maxRSS": {
+        "post": 13336,
+        "pre": 13336
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "reach_bf(x,y) :- \n   m_reach(x),\n   reach_bf(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 13336,
+           "pre": 13336
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 7297310210, "end": 7297310212},
+          "source-locator": "/root/compiler/tests/programs/p4.dl [11:1-11:55]"
+         }
+        }
+       },
+       "runtime": { "start": 7297310200, "end": 7297310224}
+      },
+      "2": {
+       "copytime": { "start": 7297309955, "end": 7297309958},
+       "maxRSS": {
+        "post": 13336,
+        "pre": 13336
+       },
+       "num-tuples": 18,
+       "recursive-rule": {
+        "reach_bf(x,y) :- \n   m_reach(x),\n   reach_bf(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 13336,
+           "pre": 13336
+          },
+          "num-tuples": 18,
+          "runtime": { "start": 7297309925, "end": 7297309931},
+          "source-locator": "/root/compiler/tests/programs/p4.dl [11:1-11:55]"
+         }
+        }
+       },
+       "runtime": { "start": 7297309924, "end": 7297309938}
+      },
+      "3": {
+       "copytime": { "start": 7297309984, "end": 7297309986},
+       "maxRSS": {
+        "post": 13336,
+        "pre": 13336
+       },
+       "num-tuples": 31,
+       "recursive-rule": {
+        "reach_bf(x,y) :- \n   m_reach(x),\n   reach_bf(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 13336,
+           "pre": 13336
+          },
+          "num-tuples": 31,
+          "runtime": { "start": 7297309962, "end": 7297309971},
+          "source-locator": "/root/compiler/tests/programs/p4.dl [11:1-11:55]"
+         }
+        }
+       },
+       "runtime": { "start": 7297309961, "end": 7297309978}
+      },
+      "4": {
+       "copytime": { "start": 7297310009, "end": 7297310012},
+       "maxRSS": {
+        "post": 13336,
+        "pre": 13336
+       },
+       "num-tuples": 29,
+       "recursive-rule": {
+        "reach_bf(x,y) :- \n   m_reach(x),\n   reach_bf(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 13336,
+           "pre": 13336
+          },
+          "num-tuples": 29,
+          "runtime": { "start": 7297309989, "end": 7297309999},
+          "source-locator": "/root/compiler/tests/programs/p4.dl [11:1-11:55]"
+         }
+        }
+       },
+       "runtime": { "start": 7297309989, "end": 7297310004}
+      },
+      "5": {
+       "copytime": { "start": 7297310034, "end": 7297310036},
+       "maxRSS": {
+        "post": 13336,
+        "pre": 13336
+       },
+       "num-tuples": 25,
+       "recursive-rule": {
+        "reach_bf(x,y) :- \n   m_reach(x),\n   reach_bf(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 13336,
+           "pre": 13336
+          },
+          "num-tuples": 25,
+          "runtime": { "start": 7297310014, "end": 7297310024},
+          "source-locator": "/root/compiler/tests/programs/p4.dl [11:1-11:55]"
+         }
+        }
+       },
+       "runtime": { "start": 7297310014, "end": 7297310029}
+      },
+      "6": {
+       "copytime": { "start": 7297310070, "end": 7297310072},
+       "maxRSS": {
+        "post": 13336,
+        "pre": 13336
+       },
+       "num-tuples": 16,
+       "recursive-rule": {
+        "reach_bf(x,y) :- \n   m_reach(x),\n   reach_bf(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 13336,
+           "pre": 13336
+          },
+          "num-tuples": 16,
+          "runtime": { "start": 7297310039, "end": 7297310048},
+          "source-locator": "/root/compiler/tests/programs/p4.dl [11:1-11:55]"
+         }
+        }
+       },
+       "runtime": { "start": 7297310038, "end": 7297310053}
+      },
+      "7": {
+       "copytime": { "start": 7297310107, "end": 7297310109},
+       "maxRSS": {
+        "post": 13336,
+        "pre": 13336
+       },
+       "num-tuples": 14,
+       "recursive-rule": {
+        "reach_bf(x,y) :- \n   m_reach(x),\n   reach_bf(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 13336,
+           "pre": 13336
+          },
+          "num-tuples": 14,
+          "runtime": { "start": 7297310076, "end": 7297310084},
+          "source-locator": "/root/compiler/tests/programs/p4.dl [11:1-11:55]"
+         }
+        }
+       },
+       "runtime": { "start": 7297310075, "end": 7297310090}
+      },
+      "8": {
+       "copytime": { "start": 7297310131, "end": 7297310132},
+       "maxRSS": {
+        "post": 13336,
+        "pre": 13336
+       },
+       "num-tuples": 6,
+       "recursive-rule": {
+        "reach_bf(x,y) :- \n   m_reach(x),\n   reach_bf(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 13336,
+           "pre": 13336
+          },
+          "num-tuples": 6,
+          "runtime": { "start": 7297310113, "end": 7297310118},
+          "source-locator": "/root/compiler/tests/programs/p4.dl [11:1-11:55]"
+         }
+        }
+       },
+       "runtime": { "start": 7297310112, "end": 7297310125}
+      },
+      "9": {
+       "copytime": { "start": 7297310146, "end": 7297310148},
+       "maxRSS": {
+        "post": 13336,
+        "pre": 13336
+       },
+       "num-tuples": 4,
+       "recursive-rule": {
+        "reach_bf(x,y) :- \n   m_reach(x),\n   reach_bf(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 13336,
+           "pre": 13336
+          },
+          "num-tuples": 4,
+          "runtime": { "start": 7297310134, "end": 7297310137},
+          "source-locator": "/root/compiler/tests/programs/p4.dl [11:1-11:55]"
+         }
+        }
+       },
+       "runtime": { "start": 7297310134, "end": 7297310141}
+      }
+     },
+     "maxRSS": {
+      "post": 13336,
+      "pre": 13336
+     },
+     "non-recursive-rule": {
+      "reach_bf(x,y) :- \n   m_reach(x),\n   edge(x,y).": {
+       "atom-frequency": {
+        "reach_bf(x,y) :- \n   m_reach(x),\n   edge(x,y).": {
+         "edge": {
+          "level": 1,
+          "num-tuples": 0
+         },
+         "m_reach": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 13336,
+        "pre": 13336
+       },
+       "num-tuples": 3,
+       "runtime": { "start": 7297309827, "end": 7297309833},
+       "source-locator": "/root/compiler/tests/programs/p4.dl [10:1-10:40]"
+      }
+     },
+     "num-tuples": 3,
+     "reads": 535,
+     "runtime": { "start": 7297309827, "end": 7297309841},
+     "source-locator": "/root/compiler/tests/programs/p4.dl [9:7-9:15]"
+    },
+    "unreach_bf": {
+     "maxRSS": {
+      "post": 13336,
+      "pre": 13336
+     },
+     "non-recursive-rule": {
+      "unreach_bf(1,y) :- \n   node(1),\n   node(y),\n   !reach_bf(1,y).": {
+       "atom-frequency": {
+        "unreach_bf(1,y) :- \n   node(1),\n   node(y),\n   !reach_bf(1,y).": {
+         "node": {
+          "level": 1,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 13336,
+        "pre": 13336
+       },
+       "num-tuples": 30,
+       "runtime": { "start": 7297310246, "end": 7297310259},
+       "source-locator": "/root/compiler/tests/programs/p4.dl [14:1-14:53]"
+      }
+     },
+     "num-tuples": 30,
+     "reads": 0,
+     "runtime": { "start": 7297310246, "end": 7297310266},
+     "source-locator": "/root/compiler/tests/programs/p4.dl [13:7-13:17]"
+    }
+   },
+   "runtime": { "start": 7297309539, "end": 7297310559},
+   "starttime": { "time": 7297309513},
+   "usage": {
+    "timepoint": {
+     "7297309625": {
+      "maxRSS": 13336,
+      "systemtime": 0,
+      "usertime": 3312
+     },
+     "7297309859": {
+      "maxRSS": 13336,
+      "systemtime": 0,
+      "usertime": 3658
+     },
+     "7297309896": {
+      "maxRSS": 13336,
+      "systemtime": 0,
+      "usertime": 3708
+     },
+     "7297309921": {
+      "maxRSS": 13336,
+      "systemtime": 0,
+      "usertime": 3744
+     },
+     "7297309925": {
+      "maxRSS": 13336,
+      "systemtime": 0,
+      "usertime": 3753
+     },
+     "7297310029": {
+      "maxRSS": 13336,
+      "systemtime": 0,
+      "usertime": 3867
+     },
+     "7297310041": {
+      "maxRSS": 13336,
+      "systemtime": 0,
+      "usertime": 3888
+     },
+     "7297310075": {
+      "maxRSS": 13336,
+      "systemtime": 0,
+      "usertime": 3930
+     },
+     "7297310174": {
+      "maxRSS": 13336,
+      "systemtime": 0,
+      "usertime": 4044
+     },
+     "7297310196": {
+      "maxRSS": 13336,
+      "systemtime": 0,
+      "usertime": 4075
+     },
+     "7297310225": {
+      "maxRSS": 13336,
+      "systemtime": 0,
+      "usertime": 4110
+     },
+     "7297310248": {
+      "maxRSS": 13336,
+      "systemtime": 0,
+      "usertime": 4139
+     },
+     "7297310358": {
+      "maxRSS": 13336,
+      "systemtime": 0,
+      "usertime": 4199
+     }
+    }
+   }
+  }
+ }
+}

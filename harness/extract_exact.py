@@ -21,6 +21,9 @@ RUNS = [
     ("probe0-p2-on", MEASUREMENTS / "probe0-p2-on-run" / "prof_on.log"),
     ("probe0-p3-off", MEASUREMENTS / "probe0-p3-off-run" / "prof_off.log"),
     ("probe0-p3-on", MEASUREMENTS / "probe0-p3-on-run" / "prof_on.log"),
+    ("probe0.5-p1prime-off", MEASUREMENTS / "probe0.5-p1prime-off-run" / "prof_off.log"),
+    ("probe0.5-p1prime-on", MEASUREMENTS / "probe0.5-p1prime-on-run" / "prof_on.log"),
+    ("probe0.5-p4", MEASUREMENTS / "probe0.5-p4-run" / "prof.log"),
 ]
 
 

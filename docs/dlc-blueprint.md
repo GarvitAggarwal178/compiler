@@ -4,7 +4,7 @@
 **Team:** 2
 **Budget:** 15 weeks from 2026-08-20 → 2026-12-03. Realistically ~10 productive weeks.
 **Status:** selected 2026-08-20, pending Probe 0. Not started.
-**Blueprint version:** v1.0
+**Blueprint version:** v1.1
 
 ---
 
@@ -20,9 +20,18 @@ untransformed evaluation on the affected components.
 The magic-set transformation is not unconditionally sound in the presence of
 negation. It can convert a stratified program into an unstratified one, and it can
 produce a stratified program that is still wrong because a negated subgoal is
-evaluated against an incomplete relation. Production engines respond by declining to
-transform anything touching negation. That conservatism has a cost, that cost is an
-exact integer, and a guarded transform recovers part of it.
+evaluated against an incomplete relation. Production engines are commonly described as declining to transform anything touching
+negation; **empirically (Soufflé 2.5, Probe 0) that description is wrong.**
+
+> Soufflé transforms relations whose bodies contain negation, but never
+> demand-restricts a *negated* relation — it isolates it (`@neglabel.<rel>`) and
+> computes it in full. This discharges completeness-under-negation by brute force and
+> forfeits every reduction reachable through a negated literal. The gap is: **when is
+> restricting a negated relation safe, and what does refusing to do it cost?**
+
+That conservatism (on the negated side only) has a cost, that cost is an exact
+integer, and a guarded transform recovers part of it. See `docs/reports/probe0.md`
+and `docs/reports/probe0_5.md` for the measurements behind this restatement.
 
 **The claim we defend:** *our transform is applied under a stated soundness guard;
 here are the N programs where the guard fires, here is what the guard is conservative
@@ -124,6 +133,14 @@ program.
 
 **Guard(P, Q) permits transformation of SCC `C` iff:**
 
+**Clause (b) is primary.** Probe 0 / 0.5 located the actual gap in Soufflé's
+behavior on clause (b), not (a): Soufflé already isolates negated relations soundly
+(no observed stratification breakage), it simply refuses to demand-restrict them,
+computing every negated relation in full every time. The headline number lives in
+clause (b) — restricting a negated relation exactly when it is safe to do so. Clause
+(a) is retained below as a correctness side-condition on the transform, tested by P5
+(§12) in M3, not as a source of the headline metric.
+
 **(a) Stratification preservation.** The precedence graph of `M(P,Q)` has no negative
 edge within any SCC intersecting `C`.
 
@@ -136,6 +153,14 @@ Literature calls these *culprit cycles*.
 
 *Cheap necessary precondition:* the affected predicates must lie in a positive cycle
 in the source. Check that first; it prunes most programs in O(V+E).
+
+**Unverified — do not build this into the guard yet.** This precondition is taken
+from a paper abstract, not confirmed against a worked example. Probe 0's P3 was
+intended to exercise exactly this positive-cycle-through-negation shape and did not:
+Soufflé's own inliner removed the relation (`q`) the cycle was supposed to run
+through before any transform-safety question was even reachable (`docs/reports/
+probe0.md`). Check this precondition directly against P5 (§12), the corrected
+culprit-cycle program, before relying on it for pruning.
 
 **(b) Completeness under negation.** For every negated literal `!q(t̄)` in `M(P,Q)`,
 the magic set for `q` must be complete on the instantiations reachable at the point
@@ -184,8 +209,21 @@ seeing results reintroduces the defect that killed bounds-check elimination.
 
 ### Headline metric (Filter 3)
 
-**Total derived tuples** = Σ over relations of tuples inserted into Δ across all
-fixpoint iterations, for a bound query. Exact integer. Deterministic. Hardware-free.
+**Primary metric, as of v1.1:**
+
+> Tuples materialized in negated relations under Soufflé's transform, against tuples
+> required under a completeness-guarded restriction. Exact integer pair per program.
+
+This targets clause (b) directly (§6) — it is the number that isolates exactly what
+Soufflé's blanket-isolate-and-fully-materialize handling of negated relations costs,
+independent of whatever else the surrounding program does. Report as a pair
+(Soufflé's materialized count, our guarded-restriction count), not a ratio, when
+either side is below ~10³ (§3, `docs/reports/probe0_5.md`) — ratios on noise-scale
+totals are not evidence.
+
+**Secondary metric — total derived tuples** = Σ over relations of tuples inserted
+into Δ across all fixpoint iterations, for a bound query. Exact integer.
+Deterministic. Hardware-free.
 
 Reported as three numbers per program:
 
@@ -274,6 +312,15 @@ long, M3 wins.
 5. **Filter 4 collapse.** Front end ends up thin, semantic analysis never rejects
    anything in the demo, instructor reads it as a runtime with a parser bolted on.
 
+6. **Soufflé's isolation turns out to be conditional.** Probe 0 / 0.5 established that
+   Soufflé leaves the negated relation fully materialized on two programs. If
+   `@neglabel` isolation is applied selectively rather than universally — restricting
+   the negated relation on some shapes and not others — the gap this project fills is
+   smaller than two programs suggest, and the "primary metric" in §7 could turn out to
+   already be near zero on most of the corpus. Mitigation: test on ≥6 negation
+   programs of differing shape before M2 closes, and report the count where the
+   negated relation was left unreduced by Soufflé.
+
 ---
 
 ## 10. Open questions — resolve by the stated date
@@ -294,7 +341,7 @@ long, M3 wins.
 
 | Artifact | What it is | Filter 1 verdict |
 |---|---|---|
-| Soufflé | Reference engine and our oracle. Documents that only the positive-datalog magic algorithm is implemented; relations with negation in their body or in the body of a dependency are not transformed. | Cite-and-avoid. Do not open `MagicSet.cpp`. |
+| Soufflé | Reference engine and our oracle. Documentation states relations with negation in their body or in the body of a dependency are not transformed. **This is contradicted by observed behaviour in Soufflé 2.5** (`probe0-p2-on-extract`, `probe0-p3-on-extract`): the negation-*bearing* relation is transformed; only the negat*ed* relation is left fully materialized (`@neglabel.<rel>`). A documentation/behavior discrepancy upstream is noted here as a low-priority side artifact, not pursued as a milestone. | Cite-and-avoid. Do not open `MagicSet.cpp`. |
 | `travitch/datalog` (Haskell) | `MagicSets.hs` comments that negated literals can break stratification and therefore refuses the transform; author explicitly unsure whether the restriction should cover only negated literals or everything defining them. | Cite-and-avoid. **This uncertainty is our research question — quote it in the report.** |
 | Jatalog | Java, semi-naive, stratified negation, no magic sets. | Not substitutable; secondary oracle. |
 | Micinski, Syracuse CIS700 Project 2 | Datalog interpreter as a course project, Soufflé-referenced test files, naive positive fragment scores 90%. | Adjacent coursework. Our project starts where it ends. Cite for honesty. |
@@ -328,13 +375,16 @@ this completes.
 
 Install Soufflé from a release `.deb`. Do not build from source.
 
-### P1 — positive reachability (validates the M2 headline)
+### P1' — positive reachability (validates the M2 headline; supersedes P1, v1.0)
+
+P1 (v1.0) declared `.output path`, forcing full materialization of `path` regardless
+of the magic transform and producing a ≈1 ratio instead of the predicted ~10³
+(`docs/reports/probe0.md`). `path` is an intermediate; only `q` is required output.
 
 ```
 .decl edge(a:number, b:number)
 .input edge
 .decl path(a:number, b:number)
-.output path
 path(x,y) :- edge(x,y).
 path(x,y) :- path(x,z), edge(z,y).
 .decl q(b:number)
@@ -342,13 +392,12 @@ path(x,y) :- path(x,z), edge(z,y).
 q(y) :- path(1,y).
 ```
 
-`edge.facts`: 2000 nodes, ~4000 edges, seeded RNG, reachable-set from node 1 of
-roughly 50 nodes. Verify the reachable-set size before running — if it is 1900, the
-graph is wrong and the ratio will be meaningless.
+Same fixture as P1 (v1.0), same seed, not regenerated: 2000 nodes, ~4000 edges,
+reachable-set from node 1 verified at exactly 50 (`probe0-p1-fixture`).
 
 ```
-souffle -F. -D. -p prof_off.log  p1.dl
-souffle -F. -D. -p prof_on.log  --magic-transform=* p1.dl
+souffle -F. -D. -p prof_off.log  p1prime.dl
+souffle -F. -D. -p prof_on.log  --magic-transform=* p1prime.dl
 souffleprof prof_off.log
 souffleprof prof_on.log
 ```
@@ -357,7 +406,7 @@ Checking: (i) Soufflé runs on WSL2; (ii) the magic transform changes the derive
 count on a bound query; (iii) **`souffleprof` reports per-relation tuple counts** —
 this is load-bearing, because the headline metric's credibility depends on validating
 our counter against a number the oracle reports independently; (iv) the ratio is
-~10^3, not ~2.
+~10^4, not ~1. See `docs/reports/probe0_5.md` for the measured result.
 
 ### P2 — benign negation (tests the documented claim)
 
@@ -381,41 +430,83 @@ predicate — the *safe* case. Expect: Soufflé declines to transform the relati
 touching negation, per its documentation. Diff `prof_on` against `prof_off`; identical
 profiles mean it declined.
 
-### P3 — culprit cycle (this one sizes the differentiator)
+### P4 — decisive experiment: hand-transformed P2 (zero `dlc` code, run before M2)
 
-Source is stratified. After MST, `magic_q →¬ s → q → magic_q` closes a negative cycle.
+Establishes the project's headline number using Soufflé as both baseline and
+executor, with no `dlc` code at all. Hand-write the magic-transformed form of P2,
+restricting the *negated* relation — the thing Soufflé's own transform refuses to do
+(§2, §11).
 
 ```
-.decl base(x:number, y:number)
-.input base
-.decl e(x:number, y:number)
-.input e
+.decl edge(a:number, b:number)
+.input edge
+.decl node(a:number)
+.input node
+
+.decl m_reach(a:number)                       // magic seed, binding pattern bf
+m_reach(1).
+
+.decl reach_bf(a:number, b:number)
+reach_bf(x,y) :- m_reach(x), edge(x,y).
+reach_bf(x,y) :- m_reach(x), reach_bf(x,z), edge(z,y).
+
+.decl unreach_bf(a:number, b:number)
+unreach_bf(1,y) :- node(1), node(y), !reach_bf(1,y).
+
+.decl q2(b:number)
+.output q2
+q2(y) :- unreach_bf(1,y).
+```
+
+Soundness argument to check against the result, not assume: `reach_bf` is complete
+for every instantiation the negated literal requires, because the only binding ever
+demanded is `x = 1` and the seed supplies it. This is guard clause (b) discharged by
+hand, for one program.
+
+Two checks: (1) `q2.csv` byte-identical to P2's `q2.csv`, both configurations — if
+not, the guard-clause-(b) argument above is wrong as stated and everything downstream
+needs rethinking. (2) tuple count of `reach_bf` against Soufflé's `reach` (26,404,
+unchanged in both P2 configurations) — report as an integer pair, not a ratio alone.
+This establishes the reduction is achievable and sound on one program. It does **not**
+establish that the guard condition can be computed automatically — M3's job.
+
+### P5 — corrected culprit cycle (M3, not Probe 0/0.5 — supersedes P3, v1.0)
+
+P3 (v1.0) was void for two independent reasons (`docs/reports/probe0.md`,
+`docs/reports/probe0_5.md`): Soufflé's inliner removed `q` before any transform ran,
+and `s(x) :- q(x,_)` made `s` the exact projection of `q`'s first column, so
+`!s(z)` and `q(z,y)` were mutually exclusive and the recursive `p` rule could never
+fire (`p = 30 = |e|` confirmed this — a dead rule, not a declined transform).
+
+```
+.decl base(x:number, y:number)     .input base
+.decl e(x:number, y:number)        .input e
+.decl blocked(x:number)            .input blocked
+
 .decl q(x:number, y:number)
-.decl s(x:number)
-.decl p(x:number, y:number)
-
 q(x,y) :- base(x,y).
-s(x)   :- q(x,_).
-p(x,y) :- e(x,y).
-p(x,y) :- p(x,z), !s(z), q(z,y).
+q(x,y) :- q(x,z), base(z,y).          // recursive: not inlinable
 
-.decl out(y:number)
-.output out
+.decl s(x:number)
+s(x) :- q(x,y), blocked(y).            // depends on q, strict subset
+
+.decl p(x:number, y:number)
+p(x,y) :- e(x,y).
+p(x,y) :- p(x,z), !s(z), q(z,y).       // fires when z reaches nothing blocked
+
+.decl out(y:number)   .output out
 out(y) :- p(1,y).
 ```
 
-Source stratification: `q` at stratum 0, `s` at stratum 0 (positive dependency on
-`q`), `p` above `s` (negative dependency). Stratified. ✓
+Source is stratified (`q` ≺ `s` ≺ `p`). The second `p` rule is non-vacuous by
+construction. Under MST with query `p(1,·)`:
+`magic_q(z) :- magic_p(1), p^bf(1,z), !s(z)` gives `magic_q →¬ s → q → magic_q`, a
+negative edge inside an SCC.
 
-Run with and without `--magic-transform=*`. **Count how many relations are skipped.**
-Only `p` has a negated literal in its body, but the documentation says relations with
-negation *in the body of a dependency* are also skipped. Is `q` transformed, or is the
-whole component dropped? That difference is the size of the gap you are filling, and
-it is an integer.
-
-Asymmetric payoff: if Soufflé *does* transform P3, the differentiator is dead — and
-you have very likely found a soundness bug in Soufflé, which is a better project than
-this one.
+**Before running:** verify on the chosen fixture that the second `p` rule actually
+fires (`|p| > |e|`) and that `q`'s recursive rule survives Soufflé's inliner (it
+should — `q` is self-recursive, and P3's inlined `q` was not). A dead rule or an
+inlined-away pivot relation is how P3 failed; check both before trusting any count.
 
 ### Report back
 
@@ -427,6 +518,12 @@ this one.
 6. P3 blast radius: how many relations skipped.
 
 Not a plan. Six answers.
+
+*(v1.1 note: the six answers above were produced against P1/P3 as specified in
+Blueprint v1.0, before the corrections in this section. They stand as the historical
+record of what Probe 0 asked and found — see `docs/reports/probe0.md`. P1' and P4/P5
+above are the corrected/superseding programs; results against them are in
+`docs/reports/probe0_5.md`.)*
 
 ---
 
