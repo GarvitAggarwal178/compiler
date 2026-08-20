@@ -38,6 +38,20 @@ the "Derived" section below the table.
 | probe0.6-p6a2-{base,hand}-run | 2026-08-20 | `souffle ... tests/programs/p6a2_*.dl` (fixtures/p2) | p6a2 | independent bf/fb adornments on the same relation | `ans` 9 = 9, `diff -q` clean | Non-degenerate match; two independently-seeded adorned versions of the same relation agree with baseline. |
 | probe0.6-q5-eval-only | 2026-08-20 | `python3 harness/corpus_predicate.py /root/souffle-src/tests/evaluation` | souffle tests/evaluation | n/a | `total_tests=149`, `included_count=11` | Superseded below — scope was narrower than the directive asked for. |
 | probe0.6-q5-corpus | 2026-08-20 | `python3 harness/build_corpus.py /root/souffle-src/tests` | souffle tests/ (whole tree) | n/a | `total_dl_bearing_dirs=612`, `included_count=36` | Pre-registered corpus (`tests/corpus/PREREGISTERED.txt`); same unmodified predicate as the row above, correct scope. |
+| probe0-p1-diff, probe0-p1-diff-q | 2026-08-20 | `diff -q measurements/probe0-p1-off-run/{path,q}.csv measurements/probe0-p1-on-run/{path,q}.csv` | p1.dl | off vs on | 0 differences (both) | Backfill (T1, `night01-T1-audit.md`) — same result already claimed in `docs/reports/probe0.md`, now with real provenance. |
+| probe0-p2-diff | 2026-08-20 | `diff -q measurements/probe0-p2-off-run/q2.csv measurements/probe0-p2-on-run/q2.csv` | p2.dl | off vs on | 0 differences | Backfill (T1) — see above. |
+| probe0-p3-diff | 2026-08-20 | `diff -q measurements/probe0-p3-off-run/out.csv measurements/probe0-p3-on-run/out.csv` | p3.dl | off vs on | 0 differences | Backfill (T1) — see above. |
+| probe0-p1-fixture-bfs-check | 2026-08-20 | `python3 harness/night01_bfs_check.py fixtures/p1/edge.facts 1` | p1 fixture | n/a | `reachable_from_1_incl_self=50` | Backfill (T1) — independent (non-Soufflé) confirmation of the `reachable_from_1=50` figure `probe0-p1-fixture` already claimed; both conventions include the source node itself, so the numbers match directly (no offset). |
+| probe0.6-p4prime-diff-vs-p4, -vs-p2 | 2026-08-20 | `diff -q measurements/probe0.6-p4prime-run/q2.csv measurements/probe0.5-p4-run/q2.csv` and vs `measurements/probe0-p2-off-run/q2.csv` | p4prime.dl | vs p4.dl, vs p2.dl | 0 differences (both) | Backfill (T1) — the ID `probe0.6-p4prime-diff` was cited in `docs/reports/probe0_6.md` but never actually captured through `run_cmd`; split into two clean single-command IDs. |
+
+**Non-determinism found, not fixed (T1, hard prohibition #2 applies):**
+`tests/corpus/detail.json`'s `matched_output_relation` diagnostic field varies
+between runs of `harness/build_corpus.py` due to Python's randomized `set` iteration
+order in `corpus_predicate.py`'s `check_program()`. `tests/corpus/
+PREREGISTERED.txt` and the included-count (36) are **not** affected — the predicate
+only needs "at least one" qualifying relation, which is order-independent. Root
+cause logged in `docs/OPEN_QUESTIONS.md`; not fixed tonight because
+`corpus_predicate.py` is the predicate NIGHT-BATCH-01 §0.2.2 forbids editing.
 
 Three-column headline metric (blueprint §7, v1.2). `T_none` = no transform,
 `T_souffle` = Soufflé `--magic-transform=*`, `T_guard` = completeness-guarded hand

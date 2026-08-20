@@ -2,6 +2,20 @@
 
 Append-only. Things noticed and not acted on, with the date noticed.
 
+## 2026-08-20 — `corpus_predicate.py` non-determinism in a diagnostic field only
+
+`check_program()` iterates `output_names` (a Python `set`) and records the first
+`.output` relation found to carry a literal as `matched_output_relation`; when
+multiple qualify, which one is recorded depends on Python's per-process randomized
+string-hash seed. Found by T1 (NIGHT-BATCH-01) re-running `probe0.6-q5-corpus` and
+diffing `tests/corpus/detail.json` against the committed version
+(`docs/reports/night01-T1-audit.md`). **`tests/corpus/PREREGISTERED.txt` and the
+36-count are unaffected** — inclusion only needs "at least one" match, which is
+order-independent. Not fixed: NIGHT-BATCH-01 §0.2.2 forbids editing the predicate
+that produced the pre-registered corpus, without exception, for the batch's
+duration. Fix when unlocked: iterate `sorted(output_names)` instead of the raw set,
+or drop the field, or run with `PYTHONHASHSEED=0`.
+
 ## 2026-08-20 — Q5 (blueprint §10), resolved
 
 "Which Soufflé `tests/` subdirectory is the pre-registered corpus?" — **The whole
