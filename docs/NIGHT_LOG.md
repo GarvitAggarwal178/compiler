@@ -69,4 +69,10 @@ Append-only. One line per task start/end: task ID, outcome, commit SHA.
   written up here). Two bugs found and fixed by validating against known-good
   data before trusting anything (a tuple_report.py false-positive, a
   differential.py relative-path bug — same class as T2's). Nothing under `src/`
-  touched. Report: `docs/reports/night01-T7-harness.md`. Commit: (pending)
+  touched. Report: `docs/reports/night01-T7-harness.md`. Commit: 65b8f9b
+- T8 start — Q3 literature check, web access available.
+- T8 end — outcome: done. Citation confirmed (Tekle & Liu, ICLP 2019, arXiv
+  1909.08246). No downloadable/installable artifact found after two targeted
+  searches and one page fetch. Filter 1 verdict unchanged (cite-and-avoid). No
+  Filter-1-event escalation needed (only required if an artifact was found).
+  Recorded: `docs/OPEN_QUESTIONS.md` (Q3). Commit: (pending)

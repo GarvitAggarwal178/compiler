@@ -30,6 +30,30 @@ that produced the pre-registered corpus, without exception, for the batch's
 duration. Fix when unlocked: iterate `sorted(output_names)` instead of the raw set,
 or drop the field, or run with `PYTHONHASHSEED=0`.
 
+## 2026-08-20 — Q3 (blueprint §10), NIGHT-BATCH-01 T8: no artifact found
+
+"Does *Extended Magic for Negation* (~2019) ship a downloadable artifact?"
+
+**Citation confirmed:** K. Tuncay Tekle and Yanhong A. Liu (Stony Brook University),
+*Extended Magic for Negation: Efficient Demand-Driven Evaluation of Stratified
+Datalog with Precise Complexity Guarantees*, ICLP 2019.
+[arXiv:1909.08246](https://arxiv.org/abs/1909.08246). The paper "presents a simple
+extension to demand transformation to support stratified negation, and a simple
+extension to an optimal bottom-up evaluation method" — existence and scope only,
+per the Prior Art Register rule (`docs/dlc-blueprint.md` §11: cite, do not read
+implementation source; not applicable here regardless, since none was found).
+
+**No downloadable or installable artifact found.** Two targeted web searches (paper
+title + "artifact"/"GitHub"; authors' names + "implementation"/"github") and one
+fetch of Yanhong Liu's Stony Brook faculty page (which lists her other Datalog
+tooling but nothing tied to this paper) turned up only the paper itself (arXiv,
+DeepAI mirror, ResearchGate, DOAJ) — no repository, no release, no download link.
+
+**Filter 1 verdict: unchanged.** `docs/dlc-blueprint.md` §11's "cite-and-avoid,
+artifact status unresolved" becomes "cite-and-avoid, no artifact exists" —
+resolved in the same direction the blueprint already assumed, not escalated
+(NIGHT-BATCH-01 §T8: escalate only if an installable artifact is found; none was).
+
 ## 2026-08-20 — Q5 (blueprint §10), resolved
 
 "Which Soufflé `tests/` subdirectory is the pre-registered corpus?" — **The whole
