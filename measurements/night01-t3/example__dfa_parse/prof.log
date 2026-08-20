@@ -1,0 +1,949 @@
+{
+ "root": {
+  "program": {
+   "configuration": {
+    "": "/root/souffle-src/tests/example/dfa_parse/dfa_parse.dl",
+    "fact-dir": "/root/souffle-src/tests/example/dfa_parse/facts",
+    "include-dir": ".",
+    "jobs": "1",
+    "libraries": "functors",
+    "library-dir": ".",
+    "magic-transform": "*",
+    "output-dir": "/root/compiler/measurements/night01-t3/example__dfa_parse",
+    "profile": "prof.log",
+    "relationCount": "7",
+    "ruleCount": "14",
+    "version": "2.5",
+    "warn": "all",
+    "wno": "none"
+   },
+   "relation": {
+    "@interm_out.out.{ff}": {
+     "maxRSS": {
+      "post": 12416,
+      "pre": 12416
+     },
+     "non-recursive-rule": {
+      "@interm_out.out.{ff}(s,\"Accept\") :- \n   @magic.@interm_out.out.{ff}(),\n   accept.{f}(s).": {
+       "atom-frequency": {
+        "@interm_out.out.{ff}(s,\"Accept\") :- \n   @magic.@interm_out.out.{ff}(),\n   accept.{f}(s).": {
+         "accept.{f}": {
+          "level": 1,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12416,
+        "pre": 12416
+       },
+       "num-tuples": 9,
+       "runtime": { "start": 21504223035, "end": 21504223037},
+       "source-locator": " [1:1-1:1]"
+      },
+      "@interm_out.out.{ff}(s,\"Reject\") :- \n   @magic.@interm_out.out.{ff}(),\n   toparse(s),\n   !@neglabel.accept(s).": {
+       "atom-frequency": {
+        "@interm_out.out.{ff}(s,\"Reject\") :- \n   @magic.@interm_out.out.{ff}(),\n   toparse(s),\n   !@neglabel.accept(s).": {
+         "toparse": {
+          "level": 1,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12416,
+        "pre": 12416
+       },
+       "num-tuples": 6,
+       "runtime": { "start": 21504223045, "end": 21504223047},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 15,
+     "runtime": { "start": 21504223027, "end": 21504223052},
+     "source-locator": " [1:1-1:1]"
+    },
+    "@magic.@interm_out.out.{ff}": {
+     "maxRSS": {
+      "post": 12144,
+      "pre": 12144
+     },
+     "non-recursive-rule": {
+      "@magic.@interm_out.out.{ff}().": {
+       "maxRSS": {
+        "post": 12144,
+        "pre": 12144
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 21504222084, "end": 21504222086},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 1,
+     "runtime": { "start": 21504222082, "end": 21504222095},
+     "source-locator": " [1:1-1:1]"
+    },
+    "@neglabel.accept": {
+     "maxRSS": {
+      "post": 12416,
+      "pre": 12416
+     },
+     "non-recursive-rule": {
+      "@neglabel.accept(in) :- \n   @poscopy_1.parse.{fff}(in,cur, _tmp_0),\n   accepting(cur),\n    _tmp_0 = strlen(in).": {
+       "atom-frequency": {
+        "@neglabel.accept(in) :- \n   @poscopy_1.parse.{fff}(in,cur, _tmp_0),\n   accepting(cur),\n    _tmp_0 = strlen(in).": {
+         "@poscopy_1.parse.{fff}": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12416,
+        "pre": 12416
+       },
+       "num-tuples": 9,
+       "runtime": { "start": 21504222968, "end": 21504222978},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 9,
+     "runtime": { "start": 21504222968, "end": 21504222984},
+     "source-locator": "/root/souffle-src/tests/example/dfa_parse/dfa_parse.dl [35:7-35:13]"
+    },
+    "@poscopy_1.parse.{fff}": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 21504222325, "end": 21504222327},
+       "maxRSS": {
+        "post": 12416,
+        "pre": 12288
+       },
+       "num-tuples": 15,
+       "recursive-rule": {
+        "@poscopy_1.parse.{fff}(in,new,(i+strlen(diff))) :- \n   @magic.@interm_out.out.{ff}(),\n   @poscopy_1.parse.{fff}(in,old,i),\n   transition(old,diff,new),\n   diff = substr(in,i,strlen(diff)).": {
+         "0": {
+          "atom-frequency": {
+           "@new_@poscopy_1.parse.{fff}(in,new,(i+strlen(diff))) :- \n   @magic.@interm_out.out.{ff}(),\n   @delta_@poscopy_1.parse.{fff}(in,old,i),\n   transition(old,diff,new),\n   diff = substr(in,i,strlen(diff)).": {
+            "@delta_@poscopy_1.parse.{fff}": {
+             "level": 1,
+             "num-tuples": 0
+            },
+            "transition": {
+             "level": 2,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 12416,
+           "pre": 12288
+          },
+          "num-tuples": 15,
+          "runtime": { "start": 21504222296, "end": 21504222309},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 21504222295, "end": 21504222317}
+      },
+      "1": {
+       "copytime": { "start": 21504222363, "end": 21504222366},
+       "maxRSS": {
+        "post": 12416,
+        "pre": 12416
+       },
+       "num-tuples": 15,
+       "recursive-rule": {
+        "@poscopy_1.parse.{fff}(in,new,(i+strlen(diff))) :- \n   @magic.@interm_out.out.{ff}(),\n   @poscopy_1.parse.{fff}(in,old,i),\n   transition(old,diff,new),\n   diff = substr(in,i,strlen(diff)).": {
+         "0": {
+          "maxRSS": {
+           "post": 12416,
+           "pre": 12416
+          },
+          "num-tuples": 15,
+          "runtime": { "start": 21504222331, "end": 21504222339},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 21504222331, "end": 21504222345}
+      },
+      "10": {
+       "copytime": { "start": 21504222609, "end": 21504222610},
+       "maxRSS": {
+        "post": 12416,
+        "pre": 12416
+       },
+       "num-tuples": 2,
+       "recursive-rule": {
+        "@poscopy_1.parse.{fff}(in,new,(i+strlen(diff))) :- \n   @magic.@interm_out.out.{ff}(),\n   @poscopy_1.parse.{fff}(in,old,i),\n   transition(old,diff,new),\n   diff = substr(in,i,strlen(diff)).": {
+         "0": {
+          "maxRSS": {
+           "post": 12416,
+           "pre": 12416
+          },
+          "num-tuples": 2,
+          "runtime": { "start": 21504222595, "end": 21504222598},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 21504222595, "end": 21504222604}
+      },
+      "11": {
+       "copytime": { "start": 21504222624, "end": 21504222625},
+       "maxRSS": {
+        "post": 12416,
+        "pre": 12416
+       },
+       "num-tuples": 2,
+       "recursive-rule": {
+        "@poscopy_1.parse.{fff}(in,new,(i+strlen(diff))) :- \n   @magic.@interm_out.out.{ff}(),\n   @poscopy_1.parse.{fff}(in,old,i),\n   transition(old,diff,new),\n   diff = substr(in,i,strlen(diff)).": {
+         "0": {
+          "maxRSS": {
+           "post": 12416,
+           "pre": 12416
+          },
+          "num-tuples": 2,
+          "runtime": { "start": 21504222612, "end": 21504222614},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 21504222612, "end": 21504222619}
+      },
+      "12": {
+       "maxRSS": {
+        "post": 12416,
+        "pre": 12416
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "@poscopy_1.parse.{fff}(in,new,(i+strlen(diff))) :- \n   @magic.@interm_out.out.{ff}(),\n   @poscopy_1.parse.{fff}(in,old,i),\n   transition(old,diff,new),\n   diff = substr(in,i,strlen(diff)).": {
+         "0": {
+          "maxRSS": {
+           "post": 12416,
+           "pre": 12416
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21504222627, "end": 21504222628},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 21504222627, "end": 21504222633}
+      },
+      "2": {
+       "copytime": { "start": 21504222403, "end": 21504222406},
+       "maxRSS": {
+        "post": 12416,
+        "pre": 12416
+       },
+       "num-tuples": 15,
+       "recursive-rule": {
+        "@poscopy_1.parse.{fff}(in,new,(i+strlen(diff))) :- \n   @magic.@interm_out.out.{ff}(),\n   @poscopy_1.parse.{fff}(in,old,i),\n   transition(old,diff,new),\n   diff = substr(in,i,strlen(diff)).": {
+         "0": {
+          "maxRSS": {
+           "post": 12416,
+           "pre": 12416
+          },
+          "num-tuples": 15,
+          "runtime": { "start": 21504222370, "end": 21504222379},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 21504222369, "end": 21504222386}
+      },
+      "3": {
+       "copytime": { "start": 21504222432, "end": 21504222434},
+       "maxRSS": {
+        "post": 12416,
+        "pre": 12416
+       },
+       "num-tuples": 10,
+       "recursive-rule": {
+        "@poscopy_1.parse.{fff}(in,new,(i+strlen(diff))) :- \n   @magic.@interm_out.out.{ff}(),\n   @poscopy_1.parse.{fff}(in,old,i),\n   transition(old,diff,new),\n   diff = substr(in,i,strlen(diff)).": {
+         "0": {
+          "maxRSS": {
+           "post": 12416,
+           "pre": 12416
+          },
+          "num-tuples": 10,
+          "runtime": { "start": 21504222410, "end": 21504222420},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 21504222409, "end": 21504222426}
+      },
+      "4": {
+       "copytime": { "start": 21504222452, "end": 21504222454},
+       "maxRSS": {
+        "post": 12416,
+        "pre": 12416
+       },
+       "num-tuples": 8,
+       "recursive-rule": {
+        "@poscopy_1.parse.{fff}(in,new,(i+strlen(diff))) :- \n   @magic.@interm_out.out.{ff}(),\n   @poscopy_1.parse.{fff}(in,old,i),\n   transition(old,diff,new),\n   diff = substr(in,i,strlen(diff)).": {
+         "0": {
+          "maxRSS": {
+           "post": 12416,
+           "pre": 12416
+          },
+          "num-tuples": 8,
+          "runtime": { "start": 21504222437, "end": 21504222442},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 21504222437, "end": 21504222447}
+      },
+      "5": {
+       "copytime": { "start": 21504222471, "end": 21504222473},
+       "maxRSS": {
+        "post": 12416,
+        "pre": 12416
+       },
+       "num-tuples": 6,
+       "recursive-rule": {
+        "@poscopy_1.parse.{fff}(in,new,(i+strlen(diff))) :- \n   @magic.@interm_out.out.{ff}(),\n   @poscopy_1.parse.{fff}(in,old,i),\n   transition(old,diff,new),\n   diff = substr(in,i,strlen(diff)).": {
+         "0": {
+          "maxRSS": {
+           "post": 12416,
+           "pre": 12416
+          },
+          "num-tuples": 6,
+          "runtime": { "start": 21504222456, "end": 21504222460},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 21504222456, "end": 21504222465}
+      },
+      "6": {
+       "copytime": { "start": 21504222500, "end": 21504222501},
+       "maxRSS": {
+        "post": 12416,
+        "pre": 12416
+       },
+       "num-tuples": 6,
+       "recursive-rule": {
+        "@poscopy_1.parse.{fff}(in,new,(i+strlen(diff))) :- \n   @magic.@interm_out.out.{ff}(),\n   @poscopy_1.parse.{fff}(in,old,i),\n   transition(old,diff,new),\n   diff = substr(in,i,strlen(diff)).": {
+         "0": {
+          "maxRSS": {
+           "post": 12416,
+           "pre": 12416
+          },
+          "num-tuples": 6,
+          "runtime": { "start": 21504222475, "end": 21504222479},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 21504222475, "end": 21504222483}
+      },
+      "7": {
+       "copytime": { "start": 21504222533, "end": 21504222534},
+       "maxRSS": {
+        "post": 12416,
+        "pre": 12416
+       },
+       "num-tuples": 6,
+       "recursive-rule": {
+        "@poscopy_1.parse.{fff}(in,new,(i+strlen(diff))) :- \n   @magic.@interm_out.out.{ff}(),\n   @poscopy_1.parse.{fff}(in,old,i),\n   transition(old,diff,new),\n   diff = substr(in,i,strlen(diff)).": {
+         "0": {
+          "maxRSS": {
+           "post": 12416,
+           "pre": 12416
+          },
+          "num-tuples": 6,
+          "runtime": { "start": 21504222504, "end": 21504222509},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 21504222504, "end": 21504222516}
+      },
+      "8": {
+       "copytime": { "start": 21504222568, "end": 21504222570},
+       "maxRSS": {
+        "post": 12416,
+        "pre": 12416
+       },
+       "num-tuples": 5,
+       "recursive-rule": {
+        "@poscopy_1.parse.{fff}(in,new,(i+strlen(diff))) :- \n   @magic.@interm_out.out.{ff}(),\n   @poscopy_1.parse.{fff}(in,old,i),\n   transition(old,diff,new),\n   diff = substr(in,i,strlen(diff)).": {
+         "0": {
+          "maxRSS": {
+           "post": 12416,
+           "pre": 12416
+          },
+          "num-tuples": 5,
+          "runtime": { "start": 21504222539, "end": 21504222544},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 21504222538, "end": 21504222551}
+      },
+      "9": {
+       "copytime": { "start": 21504222591, "end": 21504222593},
+       "maxRSS": {
+        "post": 12416,
+        "pre": 12416
+       },
+       "num-tuples": 5,
+       "recursive-rule": {
+        "@poscopy_1.parse.{fff}(in,new,(i+strlen(diff))) :- \n   @magic.@interm_out.out.{ff}(),\n   @poscopy_1.parse.{fff}(in,old,i),\n   transition(old,diff,new),\n   diff = substr(in,i,strlen(diff)).": {
+         "0": {
+          "maxRSS": {
+           "post": 12416,
+           "pre": 12416
+          },
+          "num-tuples": 5,
+          "runtime": { "start": 21504222574, "end": 21504222579},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 21504222573, "end": 21504222585}
+      }
+     },
+     "maxRSS": {
+      "post": 12288,
+      "pre": 12288
+     },
+     "non-recursive-rule": {
+      "@poscopy_1.parse.{fff}(in,cur,0) :- \n   @magic.@interm_out.out.{ff}(),\n   toparse(in),\n   start(cur).": {
+       "atom-frequency": {
+        "@poscopy_1.parse.{fff}(in,cur,0) :- \n   @magic.@interm_out.out.{ff}(),\n   toparse(in),\n   start(cur).": {
+         "start": {
+          "level": 2,
+          "num-tuples": 0
+         },
+         "toparse": {
+          "level": 1,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12288,
+        "pre": 12288
+       },
+       "num-tuples": 15,
+       "runtime": { "start": 21504222281, "end": 21504222283},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 15,
+     "runtime": { "start": 21504222280, "end": 21504222290},
+     "source-locator": " [1:1-1:1]"
+    },
+    "accept.{f}": {
+     "maxRSS": {
+      "post": 12416,
+      "pre": 12416
+     },
+     "non-recursive-rule": {
+      "accept.{f}(in) :- \n   @magic.@interm_out.out.{ff}(),\n   parse.{fff}(in,cur, _tmp_0),\n   accepting(cur),\n    _tmp_0 = strlen(in).": {
+       "atom-frequency": {
+        "accept.{f}(in) :- \n   @magic.@interm_out.out.{ff}(),\n   parse.{fff}(in,cur, _tmp_0),\n   accepting(cur),\n    _tmp_0 = strlen(in).": {
+         "parse.{fff}": {
+          "level": 1,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12416,
+        "pre": 12416
+       },
+       "num-tuples": 9,
+       "runtime": { "start": 21504222999, "end": 21504223005},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 9,
+     "reads": 0,
+     "runtime": { "start": 21504222990, "end": 21504223022},
+     "source-locator": " [1:1-1:1]"
+    },
+    "accepting": {
+     "loadtime": { "start": 21504222099, "end": 21504222180},
+     "num-tuples": 2,
+     "reads": 30,
+     "source-locator": "/root/souffle-src/tests/example/dfa_parse/dfa_parse.dl [16:7-16:16]"
+    },
+    "out": {
+     "maxRSS": {
+      "post": 12416,
+      "pre": 12416
+     },
+     "non-recursive-rule": {
+      "out(@query_x0,@query_x1) :- \n   @interm_out.out.{ff}(@query_x0,@query_x1).": {
+       "atom-frequency": {
+        "out(@query_x0,@query_x1) :- \n   @interm_out.out.{ff}(@query_x0,@query_x1).": {
+         "@interm_out.out.{ff}": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12416,
+        "pre": 12416
+       },
+       "num-tuples": 15,
+       "runtime": { "start": 21504223058, "end": 21504223059},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 15,
+     "reads": 0,
+     "runtime": { "start": 21504223058, "end": 21504223064},
+     "savetime": { "start": 21504223068, "end": 21504223178},
+     "source-locator": "/root/souffle-src/tests/example/dfa_parse/dfa_parse.dl [38:7-38:10]"
+    },
+    "parse.{fff}": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 21504222681, "end": 21504222683},
+       "maxRSS": {
+        "post": 12416,
+        "pre": 12416
+       },
+       "num-tuples": 15,
+       "recursive-rule": {
+        "parse.{fff}(in,new,(i+strlen(diff))) :- \n   @magic.@interm_out.out.{ff}(),\n   parse.{fff}(in,old,i),\n   transition(old,diff,new),\n   diff = substr(in,i,strlen(diff)).": {
+         "0": {
+          "atom-frequency": {
+           "@new_parse.{fff}(in,new,(i+strlen(diff))) :- \n   @magic.@interm_out.out.{ff}(),\n   @delta_parse.{fff}(in,old,i),\n   transition(old,diff,new),\n   diff = substr(in,i,strlen(diff)).": {
+            "@delta_parse.{fff}": {
+             "level": 1,
+             "num-tuples": 0
+            },
+            "transition": {
+             "level": 2,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 12416,
+           "pre": 12416
+          },
+          "num-tuples": 15,
+          "runtime": { "start": 21504222651, "end": 21504222658},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 21504222650, "end": 21504222664}
+      },
+      "1": {
+       "copytime": { "start": 21504222720, "end": 21504222722},
+       "maxRSS": {
+        "post": 12416,
+        "pre": 12416
+       },
+       "num-tuples": 15,
+       "recursive-rule": {
+        "parse.{fff}(in,new,(i+strlen(diff))) :- \n   @magic.@interm_out.out.{ff}(),\n   parse.{fff}(in,old,i),\n   transition(old,diff,new),\n   diff = substr(in,i,strlen(diff)).": {
+         "0": {
+          "maxRSS": {
+           "post": 12416,
+           "pre": 12416
+          },
+          "num-tuples": 15,
+          "runtime": { "start": 21504222687, "end": 21504222696},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 21504222686, "end": 21504222702}
+      },
+      "10": {
+       "copytime": { "start": 21504222939, "end": 21504222939},
+       "maxRSS": {
+        "post": 12416,
+        "pre": 12416
+       },
+       "num-tuples": 2,
+       "recursive-rule": {
+        "parse.{fff}(in,new,(i+strlen(diff))) :- \n   @magic.@interm_out.out.{ff}(),\n   parse.{fff}(in,old,i),\n   transition(old,diff,new),\n   diff = substr(in,i,strlen(diff)).": {
+         "0": {
+          "maxRSS": {
+           "post": 12416,
+           "pre": 12416
+          },
+          "num-tuples": 2,
+          "runtime": { "start": 21504222925, "end": 21504222928},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 21504222925, "end": 21504222933}
+      },
+      "11": {
+       "copytime": { "start": 21504222954, "end": 21504222954},
+       "maxRSS": {
+        "post": 12416,
+        "pre": 12416
+       },
+       "num-tuples": 2,
+       "recursive-rule": {
+        "parse.{fff}(in,new,(i+strlen(diff))) :- \n   @magic.@interm_out.out.{ff}(),\n   parse.{fff}(in,old,i),\n   transition(old,diff,new),\n   diff = substr(in,i,strlen(diff)).": {
+         "0": {
+          "maxRSS": {
+           "post": 12416,
+           "pre": 12416
+          },
+          "num-tuples": 2,
+          "runtime": { "start": 21504222942, "end": 21504222943},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 21504222941, "end": 21504222949}
+      },
+      "12": {
+       "maxRSS": {
+        "post": 12416,
+        "pre": 12416
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "parse.{fff}(in,new,(i+strlen(diff))) :- \n   @magic.@interm_out.out.{ff}(),\n   parse.{fff}(in,old,i),\n   transition(old,diff,new),\n   diff = substr(in,i,strlen(diff)).": {
+         "0": {
+          "maxRSS": {
+           "post": 12416,
+           "pre": 12416
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21504222956, "end": 21504222958},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 21504222956, "end": 21504222962}
+      },
+      "2": {
+       "copytime": { "start": 21504222759, "end": 21504222761},
+       "maxRSS": {
+        "post": 12416,
+        "pre": 12416
+       },
+       "num-tuples": 15,
+       "recursive-rule": {
+        "parse.{fff}(in,new,(i+strlen(diff))) :- \n   @magic.@interm_out.out.{ff}(),\n   parse.{fff}(in,old,i),\n   transition(old,diff,new),\n   diff = substr(in,i,strlen(diff)).": {
+         "0": {
+          "maxRSS": {
+           "post": 12416,
+           "pre": 12416
+          },
+          "num-tuples": 15,
+          "runtime": { "start": 21504222725, "end": 21504222735},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 21504222725, "end": 21504222741}
+      },
+      "3": {
+       "copytime": { "start": 21504222786, "end": 21504222788},
+       "maxRSS": {
+        "post": 12416,
+        "pre": 12416
+       },
+       "num-tuples": 10,
+       "recursive-rule": {
+        "parse.{fff}(in,new,(i+strlen(diff))) :- \n   @magic.@interm_out.out.{ff}(),\n   parse.{fff}(in,old,i),\n   transition(old,diff,new),\n   diff = substr(in,i,strlen(diff)).": {
+         "0": {
+          "maxRSS": {
+           "post": 12416,
+           "pre": 12416
+          },
+          "num-tuples": 10,
+          "runtime": { "start": 21504222764, "end": 21504222774},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 21504222764, "end": 21504222780}
+      },
+      "4": {
+       "copytime": { "start": 21504222804, "end": 21504222806},
+       "maxRSS": {
+        "post": 12416,
+        "pre": 12416
+       },
+       "num-tuples": 8,
+       "recursive-rule": {
+        "parse.{fff}(in,new,(i+strlen(diff))) :- \n   @magic.@interm_out.out.{ff}(),\n   parse.{fff}(in,old,i),\n   transition(old,diff,new),\n   diff = substr(in,i,strlen(diff)).": {
+         "0": {
+          "maxRSS": {
+           "post": 12416,
+           "pre": 12416
+          },
+          "num-tuples": 8,
+          "runtime": { "start": 21504222790, "end": 21504222795},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 21504222790, "end": 21504222799}
+      },
+      "5": {
+       "copytime": { "start": 21504222822, "end": 21504222823},
+       "maxRSS": {
+        "post": 12416,
+        "pre": 12416
+       },
+       "num-tuples": 6,
+       "recursive-rule": {
+        "parse.{fff}(in,new,(i+strlen(diff))) :- \n   @magic.@interm_out.out.{ff}(),\n   parse.{fff}(in,old,i),\n   transition(old,diff,new),\n   diff = substr(in,i,strlen(diff)).": {
+         "0": {
+          "maxRSS": {
+           "post": 12416,
+           "pre": 12416
+          },
+          "num-tuples": 6,
+          "runtime": { "start": 21504222808, "end": 21504222811},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 21504222807, "end": 21504222816}
+      },
+      "6": {
+       "copytime": { "start": 21504222839, "end": 21504222841},
+       "maxRSS": {
+        "post": 12416,
+        "pre": 12416
+       },
+       "num-tuples": 6,
+       "recursive-rule": {
+        "parse.{fff}(in,new,(i+strlen(diff))) :- \n   @magic.@interm_out.out.{ff}(),\n   parse.{fff}(in,old,i),\n   transition(old,diff,new),\n   diff = substr(in,i,strlen(diff)).": {
+         "0": {
+          "maxRSS": {
+           "post": 12416,
+           "pre": 12416
+          },
+          "num-tuples": 6,
+          "runtime": { "start": 21504222825, "end": 21504222828},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 21504222825, "end": 21504222833}
+      },
+      "7": {
+       "copytime": { "start": 21504222867, "end": 21504222868},
+       "maxRSS": {
+        "post": 12416,
+        "pre": 12416
+       },
+       "num-tuples": 6,
+       "recursive-rule": {
+        "parse.{fff}(in,new,(i+strlen(diff))) :- \n   @magic.@interm_out.out.{ff}(),\n   parse.{fff}(in,old,i),\n   transition(old,diff,new),\n   diff = substr(in,i,strlen(diff)).": {
+         "0": {
+          "maxRSS": {
+           "post": 12416,
+           "pre": 12416
+          },
+          "num-tuples": 6,
+          "runtime": { "start": 21504222843, "end": 21504222846},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 21504222842, "end": 21504222851}
+      },
+      "8": {
+       "copytime": { "start": 21504222900, "end": 21504222901},
+       "maxRSS": {
+        "post": 12416,
+        "pre": 12416
+       },
+       "num-tuples": 5,
+       "recursive-rule": {
+        "parse.{fff}(in,new,(i+strlen(diff))) :- \n   @magic.@interm_out.out.{ff}(),\n   parse.{fff}(in,old,i),\n   transition(old,diff,new),\n   diff = substr(in,i,strlen(diff)).": {
+         "0": {
+          "maxRSS": {
+           "post": 12416,
+           "pre": 12416
+          },
+          "num-tuples": 5,
+          "runtime": { "start": 21504222871, "end": 21504222876},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 21504222871, "end": 21504222883}
+      },
+      "9": {
+       "copytime": { "start": 21504222922, "end": 21504222923},
+       "maxRSS": {
+        "post": 12416,
+        "pre": 12416
+       },
+       "num-tuples": 5,
+       "recursive-rule": {
+        "parse.{fff}(in,new,(i+strlen(diff))) :- \n   @magic.@interm_out.out.{ff}(),\n   parse.{fff}(in,old,i),\n   transition(old,diff,new),\n   diff = substr(in,i,strlen(diff)).": {
+         "0": {
+          "maxRSS": {
+           "post": 12416,
+           "pre": 12416
+          },
+          "num-tuples": 5,
+          "runtime": { "start": 21504222905, "end": 21504222910},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 21504222905, "end": 21504222916}
+      }
+     },
+     "maxRSS": {
+      "post": 12416,
+      "pre": 12416
+     },
+     "non-recursive-rule": {
+      "parse.{fff}(in,cur,0) :- \n   @magic.@interm_out.out.{ff}(),\n   toparse(in),\n   start(cur).": {
+       "atom-frequency": {
+        "parse.{fff}(in,cur,0) :- \n   @magic.@interm_out.out.{ff}(),\n   toparse(in),\n   start(cur).": {
+         "start": {
+          "level": 2,
+          "num-tuples": 0
+         },
+         "toparse": {
+          "level": 1,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12416,
+        "pre": 12416
+       },
+       "num-tuples": 15,
+       "runtime": { "start": 21504222639, "end": 21504222640},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 15,
+     "reads": 95,
+     "runtime": { "start": 21504222639, "end": 21504222646},
+     "source-locator": " [1:1-1:1]"
+    },
+    "start": {
+     "loadtime": { "start": 21504222190, "end": 21504222201},
+     "num-tuples": 1,
+     "reads": 0,
+     "source-locator": "/root/souffle-src/tests/example/dfa_parse/dfa_parse.dl [19:7-19:12]"
+    },
+    "toparse": {
+     "loadtime": { "start": 21504222205, "end": 21504222234},
+     "num-tuples": 15,
+     "reads": 0,
+     "source-locator": "/root/souffle-src/tests/example/dfa_parse/dfa_parse.dl [22:7-22:14]"
+    },
+    "transition": {
+     "loadtime": { "start": 21504222240, "end": 21504222275},
+     "num-tuples": 23,
+     "reads": 0,
+     "source-locator": "/root/souffle-src/tests/example/dfa_parse/dfa_parse.dl [13:7-13:17]"
+    }
+   },
+   "runtime": { "start": 21504222077, "end": 21504223184},
+   "starttime": { "time": 21504222043},
+   "usage": {
+    "timepoint": {
+     "21504222160": {
+      "maxRSS": 12144,
+      "systemtime": 3050,
+      "usertime": 3050
+     },
+     "21504222228": {
+      "maxRSS": 12160,
+      "systemtime": 3122,
+      "usertime": 3122
+     },
+     "21504222334": {
+      "maxRSS": 12416,
+      "systemtime": 3192,
+      "usertime": 3192
+     },
+     "21504222369": {
+      "maxRSS": 12416,
+      "systemtime": 3214,
+      "usertime": 3214
+     },
+     "21504222472": {
+      "maxRSS": 12416,
+      "systemtime": 3274,
+      "usertime": 3274
+     },
+     "21504222510": {
+      "maxRSS": 12416,
+      "systemtime": 3297,
+      "usertime": 3297
+     },
+     "21504222538": {
+      "maxRSS": 12416,
+      "systemtime": 3314,
+      "usertime": 3314
+     },
+     "21504222642": {
+      "maxRSS": 12416,
+      "systemtime": 3376,
+      "usertime": 3376
+     },
+     "21504222651": {
+      "maxRSS": 12416,
+      "systemtime": 3385,
+      "usertime": 3385
+     },
+     "21504222694": {
+      "maxRSS": 12416,
+      "systemtime": 3408,
+      "usertime": 3408
+     },
+     "21504222731": {
+      "maxRSS": 12416,
+      "systemtime": 3432,
+      "usertime": 3432
+     },
+     "21504222838": {
+      "maxRSS": 12416,
+      "systemtime": 3495,
+      "usertime": 3495
+     },
+     "21504222873": {
+      "maxRSS": 12416,
+      "systemtime": 3518,
+      "usertime": 3518
+     },
+     "21504222974": {
+      "maxRSS": 12416,
+      "systemtime": 3573,
+      "usertime": 3573
+     },
+     "21504223011": {
+      "maxRSS": 12416,
+      "systemtime": 3597,
+      "usertime": 3597
+     },
+     "21504223112": {
+      "maxRSS": 12416,
+      "systemtime": 3634,
+      "usertime": 3634
+     }
+    }
+   }
+  }
+ }
+}

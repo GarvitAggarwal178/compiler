@@ -1,0 +1,813 @@
+{
+ "root": {
+  "program": {
+   "configuration": {
+    "": "/root/souffle-src/tests/example/game2/game2.dl",
+    "fact-dir": "/root/souffle-src/tests/example/game2",
+    "include-dir": ".",
+    "jobs": "1",
+    "libraries": "functors",
+    "library-dir": ".",
+    "magic-transform": "*",
+    "output-dir": "/root/compiler/measurements/night01-t3/example__game2",
+    "profile": "prof.log",
+    "relationCount": "5",
+    "ruleCount": "37",
+    "version": "2.5",
+    "warn": "all",
+    "wno": "none"
+   },
+   "relation": {
+    "@interm_out.canMove.{f}": {
+     "maxRSS": {
+      "post": 12476,
+      "pre": 12476
+     },
+     "non-recursive-rule": {
+      "@interm_out.canMove.{f}(X) :- \n   @magic.@interm_out.canMove.{f}(),\n   @interm_out.move(X,_).": {
+       "atom-frequency": {
+        "@interm_out.canMove.{f}(X) :- \n   @magic.@interm_out.canMove.{f}(),\n   @interm_out.move(X,_).": {
+         "@interm_out.move": {
+          "level": 1,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12476,
+        "pre": 12476
+       },
+       "num-tuples": 3,
+       "runtime": { "start": 21504315218, "end": 21504315221},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 3,
+     "runtime": { "start": 21504315218, "end": 21504315227},
+     "source-locator": " [1:1-1:1]"
+    },
+    "@interm_out.move": {
+     "maxRSS": {
+      "post": 12476,
+      "pre": 12476
+     },
+     "non-recursive-rule": {
+      "@interm_out.move(\"1\",\"2\").": {
+       "maxRSS": {
+        "post": 12476,
+        "pre": 12476
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 21504315152, "end": 21504315156},
+       "source-locator": " [1:1-1:1]"
+      },
+      "@interm_out.move(\"1\",\"3\").": {
+       "maxRSS": {
+        "post": 12476,
+        "pre": 12476
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 21504315175, "end": 21504315188},
+       "source-locator": " [1:1-1:1]"
+      },
+      "@interm_out.move(\"1\",\"5\").": {
+       "maxRSS": {
+        "post": 12476,
+        "pre": 12476
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 21504315195, "end": 21504315196},
+       "source-locator": " [1:1-1:1]"
+      },
+      "@interm_out.move(\"2\",\"3\").": {
+       "maxRSS": {
+        "post": 12476,
+        "pre": 12476
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 21504315165, "end": 21504315166},
+       "source-locator": " [1:1-1:1]"
+      },
+      "@interm_out.move(\"3\",\"4\").": {
+       "maxRSS": {
+        "post": 12476,
+        "pre": 12476
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 21504315170, "end": 21504315171},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 5,
+     "runtime": { "start": 21504315151, "end": 21504315201},
+     "source-locator": "/root/souffle-src/tests/example/game2/game2.dl [9:7-9:11]"
+    },
+    "@interm_out.odd_move.{bf}": {
+     "iteration": {
+      "0": {
+       "maxRSS": {
+        "post": 12476,
+        "pre": 12476
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "@interm_out.odd_move.{bf}(X,Y) :- \n   @magic.@interm_out.odd_move.{bf}(X),\n   @interm_out.move(X,Z1),\n   @interm_out.move(Z1,Z2),\n   @interm_out.odd_move.{bf}(Z2,Y).": {
+         "0": {
+          "atom-frequency": {
+           "@new_@interm_out.odd_move.{bf}(X,Y) :- \n   @magic.@interm_out.odd_move.{bf}(X),\n   @interm_out.move(X,Z1),\n   @interm_out.move(Z1,Z2),\n   @delta_@interm_out.odd_move.{bf}(Z2,Y).": {
+            "@delta_@interm_out.odd_move.{bf}": {
+             "level": 3,
+             "num-tuples": 0
+            },
+            "@interm_out.move": {
+             "level": 1,
+             "num-tuples": 0
+            },
+            "@magic.@interm_out.odd_move.{bf}": {
+             "level": 0,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 12476,
+           "pre": 12476
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21504315593, "end": 21504315594},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 21504315592, "end": 21504315603}
+      }
+     },
+     "maxRSS": {
+      "post": 12476,
+      "pre": 12476
+     },
+     "non-recursive-rule": {
+      "@interm_out.odd_move.{bf}(X,Y) :- \n   @magic.@interm_out.odd_move.{bf}(X),\n   @interm_out.move(X,Y).": {
+       "atom-frequency": {
+        "@interm_out.odd_move.{bf}(X,Y) :- \n   @magic.@interm_out.odd_move.{bf}(X),\n   @interm_out.move(X,Y).": {
+         "@interm_out.move": {
+          "level": 1,
+          "num-tuples": 0
+         },
+         "@magic.@interm_out.odd_move.{bf}": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12476,
+        "pre": 12476
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 21504315579, "end": 21504315580},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 1,
+     "runtime": { "start": 21504315569, "end": 21504315588},
+     "source-locator": " [1:1-1:1]"
+    },
+    "@interm_out.odd_move.{ff}": {
+     "maxRSS": {
+      "post": 12476,
+      "pre": 12476
+     },
+     "non-recursive-rule": {
+      "@interm_out.odd_move.{ff}(X,Y) :- \n   @magic.@interm_out.odd_move.{ff}(),\n   @interm_out.move(X,Y).": {
+       "atom-frequency": {
+        "@interm_out.odd_move.{ff}(X,Y) :- \n   @magic.@interm_out.odd_move.{ff}(),\n   @interm_out.move(X,Y).": {
+         "@interm_out.move": {
+          "level": 1,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12476,
+        "pre": 12476
+       },
+       "num-tuples": 5,
+       "runtime": { "start": 21504315633, "end": 21504315634},
+       "source-locator": " [1:1-1:1]"
+      },
+      "@interm_out.odd_move.{ff}(X,Y) :- \n   @magic.@interm_out.odd_move.{ff}(),\n   @interm_out.move(X,Z1),\n   @interm_out.move(Z1,Z2),\n   @interm_out.odd_move.{bf}(Z2,Y).": {
+       "atom-frequency": {
+        "@interm_out.odd_move.{ff}(X,Y) :- \n   @magic.@interm_out.odd_move.{ff}(),\n   @interm_out.move(X,Z1),\n   @interm_out.move(Z1,Z2),\n   @interm_out.odd_move.{bf}(Z2,Y).": {
+         "@interm_out.move": {
+          "level": 1,
+          "num-tuples": 0
+         },
+         "@interm_out.odd_move.{bf}": {
+          "level": 3,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12476,
+        "pre": 12476
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 21504315638, "end": 21504315639},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 6,
+     "runtime": { "start": 21504315633, "end": 21504315643},
+     "source-locator": " [1:1-1:1]"
+    },
+    "@interm_out.possible_winning.{f}": {
+     "maxRSS": {
+      "post": 12476,
+      "pre": 12476
+     },
+     "non-recursive-rule": {
+      "@interm_out.possible_winning.{f}(X) :- \n   @magic.@interm_out.canMove.{f}(),\n   @interm_out.odd_move.{ff}(X,Y),\n   !@neglabel.@interm_out.canMove(Y).": {
+       "atom-frequency": {
+        "@interm_out.possible_winning.{f}(X) :- \n   @magic.@interm_out.canMove.{f}(),\n   @interm_out.odd_move.{ff}(X,Y),\n   !@neglabel.@interm_out.canMove(Y).": {
+         "@interm_out.odd_move.{ff}": {
+          "level": 1,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12476,
+        "pre": 12476
+       },
+       "num-tuples": 2,
+       "runtime": { "start": 21504315660, "end": 21504315661},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 2,
+     "runtime": { "start": 21504315660, "end": 21504315666},
+     "source-locator": " [1:1-1:1]"
+    },
+    "@magic.@interm_out.canMove.{f}": {
+     "maxRSS": {
+      "post": 12476,
+      "pre": 12476
+     },
+     "non-recursive-rule": {
+      "@magic.@interm_out.canMove.{f}().": {
+       "maxRSS": {
+        "post": 12476,
+        "pre": 12476
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 21504315208, "end": 21504315209},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 1,
+     "runtime": { "start": 21504315206, "end": 21504315214},
+     "source-locator": " [1:1-1:1]"
+    },
+    "@magic.@interm_out.odd_move.{bf}": {
+     "iteration": {
+      "0": {
+       "maxRSS": {
+        "post": 12476,
+        "pre": 12476
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "@magic.@interm_out.odd_move.{bf}(Z2) :- \n   @magic.@interm_out.odd_move.{bf}(X),\n   @interm_out.move(X,Z1),\n   @interm_out.move(Z1,Z2).": {
+         "0": {
+          "atom-frequency": {
+           "@new_@magic.@interm_out.odd_move.{bf}(Z2) :- \n   @delta_@magic.@interm_out.odd_move.{bf}(X),\n   @interm_out.move(X,Z1),\n   @interm_out.move(Z1,Z2).": {
+            "@delta_@magic.@interm_out.odd_move.{bf}": {
+             "level": 0,
+             "num-tuples": 0
+            },
+            "@interm_out.move": {
+             "level": 1,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 12476,
+           "pre": 12476
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21504315483, "end": 21504315484},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 21504315483, "end": 21504315491}
+      }
+     },
+     "maxRSS": {
+      "post": 12476,
+      "pre": 12476
+     },
+     "non-recursive-rule": {
+      "@magic.@interm_out.odd_move.{bf}(Z2) :- \n   @magic.@interm_out.odd_move.{ff}(),\n   @interm_out.move(_,Z1),\n   @interm_out.move(Z1,Z2).": {
+       "atom-frequency": {
+        "@magic.@interm_out.odd_move.{bf}(Z2) :- \n   @magic.@interm_out.odd_move.{ff}(),\n   @interm_out.move(_,Z1),\n   @interm_out.move(Z1,Z2).": {
+         "@interm_out.move": {
+          "level": 1,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12476,
+        "pre": 12476
+       },
+       "num-tuples": 2,
+       "runtime": { "start": 21504315467, "end": 21504315469},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 2,
+     "runtime": { "start": 21504315456, "end": 21504315479},
+     "source-locator": " [1:1-1:1]"
+    },
+    "@magic.@interm_out.odd_move.{ff}": {
+     "maxRSS": {
+      "post": 12476,
+      "pre": 12476
+     },
+     "non-recursive-rule": {
+      "@magic.@interm_out.odd_move.{ff}() :- \n   @magic.@interm_out.canMove.{f}().": {
+       "maxRSS": {
+        "post": 12476,
+        "pre": 12476
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 21504315242, "end": 21504315243},
+       "source-locator": " [1:1-1:1]"
+      },
+      "@magic.@interm_out.odd_move.{ff}().": {
+       "maxRSS": {
+        "post": 12476,
+        "pre": 12476
+       },
+       "num-tuples": 0,
+       "runtime": { "start": 21504315257, "end": 21504315258},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 1,
+     "runtime": { "start": 21504315230, "end": 21504315263},
+     "source-locator": " [1:1-1:1]"
+    },
+    "@magic.@poscopy_1.@interm_out.odd_move.{bf}": {
+     "iteration": {
+      "0": {
+       "maxRSS": {
+        "post": 12476,
+        "pre": 12476
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "@magic.@poscopy_1.@interm_out.odd_move.{bf}(Z2) :- \n   @magic.@poscopy_1.@interm_out.odd_move.{bf}(X),\n   @interm_out.move(X,Z1),\n   @interm_out.move(Z1,Z2).": {
+         "0": {
+          "atom-frequency": {
+           "@new_@magic.@poscopy_1.@interm_out.odd_move.{bf}(Z2) :- \n   @delta_@magic.@poscopy_1.@interm_out.odd_move.{bf}(X),\n   @interm_out.move(X,Z1),\n   @interm_out.move(Z1,Z2).": {
+            "@delta_@magic.@poscopy_1.@interm_out.odd_move.{bf}": {
+             "level": 0,
+             "num-tuples": 0
+            },
+            "@interm_out.move": {
+             "level": 1,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 12476,
+           "pre": 12476
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21504315289, "end": 21504315290},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 21504315288, "end": 21504315299}
+      }
+     },
+     "maxRSS": {
+      "post": 12476,
+      "pre": 12476
+     },
+     "non-recursive-rule": {
+      "@magic.@poscopy_1.@interm_out.odd_move.{bf}(Z2) :- \n   @magic.@interm_out.canMove.{f}(),\n   @interm_out.move(_,Z1),\n   @interm_out.move(Z1,Z2).": {
+       "atom-frequency": {
+        "@magic.@poscopy_1.@interm_out.odd_move.{bf}(Z2) :- \n   @magic.@interm_out.canMove.{f}(),\n   @interm_out.move(_,Z1),\n   @interm_out.move(Z1,Z2).": {
+         "@interm_out.move": {
+          "level": 1,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12476,
+        "pre": 12476
+       },
+       "num-tuples": 2,
+       "runtime": { "start": 21504315268, "end": 21504315273},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 2,
+     "runtime": { "start": 21504315268, "end": 21504315279},
+     "source-locator": " [1:1-1:1]"
+    },
+    "@neglabel.@interm_out.canMove": {
+     "maxRSS": {
+      "post": 12476,
+      "pre": 12476
+     },
+     "non-recursive-rule": {
+      "@neglabel.@interm_out.canMove(X) :- \n   @interm_out.move(X,_).": {
+       "atom-frequency": {
+        "@neglabel.@interm_out.canMove(X) :- \n   @interm_out.move(X,_).": {
+         "@interm_out.move": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12476,
+        "pre": 12476
+       },
+       "num-tuples": 3,
+       "runtime": { "start": 21504315321, "end": 21504315321},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 3,
+     "runtime": { "start": 21504315320, "end": 21504315330},
+     "source-locator": "/root/souffle-src/tests/example/game2/game2.dl [13:7-13:14]"
+    },
+    "@neglabel.@interm_out.possible_winning": {
+     "maxRSS": {
+      "post": 12476,
+      "pre": 12476
+     },
+     "non-recursive-rule": {
+      "@neglabel.@interm_out.possible_winning(X) :- \n   @poscopy_1.@interm_out.odd_move.{ff}(X,Y),\n   !@neglabel.@interm_out.canMove(Y).": {
+       "atom-frequency": {
+        "@neglabel.@interm_out.possible_winning(X) :- \n   @poscopy_1.@interm_out.odd_move.{ff}(X,Y),\n   !@neglabel.@interm_out.canMove(Y).": {
+         "@poscopy_1.@interm_out.odd_move.{ff}": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12476,
+        "pre": 12476
+       },
+       "num-tuples": 2,
+       "runtime": { "start": 21504315648, "end": 21504315651},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 2,
+     "runtime": { "start": 21504315647, "end": 21504315656},
+     "source-locator": "/root/souffle-src/tests/example/game2/game2.dl [15:7-15:23]"
+    },
+    "@poscopy_1.@interm_out.odd_move.{bf}": {
+     "iteration": {
+      "0": {
+       "maxRSS": {
+        "post": 12476,
+        "pre": 12476
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "@poscopy_1.@interm_out.odd_move.{bf}(X,Y) :- \n   @magic.@poscopy_1.@interm_out.odd_move.{bf}(X),\n   @interm_out.move(X,Z1),\n   @interm_out.move(Z1,Z2),\n   @poscopy_1.@interm_out.odd_move.{bf}(Z2,Y).": {
+         "0": {
+          "atom-frequency": {
+           "@new_@poscopy_1.@interm_out.odd_move.{bf}(X,Y) :- \n   @magic.@poscopy_1.@interm_out.odd_move.{bf}(X),\n   @interm_out.move(X,Z1),\n   @interm_out.move(Z1,Z2),\n   @delta_@poscopy_1.@interm_out.odd_move.{bf}(Z2,Y).": {
+            "@delta_@poscopy_1.@interm_out.odd_move.{bf}": {
+             "level": 3,
+             "num-tuples": 0
+            },
+            "@interm_out.move": {
+             "level": 1,
+             "num-tuples": 0
+            },
+            "@magic.@poscopy_1.@interm_out.odd_move.{bf}": {
+             "level": 0,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 12476,
+           "pre": 12476
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 21504315511, "end": 21504315512},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 21504315511, "end": 21504315519}
+      }
+     },
+     "maxRSS": {
+      "post": 12476,
+      "pre": 12476
+     },
+     "non-recursive-rule": {
+      "@poscopy_1.@interm_out.odd_move.{bf}(X,Y) :- \n   @magic.@poscopy_1.@interm_out.odd_move.{bf}(X),\n   @interm_out.move(X,Y).": {
+       "atom-frequency": {
+        "@poscopy_1.@interm_out.odd_move.{bf}(X,Y) :- \n   @magic.@poscopy_1.@interm_out.odd_move.{bf}(X),\n   @interm_out.move(X,Y).": {
+         "@interm_out.move": {
+          "level": 1,
+          "num-tuples": 0
+         },
+         "@magic.@poscopy_1.@interm_out.odd_move.{bf}": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12476,
+        "pre": 12476
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 21504315500, "end": 21504315501},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 1,
+     "runtime": { "start": 21504315499, "end": 21504315508},
+     "source-locator": " [1:1-1:1]"
+    },
+    "@poscopy_1.@interm_out.odd_move.{ff}": {
+     "maxRSS": {
+      "post": 12476,
+      "pre": 12476
+     },
+     "non-recursive-rule": {
+      "@poscopy_1.@interm_out.odd_move.{ff}(X,Y) :- \n   @magic.@interm_out.canMove.{f}(),\n   @interm_out.move(X,Y).": {
+       "atom-frequency": {
+        "@poscopy_1.@interm_out.odd_move.{ff}(X,Y) :- \n   @magic.@interm_out.canMove.{f}(),\n   @interm_out.move(X,Y).": {
+         "@interm_out.move": {
+          "level": 1,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12476,
+        "pre": 12476
+       },
+       "num-tuples": 5,
+       "runtime": { "start": 21504315616, "end": 21504315617},
+       "source-locator": " [1:1-1:1]"
+      },
+      "@poscopy_1.@interm_out.odd_move.{ff}(X,Y) :- \n   @magic.@interm_out.canMove.{f}(),\n   @interm_out.move(X,Z1),\n   @interm_out.move(Z1,Z2),\n   @poscopy_1.@interm_out.odd_move.{bf}(Z2,Y).": {
+       "atom-frequency": {
+        "@poscopy_1.@interm_out.odd_move.{ff}(X,Y) :- \n   @magic.@interm_out.canMove.{f}(),\n   @interm_out.move(X,Z1),\n   @interm_out.move(Z1,Z2),\n   @poscopy_1.@interm_out.odd_move.{bf}(Z2,Y).": {
+         "@interm_out.move": {
+          "level": 1,
+          "num-tuples": 0
+         },
+         "@poscopy_1.@interm_out.odd_move.{bf}": {
+          "level": 3,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12476,
+        "pre": 12476
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 21504315622, "end": 21504315623},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 6,
+     "runtime": { "start": 21504315616, "end": 21504315629},
+     "source-locator": " [1:1-1:1]"
+    },
+    "canMove": {
+     "maxRSS": {
+      "post": 12476,
+      "pre": 12476
+     },
+     "non-recursive-rule": {
+      "canMove(@query_x0) :- \n   @interm_out.canMove.{f}(@query_x0).": {
+       "atom-frequency": {
+        "canMove(@query_x0) :- \n   @interm_out.canMove.{f}(@query_x0).": {
+         "@interm_out.canMove.{f}": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12476,
+        "pre": 12476
+       },
+       "num-tuples": 3,
+       "runtime": { "start": 21504315530, "end": 21504315530},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 3,
+     "reads": 0,
+     "runtime": { "start": 21504315529, "end": 21504315536},
+     "savetime": { "start": 21504315540, "end": 21504315566},
+     "source-locator": "/root/souffle-src/tests/example/game2/game2.dl [13:7-13:14]"
+    },
+    "move": {
+     "maxRSS": {
+      "post": 12476,
+      "pre": 12476
+     },
+     "non-recursive-rule": {
+      "move(@query_x0,@query_x1) :- \n   @interm_out.move(@query_x0,@query_x1).": {
+       "atom-frequency": {
+        "move(@query_x0,@query_x1) :- \n   @interm_out.move(@query_x0,@query_x1).": {
+         "@interm_out.move": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12476,
+        "pre": 12476
+       },
+       "num-tuples": 5,
+       "runtime": { "start": 21504315343, "end": 21504315344},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 5,
+     "reads": 0,
+     "runtime": { "start": 21504315334, "end": 21504315352},
+     "savetime": { "start": 21504315356, "end": 21504315451},
+     "source-locator": "/root/souffle-src/tests/example/game2/game2.dl [9:7-9:11]"
+    },
+    "odd_move": {
+     "maxRSS": {
+      "post": 12476,
+      "pre": 12476
+     },
+     "non-recursive-rule": {
+      "odd_move(@query_x0,@query_x1) :- \n   @interm_out.odd_move.{ff}(@query_x0,@query_x1).": {
+       "atom-frequency": {
+        "odd_move(@query_x0,@query_x1) :- \n   @interm_out.odd_move.{ff}(@query_x0,@query_x1).": {
+         "@interm_out.odd_move.{ff}": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12476,
+        "pre": 12476
+       },
+       "num-tuples": 6,
+       "runtime": { "start": 21504315669, "end": 21504315670},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 6,
+     "reads": 0,
+     "runtime": { "start": 21504315669, "end": 21504315675},
+     "savetime": { "start": 21504315678, "end": 21504315704},
+     "source-locator": "/root/souffle-src/tests/example/game2/game2.dl [11:7-11:15]"
+    },
+    "possible_winning": {
+     "maxRSS": {
+      "post": 12476,
+      "pre": 12476
+     },
+     "non-recursive-rule": {
+      "possible_winning(@query_x0) :- \n   @interm_out.possible_winning.{f}(@query_x0).": {
+       "atom-frequency": {
+        "possible_winning(@query_x0) :- \n   @interm_out.possible_winning.{f}(@query_x0).": {
+         "@interm_out.possible_winning.{f}": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12476,
+        "pre": 12476
+       },
+       "num-tuples": 2,
+       "runtime": { "start": 21504315746, "end": 21504315747},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 2,
+     "reads": 0,
+     "runtime": { "start": 21504315735, "end": 21504315754},
+     "savetime": { "start": 21504315758, "end": 21504315776},
+     "source-locator": "/root/souffle-src/tests/example/game2/game2.dl [15:7-15:23]"
+    },
+    "winning": {
+     "maxRSS": {
+      "post": 12476,
+      "pre": 12476
+     },
+     "non-recursive-rule": {
+      "winning(X) :- \n   @interm_out.move(X,Y),\n   !@neglabel.@interm_out.possible_winning(Y).": {
+       "atom-frequency": {
+        "winning(X) :- \n   @interm_out.move(X,Y),\n   !@neglabel.@interm_out.possible_winning(Y).": {
+         "@interm_out.move": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12476,
+        "pre": 12476
+       },
+       "num-tuples": 2,
+       "runtime": { "start": 21504315707, "end": 21504315708},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 2,
+     "reads": 0,
+     "runtime": { "start": 21504315707, "end": 21504315714},
+     "savetime": { "start": 21504315717, "end": 21504315733},
+     "source-locator": "/root/souffle-src/tests/example/game2/game2.dl [17:7-17:14]"
+    }
+   },
+   "runtime": { "start": 21504315147, "end": 21504315780},
+   "starttime": { "time": 21504315099},
+   "usage": {
+    "timepoint": {
+     "21504315149": {
+      "maxRSS": 12476,
+      "systemtime": 3279,
+      "usertime": 3279
+     },
+     "21504315172": {
+      "maxRSS": 12476,
+      "systemtime": 3302,
+      "usertime": 3302
+     },
+     "21504315210": {
+      "maxRSS": 12476,
+      "systemtime": 3325,
+      "usertime": 3325
+     },
+     "21504315293": {
+      "maxRSS": 12476,
+      "systemtime": 3377,
+      "usertime": 3377
+     },
+     "21504315328": {
+      "maxRSS": 12476,
+      "systemtime": 3397,
+      "usertime": 3397
+     },
+     "21504315350": {
+      "maxRSS": 12476,
+      "systemtime": 3411,
+      "usertime": 3411
+     },
+     "21504315375": {
+      "maxRSS": 12476,
+      "systemtime": 3420,
+      "usertime": 3420
+     },
+     "21504315543": {
+      "maxRSS": 12476,
+      "systemtime": 3520,
+      "usertime": 3520
+     },
+     "21504315715": {
+      "maxRSS": 12476,
+      "systemtime": 3614,
+      "usertime": 3614
+     },
+     "21504315762": {
+      "maxRSS": 12476,
+      "systemtime": 3642,
+      "usertime": 3642
+     }
+    }
+   }
+  }
+ }
+}

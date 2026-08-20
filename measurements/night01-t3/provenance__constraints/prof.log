@@ -1,0 +1,142 @@
+{
+ "root": {
+  "program": {
+   "configuration": {
+    "": "/root/souffle-src/tests/provenance/constraints/constraints.dl",
+    "fact-dir": "/root/souffle-src/tests/provenance/constraints/facts",
+    "include-dir": ".",
+    "jobs": "1",
+    "libraries": "functors",
+    "library-dir": ".",
+    "magic-transform": "*",
+    "output-dir": "/root/compiler/measurements/night01-t3/provenance__constraints",
+    "profile": "prof.log",
+    "provenance": "explain",
+    "relationCount": "5",
+    "ruleCount": "17",
+    "version": "2.5",
+    "warn": "all",
+    "wno": "none"
+   },
+   "relation": {
+    "Patient": {
+     "loadtime": { "start": 21633636667, "end": 21633637381},
+     "num-tuples": 3,
+     "reads": 0,
+     "source-locator": "/root/souffle-src/tests/provenance/constraints/constraints.dl [17:7-17:14]"
+    },
+    "Rule": {
+     "maxRSS": {
+      "post": 12176,
+      "pre": 12176
+     },
+     "non-recursive-rule": {
+      "Rule(0).": {
+       "maxRSS": {
+        "post": 12176,
+        "pre": 12176
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 21633637414, "end": 21633637415},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 1,
+     "reads": 0,
+     "runtime": { "start": 21633637392, "end": 21633637423},
+     "source-locator": "/root/souffle-src/tests/provenance/constraints/constraints.dl [11:7-11:11]"
+    },
+    "Violation": {
+     "maxRSS": {
+      "post": 12432,
+      "pre": 12176
+     },
+     "non-recursive-rule": {
+      "Violation(ssn,p1,p2) :- \n   Patient(ssn,p1),\n   !neg(ssn),\n   Patient(ssn,p2),\n   p1 != p2,\n   Rule(@abdul0),\n   @abdul0 = 0.": {
+       "atom-frequency": {
+        "Violation(ssn,p1,p2) :- \n   Patient(ssn,p1),\n   !neg(ssn),\n   Patient(ssn,p2),\n   p1 != p2,\n   Rule(@abdul0),\n   @abdul0 = 0.": {
+         "Patient": {
+          "level": 1,
+          "num-tuples": 0
+         },
+         "Rule": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12432,
+        "pre": 12176
+       },
+       "num-tuples": 2,
+       "runtime": { "start": 21633637439, "end": 21633637454},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 2,
+     "reads": 0,
+     "runtime": { "start": 21633637439, "end": 21633637461},
+     "savetime": { "start": 21633637464, "end": 21633637860},
+     "source-locator": "/root/souffle-src/tests/provenance/constraints/constraints.dl [20:7-20:16]"
+    },
+    "Violation.@info.1": {
+     "non-recursive-rule": {
+      "@info.clause[Violation(ssn,p1,p2) :- \n   Patient(ssn,p1),\n   !neg(ssn),\n   Patient(ssn,p2),\n   p1 != p2,\n   Rule(@abdul0),\n   @abdul0 = 0.]": {
+       "maxRSS": {
+        "post": 12560,
+        "pre": 12432
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 21633637868, "end": 21633637888},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "reads": 0
+    },
+    "neg": {
+     "maxRSS": {
+      "post": 12176,
+      "pre": 12176
+     },
+     "non-recursive-rule": {
+      "neg(121).": {
+       "maxRSS": {
+        "post": 12176,
+        "pre": 12176
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 21633637429, "end": 21633637430},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 1,
+     "reads": 3,
+     "runtime": { "start": 21633637429, "end": 21633637435},
+     "source-locator": "/root/souffle-src/tests/provenance/constraints/constraints.dl [14:7-14:10]"
+    }
+   },
+   "runtime": { "start": 21633636662, "end": 21633637866},
+   "starttime": { "time": 21633636626},
+   "usage": {
+    "timepoint": {
+     "21633636655": {
+      "maxRSS": 11652,
+      "systemtime": 6549,
+      "usertime": 3274
+     },
+     "21633637447": {
+      "maxRSS": 12304,
+      "systemtime": 7096,
+      "usertime": 3548
+     },
+     "21633637485": {
+      "maxRSS": 12432,
+      "systemtime": 7121,
+      "usertime": 3560
+     }
+    }
+   }
+  }
+ }
+}

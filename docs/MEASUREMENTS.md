@@ -44,6 +44,9 @@ the "Derived" section below the table.
 | probe0-p1-fixture-bfs-check | 2026-08-20 | `python3 harness/night01_bfs_check.py fixtures/p1/edge.facts 1` | p1 fixture | n/a | `reachable_from_1_incl_self=50` | Backfill (T1) — independent (non-Soufflé) confirmation of the `reachable_from_1=50` figure `probe0-p1-fixture` already claimed; both conventions include the source node itself, so the numbers match directly (no offset). |
 | probe0.6-p4prime-diff-vs-p4, -vs-p2 | 2026-08-20 | `diff -q measurements/probe0.6-p4prime-run/q2.csv measurements/probe0.5-p4-run/q2.csv` and vs `measurements/probe0-p2-off-run/q2.csv` | p4prime.dl | vs p4.dl, vs p2.dl | 0 differences (both) | Backfill (T1) — the ID `probe0.6-p4prime-diff` was cited in `docs/reports/probe0_6.md` but never actually captured through `run_cmd`; split into two clean single-command IDs. |
 
+| night01-t2-summary | 2026-08-20 | `python3 harness/night01_t2_corpus.py` | 36 pre-registered programs | untransformed | 31 ok, 4 rejected, 1 crash, 0 DNF; `T_none≥1000` on 3/31; floor of 8 not met | Full table `docs/reports/night01-T2-corpus.md`; per-program provenance `measurements/night01-t2/`. |
+| night01-t3-summary | 2026-08-20 | `python3 harness/night01_t3_envelope.py` | 31 T2-ok+seedable programs | `--magic-transform=*` | 27 clean, 1 crash, 1 diverged (abort), 2 not reached; `E_recoverable/T_souffle`: min 0, median 0.026, max 0.571; `E_recoverable=0` on 10/27 | Full table + distribution `docs/reports/night01-T3-envelope.md`; abort detail `docs/ESCALATIONS.md`; per-program provenance `measurements/night01-t3/`. |
+
 **Non-determinism found, not fixed (T1, hard prohibition #2 applies):**
 `tests/corpus/detail.json`'s `matched_output_relation` diagnostic field varies
 between runs of `harness/build_corpus.py` due to Python's randomized `set` iteration

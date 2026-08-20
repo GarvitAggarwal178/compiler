@@ -51,3 +51,69 @@ the file and can supply it, or needs to write it. Either resolves this immediate
 is fully determined without the missing file. T3 proceeds on the same basis (its
 stated prerequisite is T2's seedable subset, which does not depend on the missing
 document either).
+
+---
+
+## 2026-08-20 — T3: `semantic/subsumption_multiple_rules` diverges under `--magic-transform=*`
+
+**Observation.** Of 31 candidates T3 swept (26 completed before this one fired the
+abort condition, in alphabetical order), `semantic/subsumption_multiple_rules`'s
+untransformed and magic-transformed runs produce **different sets** of tuples (not
+just different row order) in at least 4 output relations: `A`, `E`, `F`, `rel`.
+Concretely, relation `A` (a shortest-path tree over a fixed 7-node graph, built via
+subsumptive `<=` rules with `btree_delete`): untransformed produces 6 rows, missing
+`(5,6,3)`; magic-transformed produces 7 rows, including it.
+
+**A first alarm on this same task was a false positive, corrected before this one
+was trusted.** `example/orbits1` initially looked identical-but-diverging under a
+raw byte comparison; sorting first (CLAUDE.md §6: "set equality on output
+relations... sort, then compare") showed it was only row order. The harness
+(`harness/night01_t3_envelope.py`) was fixed to sort before comparing — this is
+bringing the tool into line with an existing project rule, not loosening a check.
+`subsumption_multiple_rules` survives the corrected, sorted comparison: the sets
+genuinely differ.
+
+**Measurement IDs:** `measurements/night01-t2/semantic__subsumption_multiple_rules/`
+(untransformed), `measurements/night01-t3/semantic__subsumption_multiple_rules/`
+(magic-transformed).
+
+**What I tried (read-only, no new commands, per "do not investigate further
+tonight"):** read the `.dl` source and the sorted CSV diff directly. The relations
+that diverge (`A`, `rel`, `F`, and one `E`/`AF` fragment) all use Soufflé's
+subsumption operator (`<=`) with the `btree_delete` qualifier — a feature entirely
+outside blueprint §4's grammar (`dlc` will never parse or execute it). `A`'s
+specific divergent rule chain (`A(from,to,c+1):-A(_,from,c),graph(from,to).` plus
+two `<=` subsumption rules) has **no negation at all** — this divergence is not
+obviously a completeness-under-negation question in the sense this project cares
+about.
+
+**Live explanations:**
+1. Genuine interaction bug between subsumption's deletion-by-priority semantics and
+   magic-set demand-driven evaluation order: which facts get subsumed-and-deleted
+   before others are even derived can legitimately depend on evaluation order, and
+   magic-transform changes that order relative to naive/semi-naive untransformed
+   evaluation. If so, this is a property of subsumption + magic-sets, not of
+   negation, and outside what this project's guard is meant to address.
+2. A known, possibly-documented limitation of combining `<=`/`btree_delete` with
+   `--magic-transform=*` in Soufflé (subsumption is a comparatively newer feature).
+3. Corpus contamination: this program was included by the mechanical predicate for
+   an unrelated reason (it also has genuine negated-IDB literals and constant-
+   bearing outputs elsewhere in the same file, e.g. `AF`'s rule), but the specific
+   divergence found lives in a subsumption-only fragment the predicate never
+   distinguished from the negation-relevant fragments — the file bundles many
+   independent test cases under one `.dl`.
+
+**Cheapest distinguishing experiment, not run:** isolate the `A`/`graph` fragment
+(lines defining `A`, `graph`, and their rules only) into its own `.dl` file and
+re-run both configurations. If the divergence persists in isolation, explanation 1
+or 2 gains weight; if it disappears, some cross-fragment interaction in the bundled
+file (explanation 3, or something else entirely) is implicated instead.
+
+**Task disposition:** T3 aborted at this program per the batch's explicit
+instruction. 26 of 31 candidates completed before the abort (results retained,
+`measurements/night01-t3/summary.json`); the remaining candidates alphabetically
+after this one were not run. This is out of scope for `dlc` regardless of outcome
+(subsumption is not in blueprint §4's grammar) — logged for a human decision on
+whether to file upstream, exclude subsumption-using programs from the corpus
+predicate (prohibition #2 blocks that tonight), or leave it, not investigated
+further tonight.
