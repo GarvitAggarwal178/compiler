@@ -67,7 +67,14 @@ def check_program(dl_path: Path):
 
     output_with_literal = False
     matched_output = None
-    for rel in output_names:
+    # sorted(), not raw set iteration: Python's per-process randomized
+    # string-hash seed made `matched_output` (a diagnostic field only --
+    # `included` itself was always order-independent) non-deterministic
+    # across runs. Found by NIGHT-BATCH-01 T1 (docs/reports/
+    # night01-T1-audit.md); fix authorized narrowly by the 2026-08-21
+    # corpus ruling section 4.3, ordering only, no other predicate logic
+    # touched.
+    for rel in sorted(output_names):
         for clause in clauses_for_head(text, rel):
             if has_literal(clause):
                 output_with_literal = True

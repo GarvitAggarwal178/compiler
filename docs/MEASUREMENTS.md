@@ -48,7 +48,7 @@ the "Derived" section below the table.
 | night01-t3-summary | 2026-08-20 | `python3 harness/night01_t3_envelope.py` | 31 T2-ok+seedable programs | `--magic-transform=*` | 27 clean, 1 crash, 1 diverged (abort), 2 not reached; `E_recoverable/T_souffle`: min 0, median 0.026, max 0.571; `E_recoverable=0` on 10/27 | Full table + distribution `docs/reports/night01-T3-envelope.md`; abort detail `docs/ESCALATIONS.md`; per-program provenance `measurements/night01-t3/`. |
 | night01-t4-summary | 2026-08-20 | `python3 harness/night01_t4_exploratory.py` | whole `tests/` tree (612) fast pass; 107 negated-IDB programs slow pass | untransformed (fast, structural only) / `--magic-transform=*` (slow) | fast: 107/612 (17.5%) negated IDB, 242/612 (39.5%) seedable, 36/612 both; slow: 86 ok, `@neglabel.` on 57/86 (66%), `E_recoverable=0` on 29/86 (34%) | **EXPLORATORY, not a headline result.** Full counts `docs/reports/night01-T4-exploratory.md`; raw `measurements/night01-t4/`. |
 | night01-t5-summary | 2026-08-20 | `python3 harness/night01_t5_grammar.py` | whole `tests/` tree, 622 `.dl` files | n/a (structural, no execution) | `in_grammar=195/622` (31.4%); top exclusion factor `.type` declaration, 291/427 (68.1%) of out-of-grammar files | Full histogram `docs/reports/night01-T5-grammar.md`; file list `tests/corpus/IN_GRAMMAR.txt` (NOT the pre-registered corpus); raw `measurements/night01-t5/`. |
-| night01-t6-summary | 2026-08-20 | `python3 harness/night01_t6_scaling.py` | P2 fixture, scaled `n∈{250,500,1000,2000,4000,8000}` | untransformed / `--magic-transform=*` / hand-guarded (`p4prime.dl`) | `T_souffle/T_guard`: 157.2× (n=250) → 4,243.9× (n=8000); `T_none` ×4.0/doubling, `T_guard` ×~2.0/doubling; all answers set-equal at every n | Full table `docs/reports/night01-T6-scaling.md`; raw `measurements/night01-t6/`; fixtures `fixtures/p2-scale-<n>/` (each with a recorded seed). |
+| night01-t6-summary | 2026-08-20 | `python3 harness/night01_t6_scaling.py` | P2 fixture, scaled `n∈{250,500,1000,2000,4000,8000}` | untransformed / `--magic-transform=*` / hand-guarded (`p4prime.dl`) | `T_souffle/T_guard`: 157.2× (n=250) → 4,243.9× (n=8000); `T_none` ×4.0/doubling, `T_guard` ×~2.0/doubling; all answers set-equal at every n | Full table `docs/reports/night01-T6-scaling.md`; raw `measurements/night01-t6/`; fixtures `fixtures/p2-scale-<n>/` (each with a recorded seed). **Reporting correction 2026-08-21** (`docs/reports/corpus-ruling-2026-08-21.md` §3): `T_none=n²` is definitional (`reach`/`unreach` partition `node×node`), not a finding; report as `T_souffle≈0.62n²`, `T_guard≈1.2n`, `T_souffle/T_guard=Θ(n)` instead. Row not edited, per append-only. |
 
 **Non-determinism found, not fixed (T1, hard prohibition #2 applies):**
 `tests/corpus/detail.json`'s `matched_output_relation` diagnostic field varies
@@ -58,6 +58,14 @@ PREREGISTERED.txt` and the included-count (36) are **not** affected — the pred
 only needs "at least one" qualifying relation, which is order-independent. Root
 cause logged in `docs/OPEN_QUESTIONS.md`; not fixed tonight because
 `corpus_predicate.py` is the predicate NIGHT-BATCH-01 §0.2.2 forbids editing.
+
+**Fixed 2026-08-21 (`corpus-ruling-t4.3-verify`):** `corpus_predicate.py` now
+iterates `sorted(output_names)`, authorized narrowly by `docs/reports/
+corpus-ruling-2026-08-21.md` §4.3. Command: `python3 harness/build_corpus.py
+/root/souffle-src/tests`, run 3 consecutive times — `tests/corpus/detail.json`
+byte-identical across all 3; `tests/corpus/PREREGISTERED.txt`'s 36 data rows
+unchanged from the pre-fix version (only a superseding header comment added,
+separately, §2.1 of the ruling). `docs/OPEN_QUESTIONS.md` updated to resolved.
 
 Three-column headline metric (blueprint §7, v1.2). `T_none` = no transform,
 `T_souffle` = Soufflé `--magic-transform=*`, `T_guard` = completeness-guarded hand
@@ -84,3 +92,5 @@ P1's magic-on run is the only row where the two conventions diverge — it is al
 only run in this table containing a `.output`-forced `COPY_T` relation. That
 divergence is itself evidence for the §1 ruling: the defect was specific to P1's
 `.output path`, not general to the transform (P1', P3 show no such divergence).
+
+| subsumption-repro-minimal2 | 2026-08-21 | `souffle -F /tmp/emptyfacts -D measurements/subsumption-repro/minimal2-{none,magic} -p prof.log [--magic-transform=*] tests/programs/subsumption_minimal2.dl` | `subsumption_minimal2.dl` | off vs on | `A.csv`: 3 rows vs 4 rows, extra tuple `(3,4,2)` under magic-transform | Minimized repro of the T3 subsumption divergence; already reported/fixed upstream (souffle-lang/souffle#2322, #2323, PR #2567). Full writeup `docs/reports/subsumption-repro.md`. |

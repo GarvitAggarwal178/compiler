@@ -1,10 +1,22 @@
 # NIGHT-BATCH-01 — T6: P2 scaling sweep, three columns
 
-**Mechanism characterization on a self-generated fixture, not corpus evidence.**
+**Mechanism characterization on a self-generated fixture with uncontrolled
+reachable-set size, not corpus evidence.** Six points, one shape, not a general
+law. This label is permanent per the 2026-08-21 corpus ruling
+(`docs/reports/corpus-ruling-2026-08-21.md` §3) and applies to every downstream
+use of this benchmark, including `docs/dlc-blueprint.md` §12's "P2-scale" entry.
 
-Date: 2026-08-20. Outcome: **done, complete.** All 6 sizes ran, no DNF, no abort —
-answer relations (`q2.csv`, sorted set-equality per CLAUDE.md §6) identical across
-all three configurations at every `n`.
+**`T_none = n²` (plus small change) is definitional for this program shape, not an
+observation.** `reach` and `unreach` (P2.dl) partition `node × node` — `unreach`
+is the complement of `reach` within `node × node` filtered by the negation, so
+their sum is bounded by and tracks `n²` regardless of graph structure, transform,
+or anything this project's guard does. Presenting its growth as a finding about
+the graph or the transform is wrong; corrected below (2026-08-21 ruling §3).
+
+Date: 2026-08-20 (corrected 2026-08-21, see above). Outcome: **done, complete.**
+All 6 sizes ran, no DNF, no abort — answer relations (`q2.csv`, sorted
+set-equality per CLAUDE.md §6) identical across all three configurations at every
+`n`.
 
 ## Method
 
@@ -33,25 +45,33 @@ directories `measurements/night01-t6/n<n>-{none,souffle,guard}/`.
 
 ## Reading the integers, not asserting a theory
 
-Per-doubling-of-`n` growth factors, computed directly from the table above:
+**The finding, stated the required way (2026-08-21 ruling §3):**
+`T_souffle ≈ 0.62n²`, `T_guard ≈ 1.2n`, hence **`T_souffle/T_guard = Θ(n)`**.
+Mechanism: Soufflé materializes all of `reach` (still `Θ(n²)` even under
+`--magic-transform=*`, since the transform only restricts `unreach`, §7); the
+guarded form materializes only `reach(1,·)` — one source node's reachable set,
+`Θ(n)` in a fixed-density graph. `T_none` itself carries no information here — it
+is `n²` by construction (see above), not a measurement of anything.
 
-- `T_none`: ×4.0, ×4.0, ×4.0, ×4.0, ×4.0 (every step) — consistent with quadratic
-  growth in `n`, as expected for unrestricted all-pairs-style reachability.
-- `T_guard`: ×2.08, ×2.01, ×2.06, ×1.98, ×1.97 — consistent with linear growth in
-  `n`, as expected for a computation restricted to one source node's reachable set
-  in a fixed-density graph.
-- `T_souffle`: ×3.77, ×3.63, ×4.04, ×3.97, ×4.16 — tracks `T_none`'s growth rate
-  closely, not `T_guard`'s. Soufflé's own transform reduces the constant, not the
-  growth order, on this fixture.
-- `T_souffle/T_guard`: ×1.81, ×1.80, ×1.96, ×2.00, ×2.11 — itself growing at
-  roughly the same per-doubling rate as `n` (×2), consistent with the ratio scaling
-  **linearly in `n`**, not staying constant.
+Fit check against the table (not a regression, arithmetic against the two
+endpoints): `0.62 × 8000² = 39,680,000` vs. measured `T_souffle = 40,805,441`
+(3% high); `1.2 × 8000 = 9,600` vs. measured `T_guard = 9,615` (0.2% high). Holds
+at the small end too: `1.2 × 250 = 300` vs. measured `T_guard = 285` (5% high).
+
+Per-doubling-of-`n` growth factors, computed directly from the table above, as
+supporting detail for the fit above — not a separate claim:
+
+- `T_guard`: ×2.08, ×2.01, ×2.06, ×1.98, ×1.97 — consistent with `Θ(n)`.
+- `T_souffle`: ×3.77, ×3.63, ×4.04, ×3.97, ×4.16 — consistent with `Θ(n²)`, tracks
+  `T_none`'s growth rate, not `T_guard`'s.
+- `T_souffle/T_guard`: ×1.81, ×1.80, ×1.96, ×2.00, ×2.11 — consistent with `Θ(n)`.
 
 This is what the numbers show on **this self-generated, uncontrolled-reachability
 fixture** (`gen_random_graph`, no engineered reachable-set size, unlike P1's
 `gen_core_rest_graph`). It is not evidence about the pre-registered or exploratory
-corpora, and it is not a proof that the ratio grows linearly in general — six points
-on one fixture shape is a characterization, not a theorem.
+corpora (§7's two-corpora ruling separates this benchmark from both), and it is
+not a proof that the ratio grows linearly in general — six points on one fixture
+shape is a characterization, not a theorem.
 
 ## What did not work / caveats
 

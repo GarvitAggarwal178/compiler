@@ -117,3 +117,59 @@ after this one were not run. This is out of scope for `dlc` regardless of outcom
 whether to file upstream, exclude subsumption-using programs from the corpus
 predicate (prohibition #2 blocks that tonight), or leave it, not investigated
 further tonight.
+
+**Resolved 2026-08-21** (corpus ruling §4.1): minimized to 4 nodes/4 edges/1
+subsumption rule, confirmed the divergence isolates cleanly (rules out
+cross-fragment contamination). Already reported and already fixed upstream —
+[souffle-lang/souffle#2322](https://github.com/souffle-lang/souffle/issues/2322),
+[#2323](https://github.com/souffle-lang/souffle/issues/2323), fixed by
+[PR #2567](https://github.com/souffle-lang/souffle/pull/2567) (merged 2025-12-07,
+commit `7bb8e64`) — more than 8 months after our installed Soufflé 2.5. No new
+issue filed. Full writeup: `docs/reports/subsumption-repro.md`.
+
+---
+
+## 2026-08-21 — OpenRuleBench pre-registration blocked: neither candidate source is reachable
+
+**Observation.** Corpus ruling §2.2 step 1 named two candidate sources: the
+original OpenRuleBench distribution, and the RUBEN repository. Neither yields the
+actual rule-program files. Original distribution's named host
+(`rulebench.projects.semwebcentral.org`, from OpenRuleBench's own manual PDF)
+does not resolve (DNS). RUBEN (`github.com/kev-ang/RUBEN`, cloned locally) is a
+Java/Docker orchestration framework with no rule files of its own; its
+`Benchmark_Configuration.json` points at a private local path
+(`/Volumes/T7/RuleEngineBenchmark/test_data`) not shipped in the repo, and its
+referenced external dataset host (`dataset.sti2.at/RUBEN/`) refuses connections
+from two independent network paths.
+
+**What I tried.** 4 web searches (original site, GitHub mirrors, direct file
+extensions, artifact archives), 3 page/PDF fetches (project manual, a related
+2023 paper, RUBEN's GitHub page), 1 direct git clone + local file-tree
+inspection, 2 direct connection attempts (`curl`, WebFetch) against the
+referenced dataset host from separate network paths. Did not fabricate
+placeholder rule files or guess at program content to force the procedure
+through.
+
+**What was found anyway:** RUBEN's own `all_tests.json` (a real config file, not
+inference) shows OpenRuleBench/RUBEN's entire `negation` category is **one
+program shape** (`same_generation`) at 3 scale points — regardless of the access
+problem, this independently suggests the floor of 8 (ruling §2.2) will not be met
+by program-shape diversity, even if data-scale variants are counted separately.
+
+**Live explanations:** (1) OpenRuleBench's canonical distribution has simply gone
+offline in the years since 2009 and no maintained mirror exists; (2) a working
+copy exists somewhere this session's search tools can't reach (behind
+authentication, on an institutional server not indexed, or held privately by
+researchers who've used it); (3) RUBEN's authors also hit this and that's why
+`testDataPath` points at a private local drive rather than something the repo
+fetches automatically.
+
+**Cheapest distinguishing experiment, not run:** none available to this session
+— this is an external-reachability problem, not an ambiguous-observation one.
+Resolving it needs either a human with a channel this session lacks (direct
+author contact, institutional access) or a decision to route around it.
+
+**Task disposition:** `docs/reports/openrulebench-preregistration.md` written in
+full. `tests/corpus/MEASUREMENT_PREREG.txt` **not created** — no fabricated file
+list. Blueprint v1.4 §10's Q5 reopening updated to reflect blocked status, not
+silently left looking unresolved-but-in-progress.

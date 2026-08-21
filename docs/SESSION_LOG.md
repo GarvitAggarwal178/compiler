@@ -107,3 +107,54 @@ narrower 11-of-149 first framing, which is disclosed not discarded). Full writeu
 recommendation from the P6 result, and decides whether/when to run the 36-program
 pre-registered corpus (not yet run — that's an M1/M2/M3-relevant future step, not
 Phase 0.6's).
+
+(NIGHT-BATCH-01, 2026-08-20 to -21, is tracked separately in `docs/NIGHT_LOG.md`
+and `docs/reports/night01-summary.md`, per the batch's own protocol — not
+duplicated here.)
+
+## 2026-08-21 — Corpus ruling: two corpora, T6 correction, subsumption resolved, OpenRuleBench blocked
+
+**What changed:** Applied the corpus ruling (`docs/reports/
+corpus-ruling-2026-08-21.md`, saved verbatim as the document of record —
+`docs/phase0.7-corpus-viability.md` never landed, this supersedes that reference
+everywhere). Blueprint bumped to v1.4: §7 splits correctness corpus (Soufflé
+`tests/`, unchanged) from measurement corpus (OpenRuleBench, new); §9 gets
+failure mode #7 (fired, resolved by migration) and #8 (negation-bearing
+recursive+bound-query programs may be rare, T3/T4's 34-37% zero rate is first
+evidence); §10 closes Q3, closes Q5 for correctness/reopens-then-blocks it for
+measurement; §12 adds the P2-scale named benchmark with the `T_none=n²`
+disclosure attached permanently.
+
+`tests/corpus/PREREGISTERED.txt` header-annotated as superseded for measurement
+purposes (data rows unchanged). `corpus_predicate.py`'s non-determinism fixed
+(prohibition lifted narrowly per the ruling §4.3) — verified 3 consecutive runs
+byte-identical, `PREREGISTERED.txt` unaffected. `docs/reports/
+night01-T6-scaling.md` corrected per §3 (`T_none=n²` is definitional, not a
+finding; `T_souffle≈0.62n²`, `T_guard≈1.2n`, `T_souffle/T_guard=Θ(n)`).
+
+Subsumption divergence (§4.1) minimized to 4 nodes/1 rule
+(`tests/programs/subsumption_minimal2.dl`), found already reported and already
+fixed upstream (souffle-lang/souffle#2322, #2323, PR #2567, merged 2025-12-07 —
+8+ months after our installed 2.5). No new issue filed. `docs/reports/
+subsumption-repro.md`.
+
+OpenRuleBench pre-registration (§2.2) attempted and **blocked**: neither the
+original distribution (dead DNS) nor RUBEN (github.com/kev-ang/RUBEN, cloned and
+inspected directly — no rule files, private local dataset path, dead referenced
+external host) yields the actual rule-program files. `tests/corpus/
+MEASUREMENT_PREREG.txt` not created — no fabrication. Catalog metadata found
+before the block (RUBEN's `all_tests.json`) independently suggests the floor of
+8 may not be met regardless (`negation` category is 1 program shape,
+`same_generation`, at 3 scale points). `docs/reports/
+openrulebench-preregistration.md`, `docs/ESCALATIONS.md` (2026-08-21).
+
+**What is now blocked:** OpenRuleBench measurement-corpus pre-registration —
+needs either a working data source this session's tools can't reach, or a human
+decision to route around it (accept the thin coverage as the answer to failure
+mode #8, or select a different measurement corpus with the same rejection-reasoned
+rigor DOOP got).
+
+**Single next action:** Human decides how to unblock or route around the
+OpenRuleBench access problem. M1 (Lane A) still hasn't started — the ruling's own
+§6 says the next session report should lead with M1 or the schedule is fiction;
+this session did not touch `src/` and did not change that.

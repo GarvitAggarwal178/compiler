@@ -4,7 +4,7 @@
 **Team:** 2
 **Budget:** 15 weeks from 2026-08-20 → 2026-12-03. Realistically ~10 productive weeks.
 **Status:** selected 2026-08-20, pending Probe 0. Not started.
-**Blueprint version:** v1.2
+**Blueprint version:** v1.4
 
 ---
 
@@ -213,11 +213,32 @@ relation. Not written by us.
 independent cross-check on *stratification decisions* specifically — it will disagree
 with us on programs where our stratifier is wrong, independently of Soufflé.
 
-**External corpus (fixes benchmark-selection gaming):** Soufflé's own `tests/`
-directory. The denominator is fixed by someone else. Report coverage as
-`accepted / total` over a named subdirectory, decided before running anything.
-Committing to the subdirectory in advance is the whole point; choosing it after
-seeing results reintroduces the defect that killed bounds-check elimination.
+**Two corpora, as of v1.4 — they answer different questions and are never reported
+together.** NIGHT-BATCH-01's T2/T3 conflated them: 3 of 31 pre-registered programs
+clear `T_none ≥ 1,000`, so an `E_recoverable/T_souffle` ratio computed there
+measures Soufflé's unit tests being unit tests, not what a guard would recover.
+Full ruling: `docs/reports/corpus-ruling-2026-08-21.md`.
+
+- **Correctness corpus** (fixes benchmark-selection gaming): Soufflé's own `tests/`
+  directory, in-grammar subset — `tests/corpus/IN_GRAMMAR.txt` (195 of 622
+  programs). Job: differential set-equality against the oracle. Scale is
+  irrelevant here; a 40-tuple program tests the parser/checker/evaluator exactly
+  as well as a 40-million-tuple one. Report coverage as `accepted / total` over
+  this named, pre-registered list, decided before running anything — committing in
+  advance is the whole point, choosing after seeing results reintroduces the
+  defect that killed bounds-check elimination. `tests/corpus/
+  PREREGISTERED.txt` (the original 36-program negation+seedability corpus) is
+  retained unmodified as the historical record of the measurement-corpus attempt,
+  header-annotated as superseded for measurement purposes — not deleted, not
+  edited.
+- **Measurement corpus:** OpenRuleBench (or the RUBEN repository built on its
+  generators) — external programs *and* external scalable data generators, needed
+  because the three-column table requires scale the correctness corpus can't
+  supply. Pre-registration procedure, floor, and rejected alternative (DOOP):
+  `docs/reports/corpus-ruling-2026-08-21.md` §2.2. **Pre-registration attempted
+  2026-08-21 and blocked** — neither candidate source's actual rule files are
+  reachable; `docs/reports/openrulebench-preregistration.md`. `tests/corpus/
+  MEASUREMENT_PREREG.txt` does not exist.
 
 ### Headline metric (Filter 3)
 
@@ -345,6 +366,24 @@ long, M3 wins.
    programs of differing shape before M2 closes, and report the count where the
    negated relation was left unreduced by Soufflé.
 
+7. **The measurement corpus is too small-scale — fired.** NIGHT-BATCH-01 T2/T3: 3 of
+   31 pre-registered programs clear `T_none ≥ 1,000`; the resulting
+   `E_recoverable/T_souffle` distribution (median 0.026) measures Soufflé's own unit
+   tests being unit tests, not what a guard would recover. **Resolved by migration,
+   not by scope reduction:** the correctness corpus (Soufflé `tests/`, in-grammar
+   subset) and the measurement corpus (OpenRuleBench, external programs and external
+   scalable generators) are now separate, §7. Full ruling: `docs/reports/
+   corpus-ruling-2026-08-21.md`.
+
+8. **Negation-bearing recursive programs with bound queries may be rare in real
+   corpora.** T3 (n=27, pre-registered subset) found `E_recoverable = 0` on 37%; T4
+   (n=86, broader exploratory pass) found 34% — two independent estimates in
+   agreement. On roughly a third of negation-bearing Datalog programs, Soufflé
+   leaves nothing unrestricted at all, so there is nothing for a guard to recover.
+   This is a real limit on the project's reach, not a corpus artifact (two
+   differently-scoped samples agree), and belongs in the report as a stated
+   boundary, not smoothed over by a favorable-looking average.
+
 ---
 
 ## 10. Open questions — resolve by the stated date
@@ -353,9 +392,9 @@ long, M3 wins.
 |---|---|---|---|
 | Q1 | Does Soufflé's magic transform still decline negation, empirically? | Probe 0, tonight | Run it |
 | Q2 | What is the blast radius — one relation, or the whole SCC? | Probe 0, tonight | Run culprit-cycle program |
-| Q3 | Does *Extended Magic for Negation* (~2019) ship a downloadable artifact? If yes, Filter 1 verdict must be re-run. | end of week 2 | Search + check for repo |
+| Q3 | Does *Extended Magic for Negation* (~2019) ship a downloadable artifact? If yes, Filter 1 verdict must be re-run. | **Closed** (NIGHT-BATCH-01 T8, 2026-08-20). No artifact found (citation: Tekle & Liu, ICLP 2019, arXiv:1909.08246); Filter 1 verdict unchanged. `docs/OPEN_QUESTIONS.md`. | Two web searches + one page fetch |
 | Q4 | Chen (1997) labeling algorithm vs Balbin (1991): which is implementable in 5 weeks? | end of week 4 | Read Chen first |
-| Q5 | Which Soufflé `tests/` subdirectory is the pre-registered corpus? | **Moved to Phase 0.6** (was: end of week 3). Intuitions formed during hand-probing (Phase 0/0.5/0.6's P1'–P6) contaminate later pre-registration; fixing it now removes that risk. | Mechanical structural predicate, no execution — `tests/corpus/PREREGISTERED.txt`, `docs/reports/probe0_6.md` |
+| Q5 | Which Soufflé `tests/` subdirectory is the pre-registered corpus? | **Closed for the correctness corpus** (`tests/corpus/PREREGISTERED.txt`/`IN_GRAMMAR.txt`, Phase 0.6/NIGHT-BATCH-01 T5). **Reopened 2026-08-21 for the measurement corpus** (OpenRuleBench) — **blocked as of the same day**, not resolved: neither candidate source (original distribution, RUBEN) yields the actual rule files; both are unreachable. Catalog metadata found before the block suggests the floor of 8 may not be met regardless (OpenRuleBench's `negation` category is 1 program shape). `docs/reports/openrulebench-preregistration.md`, `docs/ESCALATIONS.md` (2026-08-21). | Mechanical structural predicate over OpenRuleBench, no execution — **blocked, files unobtainable** |
 
 ---
 
@@ -548,6 +587,23 @@ Blueprint v1.0, before the corrections in this section. They stand as the histor
 record of what Probe 0 asked and found — see `docs/reports/probe0.md`. P1' and P4/P5
 above are the corrected/superseding programs; results against them are in
 `docs/reports/probe0_5.md`.)*
+
+### P2-scale — named mechanism benchmark (added v1.4)
+
+The P2 fixture family (`harness/night01_t6_scaling.py`, `harness/fixtures_lib.py`'s
+`gen_random_graph`), swept at `n ∈ {250, 500, 1000, 2000, 4000, 8000}`, density held
+at 2 edges/node, seeded deterministically per `n`. Results:
+`docs/reports/night01-T6-scaling.md`.
+
+**Permanent disclosure, required wherever this benchmark's numbers are cited:**
+`T_none = n²` (plus small change) **by construction** for this program shape —
+`reach` and `unreach` partition `node × node`, so the quantity is definitional, not
+an observation about the graph or the transform. The finding worth stating is
+`T_souffle ≈ 0.62n²`, `T_guard ≈ 1.2n`, hence `T_souffle/T_guard = Θ(n)` — Soufflé
+materializes all of `reach`, the guarded form materializes only `reach(1,·)`. This
+is **mechanism characterization on a self-generated fixture with uncontrolled
+reachable-set size, six points, one shape — not a general law**, and not corpus
+evidence for either the correctness or the measurement corpus in §7.
 
 ---
 

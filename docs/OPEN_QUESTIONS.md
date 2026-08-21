@@ -2,6 +2,19 @@
 
 Append-only. Things noticed and not acted on, with the date noticed.
 
+## 2026-08-21 — `.type` support deferred to M4, not adopted now
+
+68% of `.type` declarations account for grammar exclusions found by T5
+(`docs/reports/night01-T5-grammar.md`). Corpus ruling (`docs/reports/
+corpus-ruling-2026-08-21.md` §4.2) considered and rejected adding `.type` support
+now: it would grow the correctness corpus from ~195 to ~400 programs (195 already
+exceeds what M1 can consume), buys nothing for the measurement corpus (moving to
+OpenRuleBench, §2.2), and the Filter 4 gain is marginal (`number`/`symbol` typing
+already rejects programs; subtypes add roughly one rejection ground). Cost is 2-3
+days of M1, coming directly out of M3 where the result lives. **M4 candidate,
+revisit only if OpenRuleBench integration fails** and the Soufflé suite has to
+carry measurement after all.
+
 ## 2026-08-20 — pre-registered corpus contains negative (rejection) tests
 
 T2 (NIGHT-BATCH-01, `docs/reports/night01-T2-corpus.md`) found 4 of 36
@@ -29,6 +42,13 @@ order-independent. Not fixed: NIGHT-BATCH-01 §0.2.2 forbids editing the predica
 that produced the pre-registered corpus, without exception, for the batch's
 duration. Fix when unlocked: iterate `sorted(output_names)` instead of the raw set,
 or drop the field, or run with `PYTHONHASHSEED=0`.
+
+**Resolved 2026-08-21** (corpus ruling §4.3, prohibition lifted narrowly for this
+purpose): `check_program()` now iterates `sorted(output_names)`. Verified: 3
+consecutive runs of `harness/build_corpus.py` produce byte-identical
+`tests/corpus/detail.json` (measurement `corpus-ruling-t4.3-verify`); the 36-row
+`tests/corpus/PREREGISTERED.txt` data content is unchanged from the pre-fix
+version (only a superseding header comment was added, separately).
 
 ## 2026-08-20 — Q3 (blueprint §10), NIGHT-BATCH-01 T8: no artifact found
 
