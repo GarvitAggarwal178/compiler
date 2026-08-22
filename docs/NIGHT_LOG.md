@@ -80,3 +80,13 @@ Append-only. One line per task start/end: task ID, outcome, commit SHA.
   `src/` never touched. 2 escalations logged in full. Morning summary:
   `docs/reports/night01-summary.md`. CLAUDE.md §5 reverts to normal STOP-and-wait
   semantics as of this line, per the batch directive §0.
+
+## NIGHT-BATCH-02 -- 2026-08-23
+
+- T1 start -- allowedness probes h-o, cap 30 min, run first.
+- T1 end -- outcome: done. 8/8 ran, no cap needed. Results: accept i,k,l,n,o;
+  reject h,j,m. h is the load-bearing case: p(X):-q(X),Y>3. rejects with
+  'Ungrounded variable Y' even though Y is not in the head -- allowedness
+  quantifies over body-only variables too, not just head variables. No
+  definition proposed (human's decision). Report:
+  docs/reports/night02-T1-allowedness.md.
