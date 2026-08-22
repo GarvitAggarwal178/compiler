@@ -231,3 +231,31 @@ human's track and untouched here per the hard boundary.
 Accept: a, b, e, g. Reject: c, d, f (`Ungrounded variable X`). No definition
 of allowedness proposed — observed behaviour only, per instruction. Full
 table and per-case notes: `docs/reports/J1-allowedness-probe.md`.
+
+**J2 (M1 gates, finished from NIGHT-BATCH-01 T7):** `harness/dlc_interface.py`
+(new shared stub module: `run_dlc_parse`, `run_dlc_pretty_print`, both
+`not_implemented` until Lane A lands). `harness/parse_coverage.py` — 195/195
+`tests/corpus/IN_GRAMMAR.txt` files correctly report `not_implemented`, exits
+nonzero otherwise (the human's day-2 acceptance gate, exists before the
+parser does). `harness/round_trip_scaffold.py` — parse→print→reparse→compare
+harness, 195/195 `not_implemented`, printer left as a stub deliberately.
+`tests/rejection/allowedness.py`'s 3 original cases cross-validated against
+J1 (all match exactly); 1 new case added
+(`allowedness_equation_rhs_not_bound`, J1's least obvious finding —
+already-grounded var on the left of `=` doesn't ground an unbound var on the
+right) and independently re-verified against Soufflé 2.5 directly. All 13
+rejection cases + parse-coverage + round-trip + the T7 golden-guard tests
+re-run and confirmed still correctly blocked — no vacuous green anywhere.
+Full detail: `docs/reports/J2-m1-gates.md`.
+
+**J3 (review protocol):** noted, not executable yet — it activates "when the
+human pushes Lane A code," and `src/` still does not exist as of this
+session. No Lane A pushes to review. Protocol as instructed: on any future
+push, run the differential harness + parse-coverage runner and report
+numbers; attack with adversarial inputs (precedence edge cases, malformed
+input, unicode, deep nesting, empty bodies, comments in awkward positions),
+write failing tests under `tests/`, commit them; never edit `src/`; if asked
+to fix a Lane A file, diagnosis + failing test, then stop. Speculative
+adversarial test files were not pre-written this session — a failing test
+needs a real interface to fail against, and inventing one now risks locking
+in assumptions about dlc's CLI/AST shape that Lane A hasn't decided yet.
