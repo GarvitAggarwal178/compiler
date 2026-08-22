@@ -127,3 +127,17 @@ Append-only. One line per task start/end: task ID, outcome, commit SHA.
   reason for existing. Also found a harness gotcha: Soufflé can exit 0 on a
   stratification error (fixed the runner to also check stderr for
   Error:). Report: docs/reports/night02-T5-guarded.md.
+- T6 start -- cross-shape scaling analysis, cap 60 min, prerequisite T5
+  (passed). Answers whether P2's Theta(n) ratio growth (night01 T6) was
+  the mechanism or the shape.
+- T6 end -- outcome: done, complete. No new Soufflé runs -- pairwise
+  log-log slopes over already-committed T3/T4/T5 numbers. Found: 3/4
+  guarded shapes (same_generation_negation, ancestor_nonancestor,
+  reachability_complement) share growth CLASS (T_none/T_souffle Theta(n^2),
+  T_guard Theta(n), ratio Theta(n)) despite different recursion shapes --
+  but magnitudes differ by up to 2 orders of magnitude at comparable n
+  (not explained here). culprit_cycle disagrees on class entirely: flat
+  ~1.0x ratio, no growth, and its 5 points don't admit a clean power-law
+  fit at all (reported noisy, not smoothed). transitive_closure_bound
+  (no guard) has T_souffle flat Theta(1). Report:
+  docs/reports/night02-T6-scaling-crossshape.md.
