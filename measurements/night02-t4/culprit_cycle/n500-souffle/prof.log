@@ -1,0 +1,2073 @@
+{
+ "root": {
+  "program": {
+   "configuration": {
+    "": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/culprit_cycle.dl",
+    "fact-dir": "/root/compiler/fixtures/benchmark-family/culprit_cycle/n500",
+    "include-dir": ".",
+    "jobs": "1",
+    "libraries": "functors",
+    "library-dir": ".",
+    "magic-transform": "*",
+    "output-dir": "/root/compiler/measurements/night02-t4/culprit_cycle/n500-souffle",
+    "profile": "prof.log",
+    "relationCount": "6",
+    "ruleCount": "21",
+    "version": "2.5",
+    "warn": "all",
+    "wno": "none"
+   },
+   "relation": {
+    "@magic.@poscopy_1.q.{ff}": {
+     "maxRSS": {
+      "post": 16676,
+      "pre": 16676
+     },
+     "non-recursive-rule": {
+      "@magic.@poscopy_1.q.{ff}().": {
+       "maxRSS": {
+        "post": 16676,
+        "pre": 16676
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 172845661248, "end": 172845661251},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 1,
+     "runtime": { "start": 172845661244, "end": 172845661263},
+     "source-locator": " [1:1-1:1]"
+    },
+    "@magic.p.{bf}": {
+     "maxRSS": {
+      "post": 16676,
+      "pre": 16676
+     },
+     "non-recursive-rule": {
+      "@magic.p.{bf}(1).": {
+       "maxRSS": {
+        "post": 16676,
+        "pre": 16676
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 172845661278, "end": 172845661281},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 1,
+     "runtime": { "start": 172845661268, "end": 172845661289},
+     "source-locator": " [1:1-1:1]"
+    },
+    "@magic.q.{bf}": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 172845705517, "end": 172845705527},
+       "maxRSS": {
+        "post": 16676,
+        "pre": 16676
+       },
+       "num-tuples": 2,
+       "recursive-rule": {
+        "@magic.q.{bf}(z) :- \n   @magic.p.{bf}(x),\n   p.{bf}(x,z).": {
+         "0": {
+          "atom-frequency": {
+           "@new_@magic.q.{bf}(z) :- \n   @magic.p.{bf}(x),\n   @delta_p.{bf}(x,z).": {
+            "@delta_p.{bf}": {
+             "level": 1,
+             "num-tuples": 0
+            },
+            "@magic.p.{bf}": {
+             "level": 0,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 16676,
+           "pre": 16676
+          },
+          "num-tuples": 2,
+          "runtime": { "start": 172845705440, "end": 172845705443},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 172845705429, "end": 172845705454}
+      },
+      "1": {
+       "copytime": { "start": 172845705621, "end": 172845705622},
+       "maxRSS": {
+        "post": 16676,
+        "pre": 16676
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "@magic.q.{bf}(z) :- \n   @magic.p.{bf}(x),\n   p.{bf}(x,z).": {
+         "0": {
+          "maxRSS": {
+           "post": 16676,
+           "pre": 16676
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 172845705541, "end": 172845705542},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 172845705539, "end": 172845705549}
+      },
+      "2": {
+       "copytime": { "start": 172845705725, "end": 172845705726},
+       "maxRSS": {
+        "post": 16676,
+        "pre": 16676
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "@magic.q.{bf}(z) :- \n   @magic.p.{bf}(x),\n   p.{bf}(x,z).": {
+         "0": {
+          "maxRSS": {
+           "post": 16676,
+           "pre": 16676
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 172845705640, "end": 172845705641},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 172845705640, "end": 172845705648}
+      },
+      "3": {
+       "copytime": { "start": 172845705829, "end": 172845705830},
+       "maxRSS": {
+        "post": 16676,
+        "pre": 16676
+       },
+       "num-tuples": 1,
+       "recursive-rule": {
+        "@magic.q.{bf}(z) :- \n   @magic.p.{bf}(x),\n   p.{bf}(x,z).": {
+         "0": {
+          "maxRSS": {
+           "post": 16676,
+           "pre": 16676
+          },
+          "num-tuples": 1,
+          "runtime": { "start": 172845705748, "end": 172845705749},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 172845705747, "end": 172845705755}
+      },
+      "4": {
+       "maxRSS": {
+        "post": 16676,
+        "pre": 16676
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "@magic.q.{bf}(z) :- \n   @magic.p.{bf}(x),\n   p.{bf}(x,z).": {
+         "0": {
+          "maxRSS": {
+           "post": 16676,
+           "pre": 16676
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 172845705848, "end": 172845705848},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 172845705838, "end": 172845705856}
+      }
+     },
+     "num-tuples": 0,
+     "source-locator": " [1:1-1:1]"
+    },
+    "@neglabel.s": {
+     "maxRSS": {
+      "post": 16676,
+      "pre": 16676
+     },
+     "non-recursive-rule": {
+      "@neglabel.s(x) :- \n   @poscopy_1.q.{ff}(x,y),\n   blocked(y).": {
+       "atom-frequency": {
+        "@neglabel.s(x) :- \n   @poscopy_1.q.{ff}(x,y),\n   blocked(y).": {
+         "@poscopy_1.q.{ff}": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 16676,
+        "pre": 16676
+       },
+       "num-tuples": 340,
+       "runtime": { "start": 172845702425, "end": 172845705199},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 340,
+     "runtime": { "start": 172845702424, "end": 172845705211},
+     "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/culprit_cycle.dl [24:7-24:8]"
+    },
+    "@poscopy_1.q.{ff}": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 172845662133, "end": 172845662219},
+       "maxRSS": {
+        "post": 16676,
+        "pre": 16676
+       },
+       "num-tuples": 1138,
+       "recursive-rule": {
+        "@poscopy_1.q.{ff}(x,y) :- \n   @magic.@poscopy_1.q.{ff}(),\n   @poscopy_1.q.{ff}(x,z),\n   base(z,y).": {
+         "0": {
+          "atom-frequency": {
+           "@new_@poscopy_1.q.{ff}(x,y) :- \n   @magic.@poscopy_1.q.{ff}(),\n   @delta_@poscopy_1.q.{ff}(x,z),\n   base(z,y).": {
+            "@delta_@poscopy_1.q.{ff}": {
+             "level": 1,
+             "num-tuples": 0
+            },
+            "base": {
+             "level": 2,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 16676,
+           "pre": 16676
+          },
+          "num-tuples": 1138,
+          "runtime": { "start": 172845661876, "end": 172845662101},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 172845661866, "end": 172845662112}
+      },
+      "1": {
+       "copytime": { "start": 172845662597, "end": 172845662765},
+       "maxRSS": {
+        "post": 16676,
+        "pre": 16676
+       },
+       "num-tuples": 1712,
+       "recursive-rule": {
+        "@poscopy_1.q.{ff}(x,y) :- \n   @magic.@poscopy_1.q.{ff}(),\n   @poscopy_1.q.{ff}(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 16676,
+           "pre": 16676
+          },
+          "num-tuples": 1712,
+          "runtime": { "start": 172845662233, "end": 172845662567},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 172845662223, "end": 172845662577}
+      },
+      "10": {
+       "copytime": { "start": 172845681274, "end": 172845682009},
+       "maxRSS": {
+        "post": 16676,
+        "pre": 16676
+       },
+       "num-tuples": 6245,
+       "recursive-rule": {
+        "@poscopy_1.q.{ff}(x,y) :- \n   @magic.@poscopy_1.q.{ff}(),\n   @poscopy_1.q.{ff}(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 16676,
+           "pre": 16676
+          },
+          "num-tuples": 6245,
+          "runtime": { "start": 172845679122, "end": 172845681231},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 172845679106, "end": 172845681245}
+      },
+      "11": {
+       "copytime": { "start": 172845683942, "end": 172845684596},
+       "maxRSS": {
+        "post": 16676,
+        "pre": 16676
+       },
+       "num-tuples": 5610,
+       "recursive-rule": {
+        "@poscopy_1.q.{ff}(x,y) :- \n   @magic.@poscopy_1.q.{ff}(),\n   @poscopy_1.q.{ff}(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 16676,
+           "pre": 16676
+          },
+          "num-tuples": 5610,
+          "runtime": { "start": 172845682030, "end": 172845683904},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 172845682016, "end": 172845683917}
+      },
+      "12": {
+       "copytime": { "start": 172845686536, "end": 172845687080},
+       "maxRSS": {
+        "post": 16676,
+        "pre": 16676
+       },
+       "num-tuples": 4964,
+       "recursive-rule": {
+        "@poscopy_1.q.{ff}(x,y) :- \n   @magic.@poscopy_1.q.{ff}(),\n   @poscopy_1.q.{ff}(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 16676,
+           "pre": 16676
+          },
+          "num-tuples": 4964,
+          "runtime": { "start": 172845684621, "end": 172845686497},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 172845684603, "end": 172845686509}
+      },
+      "13": {
+       "copytime": { "start": 172845688734, "end": 172845689223},
+       "maxRSS": {
+        "post": 16676,
+        "pre": 16676
+       },
+       "num-tuples": 4301,
+       "recursive-rule": {
+        "@poscopy_1.q.{ff}(x,y) :- \n   @magic.@poscopy_1.q.{ff}(),\n   @poscopy_1.q.{ff}(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 16676,
+           "pre": 16676
+          },
+          "num-tuples": 4301,
+          "runtime": { "start": 172845687102, "end": 172845688697},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 172845687086, "end": 172845688710}
+      },
+      "14": {
+       "copytime": { "start": 172845690767, "end": 172845691195},
+       "maxRSS": {
+        "post": 16676,
+        "pre": 16676
+       },
+       "num-tuples": 3725,
+       "recursive-rule": {
+        "@poscopy_1.q.{ff}(x,y) :- \n   @magic.@poscopy_1.q.{ff}(),\n   @poscopy_1.q.{ff}(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 16676,
+           "pre": 16676
+          },
+          "num-tuples": 3725,
+          "runtime": { "start": 172845689247, "end": 172845690729},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 172845689230, "end": 172845690741}
+      },
+      "15": {
+       "copytime": { "start": 172845692518, "end": 172845693035},
+       "maxRSS": {
+        "post": 16676,
+        "pre": 16676
+       },
+       "num-tuples": 3126,
+       "recursive-rule": {
+        "@poscopy_1.q.{ff}(x,y) :- \n   @magic.@poscopy_1.q.{ff}(),\n   @poscopy_1.q.{ff}(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 16676,
+           "pre": 16676
+          },
+          "num-tuples": 3126,
+          "runtime": { "start": 172845691215, "end": 172845692479},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 172845691201, "end": 172845692493}
+      },
+      "16": {
+       "copytime": { "start": 172845694137, "end": 172845694501},
+       "maxRSS": {
+        "post": 16676,
+        "pre": 16676
+       },
+       "num-tuples": 2649,
+       "recursive-rule": {
+        "@poscopy_1.q.{ff}(x,y) :- \n   @magic.@poscopy_1.q.{ff}(),\n   @poscopy_1.q.{ff}(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 16676,
+           "pre": 16676
+          },
+          "num-tuples": 2649,
+          "runtime": { "start": 172845693075, "end": 172845694094},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 172845693049, "end": 172845694108}
+      },
+      "17": {
+       "copytime": { "start": 172845695652, "end": 172845696415},
+       "maxRSS": {
+        "post": 16676,
+        "pre": 16676
+       },
+       "num-tuples": 2131,
+       "recursive-rule": {
+        "@poscopy_1.q.{ff}(x,y) :- \n   @magic.@poscopy_1.q.{ff}(),\n   @poscopy_1.q.{ff}(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 16676,
+           "pre": 16676
+          },
+          "num-tuples": 2131,
+          "runtime": { "start": 172845694522, "end": 172845695394},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 172845694507, "end": 172845695440}
+      },
+      "18": {
+       "copytime": { "start": 172845698267, "end": 172845698990},
+       "maxRSS": {
+        "post": 16676,
+        "pre": 16676
+       },
+       "num-tuples": 1576,
+       "recursive-rule": {
+        "@poscopy_1.q.{ff}(x,y) :- \n   @magic.@poscopy_1.q.{ff}(),\n   @poscopy_1.q.{ff}(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 16676,
+           "pre": 16676
+          },
+          "num-tuples": 1576,
+          "runtime": { "start": 172845696443, "end": 172845698227},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 172845696425, "end": 172845698245}
+      },
+      "19": {
+       "copytime": { "start": 172845699891, "end": 172845700235},
+       "maxRSS": {
+        "post": 16676,
+        "pre": 16676
+       },
+       "num-tuples": 1146,
+       "recursive-rule": {
+        "@poscopy_1.q.{ff}(x,y) :- \n   @magic.@poscopy_1.q.{ff}(),\n   @poscopy_1.q.{ff}(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 16676,
+           "pre": 16676
+          },
+          "num-tuples": 1146,
+          "runtime": { "start": 172845699019, "end": 172845699852},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 172845699004, "end": 172845699867}
+      },
+      "2": {
+       "copytime": { "start": 172845663337, "end": 172845663555},
+       "maxRSS": {
+        "post": 16676,
+        "pre": 16676
+       },
+       "num-tuples": 2459,
+       "recursive-rule": {
+        "@poscopy_1.q.{ff}(x,y) :- \n   @magic.@poscopy_1.q.{ff}(),\n   @poscopy_1.q.{ff}(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 16676,
+           "pre": 16676
+          },
+          "num-tuples": 2459,
+          "runtime": { "start": 172845662778, "end": 172845663308},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 172845662769, "end": 172845663318}
+      },
+      "20": {
+       "copytime": { "start": 172845700863, "end": 172845701016},
+       "maxRSS": {
+        "post": 16676,
+        "pre": 16676
+       },
+       "num-tuples": 788,
+       "recursive-rule": {
+        "@poscopy_1.q.{ff}(x,y) :- \n   @magic.@poscopy_1.q.{ff}(),\n   @poscopy_1.q.{ff}(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 16676,
+           "pre": 16676
+          },
+          "num-tuples": 788,
+          "runtime": { "start": 172845700276, "end": 172845700794},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 172845700244, "end": 172845700827}
+      },
+      "21": {
+       "copytime": { "start": 172845701339, "end": 172845701417},
+       "maxRSS": {
+        "post": 16676,
+        "pre": 16676
+       },
+       "num-tuples": 523,
+       "recursive-rule": {
+        "@poscopy_1.q.{ff}(x,y) :- \n   @magic.@poscopy_1.q.{ff}(),\n   @poscopy_1.q.{ff}(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 16676,
+           "pre": 16676
+          },
+          "num-tuples": 523,
+          "runtime": { "start": 172845701034, "end": 172845701303},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 172845701023, "end": 172845701314}
+      },
+      "22": {
+       "copytime": { "start": 172845701627, "end": 172845701688},
+       "maxRSS": {
+        "post": 16676,
+        "pre": 16676
+       },
+       "num-tuples": 340,
+       "recursive-rule": {
+        "@poscopy_1.q.{ff}(x,y) :- \n   @magic.@poscopy_1.q.{ff}(),\n   @poscopy_1.q.{ff}(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 16676,
+           "pre": 16676
+          },
+          "num-tuples": 340,
+          "runtime": { "start": 172845701433, "end": 172845701595},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 172845701422, "end": 172845701606}
+      },
+      "23": {
+       "copytime": { "start": 172845701835, "end": 172845701881},
+       "maxRSS": {
+        "post": 16676,
+        "pre": 16676
+       },
+       "num-tuples": 237,
+       "recursive-rule": {
+        "@poscopy_1.q.{ff}(x,y) :- \n   @magic.@poscopy_1.q.{ff}(),\n   @poscopy_1.q.{ff}(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 16676,
+           "pre": 16676
+          },
+          "num-tuples": 237,
+          "runtime": { "start": 172845701701, "end": 172845701805},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 172845701692, "end": 172845701815}
+      },
+      "24": {
+       "copytime": { "start": 172845701994, "end": 172845702018},
+       "maxRSS": {
+        "post": 16676,
+        "pre": 16676
+       },
+       "num-tuples": 150,
+       "recursive-rule": {
+        "@poscopy_1.q.{ff}(x,y) :- \n   @magic.@poscopy_1.q.{ff}(),\n   @poscopy_1.q.{ff}(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 16676,
+           "pre": 16676
+          },
+          "num-tuples": 150,
+          "runtime": { "start": 172845701895, "end": 172845701964},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 172845701885, "end": 172845701974}
+      },
+      "25": {
+       "copytime": { "start": 172845702106, "end": 172845702122},
+       "maxRSS": {
+        "post": 16676,
+        "pre": 16676
+       },
+       "num-tuples": 96,
+       "recursive-rule": {
+        "@poscopy_1.q.{ff}(x,y) :- \n   @magic.@poscopy_1.q.{ff}(),\n   @poscopy_1.q.{ff}(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 16676,
+           "pre": 16676
+          },
+          "num-tuples": 96,
+          "runtime": { "start": 172845702031, "end": 172845702078},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 172845702022, "end": 172845702087}
+      },
+      "26": {
+       "copytime": { "start": 172845702167, "end": 172845702176},
+       "maxRSS": {
+        "post": 16676,
+        "pre": 16676
+       },
+       "num-tuples": 51,
+       "recursive-rule": {
+        "@poscopy_1.q.{ff}(x,y) :- \n   @magic.@poscopy_1.q.{ff}(),\n   @poscopy_1.q.{ff}(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 16676,
+           "pre": 16676
+          },
+          "num-tuples": 51,
+          "runtime": { "start": 172845702126, "end": 172845702151},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 172845702125, "end": 172845702159}
+      },
+      "27": {
+       "copytime": { "start": 172845702215, "end": 172845702220},
+       "maxRSS": {
+        "post": 16676,
+        "pre": 16676
+       },
+       "num-tuples": 24,
+       "recursive-rule": {
+        "@poscopy_1.q.{ff}(x,y) :- \n   @magic.@poscopy_1.q.{ff}(),\n   @poscopy_1.q.{ff}(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 16676,
+           "pre": 16676
+          },
+          "num-tuples": 24,
+          "runtime": { "start": 172845702179, "end": 172845702191},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 172845702178, "end": 172845702196}
+      },
+      "28": {
+       "copytime": { "start": 172845702259, "end": 172845702262},
+       "maxRSS": {
+        "post": 16676,
+        "pre": 16676
+       },
+       "num-tuples": 13,
+       "recursive-rule": {
+        "@poscopy_1.q.{ff}(x,y) :- \n   @magic.@poscopy_1.q.{ff}(),\n   @poscopy_1.q.{ff}(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 16676,
+           "pre": 16676
+          },
+          "num-tuples": 13,
+          "runtime": { "start": 172845702224, "end": 172845702231},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 172845702223, "end": 172845702239}
+      },
+      "29": {
+       "copytime": { "start": 172845702298, "end": 172845702300},
+       "maxRSS": {
+        "post": 16676,
+        "pre": 16676
+       },
+       "num-tuples": 11,
+       "recursive-rule": {
+        "@poscopy_1.q.{ff}(x,y) :- \n   @magic.@poscopy_1.q.{ff}(),\n   @poscopy_1.q.{ff}(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 16676,
+           "pre": 16676
+          },
+          "num-tuples": 11,
+          "runtime": { "start": 172845702267, "end": 172845702272},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 172845702266, "end": 172845702278}
+      },
+      "3": {
+       "copytime": { "start": 172845664412, "end": 172845664711},
+       "maxRSS": {
+        "post": 16676,
+        "pre": 16676
+       },
+       "num-tuples": 3390,
+       "recursive-rule": {
+        "@poscopy_1.q.{ff}(x,y) :- \n   @magic.@poscopy_1.q.{ff}(),\n   @poscopy_1.q.{ff}(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 16676,
+           "pre": 16676
+          },
+          "num-tuples": 3390,
+          "runtime": { "start": 172845663569, "end": 172845664381},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 172845663560, "end": 172845664391}
+      },
+      "30": {
+       "copytime": { "start": 172845702325, "end": 172845702326},
+       "maxRSS": {
+        "post": 16676,
+        "pre": 16676
+       },
+       "num-tuples": 8,
+       "recursive-rule": {
+        "@poscopy_1.q.{ff}(x,y) :- \n   @magic.@poscopy_1.q.{ff}(),\n   @poscopy_1.q.{ff}(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 16676,
+           "pre": 16676
+          },
+          "num-tuples": 8,
+          "runtime": { "start": 172845702304, "end": 172845702309},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 172845702304, "end": 172845702317}
+      },
+      "31": {
+       "copytime": { "start": 172845702355, "end": 172845702357},
+       "maxRSS": {
+        "post": 16676,
+        "pre": 16676
+       },
+       "num-tuples": 3,
+       "recursive-rule": {
+        "@poscopy_1.q.{ff}(x,y) :- \n   @magic.@poscopy_1.q.{ff}(),\n   @poscopy_1.q.{ff}(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 16676,
+           "pre": 16676
+          },
+          "num-tuples": 3,
+          "runtime": { "start": 172845702329, "end": 172845702331},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 172845702329, "end": 172845702336}
+      },
+      "32": {
+       "copytime": { "start": 172845702390, "end": 172845702391},
+       "maxRSS": {
+        "post": 16676,
+        "pre": 16676
+       },
+       "num-tuples": 2,
+       "recursive-rule": {
+        "@poscopy_1.q.{ff}(x,y) :- \n   @magic.@poscopy_1.q.{ff}(),\n   @poscopy_1.q.{ff}(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 16676,
+           "pre": 16676
+          },
+          "num-tuples": 2,
+          "runtime": { "start": 172845702361, "end": 172845702363},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 172845702360, "end": 172845702371}
+      },
+      "33": {
+       "maxRSS": {
+        "post": 16676,
+        "pre": 16676
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "@poscopy_1.q.{ff}(x,y) :- \n   @magic.@poscopy_1.q.{ff}(),\n   @poscopy_1.q.{ff}(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 16676,
+           "pre": 16676
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 172845702395, "end": 172845702396},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 172845702394, "end": 172845702403}
+      },
+      "4": {
+       "copytime": { "start": 172845665848, "end": 172845666277},
+       "maxRSS": {
+        "post": 16676,
+        "pre": 16676
+       },
+       "num-tuples": 4355,
+       "recursive-rule": {
+        "@poscopy_1.q.{ff}(x,y) :- \n   @magic.@poscopy_1.q.{ff}(),\n   @poscopy_1.q.{ff}(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 16676,
+           "pre": 16676
+          },
+          "num-tuples": 4355,
+          "runtime": { "start": 172845664726, "end": 172845665816},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 172845664716, "end": 172845665827}
+      },
+      "5": {
+       "copytime": { "start": 172845667676, "end": 172845668246},
+       "maxRSS": {
+        "post": 16676,
+        "pre": 16676
+       },
+       "num-tuples": 5288,
+       "recursive-rule": {
+        "@poscopy_1.q.{ff}(x,y) :- \n   @magic.@poscopy_1.q.{ff}(),\n   @poscopy_1.q.{ff}(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 16676,
+           "pre": 16676
+          },
+          "num-tuples": 5288,
+          "runtime": { "start": 172845666292, "end": 172845667641},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 172845666282, "end": 172845667653}
+      },
+      "6": {
+       "copytime": { "start": 172845669887, "end": 172845670483},
+       "maxRSS": {
+        "post": 16676,
+        "pre": 16676
+       },
+       "num-tuples": 6117,
+       "recursive-rule": {
+        "@poscopy_1.q.{ff}(x,y) :- \n   @magic.@poscopy_1.q.{ff}(),\n   @poscopy_1.q.{ff}(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 16676,
+           "pre": 16676
+          },
+          "num-tuples": 6117,
+          "runtime": { "start": 172845668267, "end": 172845669844},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 172845668255, "end": 172845669858}
+      },
+      "7": {
+       "copytime": { "start": 172845672441, "end": 172845673116},
+       "maxRSS": {
+        "post": 16676,
+        "pre": 16676
+       },
+       "num-tuples": 6627,
+       "recursive-rule": {
+        "@poscopy_1.q.{ff}(x,y) :- \n   @magic.@poscopy_1.q.{ff}(),\n   @poscopy_1.q.{ff}(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 16676,
+           "pre": 16676
+          },
+          "num-tuples": 6627,
+          "runtime": { "start": 172845670506, "end": 172845672400},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 172845670491, "end": 172845672412}
+      },
+      "8": {
+       "copytime": { "start": 172845675339, "end": 172845676063},
+       "maxRSS": {
+        "post": 16676,
+        "pre": 16676
+       },
+       "num-tuples": 6787,
+       "recursive-rule": {
+        "@poscopy_1.q.{ff}(x,y) :- \n   @magic.@poscopy_1.q.{ff}(),\n   @poscopy_1.q.{ff}(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 16676,
+           "pre": 16676
+          },
+          "num-tuples": 6787,
+          "runtime": { "start": 172845673138, "end": 172845675312},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 172845673124, "end": 172845675325}
+      },
+      "9": {
+       "copytime": { "start": 172845678401, "end": 172845679099},
+       "maxRSS": {
+        "post": 16676,
+        "pre": 16676
+       },
+       "num-tuples": 6601,
+       "recursive-rule": {
+        "@poscopy_1.q.{ff}(x,y) :- \n   @magic.@poscopy_1.q.{ff}(),\n   @poscopy_1.q.{ff}(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 16676,
+           "pre": 16676
+          },
+          "num-tuples": 6601,
+          "runtime": { "start": 172845676081, "end": 172845678350},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 172845676071, "end": 172845678377}
+      }
+     },
+     "maxRSS": {
+      "post": 16676,
+      "pre": 16676
+     },
+     "non-recursive-rule": {
+      "@poscopy_1.q.{ff}(x,y) :- \n   @magic.@poscopy_1.q.{ff}(),\n   base(x,y).": {
+       "atom-frequency": {
+        "@poscopy_1.q.{ff}(x,y) :- \n   @magic.@poscopy_1.q.{ff}(),\n   base(x,y).": {
+         "base": {
+          "level": 1,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 16676,
+        "pre": 16676
+       },
+       "num-tuples": 750,
+       "runtime": { "start": 172845661781, "end": 172845661820},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 750,
+     "runtime": { "start": 172845661770, "end": 172845661828},
+     "source-locator": " [1:1-1:1]"
+    },
+    "base": {
+     "loadtime": { "start": 172845661294, "end": 172845661536},
+     "num-tuples": 750,
+     "reads": 0,
+     "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/culprit_cycle.dl [16:7-16:11]"
+    },
+    "blocked": {
+     "loadtime": { "start": 172845661544, "end": 172845661583},
+     "num-tuples": 118,
+     "reads": 82943,
+     "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/culprit_cycle.dl [18:7-18:14]"
+    },
+    "e": {
+     "loadtime": { "start": 172845661589, "end": 172845661764},
+     "num-tuples": 750,
+     "reads": 0,
+     "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/culprit_cycle.dl [17:7-17:8]"
+    },
+    "out": {
+     "maxRSS": {
+      "post": 16676,
+      "pre": 16676
+     },
+     "non-recursive-rule": {
+      "out(y) :- \n   p.{bf}(@abdul0,y),\n   @abdul0 = 1.": {
+       "atom-frequency": {
+        "out(y) :- \n   p.{bf}(@abdul0,y),\n   @abdul0 = 1.": {
+         "p.{bf}": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 16676,
+        "pre": 16676
+       },
+       "num-tuples": 3,
+       "runtime": { "start": 172845705947, "end": 172845705949},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 3,
+     "reads": 0,
+     "runtime": { "start": 172845705938, "end": 172845705956},
+     "savetime": { "start": 172845705961, "end": 172845706197},
+     "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/culprit_cycle.dl [31:7-31:10]"
+    },
+    "p.{bf}": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 172845705532, "end": 172845705533},
+       "maxRSS": {
+        "post": 16676,
+        "pre": 16676
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "p.{bf}(x,y) :- \n   @magic.p.{bf}(x),\n   p.{bf}(x,z),\n   !@neglabel.s(z),\n   q.{bf}(z,y).": {
+         "0": {
+          "atom-frequency": {
+           "@new_p.{bf}(x,y) :- \n   @magic.p.{bf}(x),\n   @delta_p.{bf}(x,z),\n   !@neglabel.s(z),\n   q.{bf}(z,y).": {
+            "@delta_p.{bf}": {
+             "level": 1,
+             "num-tuples": 0
+            },
+            "@magic.p.{bf}": {
+             "level": 0,
+             "num-tuples": 0
+            },
+            "q.{bf}": {
+             "level": 2,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 16676,
+           "pre": 16676
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 172845705459, "end": 172845705460},
+          "source-locator": " [1:1-1:1]"
+         },
+         "1": {
+          "atom-frequency": {
+           "@new_p.{bf}(x,y) :- \n   @magic.p.{bf}(x),\n   p.{bf}(x,z),\n   !@neglabel.s(z),\n   @delta_q.{bf}(z,y).": {
+            "@delta_q.{bf}": {
+             "level": 2,
+             "num-tuples": 0
+            },
+            "@magic.p.{bf}": {
+             "level": 0,
+             "num-tuples": 0
+            },
+            "p.{bf}": {
+             "level": 1,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 16676,
+           "pre": 16676
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 172845705467, "end": 172845705467},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 172845705458, "end": 172845705472}
+      },
+      "1": {
+       "copytime": { "start": 172845705625, "end": 172845705625},
+       "maxRSS": {
+        "post": 16676,
+        "pre": 16676
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "p.{bf}(x,y) :- \n   @magic.p.{bf}(x),\n   p.{bf}(x,z),\n   !@neglabel.s(z),\n   q.{bf}(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 16676,
+           "pre": 16676
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 172845705562, "end": 172845705563},
+          "source-locator": " [1:1-1:1]"
+         },
+         "1": {
+          "maxRSS": {
+           "post": 16676,
+           "pre": 16676
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 172845705570, "end": 172845705571},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 172845705552, "end": 172845705576}
+      },
+      "2": {
+       "copytime": { "start": 172845705728, "end": 172845705738},
+       "maxRSS": {
+        "post": 16676,
+        "pre": 16676
+       },
+       "num-tuples": 1,
+       "recursive-rule": {
+        "p.{bf}(x,y) :- \n   @magic.p.{bf}(x),\n   p.{bf}(x,z),\n   !@neglabel.s(z),\n   q.{bf}(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 16676,
+           "pre": 16676
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 172845705652, "end": 172845705652},
+          "source-locator": " [1:1-1:1]"
+         },
+         "1": {
+          "maxRSS": {
+           "post": 16676,
+           "pre": 16676
+          },
+          "num-tuples": 1,
+          "runtime": { "start": 172845705657, "end": 172845705669},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 172845705651, "end": 172845705676}
+      },
+      "3": {
+       "copytime": { "start": 172845705833, "end": 172845705833},
+       "maxRSS": {
+        "post": 16676,
+        "pre": 16676
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "p.{bf}(x,y) :- \n   @magic.p.{bf}(x),\n   p.{bf}(x,z),\n   !@neglabel.s(z),\n   q.{bf}(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 16676,
+           "pre": 16676
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 172845705768, "end": 172845705770},
+          "source-locator": " [1:1-1:1]"
+         },
+         "1": {
+          "maxRSS": {
+           "post": 16676,
+           "pre": 16676
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 172845705777, "end": 172845705778},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 172845705759, "end": 172845705783}
+      },
+      "4": {
+       "maxRSS": {
+        "post": 16676,
+        "pre": 16676
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "p.{bf}(x,y) :- \n   @magic.p.{bf}(x),\n   p.{bf}(x,z),\n   !@neglabel.s(z),\n   q.{bf}(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 16676,
+           "pre": 16676
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 172845705860, "end": 172845705861},
+          "source-locator": " [1:1-1:1]"
+         },
+         "1": {
+          "maxRSS": {
+           "post": 16676,
+           "pre": 16676
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 172845705866, "end": 172845705867},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 172845705860, "end": 172845705870}
+      }
+     },
+     "maxRSS": {
+      "post": 16676,
+      "pre": 16676
+     },
+     "non-recursive-rule": {
+      "p.{bf}(x,y) :- \n   @magic.p.{bf}(x),\n   e(x,y).": {
+       "atom-frequency": {
+        "p.{bf}(x,y) :- \n   @magic.p.{bf}(x),\n   e(x,y).": {
+         "@magic.p.{bf}": {
+          "level": 0,
+          "num-tuples": 0
+         },
+         "e": {
+          "level": 1,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 16676,
+        "pre": 16676
+       },
+       "num-tuples": 2,
+       "runtime": { "start": 172845705410, "end": 172845705412},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 2,
+     "reads": 1,
+     "runtime": { "start": 172845705395, "end": 172845705422},
+     "source-locator": " [1:1-1:1]"
+    },
+    "q.{bf}": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 172845705536, "end": 172845705536},
+       "maxRSS": {
+        "post": 16676,
+        "pre": 16676
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "q.{bf}(x,y) :- \n   @magic.q.{bf}(x),\n   base(x,y).": {
+         "0": {
+          "atom-frequency": {
+           "@new_q.{bf}(x,y) :- \n   @delta_@magic.q.{bf}(x),\n   base(x,y).": {
+            "@delta_@magic.q.{bf}": {
+             "level": 0,
+             "num-tuples": 0
+            },
+            "base": {
+             "level": 1,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 16676,
+           "pre": 16676
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 172845705476, "end": 172845705476},
+          "source-locator": " [1:1-1:1]"
+         }
+        },
+        "q.{bf}(x,y) :- \n   @magic.q.{bf}(x),\n   q.{bf}(x,z),\n   base(z,y).": {
+         "0": {
+          "atom-frequency": {
+           "@new_q.{bf}(x,y) :- \n   @delta_@magic.q.{bf}(x),\n   q.{bf}(x,z),\n   base(z,y).": {
+            "@delta_@magic.q.{bf}": {
+             "level": 0,
+             "num-tuples": 0
+            },
+            "base": {
+             "level": 2,
+             "num-tuples": 0
+            },
+            "q.{bf}": {
+             "level": 1,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 16676,
+           "pre": 16676
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 172845705481, "end": 172845705482},
+          "source-locator": " [1:1-1:1]"
+         },
+         "1": {
+          "atom-frequency": {
+           "@new_q.{bf}(x,y) :- \n   @magic.q.{bf}(x),\n   @delta_q.{bf}(x,z),\n   base(z,y).": {
+            "@delta_q.{bf}": {
+             "level": 1,
+             "num-tuples": 0
+            },
+            "@magic.q.{bf}": {
+             "level": 0,
+             "num-tuples": 0
+            },
+            "base": {
+             "level": 2,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 16676,
+           "pre": 16676
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 172845705487, "end": 172845705488},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 172845705475, "end": 172845705492}
+      },
+      "1": {
+       "copytime": { "start": 172845705627, "end": 172845705635},
+       "maxRSS": {
+        "post": 16676,
+        "pre": 16676
+       },
+       "num-tuples": 1,
+       "recursive-rule": {
+        "q.{bf}(x,y) :- \n   @magic.q.{bf}(x),\n   base(x,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 16676,
+           "pre": 16676
+          },
+          "num-tuples": 1,
+          "runtime": { "start": 172845705589, "end": 172845705591},
+          "source-locator": " [1:1-1:1]"
+         }
+        },
+        "q.{bf}(x,y) :- \n   @magic.q.{bf}(x),\n   q.{bf}(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 16676,
+           "pre": 16676
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 172845705599, "end": 172845705599},
+          "source-locator": " [1:1-1:1]"
+         },
+         "1": {
+          "maxRSS": {
+           "post": 16676,
+           "pre": 16676
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 172845705604, "end": 172845705605},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 172845705580, "end": 172845705609}
+      },
+      "2": {
+       "copytime": { "start": 172845705743, "end": 172845705743},
+       "maxRSS": {
+        "post": 16676,
+        "pre": 16676
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "q.{bf}(x,y) :- \n   @magic.q.{bf}(x),\n   base(x,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 16676,
+           "pre": 16676
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 172845705681, "end": 172845705682},
+          "source-locator": " [1:1-1:1]"
+         }
+        },
+        "q.{bf}(x,y) :- \n   @magic.q.{bf}(x),\n   q.{bf}(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 16676,
+           "pre": 16676
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 172845705687, "end": 172845705688},
+          "source-locator": " [1:1-1:1]"
+         },
+         "1": {
+          "maxRSS": {
+           "post": 16676,
+           "pre": 16676
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 172845705692, "end": 172845705693},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 172845705680, "end": 172845705698}
+      },
+      "3": {
+       "copytime": { "start": 172845705835, "end": 172845705836},
+       "maxRSS": {
+        "post": 16676,
+        "pre": 16676
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "q.{bf}(x,y) :- \n   @magic.q.{bf}(x),\n   base(x,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 16676,
+           "pre": 16676
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 172845705796, "end": 172845705797},
+          "source-locator": " [1:1-1:1]"
+         }
+        },
+        "q.{bf}(x,y) :- \n   @magic.q.{bf}(x),\n   q.{bf}(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 16676,
+           "pre": 16676
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 172845705804, "end": 172845705805},
+          "source-locator": " [1:1-1:1]"
+         },
+         "1": {
+          "maxRSS": {
+           "post": 16676,
+           "pre": 16676
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 172845705810, "end": 172845705811},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 172845705787, "end": 172845705815}
+      },
+      "4": {
+       "maxRSS": {
+        "post": 16676,
+        "pre": 16676
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "q.{bf}(x,y) :- \n   @magic.q.{bf}(x),\n   base(x,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 16676,
+           "pre": 16676
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 172845705874, "end": 172845705875},
+          "source-locator": " [1:1-1:1]"
+         }
+        },
+        "q.{bf}(x,y) :- \n   @magic.q.{bf}(x),\n   q.{bf}(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 16676,
+           "pre": 16676
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 172845705879, "end": 172845705889},
+          "source-locator": " [1:1-1:1]"
+         },
+         "1": {
+          "maxRSS": {
+           "post": 16676,
+           "pre": 16676
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 172845705896, "end": 172845705897},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 172845705874, "end": 172845705901}
+      }
+     },
+     "num-tuples": 0,
+     "reads": 1,
+     "source-locator": " [1:1-1:1]"
+    }
+   },
+   "runtime": { "start": 172845661229, "end": 172845706203},
+   "starttime": { "time": 172845661186},
+   "usage": {
+    "timepoint": {
+     "172845661200": {
+      "maxRSS": 16676,
+      "systemtime": 2263,
+      "usertime": 2263
+     },
+     "172845661249": {
+      "maxRSS": 16676,
+      "systemtime": 2881,
+      "usertime": 2881
+     },
+     "172845661282": {
+      "maxRSS": 16676,
+      "systemtime": 2902,
+      "usertime": 2902
+     },
+     "172845661308": {
+      "maxRSS": 16676,
+      "systemtime": 2912,
+      "usertime": 2912
+     },
+     "172845661629": {
+      "maxRSS": 16676,
+      "systemtime": 3063,
+      "usertime": 3063
+     },
+     "172845661792": {
+      "maxRSS": 16676,
+      "systemtime": 3166,
+      "usertime": 3166
+     },
+     "172845661888": {
+      "maxRSS": 16676,
+      "systemtime": 3221,
+      "usertime": 3221
+     },
+     "172845662146": {
+      "maxRSS": 16676,
+      "systemtime": 3360,
+      "usertime": 3360
+     },
+     "172845662238": {
+      "maxRSS": 16676,
+      "systemtime": 3415,
+      "usertime": 3415
+     },
+     "172845662597": {
+      "maxRSS": 16676,
+      "systemtime": 3598,
+      "usertime": 3598
+     },
+     "172845662783": {
+      "maxRSS": 16676,
+      "systemtime": 3696,
+      "usertime": 3696
+     },
+     "172845663337": {
+      "maxRSS": 16676,
+      "systemtime": 3976,
+      "usertime": 3976
+     },
+     "172845663574": {
+      "maxRSS": 16676,
+      "systemtime": 4099,
+      "usertime": 4099
+     },
+     "172845664415": {
+      "maxRSS": 16676,
+      "systemtime": 4099,
+      "usertime": 4952
+     },
+     "172845664730": {
+      "maxRSS": 16676,
+      "systemtime": 4099,
+      "usertime": 5277
+     },
+     "172845665807": {
+      "maxRSS": 16676,
+      "systemtime": 4099,
+      "usertime": 5290
+     },
+     "172845665851": {
+      "maxRSS": 16676,
+      "systemtime": 4099,
+      "usertime": 6447
+     },
+     "172845666302": {
+      "maxRSS": 16676,
+      "systemtime": 4099,
+      "usertime": 6905
+     },
+     "172845667411": {
+      "maxRSS": 16676,
+      "systemtime": 4099,
+      "usertime": 6919
+     },
+     "172845667677": {
+      "maxRSS": 16676,
+      "systemtime": 4138,
+      "usertime": 8276
+     },
+     "172845668277": {
+      "maxRSS": 16676,
+      "systemtime": 4138,
+      "usertime": 8881
+     },
+     "172845669343": {
+      "maxRSS": 16676,
+      "systemtime": 4138,
+      "usertime": 8889
+     },
+     "172845669919": {
+      "maxRSS": 16676,
+      "systemtime": 4138,
+      "usertime": 10529
+     },
+     "172845670541": {
+      "maxRSS": 16676,
+      "systemtime": 4138,
+      "usertime": 11168
+     },
+     "172845671651": {
+      "maxRSS": 16676,
+      "systemtime": 4138,
+      "usertime": 11185
+     },
+     "172845672475": {
+      "maxRSS": 16676,
+      "systemtime": 4138,
+      "usertime": 13135
+     },
+     "172845673179": {
+      "maxRSS": 16676,
+      "systemtime": 4138,
+      "usertime": 13859
+     },
+     "172845674252": {
+      "maxRSS": 16676,
+      "systemtime": 4138,
+      "usertime": 13870
+     },
+     "172845675333": {
+      "maxRSS": 16676,
+      "systemtime": 4138,
+      "usertime": 16094
+     },
+     "172845675345": {
+      "maxRSS": 16676,
+      "systemtime": 4138,
+      "usertime": 16107
+     },
+     "172845676089": {
+      "maxRSS": 16676,
+      "systemtime": 4138,
+      "usertime": 16856
+     },
+     "172845677188": {
+      "maxRSS": 16676,
+      "systemtime": 4138,
+      "usertime": 16865
+     },
+     "172845678304": {
+      "maxRSS": 16676,
+      "systemtime": 4138,
+      "usertime": 16889
+     },
+     "172845678401": {
+      "maxRSS": 16676,
+      "systemtime": 4138,
+      "usertime": 19212
+     },
+     "172845679159": {
+      "maxRSS": 16676,
+      "systemtime": 4138,
+      "usertime": 19959
+     },
+     "172845680248": {
+      "maxRSS": 16676,
+      "systemtime": 4138,
+      "usertime": 20883
+     },
+     "172845681281": {
+      "maxRSS": 16676,
+      "systemtime": 4138,
+      "usertime": 22146
+     },
+     "172845682073": {
+      "maxRSS": 16676,
+      "systemtime": 4138,
+      "usertime": 22929
+     },
+     "172845683152": {
+      "maxRSS": 16676,
+      "systemtime": 4138,
+      "usertime": 22946
+     },
+     "172845683940": {
+      "maxRSS": 16676,
+      "systemtime": 4142,
+      "usertime": 24856
+     },
+     "172845684653": {
+      "maxRSS": 16676,
+      "systemtime": 4143,
+      "usertime": 25559
+     },
+     "172845685723": {
+      "maxRSS": 16676,
+      "systemtime": 4143,
+      "usertime": 25569
+     },
+     "172845686567": {
+      "maxRSS": 16676,
+      "systemtime": 4143,
+      "usertime": 27502
+     },
+     "172845687139": {
+      "maxRSS": 16676,
+      "systemtime": 4143,
+      "usertime": 28085
+     },
+     "172845688203": {
+      "maxRSS": 16676,
+      "systemtime": 4143,
+      "usertime": 28992
+     },
+     "172845688733": {
+      "maxRSS": 16676,
+      "systemtime": 4143,
+      "usertime": 29727
+     },
+     "172845689264": {
+      "maxRSS": 16676,
+      "systemtime": 4143,
+      "usertime": 30258
+     },
+     "172845690371": {
+      "maxRSS": 16676,
+      "systemtime": 4143,
+      "usertime": 30279
+     },
+     "172845690795": {
+      "maxRSS": 16676,
+      "systemtime": 4143,
+      "usertime": 31819
+     },
+     "172845691227": {
+      "maxRSS": 16676,
+      "systemtime": 4143,
+      "usertime": 32282
+     },
+     "172845692305": {
+      "maxRSS": 16676,
+      "systemtime": 4143,
+      "usertime": 33084
+     },
+     "172845692519": {
+      "maxRSS": 16676,
+      "systemtime": 4143,
+      "usertime": 33617
+     },
+     "172845693082": {
+      "maxRSS": 16676,
+      "systemtime": 4143,
+      "usertime": 34188
+     },
+     "172845694143": {
+      "maxRSS": 16676,
+      "systemtime": 4143,
+      "usertime": 35267
+     },
+     "172845694631": {
+      "maxRSS": 16676,
+      "systemtime": 4143,
+      "usertime": 35669
+     },
+     "172845695463": {
+      "maxRSS": 16676,
+      "systemtime": 4143,
+      "usertime": 36722
+     },
+     "172845695686": {
+      "maxRSS": 16676,
+      "systemtime": 4143,
+      "usertime": 37032
+     },
+     "172845696469": {
+      "maxRSS": 16676,
+      "systemtime": 4143,
+      "usertime": 37843
+     },
+     "172845697617": {
+      "maxRSS": 16676,
+      "systemtime": 4143,
+      "usertime": 37874
+     },
+     "172845698283": {
+      "maxRSS": 16676,
+      "systemtime": 4143,
+      "usertime": 39728
+     },
+     "172845699023": {
+      "maxRSS": 16676,
+      "systemtime": 4143,
+      "usertime": 40509
+     },
+     "172845699910": {
+      "maxRSS": 16676,
+      "systemtime": 4143,
+      "usertime": 41407
+     },
+     "172845700267": {
+      "maxRSS": 16676,
+      "systemtime": 4143,
+      "usertime": 41829
+     },
+     "172845700851": {
+      "maxRSS": 16676,
+      "systemtime": 4143,
+      "usertime": 42408
+     },
+     "172845700869": {
+      "maxRSS": 16676,
+      "systemtime": 4143,
+      "usertime": 42447
+     },
+     "172845701041": {
+      "maxRSS": 16676,
+      "systemtime": 4143,
+      "usertime": 42625
+     },
+     "172845701340": {
+      "maxRSS": 16676,
+      "systemtime": 4143,
+      "usertime": 42942
+     },
+     "172845701440": {
+      "maxRSS": 16676,
+      "systemtime": 4143,
+      "usertime": 43049
+     },
+     "172845701631": {
+      "maxRSS": 16676,
+      "systemtime": 4143,
+      "usertime": 43256
+     },
+     "172845701748": {
+      "maxRSS": 16676,
+      "systemtime": 4143,
+      "usertime": 43342
+     },
+     "172845701835": {
+      "maxRSS": 16676,
+      "systemtime": 4143,
+      "usertime": 43487
+     },
+     "172845701902": {
+      "maxRSS": 16676,
+      "systemtime": 4143,
+      "usertime": 43556
+     },
+     "172845701996": {
+      "maxRSS": 16676,
+      "systemtime": 4143,
+      "usertime": 43668
+     },
+     "172845702035": {
+      "maxRSS": 16676,
+      "systemtime": 4143,
+      "usertime": 43716
+     },
+     "172845702169": {
+      "maxRSS": 16676,
+      "systemtime": 4143,
+      "usertime": 43885
+     },
+     "172845702234": {
+      "maxRSS": 16676,
+      "systemtime": 4143,
+      "usertime": 43961
+     },
+     "172845702263": {
+      "maxRSS": 16676,
+      "systemtime": 4143,
+      "usertime": 44005
+     },
+     "172845702310": {
+      "maxRSS": 16676,
+      "systemtime": 4143,
+      "usertime": 44071
+     },
+     "172845702358": {
+      "maxRSS": 16676,
+      "systemtime": 4143,
+      "usertime": 44152
+     },
+     "172845702393": {
+      "maxRSS": 16676,
+      "systemtime": 4143,
+      "usertime": 44196
+     },
+     "172845702424": {
+      "maxRSS": 16676,
+      "systemtime": 4143,
+      "usertime": 44231
+     },
+     "172845703496": {
+      "maxRSS": 16676,
+      "systemtime": 4143,
+      "usertime": 44251
+     },
+     "172845704574": {
+      "maxRSS": 16676,
+      "systemtime": 4143,
+      "usertime": 45845
+     },
+     "172845705418": {
+      "maxRSS": 16676,
+      "systemtime": 4143,
+      "usertime": 47277
+     },
+     "172845705457": {
+      "maxRSS": 16676,
+      "systemtime": 4143,
+      "usertime": 47332
+     },
+     "172845705510": {
+      "maxRSS": 16676,
+      "systemtime": 4143,
+      "usertime": 47422
+     },
+     "172845705532": {
+      "maxRSS": 16676,
+      "systemtime": 4143,
+      "usertime": 47454
+     },
+     "172845705544": {
+      "maxRSS": 16676,
+      "systemtime": 4143,
+      "usertime": 47472
+     },
+     "172845705568": {
+      "maxRSS": 16676,
+      "systemtime": 4143,
+      "usertime": 47501
+     },
+     "172845705607": {
+      "maxRSS": 16676,
+      "systemtime": 4143,
+      "usertime": 47565
+     },
+     "172845705616": {
+      "maxRSS": 16676,
+      "systemtime": 4143,
+      "usertime": 47585
+     },
+     "172845705619": {
+      "maxRSS": 16676,
+      "systemtime": 4143,
+      "usertime": 47591
+     },
+     "172845705624": {
+      "maxRSS": 16676,
+      "systemtime": 4143,
+      "usertime": 47599
+     },
+     "172845705649": {
+      "maxRSS": 16676,
+      "systemtime": 4143,
+      "usertime": 47629
+     },
+     "172845705676": {
+      "maxRSS": 16676,
+      "systemtime": 4143,
+      "usertime": 47667
+     },
+     "172845705721": {
+      "maxRSS": 16676,
+      "systemtime": 4143,
+      "usertime": 47734
+     },
+     "172845705743": {
+      "maxRSS": 16676,
+      "systemtime": 4143,
+      "usertime": 47766
+     },
+     "172845705749": {
+      "maxRSS": 16676,
+      "systemtime": 4143,
+      "usertime": 47778
+     },
+     "172845705774": {
+      "maxRSS": 16676,
+      "systemtime": 4143,
+      "usertime": 47806
+     },
+     "172845705800": {
+      "maxRSS": 16676,
+      "systemtime": 4143,
+      "usertime": 47843
+     },
+     "172845705830": {
+      "maxRSS": 16676,
+      "systemtime": 4143,
+      "usertime": 47903
+     },
+     "172845705853": {
+      "maxRSS": 16676,
+      "systemtime": 4143,
+      "usertime": 47931
+     },
+     "172845705893": {
+      "maxRSS": 16676,
+      "systemtime": 4143,
+      "usertime": 47998
+     },
+     "172845705924": {
+      "maxRSS": 16676,
+      "systemtime": 4143,
+      "usertime": 48041
+     },
+     "172845705954": {
+      "maxRSS": 16676,
+      "systemtime": 4143,
+      "usertime": 48077
+     },
+     "172845705963": {
+      "maxRSS": 16676,
+      "systemtime": 4143,
+      "usertime": 48099
+     }
+    }
+   }
+  }
+ }
+}

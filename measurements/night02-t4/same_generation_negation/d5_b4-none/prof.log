@@ -1,0 +1,1500 @@
+{
+ "root": {
+  "program": {
+   "configuration": {
+    "": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/same_generation_negation.dl",
+    "fact-dir": "/root/compiler/fixtures/benchmark-family/same_generation_negation/d5_b4",
+    "include-dir": ".",
+    "jobs": "1",
+    "libraries": "functors",
+    "library-dir": ".",
+    "output-dir": "/root/compiler/measurements/night02-t4/same_generation_negation/d5_b4-none",
+    "profile": "prof.log",
+    "relationCount": "5",
+    "ruleCount": "6",
+    "version": "2.5",
+    "warn": "all",
+    "wno": "none"
+   },
+   "relation": {
+    "notsg": {
+     "maxRSS": {
+      "post": 28572,
+      "pre": 28572
+     },
+     "non-recursive-rule": {
+      "notsg(x,y) :- \n   person(x),\n   person(y),\n   !sg(x,y).": {
+       "atom-frequency": {
+        "notsg(x,y) :- \n   person(x),\n   person(y),\n   !sg(x,y).": {
+         "person": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 28572,
+        "pre": 28572
+       },
+       "num-tuples": 285716,
+       "runtime": { "start": 172491288152, "end": 172491327036},
+       "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/same_generation_negation.dl [31:1-31:46]"
+      }
+     },
+     "num-tuples": 285716,
+     "reads": 0,
+     "runtime": { "start": 172491288133, "end": 172491327118},
+     "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/same_generation_negation.dl [30:7-30:12]"
+    },
+    "parent": {
+     "loadtime": { "start": 172491054840, "end": 172491055062},
+     "num-tuples": 839,
+     "reads": 0,
+     "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/same_generation_negation.dl [20:7-20:13]"
+    },
+    "person": {
+     "loadtime": { "start": 172491055072, "end": 172491055176},
+     "num-tuples": 840,
+     "reads": 0,
+     "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/same_generation_negation.dl [23:7-23:13]"
+    },
+    "q_notsg": {
+     "maxRSS": {
+      "post": 28572,
+      "pre": 28572
+     },
+     "non-recursive-rule": {
+      "q_notsg(y) :- \n   notsg(0,y).": {
+       "atom-frequency": {
+        "q_notsg(y) :- \n   notsg(0,y).": {
+         "notsg": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 28572,
+        "pre": 28572
+       },
+       "num-tuples": 839,
+       "runtime": { "start": 172491328232, "end": 172491328267},
+       "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/same_generation_negation.dl [35:1-35:26]"
+      }
+     },
+     "num-tuples": 839,
+     "reads": 0,
+     "runtime": { "start": 172491328219, "end": 172491328278},
+     "savetime": { "start": 172491328283, "end": 172491328416},
+     "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/same_generation_negation.dl [33:7-33:14]"
+    },
+    "sg": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 172491077647, "end": 172491077849},
+       "maxRSS": {
+        "post": 12316,
+        "pre": 12316
+       },
+       "num-tuples": 2612,
+       "recursive-rule": {
+        "sg(x,y) :- \n   parent(x,xp),\n   parent(y,yp),\n   sg(xp,yp),\n   x != y.": {
+         "0": {
+          "atom-frequency": {
+           "@new_sg(x,y) :- \n   parent(x,xp),\n   parent(y,yp),\n   @delta_sg(xp,yp),\n   x != y.": {
+            "parent": {
+             "level": 0,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 12316,
+           "pre": 12316
+          },
+          "num-tuples": 2612,
+          "runtime": { "start": 172491055282, "end": 172491077611},
+          "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/same_generation_negation.dl [28:1-28:58]"
+         }
+        }
+       },
+       "runtime": { "start": 172491055273, "end": 172491077624}
+      },
+      "1": {
+       "copytime": { "start": 172491101145, "end": 172491101884},
+       "maxRSS": {
+        "post": 12572,
+        "pre": 12316
+       },
+       "num-tuples": 10080,
+       "recursive-rule": {
+        "sg(x,y) :- \n   parent(x,xp),\n   parent(y,yp),\n   sg(xp,yp),\n   x != y.": {
+         "0": {
+          "maxRSS": {
+           "post": 12572,
+           "pre": 12316
+          },
+          "num-tuples": 10080,
+          "runtime": { "start": 172491077866, "end": 172491101106},
+          "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/same_generation_negation.dl [28:1-28:58]"
+         }
+        }
+       },
+       "runtime": { "start": 172491077854, "end": 172491101121}
+      },
+      "2": {
+       "copytime": { "start": 172491129077, "end": 172491132053},
+       "maxRSS": {
+        "post": 13468,
+        "pre": 12828
+       },
+       "num-tuples": 39650,
+       "recursive-rule": {
+        "sg(x,y) :- \n   parent(x,xp),\n   parent(y,yp),\n   sg(xp,yp),\n   x != y.": {
+         "0": {
+          "maxRSS": {
+           "post": 13468,
+           "pre": 12828
+          },
+          "num-tuples": 39650,
+          "runtime": { "start": 172491101903, "end": 172491129024},
+          "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/same_generation_negation.dl [28:1-28:58]"
+         }
+        }
+       },
+       "runtime": { "start": 172491101891, "end": 172491129044}
+      },
+      "3": {
+       "copytime": { "start": 172491167220, "end": 172491174919},
+       "maxRSS": {
+        "post": 16412,
+        "pre": 14492
+       },
+       "num-tuples": 108938,
+       "recursive-rule": {
+        "sg(x,y) :- \n   parent(x,xp),\n   parent(y,yp),\n   sg(xp,yp),\n   x != y.": {
+         "0": {
+          "maxRSS": {
+           "post": 16412,
+           "pre": 14492
+          },
+          "num-tuples": 108938,
+          "runtime": { "start": 172491132080, "end": 172491167104},
+          "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/same_generation_negation.dl [28:1-28:58]"
+         }
+        }
+       },
+       "runtime": { "start": 172491132063, "end": 172491167152}
+      },
+      "4": {
+       "copytime": { "start": 172491228800, "end": 172491248210},
+       "maxRSS": {
+        "post": 23068,
+        "pre": 18844
+       },
+       "num-tuples": 257764,
+       "recursive-rule": {
+        "sg(x,y) :- \n   parent(x,xp),\n   parent(y,yp),\n   sg(xp,yp),\n   x != y.": {
+         "0": {
+          "maxRSS": {
+           "post": 23068,
+           "pre": 18844
+          },
+          "num-tuples": 257764,
+          "runtime": { "start": 172491174948, "end": 172491228526},
+          "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/same_generation_negation.dl [28:1-28:58]"
+         }
+        }
+       },
+       "runtime": { "start": 172491174931, "end": 172491228641}
+      },
+      "5": {
+       "maxRSS": {
+        "post": 28572,
+        "pre": 28444
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "sg(x,y) :- \n   parent(x,xp),\n   parent(y,yp),\n   sg(xp,yp),\n   x != y.": {
+         "0": {
+          "maxRSS": {
+           "post": 28572,
+           "pre": 28444
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 172491248265, "end": 172491287556},
+          "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/same_generation_negation.dl [28:1-28:58]"
+         }
+        }
+       },
+       "runtime": { "start": 172491248231, "end": 172491287576}
+      }
+     },
+     "maxRSS": {
+      "post": 12316,
+      "pre": 12188
+     },
+     "non-recursive-rule": {
+      "sg(x,x) :- \n   person(x).": {
+       "atom-frequency": {
+        "sg(x,x) :- \n   person(x).": {
+         "person": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12316,
+        "pre": 12188
+       },
+       "num-tuples": 840,
+       "runtime": { "start": 172491055192, "end": 172491055231},
+       "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/same_generation_negation.dl [27:1-27:22]"
+      }
+     },
+     "num-tuples": 840,
+     "reads": 1124644,
+     "runtime": { "start": 172491055183, "end": 172491055239},
+     "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/same_generation_negation.dl [26:7-26:9]"
+    }
+   },
+   "runtime": { "start": 172491054835, "end": 172491328785},
+   "starttime": { "time": 172491054805},
+   "usage": {
+    "timepoint": {
+     "172491054844": {
+      "maxRSS": 11796,
+      "systemtime": 4257,
+      "usertime": 0
+     },
+     "172491055095": {
+      "maxRSS": 12188,
+      "systemtime": 4537,
+      "usertime": 0
+     },
+     "172491055199": {
+      "maxRSS": 12316,
+      "systemtime": 4671,
+      "usertime": 0
+     },
+     "172491055286": {
+      "maxRSS": 12316,
+      "systemtime": 4766,
+      "usertime": 0
+     },
+     "172491056428": {
+      "maxRSS": 12316,
+      "systemtime": 4766,
+      "usertime": 734
+     },
+     "172491057611": {
+      "maxRSS": 12316,
+      "systemtime": 4766,
+      "usertime": 750
+     },
+     "172491058823": {
+      "maxRSS": 12316,
+      "systemtime": 4766,
+      "usertime": 776
+     },
+     "172491059929": {
+      "maxRSS": 12316,
+      "systemtime": 4766,
+      "usertime": 794
+     },
+     "172491061008": {
+      "maxRSS": 12316,
+      "systemtime": 4766,
+      "usertime": 4807
+     },
+     "172491062083": {
+      "maxRSS": 12316,
+      "systemtime": 4766,
+      "usertime": 4821
+     },
+     "172491063198": {
+      "maxRSS": 12316,
+      "systemtime": 4766,
+      "usertime": 4848
+     },
+     "172491064297": {
+      "maxRSS": 12316,
+      "systemtime": 4766,
+      "usertime": 8928
+     },
+     "172491065400": {
+      "maxRSS": 12316,
+      "systemtime": 4766,
+      "usertime": 8945
+     },
+     "172491066535": {
+      "maxRSS": 12316,
+      "systemtime": 4766,
+      "usertime": 8979
+     },
+     "172491067652": {
+      "maxRSS": 12316,
+      "systemtime": 4766,
+      "usertime": 9001
+     },
+     "172491068784": {
+      "maxRSS": 12316,
+      "systemtime": 4766,
+      "usertime": 12966
+     },
+     "172491069905": {
+      "maxRSS": 12316,
+      "systemtime": 4766,
+      "usertime": 12989
+     },
+     "172491070981": {
+      "maxRSS": 12316,
+      "systemtime": 4766,
+      "usertime": 13000
+     },
+     "172491072045": {
+      "maxRSS": 12316,
+      "systemtime": 4766,
+      "usertime": 17012
+     },
+     "172491073186": {
+      "maxRSS": 12316,
+      "systemtime": 4766,
+      "usertime": 17030
+     },
+     "172491074327": {
+      "maxRSS": 12316,
+      "systemtime": 4766,
+      "usertime": 17057
+     },
+     "172491075429": {
+      "maxRSS": 12316,
+      "systemtime": 4766,
+      "usertime": 17067
+     },
+     "172491076538": {
+      "maxRSS": 12316,
+      "systemtime": 4766,
+      "usertime": 21088
+     },
+     "172491077655": {
+      "maxRSS": 12316,
+      "systemtime": 4766,
+      "usertime": 22756
+     },
+     "172491077870": {
+      "maxRSS": 12316,
+      "systemtime": 4766,
+      "usertime": 22982
+     },
+     "172491078987": {
+      "maxRSS": 12316,
+      "systemtime": 4766,
+      "usertime": 22992
+     },
+     "172491080067": {
+      "maxRSS": 12316,
+      "systemtime": 4766,
+      "usertime": 25142
+     },
+     "172491081165": {
+      "maxRSS": 12316,
+      "systemtime": 4766,
+      "usertime": 25152
+     },
+     "172491082247": {
+      "maxRSS": 12444,
+      "systemtime": 4766,
+      "usertime": 25165
+     },
+     "172491083482": {
+      "maxRSS": 12444,
+      "systemtime": 4766,
+      "usertime": 25203
+     },
+     "172491084589": {
+      "maxRSS": 12444,
+      "systemtime": 4766,
+      "usertime": 29216
+     },
+     "172491085697": {
+      "maxRSS": 12444,
+      "systemtime": 4766,
+      "usertime": 29233
+     },
+     "172491086803": {
+      "maxRSS": 12444,
+      "systemtime": 4766,
+      "usertime": 29245
+     },
+     "172491087875": {
+      "maxRSS": 12444,
+      "systemtime": 4766,
+      "usertime": 29255
+     },
+     "172491089003": {
+      "maxRSS": 12444,
+      "systemtime": 4766,
+      "usertime": 33267
+     },
+     "172491090108": {
+      "maxRSS": 12444,
+      "systemtime": 4766,
+      "usertime": 33279
+     },
+     "172491091213": {
+      "maxRSS": 12444,
+      "systemtime": 4766,
+      "usertime": 33296
+     },
+     "172491092285": {
+      "maxRSS": 12444,
+      "systemtime": 4766,
+      "usertime": 37304
+     },
+     "172491093362": {
+      "maxRSS": 12444,
+      "systemtime": 4766,
+      "usertime": 37318
+     },
+     "172491094468": {
+      "maxRSS": 12444,
+      "systemtime": 4766,
+      "usertime": 37333
+     },
+     "172491095539": {
+      "maxRSS": 12444,
+      "systemtime": 4766,
+      "usertime": 37343
+     },
+     "172491096793": {
+      "maxRSS": 12572,
+      "systemtime": 4766,
+      "usertime": 41381
+     },
+     "172491097997": {
+      "maxRSS": 12572,
+      "systemtime": 4766,
+      "usertime": 41398
+     },
+     "172491099164": {
+      "maxRSS": 12572,
+      "systemtime": 4766,
+      "usertime": 41415
+     },
+     "172491100241": {
+      "maxRSS": 12572,
+      "systemtime": 4766,
+      "usertime": 45425
+     },
+     "172491101251": {
+      "maxRSS": 12572,
+      "systemtime": 4766,
+      "usertime": 46592
+     },
+     "172491102004": {
+      "maxRSS": 12828,
+      "systemtime": 4766,
+      "usertime": 47366
+     },
+     "172491103172": {
+      "maxRSS": 12828,
+      "systemtime": 4766,
+      "usertime": 47384
+     },
+     "172491104299": {
+      "maxRSS": 12828,
+      "systemtime": 4766,
+      "usertime": 49507
+     },
+     "172491105454": {
+      "maxRSS": 12828,
+      "systemtime": 4766,
+      "usertime": 49532
+     },
+     "172491106559": {
+      "maxRSS": 12828,
+      "systemtime": 4766,
+      "usertime": 49544
+     },
+     "172491107717": {
+      "maxRSS": 12828,
+      "systemtime": 4766,
+      "usertime": 49563
+     },
+     "172491108804": {
+      "maxRSS": 12828,
+      "systemtime": 4766,
+      "usertime": 53581
+     },
+     "172491109988": {
+      "maxRSS": 12956,
+      "systemtime": 4766,
+      "usertime": 53598
+     },
+     "172491111073": {
+      "maxRSS": 12956,
+      "systemtime": 4766,
+      "usertime": 53615
+     },
+     "172491112099": {
+      "maxRSS": 12956,
+      "systemtime": 4766,
+      "usertime": 57636
+     },
+     "172491113192": {
+      "maxRSS": 13084,
+      "systemtime": 4766,
+      "usertime": 57656
+     },
+     "172491114314": {
+      "maxRSS": 13084,
+      "systemtime": 4766,
+      "usertime": 57674
+     },
+     "172491115416": {
+      "maxRSS": 13084,
+      "systemtime": 4766,
+      "usertime": 57683
+     },
+     "172491116522": {
+      "maxRSS": 13084,
+      "systemtime": 4766,
+      "usertime": 61691
+     },
+     "172491117651": {
+      "maxRSS": 13212,
+      "systemtime": 4766,
+      "usertime": 61704
+     },
+     "172491118833": {
+      "maxRSS": 13212,
+      "systemtime": 4766,
+      "usertime": 61721
+     },
+     "172491120007": {
+      "maxRSS": 13212,
+      "systemtime": 4766,
+      "usertime": 65737
+     },
+     "172491121098": {
+      "maxRSS": 13212,
+      "systemtime": 4766,
+      "usertime": 65760
+     },
+     "172491122166": {
+      "maxRSS": 13340,
+      "systemtime": 4766,
+      "usertime": 65771
+     },
+     "172491123264": {
+      "maxRSS": 13340,
+      "systemtime": 4766,
+      "usertime": 65778
+     },
+     "172491124330": {
+      "maxRSS": 13340,
+      "systemtime": 4766,
+      "usertime": 69784
+     },
+     "172491125430": {
+      "maxRSS": 13340,
+      "systemtime": 4766,
+      "usertime": 69794
+     },
+     "172491126526": {
+      "maxRSS": 13468,
+      "systemtime": 4766,
+      "usertime": 69800
+     },
+     "172491127640": {
+      "maxRSS": 13468,
+      "systemtime": 4766,
+      "usertime": 69813
+     },
+     "172491128747": {
+      "maxRSS": 13468,
+      "systemtime": 4766,
+      "usertime": 73884
+     },
+     "172491129106": {
+      "maxRSS": 13468,
+      "systemtime": 4766,
+      "usertime": 74930
+     },
+     "172491130189": {
+      "maxRSS": 13852,
+      "systemtime": 4766,
+      "usertime": 74946
+     },
+     "172491131306": {
+      "maxRSS": 14236,
+      "systemtime": 4766,
+      "usertime": 74964
+     },
+     "172491132114": {
+      "maxRSS": 14492,
+      "systemtime": 4766,
+      "usertime": 77981
+     },
+     "172491133185": {
+      "maxRSS": 14492,
+      "systemtime": 4766,
+      "usertime": 77994
+     },
+     "172491134270": {
+      "maxRSS": 14492,
+      "systemtime": 4766,
+      "usertime": 78016
+     },
+     "172491135370": {
+      "maxRSS": 14492,
+      "systemtime": 4766,
+      "usertime": 78026
+     },
+     "172491136483": {
+      "maxRSS": 14492,
+      "systemtime": 4766,
+      "usertime": 82013
+     },
+     "172491137616": {
+      "maxRSS": 14492,
+      "systemtime": 4766,
+      "usertime": 82021
+     },
+     "172491138804": {
+      "maxRSS": 14492,
+      "systemtime": 4766,
+      "usertime": 82035
+     },
+     "172491139981": {
+      "maxRSS": 14620,
+      "systemtime": 4766,
+      "usertime": 82053
+     },
+     "172491141159": {
+      "maxRSS": 14620,
+      "systemtime": 4766,
+      "usertime": 86026
+     },
+     "172491142255": {
+      "maxRSS": 14748,
+      "systemtime": 4766,
+      "usertime": 86046
+     },
+     "172491143442": {
+      "maxRSS": 14748,
+      "systemtime": 4766,
+      "usertime": 86065
+     },
+     "172491144638": {
+      "maxRSS": 14876,
+      "systemtime": 4766,
+      "usertime": 90142
+     },
+     "172491145804": {
+      "maxRSS": 14876,
+      "systemtime": 4766,
+      "usertime": 90159
+     },
+     "172491146978": {
+      "maxRSS": 15004,
+      "systemtime": 4766,
+      "usertime": 90177
+     },
+     "172491148108": {
+      "maxRSS": 15132,
+      "systemtime": 4766,
+      "usertime": 94138
+     },
+     "172491149279": {
+      "maxRSS": 15132,
+      "systemtime": 4766,
+      "usertime": 94156
+     },
+     "172491150460": {
+      "maxRSS": 15260,
+      "systemtime": 4766,
+      "usertime": 94174
+     },
+     "172491151639": {
+      "maxRSS": 15388,
+      "systemtime": 4766,
+      "usertime": 94191
+     },
+     "172491152884": {
+      "maxRSS": 15516,
+      "systemtime": 4766,
+      "usertime": 98208
+     },
+     "172491154057": {
+      "maxRSS": 15516,
+      "systemtime": 4766,
+      "usertime": 98225
+     },
+     "172491155229": {
+      "maxRSS": 15644,
+      "systemtime": 4766,
+      "usertime": 98241
+     },
+     "172491156360": {
+      "maxRSS": 15772,
+      "systemtime": 4766,
+      "usertime": 102263
+     },
+     "172491157536": {
+      "maxRSS": 15900,
+      "systemtime": 4766,
+      "usertime": 102279
+     },
+     "172491158644": {
+      "maxRSS": 15900,
+      "systemtime": 4766,
+      "usertime": 102299
+     },
+     "172491159811": {
+      "maxRSS": 16028,
+      "systemtime": 4766,
+      "usertime": 102318
+     },
+     "172491160905": {
+      "maxRSS": 16156,
+      "systemtime": 4766,
+      "usertime": 106341
+     },
+     "172491161992": {
+      "maxRSS": 16156,
+      "systemtime": 4766,
+      "usertime": 106360
+     },
+     "172491163147": {
+      "maxRSS": 16156,
+      "systemtime": 4766,
+      "usertime": 106399
+     },
+     "172491164248": {
+      "maxRSS": 16284,
+      "systemtime": 4766,
+      "usertime": 110440
+     },
+     "172491165447": {
+      "maxRSS": 16284,
+      "systemtime": 4766,
+      "usertime": 110457
+     },
+     "172491166628": {
+      "maxRSS": 16412,
+      "systemtime": 4766,
+      "usertime": 110474
+     },
+     "172491167292": {
+      "maxRSS": 16412,
+      "systemtime": 4766,
+      "usertime": 113712
+     },
+     "172491168484": {
+      "maxRSS": 16796,
+      "systemtime": 4766,
+      "usertime": 114504
+     },
+     "172491169673": {
+      "maxRSS": 17180,
+      "systemtime": 4766,
+      "usertime": 114530
+     },
+     "172491170851": {
+      "maxRSS": 17564,
+      "systemtime": 4766,
+      "usertime": 114547
+     },
+     "172491172129": {
+      "maxRSS": 17948,
+      "systemtime": 7956,
+      "usertime": 115376
+     },
+     "172491173323": {
+      "maxRSS": 18332,
+      "systemtime": 7958,
+      "usertime": 115392
+     },
+     "172491174498": {
+      "maxRSS": 18716,
+      "systemtime": 7959,
+      "usertime": 115407
+     },
+     "172491174984": {
+      "maxRSS": 18844,
+      "systemtime": 8149,
+      "usertime": 118171
+     },
+     "172491176043": {
+      "maxRSS": 18844,
+      "systemtime": 8149,
+      "usertime": 119253
+     },
+     "172491177222": {
+      "maxRSS": 18844,
+      "systemtime": 8149,
+      "usertime": 119273
+     },
+     "172491178390": {
+      "maxRSS": 18844,
+      "systemtime": 8149,
+      "usertime": 119290
+     },
+     "172491179475": {
+      "maxRSS": 18844,
+      "systemtime": 8149,
+      "usertime": 119308
+     },
+     "172491180741": {
+      "maxRSS": 18844,
+      "systemtime": 8149,
+      "usertime": 123318
+     },
+     "172491181954": {
+      "maxRSS": 18844,
+      "systemtime": 8149,
+      "usertime": 123344
+     },
+     "172491183126": {
+      "maxRSS": 18844,
+      "systemtime": 8149,
+      "usertime": 123360
+     },
+     "172491184214": {
+      "maxRSS": 18844,
+      "systemtime": 8149,
+      "usertime": 127382
+     },
+     "172491185389": {
+      "maxRSS": 18844,
+      "systemtime": 8149,
+      "usertime": 127399
+     },
+     "172491186586": {
+      "maxRSS": 18844,
+      "systemtime": 8149,
+      "usertime": 127417
+     },
+     "172491187734": {
+      "maxRSS": 18844,
+      "systemtime": 8149,
+      "usertime": 127434
+     },
+     "172491188908": {
+      "maxRSS": 18844,
+      "systemtime": 8149,
+      "usertime": 131453
+     },
+     "172491190077": {
+      "maxRSS": 18844,
+      "systemtime": 8149,
+      "usertime": 131470
+     },
+     "172491191247": {
+      "maxRSS": 18972,
+      "systemtime": 8149,
+      "usertime": 131491
+     },
+     "172491192356": {
+      "maxRSS": 18972,
+      "systemtime": 8149,
+      "usertime": 135562
+     },
+     "172491193481": {
+      "maxRSS": 19100,
+      "systemtime": 8149,
+      "usertime": 135585
+     },
+     "172491194759": {
+      "maxRSS": 19228,
+      "systemtime": 8149,
+      "usertime": 135611
+     },
+     "172491195965": {
+      "maxRSS": 19356,
+      "systemtime": 8149,
+      "usertime": 135639
+     },
+     "172491197148": {
+      "maxRSS": 19484,
+      "systemtime": 8149,
+      "usertime": 139632
+     },
+     "172491198437": {
+      "maxRSS": 19612,
+      "systemtime": 8149,
+      "usertime": 139664
+     },
+     "172491199612": {
+      "maxRSS": 19740,
+      "systemtime": 8149,
+      "usertime": 139684
+     },
+     "172491200780": {
+      "maxRSS": 19868,
+      "systemtime": 8149,
+      "usertime": 143693
+     },
+     "172491201945": {
+      "maxRSS": 19996,
+      "systemtime": 8149,
+      "usertime": 143712
+     },
+     "172491203120": {
+      "maxRSS": 20124,
+      "systemtime": 8149,
+      "usertime": 143729
+     },
+     "172491204196": {
+      "maxRSS": 20252,
+      "systemtime": 8149,
+      "usertime": 147745
+     },
+     "172491205460": {
+      "maxRSS": 20380,
+      "systemtime": 8149,
+      "usertime": 147769
+     },
+     "172491206636": {
+      "maxRSS": 20508,
+      "systemtime": 8149,
+      "usertime": 147788
+     },
+     "172491207832": {
+      "maxRSS": 20636,
+      "systemtime": 8149,
+      "usertime": 147806
+     },
+     "172491209002": {
+      "maxRSS": 20764,
+      "systemtime": 8149,
+      "usertime": 151828
+     },
+     "172491210174": {
+      "maxRSS": 21020,
+      "systemtime": 8149,
+      "usertime": 151845
+     },
+     "172491211342": {
+      "maxRSS": 21020,
+      "systemtime": 8149,
+      "usertime": 151864
+     },
+     "172491212556": {
+      "maxRSS": 21148,
+      "systemtime": 8149,
+      "usertime": 155965
+     },
+     "172491213757": {
+      "maxRSS": 21276,
+      "systemtime": 8149,
+      "usertime": 156003
+     },
+     "172491214891": {
+      "maxRSS": 21404,
+      "systemtime": 8149,
+      "usertime": 156021
+     },
+     "172491216081": {
+      "maxRSS": 21532,
+      "systemtime": 8149,
+      "usertime": 159959
+     },
+     "172491217261": {
+      "maxRSS": 21660,
+      "systemtime": 8149,
+      "usertime": 159976
+     },
+     "172491218527": {
+      "maxRSS": 21788,
+      "systemtime": 8149,
+      "usertime": 159993
+     },
+     "172491219700": {
+      "maxRSS": 22044,
+      "systemtime": 8149,
+      "usertime": 160009
+     },
+     "172491220942": {
+      "maxRSS": 22172,
+      "systemtime": 8149,
+      "usertime": 164030
+     },
+     "172491222180": {
+      "maxRSS": 22300,
+      "systemtime": 8149,
+      "usertime": 164047
+     },
+     "172491223358": {
+      "maxRSS": 22428,
+      "systemtime": 8149,
+      "usertime": 164064
+     },
+     "172491224544": {
+      "maxRSS": 22556,
+      "systemtime": 8149,
+      "usertime": 168086
+     },
+     "172491225712": {
+      "maxRSS": 22684,
+      "systemtime": 8149,
+      "usertime": 168104
+     },
+     "172491226880": {
+      "maxRSS": 22812,
+      "systemtime": 8149,
+      "usertime": 168121
+     },
+     "172491228226": {
+      "maxRSS": 23068,
+      "systemtime": 8149,
+      "usertime": 172163
+     },
+     "172491228824": {
+      "maxRSS": 23068,
+      "systemtime": 8149,
+      "usertime": 172920
+     },
+     "172491228930": {
+      "maxRSS": 23068,
+      "systemtime": 8149,
+      "usertime": 173068
+     },
+     "172491230098": {
+      "maxRSS": 23452,
+      "systemtime": 8149,
+      "usertime": 173085
+     },
+     "172491231244": {
+      "maxRSS": 23836,
+      "systemtime": 8149,
+      "usertime": 173101
+     },
+     "172491232395": {
+      "maxRSS": 24220,
+      "systemtime": 8149,
+      "usertime": 176264
+     },
+     "172491233571": {
+      "maxRSS": 24604,
+      "systemtime": 8149,
+      "usertime": 176285
+     },
+     "172491234743": {
+      "maxRSS": 24988,
+      "systemtime": 8149,
+      "usertime": 176302
+     },
+     "172491235914": {
+      "maxRSS": 25372,
+      "systemtime": 8149,
+      "usertime": 176318
+     },
+     "172491237102": {
+      "maxRSS": 25756,
+      "systemtime": 8149,
+      "usertime": 180333
+     },
+     "172491238281": {
+      "maxRSS": 26140,
+      "systemtime": 8149,
+      "usertime": 180354
+     },
+     "172491239545": {
+      "maxRSS": 26524,
+      "systemtime": 8149,
+      "usertime": 180371
+     },
+     "172491240720": {
+      "maxRSS": 26908,
+      "systemtime": 8149,
+      "usertime": 184394
+     },
+     "172491241895": {
+      "maxRSS": 27292,
+      "systemtime": 8149,
+      "usertime": 184416
+     },
+     "172491243003": {
+      "maxRSS": 27548,
+      "systemtime": 8149,
+      "usertime": 184435
+     },
+     "172491244083": {
+      "maxRSS": 27932,
+      "systemtime": 8149,
+      "usertime": 188471
+     },
+     "172491245353": {
+      "maxRSS": 28188,
+      "systemtime": 8149,
+      "usertime": 188510
+     },
+     "172491246482": {
+      "maxRSS": 28444,
+      "systemtime": 8149,
+      "usertime": 188549
+     },
+     "172491247643": {
+      "maxRSS": 28444,
+      "systemtime": 8149,
+      "usertime": 188600
+     },
+     "172491248365": {
+      "maxRSS": 28444,
+      "systemtime": 8190,
+      "usertime": 192848
+     },
+     "172491249548": {
+      "maxRSS": 28444,
+      "systemtime": 8190,
+      "usertime": 192870
+     },
+     "172491250734": {
+      "maxRSS": 28444,
+      "systemtime": 8190,
+      "usertime": 192891
+     },
+     "172491251935": {
+      "maxRSS": 28444,
+      "systemtime": 8190,
+      "usertime": 192916
+     },
+     "172491253041": {
+      "maxRSS": 28444,
+      "systemtime": 8190,
+      "usertime": 196688
+     },
+     "172491254140": {
+      "maxRSS": 28444,
+      "systemtime": 8190,
+      "usertime": 196712
+     },
+     "172491255410": {
+      "maxRSS": 28572,
+      "systemtime": 8190,
+      "usertime": 196820
+     },
+     "172491256598": {
+      "maxRSS": 28572,
+      "systemtime": 8190,
+      "usertime": 200842
+     },
+     "172491257776": {
+      "maxRSS": 28572,
+      "systemtime": 8190,
+      "usertime": 200860
+     },
+     "172491258919": {
+      "maxRSS": 28572,
+      "systemtime": 8190,
+      "usertime": 200883
+     },
+     "172491260042": {
+      "maxRSS": 28572,
+      "systemtime": 8190,
+      "usertime": 204903
+     },
+     "172491261307": {
+      "maxRSS": 28572,
+      "systemtime": 8190,
+      "usertime": 204924
+     },
+     "172491262510": {
+      "maxRSS": 28572,
+      "systemtime": 8190,
+      "usertime": 204960
+     },
+     "172491263700": {
+      "maxRSS": 28572,
+      "systemtime": 8190,
+      "usertime": 204990
+     },
+     "172491264878": {
+      "maxRSS": 28572,
+      "systemtime": 8190,
+      "usertime": 209010
+     },
+     "172491266048": {
+      "maxRSS": 28572,
+      "systemtime": 8190,
+      "usertime": 209030
+     },
+     "172491267222": {
+      "maxRSS": 28572,
+      "systemtime": 8190,
+      "usertime": 209051
+     },
+     "172491268359": {
+      "maxRSS": 28572,
+      "systemtime": 8190,
+      "usertime": 213073
+     },
+     "172491269550": {
+      "maxRSS": 28572,
+      "systemtime": 8190,
+      "usertime": 213097
+     },
+     "172491270758": {
+      "maxRSS": 28572,
+      "systemtime": 8190,
+      "usertime": 213143
+     },
+     "172491272035": {
+      "maxRSS": 28572,
+      "systemtime": 11862,
+      "usertime": 213532
+     },
+     "172491273229": {
+      "maxRSS": 28572,
+      "systemtime": 11864,
+      "usertime": 213560
+     },
+     "172491274358": {
+      "maxRSS": 28572,
+      "systemtime": 11866,
+      "usertime": 213595
+     },
+     "172491275577": {
+      "maxRSS": 28572,
+      "systemtime": 11869,
+      "usertime": 213658
+     },
+     "172491276776": {
+      "maxRSS": 28572,
+      "systemtime": 11874,
+      "usertime": 217693
+     },
+     "172491277983": {
+      "maxRSS": 28572,
+      "systemtime": 11876,
+      "usertime": 217736
+     },
+     "172491279168": {
+      "maxRSS": 28572,
+      "systemtime": 11877,
+      "usertime": 217763
+     },
+     "172491280258": {
+      "maxRSS": 28572,
+      "systemtime": 11881,
+      "usertime": 221782
+     },
+     "172491281351": {
+      "maxRSS": 28572,
+      "systemtime": 11882,
+      "usertime": 221804
+     },
+     "172491282504": {
+      "maxRSS": 28572,
+      "systemtime": 11883,
+      "usertime": 221828
+     },
+     "172491283696": {
+      "maxRSS": 28572,
+      "systemtime": 11884,
+      "usertime": 221852
+     },
+     "172491284901": {
+      "maxRSS": 28572,
+      "systemtime": 11888,
+      "usertime": 225887
+     },
+     "172491286130": {
+      "maxRSS": 28572,
+      "systemtime": 11890,
+      "usertime": 225915
+     },
+     "172491287315": {
+      "maxRSS": 28572,
+      "systemtime": 11891,
+      "usertime": 225946
+     },
+     "172491287684": {
+      "maxRSS": 28572,
+      "systemtime": 12073,
+      "usertime": 229398
+     },
+     "172491288163": {
+      "maxRSS": 28572,
+      "systemtime": 12073,
+      "usertime": 229958
+     },
+     "172491289333": {
+      "maxRSS": 28572,
+      "systemtime": 12073,
+      "usertime": 229976
+     },
+     "172491290504": {
+      "maxRSS": 28572,
+      "systemtime": 12073,
+      "usertime": 230022
+     },
+     "172491291685": {
+      "maxRSS": 28572,
+      "systemtime": 12073,
+      "usertime": 230043
+     },
+     "172491292954": {
+      "maxRSS": 28572,
+      "systemtime": 12073,
+      "usertime": 233986
+     },
+     "172491294246": {
+      "maxRSS": 28572,
+      "systemtime": 12073,
+      "usertime": 234010
+     },
+     "172491295442": {
+      "maxRSS": 28572,
+      "systemtime": 12073,
+      "usertime": 234033
+     },
+     "172491296597": {
+      "maxRSS": 28572,
+      "systemtime": 12073,
+      "usertime": 237993
+     },
+     "172491297866": {
+      "maxRSS": 28572,
+      "systemtime": 12073,
+      "usertime": 238016
+     },
+     "172491299069": {
+      "maxRSS": 28572,
+      "systemtime": 12073,
+      "usertime": 238060
+     },
+     "172491300120": {
+      "maxRSS": 28572,
+      "systemtime": 12073,
+      "usertime": 242076
+     },
+     "172491301296": {
+      "maxRSS": 28572,
+      "systemtime": 12073,
+      "usertime": 242094
+     },
+     "172491302456": {
+      "maxRSS": 28572,
+      "systemtime": 12073,
+      "usertime": 242114
+     },
+     "172491303634": {
+      "maxRSS": 28572,
+      "systemtime": 12073,
+      "usertime": 242134
+     },
+     "172491304730": {
+      "maxRSS": 28572,
+      "systemtime": 12073,
+      "usertime": 246162
+     },
+     "172491305945": {
+      "maxRSS": 28572,
+      "systemtime": 12073,
+      "usertime": 246218
+     },
+     "172491307135": {
+      "maxRSS": 28572,
+      "systemtime": 12073,
+      "usertime": 246251
+     },
+     "172491308232": {
+      "maxRSS": 28572,
+      "systemtime": 12073,
+      "usertime": 250297
+     },
+     "172491309415": {
+      "maxRSS": 28572,
+      "systemtime": 12073,
+      "usertime": 250319
+     },
+     "172491310591": {
+      "maxRSS": 28572,
+      "systemtime": 12073,
+      "usertime": 250337
+     },
+     "172491311851": {
+      "maxRSS": 28572,
+      "systemtime": 12073,
+      "usertime": 250355
+     },
+     "172491313035": {
+      "maxRSS": 28572,
+      "systemtime": 12073,
+      "usertime": 254360
+     },
+     "172491314122": {
+      "maxRSS": 28572,
+      "systemtime": 12073,
+      "usertime": 254378
+     },
+     "172491315339": {
+      "maxRSS": 28572,
+      "systemtime": 12073,
+      "usertime": 254396
+     },
+     "172491316531": {
+      "maxRSS": 28572,
+      "systemtime": 12073,
+      "usertime": 258414
+     },
+     "172491317719": {
+      "maxRSS": 28572,
+      "systemtime": 12073,
+      "usertime": 258431
+     },
+     "172491318887": {
+      "maxRSS": 28572,
+      "systemtime": 12073,
+      "usertime": 258448
+     },
+     "172491320100": {
+      "maxRSS": 28572,
+      "systemtime": 12073,
+      "usertime": 262483
+     },
+     "172491321208": {
+      "maxRSS": 28572,
+      "systemtime": 12073,
+      "usertime": 262502
+     },
+     "172491322450": {
+      "maxRSS": 28572,
+      "systemtime": 12073,
+      "usertime": 262539
+     },
+     "172491323704": {
+      "maxRSS": 28572,
+      "systemtime": 12073,
+      "usertime": 262556
+     },
+     "172491324973": {
+      "maxRSS": 28572,
+      "systemtime": 12073,
+      "usertime": 266572
+     },
+     "172491326151": {
+      "maxRSS": 28572,
+      "systemtime": 12073,
+      "usertime": 266588
+     },
+     "172491327322": {
+      "maxRSS": 28572,
+      "systemtime": 12074,
+      "usertime": 269652
+     },
+     "172491328293": {
+      "maxRSS": 28572,
+      "systemtime": 12074,
+      "usertime": 270918
+     }
+    }
+   }
+  }
+ }
+}

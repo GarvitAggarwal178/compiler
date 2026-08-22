@@ -99,3 +99,16 @@ Append-only. One line per task start/end: task ID, outcome, commit SHA.
   bug before trusting output: same_generation_negation's reachable-from-0
   walk used the wrong edge direction. Report:
   docs/reports/night02-T3-fixtures.md.
+- T4 start -- baseline sweep (T_none/T_souffle/E_recoverable), cap 120 min,
+  prerequisite T3 (passed).
+- T4 end -- outcome: done, complete. All 5 shapes x their scale points (24
+  points, 48 Soufflé runs) completed clean: no DNF, no cap fired, no
+  abort, answers identical at every point. transitive_closure_bound has
+  E_recoverable=0 at every point (positive fragment, no negation --
+  reported as a null result per instruction). reachability_complement
+  re-run (not regenerated) against its own family .dl file for consistent
+  instrumentation; matches T6's committed numbers exactly at all 6 points,
+  confirming reachability_complement.dl and p2.dl are equivalent by
+  measurement, not just inspection. excl-copy/incl-copy never diverged
+  (no COPY_T anywhere this sweep) -- null result, reported not omitted.
+  Report: docs/reports/night02-T4-baseline.md.
