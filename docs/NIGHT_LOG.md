@@ -160,3 +160,18 @@ Append-only. One line per task start/end: task ID, outcome, commit SHA.
   correctly accept, one remains genuinely inconclusive (facts filename
   itself too long for the filesystem). Report:
   docs/reports/night02-T2-hostile.md.
+- T8 start -- grammar usage census over IN_GRAMMAR.txt, cap 60 min,
+  independent.
+- T8 end -- outcome: done. 195/195 files analyzed via a token-aware static
+  scan (not a full parser, disclosed). Arity median 1 max 14; body-length
+  median 2 max 12; expr-depth median 1 max 3 (real programs are not
+  deeply nested); 69 negations across 28 files, mostly middle/last body
+  position; 688 wildcards (687 body, 1 head, unresolved to a specific
+  file); 61/954 relations directly recursive (lower bound, mutual
+  recursion not detected by this scan, disclosed). FOUND AND FLAGGED FOR
+  THE HUMAN: 11 of the 195 in-grammar files declare zero-arity
+  relations, which blueprint section 4's own grammar does not admit -- a
+  real gap in night01 T5's mechanical in-grammar predicate. Not fixed
+  (out of this task's scope; IN_GRAMMAR.txt is not under night-02's
+  corpus-file prohibitions but census != corpus maintenance). Report:
+  docs/reports/night02-T8-grammar-census.md.
