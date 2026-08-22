@@ -196,11 +196,19 @@ cloned `plast-lab/doop` (the actively-maintained, CI-tested canonical repo —
 252 real `.dl`/`.logic` files in `souffle-logic/`). Requires Java 17 + Gradle
 build + a target `.jar` (+ JRE platform libs from a separate `doop-benchmarks`
 repo for a full analysis) — a materially heavier pipeline than anything else
-this project has run. In progress / outcome pending as this entry is written;
-see the next entry or `docs/reports/T0-version-risk.md`'s sibling report if one
-exists for the final disposition.
+this project has run. **Outcome: abandoned, no profile produced.** `./doop -h`
+built and ran successfully (confirms the driver works here); Maven-coordinate
+input hung for 2+ hours on Ivy dependency resolution (confirmed genuinely
+stuck, not slow — direct Maven Central access worked fine in parallel); local
+jar input reached DOOP's analysis factory in seconds but failed needing a JRE
+platform library whose fetch URL (from the `doop-benchmarks` companion repo)
+returns "not a valid input" for both the auto-selected and an explicitly
+requested standard platform. Three distinct, clearly diagnosed failure points,
+none inside Soufflé itself. Abandoned per the 3-hour cap, not retried with a
+higher cap or further variants. `docs/reports/doop-attempt.md`.
 
-**What is now blocked:** Nothing required. DOOP is optional and capped.
+**What is now blocked:** Nothing required. DOOP was optional and remains so —
+§3.2's benchmark family is the measurement corpus of record regardless.
 
 **Single next action:** Per the ruling's §5 — no further specs until M1 exists.
 Lexer → precedence parser → decl/type check → allowedness → naive fixpoint →
