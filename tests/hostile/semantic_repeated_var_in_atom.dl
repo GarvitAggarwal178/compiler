@@ -1,0 +1,7 @@
+// Semantic edge: the same variable repeated within a single atom, both in
+// a body atom (q(X,X), implicit equality join) and in the head (p(X,X)).
+.decl q(a:number, b:number)
+.input q
+.decl p(a:number, b:number)
+.output p
+p(X, X) :- q(X, X).

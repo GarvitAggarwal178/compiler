@@ -1,0 +1,5 @@
+// Precedence: '+' vs '*'. Grammar (blueprint section 4): mul binds tighter
+// than arith(add/sub). Expected parse: 2 + (3 * 4) = 14, not (2+3)*4=20.
+.decl p(a:number)
+.output p
+p(X) :- X = 2 + 3 * 4.

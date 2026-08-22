@@ -1,0 +1,10 @@
+// Precedence: relop sits outside arith on both sides (constraint ::= arith
+// relop arith). Expected: (Y+1) < (Z*2-1) evaluated as two independent
+// arith subexpressions, not e.g. Y+(1<Z)*2-1 (relop is not part of arith
+// at all in this grammar, so a correct parser can't produce that reading,
+// but a broken precedence table might).
+.decl q(a:number, b:number)
+.input q
+.decl p(a:number)
+.output p
+p(Y) :- q(Y,Z), Y + 1 < Z * 2 - 1.

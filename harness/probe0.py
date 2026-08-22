@@ -277,7 +277,8 @@ def run_cmd(mid: str, cmd, cwd: Path, extra_meta=None):
     (outdir / "cmd.txt").write_text(" ".join(cmd) + "\n")
 
     t0 = time.time()
-    proc = subprocess.run(cmd, cwd=str(cwd), capture_output=True, text=True)
+    proc = subprocess.run(cmd, cwd=str(cwd), capture_output=True,
+                           encoding="utf-8", errors="replace")
     dt = time.time() - t0
 
     (outdir / "stdout.txt").write_text(proc.stdout)

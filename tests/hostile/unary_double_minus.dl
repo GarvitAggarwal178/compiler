@@ -1,0 +1,8 @@
+// Unary minus: double unary, "- -X". Grammar: unary ::= '-' unary |
+// primary, directly recursive, so "- -Y" is a legal two-deep unary chain
+// parsing to -(-(Y)) = Y.
+.decl q(a:number)
+.input q
+.decl p(a:number)
+.output p
+p(X) :- q(Y), X = - -Y.

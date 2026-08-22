@@ -1,0 +1,5 @@
+// Precedence: '-' vs '%'. Expected: 5 - (10 % 3) = 4, not (5-10)%3 = -2.
+// Distinguishes the two readings numerically (add_mod.dl's pair does not).
+.decl p(a:number)
+.output p
+p(X) :- X = 5 - 10 % 3.

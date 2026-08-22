@@ -1,0 +1,8 @@
+// Semantic edge: wildcard '_' in HEAD position (not body -- that would be
+// unremarkable). The grammar's term ::= arith | '_' production allows '_'
+// anywhere a term is expected, head included.
+.decl q(a:number, b:number)
+.input q
+.decl p(a:number, b:number)
+.output p
+p(X, _) :- q(X, Y), Y > 0.

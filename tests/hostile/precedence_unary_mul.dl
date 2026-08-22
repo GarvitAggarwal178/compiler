@@ -1,0 +1,12 @@
+// Precedence: unary '-' vs '*'. Multiplication can't distinguish grouping
+// here (negating one factor of a product is the same regardless of
+// bracketing), so this checks the unary binds only to the immediately
+// following primary, not further: -2 * 3 must be (-2) * 3 = -6, not
+// -(2 * 3) [also -6, degenerate] and specifically NOT parsed as unary
+// grabbing "2 * 3" as its argument in some other broken way that would
+// reject the program or mis-scope a later term -- see
+// precedence_unary_sub.dl for a case where the two groupings actually
+// differ numerically.
+.decl p(a:number)
+.output p
+p(X) :- X = -2 * 3.

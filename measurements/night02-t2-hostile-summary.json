@@ -1,0 +1,275 @@
+[
+  {
+    "file": "comment_between_neck_and_body.dl",
+    "outcome": "accept",
+    "returncode": 0,
+    "stderr": "",
+    "stdout": ""
+  },
+  {
+    "file": "comment_block_with_period.dl",
+    "outcome": "accept",
+    "returncode": 0,
+    "stderr": "",
+    "stdout": ""
+  },
+  {
+    "file": "comment_contains_period.dl",
+    "outcome": "accept",
+    "returncode": 0,
+    "stderr": "",
+    "stdout": ""
+  },
+  {
+    "file": "comment_inside_body.dl",
+    "outcome": "accept",
+    "returncode": 0,
+    "stderr": "",
+    "stdout": ""
+  },
+  {
+    "file": "comment_unterminated_block.dl",
+    "outcome": "accept",
+    "returncode": 0,
+    "stderr": "Warning: No rules/facts defined for relation p in file comment_unterminated_block.dl at line 3\n.decl p(a:number)\n------^-----------",
+    "stdout": ""
+  },
+  {
+    "file": "lexical_4kb_identifier.dl",
+    "outcome": "reject",
+    "returncode": 1,
+    "stderr": "Error loading qaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa data: Cannot open fact file qaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.facts",
+    "stdout": ""
+  },
+  {
+    "file": "lexical_empty_file.dl",
+    "outcome": "accept",
+    "returncode": 0,
+    "stderr": "",
+    "stdout": ""
+  },
+  {
+    "file": "lexical_mixed_line_endings.dl",
+    "outcome": "accept",
+    "returncode": 0,
+    "stderr": "",
+    "stdout": ""
+  },
+  {
+    "file": "lexical_no_trailing_newline.dl",
+    "outcome": "accept",
+    "returncode": 0,
+    "stderr": "",
+    "stdout": ""
+  },
+  {
+    "file": "lexical_only_comments.dl",
+    "outcome": "accept",
+    "returncode": 0,
+    "stderr": "",
+    "stdout": ""
+  },
+  {
+    "file": "lexical_unicode_identifiers.dl",
+    "outcome": "reject",
+    "returncode": 1,
+    "stderr": "Error: syntax error, unexpected invalid token, expecting ( or \",\" in file lexical_unicode_identifiers.dl at line 3\n.decl données(a:number)\n----------^--------------\nError: unexpected � in file lexical_unicode_identifiers.dl at line 3\n.decl données(a:number)\n----------^--------------\n2 errors generated, evaluation aborted",
+    "stdout": ""
+  },
+  {
+    "file": "malformed_decl_no_arity.dl",
+    "outcome": "accept",
+    "returncode": 0,
+    "stderr": "Warning: No rules/facts defined for relation p in file malformed_decl_no_arity.dl at line 3\n.decl p()\n------^---",
+    "stdout": ""
+  },
+  {
+    "file": "malformed_duplicate_decl.dl",
+    "outcome": "reject",
+    "returncode": 1,
+    "stderr": "Error: Redefinition of relation p in file malformed_duplicate_decl.dl at line 4\n.decl p(a:number)\n------^-----------\nPrevious definition in file malformed_duplicate_decl.dl at line 3\n.decl p(a:number)\n------^-----------\n1 errors generated, evaluation aborted",
+    "stdout": ""
+  },
+  {
+    "file": "malformed_empty_body.dl",
+    "outcome": "reject",
+    "returncode": 1,
+    "stderr": "Error: syntax error, unexpected . in file malformed_empty_body.dl at line 5\np(X) :- .\n--------^-\n1 errors generated, evaluation aborted",
+    "stdout": ""
+  },
+  {
+    "file": "malformed_headless_rule.dl",
+    "outcome": "reject",
+    "returncode": 1,
+    "stderr": "Error: syntax error, unexpected :- in file malformed_headless_rule.dl at line 7\n:- q(X), X < 0.\n^---------------\n1 errors generated, evaluation aborted",
+    "stdout": ""
+  },
+  {
+    "file": "malformed_missing_period.dl",
+    "outcome": "reject",
+    "returncode": 1,
+    "stderr": "Error: syntax error, unexpected end of file, expecting . in file malformed_missing_period.dl at line 6\np(X) :- q(X)\n------------^\n1 errors generated, evaluation aborted",
+    "stdout": ""
+  },
+  {
+    "file": "malformed_unbalanced_parens.dl",
+    "outcome": "reject",
+    "returncode": 1,
+    "stderr": "Error: syntax error, unexpected ., expecting ) in file malformed_unbalanced_parens.dl at line 6\np(X) :- q(X.\n-----------^-\n1 errors generated, evaluation aborted",
+    "stdout": ""
+  },
+  {
+    "file": "nesting_arith_deep.dl",
+    "outcome": "accept",
+    "returncode": 0,
+    "stderr": "",
+    "stdout": ""
+  },
+  {
+    "file": "nesting_parens_20deep.dl",
+    "outcome": "accept",
+    "returncode": 0,
+    "stderr": "",
+    "stdout": ""
+  },
+  {
+    "file": "precedence_add_div.dl",
+    "outcome": "accept",
+    "returncode": 0,
+    "stderr": "",
+    "stdout": ""
+  },
+  {
+    "file": "precedence_add_mod.dl",
+    "outcome": "accept",
+    "returncode": 0,
+    "stderr": "",
+    "stdout": ""
+  },
+  {
+    "file": "precedence_add_mul.dl",
+    "outcome": "accept",
+    "returncode": 0,
+    "stderr": "",
+    "stdout": ""
+  },
+  {
+    "file": "precedence_constraint_both_sides.dl",
+    "outcome": "accept",
+    "returncode": 0,
+    "stderr": "",
+    "stdout": ""
+  },
+  {
+    "file": "precedence_div_mod.dl",
+    "outcome": "accept",
+    "returncode": 0,
+    "stderr": "",
+    "stdout": ""
+  },
+  {
+    "file": "precedence_left_assoc_add.dl",
+    "outcome": "accept",
+    "returncode": 0,
+    "stderr": "",
+    "stdout": ""
+  },
+  {
+    "file": "precedence_left_assoc_div.dl",
+    "outcome": "accept",
+    "returncode": 0,
+    "stderr": "",
+    "stdout": ""
+  },
+  {
+    "file": "precedence_mul_div.dl",
+    "outcome": "accept",
+    "returncode": 0,
+    "stderr": "",
+    "stdout": ""
+  },
+  {
+    "file": "precedence_mul_mod.dl",
+    "outcome": "accept",
+    "returncode": 0,
+    "stderr": "",
+    "stdout": ""
+  },
+  {
+    "file": "precedence_paren_override.dl",
+    "outcome": "accept",
+    "returncode": 0,
+    "stderr": "",
+    "stdout": ""
+  },
+  {
+    "file": "precedence_sub_mod.dl",
+    "outcome": "accept",
+    "returncode": 0,
+    "stderr": "",
+    "stdout": ""
+  },
+  {
+    "file": "precedence_sub_mul.dl",
+    "outcome": "accept",
+    "returncode": 0,
+    "stderr": "",
+    "stdout": ""
+  },
+  {
+    "file": "precedence_unary_mul.dl",
+    "outcome": "accept",
+    "returncode": 0,
+    "stderr": "",
+    "stdout": ""
+  },
+  {
+    "file": "precedence_unary_sub.dl",
+    "outcome": "accept",
+    "returncode": 0,
+    "stderr": "",
+    "stdout": ""
+  },
+  {
+    "file": "semantic_head_also_input.dl",
+    "outcome": "accept",
+    "returncode": 0,
+    "stderr": "",
+    "stdout": ""
+  },
+  {
+    "file": "semantic_repeated_var_in_atom.dl",
+    "outcome": "accept",
+    "returncode": 0,
+    "stderr": "",
+    "stdout": ""
+  },
+  {
+    "file": "semantic_wildcard_in_head.dl",
+    "outcome": "reject",
+    "returncode": 1,
+    "stderr": "Error: Underscore in head of rule in file semantic_wildcard_in_head.dl at line 8\np(X, _) :- q(X, Y), Y > 0.\n-----^---------------------\n1 errors generated, evaluation aborted",
+    "stdout": ""
+  },
+  {
+    "file": "unary_double_minus.dl",
+    "outcome": "accept",
+    "returncode": 0,
+    "stderr": "",
+    "stdout": ""
+  },
+  {
+    "file": "unary_paren_double_neg.dl",
+    "outcome": "accept",
+    "returncode": 0,
+    "stderr": "",
+    "stdout": ""
+  },
+  {
+    "file": "unary_sub_minus.dl",
+    "outcome": "accept",
+    "returncode": 0,
+    "stderr": "",
+    "stdout": ""
+  }
+]

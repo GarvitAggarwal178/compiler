@@ -1,0 +1,6 @@
+// Associativity: '*'/'/'/'%' are left-associative (grammar: mul ::= mul
+// ('*'|'/'|'%') unary | unary, left recursion). Expected: (100 / 10) / 2
+// = 5, not 100 / (10 / 2) = 20.
+.decl p(a:number)
+.output p
+p(X) :- X = 100 / 10 / 2.

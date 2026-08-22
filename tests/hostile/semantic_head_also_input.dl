@@ -1,0 +1,9 @@
+// Semantic edge: a relation is both '.input' AND the head of a derivation
+// rule (mixing externally-loaded facts with internally-derived tuples for
+// the same relation).
+.decl q(a:number)
+.input q
+.decl p(a:number)
+.input p
+.output p
+p(X) :- q(X), X > 0.

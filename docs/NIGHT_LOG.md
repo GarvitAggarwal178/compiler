@@ -141,3 +141,22 @@ Append-only. One line per task start/end: task ID, outcome, commit SHA.
   fit at all (reported noisy, not smoothed). transitive_closure_bound
   (no guard) has T_souffle flat Theta(1). Report:
   docs/reports/night02-T6-scaling-crossshape.md.
+- T2 start -- hostile source corpus, cap 90 min, independent (no Lane A
+  dependency).
+- T2 end -- outcome: done. 39 .dl files under tests/hostile/, 31 accept,
+  8 reject. All 14 precedence/associativity files accept and match the
+  grammar-correct reading wherever numerically distinguishable (verified
+  against actual output values, not just parse acceptance). Found:
+  identifiers are ASCII-only (unicode rejected at the lexer); an
+  unterminated block comment silently swallows to EOF (accepts, but
+  produces 0 rules -- worth a rejection-corpus case despite Soufflé not
+  rejecting it); .decl with arity 0 is accepted by full Soufflé though
+  out of this project's own restricted grammar (not a contradiction --
+  blueprint's grammar is a deliberate subset). Fixed a
+  probe0.run_cmd UnicodeDecodeError crash on non-UTF-8 stderr (affects
+  all harness scripts using run_cmd, backward compatible). Caught and
+  fixed a harness gap that had mis-classified 2 files as reject for a
+  missing-facts-file reason rather than a language reason; one is now
+  correctly accept, one remains genuinely inconclusive (facts filename
+  itself too long for the filesystem). Report:
+  docs/reports/night02-T2-hostile.md.

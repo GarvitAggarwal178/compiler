@@ -1,0 +1,7 @@
+// Malformed (by this grammar): ':-' with no head. Blueprint grammar
+// section 4 requires clause ::= atom '.' | atom ':-' body '.' -- there is
+// no headless-rule production, unlike full Soufflé's own output/integrity
+// constraint syntax.
+.decl q(a:number)
+.input q
+:- q(X), X < 0.

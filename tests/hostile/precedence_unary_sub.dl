@@ -1,0 +1,8 @@
+// Precedence: unary '-' scope vs '-' (subtraction). Expected: (-2) - 3 =
+// -5 (unary binds only to "2"), not -(2 - 3) = 1 (unary incorrectly
+// grabbing the whole rest of the expression). These differ numerically,
+// so this actually distinguishes the two groupings, unlike
+// precedence_unary_mul.dl.
+.decl p(a:number)
+.output p
+p(X) :- X = -2 - 3.

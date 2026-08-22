@@ -1,0 +1,6 @@
+// Associativity: '+'/'-' are left-associative (grammar: arith ::= arith
+// ('+'|'-') mul | mul, left recursion). Expected: (10 - 3) - 2 = 5,
+// not 10 - (3 - 2) = 9.
+.decl p(a:number)
+.output p
+p(X) :- X = 10 - 3 - 2.

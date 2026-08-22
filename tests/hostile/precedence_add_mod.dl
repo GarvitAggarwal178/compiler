@@ -1,0 +1,6 @@
+// Precedence: '+' vs '%'. Expected: 1 + (10 % 3) = 2, not (1+10)%3=2 --
+// this pair happens to coincide numerically; kept anyway for completeness,
+// see precedence_sub_mod.dl for a pair that actually distinguishes them.
+.decl p(a:number)
+.output p
+p(X) :- X = 1 + 10 % 3.
