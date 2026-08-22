@@ -90,3 +90,12 @@ Append-only. One line per task start/end: task ID, outcome, commit SHA.
   quantifies over body-only variables too, not just head variables. No
   definition proposed (human's decision). Report:
   docs/reports/night02-T1-allowedness.md.
+- T3 start -- benchmark family fixture generation, cap 60 min, prerequisite none.
+- T3 end -- outcome: done. 38 .facts files generated across 4 shapes (
+  reachability_complement excluded, reuses T6's existing fixtures per
+  SCALE_POINTS.json's own note). Idempotent: 38/38 SHA-256 identical across
+  2 runs. transitive_closure_bound/ancestor_nonancestor reachable-from-1 =
+  50 at every n, confirming core_size=50 as designed. Caught and fixed one
+  bug before trusting output: same_generation_negation's reachable-from-0
+  walk used the wrong edge direction. Report:
+  docs/reports/night02-T3-fixtures.md.
