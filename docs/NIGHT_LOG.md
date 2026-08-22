@@ -188,3 +188,15 @@ Append-only. One line per task start/end: task ID, outcome, commit SHA.
   T_guard number or any other measurement in T5 was affected -- this was
   a side note about the rejection mechanism, not about T_guard itself.
   Full account: docs/reports/night02-T9-diagnostics.md.
+- T9 start -- Soufflé diagnostic catalogue, cap 45 min, independent.
+- T9 end -- outcome: done. Catalogued all 7 error classes (ungrounded
+  variable, arity mismatch, type mismatch [2 message shapes: inference vs
+  literal], undeclared relation, unstratifiable negation, syntax error,
+  duplicate declaration), each with exact first-line message and
+  line/col presence (all 7 carry location info). Cross-checked all 13
+  existing tests/rejection/ cases against real Soufflé: 13/13 consistent
+  with their expected_ground, no corpus revision needed. Found and
+  corrected (logged above, separate commit) a false claim in T5 about
+  Soufflé exiting 0 on a stratification error -- was a Bash-tool/wsl.exe
+  bridge artifact, root-caused and fixed. Report:
+  docs/reports/night02-T9-diagnostics.md.

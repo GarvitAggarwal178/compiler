@@ -1,0 +1,18 @@
+Error: Unable to deduce type for variable y in file prog.dl at line 5
+bar(y) :- foo(x), y = x + 1.
+----^------------------------
+Error: Unable to deduce type for variable x in file prog.dl at line 5
+bar(y) :- foo(x), y = x + 1.
+--------------^--------------
+Following constraints are incompatible:
+   ∃ t : (var(x) <: t) ∧ (var((x+1)) <: t) where t is a base type
+Error: Unable to deduce type for variable y in file prog.dl at line 5
+bar(y) :- foo(x), y = x + 1.
+------------------^----------
+Error: no valid overloads in file prog.dl at line 5
+bar(y) :- foo(x), y = x + 1.
+----------------------^------
+Error: Ambiguous constant (unable to deduce type) in file prog.dl at line 5
+bar(y) :- foo(x), y = x + 1.
+--------------------------^--
+5 errors generated, evaluation aborted

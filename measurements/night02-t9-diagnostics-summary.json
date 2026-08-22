@@ -1,0 +1,128 @@
+[
+  {
+    "ground_module": "arity",
+    "name": "arity_too_few_args",
+    "expected_ground": "arity",
+    "outcome": "reject",
+    "returncode": 1,
+    "stderr": "Error: Mismatching arity of relation foo (expected 2, got 1) in file prog.dl at line 5\nbar(x) :- foo(x).\n----------^-------\n1 errors generated, evaluation aborted",
+    "has_line_col": true
+  },
+  {
+    "ground_module": "arity",
+    "name": "arity_too_many_args",
+    "expected_ground": "arity",
+    "outcome": "reject",
+    "returncode": 1,
+    "stderr": "Error: Mismatching arity of relation foo (expected 1, got 2) in file prog.dl at line 5\nbar(x, y) :- foo(x, y).\n-------------^----------\n1 errors generated, evaluation aborted",
+    "has_line_col": true
+  },
+  {
+    "ground_module": "arity",
+    "name": "arity_mismatch_between_fact_and_decl",
+    "expected_ground": "arity",
+    "outcome": "reject",
+    "returncode": 1,
+    "stderr": "Error: Mismatching arity of relation foo (expected 2, got 3) in file prog.dl at line 3\nfoo(1, 2, 3).\n^-------------\n1 errors generated, evaluation aborted",
+    "has_line_col": true
+  },
+  {
+    "ground_module": "type",
+    "name": "type_number_vs_symbol_across_rule",
+    "expected_ground": "type",
+    "outcome": "reject",
+    "returncode": 1,
+    "stderr": "Error: Unable to deduce type for variable y in file prog.dl at line 5\nbar(y) :- foo(x, y).\n----^----------------\nFollowing constraints are incompatible:\n   Type of variable 'y' should be a subtype of 'number'\n   Type of variable 'y' should be a subtype of 'symbol' in file prog.dl at line 5\nbar(y) :- foo(x, y).\n----------^----------\nWarning: Variable x only occurs once in file prog.dl at line 5\nbar(y) :- foo(x, y).\n--------------^------\n1 errors generated, evaluation aborted",
+    "has_line_col": true
+  },
+  {
+    "ground_module": "type",
+    "name": "type_symbol_in_arithmetic",
+    "expected_ground": "type",
+    "outcome": "reject",
+    "returncode": 1,
+    "stderr": "Error: Unable to deduce type for variable y in file prog.dl at line 5\nbar(y) :- foo(x), y = x + 1.\n----^------------------------\nError: Unable to deduce type for variable x in file prog.dl at line 5\nbar(y) :- foo(x), y = x + 1.\n--------------^--------------\nFollowing constraints are incompatible:\n   \u2203 t : (var(x) <: t) \u2227 (var((x+1)) <: t) where t is a base type\nError: Unable to deduce type for variable y in file prog.dl at line 5\nbar(y) :- foo(x), y = x + 1.\n------------------^----------\nError: no valid overloads in file prog.dl at line 5\nbar(y) :- foo(x), y = x + 1.\n----------------------^------\nError: Ambiguous constant (unable to deduce type) in file prog.dl at line 5\nbar(y) :- foo(x), y = x + 1.\n--------------------------^--\n5 errors generated, evaluation aborted",
+    "has_line_col": true
+  },
+  {
+    "ground_module": "type",
+    "name": "type_mismatched_fact_literal",
+    "expected_ground": "type",
+    "outcome": "reject",
+    "returncode": 1,
+    "stderr": "Error: Symbol constant (type mismatch) in file prog.dl at line 3\nfoo(\"not_a_number\").\n----^----------------\n1 errors generated, evaluation aborted",
+    "has_line_col": true
+  },
+  {
+    "ground_module": "stratification",
+    "name": "stratification_self_negative_cycle",
+    "expected_ground": "stratification",
+    "outcome": "reject",
+    "returncode": 1,
+    "stderr": "Error: Unable to stratify relation(s) {a}\nRelation a in file prog.dl at line 1\n.decl a(x:number)\n------^-----------\nhas cyclic negation in file prog.dl at line 3\na(x) :- a(x), !a(x).\n---------------^-----\n1 errors generated, evaluation aborted",
+    "has_line_col": true
+  },
+  {
+    "ground_module": "stratification",
+    "name": "stratification_mutual_negative_cycle",
+    "expected_ground": "stratification",
+    "outcome": "reject",
+    "returncode": 1,
+    "stderr": "Error: Unable to stratify relation(s) {p,q}\nRelation p in file prog.dl at line 3\n.decl p(x:number)\n------^-----------\nhas cyclic negation in file prog.dl at line 8\nq(x) :- base(x), !p(x).\n------------------^-----\n1 errors generated, evaluation aborted",
+    "has_line_col": true
+  },
+  {
+    "ground_module": "stratification",
+    "name": "stratification_cycle_through_positive_chain",
+    "expected_ground": "stratification",
+    "outcome": "reject",
+    "returncode": 1,
+    "stderr": "Error: Unable to stratify relation(s) {p,q,r}\nRelation q in file prog.dl at line 4\n.decl q(x:number)\n------^-----------\nhas cyclic negation in file prog.dl at line 8\np(x) :- base(x), !q(x).\n------------------^-----\n1 errors generated, evaluation aborted",
+    "has_line_col": true
+  },
+  {
+    "ground_module": "allowedness",
+    "name": "allowedness_head_var_unbound",
+    "expected_ground": "allowedness",
+    "outcome": "reject",
+    "returncode": 1,
+    "stderr": "Error: Ungrounded variable y in file prog.dl at line 5\nbar(x, y) :- foo(x).\n-------^-------------\n1 errors generated, evaluation aborted",
+    "has_line_col": true
+  },
+  {
+    "ground_module": "allowedness",
+    "name": "allowedness_var_only_in_negation",
+    "expected_ground": "allowedness",
+    "outcome": "reject",
+    "returncode": 1,
+    "stderr": "Error: Ungrounded variable y in file prog.dl at line 7\nbar(x, y) :- foo(x), !baz(x, y).\n-------^-------------------------\n1 errors generated, evaluation aborted",
+    "has_line_col": true
+  },
+  {
+    "ground_module": "allowedness",
+    "name": "allowedness_var_only_in_constraint",
+    "expected_ground": "allowedness",
+    "outcome": "reject",
+    "returncode": 1,
+    "stderr": "Error: Ungrounded variable y in file prog.dl at line 5\nbar(x, y) :- foo(x), y > 0.\n-------^--------------------\n1 errors generated, evaluation aborted",
+    "has_line_col": true
+  },
+  {
+    "ground_module": "allowedness",
+    "name": "allowedness_equation_rhs_not_bound",
+    "expected_ground": "allowedness",
+    "outcome": "reject",
+    "returncode": 1,
+    "stderr": "Error: Ungrounded variable y in file prog.dl at line 5\nbar(x, y) :- foo(x), x = y + 1.\n-------^------------------------\n1 errors generated, evaluation aborted",
+    "has_line_col": true
+  },
+  {
+    "ground_module": "undeclared_relation",
+    "name": "undeclared_relation_minimal",
+    "expected_ground": "undeclared_relation",
+    "outcome": "reject",
+    "returncode": 1,
+    "stderr": "Error: Undefined relation undeclared_rel in file diagnostic_undeclared_relation.dl at line 5\np(X) :- undeclared_rel(X).\n--------^------------------\n1 errors generated, evaluation aborted",
+    "has_line_col": true
+  }
+]
