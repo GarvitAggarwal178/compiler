@@ -39,14 +39,23 @@ committed guard (`culprit_cycle_guarded.dl`) instead restricts only `p`
 (positively, acyclically reachable from the query) and leaves `q`/`s` fully
 unbound — see that file's header comment for the full account.
 
-**Harness gotcha found while confirming the rejection above: Soufflé
-exited 0 on this stratification error**, with `Error:` on stderr and no
-output file produced (confirmed: `out.csv` did not exist in the run
-directory). `harness/night02_t5_guarded.py`'s `run()` now checks
-`"Error:" in stderr` in addition to the return code — return code alone
-would have silently treated a rejected program as a successful, empty-
-answer run. Not exercised by T4 (nothing there was rejected), so this did
-not surface until T5.
+**CORRECTED 2026-08-23, during T9:** this report originally claimed
+"Soufflé exited 0 on this stratification error" here, based on one
+interactive Bash-tool invocation through the `wsl.exe` bridge that showed
+`RC=0` alongside the `Error:` text. Re-run 5 times during T9 with output
+redirected to files instead of streamed interactively (two different
+invocation methods, `subprocess.run` and direct shell redirection) —
+**every one of the 5 re-runs returned rc=1, consistently.** The original
+`rc=0` reading was an artifact of the interactive Bash-tool/`wsl.exe`
+bridge racing on live-streamed multi-command output (diagnosed in
+`docs/reports/night02-T9-diagnostics.md`), not a real Soufflé behavior.
+Soufflé returns 1 on this stratification error, as expected — there is no
+harness gotcha here after all. `harness/night02_t5_guarded.py`'s `run()`
+still checks `"Error:" in stderr` in addition to the return code; that
+check is harmless defensive redundancy, not a fix for a real problem.
+Nothing measurement-bearing in this report depended on the retracted
+claim (it was a side note about the rejection, not about `T_guard` itself)
+— no other number in this report is affected.
 
 ## Per-shape tables
 
@@ -173,9 +182,10 @@ across all 6 of T6's points) ported onto this family's relation names.
   `p`'s own rule) rests on `p` being invariant in its first argument across
   its own recursion — stated in the file's header comment, not proven here
   beyond the empirical answer-match at all 5 scale points.
-- The Soufflé-exits-0-on-stratification-error behavior (found this task) was
-  observed on exactly one program; not systematically explored (that would
-  be T9's job, the diagnostic catalogue, later in this batch).
+- (Retracted — see the corrected note above: the originally-reported
+  "Soufflé exits 0 on stratification error" behavior did not reproduce
+  under reliable invocation and was a Bash-tool/`wsl.exe` bridge artifact,
+  not a real Soufflé behavior.)
 
 ## Provenance
 

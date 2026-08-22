@@ -91,9 +91,12 @@ def run(dl_path, facts_dir, workdir, log_name="prof.log"):
         return {"status": "DNF:memcap-8gb"}
     (workdir / "stdout.txt").write_text(proc.stdout)
     (workdir / "stderr.txt").write_text(proc.stderr)
-    # Soufflé can exit 0 on a stratification error while printing "Error:"
-    # to stderr and producing no output -- rc alone is not sufficient
-    # (found empirically this session, culprit_cycle_unsafe_cyclic.dl).
+    # Belt-and-suspenders: rc!=0 already catches Soufflé errors reliably
+    # (re-verified under T9, docs/reports/night02-T9-diagnostics.md -- an
+    # earlier claim here that rc could be 0 on a stratification error was
+    # a Bash-tool/wsl.exe bridge artifact from streamed interactive
+    # output, not a real Soufflé behavior; retracted). Checking stderr too
+    # costs nothing and stays as a second line of defense.
     if proc.returncode != 0 or "Error:" in proc.stderr:
         return {"status": f"error:returncode-{proc.returncode}", "stderr": proc.stderr[:800]}
     return {"status": "ok", "workdir": workdir}

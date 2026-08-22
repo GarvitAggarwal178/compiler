@@ -7,11 +7,11 @@ to declare .input for) and records accept/reject plus the exact
 diagnostic. Gives an oracle-backed expectation for every case before the
 lexer exists.
 
-Note found while writing T5: Soufflé can exit 0 on some rejections while
-still printing "Error:" to stderr and producing no output -- so this
-script treats a run as "reject" if either the return code is nonzero OR
-stderr contains "Error:", same fix already applied in
-harness/night02_t5_guarded.py.
+Treats a run as "reject" if either the return code is nonzero OR stderr
+contains "Error:" -- belt-and-suspenders (rc!=0 alone was sufficient for
+every case actually seen in this run; see docs/reports/
+night02-T9-diagnostics.md for the retraction of an earlier, mistaken claim
+that Soufflé could exit 0 on a real rejection).
 """
 import json
 import sys

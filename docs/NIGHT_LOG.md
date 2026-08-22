@@ -175,3 +175,16 @@ Append-only. One line per task start/end: task ID, outcome, commit SHA.
   (out of this task's scope; IN_GRAMMAR.txt is not under night-02's
   corpus-file prohibitions but census != corpus maintenance). Report:
   docs/reports/night02-T8-grammar-census.md.
+- CORRECTION (found during T9, logged before T9's own start/end lines):
+  T5's report and NIGHT_LOG entry claimed 'Soufflé exited 0 on a
+  stratification error' for culprit_cycle_unsafe_cyclic.dl. Re-run 5 times
+  under T9 with output redirected to files (not streamed interactively) --
+  every re-run returned rc=1, consistently. The original rc=0 reading was
+  a Bash-tool/wsl.exe bridge artifact (racing on live-streamed multi-command
+  terminal output), not real Soufflé behavior. Corrected in
+  docs/reports/night02-T5-guarded.md (marked, not silently edited) and in
+  the two harness files whose comments cited it
+  (harness/night02_t5_guarded.py, harness/night02_t2_hostile.py). No
+  T_guard number or any other measurement in T5 was affected -- this was
+  a side note about the rejection mechanism, not about T_guard itself.
+  Full account: docs/reports/night02-T9-diagnostics.md.
