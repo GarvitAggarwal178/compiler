@@ -200,3 +200,29 @@ Append-only. One line per task start/end: task ID, outcome, commit SHA.
   Soufflé exiting 0 on a stratification error -- was a Bash-tool/wsl.exe
   bridge artifact, root-caused and fixed. Report:
   docs/reports/night02-T9-diagnostics.md.
+- T7 start -- P5 inlining prerequisite, cap 45 min, independent, last task
+  in the queue.
+- T7 end -- outcome: done. Check 1 (|p|>|e|, dead-rule check, done first
+  per instruction): fires at 4/5 T4 scale points, dead only at n=20
+  (flagged as likely fixture-sparsity at that size, not a structural
+  problem -- caught by checking the other 4 points immediately after an
+  initial n=20-only check looked alarming). Check 2: q survives Souffle's
+  inliner, confirmed -- --inline-exclude=q changed nothing at all
+  (byte-identical output with/without), meaning q was never an inlining
+  candidate to begin with (self-recursive), unlike P3's non-recursive q.
+  Check 3: culprit cycle confirmed -- q and s computed at full
+  untransformed size under the automatic transform (exact match to their
+  untransformed totals), only p genuinely restricted -- structurally the
+  same restriction T5's hand-guard makes on purpose, explaining T5's
+  ~1.0x contribution finding for this shape. Report:
+  docs/reports/night02-T7-p5-precheck.md.
+- BATCH END -- all 9 tasks (T1,T3,T4,T5,T6,T2,T8,T9,T7) reached a defined
+  outcome (done, no aborts, no DNFs anywhere in the batch). src/ never
+  touched. One correction issued and logged (T5's stratification rc=0
+  claim, retracted, separate commit). No ESCALATIONS.md entries were
+  needed -- no CLAUDE.md section 5 STOP condition actually fired this
+  batch (the rc=0 anomaly was investigated and resolved as a tooling
+  artifact, not a Soufflé nondeterminism or oracle-disagreement event).
+  Morning summary: docs/reports/night02-summary.md. CLAUDE.md section 5
+  reverts to normal STOP-and-wait semantics as of this line, per the
+  batch directive section 0.
