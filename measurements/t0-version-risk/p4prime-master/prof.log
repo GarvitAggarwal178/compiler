@@ -1,0 +1,608 @@
+{
+ "root": {
+  "program": {
+   "configuration": {
+    "": "/root/compiler/tests/programs/p4prime.dl",
+    "fact-dir": "/root/compiler/fixtures/p2",
+    "include-dir": ".",
+    "jobs": "1",
+    "libraries": "functors",
+    "library-dir": ".",
+    "output-dir": "/root/compiler/measurements/t0-version-risk/p4prime-master",
+    "profile": "/root/compiler/measurements/t0-version-risk/p4prime-master/prof.log",
+    "relationCount": "6",
+    "ruleCount": "7",
+    "version": "2.5",
+    "warn": "all",
+    "wno": "none"
+   },
+   "relation": {
+    "edge": {
+     "loadtime": { "start": 122980986578, "end": 122980986739},
+     "num-tuples": 400,
+     "reads": 0,
+     "source-locator": "/root/compiler/tests/programs/p4prime.dl [1:7-1:11]"
+    },
+    "m_reach": {
+     "maxRSS": {
+      "post": 12280,
+      "pre": 12280
+     },
+     "non-recursive-rule": {
+      "m_reach(1).": {
+       "maxRSS": {
+        "post": 12280,
+        "pre": 12280
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 122980986760, "end": 122980986764},
+       "source-locator": "/root/compiler/tests/programs/p4prime.dl [7:1-7:12]"
+      }
+     },
+     "num-tuples": 1,
+     "reads": 0,
+     "runtime": { "start": 122980986747, "end": 122980986772},
+     "source-locator": "/root/compiler/tests/programs/p4prime.dl [6:7-6:14]"
+    },
+    "node": {
+     "loadtime": { "start": 122980986777, "end": 122980986819},
+     "num-tuples": 200,
+     "reads": 1,
+     "source-locator": "/root/compiler/tests/programs/p4prime.dl [3:7-3:11]"
+    },
+    "q2": {
+     "maxRSS": {
+      "post": 12280,
+      "pre": 12280
+     },
+     "non-recursive-rule": {
+      "q2(y) :- \n   unreach_bf(1,y).": {
+       "atom-frequency": {
+        "q2(y) :- \n   unreach_bf(1,y).": {
+         "unreach_bf": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12280,
+        "pre": 12280
+       },
+       "num-tuples": 30,
+       "runtime": { "start": 122980987411, "end": 122980987413},
+       "source-locator": "/root/compiler/tests/programs/p4prime.dl [18:1-18:26]"
+      }
+     },
+     "num-tuples": 30,
+     "reads": 0,
+     "runtime": { "start": 122980987402, "end": 122980987421},
+     "savetime": { "start": 122980987426, "end": 122980988334},
+     "source-locator": "/root/compiler/tests/programs/p4prime.dl [16:7-16:9]"
+    },
+    "reach_bf": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 122980986899, "end": 122980986900},
+       "maxRSS": {
+        "post": 12280,
+        "pre": 12280
+       },
+       "num-tuples": 7,
+       "recursive-rule": {
+        "reach_bf(x,y) :- \n   m_reach(x),\n   reach_bf(x,z),\n   edge(z,y).": {
+         "0": {
+          "atom-frequency": {
+           "@new_reach_bf(x,y) :- \n   m_reach(x),\n   @delta_reach_bf(x,z),\n   edge(z,y).": {
+            "@delta_reach_bf": {
+             "level": 1,
+             "num-tuples": 0
+            },
+            "edge": {
+             "level": 2,
+             "num-tuples": 0
+            },
+            "m_reach": {
+             "level": 0,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 12280,
+           "pre": 12280
+          },
+          "num-tuples": 7,
+          "runtime": { "start": 122980986863, "end": 122980986867},
+          "source-locator": "/root/compiler/tests/programs/p4prime.dl [11:1-11:55]"
+         }
+        }
+       },
+       "runtime": { "start": 122980986853, "end": 122980986878}
+      },
+      "1": {
+       "copytime": { "start": 122980986935, "end": 122980986936},
+       "maxRSS": {
+        "post": 12280,
+        "pre": 12280
+       },
+       "num-tuples": 10,
+       "recursive-rule": {
+        "reach_bf(x,y) :- \n   m_reach(x),\n   reach_bf(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12280,
+           "pre": 12280
+          },
+          "num-tuples": 10,
+          "runtime": { "start": 122980986906, "end": 122980986909},
+          "source-locator": "/root/compiler/tests/programs/p4prime.dl [11:1-11:55]"
+         }
+        }
+       },
+       "runtime": { "start": 122980986905, "end": 122980986917}
+      },
+      "10": {
+       "copytime": { "start": 122980987260, "end": 122980987262},
+       "maxRSS": {
+        "post": 12280,
+        "pre": 12280
+       },
+       "num-tuples": 5,
+       "recursive-rule": {
+        "reach_bf(x,y) :- \n   m_reach(x),\n   reach_bf(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12280,
+           "pre": 12280
+          },
+          "num-tuples": 5,
+          "runtime": { "start": 122980987235, "end": 122980987237},
+          "source-locator": "/root/compiler/tests/programs/p4prime.dl [11:1-11:55]"
+         }
+        }
+       },
+       "runtime": { "start": 122980987234, "end": 122980987242}
+      },
+      "11": {
+       "copytime": { "start": 122980987295, "end": 122980987296},
+       "maxRSS": {
+        "post": 12280,
+        "pre": 12280
+       },
+       "num-tuples": 1,
+       "recursive-rule": {
+        "reach_bf(x,y) :- \n   m_reach(x),\n   reach_bf(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12280,
+           "pre": 12280
+          },
+          "num-tuples": 1,
+          "runtime": { "start": 122980987266, "end": 122980987269},
+          "source-locator": "/root/compiler/tests/programs/p4prime.dl [11:1-11:55]"
+         }
+        }
+       },
+       "runtime": { "start": 122980987266, "end": 122980987276}
+      },
+      "12": {
+       "copytime": { "start": 122980987327, "end": 122980987328},
+       "maxRSS": {
+        "post": 12280,
+        "pre": 12280
+       },
+       "num-tuples": 1,
+       "recursive-rule": {
+        "reach_bf(x,y) :- \n   m_reach(x),\n   reach_bf(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12280,
+           "pre": 12280
+          },
+          "num-tuples": 1,
+          "runtime": { "start": 122980987300, "end": 122980987301},
+          "source-locator": "/root/compiler/tests/programs/p4prime.dl [11:1-11:55]"
+         }
+        }
+       },
+       "runtime": { "start": 122980987299, "end": 122980987308}
+      },
+      "13": {
+       "maxRSS": {
+        "post": 12280,
+        "pre": 12280
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "reach_bf(x,y) :- \n   m_reach(x),\n   reach_bf(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12280,
+           "pre": 12280
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 122980987341, "end": 122980987343},
+          "source-locator": "/root/compiler/tests/programs/p4prime.dl [11:1-11:55]"
+         }
+        }
+       },
+       "runtime": { "start": 122980987332, "end": 122980987352}
+      },
+      "2": {
+       "copytime": { "start": 122980986972, "end": 122980986976},
+       "maxRSS": {
+        "post": 12280,
+        "pre": 12280
+       },
+       "num-tuples": 18,
+       "recursive-rule": {
+        "reach_bf(x,y) :- \n   m_reach(x),\n   reach_bf(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12280,
+           "pre": 12280
+          },
+          "num-tuples": 18,
+          "runtime": { "start": 122980986950, "end": 122980986955},
+          "source-locator": "/root/compiler/tests/programs/p4prime.dl [11:1-11:55]"
+         }
+        }
+       },
+       "runtime": { "start": 122980986940, "end": 122980986963}
+      },
+      "3": {
+       "copytime": { "start": 122980987011, "end": 122980987014},
+       "maxRSS": {
+        "post": 12280,
+        "pre": 12280
+       },
+       "num-tuples": 31,
+       "recursive-rule": {
+        "reach_bf(x,y) :- \n   m_reach(x),\n   reach_bf(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12280,
+           "pre": 12280
+          },
+          "num-tuples": 31,
+          "runtime": { "start": 122980986979, "end": 122980986987},
+          "source-locator": "/root/compiler/tests/programs/p4prime.dl [11:1-11:55]"
+         }
+        }
+       },
+       "runtime": { "start": 122980986979, "end": 122980986992}
+      },
+      "4": {
+       "copytime": { "start": 122980987055, "end": 122980987058},
+       "maxRSS": {
+        "post": 12280,
+        "pre": 12280
+       },
+       "num-tuples": 29,
+       "recursive-rule": {
+        "reach_bf(x,y) :- \n   m_reach(x),\n   reach_bf(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12280,
+           "pre": 12280
+          },
+          "num-tuples": 29,
+          "runtime": { "start": 122980987018, "end": 122980987028},
+          "source-locator": "/root/compiler/tests/programs/p4prime.dl [11:1-11:55]"
+         }
+        }
+       },
+       "runtime": { "start": 122980987018, "end": 122980987036}
+      },
+      "5": {
+       "copytime": { "start": 122980987090, "end": 122980987092},
+       "maxRSS": {
+        "post": 12280,
+        "pre": 12280
+       },
+       "num-tuples": 25,
+       "recursive-rule": {
+        "reach_bf(x,y) :- \n   m_reach(x),\n   reach_bf(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12280,
+           "pre": 12280
+          },
+          "num-tuples": 25,
+          "runtime": { "start": 122980987063, "end": 122980987073},
+          "source-locator": "/root/compiler/tests/programs/p4prime.dl [11:1-11:55]"
+         }
+        }
+       },
+       "runtime": { "start": 122980987062, "end": 122980987080}
+      },
+      "6": {
+       "copytime": { "start": 122980987144, "end": 122980987146},
+       "maxRSS": {
+        "post": 12280,
+        "pre": 12280
+       },
+       "num-tuples": 16,
+       "recursive-rule": {
+        "reach_bf(x,y) :- \n   m_reach(x),\n   reach_bf(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12280,
+           "pre": 12280
+          },
+          "num-tuples": 16,
+          "runtime": { "start": 122980987105, "end": 122980987114},
+          "source-locator": "/root/compiler/tests/programs/p4prime.dl [11:1-11:55]"
+         }
+        }
+       },
+       "runtime": { "start": 122980987095, "end": 122980987122}
+      },
+      "7": {
+       "copytime": { "start": 122980987186, "end": 122980987188},
+       "maxRSS": {
+        "post": 12280,
+        "pre": 12280
+       },
+       "num-tuples": 14,
+       "recursive-rule": {
+        "reach_bf(x,y) :- \n   m_reach(x),\n   reach_bf(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12280,
+           "pre": 12280
+          },
+          "num-tuples": 14,
+          "runtime": { "start": 122980987150, "end": 122980987158},
+          "source-locator": "/root/compiler/tests/programs/p4prime.dl [11:1-11:55]"
+         }
+        }
+       },
+       "runtime": { "start": 122980987150, "end": 122980987165}
+      },
+      "8": {
+       "copytime": { "start": 122980987211, "end": 122980987213},
+       "maxRSS": {
+        "post": 12280,
+        "pre": 12280
+       },
+       "num-tuples": 6,
+       "recursive-rule": {
+        "reach_bf(x,y) :- \n   m_reach(x),\n   reach_bf(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12280,
+           "pre": 12280
+          },
+          "num-tuples": 6,
+          "runtime": { "start": 122980987192, "end": 122980987198},
+          "source-locator": "/root/compiler/tests/programs/p4prime.dl [11:1-11:55]"
+         }
+        }
+       },
+       "runtime": { "start": 122980987192, "end": 122980987205}
+      },
+      "9": {
+       "copytime": { "start": 122980987231, "end": 122980987232},
+       "maxRSS": {
+        "post": 12280,
+        "pre": 12280
+       },
+       "num-tuples": 4,
+       "recursive-rule": {
+        "reach_bf(x,y) :- \n   m_reach(x),\n   reach_bf(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12280,
+           "pre": 12280
+          },
+          "num-tuples": 4,
+          "runtime": { "start": 122980987216, "end": 122980987218},
+          "source-locator": "/root/compiler/tests/programs/p4prime.dl [11:1-11:55]"
+         }
+        }
+       },
+       "runtime": { "start": 122980987215, "end": 122980987223}
+      }
+     },
+     "maxRSS": {
+      "post": 12280,
+      "pre": 12280
+     },
+     "non-recursive-rule": {
+      "reach_bf(x,y) :- \n   m_reach(x),\n   edge(x,y).": {
+       "atom-frequency": {
+        "reach_bf(x,y) :- \n   m_reach(x),\n   edge(x,y).": {
+         "edge": {
+          "level": 1,
+          "num-tuples": 0
+         },
+         "m_reach": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12280,
+        "pre": 12280
+       },
+       "num-tuples": 3,
+       "runtime": { "start": 122980986835, "end": 122980986839},
+       "source-locator": "/root/compiler/tests/programs/p4prime.dl [10:1-10:40]"
+      }
+     },
+     "num-tuples": 3,
+     "reads": 535,
+     "runtime": { "start": 122980986825, "end": 122980986848},
+     "source-locator": "/root/compiler/tests/programs/p4prime.dl [9:7-9:15]"
+    },
+    "unreach_bf": {
+     "maxRSS": {
+      "post": 12280,
+      "pre": 12280
+     },
+     "non-recursive-rule": {
+      "unreach_bf(x,y) :- \n   m_reach(x),\n   node(x),\n   node(y),\n   !reach_bf(x,y).": {
+       "atom-frequency": {
+        "unreach_bf(x,y) :- \n   m_reach(x),\n   node(x),\n   node(y),\n   !reach_bf(x,y).": {
+         "m_reach": {
+          "level": 0,
+          "num-tuples": 0
+         },
+         "node": {
+          "level": 2,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12280,
+        "pre": 12280
+       },
+       "num-tuples": 30,
+       "runtime": { "start": 122980987376, "end": 122980987389},
+       "source-locator": "/root/compiler/tests/programs/p4prime.dl [14:1-14:65]"
+      }
+     },
+     "num-tuples": 30,
+     "reads": 0,
+     "runtime": { "start": 122980987376, "end": 122980987396},
+     "source-locator": "/root/compiler/tests/programs/p4prime.dl [13:7-13:17]"
+    }
+   },
+   "runtime": { "start": 122980986568, "end": 122980988344},
+   "starttime": { "time": 122980986533},
+   "usage": {
+    "timepoint": {
+     "122980986545": {
+      "maxRSS": 11756,
+      "systemtime": 0,
+      "usertime": 2135
+     },
+     "122980986579": {
+      "maxRSS": 11884,
+      "systemtime": 0,
+      "usertime": 3955
+     },
+     "122980986764": {
+      "maxRSS": 12280,
+      "systemtime": 0,
+      "usertime": 4147
+     },
+     "122980986798": {
+      "maxRSS": 12280,
+      "systemtime": 0,
+      "usertime": 4173
+     },
+     "122980986842": {
+      "maxRSS": 12280,
+      "systemtime": 0,
+      "usertime": 4247
+     },
+     "122980986869": {
+      "maxRSS": 12280,
+      "systemtime": 0,
+      "usertime": 4285
+     },
+     "122980986897": {
+      "maxRSS": 12280,
+      "systemtime": 0,
+      "usertime": 4318
+     },
+     "122980986906": {
+      "maxRSS": 12280,
+      "systemtime": 0,
+      "usertime": 4340
+     },
+     "122980986934": {
+      "maxRSS": 12280,
+      "systemtime": 0,
+      "usertime": 4368
+     },
+     "122980986961": {
+      "maxRSS": 12280,
+      "systemtime": 0,
+      "usertime": 4406
+     },
+     "122980986978": {
+      "maxRSS": 12280,
+      "systemtime": 0,
+      "usertime": 4437
+     },
+     "122980987027": {
+      "maxRSS": 12280,
+      "systemtime": 0,
+      "usertime": 4491
+     },
+     "122980987076": {
+      "maxRSS": 12280,
+      "systemtime": 0,
+      "usertime": 4559
+     },
+     "122980987088": {
+      "maxRSS": 12280,
+      "systemtime": 0,
+      "usertime": 4582
+     },
+     "122980987113": {
+      "maxRSS": 12280,
+      "systemtime": 0,
+      "usertime": 4619
+     },
+     "122980987149": {
+      "maxRSS": 12280,
+      "systemtime": 0,
+      "usertime": 4661
+     },
+     "122980987212": {
+      "maxRSS": 12280,
+      "systemtime": 0,
+      "usertime": 4744
+     },
+     "122980987231": {
+      "maxRSS": 12280,
+      "systemtime": 0,
+      "usertime": 4776
+     },
+     "122980987262": {
+      "maxRSS": 12280,
+      "systemtime": 0,
+      "usertime": 4816
+     },
+     "122980987296": {
+      "maxRSS": 12280,
+      "systemtime": 0,
+      "usertime": 4859
+     },
+     "122980987326": {
+      "maxRSS": 12280,
+      "systemtime": 0,
+      "usertime": 4893
+     },
+     "122980987346": {
+      "maxRSS": 12280,
+      "systemtime": 0,
+      "usertime": 4920
+     },
+     "122980987373": {
+      "maxRSS": 12280,
+      "systemtime": 0,
+      "usertime": 4951
+     },
+     "122980987415": {
+      "maxRSS": 12280,
+      "systemtime": 0,
+      "usertime": 5001
+     },
+     "122980987439": {
+      "maxRSS": 12280,
+      "systemtime": 0,
+      "usertime": 5020
+     }
+    }
+   }
+  }
+ }
+}

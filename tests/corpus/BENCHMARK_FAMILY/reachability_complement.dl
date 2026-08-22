@@ -1,0 +1,30 @@
+// Shape: reachability complement -- the "P2" shape used throughout this
+// project since Phase 0 (docs/reports/probe0.md), unchanged.
+//
+// Lineage, disclosed rather than presented as original (2026-08-22
+// ruling section 3.1): a standard complement-of-transitive-closure
+// construction -- the negation-of-reachability companion to the
+// Beeri-Ramakrishnan bound-query transitive-closure shape
+// (transitive_closure_bound.dl in this family). Not attributed to a
+// single citable paper beyond that lineage; this exact program has been
+// this project's own working example since Probe 0 and is included here
+// for continuity across the correctness/measurement split (2026-08-21
+// corpus ruling section 2), not as a newly "found" canonical benchmark.
+//
+// Fixture: harness/fixtures_lib.py's gen_core_rest_graph.
+
+.decl edge(a:number, b:number)
+.input edge
+.decl node(a:number)
+.input node
+
+.decl reach(a:number, b:number)
+reach(x,y) :- edge(x,y).
+reach(x,y) :- reach(x,z), edge(z,y).
+
+.decl unreach(a:number, b:number)
+unreach(x,y) :- node(x), node(y), !reach(x,y).
+
+.decl q_unreach(b:number)
+.output q_unreach
+q_unreach(y) :- unreach(1,y).

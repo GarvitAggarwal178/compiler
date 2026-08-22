@@ -1,0 +1,26 @@
+// Shape: transitive closure, bound query.
+//
+// Provenance: canonical magic-sets example. Beeri & Ramakrishnan, "On the
+// Power of Magic", PODS 1987 -- transitive closure with a bound source
+// argument is their running example throughout the paper. Also
+// OpenRuleBench's "datalog_recursion" category, test name
+// "transitive_closure" (Liang, Fodor, Wan, Kifer, WWW 2009) -- same
+// shape, independent citation.
+//
+// No negation in this shape; it exists in the family as the positive-
+// fragment baseline (T_none/T_souffle only, no E_recoverable) rather than
+// to test the guard.
+//
+// Fixture: harness/fixtures_lib.py's gen_core_rest_graph (controllable
+// reachable-set size, the P1/Phase-0.5 lesson).
+
+.decl edge(a:number, b:number)
+.input edge
+
+.decl tc(a:number, b:number)
+tc(x,y) :- edge(x,y).
+tc(x,y) :- tc(x,z), edge(z,y).
+
+.decl q_tc(y:number)
+.output q_tc
+q_tc(y) :- tc(1,y).

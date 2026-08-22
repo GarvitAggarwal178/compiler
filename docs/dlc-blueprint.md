@@ -4,7 +4,7 @@
 **Team:** 2
 **Budget:** 15 weeks from 2026-08-20 → 2026-12-03. Realistically ~10 productive weeks.
 **Status:** selected 2026-08-20, pending Probe 0. Not started.
-**Blueprint version:** v1.4
+**Blueprint version:** v1.5 — last spec until M1 exists.
 
 ---
 
@@ -231,14 +231,21 @@ Full ruling: `docs/reports/corpus-ruling-2026-08-21.md`.
   retained unmodified as the historical record of the measurement-corpus attempt,
   header-annotated as superseded for measurement purposes — not deleted, not
   edited.
-- **Measurement corpus:** OpenRuleBench (or the RUBEN repository built on its
-  generators) — external programs *and* external scalable data generators, needed
-  because the three-column table requires scale the correctness corpus can't
-  supply. Pre-registration procedure, floor, and rejected alternative (DOOP):
-  `docs/reports/corpus-ruling-2026-08-21.md` §2.2. **Pre-registration attempted
-  2026-08-21 and blocked** — neither candidate source's actual rule files are
-  reachable; `docs/reports/openrulebench-preregistration.md`. `tests/corpus/
-  MEASUREMENT_PREREG.txt` does not exist.
+- **Measurement corpus, as of v1.5: the canonical benchmark family**
+  (`tests/corpus/BENCHMARK_FAMILY/`), not OpenRuleBench directly — the
+  OpenRuleBench pre-registration attempt (2026-08-21) is blocked, neither
+  candidate source's actual rule files are reachable (`docs/reports/
+  openrulebench-preregistration.md`); `tests/corpus/MEASUREMENT_PREREG.txt`
+  does not exist and will not be created against an unreachable source.
+  **Adopted instead (`docs/reports/corpus-ruling-v1.5.md` §3): the rules are
+  external, the fact generators are ours, and both facts are disclosed.**
+  Five shapes, each citation-traceable to a published source or explicitly
+  disclosed as constructed (`tests/corpus/BENCHMARK_FAMILY/README.md`); every
+  number this corpus produces must state which of the two provenances applies
+  wherever it appears — mixing them silently is the Filter 2 defect. Scale
+  points pre-registered (`SCALE_POINTS.json`), generators validated, **not run**
+  as of v1.5 except `reachability_complement`, which reuses NIGHT-BATCH-01 T6's
+  already-run sweep (`docs/reports/night01-T6-scaling.md`).
 
 ### Headline metric (Filter 3)
 
@@ -375,14 +382,23 @@ long, M3 wins.
    scalable generators) are now separate, §7. Full ruling: `docs/reports/
    corpus-ruling-2026-08-21.md`.
 
-8. **Negation-bearing recursive programs with bound queries may be rare in real
-   corpora.** T3 (n=27, pre-registered subset) found `E_recoverable = 0` on 37%; T4
-   (n=86, broader exploratory pass) found 34% — two independent estimates in
-   agreement. On roughly a third of negation-bearing Datalog programs, Soufflé
-   leaves nothing unrestricted at all, so there is nothing for a guard to recover.
-   This is a real limit on the project's reach, not a corpus artifact (two
-   differently-scoped samples agree), and belongs in the report as a stated
-   boundary, not smoothed over by a favorable-looking average.
+8. **[PROMOTED TO FINDING, 2026-08-22 — no longer an open risk, state it as a
+   result.]** Negation-bearing recursive Datalog with bound queries, at scale,
+   is rare in public corpora. **Three independent sources agree:**
+
+   | Source | Negation-bearing programs | Scale | Zero rate |
+   |---|---|---|---|
+   | Soufflé `tests/`, pre-registered 36 | 31 ran | 3/31 clear 1,000 tuples | 37% (n=27) |
+   | Soufflé `tests/`, exploratory whole tree | 86 | not measured | 34% (n=86) |
+   | OpenRuleBench / RUBEN catalog | 1 shape, 3 scale points | good, but unreachable | n/a |
+
+   The search stopped here (`docs/reports/corpus-ruling-v1.5.md` §2) — this is
+   the answer, not an obstacle to finding one. **This goes in the abstract
+   alongside the `Θ(n)` result (§12's P2-scale benchmark), not in a footnote.**
+   A result that states its own applicability bound is stronger than one that
+   doesn't; an examiner who finds the 34–37% zero rate in the data will assume
+   it was hidden if it isn't stated up front. No fourth corpus hunt — that
+   would be prior-art scanning in a new costume.
 
 ---
 
@@ -394,7 +410,8 @@ long, M3 wins.
 | Q2 | What is the blast radius — one relation, or the whole SCC? | Probe 0, tonight | Run culprit-cycle program |
 | Q3 | Does *Extended Magic for Negation* (~2019) ship a downloadable artifact? If yes, Filter 1 verdict must be re-run. | **Closed** (NIGHT-BATCH-01 T8, 2026-08-20). No artifact found (citation: Tekle & Liu, ICLP 2019, arXiv:1909.08246); Filter 1 verdict unchanged. `docs/OPEN_QUESTIONS.md`. | Two web searches + one page fetch |
 | Q4 | Chen (1997) labeling algorithm vs Balbin (1991): which is implementable in 5 weeks? | end of week 4 | Read Chen first |
-| Q5 | Which Soufflé `tests/` subdirectory is the pre-registered corpus? | **Closed for the correctness corpus** (`tests/corpus/PREREGISTERED.txt`/`IN_GRAMMAR.txt`, Phase 0.6/NIGHT-BATCH-01 T5). **Reopened 2026-08-21 for the measurement corpus** (OpenRuleBench) — **blocked as of the same day**, not resolved: neither candidate source (original distribution, RUBEN) yields the actual rule files; both are unreachable. Catalog metadata found before the block suggests the floor of 8 may not be met regardless (OpenRuleBench's `negation` category is 1 program shape). `docs/reports/openrulebench-preregistration.md`, `docs/ESCALATIONS.md` (2026-08-21). | Mechanical structural predicate over OpenRuleBench, no execution — **blocked, files unobtainable** |
+| Q5 | Which Soufflé `tests/` subdirectory is the pre-registered corpus? | **Closed, both corpora, 2026-08-22.** Correctness: `tests/corpus/PREREGISTERED.txt`/`IN_GRAMMAR.txt` (Phase 0.6/NIGHT-BATCH-01 T5). Measurement: OpenRuleBench route blocked (unreachable sources, `docs/reports/openrulebench-preregistration.md`) — superseded by the canonical benchmark family, `tests/corpus/BENCHMARK_FAMILY/` (§7, `docs/reports/corpus-ruling-v1.5.md` §3). | Closed |
+| Q6 | Does Soufflé master still refuse to demand-restrict negated relations? | **Closed 2026-08-22, same day it was opened — due immediately per T0.** Master `a1303be3` (42 commits past the `2.5` tag): `@neglabel.reach` still appears, still 26,404, `T_souffle`/`T_guard`/`E_recoverable` all identical to 2.5. Differentiator holds; 2.5 pinned. `docs/reports/T0-version-risk.md`. | Clone + build + re-run P2/P4', commit-title scan of the transform path |
 
 ---
 
@@ -404,7 +421,7 @@ long, M3 wins.
 
 | Artifact | What it is | Filter 1 verdict |
 |---|---|---|
-| Soufflé | Reference engine and our oracle. Documentation states relations with negation in their body or in the body of a dependency are not transformed. **This is contradicted by observed behaviour in Soufflé 2.5** (`probe0-p2-on-extract`, `probe0-p3-on-extract`): the negation-*bearing* relation is transformed; only the negat*ed* relation is left fully materialized (`@neglabel.<rel>`). A documentation/behavior discrepancy upstream is noted here as a low-priority side artifact, not pursued as a milestone. | Cite-and-avoid. Do not open `MagicSet.cpp`. |
+| Soufflé | Reference engine and our oracle. Documentation states relations with negation in their body or in the body of a dependency are not transformed. **This is contradicted by observed behaviour in Soufflé 2.5** (`probe0-p2-on-extract`, `probe0-p3-on-extract`): the negation-*bearing* relation is transformed; only the negat*ed* relation is left fully materialized (`@neglabel.<rel>`). A documentation/behavior discrepancy upstream is noted here as a low-priority side artifact, not pursued as a milestone. **Confirmed still true on master as of 2026-08-22** (Q6, `docs/reports/T0-version-risk.md`) — not an artifact of the 2.5 snapshot. **Separately:** subsumption (`<=`/`btree_delete`) combined with `--magic-transform=*` produces genuinely different answer sets pre-fix — confirmed real (`docs/reports/subsumption-repro.md`), confirmed already reported and fixed upstream (souffle-lang/souffle#2322, #2323, PR #2567, merged 2025-12-07, **post-2.5**). This is a known-issue note about our pinned oracle version, not a project finding — subsumption is outside blueprint §4's grammar entirely. | Cite-and-avoid. Do not open `MagicSet.cpp`. |
 | `travitch/datalog` (Haskell) | `MagicSets.hs` comments that negated literals can break stratification and therefore refuses the transform; author explicitly unsure whether the restriction should cover only negated literals or everything defining them. | Cite-and-avoid. **This uncertainty is our research question — quote it in the report.** |
 | Jatalog | Java, semi-naive, stratified negation, no magic sets. | Not substitutable; secondary oracle. |
 | Micinski, Syracuse CIS700 Project 2 | Datalog interpreter as a course project, Soufflé-referenced test files, naive positive fragment scores 90%. | Adjacent coursework. Our project starts where it ends. Cite for honesty. |

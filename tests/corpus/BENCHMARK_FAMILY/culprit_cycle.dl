@@ -1,0 +1,32 @@
+// Shape: culprit-cycle (P5).
+//
+// CONSTRUCTED for testing guard clause (a) (stratification preservation
+// under the magic transform) -- NOT from a published source. Disclosed
+// as constructed, per the 2026-08-22 ruling section 3.1 ("a shape
+// without a citation is one we invented and must be labeled as such").
+// See docs/dlc-blueprint.md section 12 (P5) for the derivation of the
+// negative cycle this shape exercises: under MST with query p(1,.),
+// magic_q(z):-magic_p(1),p^bf(1,z),!s(z) closes magic_q ->~ s -> q ->
+// magic_q. Supersedes P3 (v1.0), which was void -- Souffle's own inliner
+// removed the pivot relation `q` before any transform-safety question
+// was reachable (docs/reports/probe0.md).
+//
+// Fixture: harness/fixtures_lib.py's gen_culprit_cycle_facts.
+
+.decl base(x:number, y:number)     .input base
+.decl e(x:number, y:number)        .input e
+.decl blocked(x:number)            .input blocked
+
+.decl q(x:number, y:number)
+q(x,y) :- base(x,y).
+q(x,y) :- q(x,z), base(z,y).
+
+.decl s(x:number)
+s(x) :- q(x,y), blocked(y).
+
+.decl p(x:number, y:number)
+p(x,y) :- e(x,y).
+p(x,y) :- p(x,z), !s(z), q(z,y).
+
+.decl out(y:number)   .output out
+out(y) :- p(1,y).

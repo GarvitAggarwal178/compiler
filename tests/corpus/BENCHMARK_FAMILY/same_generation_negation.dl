@@ -1,0 +1,35 @@
+// Shape: same-generation with negation.
+//
+// Provenance: the "same generation" (SG) recursive query is a canonical
+// Datalog benchmark -- Ullman, "Principles of Database and Knowledge-Base
+// Systems", Vol I (1988), section on recursive query evaluation; the
+// exact formulation used here (sg(x,x) base case, parent-pair recursive
+// case) is the standard textbook one, unchanged across the literature.
+// The negation extension is motivated by OpenRuleBench's "negation"
+// category (Liang, Fodor, Wan, Kifer, "OpenRuleBench: An Analysis of the
+// Performance of Rule Engines", WWW 2009), test name "same_generation" --
+// OpenRuleBench's own source file could not be obtained
+// (docs/reports/openrulebench-preregistration.md, 2026-08-21) so this is
+// a reconstruction from the well-known problem definition, NOT a copy of
+// OpenRuleBench's exact file. Cite the shape's provenance (Ullman +
+// OpenRuleBench's category), not this file, as OpenRuleBench's own.
+//
+// Fixture: harness/fixtures_lib.py's gen_family_tree (parameters: seed,
+// depth, branching). Root is always node 0.
+
+.decl parent(child:number, par:number)
+.input parent
+
+.decl person(x:number)
+.input person
+
+.decl sg(x:number, y:number)
+sg(x,x) :- person(x).
+sg(x,y) :- parent(x,xp), parent(y,yp), sg(xp,yp), x != y.
+
+.decl notsg(x:number, y:number)
+notsg(x,y) :- person(x), person(y), !sg(x,y).
+
+.decl q_notsg(y:number)
+.output q_notsg
+q_notsg(y) :- notsg(0,y).

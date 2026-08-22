@@ -92,6 +92,66 @@ def gen_random_graph(seed, n=200, target_edges=400):
     return edges
 
 
+def gen_family_tree(seed, depth=6, branching=4):
+    """Deterministic family tree for the same-generation benchmark shape
+    (tests/corpus/BENCHMARK_FAMILY, 2026-08-22 ruling section 3). Root is
+    always named 0 so the bound query is stable across seeds/sizes.
+    Returns (parent_edges, person_ids) where parent_edges are
+    (child, parent) pairs and person_ids covers every node including the
+    root. Branching factor jitters +-1 per node (seeded) so the tree is
+    not perfectly regular, matching real family-tree irregularity without
+    losing determinism."""
+    rng = random.Random(seed)
+    parent_edges = []
+    persons = [0]
+    frontier = [0]
+    next_id = 1
+    for _level in range(depth):
+        new_frontier = []
+        for node in frontier:
+            b = max(1, branching + rng.randint(-1, 1))
+            for _ in range(b):
+                child = next_id
+                next_id += 1
+                parent_edges.append((child, node))
+                persons.append(child)
+                new_frontier.append(child)
+        frontier = new_frontier
+        if not frontier:
+            break
+    return parent_edges, persons
+
+
+def gen_culprit_cycle_facts(seed, n=20, target_base=30, target_e=30, blocked_fraction=0.2):
+    """Facts for the P5 culprit-cycle shape (constructed, not from a
+    published source -- disclosed in tests/corpus/BENCHMARK_FAMILY/
+    culprit_cycle.dl's header comment). Generalizes probe0.build_p3_fixture
+    with a `blocked` relation and a controllable size."""
+    rng = random.Random(seed)
+
+    def rand_edges(count):
+        edges, edge_set = [], set()
+        attempts, max_attempts = 0, count * 20 + 2000
+        while len(edges) < count and attempts < max_attempts:
+            attempts += 1
+            a, b = rng.randint(1, n), rng.randint(1, n)
+            if a == b:
+                continue
+            e = (a, b)
+            if e in edge_set:
+                continue
+            edge_set.add(e)
+            edges.append(e)
+        return edges
+
+    base_edges = rand_edges(target_base)
+    e_edges = rand_edges(target_e)
+    if not any(a == 1 for a, _ in e_edges):
+        e_edges.append((1, rng.randint(2, n)))
+    blocked = [(i,) for i in range(1, n + 1) if rng.random() < blocked_fraction]
+    return base_edges, e_edges, blocked
+
+
 def bfs_reachable(edges, source):
     adj = {}
     for a, b in edges:

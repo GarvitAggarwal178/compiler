@@ -1,0 +1,29 @@
+// Shape: ancestor / non-ancestor.
+//
+// Provenance: standard textbook stratified-negation example. Appears,
+// essentially unchanged, in Ullman, "Principles of Database and
+// Knowledge-Base Systems", Vol I (1988) and in Abiteboul, Hull & Vianu,
+// "Foundations of Databases" (1995), ch. 15 (stratified Datalog). The
+// ancestor/non-ancestor pairing is the standard illustration of why
+// negation needs a positive relation fully computed first (stratum 0)
+// before the negated stratum can be evaluated.
+//
+// Fixture: harness/fixtures_lib.py's gen_core_rest_graph, reusing "edge"
+// as the parent relation (child -> parent), controllable reachable-set
+// size.
+
+.decl parent(child:number, par:number)
+.input parent
+.decl person(x:number)
+.input person
+
+.decl ancestor(x:number, y:number)
+ancestor(x,y) :- parent(x,y).
+ancestor(x,y) :- parent(x,z), ancestor(z,y).
+
+.decl nonancestor(x:number, y:number)
+nonancestor(x,y) :- person(x), person(y), !ancestor(x,y).
+
+.decl q_nonancestor(y:number)
+.output q_nonancestor
+q_nonancestor(y) :- nonancestor(1,y).

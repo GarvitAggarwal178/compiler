@@ -158,3 +158,51 @@ rigor DOOP got).
 OpenRuleBench access problem. M1 (Lane A) still hasn't started — the ruling's own
 §6 says the next session report should lead with M1 or the schedule is fiction;
 this session did not touch `src/` and did not change that.
+
+## 2026-08-22 — Ruling v1.5: version risk closed, benchmark family pre-registered
+
+**What changed:** Applied the "corpus closed, version risk opened" ruling
+(`docs/reports/corpus-ruling-v1.5.md`, saved verbatim as the document of record).
+Blueprint → v1.5, marked "last spec until M1 exists."
+
+**T0 (highest priority, cap 1 hour, used well under):** cloned Soufflé master
+(`a1303be3`, 42 commits past the `2.5` tag), confirmed via commit-title scan that
+only one commit touched the magic-set transform path since 2.5 (the subsumption
+fix already known). Installed missing build deps (`bison`, `flex`, `sqlite3`
+CLI), built master successfully, re-ran P2 and P4' against it. **Result: master
+behaves identically to 2.5** — `@neglabel.reach`=26,404, `T_souffle`=26,465,
+`T_guard`=231, all answer relations sorted-set-equal to the committed 2.5 runs.
+Differentiator holds; 2.5 pinned; new Q6 opened and closed same-day.
+`docs/reports/T0-version-risk.md`.
+
+**§2 corpus hunt closed:** blueprint §9 failure mode #8 promoted to a stated
+finding (three independent sources agree: negation-bearing recursive Datalog
+with bound queries, at scale, is rare — 37%/34%/OpenRuleBench's 1-shape zero
+signal).
+
+**§3.2 canonical benchmark family pre-registered, not run:** five shapes in
+`tests/corpus/BENCHMARK_FAMILY/`, each with a citation (Ullman 1988,
+Beeri-Ramakrishnan 1987, OpenRuleBench's category as motivation where the
+original file was unobtainable) or explicitly disclosed as constructed
+(`culprit_cycle.dl`, for clause (a)). Two new generators added to
+`harness/fixtures_lib.py` (`gen_family_tree`, `gen_culprit_cycle_facts`),
+validated in-memory against every pre-registered scale point
+(`SCALE_POINTS.json`) before committing — no fixture files or measurement
+numbers produced, per instruction. `harness/run_benchmark_family.py`'s
+Soufflé-invocation half deliberately left unimplemented.
+
+**§3.3 DOOP (optional, cap 3 hours, attempted after T0/§3.2 complete):**
+cloned `plast-lab/doop` (the actively-maintained, CI-tested canonical repo —
+252 real `.dl`/`.logic` files in `souffle-logic/`). Requires Java 17 + Gradle
+build + a target `.jar` (+ JRE platform libs from a separate `doop-benchmarks`
+repo for a full analysis) — a materially heavier pipeline than anything else
+this project has run. In progress / outcome pending as this entry is written;
+see the next entry or `docs/reports/T0-version-risk.md`'s sibling report if one
+exists for the final disposition.
+
+**What is now blocked:** Nothing required. DOOP is optional and capped.
+
+**Single next action:** Per the ruling's §5 — no further specs until M1 exists.
+Lexer → precedence parser → decl/type check → allowedness → naive fixpoint →
+semi-naive, three weeks, Lane A, human's track. This session did not touch
+`src/`.

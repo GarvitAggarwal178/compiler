@@ -1,0 +1,62 @@
+{
+  "_note": "Pre-registered scale points, 2026-08-22 ruling section 3.2 step 3, committed before any measurement run against this family. Not run as of this commit -- see README.md.",
+  "same_generation_negation": {
+    "generator": "gen_family_tree",
+    "params_per_point": ["seed", "depth", "branching"],
+    "seed_base": 20260822100,
+    "points": [
+      {"depth": 4, "branching": 4},
+      {"depth": 5, "branching": 4},
+      {"depth": 6, "branching": 4},
+      {"depth": 7, "branching": 4}
+    ],
+    "note": "seed = seed_base + depth. Root is always node 0 (q_notsg query is notsg(0,y))."
+  },
+  "transitive_closure_bound": {
+    "generator": "gen_core_rest_graph",
+    "params_per_point": ["seed", "n", "core_size", "target_edges"],
+    "seed_base": 20260822200,
+    "core_size": 50,
+    "points": [
+      {"n": 500, "target_edges": 1000},
+      {"n": 1000, "target_edges": 2000},
+      {"n": 2000, "target_edges": 4000},
+      {"n": 4000, "target_edges": 8000},
+      {"n": 8000, "target_edges": 16000}
+    ],
+    "note": "seed = seed_base + n. core_size fixed at 50 across all points (matches P1's reachable-set convention). Query is bound at node 1."
+  },
+  "ancestor_nonancestor": {
+    "generator": "gen_core_rest_graph",
+    "params_per_point": ["seed", "n", "core_size", "target_edges"],
+    "seed_base": 20260822300,
+    "core_size": 50,
+    "points": [
+      {"n": 500, "target_edges": 1000},
+      {"n": 1000, "target_edges": 2000},
+      {"n": 2000, "target_edges": 4000},
+      {"n": 4000, "target_edges": 8000},
+      {"n": 8000, "target_edges": 16000}
+    ],
+    "note": "seed = seed_base + n. `parent` reuses the edge generator's output directly (child -> par pairs). Query is bound at node 1."
+  },
+  "reachability_complement": {
+    "generator": "gen_random_graph",
+    "note": "REUSES NIGHT-BATCH-01 T6's existing scale points and already-generated fixtures (fixtures/p2-scale-<n>/, seed_base 20260820100) rather than re-registering new ones -- this shape and its sweep were already run (docs/reports/night01-T6-scaling.md). No new fixtures needed for this shape.",
+    "points_already_run": [250, 500, 1000, 2000, 4000, 8000]
+  },
+  "culprit_cycle": {
+    "generator": "gen_culprit_cycle_facts",
+    "params_per_point": ["seed", "n", "target_base", "target_e", "blocked_fraction"],
+    "seed_base": 20260822400,
+    "blocked_fraction": 0.2,
+    "points": [
+      {"n": 20, "target_base": 30, "target_e": 30},
+      {"n": 50, "target_base": 75, "target_e": 75},
+      {"n": 100, "target_base": 150, "target_e": 150},
+      {"n": 200, "target_base": 300, "target_e": 300},
+      {"n": 500, "target_base": 750, "target_e": 750}
+    ],
+    "note": "seed = seed_base + n. Before running, per blueprint section 12's P5 instructions: verify the second p rule actually fires (|p| > |e|) and that q's recursive rule survives Souffle's inliner -- a dead rule or an inlined pivot is how P3 (v1.0) failed."
+  }
+}
