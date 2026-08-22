@@ -1,0 +1,32 @@
+// Hand-guarded transform of ../reachability_complement.dl.
+// Binding pattern: bf (query constant bound in the 1st argument, 2nd free).
+// Query constant (1) appears only in the magic seed m_reach(1) -- never
+// hardcoded into a rule head elsewhere. Ports tests/programs/p4prime.dl
+// (Phase 0.6) onto this family's relation names (q_unreach, not q2);
+// structurally identical otherwise, and p4prime.dl was already validated
+// answer-equal to the untransformed program across all of NIGHT-BATCH-01
+// T6's scale points (docs/reports/night01-T6-scaling.md).
+//
+// `reach` is invariant in its 1st argument across its own recursion
+// (reach(x,y):-reach(x,z),edge(z,y) keeps x fixed while extending y), so a
+// single static seed suffices -- no magic-propagation rule is needed, unlike
+// ancestor_nonancestor_guarded.dl below.
+
+.decl edge(a:number, b:number)
+.input edge
+.decl node(a:number)
+.input node
+
+.decl m_reach(a:number)
+m_reach(1).
+
+.decl reach_bf(a:number, b:number)
+reach_bf(x,y) :- m_reach(x), edge(x,y).
+reach_bf(x,y) :- m_reach(x), reach_bf(x,z), edge(z,y).
+
+.decl unreach_bf(a:number, b:number)
+unreach_bf(x,y) :- m_reach(x), node(x), node(y), !reach_bf(x,y).
+
+.decl q_unreach(b:number)
+.output q_unreach
+q_unreach(y) :- unreach_bf(1,y).

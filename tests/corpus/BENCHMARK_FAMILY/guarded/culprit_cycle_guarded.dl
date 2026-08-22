@@ -1,0 +1,54 @@
+// Hand-guarded transform of ../culprit_cycle.dl.
+// Binding pattern: bf on p's 1st argument (query constant 1 bound, 2nd
+// free). Query constant (1) appears only in the magic seed m_p(1) -- never
+// hardcoded into a rule head elsewhere.
+//
+// p is invariant in its 1st argument across its own recursion
+// (p(x,y):-p(x,z),!s(z),q(z,y) keeps x fixed), so a single static seed is
+// enough to restrict p itself, mirroring reachability_complement_guarded.dl.
+//
+// q and s are DELIBERATELY LEFT UNRESTRICTED here -- this is not an
+// oversight. A first attempt propagated a magic seed from p_bf's own
+// recursion into q and s (m_q(z):-m_p(x),p_bf(x,z), then restricting q_bf/
+// s_bf by m_q), following the same general pattern as
+// ancestor_nonancestor_guarded.dl. Soufflé rejected that program outright:
+//
+//   Error: Unable to stratify relation(s) {m_q,p_bf,q_bf,s_bf}
+//   ...has cyclic negation...
+//   p_bf(x,y) :- m_p(x), p_bf(x,z), !s_bf(z), q_bf(z,y).
+//
+// -- because m_q depends positively on p_bf (via p_bf's own recursion),
+// and p_bf depends negatively on s_bf which depends on m_q: a negative
+// cycle. This is not a bug to fix; it is P5's own reason for existing
+// (docs/dlc-blueprint.md section 12, P5 derivation comment in
+// ../culprit_cycle.dl) -- the general adornment recreates the exact
+// culprit cycle the shape is constructed to exercise. Per T5 requirement
+// 2 ("a transform violating [answer equality / stratifiability] is
+// discarded, not fixed up"), that derivation is discarded (kept as scratch
+// evidence at measurements/_scratch_night02_t5/culprit_cycle_unsafe_cyclic.dl,
+// not committed as a deliverable) and this partial-restriction version --
+// which only restricts what is positively, acyclically reachable from the
+// query -- is used instead. See docs/reports/night02-T5-guarded.md for the
+// full account and docs/reports/night02-T7-p5-precheck.md for whether the
+// underlying rules even fire on this fixture.
+
+.decl base(x:number, y:number)     .input base
+.decl e(x:number, y:number)        .input e
+.decl blocked(x:number)            .input blocked
+
+.decl m_p(a:number)
+m_p(1).
+
+.decl p_bf(x:number, y:number)
+p_bf(x,y) :- m_p(x), e(x,y).
+p_bf(x,y) :- m_p(x), p_bf(x,z), !s(z), q(z,y).
+
+.decl q(x:number, y:number)
+q(x,y) :- base(x,y).
+q(x,y) :- q(x,z), base(z,y).
+
+.decl s(x:number)
+s(x) :- q(x,y), blocked(y).
+
+.decl out(y:number)   .output out
+out(y) :- p_bf(1,y).

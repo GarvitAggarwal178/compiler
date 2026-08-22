@@ -1,0 +1,279 @@
+{
+ "root": {
+  "program": {
+   "configuration": {
+    "": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/guarded/same_generation_negation_guarded.dl",
+    "fact-dir": "/root/compiler/fixtures/benchmark-family/same_generation_negation/d4_b4",
+    "include-dir": ".",
+    "jobs": "1",
+    "libraries": "functors",
+    "library-dir": ".",
+    "output-dir": "/root/compiler/measurements/night02-t5/same_generation_negation/d4_b4-guard",
+    "profile": "prof.log",
+    "relationCount": "6",
+    "ruleCount": "10",
+    "version": "2.5",
+    "warn": "all",
+    "wno": "none"
+   },
+   "relation": {
+    "m_sg": {
+     "iteration": {
+      "0": {
+       "maxRSS": {
+        "post": 12148,
+        "pre": 12148
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "m_sg(xp) :- \n   m_sg(x),\n   parent(x,xp).": {
+         "0": {
+          "atom-frequency": {
+           "@new_m_sg(xp) :- \n   @delta_m_sg(x),\n   parent(x,xp).": {
+            "@delta_m_sg": {
+             "level": 0,
+             "num-tuples": 0
+            },
+            "parent": {
+             "level": 1,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 12148,
+           "pre": 12148
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 173480607410, "end": 173480607415},
+          "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/guarded/same_generation_negation_guarded.dl [29:1-29:35]"
+         }
+        }
+       },
+       "runtime": { "start": 173480607410, "end": 173480607424}
+      }
+     },
+     "maxRSS": {
+      "post": 12148,
+      "pre": 12020
+     },
+     "non-recursive-rule": {
+      "m_sg(0).": {
+       "maxRSS": {
+        "post": 12148,
+        "pre": 12020
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 173480607390, "end": 173480607394},
+       "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/guarded/same_generation_negation_guarded.dl [28:1-28:9]"
+      }
+     },
+     "num-tuples": 1,
+     "reads": 0,
+     "runtime": { "start": 173480607378, "end": 173480607402},
+     "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/guarded/same_generation_negation_guarded.dl [27:7-27:11]"
+    },
+    "notsg_bf": {
+     "maxRSS": {
+      "post": 12276,
+      "pre": 12276
+     },
+     "non-recursive-rule": {
+      "notsg_bf(x,y) :- \n   m_sg(x),\n   person(x),\n   person(y),\n   !sg_bf(x,y).": {
+       "atom-frequency": {
+        "notsg_bf(x,y) :- \n   m_sg(x),\n   person(x),\n   person(y),\n   !sg_bf(x,y).": {
+         "m_sg": {
+          "level": 0,
+          "num-tuples": 0
+         },
+         "person": {
+          "level": 2,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12276,
+        "pre": 12276
+       },
+       "num-tuples": 225,
+       "runtime": { "start": 173480607505, "end": 173480607522},
+       "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/guarded/same_generation_negation_guarded.dl [36:1-36:61]"
+      }
+     },
+     "num-tuples": 225,
+     "reads": 0,
+     "runtime": { "start": 173480607504, "end": 173480607529},
+     "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/guarded/same_generation_negation_guarded.dl [35:7-35:15]"
+    },
+    "parent": {
+     "loadtime": { "start": 173480605639, "end": 173480607032},
+     "num-tuples": 225,
+     "reads": 0,
+     "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/guarded/same_generation_negation_guarded.dl [22:7-22:13]"
+    },
+    "person": {
+     "loadtime": { "start": 173480607043, "end": 173480607367},
+     "num-tuples": 226,
+     "reads": 2,
+     "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/guarded/same_generation_negation_guarded.dl [24:7-24:13]"
+    },
+    "q_notsg": {
+     "maxRSS": {
+      "post": 12276,
+      "pre": 12276
+     },
+     "non-recursive-rule": {
+      "q_notsg(y) :- \n   notsg_bf(0,y).": {
+       "atom-frequency": {
+        "q_notsg(y) :- \n   notsg_bf(0,y).": {
+         "notsg_bf": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12276,
+        "pre": 12276
+       },
+       "num-tuples": 225,
+       "runtime": { "start": 173480607542, "end": 173480607550},
+       "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/guarded/same_generation_negation_guarded.dl [40:1-40:29]"
+      }
+     },
+     "num-tuples": 225,
+     "reads": 0,
+     "runtime": { "start": 173480607533, "end": 173480607557},
+     "savetime": { "start": 173480607561, "end": 173480607703},
+     "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/guarded/same_generation_negation_guarded.dl [38:7-38:14]"
+    },
+    "sg_bf": {
+     "iteration": {
+      "0": {
+       "maxRSS": {
+        "post": 12276,
+        "pre": 12276
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "sg_bf(x,y) :- \n   m_sg(x),\n   parent(x,xp),\n   parent(y,yp),\n   sg_bf(xp,yp),\n   x != y.": {
+         "0": {
+          "atom-frequency": {
+           "@new_sg_bf(x,y) :- \n   m_sg(x),\n   parent(x,xp),\n   parent(y,yp),\n   @delta_sg_bf(xp,yp),\n   x != y.": {
+            "m_sg": {
+             "level": 0,
+             "num-tuples": 0
+            },
+            "parent": {
+             "level": 1,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 12276,
+           "pre": 12276
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 173480607473, "end": 173480607474},
+          "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/guarded/same_generation_negation_guarded.dl [33:1-33:71]"
+         }
+        }
+       },
+       "runtime": { "start": 173480607463, "end": 173480607483}
+      }
+     },
+     "maxRSS": {
+      "post": 12276,
+      "pre": 12148
+     },
+     "non-recursive-rule": {
+      "sg_bf(x,x) :- \n   m_sg(x),\n   person(x).": {
+       "atom-frequency": {
+        "sg_bf(x,x) :- \n   m_sg(x),\n   person(x).": {
+         "m_sg": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12276,
+        "pre": 12148
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 173480607447, "end": 173480607450},
+       "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/guarded/same_generation_negation_guarded.dl [32:1-32:34]"
+      }
+     },
+     "num-tuples": 1,
+     "reads": 226,
+     "runtime": { "start": 173480607446, "end": 173480607458},
+     "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/guarded/same_generation_negation_guarded.dl [31:7-31:12]"
+    }
+   },
+   "runtime": { "start": 173480605633, "end": 173480607710},
+   "starttime": { "time": 173480605599},
+   "usage": {
+    "timepoint": {
+     "173480605618": {
+      "maxRSS": 11496,
+      "systemtime": 29592,
+      "usertime": 3288
+     },
+     "173480606715": {
+      "maxRSS": 11752,
+      "systemtime": 31585,
+      "usertime": 3509
+     },
+     "173480607068": {
+      "maxRSS": 12020,
+      "systemtime": 31694,
+      "usertime": 3521
+     },
+     "173480607403": {
+      "maxRSS": 12148,
+      "systemtime": 31943,
+      "usertime": 3549
+     },
+     "173480607411": {
+      "maxRSS": 12148,
+      "systemtime": 31957,
+      "usertime": 3550
+     },
+     "173480607444": {
+      "maxRSS": 12148,
+      "systemtime": 31987,
+      "usertime": 3554
+     },
+     "173480607477": {
+      "maxRSS": 12276,
+      "systemtime": 32023,
+      "usertime": 3558
+     },
+     "173480607502": {
+      "maxRSS": 12276,
+      "systemtime": 32052,
+      "usertime": 3561
+     },
+     "173480607506": {
+      "maxRSS": 12276,
+      "systemtime": 32063,
+      "usertime": 3562
+     },
+     "173480607547": {
+      "maxRSS": 12276,
+      "systemtime": 32099,
+      "usertime": 3566
+     },
+     "173480607575": {
+      "maxRSS": 12276,
+      "systemtime": 32121,
+      "usertime": 3569
+     }
+    }
+   }
+  }
+ }
+}

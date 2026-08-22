@@ -1,0 +1,8 @@
+Error: Unable to stratify relation(s) {m_q,p_bf,q_bf,s_bf}
+Relation s_bf in file culprit_cycle_unsafe_cyclic.dl at line 27
+.decl s_bf(x:number)
+------^--------------
+has cyclic negation in file culprit_cycle_unsafe_cyclic.dl at line 18
+p_bf(x,y) :- m_p(x), p_bf(x,z), !s_bf(z), q_bf(z,y).
+---------------------------------^-------------------
+1 errors generated, evaluation aborted

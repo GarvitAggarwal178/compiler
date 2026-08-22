@@ -1,0 +1,778 @@
+{
+ "root": {
+  "program": {
+   "configuration": {
+    "": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/guarded/reachability_complement_guarded.dl",
+    "fact-dir": "/root/compiler/fixtures/p2-scale-2000",
+    "include-dir": ".",
+    "jobs": "1",
+    "libraries": "functors",
+    "library-dir": ".",
+    "output-dir": "/root/compiler/measurements/night02-t5/reachability_complement/n2000-guard",
+    "profile": "prof.log",
+    "relationCount": "6",
+    "ruleCount": "7",
+    "version": "2.5",
+    "warn": "all",
+    "wno": "none"
+   },
+   "relation": {
+    "edge": {
+     "loadtime": { "start": 173480978600, "end": 173480980259},
+     "num-tuples": 4000,
+     "reads": 0,
+     "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/guarded/reachability_complement_guarded.dl [15:7-15:11]"
+    },
+    "m_reach": {
+     "maxRSS": {
+      "post": 12484,
+      "pre": 12356
+     },
+     "non-recursive-rule": {
+      "m_reach(1).": {
+       "maxRSS": {
+        "post": 12484,
+        "pre": 12356
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 173480980281, "end": 173480980285},
+       "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/guarded/reachability_complement_guarded.dl [21:1-21:12]"
+      }
+     },
+     "num-tuples": 1,
+     "reads": 0,
+     "runtime": { "start": 173480980269, "end": 173480980293},
+     "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/guarded/reachability_complement_guarded.dl [20:7-20:14]"
+    },
+    "node": {
+     "loadtime": { "start": 173480980298, "end": 173480980998},
+     "num-tuples": 2000,
+     "reads": 1,
+     "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/guarded/reachability_complement_guarded.dl [17:7-17:11]"
+    },
+    "q_unreach": {
+     "maxRSS": {
+      "post": 12612,
+      "pre": 12612
+     },
+     "non-recursive-rule": {
+      "q_unreach(y) :- \n   unreach_bf(1,y).": {
+       "atom-frequency": {
+        "q_unreach(y) :- \n   unreach_bf(1,y).": {
+         "unreach_bf": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12612,
+        "pre": 12612
+       },
+       "num-tuples": 461,
+       "runtime": { "start": 173480982915, "end": 173480982943},
+       "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/guarded/reachability_complement_guarded.dl [32:1-32:33]"
+      }
+     },
+     "num-tuples": 461,
+     "reads": 0,
+     "runtime": { "start": 173480982897, "end": 173480982956},
+     "savetime": { "start": 173480982963, "end": 173480983322},
+     "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/guarded/reachability_complement_guarded.dl [30:7-30:16]"
+    },
+    "reach_bf": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 173480981074, "end": 173480981076},
+       "maxRSS": {
+        "post": 12612,
+        "pre": 12484
+       },
+       "num-tuples": 2,
+       "recursive-rule": {
+        "reach_bf(x,y) :- \n   m_reach(x),\n   reach_bf(x,z),\n   edge(z,y).": {
+         "0": {
+          "atom-frequency": {
+           "@new_reach_bf(x,y) :- \n   m_reach(x),\n   @delta_reach_bf(x,z),\n   edge(z,y).": {
+            "@delta_reach_bf": {
+             "level": 1,
+             "num-tuples": 0
+            },
+            "edge": {
+             "level": 2,
+             "num-tuples": 0
+            },
+            "m_reach": {
+             "level": 0,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 12612,
+           "pre": 12484
+          },
+          "num-tuples": 2,
+          "runtime": { "start": 173480981041, "end": 173480981046},
+          "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/guarded/reachability_complement_guarded.dl [25:1-25:55]"
+         }
+        }
+       },
+       "runtime": { "start": 173480981041, "end": 173480981054}
+      },
+      "1": {
+       "copytime": { "start": 173480981110, "end": 173480981111},
+       "maxRSS": {
+        "post": 12612,
+        "pre": 12612
+       },
+       "num-tuples": 5,
+       "recursive-rule": {
+        "reach_bf(x,y) :- \n   m_reach(x),\n   reach_bf(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12612,
+           "pre": 12612
+          },
+          "num-tuples": 5,
+          "runtime": { "start": 173480981081, "end": 173480981084},
+          "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/guarded/reachability_complement_guarded.dl [25:1-25:55]"
+         }
+        }
+       },
+       "runtime": { "start": 173480981080, "end": 173480981091}
+      },
+      "10": {
+       "copytime": { "start": 173480982051, "end": 173480982076},
+       "maxRSS": {
+        "post": 12612,
+        "pre": 12612
+       },
+       "num-tuples": 294,
+       "recursive-rule": {
+        "reach_bf(x,y) :- \n   m_reach(x),\n   reach_bf(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12612,
+           "pre": 12612
+          },
+          "num-tuples": 294,
+          "runtime": { "start": 173480981888, "end": 173480982022},
+          "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/guarded/reachability_complement_guarded.dl [25:1-25:55]"
+         }
+        }
+       },
+       "runtime": { "start": 173480981879, "end": 173480982031}
+      },
+      "11": {
+       "copytime": { "start": 173480982230, "end": 173480982249},
+       "maxRSS": {
+        "post": 12612,
+        "pre": 12612
+       },
+       "num-tuples": 184,
+       "recursive-rule": {
+        "reach_bf(x,y) :- \n   m_reach(x),\n   reach_bf(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12612,
+           "pre": 12612
+          },
+          "num-tuples": 184,
+          "runtime": { "start": 173480982081, "end": 173480982199},
+          "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/guarded/reachability_complement_guarded.dl [25:1-25:55]"
+         }
+        }
+       },
+       "runtime": { "start": 173480982080, "end": 173480982208}
+      },
+      "12": {
+       "copytime": { "start": 173480982359, "end": 173480982369},
+       "maxRSS": {
+        "post": 12612,
+        "pre": 12612
+       },
+       "num-tuples": 85,
+       "recursive-rule": {
+        "reach_bf(x,y) :- \n   m_reach(x),\n   reach_bf(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12612,
+           "pre": 12612
+          },
+          "num-tuples": 85,
+          "runtime": { "start": 173480982254, "end": 173480982330},
+          "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/guarded/reachability_complement_guarded.dl [25:1-25:55]"
+         }
+        }
+       },
+       "runtime": { "start": 173480982254, "end": 173480982338}
+      },
+      "13": {
+       "copytime": { "start": 173480982439, "end": 173480982444},
+       "maxRSS": {
+        "post": 12612,
+        "pre": 12612
+       },
+       "num-tuples": 38,
+       "recursive-rule": {
+        "reach_bf(x,y) :- \n   m_reach(x),\n   reach_bf(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12612,
+           "pre": 12612
+          },
+          "num-tuples": 38,
+          "runtime": { "start": 173480982373, "end": 173480982408},
+          "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/guarded/reachability_complement_guarded.dl [25:1-25:55]"
+         }
+        }
+       },
+       "runtime": { "start": 173480982372, "end": 173480982416}
+      },
+      "14": {
+       "copytime": { "start": 173480982501, "end": 173480982505},
+       "maxRSS": {
+        "post": 12612,
+        "pre": 12612
+       },
+       "num-tuples": 19,
+       "recursive-rule": {
+        "reach_bf(x,y) :- \n   m_reach(x),\n   reach_bf(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12612,
+           "pre": 12612
+          },
+          "num-tuples": 19,
+          "runtime": { "start": 173480982449, "end": 173480982466},
+          "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/guarded/reachability_complement_guarded.dl [25:1-25:55]"
+         }
+        }
+       },
+       "runtime": { "start": 173480982449, "end": 173480982479}
+      },
+      "15": {
+       "copytime": { "start": 173480982550, "end": 173480982553},
+       "maxRSS": {
+        "post": 12612,
+        "pre": 12612
+       },
+       "num-tuples": 12,
+       "recursive-rule": {
+        "reach_bf(x,y) :- \n   m_reach(x),\n   reach_bf(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12612,
+           "pre": 12612
+          },
+          "num-tuples": 12,
+          "runtime": { "start": 173480982510, "end": 173480982522},
+          "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/guarded/reachability_complement_guarded.dl [25:1-25:55]"
+         }
+        }
+       },
+       "runtime": { "start": 173480982509, "end": 173480982529}
+      },
+      "16": {
+       "copytime": { "start": 173480982591, "end": 173480982593},
+       "maxRSS": {
+        "post": 12612,
+        "pre": 12612
+       },
+       "num-tuples": 3,
+       "recursive-rule": {
+        "reach_bf(x,y) :- \n   m_reach(x),\n   reach_bf(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12612,
+           "pre": 12612
+          },
+          "num-tuples": 3,
+          "runtime": { "start": 173480982558, "end": 173480982564},
+          "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/guarded/reachability_complement_guarded.dl [25:1-25:55]"
+         }
+        }
+       },
+       "runtime": { "start": 173480982557, "end": 173480982571}
+      },
+      "17": {
+       "copytime": { "start": 173480982626, "end": 173480982627},
+       "maxRSS": {
+        "post": 12612,
+        "pre": 12612
+       },
+       "num-tuples": 2,
+       "recursive-rule": {
+        "reach_bf(x,y) :- \n   m_reach(x),\n   reach_bf(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12612,
+           "pre": 12612
+          },
+          "num-tuples": 2,
+          "runtime": { "start": 173480982597, "end": 173480982601},
+          "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/guarded/reachability_complement_guarded.dl [25:1-25:55]"
+         }
+        }
+       },
+       "runtime": { "start": 173480982596, "end": 173480982608}
+      },
+      "18": {
+       "maxRSS": {
+        "post": 12612,
+        "pre": 12612
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "reach_bf(x,y) :- \n   m_reach(x),\n   reach_bf(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12612,
+           "pre": 12612
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 173480982632, "end": 173480982635},
+          "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/guarded/reachability_complement_guarded.dl [25:1-25:55]"
+         }
+        }
+       },
+       "runtime": { "start": 173480982631, "end": 173480982645}
+      },
+      "2": {
+       "copytime": { "start": 173480981157, "end": 173480981158},
+       "maxRSS": {
+        "post": 12612,
+        "pre": 12612
+       },
+       "num-tuples": 6,
+       "recursive-rule": {
+        "reach_bf(x,y) :- \n   m_reach(x),\n   reach_bf(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12612,
+           "pre": 12612
+          },
+          "num-tuples": 6,
+          "runtime": { "start": 173480981125, "end": 173480981129},
+          "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/guarded/reachability_complement_guarded.dl [25:1-25:55]"
+         }
+        }
+       },
+       "runtime": { "start": 173480981116, "end": 173480981138}
+      },
+      "3": {
+       "copytime": { "start": 173480981205, "end": 173480981207},
+       "maxRSS": {
+        "post": 12612,
+        "pre": 12612
+       },
+       "num-tuples": 15,
+       "recursive-rule": {
+        "reach_bf(x,y) :- \n   m_reach(x),\n   reach_bf(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12612,
+           "pre": 12612
+          },
+          "num-tuples": 15,
+          "runtime": { "start": 173480981171, "end": 173480981177},
+          "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/guarded/reachability_complement_guarded.dl [25:1-25:55]"
+         }
+        }
+       },
+       "runtime": { "start": 173480981162, "end": 173480981185}
+      },
+      "4": {
+       "copytime": { "start": 173480981257, "end": 173480981259},
+       "maxRSS": {
+        "post": 12612,
+        "pre": 12612
+       },
+       "num-tuples": 23,
+       "recursive-rule": {
+        "reach_bf(x,y) :- \n   m_reach(x),\n   reach_bf(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12612,
+           "pre": 12612
+          },
+          "num-tuples": 23,
+          "runtime": { "start": 173480981220, "end": 173480981230},
+          "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/guarded/reachability_complement_guarded.dl [25:1-25:55]"
+         }
+        }
+       },
+       "runtime": { "start": 173480981211, "end": 173480981238}
+      },
+      "5": {
+       "copytime": { "start": 173480981313, "end": 173480981316},
+       "maxRSS": {
+        "post": 12612,
+        "pre": 12612
+       },
+       "num-tuples": 38,
+       "recursive-rule": {
+        "reach_bf(x,y) :- \n   m_reach(x),\n   reach_bf(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12612,
+           "pre": 12612
+          },
+          "num-tuples": 38,
+          "runtime": { "start": 173480981272, "end": 173480981285},
+          "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/guarded/reachability_complement_guarded.dl [25:1-25:55]"
+         }
+        }
+       },
+       "runtime": { "start": 173480981263, "end": 173480981293}
+      },
+      "6": {
+       "copytime": { "start": 173480981444, "end": 173480981452},
+       "maxRSS": {
+        "post": 12612,
+        "pre": 12612
+       },
+       "num-tuples": 84,
+       "recursive-rule": {
+        "reach_bf(x,y) :- \n   m_reach(x),\n   reach_bf(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12612,
+           "pre": 12612
+          },
+          "num-tuples": 84,
+          "runtime": { "start": 173480981360, "end": 173480981400},
+          "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/guarded/reachability_complement_guarded.dl [25:1-25:55]"
+         }
+        }
+       },
+       "runtime": { "start": 173480981320, "end": 173480981417}
+      },
+      "7": {
+       "copytime": { "start": 173480981537, "end": 173480981549},
+       "maxRSS": {
+        "post": 12612,
+        "pre": 12612
+       },
+       "num-tuples": 148,
+       "recursive-rule": {
+        "reach_bf(x,y) :- \n   m_reach(x),\n   reach_bf(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12612,
+           "pre": 12612
+          },
+          "num-tuples": 148,
+          "runtime": { "start": 173480981459, "end": 173480981509},
+          "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/guarded/reachability_complement_guarded.dl [25:1-25:55]"
+         }
+        }
+       },
+       "runtime": { "start": 173480981457, "end": 173480981517}
+      },
+      "8": {
+       "copytime": { "start": 173480981673, "end": 173480981692},
+       "maxRSS": {
+        "post": 12612,
+        "pre": 12612
+       },
+       "num-tuples": 256,
+       "recursive-rule": {
+        "reach_bf(x,y) :- \n   m_reach(x),\n   reach_bf(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12612,
+           "pre": 12612
+          },
+          "num-tuples": 256,
+          "runtime": { "start": 173480981563, "end": 173480981643},
+          "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/guarded/reachability_complement_guarded.dl [25:1-25:55]"
+         }
+        }
+       },
+       "runtime": { "start": 173480981553, "end": 173480981652}
+      },
+      "9": {
+       "copytime": { "start": 173480981849, "end": 173480981875},
+       "maxRSS": {
+        "post": 12612,
+        "pre": 12612
+       },
+       "num-tuples": 324,
+       "recursive-rule": {
+        "reach_bf(x,y) :- \n   m_reach(x),\n   reach_bf(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12612,
+           "pre": 12612
+          },
+          "num-tuples": 324,
+          "runtime": { "start": 173480981705, "end": 173480981819},
+          "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/guarded/reachability_complement_guarded.dl [25:1-25:55]"
+         }
+        }
+       },
+       "runtime": { "start": 173480981696, "end": 173480981828}
+      }
+     },
+     "maxRSS": {
+      "post": 12484,
+      "pre": 12484
+     },
+     "non-recursive-rule": {
+      "reach_bf(x,y) :- \n   m_reach(x),\n   edge(x,y).": {
+       "atom-frequency": {
+        "reach_bf(x,y) :- \n   m_reach(x),\n   edge(x,y).": {
+         "edge": {
+          "level": 1,
+          "num-tuples": 0
+         },
+         "m_reach": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12484,
+        "pre": 12484
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 173480981019, "end": 173480981026},
+       "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/guarded/reachability_complement_guarded.dl [24:1-24:40]"
+      }
+     },
+     "num-tuples": 1,
+     "reads": 5057,
+     "runtime": { "start": 173480981007, "end": 173480981035},
+     "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/guarded/reachability_complement_guarded.dl [23:7-23:15]"
+    },
+    "unreach_bf": {
+     "maxRSS": {
+      "post": 12612,
+      "pre": 12612
+     },
+     "non-recursive-rule": {
+      "unreach_bf(x,y) :- \n   m_reach(x),\n   node(x),\n   node(y),\n   !reach_bf(x,y).": {
+       "atom-frequency": {
+        "unreach_bf(x,y) :- \n   m_reach(x),\n   node(x),\n   node(y),\n   !reach_bf(x,y).": {
+         "m_reach": {
+          "level": 0,
+          "num-tuples": 0
+         },
+         "node": {
+          "level": 2,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12612,
+        "pre": 12612
+       },
+       "num-tuples": 461,
+       "runtime": { "start": 173480982677, "end": 173480982867},
+       "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/guarded/reachability_complement_guarded.dl [28:1-28:65]"
+      }
+     },
+     "num-tuples": 461,
+     "reads": 0,
+     "runtime": { "start": 173480982675, "end": 173480982880},
+     "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/guarded/reachability_complement_guarded.dl [27:7-27:17]"
+    }
+   },
+   "runtime": { "start": 173480978596, "end": 173480983335},
+   "starttime": { "time": 173480978567},
+   "usage": {
+    "timepoint": {
+     "173480978592": {
+      "maxRSS": 11708,
+      "systemtime": 2226,
+      "usertime": 0
+     },
+     "173480979700": {
+      "maxRSS": 12228,
+      "systemtime": 4247,
+      "usertime": 0
+     },
+     "173480980289": {
+      "maxRSS": 12484,
+      "systemtime": 4247,
+      "usertime": 950
+     },
+     "173480980312": {
+      "maxRSS": 12484,
+      "systemtime": 4247,
+      "usertime": 974
+     },
+     "173480981028": {
+      "maxRSS": 12484,
+      "systemtime": 4247,
+      "usertime": 1553
+     },
+     "173480981053": {
+      "maxRSS": 12612,
+      "systemtime": 4247,
+      "usertime": 1599
+     },
+     "173480981074": {
+      "maxRSS": 12612,
+      "systemtime": 4247,
+      "usertime": 1629
+     },
+     "173480981082": {
+      "maxRSS": 12612,
+      "systemtime": 4247,
+      "usertime": 1649
+     },
+     "173480981109": {
+      "maxRSS": 12612,
+      "systemtime": 4247,
+      "usertime": 1678
+     },
+     "173480981130": {
+      "maxRSS": 12612,
+      "systemtime": 4247,
+      "usertime": 1709
+     },
+     "173480981156": {
+      "maxRSS": 12612,
+      "systemtime": 4247,
+      "usertime": 1738
+     },
+     "173480981176": {
+      "maxRSS": 12612,
+      "systemtime": 4247,
+      "usertime": 1765
+     },
+     "173480981204": {
+      "maxRSS": 12612,
+      "systemtime": 4247,
+      "usertime": 1800
+     },
+     "173480981225": {
+      "maxRSS": 12612,
+      "systemtime": 4247,
+      "usertime": 1827
+     },
+     "173480981256": {
+      "maxRSS": 12612,
+      "systemtime": 4247,
+      "usertime": 1865
+     },
+     "173480981277": {
+      "maxRSS": 12612,
+      "systemtime": 4247,
+      "usertime": 1893
+     },
+     "173480981312": {
+      "maxRSS": 12612,
+      "systemtime": 4247,
+      "usertime": 1934
+     },
+     "173480981396": {
+      "maxRSS": 12612,
+      "systemtime": 4247,
+      "usertime": 2008
+     },
+     "173480981450": {
+      "maxRSS": 12612,
+      "systemtime": 4247,
+      "usertime": 2110
+     },
+     "173480981459": {
+      "maxRSS": 12612,
+      "systemtime": 4247,
+      "usertime": 2133
+     },
+     "173480981540": {
+      "maxRSS": 12612,
+      "systemtime": 4247,
+      "usertime": 2222
+     },
+     "173480981568": {
+      "maxRSS": 12612,
+      "systemtime": 4247,
+      "usertime": 2256
+     },
+     "173480981680": {
+      "maxRSS": 12612,
+      "systemtime": 4247,
+      "usertime": 2379
+     },
+     "173480981711": {
+      "maxRSS": 12612,
+      "systemtime": 4247,
+      "usertime": 2423
+     },
+     "173480981851": {
+      "maxRSS": 12612,
+      "systemtime": 4247,
+      "usertime": 2576
+     },
+     "173480981942": {
+      "maxRSS": 12612,
+      "systemtime": 4247,
+      "usertime": 2627
+     },
+     "173480982080": {
+      "maxRSS": 12612,
+      "systemtime": 4247,
+      "usertime": 2829
+     },
+     "173480982248": {
+      "maxRSS": 12612,
+      "systemtime": 4247,
+      "usertime": 3023
+     },
+     "173480982382": {
+      "maxRSS": 12612,
+      "systemtime": 4247,
+      "usertime": 3171
+     },
+     "173480982445": {
+      "maxRSS": 12612,
+      "systemtime": 4247,
+      "usertime": 3261
+     },
+     "173480982507": {
+      "maxRSS": 12612,
+      "systemtime": 4247,
+      "usertime": 3339
+     },
+     "173480982554": {
+      "maxRSS": 12612,
+      "systemtime": 4247,
+      "usertime": 3399
+     },
+     "173480982591": {
+      "maxRSS": 12612,
+      "systemtime": 4247,
+      "usertime": 3453
+     },
+     "173480982598": {
+      "maxRSS": 12612,
+      "systemtime": 4247,
+      "usertime": 3465
+     },
+     "173480982655": {
+      "maxRSS": 12612,
+      "systemtime": 4247,
+      "usertime": 3549
+     },
+     "173480982680": {
+      "maxRSS": 12612,
+      "systemtime": 4247,
+      "usertime": 3597
+     },
+     "173480982927": {
+      "maxRSS": 12612,
+      "systemtime": 4247,
+      "usertime": 3848
+     }
+    }
+   }
+  }
+ }
+}

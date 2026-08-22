@@ -1,0 +1,40 @@
+// Hand-guarded transform of ../same_generation_negation.dl.
+// Binding pattern: bf on sg's 1st argument (query constant 0 bound, 2nd
+// free). Query constant (0) appears only in the magic seed m_sg(0) and in
+// the final projection notsg_bf(0,y) -- never hardcoded into an
+// intermediate rule head.
+//
+// sg's recursive rule (sg(x,y):-parent(x,xp),parent(y,yp),sg(xp,yp),x!=y)
+// changes the bound argument each step (x -> xp), same shape as
+// ancestor_nonancestor's recursion, so the seed is propagated the same way
+// (m_sg(xp):-m_sg(x),parent(x,xp)) rather than held static. NOTE: this
+// program's 2nd argument (y) is never bound by the adornment at all --
+// parent(y,yp) enumerates over ALL persons regardless of m_sg, because y is
+// the query's free/output variable, not the bound one. This is the textbook
+// difficulty with magic sets on same-generation queries (Beeri & Ramakrishnan
+// and the wider magic-sets literature use sg as a standing counterexample to
+// "magic sets always help"): restricting x does not, in general, shrink the
+// dominant cost of this rule. Reported, not hidden -- see
+// docs/reports/night02-T5-guarded.md for what this shape's fixture (root=0
+// with no parent, per SCALE_POINTS.json's own note) does to this specific
+// measurement.
+
+.decl parent(child:number, par:number)
+.input parent
+.decl person(x:number)
+.input person
+
+.decl m_sg(a:number)
+m_sg(0).
+m_sg(xp) :- m_sg(x), parent(x,xp).
+
+.decl sg_bf(x:number, y:number)
+sg_bf(x,x) :- m_sg(x), person(x).
+sg_bf(x,y) :- m_sg(x), parent(x,xp), parent(y,yp), sg_bf(xp,yp), x!=y.
+
+.decl notsg_bf(x:number, y:number)
+notsg_bf(x,y) :- m_sg(x), person(x), person(y), !sg_bf(x,y).
+
+.decl q_notsg(y:number)
+.output q_notsg
+q_notsg(y) :- notsg_bf(0,y).

@@ -1,0 +1,31 @@
+// SCRATCH, not a T5 deliverable. Tests whether the "natural" general
+// magic-set derivation for culprit_cycle.dl -- propagating a magic seed
+// from p_bf's own recursion into q/s -- recreates the negative-cycle
+// problem the shape (P5) was constructed to exercise. If Soufflé rejects
+// this with a stratification error, that is the expected/interesting
+// result and this file is discarded per T5 requirement 2 (not fixed up);
+// the actual committed guard uses a safe partial restriction instead.
+
+.decl base(x:number, y:number)     .input base
+.decl e(x:number, y:number)        .input e
+.decl blocked(x:number)            .input blocked
+
+.decl m_p(a:number)
+m_p(1).
+
+.decl p_bf(x:number, y:number)
+p_bf(x,y) :- m_p(x), e(x,y).
+p_bf(x,y) :- m_p(x), p_bf(x,z), !s_bf(z), q_bf(z,y).
+
+.decl m_q(a:number)
+m_q(z) :- m_p(x), p_bf(x,z).
+
+.decl q_bf(x:number, y:number)
+q_bf(x,y) :- m_q(x), base(x,y).
+q_bf(x,y) :- m_q(x), q_bf(x,z), base(z,y).
+
+.decl s_bf(x:number)
+s_bf(x) :- m_q(x), q_bf(x,y), blocked(y).
+
+.decl out(y:number)   .output out
+out(y) :- p_bf(1,y).

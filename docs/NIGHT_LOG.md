@@ -112,3 +112,18 @@ Append-only. One line per task start/end: task ID, outcome, commit SHA.
   measurement, not just inspection. excl-copy/incl-copy never diverged
   (no COPY_T anywhere this sweep) -- null result, reported not omitted.
   Report: docs/reports/night02-T4-baseline.md.
+- T5 start -- hand-guarded transforms (T_guard, the headline), cap 150 min,
+  prerequisite T4 (passed). transitive_closure_bound excluded (E_recoverable=0).
+- T5 end -- outcome: done, complete. 4 shapes guarded, 20 scale points, no
+  DNF, no abort -- answers identical to T4 baseline everywhere. Ratios:
+  same_generation_negation 68x-4,371x (explained: query root=0 has no
+  parent in this fixture, verified independently against T4's own
+  q_notsg.csv counts); ancestor_nonancestor 4x-62x (most modest, grows
+  linearly not superlinearly); culprit_cycle ~1.0x (no real contribution --
+  q/s left deliberately unrestricted); reachability_complement 157x-4,244x
+  (matches T6 exactly, confirms p4prime.dl port is correct). Found and
+  discarded (not fixed up) a general-adornment derivation for culprit_cycle
+  that Soufflé rejected for cyclic negation -- this recreates P5's own
+  reason for existing. Also found a harness gotcha: Soufflé can exit 0 on a
+  stratification error (fixed the runner to also check stderr for
+  Error:). Report: docs/reports/night02-T5-guarded.md.

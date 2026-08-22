@@ -1,0 +1,35 @@
+// Hand-guarded transform of ../ancestor_nonancestor.dl.
+// Binding pattern: bf (query constant bound in the 1st argument, 2nd free).
+// Query constant (1) appears only in the magic seed m_ancestor(1) -- never
+// hardcoded into a rule head elsewhere.
+//
+// Unlike reachability_complement (whose recursive relation is invariant in
+// its 1st argument), ancestor's recursion changes the bound argument each
+// step: ancestor(x,y):-parent(x,z),ancestor(z,y) recurses into ancestor(z,y),
+// not ancestor(x,y) -- z, not x, is the new "bound" first argument. A single
+// static seed is not enough; the seed must be *propagated* through parent
+// exactly along the same edges the recursive rule itself follows, which is
+// what the second m_ancestor rule below does. Any (x,z) pair that fires the
+// recursive ancestor_bf rule has already, by that same rule body, satisfied
+// m_ancestor(z) -- so ancestor_bf(z,y) is guaranteed to have been (or be)
+// computed under the same restriction, preserving completeness.
+
+.decl parent(child:number, par:number)
+.input parent
+.decl person(x:number)
+.input person
+
+.decl m_ancestor(a:number)
+m_ancestor(1).
+m_ancestor(z) :- m_ancestor(x), parent(x,z).
+
+.decl ancestor_bf(x:number, y:number)
+ancestor_bf(x,y) :- m_ancestor(x), parent(x,y).
+ancestor_bf(x,y) :- m_ancestor(x), parent(x,z), ancestor_bf(z,y).
+
+.decl nonancestor_bf(x:number, y:number)
+nonancestor_bf(x,y) :- m_ancestor(x), person(x), person(y), !ancestor_bf(x,y).
+
+.decl q_nonancestor(y:number)
+.output q_nonancestor
+q_nonancestor(y) :- nonancestor_bf(1,y).
