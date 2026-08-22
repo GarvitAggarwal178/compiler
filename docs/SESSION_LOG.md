@@ -214,3 +214,20 @@ higher cap or further variants. `docs/reports/doop-attempt.md`.
 Lexer → precedence parser → decl/type check → allowedness → naive fixpoint →
 semi-naive, three weeks, Lane A, human's track. This session did not touch
 `src/`.
+
+## 2026-08-22 — M1 session: J1 allowedness probe, J2 gates, J3 review protocol
+
+**Note:** session opened referencing `docs/ruling-v1.5-final.md`, which does not
+exist (only `docs/reports/corpus-ruling-v1.5.md`, already applied last
+session). Not blocking — this session's task list (J1/J2/J3) is fully
+self-contained in the instructions themselves, nothing in it depends on the
+missing file's content. Noted, not escalated.
+
+`src/` still does not exist as of this session's start; M1 (Lane A) is the
+human's track and untouched here per the hard boundary.
+
+**J1 (done first, per instruction):** 7 allowedness probe programs
+(`tests/programs/allowedness_probe_{a..g}.dl`) run against Soufflé 2.5.
+Accept: a, b, e, g. Reject: c, d, f (`Ungrounded variable X`). No definition
+of allowedness proposed — observed behaviour only, per instruction. Full
+table and per-case notes: `docs/reports/J1-allowedness-probe.md`.
