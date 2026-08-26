@@ -1,0 +1,1 @@
+{"status":"ok","printed":".decl edge(a:number, b:number)\n.input edge\n.decl node(a:number)\n.input node\n.decl reach(a:number, b:number)\n.decl unreach(a:number, b:number)\n.decl q_unreach(b:number)\n.output q_unreach\nreach(x, y) :- edge(x, y).\nreach(x, y) :- reach(x, z), edge(z, y).\nunreach(x, y) :- node(x), node(y), !reach(x, y).\nq_unreach(y) :- unreach(1, y).\n"}

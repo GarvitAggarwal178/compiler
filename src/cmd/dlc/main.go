@@ -6,6 +6,8 @@ import (
 	"fmt"
 	"os"
 
+	"strings"
+
 	"dlc/src/ast"
 	"dlc/src/codegen"
 	"dlc/src/eval"
@@ -14,6 +16,7 @@ import (
 	"dlc/src/parser"
 	"dlc/src/sema"
 	"dlc/src/token"
+	"dlc/src/transform"
 )
 
 func main() {
@@ -50,6 +53,14 @@ func main() {
 			os.Exit(2)
 		}
 		runCodegen(path, os.Args[3])
+	case "emit":
+		transformerName := "passthrough"
+		for _, a := range os.Args[3:] {
+			if v, ok := strings.CutPrefix(a, "--transformer="); ok {
+				transformerName = v
+			}
+		}
+		runEmit(path, transformerName)
 	default:
 		fmt.Fprintf(os.Stderr, "unknown subcommand %q\n", subcommand)
 		os.Exit(2)
@@ -323,6 +334,97 @@ func runCodegen(path, outPath string) {
 
 	out := codegenOutput{Status: "ok"}
 	enc, _ := json.Marshal(out)
+	fmt.Println(string(enc))
+}
+
+// transformerRegistry names every Transformer the CLI can select via
+// --transformer=. Adding a second implementation (e.g. the real magic-set
+// transform) means adding one entry here -- nothing else in main.go
+// changes, per transform/transformer.go's own design note.
+var transformerRegistry = map[string]transform.Transformer{
+	"passthrough": transform.PassThrough{},
+}
+
+type emitOutput struct {
+	Status      string               `json:"status"` // "ok" | "rejected" | "parse_error" | "transform_error"
+	Diagnostics []jsonSemaDiagnostic `json:"diagnostics,omitempty"`
+	ParseErrors []jsonDiagnostic     `json:"parse_errors,omitempty"`
+	Printed     string               `json:"printed,omitempty"`
+	Panic       string               `json:"panic,omitempty"`
+}
+
+// runEmit is T2's entry point: parse -> full sema check -> (if clean)
+// apply the named Transformer -> print the result. This is the M3
+// measurement path's front half -- "dlc decides and emits, Soufflé
+// evaluates" -- so its own evaluator is never invoked here, only
+// parser.Print on whatever *ast.Program the Transformer returns.
+func runEmit(path, transformerName string) {
+	defer func() {
+		if r := recover(); r != nil {
+			out := emitOutput{Status: "panic", Panic: fmt.Sprintf("%v", r)}
+			enc, _ := json.Marshal(out)
+			fmt.Println(string(enc))
+			os.Exit(1)
+		}
+	}()
+
+	src, err := os.ReadFile(path)
+	if err != nil {
+		out := emitOutput{Status: "read_error", Panic: err.Error()}
+		enc, _ := json.Marshal(out)
+		fmt.Println(string(enc))
+		os.Exit(1)
+	}
+
+	prog, perrs := parser.Parse(src)
+	if len(perrs) > 0 {
+		out := emitOutput{Status: "parse_error"}
+		for _, e := range perrs {
+			out.ParseErrors = append(out.ParseErrors, jsonDiagnostic{Span: toJSONSpan(e.Span), Message: e.Message})
+		}
+		enc, _ := json.Marshal(out)
+		fmt.Println(string(enc))
+		return
+	}
+
+	var diags []sema.Diagnostic
+	diags = append(diags, sema.CheckDeclType(prog)...)
+	diags = append(diags, sema.CheckAllowedness(prog)...)
+	stratDiags, stratResult := sema.CheckStratification(prog)
+	diags = append(diags, stratDiags...)
+	if len(diags) > 0 {
+		out := emitOutput{Status: "rejected"}
+		for _, d := range diags {
+			out.Diagnostics = append(out.Diagnostics, jsonSemaDiagnostic{
+				Span: toJSONSpan(d.Span), Category: string(d.Category), Message: d.Message,
+			})
+		}
+		enc, _ := json.Marshal(out)
+		fmt.Println(string(enc))
+		return
+	}
+
+	transformer, ok := transformerRegistry[transformerName]
+	if !ok {
+		out := emitOutput{Status: "transform_error", Panic: fmt.Sprintf("unknown transformer %q", transformerName)}
+		enc, _ := json.Marshal(out)
+		fmt.Println(string(enc))
+		os.Exit(2)
+	}
+	transformed, err := transformer.Transform(prog, stratResult)
+	if err != nil {
+		out := emitOutput{Status: "transform_error", Panic: err.Error()}
+		enc, _ := json.Marshal(out)
+		fmt.Println(string(enc))
+		return
+	}
+
+	out := emitOutput{Status: "ok", Printed: parser.Print(transformed)}
+	enc, err := json.Marshal(out)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "internal error marshaling output: %v\n", err)
+		os.Exit(1)
+	}
 	fmt.Println(string(enc))
 }
 

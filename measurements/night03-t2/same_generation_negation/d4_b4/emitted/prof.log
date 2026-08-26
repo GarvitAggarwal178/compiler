@@ -1,0 +1,393 @@
+{
+ "root": {
+  "program": {
+   "configuration": {
+    "": "/root/compiler/measurements/night03-t2/same_generation_negation/d4_b4/emit/transformed.dl",
+    "fact-dir": "/root/compiler/fixtures/benchmark-family/same_generation_negation/d4_b4",
+    "include-dir": ".",
+    "jobs": "1",
+    "libraries": "functors",
+    "library-dir": ".",
+    "output-dir": "/root/compiler/measurements/night03-t2/same_generation_negation/d4_b4/emitted",
+    "profile": "prof.log",
+    "relationCount": "5",
+    "ruleCount": "6",
+    "version": "2.5",
+    "warn": "all",
+    "wno": "none"
+   },
+   "relation": {
+    "notsg": {
+     "maxRSS": {
+      "post": 13656,
+      "pre": 13656
+     },
+     "non-recursive-rule": {
+      "notsg(x,y) :- \n   person(x),\n   person(y),\n   !sg(x,y).": {
+       "atom-frequency": {
+        "notsg(x,y) :- \n   person(x),\n   person(y),\n   !sg(x,y).": {
+         "person": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 13656,
+        "pre": 13656
+       },
+       "num-tuples": 20620,
+       "runtime": { "start": 705437911, "end": 705440795},
+       "source-locator": "/root/compiler/measurements/night03-t2/same_generation_negation/d4_b4/emit/transformed.dl [11:1-11:48]"
+      }
+     },
+     "num-tuples": 20620,
+     "reads": 0,
+     "runtime": { "start": 705437901, "end": 705440808},
+     "source-locator": "/root/compiler/measurements/night03-t2/same_generation_negation/d4_b4/emit/transformed.dl [6:7-6:12]"
+    },
+    "parent": {
+     "loadtime": { "start": 705420848, "end": 705421056},
+     "num-tuples": 225,
+     "reads": 0,
+     "source-locator": "/root/compiler/measurements/night03-t2/same_generation_negation/d4_b4/emit/transformed.dl [1:7-1:13]"
+    },
+    "person": {
+     "loadtime": { "start": 705421069, "end": 705421154},
+     "num-tuples": 226,
+     "reads": 0,
+     "source-locator": "/root/compiler/measurements/night03-t2/same_generation_negation/d4_b4/emit/transformed.dl [3:7-3:13]"
+    },
+    "q_notsg": {
+     "maxRSS": {
+      "post": 13656,
+      "pre": 13656
+     },
+     "non-recursive-rule": {
+      "q_notsg(y) :- \n   notsg(0,y).": {
+       "atom-frequency": {
+        "q_notsg(y) :- \n   notsg(0,y).": {
+         "notsg": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 13656,
+        "pre": 13656
+       },
+       "num-tuples": 225,
+       "runtime": { "start": 705440921, "end": 705440938},
+       "source-locator": "/root/compiler/measurements/night03-t2/same_generation_negation/d4_b4/emit/transformed.dl [12:1-12:27]"
+      }
+     },
+     "num-tuples": 225,
+     "reads": 0,
+     "runtime": { "start": 705440905, "end": 705440948},
+     "savetime": { "start": 705440953, "end": 705441096},
+     "source-locator": "/root/compiler/measurements/night03-t2/same_generation_negation/d4_b4/emit/transformed.dl [7:7-7:14]"
+    },
+    "sg": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 705423512, "end": 705423565},
+       "maxRSS": {
+        "post": 12504,
+        "pre": 12376
+       },
+       "num-tuples": 706,
+       "recursive-rule": {
+        "sg(x,y) :- \n   parent(x,xp),\n   parent(y,yp),\n   sg(xp,yp),\n   x != y.": {
+         "0": {
+          "atom-frequency": {
+           "@new_sg(x,y) :- \n   parent(x,xp),\n   parent(y,yp),\n   @delta_sg(xp,yp),\n   x != y.": {
+            "parent": {
+             "level": 0,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 12504,
+           "pre": 12376
+          },
+          "num-tuples": 706,
+          "runtime": { "start": 705421231, "end": 705423448},
+          "source-locator": "/root/compiler/measurements/night03-t2/same_generation_negation/d4_b4/emit/transformed.dl [10:1-10:62]"
+         }
+        }
+       },
+       "runtime": { "start": 705421215, "end": 705423471}
+      },
+      "1": {
+       "copytime": { "start": 705425496, "end": 705425730},
+       "maxRSS": {
+        "post": 12504,
+        "pre": 12504
+       },
+       "num-tuples": 2564,
+       "recursive-rule": {
+        "sg(x,y) :- \n   parent(x,xp),\n   parent(y,yp),\n   sg(xp,yp),\n   x != y.": {
+         "0": {
+          "maxRSS": {
+           "post": 12504,
+           "pre": 12504
+          },
+          "num-tuples": 2564,
+          "runtime": { "start": 705423582, "end": 705425464},
+          "source-locator": "/root/compiler/measurements/night03-t2/same_generation_negation/d4_b4/emit/transformed.dl [10:1-10:62]"
+         }
+        }
+       },
+       "runtime": { "start": 705423570, "end": 705425475}
+      },
+      "2": {
+       "copytime": { "start": 705428552, "end": 705429298},
+       "maxRSS": {
+        "post": 12760,
+        "pre": 12504
+       },
+       "num-tuples": 8820,
+       "recursive-rule": {
+        "sg(x,y) :- \n   parent(x,xp),\n   parent(y,yp),\n   sg(xp,yp),\n   x != y.": {
+         "0": {
+          "maxRSS": {
+           "post": 12760,
+           "pre": 12504
+          },
+          "num-tuples": 8820,
+          "runtime": { "start": 705425747, "end": 705428503},
+          "source-locator": "/root/compiler/measurements/night03-t2/same_generation_negation/d4_b4/emit/transformed.dl [10:1-10:62]"
+         }
+        }
+       },
+       "runtime": { "start": 705425736, "end": 705428519}
+      },
+      "3": {
+       "copytime": { "start": 705434099, "end": 705435426},
+       "maxRSS": {
+        "post": 13272,
+        "pre": 12888
+       },
+       "num-tuples": 18140,
+       "recursive-rule": {
+        "sg(x,y) :- \n   parent(x,xp),\n   parent(y,yp),\n   sg(xp,yp),\n   x != y.": {
+         "0": {
+          "maxRSS": {
+           "post": 13272,
+           "pre": 12888
+          },
+          "num-tuples": 18140,
+          "runtime": { "start": 705429321, "end": 705434048},
+          "source-locator": "/root/compiler/measurements/night03-t2/same_generation_negation/d4_b4/emit/transformed.dl [10:1-10:62]"
+         }
+        }
+       },
+       "runtime": { "start": 705429306, "end": 705434068}
+      },
+      "4": {
+       "maxRSS": {
+        "post": 13656,
+        "pre": 13656
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "sg(x,y) :- \n   parent(x,xp),\n   parent(y,yp),\n   sg(xp,yp),\n   x != y.": {
+         "0": {
+          "maxRSS": {
+           "post": 13656,
+           "pre": 13656
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 705435449, "end": 705437841},
+          "source-locator": "/root/compiler/measurements/night03-t2/same_generation_negation/d4_b4/emit/transformed.dl [10:1-10:62]"
+         }
+        }
+       },
+       "runtime": { "start": 705435435, "end": 705437852}
+      }
+     },
+     "maxRSS": {
+      "post": 12376,
+      "pre": 12376
+     },
+     "non-recursive-rule": {
+      "sg(x,x) :- \n   person(x).": {
+       "atom-frequency": {
+        "sg(x,x) :- \n   person(x).": {
+         "person": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12376,
+        "pre": 12376
+       },
+       "num-tuples": 226,
+       "runtime": { "start": 705421165, "end": 705421184},
+       "source-locator": "/root/compiler/measurements/night03-t2/same_generation_negation/d4_b4/emit/transformed.dl [9:1-9:23]"
+      }
+     },
+     "num-tuples": 226,
+     "reads": 81306,
+     "runtime": { "start": 705421164, "end": 705421195},
+     "source-locator": "/root/compiler/measurements/night03-t2/same_generation_negation/d4_b4/emit/transformed.dl [5:7-5:9]"
+    }
+   },
+   "runtime": { "start": 705420840, "end": 705441132},
+   "starttime": { "time": 705420790},
+   "usage": {
+    "timepoint": {
+     "705420864": {
+      "maxRSS": 11968,
+      "systemtime": 7312,
+      "usertime": 0
+     },
+     "705421158": {
+      "maxRSS": 12376,
+      "systemtime": 7692,
+      "usertime": 0
+     },
+     "705421249": {
+      "maxRSS": 12504,
+      "systemtime": 7789,
+      "usertime": 0
+     },
+     "705422348": {
+      "maxRSS": 12504,
+      "systemtime": 7813,
+      "usertime": 0
+     },
+     "705423464": {
+      "maxRSS": 12504,
+      "systemtime": 10062,
+      "usertime": 0
+     },
+     "705423513": {
+      "maxRSS": 12504,
+      "systemtime": 10148,
+      "usertime": 0
+     },
+     "705423592": {
+      "maxRSS": 12504,
+      "systemtime": 10230,
+      "usertime": 0
+     },
+     "705424776": {
+      "maxRSS": 12504,
+      "systemtime": 10230,
+      "usertime": 451
+     },
+     "705425555": {
+      "maxRSS": 12504,
+      "systemtime": 10230,
+      "usertime": 1961
+     },
+     "705425816": {
+      "maxRSS": 12504,
+      "systemtime": 10230,
+      "usertime": 2229
+     },
+     "705426902": {
+      "maxRSS": 12632,
+      "systemtime": 10230,
+      "usertime": 2246
+     },
+     "705427983": {
+      "maxRSS": 12632,
+      "systemtime": 10230,
+      "usertime": 2263
+     },
+     "705428571": {
+      "maxRSS": 12760,
+      "systemtime": 10230,
+      "usertime": 5092
+     },
+     "705429346": {
+      "maxRSS": 12888,
+      "systemtime": 10230,
+      "usertime": 5886
+     },
+     "705430459": {
+      "maxRSS": 12888,
+      "systemtime": 10230,
+      "usertime": 5920
+     },
+     "705431611": {
+      "maxRSS": 13016,
+      "systemtime": 10230,
+      "usertime": 5942
+     },
+     "705432690": {
+      "maxRSS": 13144,
+      "systemtime": 10230,
+      "usertime": 8657
+     },
+     "705433789": {
+      "maxRSS": 13272,
+      "systemtime": 10230,
+      "usertime": 8672
+     },
+     "705434102": {
+      "maxRSS": 13272,
+      "systemtime": 10230,
+      "usertime": 10767
+     },
+     "705435173": {
+      "maxRSS": 13528,
+      "systemtime": 10230,
+      "usertime": 10777
+     },
+     "705435454": {
+      "maxRSS": 13656,
+      "systemtime": 10230,
+      "usertime": 12138
+     },
+     "705436522": {
+      "maxRSS": 13656,
+      "systemtime": 10230,
+      "usertime": 12710
+     },
+     "705437591": {
+      "maxRSS": 13656,
+      "systemtime": 10230,
+      "usertime": 12720
+     },
+     "705437877": {
+      "maxRSS": 13656,
+      "systemtime": 10230,
+      "usertime": 14587
+     },
+     "705437919": {
+      "maxRSS": 13656,
+      "systemtime": 10230,
+      "usertime": 14644
+     },
+     "705438987": {
+      "maxRSS": 13656,
+      "systemtime": 10230,
+      "usertime": 14653
+     },
+     "705440064": {
+      "maxRSS": 13656,
+      "systemtime": 10230,
+      "usertime": 16763
+     },
+     "705440930": {
+      "maxRSS": 13656,
+      "systemtime": 10230,
+      "usertime": 17698
+     },
+     "705440968": {
+      "maxRSS": 13656,
+      "systemtime": 10230,
+      "usertime": 17740
+     }
+    }
+   }
+  }
+ }
+}

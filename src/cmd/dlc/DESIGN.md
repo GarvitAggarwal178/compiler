@@ -25,3 +25,13 @@ rather than merely hoped-for.
 
 Subcommands: `lex` (implemented, §3.1). `parse`, once §3.3 lands, will
 follow the same JSON-document convention.
+
+**`emit` (NIGHT-BATCH-03 T2).** Parses, runs the full sema pipeline, applies
+a named `transform.Transformer` (via `transformerRegistry`, a
+`map[string]transform.Transformer` — adding a second implementation, e.g.
+the real magic-set transform, is a one-line registry addition, nothing else
+in `main.go` changes), and prints the result with `parser.Print`. This is
+the front half of the M3 measurement protocol: `dlc` decides and emits,
+Soufflé evaluates — `emit` never runs `dlc`'s own evaluator. Default
+transformer is `passthrough` (`transform.PassThrough`); select another with
+`--transformer=<name>`.

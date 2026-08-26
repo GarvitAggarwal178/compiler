@@ -1,0 +1,12 @@
+.decl parent(child:number, par:number)
+.input parent
+.decl person(x:number)
+.input person
+.decl sg(x:number, y:number)
+.decl notsg(x:number, y:number)
+.decl q_notsg(y:number)
+.output q_notsg
+sg(x, x) :- person(x).
+sg(x, y) :- parent(x, xp), parent(y, yp), sg(xp, yp), x != y.
+notsg(x, y) :- person(x), person(y), !sg(x, y).
+q_notsg(y) :- notsg(0, y).

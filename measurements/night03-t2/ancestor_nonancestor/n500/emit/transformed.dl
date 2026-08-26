@@ -1,0 +1,12 @@
+.decl parent(child:number, par:number)
+.input parent
+.decl person(x:number)
+.input person
+.decl ancestor(x:number, y:number)
+.decl nonancestor(x:number, y:number)
+.decl q_nonancestor(y:number)
+.output q_nonancestor
+ancestor(x, y) :- parent(x, y).
+ancestor(x, y) :- parent(x, z), ancestor(z, y).
+nonancestor(x, y) :- person(x), person(y), !ancestor(x, y).
+q_nonancestor(y) :- nonancestor(1, y).

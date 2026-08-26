@@ -606,3 +606,18 @@ no query planning in a tree-walking interpreter). Full table:
 
 **M1 (all of §3 and §4) complete.** Final report per §7:
 `docs/reports/m1-progress.md`.
+
+## 2026-08-27 — NIGHT-BATCH-03 + M2-M3-BUILD, unattended overnight batch
+
+Lane A retired per `docs/m2 m3.md` §0 (supersedes M1-BUILD.md §1 and
+NIGHT-BATCH-03 §0.2.1) -- all of `src/` including `transform/magicset/`,
+`transform/guard/`, `eval/fallback.go` is Lane B from this session on.
+
+**T1: DONE.** Printer -> Soufflé round-trip. `harness/night03_t1_printer_souffle.py`.
+Gate: 6/6 shapes (5 BENCHMARK_FAMILY + p4prime.dl) Soufflé-accepted and
+answer-identical against the untransformed original. Full 26-case corpus:
+17/26 accepted, 17/17 answer-identical among comparable, 0 printer-only
+failures, 0 answer mismatches -- the 9 non-accepted cases fail identically
+on the original file too (broken/include-only Soufflé fixtures, not a
+printer defect). `docs/reports/night03-T1-printer-souffle.md`. Commit
+`df652e1`. T2 unblocked.

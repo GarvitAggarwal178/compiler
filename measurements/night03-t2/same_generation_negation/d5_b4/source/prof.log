@@ -1,0 +1,1590 @@
+{
+ "root": {
+  "program": {
+   "configuration": {
+    "": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/same_generation_negation.dl",
+    "fact-dir": "/root/compiler/fixtures/benchmark-family/same_generation_negation/d5_b4",
+    "include-dir": ".",
+    "jobs": "1",
+    "libraries": "functors",
+    "library-dir": ".",
+    "output-dir": "/root/compiler/measurements/night03-t2/same_generation_negation/d5_b4/source",
+    "profile": "prof.log",
+    "relationCount": "5",
+    "ruleCount": "6",
+    "version": "2.5",
+    "warn": "all",
+    "wno": "none"
+   },
+   "relation": {
+    "notsg": {
+     "maxRSS": {
+      "post": 28448,
+      "pre": 28448
+     },
+     "non-recursive-rule": {
+      "notsg(x,y) :- \n   person(x),\n   person(y),\n   !sg(x,y).": {
+       "atom-frequency": {
+        "notsg(x,y) :- \n   person(x),\n   person(y),\n   !sg(x,y).": {
+         "person": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 28448,
+        "pre": 28448
+       },
+       "num-tuples": 285716,
+       "runtime": { "start": 705683579, "end": 705722457},
+       "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/same_generation_negation.dl [31:1-31:46]"
+      }
+     },
+     "num-tuples": 285716,
+     "reads": 0,
+     "runtime": { "start": 705683562, "end": 705722599},
+     "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/same_generation_negation.dl [30:7-30:12]"
+    },
+    "parent": {
+     "loadtime": { "start": 705450518, "end": 705451107},
+     "num-tuples": 839,
+     "reads": 0,
+     "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/same_generation_negation.dl [20:7-20:13]"
+    },
+    "person": {
+     "loadtime": { "start": 705451117, "end": 705451438},
+     "num-tuples": 840,
+     "reads": 0,
+     "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/same_generation_negation.dl [23:7-23:13]"
+    },
+    "q_notsg": {
+     "maxRSS": {
+      "post": 28448,
+      "pre": 28448
+     },
+     "non-recursive-rule": {
+      "q_notsg(y) :- \n   notsg(0,y).": {
+       "atom-frequency": {
+        "q_notsg(y) :- \n   notsg(0,y).": {
+         "notsg": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 28448,
+        "pre": 28448
+       },
+       "num-tuples": 839,
+       "runtime": { "start": 705723768, "end": 705723807},
+       "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/same_generation_negation.dl [35:1-35:26]"
+      }
+     },
+     "num-tuples": 839,
+     "reads": 0,
+     "runtime": { "start": 705723749, "end": 705723817},
+     "savetime": { "start": 705723822, "end": 705723999},
+     "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/same_generation_negation.dl [33:7-33:14]"
+    },
+    "sg": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 705473692, "end": 705473927},
+       "maxRSS": {
+        "post": 12192,
+        "pre": 12064
+       },
+       "num-tuples": 2612,
+       "recursive-rule": {
+        "sg(x,y) :- \n   parent(x,xp),\n   parent(y,yp),\n   sg(xp,yp),\n   x != y.": {
+         "0": {
+          "atom-frequency": {
+           "@new_sg(x,y) :- \n   parent(x,xp),\n   parent(y,yp),\n   @delta_sg(xp,yp),\n   x != y.": {
+            "parent": {
+             "level": 0,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 12192,
+           "pre": 12064
+          },
+          "num-tuples": 2612,
+          "runtime": { "start": 705451567, "end": 705473652},
+          "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/same_generation_negation.dl [28:1-28:58]"
+         }
+        }
+       },
+       "runtime": { "start": 705451556, "end": 705473664}
+      },
+      "1": {
+       "copytime": { "start": 705497339, "end": 705498190},
+       "maxRSS": {
+        "post": 12448,
+        "pre": 12192
+       },
+       "num-tuples": 10080,
+       "recursive-rule": {
+        "sg(x,y) :- \n   parent(x,xp),\n   parent(y,yp),\n   sg(xp,yp),\n   x != y.": {
+         "0": {
+          "maxRSS": {
+           "post": 12448,
+           "pre": 12192
+          },
+          "num-tuples": 10080,
+          "runtime": { "start": 705473946, "end": 705497300},
+          "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/same_generation_negation.dl [28:1-28:58]"
+         }
+        }
+       },
+       "runtime": { "start": 705473936, "end": 705497314}
+      },
+      "2": {
+       "copytime": { "start": 705525559, "end": 705528882},
+       "maxRSS": {
+        "post": 13344,
+        "pre": 12704
+       },
+       "num-tuples": 39650,
+       "recursive-rule": {
+        "sg(x,y) :- \n   parent(x,xp),\n   parent(y,yp),\n   sg(xp,yp),\n   x != y.": {
+         "0": {
+          "maxRSS": {
+           "post": 13344,
+           "pre": 12704
+          },
+          "num-tuples": 39650,
+          "runtime": { "start": 705498209, "end": 705525474},
+          "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/same_generation_negation.dl [28:1-28:58]"
+         }
+        }
+       },
+       "runtime": { "start": 705498198, "end": 705525492}
+      },
+      "3": {
+       "copytime": { "start": 705564600, "end": 705572944},
+       "maxRSS": {
+        "post": 16288,
+        "pre": 14368
+       },
+       "num-tuples": 108938,
+       "recursive-rule": {
+        "sg(x,y) :- \n   parent(x,xp),\n   parent(y,yp),\n   sg(xp,yp),\n   x != y.": {
+         "0": {
+          "maxRSS": {
+           "post": 16288,
+           "pre": 14368
+          },
+          "num-tuples": 108938,
+          "runtime": { "start": 705528902, "end": 705564503},
+          "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/same_generation_negation.dl [28:1-28:58]"
+         }
+        }
+       },
+       "runtime": { "start": 705528892, "end": 705564541}
+      },
+      "4": {
+       "copytime": { "start": 705627518, "end": 705646590},
+       "maxRSS": {
+        "post": 22944,
+        "pre": 18720
+       },
+       "num-tuples": 257764,
+       "recursive-rule": {
+        "sg(x,y) :- \n   parent(x,xp),\n   parent(y,yp),\n   sg(xp,yp),\n   x != y.": {
+         "0": {
+          "maxRSS": {
+           "post": 22944,
+           "pre": 18720
+          },
+          "num-tuples": 257764,
+          "runtime": { "start": 705572972, "end": 705627229},
+          "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/same_generation_negation.dl [28:1-28:58]"
+         }
+        }
+       },
+       "runtime": { "start": 705572954, "end": 705627347}
+      },
+      "5": {
+       "maxRSS": {
+        "post": 28448,
+        "pre": 28448
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "sg(x,y) :- \n   parent(x,xp),\n   parent(y,yp),\n   sg(xp,yp),\n   x != y.": {
+         "0": {
+          "maxRSS": {
+           "post": 28448,
+           "pre": 28448
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 705646631, "end": 705683137},
+          "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/same_generation_negation.dl [28:1-28:58]"
+         }
+        }
+       },
+       "runtime": { "start": 705646617, "end": 705683153}
+      }
+     },
+     "maxRSS": {
+      "post": 12064,
+      "pre": 12064
+     },
+     "non-recursive-rule": {
+      "sg(x,x) :- \n   person(x).": {
+       "atom-frequency": {
+        "sg(x,x) :- \n   person(x).": {
+         "person": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12064,
+        "pre": 12064
+       },
+       "num-tuples": 840,
+       "runtime": { "start": 705451466, "end": 705451505},
+       "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/same_generation_negation.dl [27:1-27:22]"
+      }
+     },
+     "num-tuples": 840,
+     "reads": 1124644,
+     "runtime": { "start": 705451447, "end": 705451522},
+     "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/same_generation_negation.dl [26:7-26:9]"
+    }
+   },
+   "runtime": { "start": 705450513, "end": 705724434},
+   "starttime": { "time": 705450486},
+   "usage": {
+    "timepoint": {
+     "705450498": {
+      "maxRSS": 12016,
+      "systemtime": 0,
+      "usertime": 2699
+     },
+     "705450521": {
+      "maxRSS": 12016,
+      "systemtime": 0,
+      "usertime": 4405
+     },
+     "705451152": {
+      "maxRSS": 12064,
+      "systemtime": 0,
+      "usertime": 4703
+     },
+     "705451470": {
+      "maxRSS": 12064,
+      "systemtime": 0,
+      "usertime": 4900
+     },
+     "705451570": {
+      "maxRSS": 12192,
+      "systemtime": 0,
+      "usertime": 5007
+     },
+     "705452641": {
+      "maxRSS": 12192,
+      "systemtime": 0,
+      "usertime": 5459
+     },
+     "705453706": {
+      "maxRSS": 12192,
+      "systemtime": 0,
+      "usertime": 5467
+     },
+     "705454771": {
+      "maxRSS": 12192,
+      "systemtime": 0,
+      "usertime": 5476
+     },
+     "705455887": {
+      "maxRSS": 12192,
+      "systemtime": 0,
+      "usertime": 5488
+     },
+     "705457001": {
+      "maxRSS": 12192,
+      "systemtime": 0,
+      "usertime": 9501
+     },
+     "705458109": {
+      "maxRSS": 12192,
+      "systemtime": 0,
+      "usertime": 9521
+     },
+     "705459213": {
+      "maxRSS": 12192,
+      "systemtime": 0,
+      "usertime": 9543
+     },
+     "705460292": {
+      "maxRSS": 12192,
+      "systemtime": 0,
+      "usertime": 13556
+     },
+     "705461418": {
+      "maxRSS": 12192,
+      "systemtime": 0,
+      "usertime": 13584
+     },
+     "705462490": {
+      "maxRSS": 12192,
+      "systemtime": 0,
+      "usertime": 13599
+     },
+     "705463559": {
+      "maxRSS": 12192,
+      "systemtime": 0,
+      "usertime": 13608
+     },
+     "705464638": {
+      "maxRSS": 12192,
+      "systemtime": 0,
+      "usertime": 17622
+     },
+     "705465711": {
+      "maxRSS": 12192,
+      "systemtime": 0,
+      "usertime": 17634
+     },
+     "705466790": {
+      "maxRSS": 12192,
+      "systemtime": 0,
+      "usertime": 17648
+     },
+     "705467888": {
+      "maxRSS": 12192,
+      "systemtime": 0,
+      "usertime": 17674
+     },
+     "705468995": {
+      "maxRSS": 12192,
+      "systemtime": 0,
+      "usertime": 21697
+     },
+     "705470102": {
+      "maxRSS": 12192,
+      "systemtime": 0,
+      "usertime": 21712
+     },
+     "705471203": {
+      "maxRSS": 12192,
+      "systemtime": 0,
+      "usertime": 21723
+     },
+     "705472271": {
+      "maxRSS": 12192,
+      "systemtime": 0,
+      "usertime": 25733
+     },
+     "705473337": {
+      "maxRSS": 12192,
+      "systemtime": 0,
+      "usertime": 25742
+     },
+     "705473692": {
+      "maxRSS": 12192,
+      "systemtime": 0,
+      "usertime": 27435
+     },
+     "705473950": {
+      "maxRSS": 12192,
+      "systemtime": 0,
+      "usertime": 27705
+     },
+     "705475062": {
+      "maxRSS": 12192,
+      "systemtime": 0,
+      "usertime": 27717
+     },
+     "705476128": {
+      "maxRSS": 12192,
+      "systemtime": 0,
+      "usertime": 29780
+     },
+     "705477223": {
+      "maxRSS": 12192,
+      "systemtime": 0,
+      "usertime": 29799
+     },
+     "705478291": {
+      "maxRSS": 12320,
+      "systemtime": 0,
+      "usertime": 29810
+     },
+     "705479369": {
+      "maxRSS": 12320,
+      "systemtime": 0,
+      "usertime": 29829
+     },
+     "705480439": {
+      "maxRSS": 12320,
+      "systemtime": 0,
+      "usertime": 33842
+     },
+     "705481523": {
+      "maxRSS": 12320,
+      "systemtime": 0,
+      "usertime": 33852
+     },
+     "705482586": {
+      "maxRSS": 12320,
+      "systemtime": 0,
+      "usertime": 33859
+     },
+     "705483649": {
+      "maxRSS": 12320,
+      "systemtime": 0,
+      "usertime": 33865
+     },
+     "705484750": {
+      "maxRSS": 12320,
+      "systemtime": 0,
+      "usertime": 37876
+     },
+     "705485813": {
+      "maxRSS": 12320,
+      "systemtime": 0,
+      "usertime": 37883
+     },
+     "705486918": {
+      "maxRSS": 12320,
+      "systemtime": 0,
+      "usertime": 37900
+     },
+     "705488055": {
+      "maxRSS": 12320,
+      "systemtime": 0,
+      "usertime": 41913
+     },
+     "705489127": {
+      "maxRSS": 12320,
+      "systemtime": 0,
+      "usertime": 41926
+     },
+     "705490198": {
+      "maxRSS": 12320,
+      "systemtime": 0,
+      "usertime": 41939
+     },
+     "705491295": {
+      "maxRSS": 12320,
+      "systemtime": 0,
+      "usertime": 41948
+     },
+     "705492373": {
+      "maxRSS": 12448,
+      "systemtime": 0,
+      "usertime": 45960
+     },
+     "705493457": {
+      "maxRSS": 12448,
+      "systemtime": 0,
+      "usertime": 45977
+     },
+     "705494549": {
+      "maxRSS": 12448,
+      "systemtime": 0,
+      "usertime": 45997
+     },
+     "705495664": {
+      "maxRSS": 12448,
+      "systemtime": 0,
+      "usertime": 46033
+     },
+     "705496733": {
+      "maxRSS": 12448,
+      "systemtime": 0,
+      "usertime": 50042
+     },
+     "705497345": {
+      "maxRSS": 12448,
+      "systemtime": 0,
+      "usertime": 51395
+     },
+     "705498219": {
+      "maxRSS": 12704,
+      "systemtime": 0,
+      "usertime": 52291
+     },
+     "705499294": {
+      "maxRSS": 12704,
+      "systemtime": 0,
+      "usertime": 52306
+     },
+     "705500368": {
+      "maxRSS": 12704,
+      "systemtime": 0,
+      "usertime": 54116
+     },
+     "705501436": {
+      "maxRSS": 12704,
+      "systemtime": 0,
+      "usertime": 54126
+     },
+     "705502503": {
+      "maxRSS": 12704,
+      "systemtime": 0,
+      "usertime": 54163
+     },
+     "705503569": {
+      "maxRSS": 12704,
+      "systemtime": 0,
+      "usertime": 54172
+     },
+     "705504645": {
+      "maxRSS": 12704,
+      "systemtime": 0,
+      "usertime": 58182
+     },
+     "705505748": {
+      "maxRSS": 12832,
+      "systemtime": 0,
+      "usertime": 58196
+     },
+     "705506860": {
+      "maxRSS": 12832,
+      "systemtime": 0,
+      "usertime": 58215
+     },
+     "705507925": {
+      "maxRSS": 12832,
+      "systemtime": 0,
+      "usertime": 58223
+     },
+     "705508991": {
+      "maxRSS": 12960,
+      "systemtime": 0,
+      "usertime": 62231
+     },
+     "705510089": {
+      "maxRSS": 12960,
+      "systemtime": 0,
+      "usertime": 62253
+     },
+     "705511205": {
+      "maxRSS": 12960,
+      "systemtime": 0,
+      "usertime": 62286
+     },
+     "705512289": {
+      "maxRSS": 12960,
+      "systemtime": 0,
+      "usertime": 66310
+     },
+     "705513429": {
+      "maxRSS": 13088,
+      "systemtime": 0,
+      "usertime": 66331
+     },
+     "705514518": {
+      "maxRSS": 13088,
+      "systemtime": 0,
+      "usertime": 66349
+     },
+     "705515628": {
+      "maxRSS": 13088,
+      "systemtime": 0,
+      "usertime": 66365
+     },
+     "705516733": {
+      "maxRSS": 13088,
+      "systemtime": 0,
+      "usertime": 70393
+     },
+     "705517822": {
+      "maxRSS": 13216,
+      "systemtime": 0,
+      "usertime": 70419
+     },
+     "705518926": {
+      "maxRSS": 13216,
+      "systemtime": 0,
+      "usertime": 70436
+     },
+     "705520050": {
+      "maxRSS": 13216,
+      "systemtime": 0,
+      "usertime": 74446
+     },
+     "705521132": {
+      "maxRSS": 13216,
+      "systemtime": 0,
+      "usertime": 74465
+     },
+     "705522217": {
+      "maxRSS": 13344,
+      "systemtime": 0,
+      "usertime": 74491
+     },
+     "705523301": {
+      "maxRSS": 13344,
+      "systemtime": 0,
+      "usertime": 74506
+     },
+     "705524419": {
+      "maxRSS": 13344,
+      "systemtime": 0,
+      "usertime": 78589
+     },
+     "705525499": {
+      "maxRSS": 13344,
+      "systemtime": 0,
+      "usertime": 80038
+     },
+     "705525600": {
+      "maxRSS": 13344,
+      "systemtime": 0,
+      "usertime": 80141
+     },
+     "705526698": {
+      "maxRSS": 13728,
+      "systemtime": 0,
+      "usertime": 80169
+     },
+     "705527812": {
+      "maxRSS": 14112,
+      "systemtime": 0,
+      "usertime": 80187
+     },
+     "705528941": {
+      "maxRSS": 14368,
+      "systemtime": 0,
+      "usertime": 83565
+     },
+     "705530015": {
+      "maxRSS": 14368,
+      "systemtime": 0,
+      "usertime": 83579
+     },
+     "705531112": {
+      "maxRSS": 14368,
+      "systemtime": 0,
+      "usertime": 83598
+     },
+     "705532197": {
+      "maxRSS": 14368,
+      "systemtime": 0,
+      "usertime": 86721
+     },
+     "705533308": {
+      "maxRSS": 14368,
+      "systemtime": 0,
+      "usertime": 86747
+     },
+     "705534415": {
+      "maxRSS": 14368,
+      "systemtime": 0,
+      "usertime": 86771
+     },
+     "705535503": {
+      "maxRSS": 14368,
+      "systemtime": 0,
+      "usertime": 86784
+     },
+     "705536597": {
+      "maxRSS": 14496,
+      "systemtime": 0,
+      "usertime": 90801
+     },
+     "705537676": {
+      "maxRSS": 14496,
+      "systemtime": 0,
+      "usertime": 90816
+     },
+     "705538762": {
+      "maxRSS": 14624,
+      "systemtime": 0,
+      "usertime": 90831
+     },
+     "705539841": {
+      "maxRSS": 14624,
+      "systemtime": 0,
+      "usertime": 90850
+     },
+     "705540935": {
+      "maxRSS": 14752,
+      "systemtime": 0,
+      "usertime": 94864
+     },
+     "705542013": {
+      "maxRSS": 14752,
+      "systemtime": 0,
+      "usertime": 94879
+     },
+     "705543085": {
+      "maxRSS": 14880,
+      "systemtime": 0,
+      "usertime": 94892
+     },
+     "705544156": {
+      "maxRSS": 14880,
+      "systemtime": 0,
+      "usertime": 98914
+     },
+     "705545259": {
+      "maxRSS": 15008,
+      "systemtime": 0,
+      "usertime": 98928
+     },
+     "705546331": {
+      "maxRSS": 15008,
+      "systemtime": 0,
+      "usertime": 98942
+     },
+     "705547446": {
+      "maxRSS": 15136,
+      "systemtime": 0,
+      "usertime": 98968
+     },
+     "705548529": {
+      "maxRSS": 15136,
+      "systemtime": 0,
+      "usertime": 102984
+     },
+     "705549616": {
+      "maxRSS": 15264,
+      "systemtime": 0,
+      "usertime": 102998
+     },
+     "705550692": {
+      "maxRSS": 15392,
+      "systemtime": 0,
+      "usertime": 103013
+     },
+     "705551794": {
+      "maxRSS": 15520,
+      "systemtime": 0,
+      "usertime": 103037
+     },
+     "705552880": {
+      "maxRSS": 15520,
+      "systemtime": 0,
+      "usertime": 107061
+     },
+     "705553955": {
+      "maxRSS": 15648,
+      "systemtime": 0,
+      "usertime": 107078
+     },
+     "705555032": {
+      "maxRSS": 15648,
+      "systemtime": 0,
+      "usertime": 107093
+     },
+     "705556109": {
+      "maxRSS": 15776,
+      "systemtime": 0,
+      "usertime": 111108
+     },
+     "705557198": {
+      "maxRSS": 15904,
+      "systemtime": 0,
+      "usertime": 111122
+     },
+     "705558293": {
+      "maxRSS": 15904,
+      "systemtime": 0,
+      "usertime": 111145
+     },
+     "705559394": {
+      "maxRSS": 16032,
+      "systemtime": 0,
+      "usertime": 111172
+     },
+     "705560488": {
+      "maxRSS": 16032,
+      "systemtime": 0,
+      "usertime": 115205
+     },
+     "705561584": {
+      "maxRSS": 16160,
+      "systemtime": 0,
+      "usertime": 115226
+     },
+     "705562697": {
+      "maxRSS": 16160,
+      "systemtime": 0,
+      "usertime": 115262
+     },
+     "705563782": {
+      "maxRSS": 16288,
+      "systemtime": 0,
+      "usertime": 115291
+     },
+     "705564586": {
+      "maxRSS": 16288,
+      "systemtime": 0,
+      "usertime": 119880
+     },
+     "705564631": {
+      "maxRSS": 16288,
+      "systemtime": 0,
+      "usertime": 119927
+     },
+     "705565725": {
+      "maxRSS": 16672,
+      "systemtime": 0,
+      "usertime": 119946
+     },
+     "705566825": {
+      "maxRSS": 16928,
+      "systemtime": 0,
+      "usertime": 119971
+     },
+     "705567919": {
+      "maxRSS": 17312,
+      "systemtime": 0,
+      "usertime": 119992
+     },
+     "705568995": {
+      "maxRSS": 17568,
+      "systemtime": 0,
+      "usertime": 123400
+     },
+     "705570068": {
+      "maxRSS": 17952,
+      "systemtime": 0,
+      "usertime": 123413
+     },
+     "705571142": {
+      "maxRSS": 18208,
+      "systemtime": 0,
+      "usertime": 123426
+     },
+     "705572221": {
+      "maxRSS": 18464,
+      "systemtime": 0,
+      "usertime": 127441
+     },
+     "705572983": {
+      "maxRSS": 18720,
+      "systemtime": 0,
+      "usertime": 128425
+     },
+     "705574074": {
+      "maxRSS": 18720,
+      "systemtime": 0,
+      "usertime": 128439
+     },
+     "705575150": {
+      "maxRSS": 18720,
+      "systemtime": 0,
+      "usertime": 128454
+     },
+     "705576224": {
+      "maxRSS": 18720,
+      "systemtime": 0,
+      "usertime": 131512
+     },
+     "705577289": {
+      "maxRSS": 18720,
+      "systemtime": 0,
+      "usertime": 131520
+     },
+     "705578352": {
+      "maxRSS": 18720,
+      "systemtime": 0,
+      "usertime": 131527
+     },
+     "705579423": {
+      "maxRSS": 18720,
+      "systemtime": 0,
+      "usertime": 131540
+     },
+     "705580491": {
+      "maxRSS": 18720,
+      "systemtime": 0,
+      "usertime": 135539
+     },
+     "705581575": {
+      "maxRSS": 18720,
+      "systemtime": 0,
+      "usertime": 135551
+     },
+     "705582652": {
+      "maxRSS": 18720,
+      "systemtime": 0,
+      "usertime": 135565
+     },
+     "705583723": {
+      "maxRSS": 18720,
+      "systemtime": 0,
+      "usertime": 135577
+     },
+     "705584827": {
+      "maxRSS": 18720,
+      "systemtime": 0,
+      "usertime": 139601
+     },
+     "705585970": {
+      "maxRSS": 18720,
+      "systemtime": 0,
+      "usertime": 139638
+     },
+     "705587070": {
+      "maxRSS": 18720,
+      "systemtime": 0,
+      "usertime": 139669
+     },
+     "705588150": {
+      "maxRSS": 18720,
+      "systemtime": 0,
+      "usertime": 143683
+     },
+     "705589225": {
+      "maxRSS": 18848,
+      "systemtime": 0,
+      "usertime": 143696
+     },
+     "705590329": {
+      "maxRSS": 18976,
+      "systemtime": 0,
+      "usertime": 143717
+     },
+     "705591408": {
+      "maxRSS": 18976,
+      "systemtime": 0,
+      "usertime": 143741
+     },
+     "705592514": {
+      "maxRSS": 19104,
+      "systemtime": 0,
+      "usertime": 147770
+     },
+     "705593632": {
+      "maxRSS": 19232,
+      "systemtime": 0,
+      "usertime": 147795
+     },
+     "705594713": {
+      "maxRSS": 19360,
+      "systemtime": 0,
+      "usertime": 147809
+     },
+     "705595788": {
+      "maxRSS": 19488,
+      "systemtime": 0,
+      "usertime": 147823
+     },
+     "705596864": {
+      "maxRSS": 19616,
+      "systemtime": 0,
+      "usertime": 151847
+     },
+     "705597954": {
+      "maxRSS": 19744,
+      "systemtime": 0,
+      "usertime": 151861
+     },
+     "705599026": {
+      "maxRSS": 19872,
+      "systemtime": 0,
+      "usertime": 151874
+     },
+     "705600065": {
+      "maxRSS": 20000,
+      "systemtime": 0,
+      "usertime": 155907
+     },
+     "705601190": {
+      "maxRSS": 20000,
+      "systemtime": 0,
+      "usertime": 155944
+     },
+     "705602300": {
+      "maxRSS": 20128,
+      "systemtime": 0,
+      "usertime": 155978
+     },
+     "705603401": {
+      "maxRSS": 20256,
+      "systemtime": 0,
+      "usertime": 156006
+     },
+     "705604511": {
+      "maxRSS": 20384,
+      "systemtime": 0,
+      "usertime": 160025
+     },
+     "705605596": {
+      "maxRSS": 20512,
+      "systemtime": 0,
+      "usertime": 160046
+     },
+     "705606675": {
+      "maxRSS": 20640,
+      "systemtime": 0,
+      "usertime": 160066
+     },
+     "705607750": {
+      "maxRSS": 20768,
+      "systemtime": 0,
+      "usertime": 160080
+     },
+     "705608839": {
+      "maxRSS": 20896,
+      "systemtime": 0,
+      "usertime": 164097
+     },
+     "705609916": {
+      "maxRSS": 21024,
+      "systemtime": 0,
+      "usertime": 164111
+     },
+     "705610991": {
+      "maxRSS": 21152,
+      "systemtime": 0,
+      "usertime": 164125
+     },
+     "705612074": {
+      "maxRSS": 21152,
+      "systemtime": 0,
+      "usertime": 168145
+     },
+     "705613162": {
+      "maxRSS": 21280,
+      "systemtime": 0,
+      "usertime": 168168
+     },
+     "705614276": {
+      "maxRSS": 21408,
+      "systemtime": 0,
+      "usertime": 168191
+     },
+     "705615381": {
+      "maxRSS": 21536,
+      "systemtime": 0,
+      "usertime": 168219
+     },
+     "705616467": {
+      "maxRSS": 21664,
+      "systemtime": 0,
+      "usertime": 172248
+     },
+     "705617542": {
+      "maxRSS": 21792,
+      "systemtime": 0,
+      "usertime": 172262
+     },
+     "705618618": {
+      "maxRSS": 21920,
+      "systemtime": 0,
+      "usertime": 172277
+     },
+     "705619709": {
+      "maxRSS": 22048,
+      "systemtime": 0,
+      "usertime": 172293
+     },
+     "705620828": {
+      "maxRSS": 22176,
+      "systemtime": 0,
+      "usertime": 176318
+     },
+     "705621912": {
+      "maxRSS": 22304,
+      "systemtime": 0,
+      "usertime": 176338
+     },
+     "705622993": {
+      "maxRSS": 22432,
+      "systemtime": 0,
+      "usertime": 176355
+     },
+     "705624080": {
+      "maxRSS": 22560,
+      "systemtime": 0,
+      "usertime": 180390
+     },
+     "705625157": {
+      "maxRSS": 22688,
+      "systemtime": 0,
+      "usertime": 180405
+     },
+     "705626234": {
+      "maxRSS": 22816,
+      "systemtime": 0,
+      "usertime": 180421
+     },
+     "705627311": {
+      "maxRSS": 22944,
+      "systemtime": 0,
+      "usertime": 183663
+     },
+     "705627450": {
+      "maxRSS": 22944,
+      "systemtime": 0,
+      "usertime": 183869
+     },
+     "705627595": {
+      "maxRSS": 22944,
+      "systemtime": 0,
+      "usertime": 184011
+     },
+     "705628668": {
+      "maxRSS": 23200,
+      "systemtime": 0,
+      "usertime": 184447
+     },
+     "705629752": {
+      "maxRSS": 23584,
+      "systemtime": 0,
+      "usertime": 184460
+     },
+     "705630825": {
+      "maxRSS": 23840,
+      "systemtime": 0,
+      "usertime": 184475
+     },
+     "705631933": {
+      "maxRSS": 24224,
+      "systemtime": 0,
+      "usertime": 184506
+     },
+     "705633013": {
+      "maxRSS": 24608,
+      "systemtime": 0,
+      "usertime": 188521
+     },
+     "705634101": {
+      "maxRSS": 24864,
+      "systemtime": 0,
+      "usertime": 188536
+     },
+     "705635222": {
+      "maxRSS": 25248,
+      "systemtime": 0,
+      "usertime": 188571
+     },
+     "705636298": {
+      "maxRSS": 25504,
+      "systemtime": 0,
+      "usertime": 192586
+     },
+     "705637386": {
+      "maxRSS": 25888,
+      "systemtime": 0,
+      "usertime": 192598
+     },
+     "705638470": {
+      "maxRSS": 26272,
+      "systemtime": 0,
+      "usertime": 192616
+     },
+     "705639547": {
+      "maxRSS": 26528,
+      "systemtime": 0,
+      "usertime": 192631
+     },
+     "705640621": {
+      "maxRSS": 26912,
+      "systemtime": 0,
+      "usertime": 196648
+     },
+     "705641689": {
+      "maxRSS": 27168,
+      "systemtime": 0,
+      "usertime": 196660
+     },
+     "705642759": {
+      "maxRSS": 27552,
+      "systemtime": 0,
+      "usertime": 196671
+     },
+     "705643830": {
+      "maxRSS": 27808,
+      "systemtime": 0,
+      "usertime": 196685
+     },
+     "705644905": {
+      "maxRSS": 28064,
+      "systemtime": 0,
+      "usertime": 200701
+     },
+     "705646026": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 200744
+     },
+     "705646643": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 203401
+     },
+     "705647720": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 203417
+     },
+     "705648795": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 204802
+     },
+     "705649871": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 204814
+     },
+     "705650974": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 204837
+     },
+     "705652060": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 208875
+     },
+     "705653155": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 208892
+     },
+     "705654235": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 208906
+     },
+     "705655315": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 208922
+     },
+     "705656399": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 212949
+     },
+     "705657520": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 212987
+     },
+     "705658606": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 213016
+     },
+     "705659678": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 213026
+     },
+     "705660751": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 217044
+     },
+     "705661818": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 217054
+     },
+     "705662884": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 217062
+     },
+     "705663957": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 217074
+     },
+     "705665048": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 221090
+     },
+     "705666120": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 221103
+     },
+     "705667190": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 221116
+     },
+     "705668262": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 225128
+     },
+     "705669337": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 225141
+     },
+     "705670423": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 225156
+     },
+     "705671510": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 225180
+     },
+     "705672588": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 229199
+     },
+     "705673669": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 229214
+     },
+     "705674747": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 229229
+     },
+     "705675823": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 229245
+     },
+     "705676902": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 233270
+     },
+     "705677978": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 233283
+     },
+     "705679063": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 233309
+     },
+     "705680140": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 237318
+     },
+     "705681216": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 237332
+     },
+     "705682293": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 237347
+     },
+     "705683177": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 240523
+     },
+     "705683605": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 240956
+     },
+     "705684708": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 241419
+     },
+     "705685781": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 241434
+     },
+     "705686852": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 241447
+     },
+     "705687962": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 241470
+     },
+     "705689066": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 245516
+     },
+     "705690140": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 245530
+     },
+     "705691223": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 245555
+     },
+     "705692298": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 249563
+     },
+     "705693397": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 249588
+     },
+     "705694496": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 249612
+     },
+     "705695571": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 249626
+     },
+     "705696879": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 253639
+     },
+     "705697960": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 253662
+     },
+     "705699027": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 253672
+     },
+     "705700038": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 257682
+     },
+     "705701110": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 257695
+     },
+     "705702201": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 257709
+     },
+     "705703277": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 257724
+     },
+     "705704365": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 261738
+     },
+     "705705449": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 261760
+     },
+     "705706521": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 261774
+     },
+     "705707591": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 261784
+     },
+     "705708678": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 265798
+     },
+     "705709754": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 265813
+     },
+     "705710858": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 265838
+     },
+     "705712016": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 265905
+     },
+     "705713093": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 269944
+     },
+     "705714171": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 269959
+     },
+     "705715269": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 269971
+     },
+     "705716360": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 273973
+     },
+     "705717507": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 274006
+     },
+     "705718595": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 274035
+     },
+     "705719664": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 274048
+     },
+     "705720766": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 278046
+     },
+     "705721850": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 278065
+     },
+     "705722939": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 280556
+     },
+     "705723781": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 281872
+     },
+     "705723887": {
+      "maxRSS": 28448,
+      "systemtime": 0,
+      "usertime": 281971
+     }
+    }
+   }
+  }
+ }
+}

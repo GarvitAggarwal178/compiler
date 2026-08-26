@@ -1,0 +1,12 @@
+.decl edge(a:number, b:number)
+.input edge
+.decl node(a:number)
+.input node
+.decl reach(a:number, b:number)
+.decl unreach(a:number, b:number)
+.decl q_unreach(b:number)
+.output q_unreach
+reach(x, y) :- edge(x, y).
+reach(x, y) :- reach(x, z), edge(z, y).
+unreach(x, y) :- node(x), node(y), !reach(x, y).
+q_unreach(y) :- unreach(1, y).
