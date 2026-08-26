@@ -259,3 +259,18 @@ to fix a Lane A file, diagnosis + failing test, then stop. Speculative
 adversarial test files were not pre-written this session — a failing test
 needs a real interface to fail against, and inventing one now risks locking
 in assumptions about dlc's CLI/AST shape that Lane A hasn't decided yet.
+
+## 2026-08-26 — M1 build start, per docs/M1-BUILD.md
+
+CLAUDE.md §2 superseded by docs/M1-BUILD.md §1 (direct human instruction).
+Lane A narrowed to three components: magic-set transform (src/transform/
+magicset/), the guard (src/transform/guard/), fallback evaluation wiring
+(src/eval/fallback.go). Everything else in src/ is now Lane B.
+
+**Setup (not a numbered §3 item, prerequisite to it):** installed Go 1.26
+(none was present), ran `go mod init dlc`, created the full src/ directory
+layout per M1-BUILD.md §2, wrote the three Lane A marker files (doc.go x2
++ fallback.go), each containing only the package clause and the one-line
+"// Lane A — human-authored. See docs/M1-BUILD.md §1." comment — no stubs,
+no algorithm sketches. `go build ./...` and `go vet ./...` both clean.
+Logged: docs/DECISIONS.md.
