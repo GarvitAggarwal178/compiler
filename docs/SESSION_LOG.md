@@ -543,3 +543,18 @@ full account in `eval/DESIGN.md`.
 as measured, never weakened to hit a target number.** `go build`/
 `go vet`/`go test ./...` all clean throughout. Continuing per the
 original instruction: "If §3 completes, continue with §4 in order."
+
+**§4 item 2 (the Lane A transform interface):** `src/transform/
+transformer.go` -- `Transformer` interface (`Transform(prog
+*ast.Program, strata *sema.StratumResult) (*ast.Program, error)`) plus
+`PassThrough`, a no-op Lane B placeholder. Deliberately NOT wired into
+`cmd/dlc`'s `run`/`run-seminaive` yet -- routing through a no-op changes
+nothing observable; the natural point to wire it in is when Lane A's real
+implementation lands (one call between `CheckStratification` and
+`RunNaive`/`RunSemiNaive`, nothing else in `cmd/dlc` changes). Documented,
+not solved: a real transform invalidates the `strata` argument for its
+own output (magic-seed relations change the precedence graph) --
+`Transformer`'s own doc comment says the implementer re-runs
+`sema.CheckStratification` on the result; deliberately not designed
+further than that (would be resolving a Lane A design question). 2 Go
+tests, both pass.
