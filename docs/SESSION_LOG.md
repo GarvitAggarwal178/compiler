@@ -651,3 +651,53 @@ flagged), all classifier-verified, `dlc check`-clean, Souffle-recorded
 (6/6 complete, 6/6 answer-identical, 0 stratification failures under
 Souffle's own transform -- consistent with `culprit_cycle.dl`'s own
 observed behaviour). `docs/reports/night03-T4-culprit-corpus.md`.
+
+**T5: DONE.** Q11 pre-registered (`docs/OPEN_QUESTIONS.md`, commit
+`caa4c0f`) before any measurement, per instruction. Built exactly as
+predicted (`ancestor_nonancestor_guarded_v2.dl`, static seed only, no
+propagation) -- **falsified at all 5 scale points**: the premise
+misidentified `ancestor`'s actual recursive shape (not first-argument-
+invariant, unlike `reach`/`p4prime.dl`), verified by inspection before
+building v2. `docs/reports/night03-T5-ancestor-seed.md`.
+
+**T6: DONE, amendment kept.** `.input`/`.output` optional-parens amendment
+(`src/parser/parser.go`). Gate one: 20/195 -> 89/195; negation-bearing
+parsed: 3 -> 18. Both legs of the decision rule pass. 0 round-trip
+regressions. `docs/reports/night03-T6-parens.md`.
+
+**T7: DONE.** `harness/night03_t7_grammar_v2.py` (23 categories, each
+justified against a specific blueprint section 4 production). Converged
+iteratively (43/622 admitted with 44% cross-check -> 21/622 admitted, 90%
+cross-check) after investigating real discrepancies against real `dlc`
+diagnostics. `IN_GRAMMAR_V2.txt` committed alongside the untouched
+`IN_GRAMMAR.txt` (confirmed exact subset). `docs/reports/
+night03-T7-grammar-v2.md`.
+
+**T8: DONE, real defect found and fixed.** Codegen's `<`/`<=`/`>`/`>=` on
+`symbol` columns compared interned ids, not strings -- confirmed real
+(temporarily disabled the fix, all 4 new tests failed exactly as
+predicted, then restored it). Fixed by exporting `sema.ClauseVarTypes`.
+Cross-checked against real Souffle: set-identical. `docs/reports/
+night03-T8-symbol-order.md`.
+
+**T9: DONE.** `harness/cone_metric.py`: downward dependency closure over
+the full (positive+negative) edge set. Validated exactly against
+`culprit_cycle`'s already-observed `{q,s}` pattern. All 5 shapes reported:
+3 partition-style shapes at `cone_fraction=1/3`, `culprit_cycle` at `1/2`,
+`transitive_closure_bound` n/a (no negation). `docs/reports/
+night03-T9-cone.md`.
+
+**T10: DONE.** 17 rows appended to `docs/MEASUREMENTS.md` (one per M1
+gate), 3 `docs/DECISIONS.md` entries (flat-JSON provenance format
+accepted; Q7 closed, C codegen drops below M3 overflow in M4; T8
+zero-arity correction 11->12 recorded).
+
+**T11: DONE.** `docs/dlc-blueprint.md`'s header `Status:` line (the only
+volatile milestone-status assertion found anywhere outside session
+history/logs) replaced with a pointer to `docs/SESSION_LOG.md` and
+`docs/reports/m1-progress.md`. Version number untouched, no new document.
+
+**NIGHT-BATCH-03 (T1-T11): all 11 tasks DONE, no BLOCKED, no PARTIAL.**
+Full report: `docs/reports/night03-summary.md`. Continuing per instruction
+into `docs/m2 m3.md` sections 2-9 (Lane A retired, all of `src/` now Lane
+B).
