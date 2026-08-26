@@ -1,0 +1,43 @@
+// Hand-guarded transform of ../ancestor_nonancestor.dl -- v2, per
+// docs/OPEN_QUESTIONS.md Q11 (pre-registered 2026-08-27, NIGHT-BATCH-03 T5).
+// Does NOT modify ancestor_nonancestor_guarded.dl (v1) -- both files
+// survive, both are reported, same precedent as p4/p4prime.
+//
+// Q11's literal construction: seed `m_nonancestor(1).` directly (a single
+// static fact, mirroring p4prime.dl's `m_reach(1).`) instead of v1's
+// propagation rule `m_ancestor(z):-m_ancestor(x),parent(x,z).`.
+//
+// v1's own header comment already states why this file's real recursive
+// rule needs propagation and p4prime.dl's `reach` does not: `reach_bf`'s
+// recursion is `reach_bf(x,y):-m_reach(x),reach_bf(x,z),edge(z,y)` -- x
+// stays fixed, only y extends, so a single static seed at x=1 covers every
+// step. `ancestor`'s ACTUAL committed recursion (../ancestor_nonancestor.dl)
+// is `ancestor(x,y):-parent(x,z),ancestor(z,y)` -- the recursive atom's
+// bound position is z, not x; x is never reused past the first literal. A
+// static seed containing only {1} can never satisfy `m_nonancestor(z)` for
+// any z reached after the first parent-hop, so `ancestor_bf2`'s own
+// recursive rule (below) is structurally unable to fire past depth 1.
+//
+// Built exactly as pre-registered anyway -- literally seeding
+// `m_nonancestor(1).` with no propagation rule, no third variant
+// substituted in to rescue the prediction. See
+// docs/reports/night03-T5-ancestor-seed.md for the measured consequence.
+
+.decl parent(child:number, par:number)
+.input parent
+.decl person(x:number)
+.input person
+
+.decl m_nonancestor(a:number)
+m_nonancestor(1).
+
+.decl ancestor_bf2(x:number, y:number)
+ancestor_bf2(x,y) :- m_nonancestor(x), parent(x,y).
+ancestor_bf2(x,y) :- m_nonancestor(x), parent(x,z), ancestor_bf2(z,y).
+
+.decl nonancestor_bf2(x:number, y:number)
+nonancestor_bf2(x,y) :- m_nonancestor(x), person(x), person(y), !ancestor_bf2(x,y).
+
+.decl q_nonancestor(y:number)
+.output q_nonancestor
+q_nonancestor(y) :- nonancestor_bf2(1,y).

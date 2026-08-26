@@ -1,0 +1,242 @@
+{
+ "root": {
+  "program": {
+   "configuration": {
+    "": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/guarded/ancestor_nonancestor_guarded_v2.dl",
+    "fact-dir": "/root/compiler/fixtures/benchmark-family/ancestor_nonancestor/n500",
+    "include-dir": ".",
+    "jobs": "1",
+    "libraries": "functors",
+    "library-dir": ".",
+    "output-dir": "/root/compiler/measurements/night03-t5/n500/v1_vs_v2/candidate",
+    "profile": "prof.log",
+    "relationCount": "6",
+    "ruleCount": "7",
+    "version": "2.5",
+    "warn": "all",
+    "wno": "none"
+   },
+   "relation": {
+    "ancestor_bf2": {
+     "iteration": {
+      "0": {
+       "maxRSS": {
+        "post": 12204,
+        "pre": 12204
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "ancestor_bf2(x,y) :- \n   m_nonancestor(x),\n   parent(x,z),\n   ancestor_bf2(z,y).": {
+         "0": {
+          "atom-frequency": {
+           "@new_ancestor_bf2(x,y) :- \n   m_nonancestor(x),\n   parent(x,z),\n   @delta_ancestor_bf2(z,y).": {
+            "@delta_ancestor_bf2": {
+             "level": 2,
+             "num-tuples": 0
+            },
+            "m_nonancestor": {
+             "level": 0,
+             "num-tuples": 0
+            },
+            "parent": {
+             "level": 1,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 12204,
+           "pre": 12204
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 1897960615, "end": 1897960617},
+          "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/guarded/ancestor_nonancestor_guarded_v2.dl [36:1-36:71]"
+         }
+        }
+       },
+       "runtime": { "start": 1897960606, "end": 1897960627}
+      }
+     },
+     "maxRSS": {
+      "post": 12204,
+      "pre": 12076
+     },
+     "non-recursive-rule": {
+      "ancestor_bf2(x,y) :- \n   m_nonancestor(x),\n   parent(x,y).": {
+       "atom-frequency": {
+        "ancestor_bf2(x,y) :- \n   m_nonancestor(x),\n   parent(x,y).": {
+         "m_nonancestor": {
+          "level": 0,
+          "num-tuples": 0
+         },
+         "parent": {
+          "level": 1,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12204,
+        "pre": 12076
+       },
+       "num-tuples": 5,
+       "runtime": { "start": 1897960586, "end": 1897960591},
+       "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/guarded/ancestor_nonancestor_guarded_v2.dl [35:1-35:52]"
+      }
+     },
+     "num-tuples": 5,
+     "reads": 500,
+     "runtime": { "start": 1897960576, "end": 1897960600},
+     "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/guarded/ancestor_nonancestor_guarded_v2.dl [34:7-34:19]"
+    },
+    "m_nonancestor": {
+     "maxRSS": {
+      "post": 11888,
+      "pre": 11760
+     },
+     "non-recursive-rule": {
+      "m_nonancestor(1).": {
+       "maxRSS": {
+        "post": 11888,
+        "pre": 11760
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 1897960163, "end": 1897960168},
+       "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/guarded/ancestor_nonancestor_guarded_v2.dl [32:1-32:18]"
+      }
+     },
+     "num-tuples": 1,
+     "reads": 0,
+     "runtime": { "start": 1897960161, "end": 1897960178},
+     "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/guarded/ancestor_nonancestor_guarded_v2.dl [31:7-31:20]"
+    },
+    "nonancestor_bf2": {
+     "maxRSS": {
+      "post": 12204,
+      "pre": 12204
+     },
+     "non-recursive-rule": {
+      "nonancestor_bf2(x,y) :- \n   m_nonancestor(x),\n   person(x),\n   person(y),\n   !ancestor_bf2(x,y).": {
+       "atom-frequency": {
+        "nonancestor_bf2(x,y) :- \n   m_nonancestor(x),\n   person(x),\n   person(y),\n   !ancestor_bf2(x,y).": {
+         "m_nonancestor": {
+          "level": 0,
+          "num-tuples": 0
+         },
+         "person": {
+          "level": 2,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12204,
+        "pre": 12204
+       },
+       "num-tuples": 495,
+       "runtime": { "start": 1897960651, "end": 1897960689},
+       "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/guarded/ancestor_nonancestor_guarded_v2.dl [39:1-39:84]"
+      }
+     },
+     "num-tuples": 495,
+     "reads": 0,
+     "runtime": { "start": 1897960650, "end": 1897960696},
+     "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/guarded/ancestor_nonancestor_guarded_v2.dl [38:7-38:22]"
+    },
+    "parent": {
+     "loadtime": { "start": 1897960184, "end": 1897960488},
+     "num-tuples": 1000,
+     "reads": 0,
+     "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/guarded/ancestor_nonancestor_guarded_v2.dl [26:7-26:13]"
+    },
+    "person": {
+     "loadtime": { "start": 1897960497, "end": 1897960569},
+     "num-tuples": 500,
+     "reads": 1,
+     "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/guarded/ancestor_nonancestor_guarded_v2.dl [28:7-28:13]"
+    },
+    "q_nonancestor": {
+     "maxRSS": {
+      "post": 12204,
+      "pre": 12204
+     },
+     "non-recursive-rule": {
+      "q_nonancestor(y) :- \n   nonancestor_bf2(1,y).": {
+       "atom-frequency": {
+        "q_nonancestor(y) :- \n   nonancestor_bf2(1,y).": {
+         "nonancestor_bf2": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12204,
+        "pre": 12204
+       },
+       "num-tuples": 495,
+       "runtime": { "start": 1897960711, "end": 1897960725},
+       "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/guarded/ancestor_nonancestor_guarded_v2.dl [43:1-43:42]"
+      }
+     },
+     "num-tuples": 495,
+     "reads": 0,
+     "runtime": { "start": 1897960701, "end": 1897960733},
+     "savetime": { "start": 1897960738, "end": 1897960878},
+     "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/guarded/ancestor_nonancestor_guarded_v2.dl [41:7-41:20]"
+    }
+   },
+   "runtime": { "start": 1897960131, "end": 1897960884},
+   "starttime": { "time": 1897960077},
+   "usage": {
+    "timepoint": {
+     "1897960096": {
+      "maxRSS": 11632,
+      "systemtime": 2201,
+      "usertime": 2201
+     },
+     "1897960165": {
+      "maxRSS": 11760,
+      "systemtime": 2280,
+      "usertime": 2280
+     },
+     "1897960204": {
+      "maxRSS": 11888,
+      "systemtime": 2296,
+      "usertime": 2296
+     },
+     "1897960515": {
+      "maxRSS": 12076,
+      "systemtime": 2459,
+      "usertime": 2459
+     },
+     "1897960590": {
+      "maxRSS": 12204,
+      "systemtime": 2507,
+      "usertime": 2507
+     },
+     "1897960620": {
+      "maxRSS": 12204,
+      "systemtime": 2527,
+      "usertime": 2527
+     },
+     "1897960646": {
+      "maxRSS": 12204,
+      "systemtime": 2542,
+      "usertime": 2542
+     },
+     "1897960718": {
+      "maxRSS": 12204,
+      "systemtime": 2583,
+      "usertime": 2583
+     },
+     "1897960753": {
+      "maxRSS": 12204,
+      "systemtime": 2602,
+      "usertime": 2602
+     }
+    }
+   }
+  }
+ }
+}

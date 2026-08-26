@@ -48,6 +48,7 @@ def run_souffle(dl_path: Path, facts_dir: Path, workdir: Path):
     workdir.mkdir(parents=True, exist_ok=True)
     cmd = ["souffle", "-F", str(facts_dir.resolve()), "-D", str(workdir.resolve()),
            "-p", "prof.log", str(dl_path.resolve())]
+    (workdir / "cmd.txt").write_text(" ".join(cmd) + "\n")
     try:
         proc = subprocess.run(cmd, cwd=str(workdir), capture_output=True, text=True,
                                timeout=TIMEOUT_S, preexec_fn=_limit_mem)
@@ -55,6 +56,8 @@ def run_souffle(dl_path: Path, facts_dir: Path, workdir: Path):
         return {"status": f"DNF:timeout-{TIMEOUT_S}s"}
     except MemoryError:
         return {"status": "DNF:memcap-8gb"}
+    (workdir / "stdout.txt").write_text(proc.stdout)
+    (workdir / "stderr.txt").write_text(proc.stderr)
     if proc.returncode != 0:
         return {"status": f"error:returncode-{proc.returncode}", "stderr": proc.stderr[:1000]}
     return {"status": "ok"}
