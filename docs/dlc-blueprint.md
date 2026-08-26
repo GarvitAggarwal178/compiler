@@ -3,7 +3,10 @@
 **Course:** Compiler Design (semester project)
 **Team:** 2
 **Budget:** 15 weeks from 2026-08-20 → 2026-12-03. Realistically ~10 productive weeks.
-**Status:** selected 2026-08-20, pending Probe 0. Not started.
+**Status:** see `docs/SESSION_LOG.md` (session-by-session narrative) and
+`docs/reports/m1-progress.md` (M1's own final report) — not tracked as a
+static field here, since this line goes stale the moment any session runs
+and nothing in this file's own review process catches that.
 **Blueprint version:** v1.5 — last spec until M1 exists.
 
 ---
