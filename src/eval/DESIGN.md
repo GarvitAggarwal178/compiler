@@ -1,0 +1,81 @@
+# package eval
+
+`fallback.go` is Lane A (docs/M1-BUILD.md §1) and contains only the
+marker comment. Everything else here — `naive.go` (§3.8), `io.go` — is
+Lane B. Semi-naive (§3.9) lands in this same package.
+
+**`Evaluator` bundles relation storage and the string interner into one
+struct** purely so the many small helper functions (`evalArith`,
+`tryUnify`, `groundTuple`, ...) don't each need both threaded through
+their parameter list. Nothing here is concurrent; there is no locking
+because there is nothing to protect against.
+
+**Key decision, forced by a real bug an early test caught:
+`safeOrder` reorders a clause's body before naive evaluation walks it
+left to right.** `sema.CheckAllowedness`'s fixpoint (§3.5) is
+deliberately order-independent — `X = Y + 1, q(Y).` is exactly as
+allowed as `q(Y), X = Y + 1.` (probe case b). But a naive left-to-right
+*evaluator* cannot process `X = Y + 1` before anything has bound `Y`: at
+that point in the walk, `Y` isn't in `bindings` yet, and there is nothing
+sensible to do with an equation whose right-hand side isn't computable.
+`safeOrder` greedily schedules whatever literal is currently safe (a
+positive atom always is; a negated atom or a non-grounding constraint
+only once every variable it needs is already bound; a grounding `V = E`
+constraint once `E`'s variables are bound, even if `V` itself isn't yet)
+and repeats until the whole body is scheduled. `TestEquationBeforeGroundingAtomSafeOrder`
+pins this directly against probe case (b)'s own shape.
+
+**The `=` constraint has two different runtime behaviors, matching its
+two different roles in allowedness's own fixpoint.** `evalConstraint`
+checks, in order: is one side a not-yet-bound bare `Var` and the other
+side's variables all bound? If so, this is a *grounding* occurrence —
+evaluate the other side and bind the variable (an assignment, not a
+test). Otherwise it's a plain equality *test* — evaluate both sides
+(now guaranteed possible, `safeOrder` already ensured it) and compare.
+Every other relop (`!=`,`<`,`<=`,`>`,`>=`) is always a test, never a
+grounding — mirrors sema's own "only `=` contributes" rule
+(`sema/DESIGN.md`) exactly, because it has to: an evaluator that grounded
+through `<` would accept programs allowedness had already rejected as
+unsafe, and one that couldn't evaluate a same-side-bound `=` as a test
+would reject some allowed programs outright.
+
+**A found-by-testing correction, not a design decision made in
+advance: source-level fact clauses (`edge(1,2).`) ARE counted as
+rule-derived tuples, matching Soufflé's own convention** — only
+`.input`-loaded data (`LoadFacts`, which never calls
+`RecordSeedInsert`/`RecordIterationInsert`) is excluded. A first draft of the test now named
+`TestInstrumentationExcludesInputLoadsButCountsSourceFacts` assumed fact
+clauses should also be excluded and failed; checking `harness/tuple_report.py`'s actual
+`is_input_relation` predicate (keyed on Soufflé's own `"loadtime"`
+profile attribute, which only a real `.input` load produces) confirmed
+the *test's* assumption was wrong, not the evaluator's behavior — a plain
+source fact is, to Soufflé, just a non-recursive rule like any other, and
+is counted. Fixed by correcting the test, not the code, and logged here
+so the reasoning survives past the one commit that fixed it.
+
+**Naive evaluation records every insertion into iteration bucket 0**
+(`ir.RelationStats.IterationInserts[0]`) — there is no seed/delta
+distinction to make without semi-naive's Δ-rewrite, so `RecordIterationInsert(0)`
+is called uniformly for every rule-derived tuple regardless of which
+pass of the fixpoint loop produced it. `Total()` (ir/DESIGN.md) still
+gives the right number either way.
+
+**A negated atom's terms are required to already be fully ground**
+(`groundTuple` returns `ok=false`, silently skipping that branch, if any
+term isn't `ast.Arith`-evaluable) — this can only happen for a `Wildcard`
+inside a negated atom's argument list, a construction allowedness does
+not itself forbid but that has no sensible ground-truth membership test
+(`!q(_, X)` — is that "for all possible first columns" or "there exists
+one"? Soufflé's own semantics for this shape were not investigated).
+Disclosed as an unhandled edge case, not silently miscomputed as a
+false-negative or false-positive.
+
+**A `Wildcard` in *head* position falls back to a fixed value
+(`NumberValue(0)`) instead of panicking.** Real Soufflé rejects this
+construct outright (`docs/reports/night02-T2-hostile.md`,
+`semantic_wildcard_in_head.dl`) but sema (§3.4-§3.6, as implemented)
+doesn't check for it — adding that check was out of scope creep for this
+item. The fallback exists purely so a program containing this construct
+degrades to "produces a wrong-but-harmless tuple" rather than a crash,
+consistent with "never panic" as the higher-priority invariant when the
+two goals conflict.

@@ -6,6 +6,9 @@ import (
 	"fmt"
 	"os"
 
+	"dlc/src/ast"
+	"dlc/src/eval"
+	"dlc/src/ir"
 	"dlc/src/lexer"
 	"dlc/src/parser"
 	"dlc/src/sema"
@@ -14,7 +17,7 @@ import (
 
 func main() {
 	if len(os.Args) < 3 {
-		fmt.Fprintln(os.Stderr, "usage: dlc <subcommand> <file>")
+		fmt.Fprintln(os.Stderr, "usage: dlc <subcommand> <file> [args...]")
 		os.Exit(2)
 	}
 	subcommand, path := os.Args[1], os.Args[2]
@@ -28,6 +31,12 @@ func main() {
 		runRoundtrip(path)
 	case "check":
 		runCheck(path)
+	case "run":
+		if len(os.Args) != 5 {
+			fmt.Fprintln(os.Stderr, "usage: dlc run <file> <factsDir> <outDir>")
+			os.Exit(2)
+		}
+		runRun(path, os.Args[3], os.Args[4])
 	default:
 		fmt.Fprintf(os.Stderr, "unknown subcommand %q\n", subcommand)
 		os.Exit(2)
@@ -111,6 +120,113 @@ func runLex(path string) {
 		os.Exit(1)
 	}
 	fmt.Println(string(enc))
+}
+
+type runOutput struct {
+	Status      string               `json:"status"` // "ok" | "rejected" | "parse_error" | "eval_error"
+	Diagnostics []jsonSemaDiagnostic `json:"diagnostics,omitempty"`
+	ParseErrors []jsonDiagnostic     `json:"parse_errors,omitempty"`
+	Panic       string               `json:"panic,omitempty"`
+}
+
+// runRun is §3.8/§3.9's entry point and harness/differential.py's
+// run_dlc() target: parse -> full sema check -> (if clean) load facts,
+// evaluate, write every .output relation's .csv to outDir in the same
+// tab-separated, no-header shape Soufflé itself writes, plus a
+// Soufflé-profile-shaped JSON (ir.EmitProfile) to <outDir>/profile.json
+// for T_naive/T_semi-naive extraction. Prints a runOutput document so a
+// caller can tell "ok, csvs are on disk" from "rejected" from "crashed"
+// without inspecting the filesystem first.
+func runRun(path, factsDir, outDir string) {
+	defer func() {
+		if r := recover(); r != nil {
+			out := runOutput{Status: "panic", Panic: fmt.Sprintf("%v", r)}
+			enc, _ := json.Marshal(out)
+			fmt.Println(string(enc))
+			os.Exit(1)
+		}
+	}()
+
+	src, err := os.ReadFile(path)
+	if err != nil {
+		out := runOutput{Status: "read_error", Panic: err.Error()}
+		enc, _ := json.Marshal(out)
+		fmt.Println(string(enc))
+		os.Exit(1)
+	}
+
+	prog, perrs := parser.Parse(src)
+	if len(perrs) > 0 {
+		out := runOutput{Status: "parse_error"}
+		for _, e := range perrs {
+			out.ParseErrors = append(out.ParseErrors, jsonDiagnostic{Span: toJSONSpan(e.Span), Message: e.Message})
+		}
+		enc, _ := json.Marshal(out)
+		fmt.Println(string(enc))
+		return
+	}
+
+	var diags []sema.Diagnostic
+	diags = append(diags, sema.CheckDeclType(prog)...)
+	diags = append(diags, sema.CheckAllowedness(prog)...)
+	stratDiags, stratResult := sema.CheckStratification(prog)
+	diags = append(diags, stratDiags...)
+	if len(diags) > 0 {
+		out := runOutput{Status: "rejected"}
+		for _, d := range diags {
+			out.Diagnostics = append(out.Diagnostics, jsonSemaDiagnostic{
+				Span: toJSONSpan(d.Span), Category: string(d.Category), Message: d.Message,
+			})
+		}
+		enc, _ := json.Marshal(out)
+		fmt.Println(string(enc))
+		return
+	}
+
+	schemas, _ := sema.BuildSymbolTable(prog)
+	inputNames := map[string]bool{}
+	outputNames := map[string]bool{}
+	for _, d := range prog.Decls {
+		switch d.Kind {
+		case ast.DeclInput:
+			inputNames[d.Name] = true
+		case ast.DeclOutput:
+			outputNames[d.Name] = true
+		}
+	}
+
+	evaluator := eval.NewEvaluator(schemas.Relations)
+	if err := evaluator.LoadFacts(factsDir, schemas.Relations, inputNames); err != nil {
+		out := runOutput{Status: "eval_error", Panic: err.Error()}
+		enc, _ := json.Marshal(out)
+		fmt.Println(string(enc))
+		os.Exit(1)
+	}
+	evaluator.RunNaive(prog, stratResult.Stratum)
+	if err := evaluator.WriteOutput(outDir, schemas.Relations, outputNames); err != nil {
+		out := runOutput{Status: "eval_error", Panic: err.Error()}
+		enc, _ := json.Marshal(out)
+		fmt.Println(string(enc))
+		os.Exit(1)
+	}
+	writeProfile(evaluator, outDir)
+
+	out := runOutput{Status: "ok"}
+	enc, _ := json.Marshal(out)
+	fmt.Println(string(enc))
+}
+
+// writeProfile writes <outDir>/profile.json in Soufflé's own -p JSON
+// profile shape (ir.EmitProfile) -- harness/parse_profile.py and
+// harness/tuple_report.py, already written against real Soufflé output,
+// read this file unmodified.
+func writeProfile(evaluator *eval.Evaluator, outDir string) {
+	doc := ir.EmitProfile(evaluator.Relations)
+	enc, err := json.MarshalIndent(doc, "", "  ")
+	if err != nil {
+		return
+	}
+	_ = os.WriteFile(outDir+"/profile.json", enc, 0o644)
 }
 
 type jsonDiagnostic struct {

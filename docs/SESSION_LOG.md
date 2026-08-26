@@ -457,3 +457,34 @@ JSON shape field-for-field so `harness/parse_profile.py`/
   not fabricated ahead of there being anything to report.
 - 8 Go unit tests, all pass. `go build`/`go vet`/`go test ./...` all
   clean.
+
+**§3.8 (naive evaluation):** gate PASSED, zero disagreements.
+`src/eval/naive.go`: per-stratum naive fixpoint, nested-loop join with
+`ir`'s column-0 index used when the joined atom's first term is already
+bound. `safeOrder` reorders each clause's body so negated atoms/
+grounding constraints only get evaluated once their variables are bound
+-- required because allowedness's own fixpoint (§3.5) is deliberately
+order-independent but a left-to-right evaluator is not; pinned by
+`TestEquationBeforeGroundingAtomSafeOrder` against probe case (b)'s exact
+shape. 13 Go unit tests (transitive closure, stratified negation,
+zero-arity, symbols, dedup, unary minus, instrumentation correctness --
+one test's own wrong assumption caught and fixed, logged in DESIGN.md).
+CLI gained a `run` subcommand (parse+check+load facts+evaluate+write
+`.output` CSVs in Soufflé's own tab-separated shape+write a
+Soufflé-profile-shaped `profile.json`, `src/ir.EmitProfile`).
+`harness/differential.py`'s `run_dlc()` now calls the real binary --
+everything downstream (`compare()`, reporting) needed zero changes,
+exactly as that file's original stub-era comment said it would.
+
+- **Gate: agreed/attempted = 11/20** on the in-grammar files dlc's front
+  end accepts (§3.3 gate one's 20/195), against real Soufflé, empty
+  facts dir (none of the 20 has an `.facts` file in Soufflé's own tree --
+  every one defines its EDB via source fact clauses). **0
+  disagreements** among the 11 comparable cases. The other 9 are
+  correctly rejected by sema before evaluation is even attempted (8
+  already known from §3.4/§3.5's findings -- multi-file limitations,
+  Soufflé builtins, designed-to-fail negative tests; 1 new one,
+  `semantic/var_single/var_single.dl`, itself another Soufflé designed
+  negative test for exactly the ungrounded-head-variable shape
+  allowedness already covers). (`measurements/
+  m1-3.8-naive-eval-summary.json`)

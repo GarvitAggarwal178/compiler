@@ -1,23 +1,24 @@
 #!/usr/bin/env python3
 """
 NIGHT-BATCH-01 T7 item 1: differential runner. Takes a .dl program and a
-fact directory, runs both dlc (via a stub -- Lane A doesn't exist yet)
-and Soufflé, compares output relations by set equality on sorted output
-(CLAUDE.md section 6), reports the symmetric difference per relation,
-not a boolean.
+fact directory, runs both dlc and Soufflé, compares output relations by
+set equality on sorted output (CLAUDE.md section 6), reports the
+symmetric difference per relation, not a boolean.
 
-The dlc side is a deliberate stub, not an accident of a missing binary:
-run_dlc() always returns status="not_implemented" right now. M1 (Lane A)
-replaces its body with a real subprocess call to the built dlc binary;
-everything downstream (comparison, reporting) is already wired and does
-not change when that happens.
+run_dlc() calls the real `dlc run` subcommand (§3.8/§3.9, Lane B under
+docs/M1-BUILD.md §1) now -- everything downstream (comparison, reporting)
+was already wired for this day and did not need to change.
 """
 import json
 import subprocess
 import sys
+import tempfile
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Optional
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import dlc_interface  # noqa: E402
 
 
 @dataclass
@@ -37,11 +38,32 @@ class Comparison:
 
 
 def run_dlc(dl_path: Path, facts_dir: Path) -> EngineResult:
-    """STUB. M1 (Lane A) replaces this body with a real invocation of the
-    built dlc binary, once it exists. Everything else in this module is
-    already correct for that day and does not need to change."""
-    return EngineResult(engine="dlc", status="not_implemented",
-                         stderr="dlc is not implemented yet (M1, Lane A)")
+    """Runs the real `dlc run` subcommand and collects its .output
+    relations the same way run_souffle does (sorted CSV lines), so
+    compare() below treats both engines identically."""
+    dlc_interface.build_dlc()
+    output_names = _extract_output_names(dl_path)
+    with tempfile.TemporaryDirectory() as out_dir_str:
+        out_dir = Path(out_dir_str)
+        proc = subprocess.run(
+            [str(dlc_interface.DLC_BINARY), "run", str(dl_path), str(facts_dir), str(out_dir)],
+            capture_output=True, encoding="utf-8", errors="replace",
+        )
+        if proc.returncode != 0 and not proc.stdout.strip():
+            return EngineResult(engine="dlc", status="panic", stderr=proc.stderr)
+        try:
+            doc = json.loads(proc.stdout.strip().splitlines()[-1]) if proc.stdout.strip() else {}
+        except (json.JSONDecodeError, IndexError) as e:
+            return EngineResult(engine="dlc", status="panic", stderr=f"non-JSON output: {e}; stdout: {proc.stdout[:500]}")
+        status = doc.get("status", "panic")
+        if status != "ok":
+            return EngineResult(engine="dlc", status=status, stderr=json.dumps(doc)[:1000])
+
+        relations = {}
+        for name in output_names:
+            fp = out_dir / f"{name}.csv"
+            relations[name] = sorted(fp.read_text().splitlines()) if fp.is_file() else []
+        return EngineResult(engine="dlc", status="ok", output_relations=relations)
 
 
 def run_souffle(dl_path: Path, facts_dir: Path, workdir: Path) -> EngineResult:
