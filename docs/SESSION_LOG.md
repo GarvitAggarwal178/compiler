@@ -621,3 +621,33 @@ failures, 0 answer mismatches -- the 9 non-accepted cases fail identically
 on the original file too (broken/include-only Soufflé fixtures, not a
 printer defect). `docs/reports/night03-T1-printer-souffle.md`. Commit
 `df652e1`. T2 unblocked.
+
+**T2: DONE.** `dlc emit` subcommand + `transformerRegistry` added to
+`cmd/dlc`. `harness/night03_t2_protocol.py`: full M3 measurement pipeline
+(`dlc` emits, Soufflé evaluates) on `--transformer=passthrough`, all 5
+`BENCHMARK_FAMILY` shapes, every `SCALE_POINTS.json` point (25/25). Tuple
+totals + answers identical in all 25 (mathematically required for a no-op
+transformer; confirms the plumbing is transparent).
+`docs/reports/night03-T2-protocol.md`. Commit `e0d550d`.
+
+**T3: DONE.** `harness/m2_accept.py` (semantic acceptance harness for any
+candidate transform) validated on 3 known-good pairs
+(p2/p4prime, ancestor_nonancestor/guarded, same_generation_negation/guarded)
+-- exact match against committed T5/T6 numbers on all 3, 3/3
+answer-identical. T3a: `souffle --show=transformed-ast` (confirmed name --
+NOT `--show=transformed-datalog`, which does not exist) dumped for 8 files
+under `tests/reference/souffle-transformed/`, reference-only.
+`docs/reports/night03-T3-m2-harness.md`. Commit `a394848`.
+
+**T4: DONE.** `harness/night03_t4_culprit_classifier.py` implements
+blueprint section 6's formal culprit-cycle mechanism directly (found and
+fixed a real directive/period-splitting bug before trusting the count --
+`culprit_cycle.dl` itself scored zero findings until fixed). Census: 0/817
+real-world files (195 in-grammar + 622 full Souffle tree) match beyond the
+one already-known file. 6 new hand-constructed programs added to
+`tests/corpus/CULPRIT_CANDIDATES/` (5 structurally matching + 1 deliberate
+negative control, `cc_edb_negated`, EDB negated predicate correctly not
+flagged), all classifier-verified, `dlc check`-clean, Souffle-recorded
+(6/6 complete, 6/6 answer-identical, 0 stratification failures under
+Souffle's own transform -- consistent with `culprit_cycle.dl`'s own
+observed behaviour). `docs/reports/night03-T4-culprit-corpus.md`.
