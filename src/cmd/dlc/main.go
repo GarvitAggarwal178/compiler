@@ -217,6 +217,7 @@ func runCheck(path string) {
 
 	var diags []sema.Diagnostic
 	diags = append(diags, sema.CheckDeclType(prog)...)
+	diags = append(diags, sema.CheckAllowedness(prog)...)
 
 	out := checkOutput{Status: "ok"}
 	if len(diags) > 0 {

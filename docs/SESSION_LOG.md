@@ -371,3 +371,23 @@ CLI gained a `check` subcommand.
   .dl`, `semantic/type_system7.dl`) are, by their own names, Soufflé's
   *own* designed-to-fail negative test cases -- dlc correctly rejecting
   them is validation, not a bug.
+
+**§3.5 (allowedness):** gate PASSED, cleanly. `src/sema/allowedness.go`
+implements the fixpoint definition in `docs/DECISIONS.md` literally --
+G0 from positive-atom arguments, `V = E`/`E = V` grounding to a fixpoint,
+every variable in the clause must end up grounded. All four asymmetries
+(only `=` contributes; grounded side must be bare; no arithmetic
+inversion; every variable not just head variables) implemented as
+separate, visible code paths, each pinned by DESIGN.md to the specific
+probe case that forces it.
+
+- **Gate: 15/15** probe programs (`tests/programs/
+  allowedness_probe_{a..o}.dl`) match their recorded Soufflé verdict,
+  both as Go unit tests (`src/sema/allowedness_test.go`) and end-to-end
+  through the built CLI (`harness/m1_3_5_allowedness.py`,
+  `measurements/m1-3.5-allowedness-summary.json`).
+- **Plus all 13 `tests/rejection/` cases: 10/13** correctly rejected.
+  The remaining 3 are exactly the stratification-ground cases --
+  attributed explicitly to §3.6 not existing yet, not a §3.5 shortfall
+  (verified: all 10 non-stratification cases, across arity/type/
+  allowedness, are 100% correct).
