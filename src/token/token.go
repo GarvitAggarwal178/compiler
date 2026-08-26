@@ -15,13 +15,13 @@ const (
 	NUMBER
 	STRING
 
-	COLONDASH // ':-'
-	DOT       // '.'
-	COMMA     // ','
-	BANG      // '!'
-	LPAREN    // '('
-	RPAREN    // ')'
-	COLON     // ':'
+	COLONDASH  // ':-'
+	DOT        // '.'
+	COMMA      // ','
+	BANG       // '!'
+	LPAREN     // '('
+	RPAREN     // ')'
+	COLON      // ':'
 	UNDERSCORE // '_' (wildcard)
 
 	EQ  // '='

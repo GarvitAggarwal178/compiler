@@ -104,3 +104,39 @@ func TestStratificationDeterministicAcrossRuns(t *testing.T) {
 		}
 	}
 }
+
+// The exact shape that exposed the stratum-vs-SCC bug in eval (found via
+// example/josephus/josephus.dl, M1 §3.9): a self-recursive relation
+// (Relation) and a second, independent relation (Josephus) that reads it
+// positively -- no negation anywhere, so both end up at stratum 0, but
+// Josephus's SCC must still be evaluated strictly after Relation's SCC
+// has fully converged. SCCOrder is what carries that ordering; stratum
+// number alone does not.
+func TestSCCOrderRespectsPositiveDependencyEvenWithinOneStratum(t *testing.T) {
+	src := ".decl Relation(a:symbol,b:symbol)\n" +
+		"Relation(a,c) :- Relation(a,b), Relation(b,c).\n" +
+		".decl Josephus(a:symbol)\n" +
+		"Josephus(a) :- Relation(a,b), Relation(b,a).\n"
+	_, result := mustStratify(t, src)
+	if result.Stratum["Relation"] != result.Stratum["Josephus"] {
+		t.Fatalf("expected both at the same stratum number (no negation anywhere), got Relation=%d Josephus=%d",
+			result.Stratum["Relation"], result.Stratum["Josephus"])
+	}
+	relationPos, josephusPos := -1, -1
+	for i, scc := range result.SCCOrder {
+		for _, name := range scc {
+			if name == "Relation" {
+				relationPos = i
+			}
+			if name == "Josephus" {
+				josephusPos = i
+			}
+		}
+	}
+	if relationPos == -1 || josephusPos == -1 {
+		t.Fatalf("expected both relations to appear in SCCOrder, got %v", result.SCCOrder)
+	}
+	if !(relationPos < josephusPos) {
+		t.Fatalf("expected Relation's SCC to precede Josephus's SCC in SCCOrder (Josephus depends on Relation), got order %v", result.SCCOrder)
+	}
+}

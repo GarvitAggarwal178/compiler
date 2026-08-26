@@ -36,7 +36,13 @@ func main() {
 			fmt.Fprintln(os.Stderr, "usage: dlc run <file> <factsDir> <outDir>")
 			os.Exit(2)
 		}
-		runRun(path, os.Args[3], os.Args[4])
+		runRun(path, os.Args[3], os.Args[4], false)
+	case "run-seminaive":
+		if len(os.Args) != 5 {
+			fmt.Fprintln(os.Stderr, "usage: dlc run-seminaive <file> <factsDir> <outDir>")
+			os.Exit(2)
+		}
+		runRun(path, os.Args[3], os.Args[4], true)
 	default:
 		fmt.Fprintf(os.Stderr, "unknown subcommand %q\n", subcommand)
 		os.Exit(2)
@@ -123,10 +129,11 @@ func runLex(path string) {
 }
 
 type runOutput struct {
-	Status      string               `json:"status"` // "ok" | "rejected" | "parse_error" | "eval_error"
-	Diagnostics []jsonSemaDiagnostic `json:"diagnostics,omitempty"`
-	ParseErrors []jsonDiagnostic     `json:"parse_errors,omitempty"`
-	Panic       string               `json:"panic,omitempty"`
+	Status             string               `json:"status"` // "ok" | "rejected" | "parse_error" | "eval_error"
+	Diagnostics        []jsonSemaDiagnostic `json:"diagnostics,omitempty"`
+	ParseErrors        []jsonDiagnostic     `json:"parse_errors,omitempty"`
+	DerivationAttempts int64                `json:"derivation_attempts,omitempty"`
+	Panic              string               `json:"panic,omitempty"`
 }
 
 // runRun is §3.8/§3.9's entry point and harness/differential.py's
@@ -137,7 +144,13 @@ type runOutput struct {
 // for T_naive/T_semi-naive extraction. Prints a runOutput document so a
 // caller can tell "ok, csvs are on disk" from "rejected" from "crashed"
 // without inspecting the filesystem first.
-func runRun(path, factsDir, outDir string) {
+//
+// semiNaive selects §3.9's evaluator instead of §3.8's naive one --
+// same parse/check/load/write pipeline either way, so the two are only
+// ever compared on identical everything else (differential.py's own
+// gate-one re-check, and the T_naive-vs-T_semi-naive headline number
+// both depend on that).
+func runRun(path, factsDir, outDir string, semiNaive bool) {
 	defer func() {
 		if r := recover(); r != nil {
 			out := runOutput{Status: "panic", Panic: fmt.Sprintf("%v", r)}
@@ -202,7 +215,11 @@ func runRun(path, factsDir, outDir string) {
 		fmt.Println(string(enc))
 		os.Exit(1)
 	}
-	evaluator.RunNaive(prog, stratResult.Stratum)
+	if semiNaive {
+		evaluator.RunSemiNaive(prog, stratResult)
+	} else {
+		evaluator.RunNaive(prog, stratResult.Stratum)
+	}
 	if err := evaluator.WriteOutput(outDir, schemas.Relations, outputNames); err != nil {
 		out := runOutput{Status: "eval_error", Panic: err.Error()}
 		enc, _ := json.Marshal(out)
@@ -211,7 +228,7 @@ func runRun(path, factsDir, outDir string) {
 	}
 	writeProfile(evaluator, outDir)
 
-	out := runOutput{Status: "ok"}
+	out := runOutput{Status: "ok", DerivationAttempts: evaluator.DerivationAttempts}
 	enc, _ := json.Marshal(out)
 	fmt.Println(string(enc))
 }

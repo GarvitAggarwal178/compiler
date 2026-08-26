@@ -16,9 +16,21 @@ import (
 // struct (rather than threading both through every helper function's
 // parameter list) purely for readability -- nothing here is safe for
 // concurrent use, and nothing needs to be.
+//
+// DerivationAttempts counts every candidate head tuple a clause body
+// match successfully builds, BEFORE Relation.Insert's dedup -- unlike
+// ir.RelationStats (distinct tuples only, matching this project's T
+// metric since Phase 0), this number is expected to differ between
+// RunNaive and RunSemiNaive on the same program: naive re-derives
+// already-known tuples on every pass until its combined fixpoint stops
+// changing, semi-naive's whole point is to avoid exactly that. See
+// DESIGN.md for why the *tuple-count* T_naive/T_semi-naive is expected
+// to be identical (both compute the same minimal model) and why this
+// separate counter is what actually shows semi-naive's saved work.
 type Evaluator struct {
-	Relations map[string]*ir.Relation
-	Strings   *ir.StringTable
+	Relations          map[string]*ir.Relation
+	Strings            *ir.StringTable
+	DerivationAttempts int64
 }
 
 // NewEvaluator creates one Relation per declared relation (schema-only
@@ -63,11 +75,12 @@ func (e *Evaluator) fixpoint(clauses []*ast.Clause) {
 		for _, c := range clauses {
 			ordered := safeOrder(c.Body)
 			headRel := e.Relations[c.Head.Name]
-			e.evalBody(ordered, 0, map[string]ir.Value{}, func(bindings map[string]ir.Value) {
+			e.evalBody(ordered, 0, map[string]ir.Value{}, nil, func(bindings map[string]ir.Value) {
 				tup, ok := e.buildTuple(c.Head, bindings)
 				if !ok {
 					return
 				}
+				e.DerivationAttempts++
 				if headRel.Insert(tup) {
 					headRel.RecordIterationInsert(0)
 					changed = true
@@ -190,7 +203,23 @@ func addBoundVars(lit ast.Literal, bound map[string]bool) {
 // step and recursing, calling cont once with the accumulated bindings
 // for every way to satisfy the whole (ordered) body -- a plain nested-
 // loop join, no smarter plan than the literal order safeOrder produced.
-func (e *Evaluator) evalBody(body []ast.Literal, idx int, bindings map[string]ir.Value, cont func(map[string]ir.Value)) {
+//
+// overrideIdx, when non-nil, redirects one specific POSITIVE atom
+// OCCURRENCE (keyed by its index in body, not by relation name) to read
+// from a delta relation (§3.9's semi-naive Δ-rewrite) instead of
+// e.Relations[name] (the full accumulated relation). Keyed by position,
+// not name, deliberately: a self-join (the same relation appearing twice
+// in one recursive rule's body, e.g. `p(x,y):-p(x,z),p(z,y).`) needs
+// separate Δ-rewrite variants that redirect exactly one *occurrence* at
+// a time -- keying by name would redirect every occurrence of that
+// relation at once and silently drop the new-old / old-new combinations
+// semi-naive evaluation exists to still catch. Negated atoms never
+// consult overrideIdx -- they only ever reference a strictly lower,
+// already-stable stratum (sema/stratify.go's computeStrata guarantees
+// this), so "delta vs full" is not a meaningful distinction for them.
+// nil overrideIdx (naive evaluation, §3.8) behaves exactly as before
+// this parameter existed.
+func (e *Evaluator) evalBody(body []ast.Literal, idx int, bindings map[string]ir.Value, overrideIdx map[int]*ir.Relation, cont func(map[string]ir.Value)) {
 	if idx == len(body) {
 		cont(bindings)
 		return
@@ -198,23 +227,28 @@ func (e *Evaluator) evalBody(body []ast.Literal, idx int, bindings map[string]ir
 	switch v := body[idx].(type) {
 	case *ast.Atom:
 		rel := e.Relations[v.Name]
+		if overrideIdx != nil {
+			if r2, ok := overrideIdx[idx]; ok {
+				rel = r2
+			}
+		}
 		if rel == nil {
 			return // undeclared relation -- sema should have already rejected this program
 		}
 		for _, tup := range e.candidateTuples(rel, v.Terms, bindings) {
 			if newBindings, ok := e.tryUnify(v.Terms, tup, bindings); ok {
-				e.evalBody(body, idx+1, newBindings, cont)
+				e.evalBody(body, idx+1, newBindings, overrideIdx, cont)
 			}
 		}
 	case *ast.NegatedAtom:
 		rel := e.Relations[v.Atom.Name]
 		tup, ok := e.groundTuple(v.Atom.Terms, bindings)
 		if ok && rel != nil && !relContains(rel, tup) {
-			e.evalBody(body, idx+1, bindings, cont)
+			e.evalBody(body, idx+1, bindings, overrideIdx, cont)
 		}
 	case *ast.Constraint:
 		if newBindings, ok := e.evalConstraint(v, bindings); ok {
-			e.evalBody(body, idx+1, newBindings, cont)
+			e.evalBody(body, idx+1, newBindings, overrideIdx, cont)
 		}
 	}
 }

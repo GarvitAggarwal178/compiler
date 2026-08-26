@@ -15,7 +15,7 @@ type IterationProfile struct {
 }
 
 type RelationProfile struct {
-	NumTuples int                          `json:"num-tuples"`
+	NumTuples int                         `json:"num-tuples"`
 	Iteration map[string]IterationProfile `json:"iteration,omitempty"`
 }
 

@@ -1,8 +1,53 @@
 # package eval
 
 `fallback.go` is Lane A (docs/M1-BUILD.md §1) and contains only the
-marker comment. Everything else here — `naive.go` (§3.8), `io.go` — is
-Lane B. Semi-naive (§3.9) lands in this same package.
+marker comment. Everything else here — `naive.go` (§3.8), `seminaive.go`
+(§3.9), `io.go` — is Lane B.
+
+## The SCC-vs-stratum evaluation-order bug (§3.9, found by the
+differential harness, not by inspection)
+
+`RunSemiNaive`'s first version grouped clauses by **stratum number** for
+its seed/recursive-round loop, mirroring `RunNaive`. §3.9's own gate one
+("same set equality as 3.8, unchanged") caught a real disagreement on
+`example/josephus/josephus.dl`: `Josephus` was missing a tuple
+(`"e"`) that both naive evaluation and real Soufflé agree belongs there.
+
+Root cause: `josephus.dl` has a self-recursive `Relation` and a second,
+independent `Josephus` that reads it positively — no negation anywhere in
+the file, so nothing forces `Josephus` to a strictly later stratum
+*number*; both land at stratum 0. Grouping by stratum number put
+`Josephus`'s (correctly seed-classified) clause in the same batch as
+`Relation`'s clauses, so it ran during the **seed round** — before
+`Relation`'s own recursive rule had produced anything beyond its 6
+initial facts. `Josephus` silently got evaluated against a
+not-yet-converged `Relation`.
+
+**Why `RunNaive` never showed this bug:** naive evaluation repeats its
+*entire* combined batch to a full joint fixpoint regardless of internal
+structure — `Josephus`'s clause gets harmlessly re-evaluated on every
+pass, and by the pass where `Relation` finally stops changing, `Josephus`
+picks up everything it was missing for free. Semi-naive's entire point is
+to *not* redundantly re-run a seed clause once its dependencies are
+stable — which is exactly the case this bug violated.
+
+**Fix:** `sema/stratify.go`'s `StratumResult` gained `SCCOrder`, a plain
+topological order of the SCC condensation (every SCC a given SCC depends
+on, by any edge, appears earlier). `RunSemiNaive` now processes one SCC
+at a time in that order (`semiNaiveSCC`), not one stratum-number batch at
+a time — stratum number is only ever needed for the negation-safety
+*rejection* check in `stratify.go`, never for driving evaluation order.
+`sameSCCAtomIndices` (renamed from `sameStratumAtomIndices`) classifies
+"recursive vs seed" by SCC membership too, which was already the right
+granularity for that decision (see below) — SCC-order processing is what
+makes that classification actually *safe* to act on.
+`TestSCCOrderRespectsPositiveDependencyEvenWithinOneStratum`
+(`sema/stratify_test.go`) and
+`TestSemiNaiveWaitsForDependencySCCEvenAtSameStratum`
+(`eval/seminaive_test.go`) pin the exact shape that broke, both now
+passing; `harness/m1_3_9_gate1_seminaive_agreement.py` re-confirmed
+11/20 against real Soufflé, matching §3.8's baseline exactly, after the
+fix.
 
 **`Evaluator` bundles relation storage and the string interner into one
 struct** purely so the many small helper functions (`evalArith`,
@@ -69,6 +114,20 @@ not itself forbid but that has no sensible ground-truth membership test
 one"? Soufflé's own semantics for this shape were not investigated).
 Disclosed as an unhandled edge case, not silently miscomputed as a
 false-negative or false-positive.
+
+**Δ-rewrite variants are keyed by body-literal *position*, not relation
+name** (`evalBody`'s `overrideIdx map[int]*ir.Relation`, `naive.go`).
+A self-join — the same relation appearing twice in one recursive rule's
+body, e.g. `p(x,y):-p(x,z),p(z,y).` — needs one Δ-rewrite variant per
+*occurrence*, each redirecting only that one occurrence to the delta
+relation while the other occurrence still reads the full accumulated
+relation. Keying by name instead would redirect every occurrence of that
+relation at once, silently dropping the old-new/new-old combinations
+semi-naive evaluation exists to still catch.
+`TestSemiNaiveSelfJoinMatchesNaive` (`eval/seminaive_test.go`) checks
+this against a 5-node chain computed via `p(x,y):-p(x,z),p(z,y).`
+specifically (not the edge-driven `p(x,y):-p(x,z),edge(z,y).` shape,
+which has no self-join to get wrong).
 
 **A `Wildcard` in *head* position falls back to a fixed value
 (`NumberValue(0)`) instead of panicking.** Real Soufflé rejects this

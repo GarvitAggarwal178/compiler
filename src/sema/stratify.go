@@ -13,9 +13,28 @@ import (
 const Unstratifiable Category = "unstratifiable"
 
 // StratumResult is the accepted outcome: a stratum number (0-based, in
-// evaluation order) per IDB relation name.
+// evaluation order) per IDB relation name; which SCC each relation
+// belongs to (SCCOf); and SCCOrder, every SCC's own relation-name
+// members, in a valid evaluation order (index 0 first -- every relation
+// an SCC depends on, by any edge, belongs to an earlier SCC in this
+// list).
+//
+// SCCOrder exists because stratum number is too coarse a grouping for
+// §3.9's semi-naive evaluator: two SCCs can share a stratum number
+// without one depending on the other at all having been computed yet
+// relative to a THIRD, unrelated SCC also in that stratum (found by a
+// failing test, eval/DESIGN.md -- a plain relation and something that
+// only reads it, both stratum 0 with nothing forcing either order
+// between them and a third independent relation, but the reader still
+// needs the read-from relation fully computed first). A plain
+// topological order of the SCC condensation (this field) is what
+// evaluation order actually needs; stratum number alone is only ever
+// needed for the negation-safety rejection check above, not for driving
+// evaluation.
 type StratumResult struct {
-	Stratum map[string]int
+	Stratum  map[string]int
+	SCCOf    map[string]int
+	SCCOrder [][]string
 }
 
 // edge is one precedence-graph edge: `from` (a clause head, an IDB
@@ -57,7 +76,46 @@ func CheckStratification(prog *ast.Program) ([]Diagnostic, *StratumResult) {
 	}
 
 	stratum := computeStrata(g, sccOf, sccMembers)
-	return nil, &StratumResult{Stratum: stratum}
+	sccOrder := sccTopoOrder(g, sccOf, sccMembers)
+	return nil, &StratumResult{Stratum: stratum, SCCOf: sccOf, SCCOrder: sccOrder}
+}
+
+// sccTopoOrder returns every SCC's members (sorted, for determinism),
+// ordered so that every SCC a given SCC depends on (by any edge, positive
+// or negative) appears earlier in the returned slice -- a plain
+// post-order DFS over the (acyclic, by construction) SCC condensation.
+func sccTopoOrder(g *graph, sccOf map[string]int, sccMembers [][]string) [][]string {
+	visited := make([]bool, len(sccMembers))
+	var order []int
+	var visit func(idx int)
+	visit = func(idx int) {
+		if visited[idx] {
+			return
+		}
+		visited[idx] = true
+		members := append([]string{}, sccMembers[idx]...)
+		sort.Strings(members)
+		for _, m := range members {
+			edges := append([]edge{}, g.adjacency[m]...)
+			sort.Slice(edges, func(i, j int) bool { return edges[i].to < edges[j].to })
+			for _, e := range edges {
+				if t := sccOf[e.to]; t != idx {
+					visit(t)
+				}
+			}
+		}
+		order = append(order, idx)
+	}
+	for i := range sccMembers {
+		visit(i)
+	}
+	out := make([][]string, len(order))
+	for i, idx := range order {
+		members := append([]string{}, sccMembers[idx]...)
+		sort.Strings(members)
+		out[i] = members
+	}
+	return out
 }
 
 type graph struct {

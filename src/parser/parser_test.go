@@ -81,8 +81,8 @@ func TestPrecedence(t *testing.T) {
 		expr string
 		want string // canonical fully-parenthesized shape, innermost-first reading
 	}{
-		{"add_mul", "2 + 3 * 4", "(2+(3*4))"},        // not (2+3)*4
-		{"sub_mul", "10 - 2 * 3", "(10-(2*3))"},       // not (10-2)*3
+		{"add_mul", "2 + 3 * 4", "(2+(3*4))"},              // not (2+3)*4
+		{"sub_mul", "10 - 2 * 3", "(10-(2*3))"},            // not (10-2)*3
 		{"mul_div_left_assoc", "20 / 4 * 2", "((20/4)*2)"}, // not 20/(4*2)
 		{"left_assoc_add", "10 - 3 - 2", "((10-3)-2)"},     // not 10-(3-2)
 		{"unary_sub", "-2 - 3", "((-2)-3)"},                // not -(2-3)

@@ -69,8 +69,8 @@ func TestAllowednessProbeCases(t *testing.T) {
 // same programs, same expected outcome (all 4 reject).
 func TestAllowednessRejectionCorpus(t *testing.T) {
 	cases := map[string]string{
-		"head_var_unbound": ".decl foo(a:number)\n.input foo\n.decl bar(x:number, y:number)\n.output bar\nbar(x, y) :- foo(x).\n",
-		"var_only_in_negation": ".decl foo(a:number)\n.input foo\n.decl baz(a:number, b:number)\n.input baz\n.decl bar(x:number, y:number)\n.output bar\nbar(x, y) :- foo(x), !baz(x, y).\n",
+		"head_var_unbound":       ".decl foo(a:number)\n.input foo\n.decl bar(x:number, y:number)\n.output bar\nbar(x, y) :- foo(x).\n",
+		"var_only_in_negation":   ".decl foo(a:number)\n.input foo\n.decl baz(a:number, b:number)\n.input baz\n.decl bar(x:number, y:number)\n.output bar\nbar(x, y) :- foo(x), !baz(x, y).\n",
 		"var_only_in_constraint": ".decl foo(a:number)\n.input foo\n.decl bar(x:number, y:number)\n.output bar\nbar(x, y) :- foo(x), y > 0.\n",
 		"equation_rhs_not_bound": ".decl foo(a:number)\n.input foo\n.decl bar(x:number, y:number)\n.output bar\nbar(x, y) :- foo(x), x = y + 1.\n",
 	}

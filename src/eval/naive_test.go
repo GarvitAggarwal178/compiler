@@ -221,4 +221,3 @@ func TestUnaryMinus(t *testing.T) {
 		t.Fatalf("expected p(-5), got %v", got)
 	}
 }
-

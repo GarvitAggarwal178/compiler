@@ -488,3 +488,58 @@ exactly as that file's original stub-era comment said it would.
   negative test for exactly the ungrounded-head-variable shape
   allowedness already covers). (`measurements/
   m1-3.8-naive-eval-summary.json`)
+
+**§3.9 (semi-naive evaluation) — M1's last work item.**
+`src/eval/seminaive.go`: Δ-rewrite per SCC (not per stratum -- see the
+bug below), one variant per same-SCC positive-atom *occurrence* (keyed
+by body position, not relation name, so a self-join gets one variant per
+occurrence rather than redirecting every occurrence of that relation at
+once).
+
+**Found and fixed a real evaluation-order bug, via the differential
+harness, not by inspection:** the first version grouped by stratum
+*number* (mirroring `RunNaive`), and `example/josephus/josephus.dl`
+immediately disagreed with Soufflé -- `Josephus` (reads a self-recursive
+`Relation` positively, no negation anywhere in the file so both land at
+stratum 0) got evaluated during the seed round, before `Relation`'s own
+recursion had produced anything beyond its 6 initial facts. Fixed by
+adding `SCCOrder` to `sema.StratumResult` (`sema/stratify.go`, a plain
+topological order of the SCC condensation) and processing one SCC at a
+time in that order instead of one stratum-number batch at a time --
+stratum number is only ever needed for the negation-safety *rejection*
+check, never for driving evaluation order. `RunNaive` never showed this
+bug (brute-force full-fixpoint repetition is insensitive to
+over-coarse grouping; semi-naive's entire point is to not redundantly
+repeat, which is exactly what the bug violated). Two regression tests
+added (`sema/stratify_test.go`, `eval/seminaive_test.go`), both passing;
+full account in `eval/DESIGN.md`.
+
+- **Gate one (same set equality as 3.8, unchanged): 11/20**, re-matching
+  §3.8's baseline exactly after the fix, 0 disagreements
+  (`measurements/m1-3.9-gate1-seminaive-agreement-summary.json`,
+  `harness/m1_3_9_gate1_seminaive_agreement.py`).
+- **Gate two, M1's headline number: `T_naive` vs `T_semi-naive`, exact
+  tuple counts, on a fixed program set** (the 5 `tests/corpus/
+  BENCHMARK_FAMILY/` shapes, pre-registered, each at its own smallest
+  scale point -- `harness/m1_3_9_gate2_headline.py`,
+  `measurements/m1-3.9-gate2-headline-summary.json`). **`T_naive ==
+  T_semi_naive` exactly, all 5 shapes, ratio 1.00x every time** -- this
+  is mathematically expected, not a null result: both evaluators compute
+  the identical minimal Herbrand model of the same program, and both
+  count each distinct tuple once (this project's own T-metric convention
+  since Phase 0), so the final counts cannot differ by construction. The
+  actual optimization signal semi-naive provides is in avoided redundant
+  *re-derivation*, not fewer final tuples -- added a second counter,
+  `Evaluator.DerivationAttempts` (every candidate head tuple a clause
+  match builds, counted before dedup, so naive's repeated full rescans
+  show up and semi-naive's Δ-restriction doesn't), reported alongside per
+  shape, never aggregated: `same_generation_negation` 2.00x,
+  `transitive_closure_bound` 18.93x, `ancestor_nonancestor` 6.18x,
+  `reachability_complement` 16.21x, `culprit_cycle` 6.05x. Answer-set
+  equality between naive and semi-naive verified on all 5 (not just the
+  count) before trusting any of this.
+
+**M1 §3 complete: all 9 work items (3.1-3.9) done, every gate reported
+as measured, never weakened to hit a target number.** `go build`/
+`go vet`/`go test ./...` all clean throughout. Continuing per the
+original instruction: "If §3 completes, continue with §4 in order."

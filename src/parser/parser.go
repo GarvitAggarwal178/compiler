@@ -36,8 +36,8 @@ func Parse(src []byte) (*ast.Program, []Diagnostic) {
 	return prog, p.errs
 }
 
-func (p *Parser) cur() token.Token  { return p.toks[p.pos] }
-func (p *Parser) atEOF() bool       { return p.cur().Kind == token.EOF }
+func (p *Parser) cur() token.Token { return p.toks[p.pos] }
+func (p *Parser) atEOF() bool      { return p.cur().Kind == token.EOF }
 func (p *Parser) advance() token.Token {
 	t := p.toks[p.pos]
 	if p.pos < len(p.toks)-1 {
