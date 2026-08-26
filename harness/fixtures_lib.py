@@ -152,6 +152,39 @@ def gen_culprit_cycle_facts(seed, n=20, target_base=30, target_e=30, blocked_fra
     return base_edges, e_edges, blocked
 
 
+def gen_culprit_cycle_facts_labeled(seed, n=20, num_labels=3, target_base=30, target_e=30, blocked_fraction=0.2):
+    """NIGHT-BATCH-03 T4: arity-3 variant of gen_culprit_cycle_facts, for
+    the CULPRIT_CANDIDATES construction that varies arity (label is a
+    third column on base/e; blocked gets a matching second column). Query
+    connectivity is guaranteed at label 1 specifically (not just node 1)
+    since the arity-3 candidate's query binds both the node and the label
+    argument."""
+    rng = random.Random(seed)
+
+    def rand_labeled_edges(count):
+        edges, edge_set = [], set()
+        attempts, max_attempts = count * 20 + 2000, count * 20 + 2000
+        tries = 0
+        while len(edges) < count and tries < attempts:
+            tries += 1
+            a, b, l = rng.randint(1, n), rng.randint(1, n), rng.randint(1, num_labels)
+            if a == b:
+                continue
+            key = (a, b, l)
+            if key in edge_set:
+                continue
+            edge_set.add(key)
+            edges.append(key)
+        return edges
+
+    base_edges = rand_labeled_edges(target_base)
+    e_edges = rand_labeled_edges(target_e)
+    if not any(a == 1 and l == 1 for a, _, l in e_edges):
+        e_edges.append((1, rng.randint(2, n), 1))
+    blocked = [(i, l) for i in range(1, n + 1) for l in range(1, num_labels + 1) if rng.random() < blocked_fraction]
+    return base_edges, e_edges, blocked
+
+
 def bfs_reachable(edges, source):
     adj = {}
     for a, b in edges:

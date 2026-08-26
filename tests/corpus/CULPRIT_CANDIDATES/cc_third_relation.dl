@@ -1,0 +1,30 @@
+// CULPRIT_CANDIDATES: cc_third_relation
+//
+// NIGHT-BATCH-03 T4 variant: target_r=p itself (not a separately-named
+// "q") is the self-recursive positive-cycle relation, and the negated
+// literal that precedes it sits in a THIRD relation's (q2's) rule body,
+// not in p's own rule and not in the rule of the relation p itself
+// negates. Demonstrates the culprit-cycle mechanism does not require the
+// negation and the target atom to co-occur in the "obvious" recursive
+// rule -- q2(x,z), !s(z), p(z,y) is enough: s depends on p, p is
+// self-recursive, !s(z) precedes p(z,y).
+//
+// Fixture: harness/fixtures_lib.py's gen_culprit_cycle_facts (unmodified).
+
+.decl base(x:number, y:number)     .input base
+.decl e(x:number, y:number)        .input e
+.decl blocked(x:number)            .input blocked
+
+.decl p(x:number, y:number)
+p(x,y) :- e(x,y).
+p(x,y) :- p(x,z), base(z,y).
+
+.decl s(x:number)
+s(x) :- p(x,y), blocked(y).
+
+.decl q2(x:number, y:number)
+q2(x,y) :- base(x,y).
+q2(x,y) :- q2(x,z), !s(z), p(z,y).
+
+.decl out(y:number)   .output out
+out(y) :- q2(1,y).

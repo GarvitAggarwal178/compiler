@@ -1,0 +1,32 @@
+// CULPRIT_CANDIDATES: cc_longer_cycle
+//
+// NIGHT-BATCH-03 T4 variant: the positive cycle target_r sits in a
+// length-2 mutual-recursion SCC (r1 <-> r2) instead of culprit_cycle.dl's
+// self-loop. Structurally-matching: target_r=r1 is in a positive cycle
+// (r1->r2->r1, both positive), s depends on r1, and p's recursive rule
+// has !s(z) preceding r1(z,y) in body order.
+//
+// Fixture: harness/fixtures_lib.py's gen_culprit_cycle_facts (unmodified,
+// reused -- same base/e/blocked shape as the original P5 shape).
+// Constructed, not from a published source (same disclosure as
+// culprit_cycle.dl itself).
+
+.decl base(x:number, y:number)     .input base
+.decl e(x:number, y:number)        .input e
+.decl blocked(x:number)            .input blocked
+
+.decl r1(x:number, y:number)
+.decl r2(x:number, y:number)
+r1(x,y) :- base(x,y).
+r1(x,y) :- r2(x,z), base(z,y).
+r2(x,y) :- r1(x,y).
+
+.decl s(x:number)
+s(x) :- r1(x,y), blocked(y).
+
+.decl p(x:number, y:number)
+p(x,y) :- e(x,y).
+p(x,y) :- p(x,z), !s(z), r1(z,y).
+
+.decl out(y:number)   .output out
+out(y) :- p(1,y).

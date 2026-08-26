@@ -1,0 +1,385 @@
+{
+ "root": {
+  "program": {
+   "configuration": {
+    "": "/root/compiler/tests/corpus/CULPRIT_CANDIDATES/cc_arity3_twobound.dl",
+    "fact-dir": "/root/compiler/fixtures/culprit_candidates/cc_arity3_twobound",
+    "include-dir": ".",
+    "jobs": "1",
+    "libraries": "functors",
+    "library-dir": ".",
+    "output-dir": "/root/compiler/measurements/night03-t4/candidates/cc_arity3_twobound/none",
+    "profile": "prof.log",
+    "relationCount": "7",
+    "ruleCount": "10",
+    "version": "2.5",
+    "warn": "all",
+    "wno": "none"
+   },
+   "relation": {
+    "base": {
+     "loadtime": { "start": 1514680348, "end": 1514680445},
+     "num-tuples": 75,
+     "reads": 0,
+     "source-locator": "/root/compiler/tests/corpus/CULPRIT_CANDIDATES/cc_arity3_twobound.dl [13:7-13:11]"
+    },
+    "blocked": {
+     "loadtime": { "start": 1514680453, "end": 1514680485},
+     "num-tuples": 32,
+     "reads": 109,
+     "source-locator": "/root/compiler/tests/corpus/CULPRIT_CANDIDATES/cc_arity3_twobound.dl [15:7-15:14]"
+    },
+    "e": {
+     "loadtime": { "start": 1514680492, "end": 1514680532},
+     "num-tuples": 75,
+     "reads": 0,
+     "source-locator": "/root/compiler/tests/corpus/CULPRIT_CANDIDATES/cc_arity3_twobound.dl [14:7-14:8]"
+    },
+    "out": {
+     "maxRSS": {
+      "post": 14228,
+      "pre": 14228
+     },
+     "non-recursive-rule": {
+      "out(y) :- \n   p(1,y,1).": {
+       "atom-frequency": {
+        "out(y) :- \n   p(1,y,1).": {
+         "p": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 14228,
+        "pre": 14228
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 1514680891, "end": 1514680893},
+       "source-locator": "/root/compiler/tests/corpus/CULPRIT_CANDIDATES/cc_arity3_twobound.dl [29:1-29:20]"
+      }
+     },
+     "num-tuples": 1,
+     "reads": 0,
+     "runtime": { "start": 1514680890, "end": 1514680900},
+     "savetime": { "start": 1514680904, "end": 1514680959},
+     "source-locator": "/root/compiler/tests/corpus/CULPRIT_CANDIDATES/cc_arity3_twobound.dl [28:7-28:10]"
+    },
+    "p": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 1514680835, "end": 1514680841},
+       "maxRSS": {
+        "post": 14228,
+        "pre": 14228
+       },
+       "num-tuples": 46,
+       "recursive-rule": {
+        "p(x,y,l) :- \n   p(x,z,l),\n   !s(z,l),\n   q(z,y,l).": {
+         "0": {
+          "atom-frequency": {
+           "@new_p(x,y,l) :- \n   @delta_p(x,z,l),\n   !s(z,l),\n   q(z,y,l).": {
+            "@delta_p": {
+             "level": 0,
+             "num-tuples": 0
+            },
+            "q": {
+             "level": 1,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 14228,
+           "pre": 14228
+          },
+          "num-tuples": 46,
+          "runtime": { "start": 1514680786, "end": 1514680808},
+          "source-locator": "/root/compiler/tests/corpus/CULPRIT_CANDIDATES/cc_arity3_twobound.dl [26:1-26:41]"
+         }
+        }
+       },
+       "runtime": { "start": 1514680777, "end": 1514680817}
+      },
+      "1": {
+       "maxRSS": {
+        "post": 14228,
+        "pre": 14228
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "p(x,y,l) :- \n   p(x,z,l),\n   !s(z,l),\n   q(z,y,l).": {
+         "0": {
+          "maxRSS": {
+           "post": 14228,
+           "pre": 14228
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 1514680853, "end": 1514680863},
+          "source-locator": "/root/compiler/tests/corpus/CULPRIT_CANDIDATES/cc_arity3_twobound.dl [26:1-26:41]"
+         }
+        }
+       },
+       "runtime": { "start": 1514680844, "end": 1514680871}
+      }
+     },
+     "maxRSS": {
+      "post": 14228,
+      "pre": 14228
+     },
+     "non-recursive-rule": {
+      "p(x,y,l) :- \n   e(x,y,l).": {
+       "atom-frequency": {
+        "p(x,y,l) :- \n   e(x,y,l).": {
+         "e": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 14228,
+        "pre": 14228
+       },
+       "num-tuples": 75,
+       "runtime": { "start": 1514680756, "end": 1514680762},
+       "source-locator": "/root/compiler/tests/corpus/CULPRIT_CANDIDATES/cc_arity3_twobound.dl [25:1-25:22]"
+      }
+     },
+     "num-tuples": 75,
+     "reads": 62,
+     "runtime": { "start": 1514680747, "end": 1514680769},
+     "source-locator": "/root/compiler/tests/corpus/CULPRIT_CANDIDATES/cc_arity3_twobound.dl [24:7-24:8]"
+    },
+    "q": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 1514680634, "end": 1514680639},
+       "maxRSS": {
+        "post": 14228,
+        "pre": 14228
+       },
+       "num-tuples": 27,
+       "recursive-rule": {
+        "q(x,y,l) :- \n   q(x,z,l),\n   base(z,y,l).": {
+         "0": {
+          "atom-frequency": {
+           "@new_q(x,y,l) :- \n   @delta_q(x,z,l),\n   base(z,y,l).": {
+            "@delta_q": {
+             "level": 0,
+             "num-tuples": 0
+            },
+            "base": {
+             "level": 1,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 14228,
+           "pre": 14228
+          },
+          "num-tuples": 27,
+          "runtime": { "start": 1514680584, "end": 1514680605},
+          "source-locator": "/root/compiler/tests/corpus/CULPRIT_CANDIDATES/cc_arity3_twobound.dl [19:1-19:35]"
+         }
+        }
+       },
+       "runtime": { "start": 1514680575, "end": 1514680615}
+      },
+      "1": {
+       "copytime": { "start": 1514680685, "end": 1514680687},
+       "maxRSS": {
+        "post": 14228,
+        "pre": 14228
+       },
+       "num-tuples": 7,
+       "recursive-rule": {
+        "q(x,y,l) :- \n   q(x,z,l),\n   base(z,y,l).": {
+         "0": {
+          "maxRSS": {
+           "post": 14228,
+           "pre": 14228
+          },
+          "num-tuples": 7,
+          "runtime": { "start": 1514680653, "end": 1514680659},
+          "source-locator": "/root/compiler/tests/corpus/CULPRIT_CANDIDATES/cc_arity3_twobound.dl [19:1-19:35]"
+         }
+        }
+       },
+       "runtime": { "start": 1514680643, "end": 1514680667}
+      },
+      "2": {
+       "maxRSS": {
+        "post": 14228,
+        "pre": 14228
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "q(x,y,l) :- \n   q(x,z,l),\n   base(z,y,l).": {
+         "0": {
+          "maxRSS": {
+           "post": 14228,
+           "pre": 14228
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 1514680700, "end": 1514680702},
+          "source-locator": "/root/compiler/tests/corpus/CULPRIT_CANDIDATES/cc_arity3_twobound.dl [19:1-19:35]"
+         }
+        }
+       },
+       "runtime": { "start": 1514680691, "end": 1514680709}
+      }
+     },
+     "maxRSS": {
+      "post": 14228,
+      "pre": 14228
+     },
+     "non-recursive-rule": {
+      "q(x,y,l) :- \n   base(x,y,l).": {
+       "atom-frequency": {
+        "q(x,y,l) :- \n   base(x,y,l).": {
+         "base": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 14228,
+        "pre": 14228
+       },
+       "num-tuples": 75,
+       "runtime": { "start": 1514680548, "end": 1514680557},
+       "source-locator": "/root/compiler/tests/corpus/CULPRIT_CANDIDATES/cc_arity3_twobound.dl [18:1-18:25]"
+      }
+     },
+     "num-tuples": 75,
+     "reads": 35,
+     "runtime": { "start": 1514680539, "end": 1514680565},
+     "source-locator": "/root/compiler/tests/corpus/CULPRIT_CANDIDATES/cc_arity3_twobound.dl [17:7-17:8]"
+    },
+    "s": {
+     "maxRSS": {
+      "post": 14228,
+      "pre": 14228
+     },
+     "non-recursive-rule": {
+      "s(x,l) :- \n   q(x,_,l),\n   blocked(x,l).": {
+       "atom-frequency": {
+        "s(x,l) :- \n   q(x,_,l),\n   blocked(x,l).": {
+         "q": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 14228,
+        "pre": 14228
+       },
+       "num-tuples": 11,
+       "runtime": { "start": 1514680727, "end": 1514680734},
+       "source-locator": "/root/compiler/tests/corpus/CULPRIT_CANDIDATES/cc_arity3_twobound.dl [22:1-22:34]"
+      }
+     },
+     "num-tuples": 11,
+     "reads": 121,
+     "runtime": { "start": 1514680718, "end": 1514680742},
+     "source-locator": "/root/compiler/tests/corpus/CULPRIT_CANDIDATES/cc_arity3_twobound.dl [21:7-21:8]"
+    }
+   },
+   "runtime": { "start": 1514680344, "end": 1514680964},
+   "starttime": { "time": 1514680310},
+   "usage": {
+    "timepoint": {
+     "1514680327": {
+      "maxRSS": 14228,
+      "systemtime": 0,
+      "usertime": 3787
+     },
+     "1514680352": {
+      "maxRSS": 14228,
+      "systemtime": 0,
+      "usertime": 4144
+     },
+     "1514680474": {
+      "maxRSS": 14228,
+      "systemtime": 0,
+      "usertime": 4257
+     },
+     "1514680506": {
+      "maxRSS": 14228,
+      "systemtime": 0,
+      "usertime": 4307
+     },
+     "1514680553": {
+      "maxRSS": 14228,
+      "systemtime": 0,
+      "usertime": 4369
+     },
+     "1514680589": {
+      "maxRSS": 14228,
+      "systemtime": 0,
+      "usertime": 4412
+     },
+     "1514680633": {
+      "maxRSS": 14228,
+      "systemtime": 0,
+      "usertime": 4463
+     },
+     "1514680658": {
+      "maxRSS": 14228,
+      "systemtime": 0,
+      "usertime": 4498
+     },
+     "1514680685": {
+      "maxRSS": 14228,
+      "systemtime": 0,
+      "usertime": 4531
+     },
+     "1514680709": {
+      "maxRSS": 14228,
+      "systemtime": 0,
+      "usertime": 4570
+     },
+     "1514680734": {
+      "maxRSS": 14228,
+      "systemtime": 0,
+      "usertime": 4597
+     },
+     "1514680761": {
+      "maxRSS": 14228,
+      "systemtime": 0,
+      "usertime": 4633
+     },
+     "1514680791": {
+      "maxRSS": 14228,
+      "systemtime": 0,
+      "usertime": 4670
+     },
+     "1514680834": {
+      "maxRSS": 14228,
+      "systemtime": 0,
+      "usertime": 4719
+     },
+     "1514680858": {
+      "maxRSS": 14228,
+      "systemtime": 0,
+      "usertime": 4752
+     },
+     "1514680888": {
+      "maxRSS": 14228,
+      "systemtime": 0,
+      "usertime": 4788
+     },
+     "1514680925": {
+      "maxRSS": 14228,
+      "systemtime": 0,
+      "usertime": 4821
+     }
+    }
+   }
+  }
+ }
+}

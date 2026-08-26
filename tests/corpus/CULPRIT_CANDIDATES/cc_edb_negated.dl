@@ -1,0 +1,30 @@
+// CULPRIT_CANDIDATES: cc_edb_negated
+//
+// NIGHT-BATCH-03 T4 variant, NEGATIVE CONTROL: the negated predicate
+// (blocked_pair) is EDB -- .input only, no rules of its own -- rather
+// than IDB. An EDB relation has no outgoing dependency edges, so it can
+// never "transitively depend on" target_r=q, and the structural
+// classifier (harness/night03_t4_culprit_classifier.py) correctly does
+// NOT flag this file. Included specifically to exercise that boundary:
+// a negated literal preceding a self-recursive positive atom is NOT
+// sufficient on its own; the negated predicate must itself depend back
+// on the cyclic relation for a culprit cycle to be even structurally
+// possible.
+//
+// Fixture: harness/fixtures_lib.py's gen_culprit_cycle_facts (unmodified;
+// "blocked" here is read directly as blocked_pair, no derived rule).
+
+.decl base(x:number, y:number)      .input base
+.decl link(x:number, y:number)      .input link
+.decl blocked_pair(x:number)        .input blocked_pair
+
+.decl q(x:number, y:number)
+q(x,y) :- base(x,y).
+q(x,y) :- q(x,z), base(z,y).
+
+.decl p(x:number, y:number)
+p(x,y) :- link(x,y).
+p(x,y) :- link(x,z), !blocked_pair(z), q(z,y).
+
+.decl out(y:number)   .output out
+out(y) :- p(1,y).
