@@ -146,6 +146,58 @@ func TestCodegenSymbolsAndStringLiterals(t *testing.T) {
 	}
 }
 
+// symbolOrderingProgram builds a program where the DECLARATION/insertion
+// order of string literals ("zebra" interned before "apple", NIGHT-BATCH-03
+// T8's own stated case) is the reverse of lexicographic order -- so a bug
+// comparing interned ids instead of string contents produces a
+// DIFFERENT (not just differently-ordered) result set, not merely a
+// different sort order of the same set.
+func symbolOrderingProgram(op string) string {
+	return ".decl q(a:symbol)\n.decl p(a:symbol,b:symbol)\n.output p\n" +
+		"q(\"zebra\").\nq(\"apple\").\nq(\"mango\").\n" +
+		"p(x,y) :- q(x), q(y), x " + op + " y.\n"
+}
+
+func TestCodegenSymbolOrderingLessThan(t *testing.T) {
+	// Intern order: zebra=0, apple=1, mango=2. An id-based `<` would wrongly
+	// answer {(zebra,apple),(zebra,mango),(apple,mango)}. Lexicographic
+	// (correct) answer: apple < mango < zebra.
+	got := compileAndRun(t, symbolOrderingProgram("<"), t.TempDir(), "p")
+	want := []string{"apple\tmango", "apple\tzebra", "mango\tzebra"}
+	sort.Strings(want)
+	if strings.Join(got, ",") != strings.Join(want, ",") {
+		t.Fatalf("symbol '<' ordering wrong: got %v, want %v (interned-id order would wrongly give "+
+			"{zebra<apple, zebra<mango, apple<mango})", got, want)
+	}
+}
+
+func TestCodegenSymbolOrderingLessOrEqual(t *testing.T) {
+	got := compileAndRun(t, symbolOrderingProgram("<="), t.TempDir(), "p")
+	want := []string{"apple\tapple", "apple\tmango", "apple\tzebra", "mango\tmango", "mango\tzebra", "zebra\tzebra"}
+	sort.Strings(want)
+	if strings.Join(got, ",") != strings.Join(want, ",") {
+		t.Fatalf("symbol '<=' ordering wrong: got %v, want %v", got, want)
+	}
+}
+
+func TestCodegenSymbolOrderingGreaterThan(t *testing.T) {
+	got := compileAndRun(t, symbolOrderingProgram(">"), t.TempDir(), "p")
+	want := []string{"mango\tapple", "zebra\tapple", "zebra\tmango"}
+	sort.Strings(want)
+	if strings.Join(got, ",") != strings.Join(want, ",") {
+		t.Fatalf("symbol '>' ordering wrong: got %v, want %v", got, want)
+	}
+}
+
+func TestCodegenSymbolOrderingGreaterOrEqual(t *testing.T) {
+	got := compileAndRun(t, symbolOrderingProgram(">="), t.TempDir(), "p")
+	want := []string{"apple\tapple", "mango\tapple", "mango\tmango", "zebra\tapple", "zebra\tmango", "zebra\tzebra"}
+	sort.Strings(want)
+	if strings.Join(got, ",") != strings.Join(want, ",") {
+		t.Fatalf("symbol '>=' ordering wrong: got %v, want %v", got, want)
+	}
+}
+
 func TestCodegenSelfJoin(t *testing.T) {
 	src := ".decl edge(a:number,b:number)\n.decl p(a:number,b:number)\n.output p\n" +
 		"edge(1,2).\nedge(2,3).\nedge(3,4).\nedge(4,5).\n" +

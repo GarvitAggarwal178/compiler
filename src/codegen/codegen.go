@@ -49,6 +49,15 @@ type generator struct {
 	schemas     map[string]*sema.RelationSchema
 	inputNames  []string
 	outputNames []string
+
+	// curVarTypes is the current clause's variable -> declared-type
+	// ("number"/"symbol") map, set by emitRuleClause before emitting a
+	// clause's body and read by emitConstraint (NIGHT-BATCH-03 T8) to
+	// decide whether a `<`/`<=`/`>`/`>=` comparison needs lexicographic
+	// (symbol) or integer (number) semantics. nil outside of emitting a
+	// rule clause's body -- a fact clause has no constraints to evaluate,
+	// so nothing reads it there.
+	curVarTypes map[string]string
 }
 
 func (g *generator) w(format string, args ...interface{}) {

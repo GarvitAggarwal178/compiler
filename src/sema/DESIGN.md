@@ -152,3 +152,13 @@ every negated-atom edge `X -> !Y`, `Y`'s `CALL` must precede `X`'s in
 Soufflé's `MAIN` sequence, and `dlc`'s `stratum[Y] < stratum[X]` must
 hold -- not that the two tools agree on an exact sequence or on stratum
 numbering itself, which was never something they were expected to share.
+
+**`ClauseVarTypes` (NIGHT-BATCH-03 T8), `decltype.go`.** Exports the same
+per-clause variable-type environment `checkClause`'s internal
+`clauseChecker` already built (`runClauseChecker` factors the shared
+construction out so `checkClause` and `ClauseVarTypes` are two thin
+callers of one function, not a duplicated copy). Added because `codegen`
+needed to know a variable's declared type (`symbol` vs `number`) to fix
+the symbol-ordering codegen bug and had no way to compute it without
+either reimplementing this exact logic a second time or exporting it --
+exporting was the smaller, more honest change.

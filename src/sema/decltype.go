@@ -111,7 +111,24 @@ type clauseChecker struct {
 	varFirstSpan map[string]token.Span
 }
 
+// ClauseVarTypes returns the same per-clause variable-type environment
+// checkClause builds internally, for a caller (codegen -- NIGHT-BATCH-03
+// T8) that needs to know a variable's declared type (`symbol` vs
+// `number`) and has no other way to compute it without duplicating this
+// logic. Only meaningful for a clause that has already passed
+// CheckDeclType with zero diagnostics; a rejected clause's returned map
+// may be incomplete (checkAtomOccurrence returns early on an arity
+// mismatch, per its own comment) since nothing calls this on a rejected
+// program in practice.
+func ClauseVarTypes(st *SymbolTable, c *ast.Clause) map[string]string {
+	return runClauseChecker(st, c).varTypes
+}
+
 func checkClause(st *SymbolTable, c *ast.Clause) []Diagnostic {
+	return runClauseChecker(st, c).diags
+}
+
+func runClauseChecker(st *SymbolTable, c *ast.Clause) *clauseChecker {
 	cc := &clauseChecker{varTypes: map[string]string{}, varFirstSpan: map[string]token.Span{}}
 	// Body first, then head: mirrors the natural "grounded by the body,
 	// used by the head" reading (matches how Soufflé's own diagnostic
@@ -129,7 +146,7 @@ func checkClause(st *SymbolTable, c *ast.Clause) []Diagnostic {
 		}
 	}
 	cc.checkAtomOccurrence(st, c.Head)
-	return cc.diags
+	return cc
 }
 
 func (cc *clauseChecker) checkAtomOccurrence(st *SymbolTable, a *ast.Atom) {

@@ -23,19 +23,28 @@ runtime: a `symbol` column's `int64_t` is always an interned id, a
 given column never needs to ask which. This is a real advantage of AOT
 codegen over the interpreter, not a corner cut.
 
-**Known, disclosed gap: ordering comparisons (`<`,`<=`,`>`,`>=`) on
-`symbol` columns compare interned ids, not strings.** Interned ids are
-assigned in first-seen order, not alphabetical order, so `id(a) <
-id(b)` does not generally mean `a` sorts before `b` lexicographically.
-Soufflé does real string comparison here. Fixing this needs per-variable
-type information threaded from sema into codegen (sema's own
-type-checker computes exactly this, `sema/decltype.go`'s
-`clauseChecker.varTypes`, but does not currently export it) — not
-implemented; `=`/`!=` on symbols are unaffected (id equality is string
-equality, correctly) and this project's own benchmark family and hostile
-corpus do not exercise ordering comparisons on symbol columns, so this
-gap has not been hit by anything tested so far, but it is real and
-un-fixed, not silently assumed away.
+**FIXED (NIGHT-BATCH-03 T8): ordering comparisons (`<`,`<=`,`>`,`>=`) on
+`symbol` columns now compare strings, not interned ids.** Previously
+compared interned ids directly, and interned ids are assigned in
+first-seen order, not alphabetical order, so `id(a) < id(b)` did not
+generally mean `a` sorts before `b` lexicographically. Fixed by exporting
+`sema.ClauseVarTypes` (a thin wrapper around the same per-clause
+`clauseChecker.varTypes` this note used to say was unexported) and, in
+`emitConstraint`, emitting `strcmp(str_lookup(x), str_lookup(y)) OP 0`
+instead of a raw integer comparison whenever an ordering operator's
+operand is symbol-typed (`isSymbolArith`: a bare string literal, or a
+`Var` `ClauseVarTypes` resolves to `"symbol"` — arithmetic operators are
+always number, so no other `ast.Arith` shape can be symbol-typed).
+`=`/`!=` were never affected (id equality is string equality regardless
+of intern order) and are unchanged. 4 new end-to-end tests
+(`codegen_test.go`, `TestCodegenSymbolOrdering{LessThan,LessOrEqual,
+GreaterThan,GreaterOrEqual}`) construct facts where intern order is the
+*reverse* of lexicographic order (`"zebra"` interned before `"apple"`,
+exactly the case this note used to warn about) so a regression produces a
+different answer *set*, not just a different row order; all 4 confirmed
+to fail before the fix and pass after, and independently cross-checked
+against real Soufflé on the same program
+(`docs/reports/night03-T8-symbol-order.md`).
 
 **No fixed-size scratch buffer anywhere, on purpose — a real bug caught
 before it was ever run.** A first draft's `_lookup_c0` helper collected

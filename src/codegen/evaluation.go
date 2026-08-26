@@ -93,11 +93,13 @@ func (g *generator) constExpr(term ast.Term) string {
 // (small, deliberate duplication -- see DESIGN.md), then recursively
 // nest one C construct per literal.
 func (g *generator) emitRuleClause(c *ast.Clause) {
+	g.curVarTypes = sema.ClauseVarTypes(&sema.SymbolTable{Relations: g.schemas}, c)
 	ordered := safeOrderForCodegen(c.Body)
 	var sb indentWriter
 	sb.level = 3
 	g.emitLiteral(&sb, ordered, 0, map[string]string{}, c)
 	g.sb.WriteString(sb.buf.String())
+	g.curVarTypes = nil
 }
 
 // indentWriter is a tiny helper so the recursively-nested C blocks come
@@ -255,11 +257,45 @@ func (g *generator) emitConstraint(w *indentWriter, c *ast.Constraint, bound map
 	}
 	left := g.groundExpr(c.Left, bound)
 	right := g.groundExpr(c.Right, bound)
-	w.line("if ((%s) %s (%s)) {", left, cOp(c.Op), right)
+	// NIGHT-BATCH-03 T8: <, <=, >, >= on symbol-typed operands must
+	// compare the interned strings lexicographically, not the interned
+	// ids by assignment order (a symbol's ir.Value IS its intern id --
+	// src/ir/relation.go -- so a bare integer comparison here silently
+	// compared assignment order until this fix). = and != are unaffected:
+	// id equality is exactly string equality regardless of intern order,
+	// so no change is needed for those two operators.
+	if isOrderingOp(c.Op) && (g.isSymbolArith(c.Left) || g.isSymbolArith(c.Right)) {
+		w.line("if (strcmp(str_lookup(%s), str_lookup(%s)) %s 0) {", left, right, cOp(c.Op))
+	} else {
+		w.line("if ((%s) %s (%s)) {", left, cOp(c.Op), right)
+	}
 	w.level++
 	cont(bound)
 	w.level--
 	w.line("}")
+}
+
+func isOrderingOp(op string) bool {
+	switch op {
+	case "<", "<=", ">", ">=":
+		return true
+	}
+	return false
+}
+
+// isSymbolArith reports whether a is definitely symbol-typed: a bare
+// string literal, or a variable g.curVarTypes resolves to "symbol". Any
+// other arith shape (BinaryExpr/UnaryExpr/NumberLit) is always "number"
+// -- this grammar's arithmetic operators are only ever defined over
+// number (sema/decltype.go's forceArithNumber).
+func (g *generator) isSymbolArith(a ast.Arith) bool {
+	switch v := a.(type) {
+	case *ast.StringLit:
+		return true
+	case *ast.Var:
+		return g.curVarTypes[v.Name] == "symbol"
+	}
+	return false
 }
 
 func cOp(op string) string {
