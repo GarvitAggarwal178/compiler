@@ -1,0 +1,32 @@
+.decl @magic.notsg.{bf}(x:number) 
+.decl @neglabel.sg(x:number, y:number) 
+.decl notsg.{bf}(x:number, y:number) 
+.decl parent(child:number, par:number) 
+.decl person(x:number) 
+.decl q_notsg(y:number) 
+@magic.notsg.{bf}(0).
+
+@neglabel.sg(x,x) :- 
+   person(x).
+
+@neglabel.sg(x,y) :- 
+   parent(x,xp),
+   parent(y,yp),
+   @neglabel.sg(xp,yp),
+   x != y.
+
+notsg.{bf}(x,y) :- 
+   @magic.notsg.{bf}(x),
+   person(x),
+   person(y),
+   !@neglabel.sg(x,y).
+
+q_notsg(y) :- 
+   notsg.{bf}(@abdul0,y),
+   @abdul0 = 0.
+.input parent(IO="file",attributeNames="child	par",fact-dir=".",name="parent",operation="input",params="{"records": {}, "relation": {"arity": 2, "params": ["child", "par"]}}",types="{"ADTs": {}, "records": {}, "relation": {"arity": 2, "types": ["i:number", "i:number"]}}")
+
+.input person(IO="file",attributeNames="x",fact-dir=".",name="person",operation="input",params="{"records": {}, "relation": {"arity": 1, "params": ["x"]}}",types="{"ADTs": {}, "records": {}, "relation": {"arity": 1, "types": ["i:number"]}}")
+
+.output q_notsg(IO="file",attributeNames="y",name="q_notsg",operation="output",output-dir=".",params="{"records": {}, "relation": {"arity": 1, "params": ["y"]}}",types="{"ADTs": {}, "records": {}, "relation": {"arity": 1, "types": ["i:number"]}}")
+

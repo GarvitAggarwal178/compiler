@@ -1,0 +1,27 @@
+.decl notsg(x:number, y:number) 
+.decl parent(child:number, par:number) 
+.decl person(x:number) 
+.decl q_notsg(y:number) 
+.decl sg(x:number, y:number) 
+notsg(x,y) :- 
+   person(x),
+   person(y),
+   !sg(x,y).
+
+q_notsg(y) :- 
+   notsg(0,y).
+
+sg(x,x) :- 
+   person(x).
+
+sg(x,y) :- 
+   parent(x,xp),
+   parent(y,yp),
+   sg(xp,yp),
+   x != y.
+.input parent(IO="file",attributeNames="child	par",fact-dir=".",name="parent",operation="input",params="{"records": {}, "relation": {"arity": 2, "params": ["child", "par"]}}",types="{"ADTs": {}, "records": {}, "relation": {"arity": 2, "types": ["i:number", "i:number"]}}")
+
+.input person(IO="file",attributeNames="x",fact-dir=".",name="person",operation="input",params="{"records": {}, "relation": {"arity": 1, "params": ["x"]}}",types="{"ADTs": {}, "records": {}, "relation": {"arity": 1, "types": ["i:number"]}}")
+
+.output q_notsg(IO="file",attributeNames="y",name="q_notsg",operation="output",output-dir=".",params="{"records": {}, "relation": {"arity": 1, "params": ["y"]}}",types="{"ADTs": {}, "records": {}, "relation": {"arity": 1, "types": ["i:number"]}}")
+

@@ -1,0 +1,22 @@
+.decl @magic.path.{bf}(a:number) 
+.decl edge(a:number, b:number) 
+.decl path.{bf}(a:number, b:number) 
+.decl q(b:number) 
+@magic.path.{bf}(1).
+
+path.{bf}(x,y) :- 
+   @magic.path.{bf}(x),
+   edge(x,y).
+
+path.{bf}(x,y) :- 
+   @magic.path.{bf}(x),
+   path.{bf}(x,z),
+   edge(z,y).
+
+q(y) :- 
+   path.{bf}(@abdul0,y),
+   @abdul0 = 1.
+.input edge(IO="file",attributeNames="a	b",fact-dir=".",name="edge",operation="input",params="{"records": {}, "relation": {"arity": 2, "params": ["a", "b"]}}",types="{"ADTs": {}, "records": {}, "relation": {"arity": 2, "types": ["i:number", "i:number"]}}")
+
+.output q(IO="file",attributeNames="b",name="q",operation="output",output-dir=".",params="{"records": {}, "relation": {"arity": 1, "params": ["b"]}}",types="{"ADTs": {}, "records": {}, "relation": {"arity": 1, "types": ["i:number"]}}")
+

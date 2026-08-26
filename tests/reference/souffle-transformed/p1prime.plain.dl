@@ -1,0 +1,16 @@
+.decl edge(a:number, b:number) 
+.decl path(a:number, b:number) 
+.decl q(b:number) 
+path(x,y) :- 
+   edge(x,y).
+
+path(x,y) :- 
+   path(x,z),
+   edge(z,y).
+
+q(y) :- 
+   path(1,y).
+.input edge(IO="file",attributeNames="a	b",fact-dir=".",name="edge",operation="input",params="{"records": {}, "relation": {"arity": 2, "params": ["a", "b"]}}",types="{"ADTs": {}, "records": {}, "relation": {"arity": 2, "types": ["i:number", "i:number"]}}")
+
+.output q(IO="file",attributeNames="b",name="q",operation="output",output-dir=".",params="{"records": {}, "relation": {"arity": 1, "params": ["b"]}}",types="{"ADTs": {}, "records": {}, "relation": {"arity": 1, "types": ["i:number"]}}")
+

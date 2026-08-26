@@ -1,0 +1,36 @@
+.decl base(x:number, y:number) 
+.decl blocked(x:number) 
+.decl e(x:number, y:number) 
+.decl out(y:number) 
+.decl p(x:number, y:number) 
+.decl q(x:number, y:number) 
+.decl s(x:number) 
+out(y) :- 
+   p(1,y).
+
+p(x,y) :- 
+   e(x,y).
+
+p(x,y) :- 
+   p(x,z),
+   !s(z),
+   q(z,y).
+
+q(x,y) :- 
+   base(x,y).
+
+q(x,y) :- 
+   q(x,z),
+   base(z,y).
+
+s(x) :- 
+   q(x,y),
+   blocked(y).
+.input base(IO="file",attributeNames="x	y",fact-dir=".",name="base",operation="input",params="{"records": {}, "relation": {"arity": 2, "params": ["x", "y"]}}",types="{"ADTs": {}, "records": {}, "relation": {"arity": 2, "types": ["i:number", "i:number"]}}")
+
+.input blocked(IO="file",attributeNames="x",fact-dir=".",name="blocked",operation="input",params="{"records": {}, "relation": {"arity": 1, "params": ["x"]}}",types="{"ADTs": {}, "records": {}, "relation": {"arity": 1, "types": ["i:number"]}}")
+
+.input e(IO="file",attributeNames="x	y",fact-dir=".",name="e",operation="input",params="{"records": {}, "relation": {"arity": 2, "params": ["x", "y"]}}",types="{"ADTs": {}, "records": {}, "relation": {"arity": 2, "types": ["i:number", "i:number"]}}")
+
+.output out(IO="file",attributeNames="y",name="out",operation="output",output-dir=".",params="{"records": {}, "relation": {"arity": 1, "params": ["y"]}}",types="{"ADTs": {}, "records": {}, "relation": {"arity": 1, "types": ["i:number"]}}")
+

@@ -1,0 +1,25 @@
+.decl edge(a:number, b:number) 
+.decl node(a:number) 
+.decl q2(b:number) 
+.decl reach(a:number, b:number) 
+.decl unreach(a:number, b:number) 
+q2(y) :- 
+   unreach(1,y).
+
+reach(x,y) :- 
+   edge(x,y).
+
+reach(x,y) :- 
+   reach(x,z),
+   edge(z,y).
+
+unreach(x,y) :- 
+   node(x),
+   node(y),
+   !reach(x,y).
+.input edge(IO="file",attributeNames="a	b",fact-dir=".",name="edge",operation="input",params="{"records": {}, "relation": {"arity": 2, "params": ["a", "b"]}}",types="{"ADTs": {}, "records": {}, "relation": {"arity": 2, "types": ["i:number", "i:number"]}}")
+
+.input node(IO="file",attributeNames="a",fact-dir=".",name="node",operation="input",params="{"records": {}, "relation": {"arity": 1, "params": ["a"]}}",types="{"ADTs": {}, "records": {}, "relation": {"arity": 1, "types": ["i:number"]}}")
+
+.output q2(IO="file",attributeNames="b",name="q2",operation="output",output-dir=".",params="{"records": {}, "relation": {"arity": 1, "params": ["b"]}}",types="{"ADTs": {}, "records": {}, "relation": {"arity": 1, "types": ["i:number"]}}")
+

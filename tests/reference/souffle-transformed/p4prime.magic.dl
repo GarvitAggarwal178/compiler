@@ -1,0 +1,32 @@
+.decl @magic.unreach_bf.{bf}(a:number) 
+.decl @neglabel.reach_bf(a:number, b:number) 
+.decl edge(a:number, b:number) 
+.decl node(a:number) 
+.decl q2(b:number) 
+.decl unreach_bf.{bf}(a:number, b:number) 
+@magic.unreach_bf.{bf}(1).
+
+@neglabel.reach_bf(x,y) :- 
+   @magic.unreach_bf.{bf}(x),
+   edge(x,y).
+
+@neglabel.reach_bf(x,y) :- 
+   @magic.unreach_bf.{bf}(x),
+   @neglabel.reach_bf(x,z),
+   edge(z,y).
+
+q2(y) :- 
+   unreach_bf.{bf}(@abdul0,y),
+   @abdul0 = 1.
+
+unreach_bf.{bf}(x,y) :- 
+   @magic.unreach_bf.{bf}(x),
+   node(x),
+   node(y),
+   !@neglabel.reach_bf(x,y).
+.input edge(IO="file",attributeNames="a	b",fact-dir=".",name="edge",operation="input",params="{"records": {}, "relation": {"arity": 2, "params": ["a", "b"]}}",types="{"ADTs": {}, "records": {}, "relation": {"arity": 2, "types": ["i:number", "i:number"]}}")
+
+.input node(IO="file",attributeNames="a",fact-dir=".",name="node",operation="input",params="{"records": {}, "relation": {"arity": 1, "params": ["a"]}}",types="{"ADTs": {}, "records": {}, "relation": {"arity": 1, "types": ["i:number"]}}")
+
+.output q2(IO="file",attributeNames="b",name="q2",operation="output",output-dir=".",params="{"records": {}, "relation": {"arity": 1, "params": ["b"]}}",types="{"ADTs": {}, "records": {}, "relation": {"arity": 1, "types": ["i:number"]}}")
+

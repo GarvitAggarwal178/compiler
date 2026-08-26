@@ -1,0 +1,62 @@
+.decl @magic.@poscopy_1.q.{ff}() 
+.decl @magic.p.{bf}(x:number) 
+.decl @magic.q.{bf}(x:number) 
+.decl @neglabel.s(x:number) 
+.decl @poscopy_1.q.{ff}(x:number, y:number) 
+.decl base(x:number, y:number) 
+.decl blocked(x:number) 
+.decl e(x:number, y:number) 
+.decl out(y:number) 
+.decl p.{bf}(x:number, y:number) 
+.decl q.{bf}(x:number, y:number) 
+@magic.@poscopy_1.q.{ff}().
+
+@magic.p.{bf}(1).
+
+@magic.q.{bf}(z) :- 
+   @magic.p.{bf}(x),
+   p.{bf}(x,z).
+
+@neglabel.s(x) :- 
+   @poscopy_1.q.{ff}(x,y),
+   blocked(y).
+
+@poscopy_1.q.{ff}(x,y) :- 
+   @magic.@poscopy_1.q.{ff}(),
+   base(x,y).
+
+@poscopy_1.q.{ff}(x,y) :- 
+   @magic.@poscopy_1.q.{ff}(),
+   @poscopy_1.q.{ff}(x,z),
+   base(z,y).
+
+out(y) :- 
+   p.{bf}(@abdul0,y),
+   @abdul0 = 1.
+
+p.{bf}(x,y) :- 
+   @magic.p.{bf}(x),
+   e(x,y).
+
+p.{bf}(x,y) :- 
+   @magic.p.{bf}(x),
+   p.{bf}(x,z),
+   !@neglabel.s(z),
+   q.{bf}(z,y).
+
+q.{bf}(x,y) :- 
+   @magic.q.{bf}(x),
+   base(x,y).
+
+q.{bf}(x,y) :- 
+   @magic.q.{bf}(x),
+   q.{bf}(x,z),
+   base(z,y).
+.input base(IO="file",attributeNames="x	y",fact-dir=".",name="base",operation="input",params="{"records": {}, "relation": {"arity": 2, "params": ["x", "y"]}}",types="{"ADTs": {}, "records": {}, "relation": {"arity": 2, "types": ["i:number", "i:number"]}}")
+
+.input blocked(IO="file",attributeNames="x",fact-dir=".",name="blocked",operation="input",params="{"records": {}, "relation": {"arity": 1, "params": ["x"]}}",types="{"ADTs": {}, "records": {}, "relation": {"arity": 1, "types": ["i:number"]}}")
+
+.input e(IO="file",attributeNames="x	y",fact-dir=".",name="e",operation="input",params="{"records": {}, "relation": {"arity": 2, "params": ["x", "y"]}}",types="{"ADTs": {}, "records": {}, "relation": {"arity": 2, "types": ["i:number", "i:number"]}}")
+
+.output out(IO="file",attributeNames="y",name="out",operation="output",output-dir=".",params="{"records": {}, "relation": {"arity": 1, "params": ["y"]}}",types="{"ADTs": {}, "records": {}, "relation": {"arity": 1, "types": ["i:number"]}}")
+
