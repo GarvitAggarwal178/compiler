@@ -8,6 +8,7 @@ import (
 
 	"dlc/src/lexer"
 	"dlc/src/parser"
+	"dlc/src/sema"
 	"dlc/src/token"
 )
 
@@ -25,6 +26,8 @@ func main() {
 		runParse(path)
 	case "roundtrip":
 		runRoundtrip(path)
+	case "check":
+		runCheck(path)
 	default:
 		fmt.Fprintf(os.Stderr, "unknown subcommand %q\n", subcommand)
 		os.Exit(2)
@@ -156,6 +159,73 @@ func runParse(path string) {
 	}
 	for _, e := range errs {
 		out.Diagnostics = append(out.Diagnostics, jsonDiagnostic{Span: toJSONSpan(e.Span), Message: e.Message})
+	}
+	enc, err := json.Marshal(out)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "internal error marshaling output: %v\n", err)
+		os.Exit(1)
+	}
+	fmt.Println(string(enc))
+}
+
+type jsonSemaDiagnostic struct {
+	Span     jsonSpan `json:"span"`
+	Category string   `json:"category"`
+	Message  string   `json:"message"`
+}
+
+type checkOutput struct {
+	Status      string               `json:"status"` // "ok" | "rejected" | "parse_error"
+	Diagnostics []jsonSemaDiagnostic `json:"diagnostics,omitempty"`
+	ParseErrors []jsonDiagnostic     `json:"parse_errors,omitempty"`
+	Panic       string               `json:"panic,omitempty"`
+}
+
+// runCheck is §3.4/§3.5/§3.6's entry point: parse, then run every sema
+// checker implemented so far, reporting every Diagnostic with its
+// Category (docs/reports/night02-T9-diagnostics.md's four grounds).
+// Message text is dlc's own; only the classification is required to
+// agree with Soufflé (§3.4's own instruction).
+func runCheck(path string) {
+	defer func() {
+		if r := recover(); r != nil {
+			out := checkOutput{Status: "panic", Panic: fmt.Sprintf("%v", r)}
+			enc, _ := json.Marshal(out)
+			fmt.Println(string(enc))
+			os.Exit(1)
+		}
+	}()
+
+	src, err := os.ReadFile(path)
+	if err != nil {
+		out := checkOutput{Status: "read_error", Panic: err.Error()}
+		enc, _ := json.Marshal(out)
+		fmt.Println(string(enc))
+		os.Exit(1)
+	}
+
+	prog, perrs := parser.Parse(src)
+	if len(perrs) > 0 {
+		out := checkOutput{Status: "parse_error"}
+		for _, e := range perrs {
+			out.ParseErrors = append(out.ParseErrors, jsonDiagnostic{Span: toJSONSpan(e.Span), Message: e.Message})
+		}
+		enc, _ := json.Marshal(out)
+		fmt.Println(string(enc))
+		return
+	}
+
+	var diags []sema.Diagnostic
+	diags = append(diags, sema.CheckDeclType(prog)...)
+
+	out := checkOutput{Status: "ok"}
+	if len(diags) > 0 {
+		out.Status = "rejected"
+	}
+	for _, d := range diags {
+		out.Diagnostics = append(out.Diagnostics, jsonSemaDiagnostic{
+			Span: toJSONSpan(d.Span), Category: string(d.Category), Message: d.Message,
+		})
 	}
 	enc, err := json.Marshal(out)
 	if err != nil {

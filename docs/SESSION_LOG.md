@@ -342,3 +342,32 @@ exactly), all pass.
   (§3.1) surfacing again here, not a new finding. Reported, not adjusted
   to match, per the gate's own instruction.
   (`measurements/m1-3.3-gate3-hostile-summary.json`)
+
+**§3.4 (sema: decl/arity/type):** no numeric gate stated in M1-BUILD.md
+for this item; adopted completion criterion (analogous to §3.2): the 6
+real `tests/rejection/{arity,type}.py` cases, run through the real `dlc
+check` CLI end-to-end, correctly classified. `src/sema/decltype.go`:
+symbol table (one schema-defining `.decl` per relation; `.input`/
+`.output` only mark an existing schema, confirmed NOT the same as
+duplicate declaration -- `TestInputAfterDeclIsNotDuplicate`), per-clause
+(not per-program) variable type tracking, and the arithmetic-forces-
+number-but-bare-comparison-doesn't distinction pinned by the
+`type_symbol_in_arithmetic` vs a plain `X = "foo"` case
+(`TestBareComparisonDoesNotForceNumber`). 13 Go unit tests, all pass.
+CLI gained a `check` subcommand.
+
+- **Gate (adopted): 6/6** arity+type rejection-corpus cases correctly
+  classified (`measurements/m1-3.4-decltype-summary.json`).
+- **Sanity check** (not a strict gate, a validation): ran sema over all
+  20 files gate one (§3.3) found parse cleanly. 12/20 clean, 8/20
+  rejected. Investigated all 8, none is a checker bug: 4 are multi-file
+  Soufflé programs split across `#include`d fragments or an EDB-only
+  file with no `.decl` of its own (`example/magic_pointsto/edb.dl`,
+  `example/pointsto/edb.dl`, `syntactic/include_directive1/foo.dl`) or a
+  reference to a Soufflé builtin (`match`, `example/not_match/
+  not_match.dl`) -- genuine single-file-analysis limitations, disclosed,
+  not fixed (out of scope). The other ~4
+  (`semantic/error_deduce_type.dl`, `semantic/rule_undeclared_relation{,2}
+  .dl`, `semantic/type_system7.dl`) are, by their own names, Soufflé's
+  *own* designed-to-fail negative test cases -- dlc correctly rejecting
+  them is validation, not a bug.

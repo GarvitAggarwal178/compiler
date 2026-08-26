@@ -50,6 +50,14 @@ class RoundtripResult:
 
 
 @dataclass
+class CheckResult:
+    status: str  # "ok" | "rejected" | "parse_error" | "panic" | "read_error" | "build_missing"
+    diagnostics: list = field(default_factory=list)      # sema diagnostics: [{span,category,message}]
+    parse_errors: list = field(default_factory=list)
+    diagnostic: str = ""
+
+
+@dataclass
 class LexResult:
     status: str  # "lexed" | "panic" | "read_error" | "build_missing"
     token_count: int = 0
@@ -142,6 +150,22 @@ def run_dlc_parse(source_text: str) -> ParseResult:
         clause_count=doc.get("clause_count", 0),
         error_count=doc.get("error_count", 0),
         diagnostics=doc.get("diagnostics", []),
+    )
+
+
+def run_dlc_check(source_text: str) -> CheckResult:
+    """Runs the real `dlc check` subcommand (§3.4 decl/arity/type; later
+    §3.5 allowedness and §3.6 stratification join the same subcommand)
+    and parses its JSON output. Never raises."""
+    doc, err = _run_dlc_on_text("check", source_text)
+    if doc is None:
+        return CheckResult(status="panic", diagnostic=err)
+    if "panic" in doc and doc.get("status") not in ("ok", "rejected", "parse_error"):
+        return CheckResult(status=doc.get("status", "panic"), diagnostic=doc.get("panic", ""))
+    return CheckResult(
+        status=doc.get("status", "panic"),
+        diagnostics=doc.get("diagnostics", []),
+        parse_errors=doc.get("parse_errors", []),
     )
 
 
