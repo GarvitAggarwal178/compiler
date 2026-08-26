@@ -242,3 +242,14 @@ blueprint's own words: "No functors, no aggregates"), or the pragma/`#include`
 directives already flagged in the entry above. Not acted on beyond reporting;
 gate two (round-trip) and gate three (hostile-corpus oracle agreement) are
 unaffected and both passed cleanly on everything that did parse.
+
+## 2026-08-27 — Q11, pre-registered before measurement (NIGHT-BATCH-03 T5)
+
+**Q11.** `ancestor_nonancestor_guarded.dl` propagates `m_ancestor` across a
+recursion whose bound argument is invariant, and derives `nonancestor`'s
+restriction from `m_ancestor` rather than seeding it from the query.
+Prediction, recorded before measurement: a variant seeding `m_nonancestor(1).`
+directly gives `T_guard ≈ 3,200` at n=500 and `≈ 18,200` at n=8,000, i.e.
+`T_souffle/T_guard ≈ 32×` and `≈ 1,400×` respectively, moving this shape into
+the same band as `reachability_complement` and `same_generation_negation` and
+dissolving Q8.
