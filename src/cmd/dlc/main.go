@@ -17,6 +17,7 @@ import (
 	"dlc/src/sema"
 	"dlc/src/token"
 	"dlc/src/transform"
+	"dlc/src/transform/magicset"
 )
 
 func main() {
@@ -343,6 +344,7 @@ func runCodegen(path, outPath string) {
 // changes, per transform/transformer.go's own design note.
 var transformerRegistry = map[string]transform.Transformer{
 	"passthrough": transform.PassThrough{},
+	"magicset":    magicset.Transformer{},
 }
 
 type emitOutput struct {
