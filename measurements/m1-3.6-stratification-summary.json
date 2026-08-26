@@ -1,0 +1,72 @@
+{
+  "candidates_considered": 3,
+  "results": [
+    {
+      "file": "evaluation/set_ops_output/set_ops_output.dl",
+      "status": "agree",
+      "dlc_strata": {
+        "A": 0,
+        "AintersectionB": 0,
+        "AminusB": 1,
+        "AunionB": 0,
+        "AxB": 0,
+        "B": 0,
+        "BminusA": 1
+      },
+      "souffle_call_order": [
+        "A",
+        "B",
+        "AintersectionB",
+        "AminusB",
+        "AunionB",
+        "AxB",
+        "BminusA"
+      ],
+      "violations": []
+    },
+    {
+      "file": "example/not_match/not_match.dl",
+      "status": "dlc_rejected_other_ground",
+      "diagnostics": [
+        {
+          "span": {
+            "start": {
+              "offset": 415,
+              "line": 15,
+              "col": 33
+            },
+            "end": {
+              "offset": 430,
+              "line": 15,
+              "col": 48
+            }
+          },
+          "category": "undeclared_relation",
+          "message": "relation \"match\" is not declared"
+        }
+      ]
+    },
+    {
+      "file": "semantic/rule_undeclared_relation2/rule_undeclared_relation2.dl",
+      "status": "dlc_rejected_other_ground",
+      "diagnostics": [
+        {
+          "span": {
+            "start": {
+              "offset": 92,
+              "line": 5,
+              "col": 16
+            },
+            "end": {
+              "offset": 96,
+              "line": 5,
+              "col": 20
+            }
+          },
+          "category": "undeclared_relation",
+          "message": "relation \"b\" is not declared"
+        }
+      ]
+    }
+  ]
+}

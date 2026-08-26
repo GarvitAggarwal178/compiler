@@ -54,6 +54,7 @@ class CheckResult:
     status: str  # "ok" | "rejected" | "parse_error" | "panic" | "read_error" | "build_missing"
     diagnostics: list = field(default_factory=list)      # sema diagnostics: [{span,category,message}]
     parse_errors: list = field(default_factory=list)
+    strata: dict = field(default_factory=dict)  # relation name -> stratum, only when status=="ok"
     diagnostic: str = ""
 
 
@@ -166,6 +167,7 @@ def run_dlc_check(source_text: str) -> CheckResult:
         status=doc.get("status", "panic"),
         diagnostics=doc.get("diagnostics", []),
         parse_errors=doc.get("parse_errors", []),
+        strata=doc.get("strata", {}),
     )
 
 

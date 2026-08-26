@@ -106,3 +106,49 @@ expression (e.g. `q(X+1)`), but the fixpoint definition says "variables
 occurring as an argument," not "arguments that are bare variables" --
 recursing is the literal reading, applied consistently even where no
 probe case forces the question.
+
+## Source stratification (`stratify.go`, §3.6)
+
+Precedence graph over IDB relations only (a relation is a node iff it is
+some clause's head; an `.input`-only relation with no rules is never a
+node, and edges to it are dropped when building the graph -- confirmed by
+a test that would otherwise have been a false positive,
+`TestStratificationDeterministicAcrossRuns`'s first draft, see below).
+Tarjan SCC, then reject iff a negative edge closes within one SCC,
+else assign strata via memoized DFS over the (guaranteed-acyclic)
+condensation: a relation's stratum is one more than the highest stratum
+among its negative dependencies, and at least as high as its positive
+ones.
+
+**Found while writing this file's tests, not by inspection: a relation
+referenced both positively and negatively by two *different*,
+non-mutually-recursive relations is perfectly stratifiable.** A first
+draft of the determinism test used `b(x):-a(x).  c(x):-b(x),!b(x).`
+expecting rejection, on the mistaken assumption that "the same relation
+appears in one program both positively and negatively" was itself
+suspicious. It isn't: `b` and `c` aren't in each other's SCC (there's no
+cycle at all), so this stratifies cleanly (`b` at stratum 0, `c` at
+stratum 1) -- exactly what stratified negation is supposed to allow. The
+test was wrong, not the stratifier; fixed to use the actual
+self-negative-cycle case instead. Left here because it's a genuine,
+easy-to-make misconception about what "unstratifiable" means.
+
+**Gate two's oracle signal took a wrong turn before it worked.** The
+plan was to compare against Soufflé's `SUBROUTINE <Relation>` emission
+order in `souffle --show=initial-ram <file>` output. That order turned
+out to be **alphabetical, not evaluation order** (confirmed on
+`evaluation/set_ops_output/set_ops_output.dl`: subroutines are listed
+`A, AintersectionB, AminusB, AunionB, AxB, B, BminusA` -- pure sort
+order). The actual execution order lives in a separate
+`BEGIN MAIN ... CALL stratum_<Relation> ... END MAIN` block, which is
+**also not sorted by numeric stratum** (that same file calls
+`stratum_AminusB`, stratum 1 by this project's own numbering, *before*
+`stratum_AunionB`/`stratum_AxB`, stratum 0) -- Soufflé emits some valid
+topological order of the dependency DAG, not relations grouped by
+stratum number. The comparison this project's gate actually needs, and
+the one implemented in `harness/m1_3_6_stratification.py`, is narrower
+and is the actual correctness invariant of stratified negation: for
+every negated-atom edge `X -> !Y`, `Y`'s `CALL` must precede `X`'s in
+Soufflé's `MAIN` sequence, and `dlc`'s `stratum[Y] < stratum[X]` must
+hold -- not that the two tools agree on an exact sequence or on stratum
+numbering itself, which was never something they were expected to share.

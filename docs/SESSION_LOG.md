@@ -391,3 +391,47 @@ probe case that forces it.
   attributed explicitly to §3.6 not existing yet, not a §3.5 shortfall
   (verified: all 10 non-stratification cases, across arity/type/
   allowedness, are 100% correct).
+
+**§3.6 (source stratification):** gate PASSED on both parts.
+`src/sema/stratify.go`: precedence graph over IDB relations only
+(EDB/`.input`-only relations are never nodes), Tarjan SCC, reject iff a
+negative edge closes within one SCC, else memoized-DFS stratum
+assignment over the condensation. Explicitly did NOT generalize toward
+the transformed-program culprit-cycle detector (Lane A) -- confirmed the
+*source* `culprit_cycle.dl` shape stratifies cleanly
+(`TestStratifiableCulpritCycleShape`), consistent with T7's finding this
+project already had that the culprit cycle is transform-introduced, not
+present in the source program.
+
+- **Gate, part 1 (rejects unstratifiable programs): 3/3** — all
+  `tests/rejection/stratification.py` cases reject, as Go unit tests.
+- **Gate, part 2 (agrees with Soufflé's evaluation order): 1/1** usable
+  sample. Only 1 of the 195 in-grammar files both parses under dlc today
+  (§3.3: 20/195) and contains real negation — the other two candidates
+  are already-known problem files (a Soufflé builtin reference; a
+  designed-to-fail negative test). Oracle signal took a wrong turn before
+  landing: `--show=initial-ram`'s `SUBROUTINE` list is alphabetical, not
+  evaluation order; the real signal is the `BEGIN MAIN ... CALL
+  stratum_X ... END MAIN` block, which is *also* not grouped by numeric
+  stratum (a valid topological order, not stratum-sorted) — the actual
+  comparable invariant is "every negated dependency's `CALL` precedes its
+  dependent's, and `dlc`'s own stratum numbers agree with that same
+  ordering," not exact-sequence or exact-stratum-number agreement.
+  (`measurements/m1-3.6-stratification-summary.json`,
+  `harness/m1_3_6_stratification.py`)
+- Found and fixed a wrong assumption in a first draft of the determinism
+  test: a relation referenced both positively and negatively by two
+  *different*, non-mutually-recursive relations is perfectly
+  stratifiable (not a bug) -- logged in DESIGN.md as a genuine, easy
+  misconception, not just fixed silently.
+
+19 Go unit tests across `stratify_test.go`; full `src/sema` package
+(decl/type + allowedness + stratification): 45 tests, all pass.
+`go build`/`go vet`/`go test ./...` all clean.
+
+**End of §3 (M1 work items) for this session's continuous run: 3.1-3.6
+complete, all gates reported (none silently weakened). 3.7-3.9 remain
+(relation storage/indices, naive eval, semi-naive eval + M1's headline
+number) -- substantial remaining scope, continuing per the original
+instruction ("Execute M1 §3 in order... If §3 completes, continue with
+§4").

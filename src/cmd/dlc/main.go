@@ -178,6 +178,7 @@ type checkOutput struct {
 	Status      string               `json:"status"` // "ok" | "rejected" | "parse_error"
 	Diagnostics []jsonSemaDiagnostic `json:"diagnostics,omitempty"`
 	ParseErrors []jsonDiagnostic     `json:"parse_errors,omitempty"`
+	Strata      map[string]int       `json:"strata,omitempty"` // relation -> stratum, only when status=="ok"
 	Panic       string               `json:"panic,omitempty"`
 }
 
@@ -218,10 +219,14 @@ func runCheck(path string) {
 	var diags []sema.Diagnostic
 	diags = append(diags, sema.CheckDeclType(prog)...)
 	diags = append(diags, sema.CheckAllowedness(prog)...)
+	stratDiags, stratResult := sema.CheckStratification(prog)
+	diags = append(diags, stratDiags...)
 
 	out := checkOutput{Status: "ok"}
 	if len(diags) > 0 {
 		out.Status = "rejected"
+	} else if stratResult != nil {
+		out.Strata = stratResult.Stratum
 	}
 	for _, d := range diags {
 		out.Diagnostics = append(out.Diagnostics, jsonSemaDiagnostic{
