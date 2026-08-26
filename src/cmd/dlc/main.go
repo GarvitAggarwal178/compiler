@@ -7,6 +7,7 @@ import (
 	"os"
 
 	"dlc/src/lexer"
+	"dlc/src/parser"
 	"dlc/src/token"
 )
 
@@ -20,6 +21,10 @@ func main() {
 	switch subcommand {
 	case "lex":
 		runLex(path)
+	case "parse":
+		runParse(path)
+	case "roundtrip":
+		runRoundtrip(path)
 	default:
 		fmt.Fprintf(os.Stderr, "unknown subcommand %q\n", subcommand)
 		os.Exit(2)
@@ -96,6 +101,103 @@ func runLex(path string) {
 		out.Tokens = append(out.Tokens, jsonToken{
 			Kind: t.Kind.String(), Text: t.Text, Span: toJSONSpan(t.Span), Message: t.Message,
 		})
+	}
+	enc, err := json.Marshal(out)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "internal error marshaling output: %v\n", err)
+		os.Exit(1)
+	}
+	fmt.Println(string(enc))
+}
+
+type jsonDiagnostic struct {
+	Span    jsonSpan `json:"span"`
+	Message string   `json:"message"`
+}
+
+type parseOutput struct {
+	Status      string           `json:"status"` // "parsed" | "error"
+	DeclCount   int              `json:"decl_count"`
+	ClauseCount int              `json:"clause_count"`
+	ErrorCount  int              `json:"error_count"`
+	Diagnostics []jsonDiagnostic `json:"diagnostics"`
+	Panic       string           `json:"panic,omitempty"`
+}
+
+// runParse is §3.3 gates one and three's entry point: parse the file,
+// report whether it parsed with zero errors, and the diagnostics if not.
+func runParse(path string) {
+	defer func() {
+		if r := recover(); r != nil {
+			out := parseOutput{Status: "panic", Panic: fmt.Sprintf("%v", r)}
+			enc, _ := json.Marshal(out)
+			fmt.Println(string(enc))
+			os.Exit(1)
+		}
+	}()
+
+	src, err := os.ReadFile(path)
+	if err != nil {
+		out := parseOutput{Status: "read_error", Panic: err.Error()}
+		enc, _ := json.Marshal(out)
+		fmt.Println(string(enc))
+		os.Exit(1)
+	}
+
+	prog, errs := parser.Parse(src)
+	out := parseOutput{
+		Status:      "parsed",
+		DeclCount:   len(prog.Decls),
+		ClauseCount: len(prog.Clauses),
+		ErrorCount:  len(errs),
+	}
+	if len(errs) > 0 {
+		out.Status = "error"
+	}
+	for _, e := range errs {
+		out.Diagnostics = append(out.Diagnostics, jsonDiagnostic{Span: toJSONSpan(e.Span), Message: e.Message})
+	}
+	enc, err := json.Marshal(out)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "internal error marshaling output: %v\n", err)
+		os.Exit(1)
+	}
+	fmt.Println(string(enc))
+}
+
+type roundtripOutput struct {
+	Status      string           `json:"status"` // "match" | "mismatch" | "parse_error" | "reparse_error"
+	Diagnostics []jsonDiagnostic `json:"diagnostics,omitempty"`
+	Printed     string           `json:"printed,omitempty"`
+	Panic       string           `json:"panic,omitempty"`
+}
+
+// runRoundtrip is §3.3 gate two's entry point: parse -> print -> reparse
+// -> ast.Equal, entirely in Go (parser.Roundtrip), reporting only the
+// verdict -- see parser/DESIGN.md for why the comparison itself belongs
+// in Go, not reimplemented against a JSON dump in Python.
+func runRoundtrip(path string) {
+	defer func() {
+		if r := recover(); r != nil {
+			out := roundtripOutput{Status: "panic", Panic: fmt.Sprintf("%v", r)}
+			enc, _ := json.Marshal(out)
+			fmt.Println(string(enc))
+			os.Exit(1)
+		}
+	}()
+
+	src, err := os.ReadFile(path)
+	if err != nil {
+		out := roundtripOutput{Status: "read_error", Panic: err.Error()}
+		enc, _ := json.Marshal(out)
+		fmt.Println(string(enc))
+		os.Exit(1)
+	}
+
+	r := parser.Roundtrip(src)
+	out := roundtripOutput{Status: r.Status, Printed: r.Printed}
+	for _, e := range r.ParseErrors {
+		out.Diagnostics = append(out.Diagnostics, jsonDiagnostic{Span: toJSONSpan(e.Span), Message: e.Message})
 	}
 	enc, err := json.Marshal(out)
 	if err != nil {

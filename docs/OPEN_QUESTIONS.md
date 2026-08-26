@@ -196,3 +196,49 @@ least one candidate program where that selectivity is either wrong (unsound) or
 needlessly conservative (declines something safe); none has been found or
 constructed yet. This is a design question for whichever corpus subdirectory Q5
 resolves to, not something to invent inside Phase 0.
+
+## 2026-08-26 — IN_GRAMMAR.txt admits more out-of-grammar features than the zero-arity gap already found
+
+NIGHT-BATCH-02 T8 (`docs/reports/night02-T8-grammar-census.md`) found 11 of the 195
+`IN_GRAMMAR.txt` files use zero-arity relations, which blueprint §4's grammar (as
+written then) did not admit -- flagged, not fixed, since zero-arity is now
+explicitly admitted by M1-BUILD.md §3.3's amendment. Running the real `dlc` lexer
+over the same 195 files (M1 §3.1, `docs/SESSION_LOG.md` 2026-08-26) found a larger
+problem: 42/195 files produce lex-error tokens, the large majority from
+aggregates (`sum`/`max`/`min`/`count`-style syntax), records
+(`semantic/type_system_records{,2}`, 240 and 24 error tokens respectively -- by far
+the worst offenders), `#include` preprocessor directives, and Soufflé pragma
+directives (`.printsize`, source-location pragmas) -- all explicitly out of
+blueprint §4's grammar ("No functors, no aggregates, no components, no records").
+NIGHT-BATCH-01 T5's mechanical text-scan predicate did not catch any of these.
+**Practical consequence:** M1-BUILD.md §3.3's gate one ("all 195 in-grammar files
+parse with zero errors") is very likely unachievable as literally stated without
+first correcting `IN_GRAMMAR.txt` itself -- a human decision (`IN_GRAMMAR.txt` is
+not under M1-BUILD.md §5's edit prohibition, but fixing the mechanical predicate
+that built it is scope beyond a single M1 work item). Not acted on here; the
+lex-coverage gate that actually governs §3.1 is panics-only and passed cleanly
+(0/234, `measurements/m1-3.1-lex-coverage-summary.json`) regardless of this.
+
+## 2026-08-26 — `.input`/`.output NAME()` (trailing parens) is the dominant cause of §3.3 gate one's shortfall, not a parser bug
+
+M1 §3.3's parser gate one ("all 195 in-grammar files parse with zero errors")
+measured 20/195, far below what §3.1's lex-coverage finding alone predicted
+(`docs/reports/m1-progress.md` has the full breakdown). Root cause of the largest
+single bucket (105/175 failures, 60%): real Soufflé test files overwhelmingly write
+`.input Name()` / `.output Name()` with cosmetic empty parentheses after the
+relation name -- e.g. `evaluation/access1/access1.dl`'s `.output Low()`. Blueprint
+§4's grammar says `.input ident` / `.output ident`, no parens, and M1-BUILD.md
+§3.3 authorizes exactly one amendment (the term-list-in-an-atom one) -- not this.
+`dlc` therefore rejects the parenthesized form as specified, correctly, per the
+grammar as actually authorized. **This is not a bug and was not silently
+"fixed"** by adding an unauthorized second amendment -- flagged here instead,
+since a human may want to authorize it explicitly (the idiom is cosmetic,
+near-universal in real Souffle code, and costs nothing semantically to admit).
+Remaining causes of the 175 failures, all independently confirmed as genuinely
+out-of-grammar rather than parser bugs: 15 files use `unsigned`/`float` types
+(2-type grammar is number/symbol only); the remaining ~55 use aggregates
+(`sum w : ...`), functors (`cat(...)`, `strlen(...)`, `range(...)`, etc. --
+blueprint's own words: "No functors, no aggregates"), or the pragma/`#include`
+directives already flagged in the entry above. Not acted on beyond reporting;
+gate two (round-trip) and gate three (hostile-corpus oracle agreement) are
+unaffected and both passed cleanly on everything that did parse.

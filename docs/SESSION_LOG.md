@@ -303,3 +303,42 @@ DESIGN.md, and provides what §3.3-3.9 need" per the item's own framing
 round-trip check will need (a straight `reflect.DeepEqual` can never pass
 that gate, since a reparse always produces different spans). 4 Go unit
 tests, all pass. `go build`/`go vet`/`go test` all clean.
+
+**§3.3 (parser):** all three gates run; none is a clean "pass," all three
+are honestly reported per M1-BUILD.md §7 ("report it as parsed/195," not
+"make it say 195/195"). Recursive-descent parser + precedence-climbing
+arith (`src/parser/parser.go`), pretty-printer (`printer.go`), and a
+Go-native `Roundtrip` (`roundtrip.go`) using `ast.Equal`. CLI gained
+`parse` and `roundtrip` subcommands. 9 Go unit tests (precedence table
+matches `docs/reports/night02-T2-hostile.md`'s oracle-verified values
+exactly), all pass.
+
+- **Gate one:** `parsed/195 = 20/195`
+  (`measurements/m1-3.3-gate1-parse-coverage-summary.json`). NOT a parser
+  bug: 105/175 failures (60%) are real Soufflé files using `.input Name()`
+  / `.output Name()` with cosmetic trailing parens -- grammar-legal in
+  full Soufflé, not admitted by blueprint §4 plus the one authorized
+  amendment (term-list-in-atom only). Flagged prominently
+  (`docs/OPEN_QUESTIONS.md` 2026-08-26) as a human decision point (worth
+  authorizing as a second amendment, given how pervasive and cosmetic it
+  is) rather than silently added. Remaining 70 failures independently
+  confirmed genuinely out-of-grammar: 15 `unsigned`/`float` types, ~55
+  aggregates/functors/pragmas (consistent with §3.1's lex-coverage finding
+  and blueprint's own "no functors, no aggregates").
+- **Gate two:** `match/195 = 20/195`
+  (`measurements/m1-3.3-gate2-roundtrip-summary.json`) -- but the other
+  175 are inherited `parse_error` from gate one, not new round-trip
+  failures. **Of the 20 files that parse, 20/20 round-trip correctly**
+  (100%) -- no printer/precedence bug found on real-world content, beyond
+  the 9 synthetic unit tests.
+- **Gate three:** 39 hostile files vs `docs/reports/night02-T2-hostile.md`'s
+  Soufflé-established verdicts: 35/39 agree; 2 are expected gaps (Soufflé's
+  rejection was semantic -- duplicate decl, underscore-in-head -- and
+  sema doesn't exist until §3.4/§3.6); 1 is T2's own already-known
+  inconclusive case (`lexical_4kb_identifier.dl`); **exactly 1 genuine
+  disagreement**, `comment_unterminated_block.dl` -- dlc rejects an
+  unterminated block comment, Soufflé silently swallows it to EOF. This
+  is the deliberate, pre-documented disagreement from `lexer/DESIGN.md`
+  (§3.1) surfacing again here, not a new finding. Reported, not adjusted
+  to match, per the gate's own instruction.
+  (`measurements/m1-3.3-gate3-hostile-summary.json`)
