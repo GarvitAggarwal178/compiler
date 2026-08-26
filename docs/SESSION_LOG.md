@@ -558,3 +558,36 @@ own output (magic-seed relations change the precedence graph) --
 `sema.CheckStratification` on the result; deliberately not designed
 further than that (would be resolving a Lane A design question). 2 Go
 tests, both pass.
+
+**§4 item 1 (C code generation):** `src/codegen/` -- emits a standalone C
+program (naive evaluation only, not semi-naive's Δ-rewrite; §4 item 1's
+own wording describes naive's shape, disclosed scoping in DESIGN.md) from
+an already-checked program: fixed-arity tuple structs, a chained hash
+index on column 0 per relation ("nested loops... with hash indices," the
+task's own wording, same one-index choice `ir.Relation` makes and for
+the same reason), fact loading matching Soufflé's tab-separated
+convention, per-stratum naive fixpoint. CLI gained a `codegen`
+subcommand. **8 real end-to-end tests** (generate C -> compile with `cc`
+-> run the binary -> check output): facts+rules, transitive-closure
+recursion, stratified negation, `.input`-loaded facts, arithmetic +
+constraints, symbols/string literals, a genuine self-join, zero-arity --
+all pass. Spot-checked independently outside the test suite too:
+`dlc codegen` on `ancestor_nonancestor.dl` at n=500, compiled and run,
+matches NIGHT-BATCH-02 T4's already-committed real-Soufflé baseline
+exactly.
+
+- **Found and fixed a real correctness risk before any generated C was
+  ever compiled:** a first draft's column-0 lookup collected matching
+  row indices into a fixed `1<<20`-entry static buffer; NIGHT-BATCH-02's
+  own measurements found relations in the millions of tuples at this
+  family's larger scale points, so a single hash bucket could plausibly
+  overflow it. Replaced with an inline hash-bucket walk at each join
+  site -- no fixed-size buffer anywhere, regardless of relation size.
+- **Disclosed, not fixed:** ordering comparisons (`<`,`<=`,`>`,`>=`) on
+  `symbol` columns compare interned ids (assignment order), not strings
+  (lexicographic) -- `=`/`!=` are unaffected (id equality is string
+  equality); fixing the ordering case needs per-variable type
+  information sema computes internally but doesn't currently export.
+  Neither the benchmark family nor the hostile corpus exercises this
+  shape, so it hasn't been hit by anything tested, but it is a real,
+  disclosed gap, not silently assumed correct.

@@ -7,6 +7,7 @@ import (
 	"os"
 
 	"dlc/src/ast"
+	"dlc/src/codegen"
 	"dlc/src/eval"
 	"dlc/src/ir"
 	"dlc/src/lexer"
@@ -43,6 +44,12 @@ func main() {
 			os.Exit(2)
 		}
 		runRun(path, os.Args[3], os.Args[4], true)
+	case "codegen":
+		if len(os.Args) != 4 {
+			fmt.Fprintln(os.Stderr, "usage: dlc codegen <file> <outfile.c>")
+			os.Exit(2)
+		}
+		runCodegen(path, os.Args[3])
 	default:
 		fmt.Fprintf(os.Stderr, "unknown subcommand %q\n", subcommand)
 		os.Exit(2)
@@ -244,6 +251,79 @@ func writeProfile(evaluator *eval.Evaluator, outDir string) {
 		return
 	}
 	_ = os.WriteFile(outDir+"/profile.json", enc, 0o644)
+}
+
+type codegenOutput struct {
+	Status      string               `json:"status"` // "ok" | "rejected" | "parse_error"
+	Diagnostics []jsonSemaDiagnostic `json:"diagnostics,omitempty"`
+	ParseErrors []jsonDiagnostic     `json:"parse_errors,omitempty"`
+	Panic       string               `json:"panic,omitempty"`
+}
+
+// runCodegen is §4 item 1's entry point: parse -> full sema check ->
+// (if clean) codegen.Generate -> write C source to outPath. Same
+// parse/check pipeline as runCheck/runRun, so a program codegen accepts
+// is exactly one already-accepted by every other subcommand -- codegen
+// never sees a program the rest of the pipeline hasn't already
+// validated.
+func runCodegen(path, outPath string) {
+	defer func() {
+		if r := recover(); r != nil {
+			out := codegenOutput{Status: "panic", Panic: fmt.Sprintf("%v", r)}
+			enc, _ := json.Marshal(out)
+			fmt.Println(string(enc))
+			os.Exit(1)
+		}
+	}()
+
+	src, err := os.ReadFile(path)
+	if err != nil {
+		out := codegenOutput{Status: "read_error", Panic: err.Error()}
+		enc, _ := json.Marshal(out)
+		fmt.Println(string(enc))
+		os.Exit(1)
+	}
+
+	prog, perrs := parser.Parse(src)
+	if len(perrs) > 0 {
+		out := codegenOutput{Status: "parse_error"}
+		for _, e := range perrs {
+			out.ParseErrors = append(out.ParseErrors, jsonDiagnostic{Span: toJSONSpan(e.Span), Message: e.Message})
+		}
+		enc, _ := json.Marshal(out)
+		fmt.Println(string(enc))
+		return
+	}
+
+	var diags []sema.Diagnostic
+	diags = append(diags, sema.CheckDeclType(prog)...)
+	diags = append(diags, sema.CheckAllowedness(prog)...)
+	stratDiags, stratResult := sema.CheckStratification(prog)
+	diags = append(diags, stratDiags...)
+	if len(diags) > 0 {
+		out := codegenOutput{Status: "rejected"}
+		for _, d := range diags {
+			out.Diagnostics = append(out.Diagnostics, jsonSemaDiagnostic{
+				Span: toJSONSpan(d.Span), Category: string(d.Category), Message: d.Message,
+			})
+		}
+		enc, _ := json.Marshal(out)
+		fmt.Println(string(enc))
+		return
+	}
+
+	schemas, _ := sema.BuildSymbolTable(prog)
+	cSource := codegen.Generate(prog, schemas.Relations, stratResult)
+	if err := os.WriteFile(outPath, []byte(cSource), 0o644); err != nil {
+		out := codegenOutput{Status: "eval_error", Panic: err.Error()}
+		enc, _ := json.Marshal(out)
+		fmt.Println(string(enc))
+		os.Exit(1)
+	}
+
+	out := codegenOutput{Status: "ok"}
+	enc, _ := json.Marshal(out)
+	fmt.Println(string(enc))
 }
 
 type jsonDiagnostic struct {
