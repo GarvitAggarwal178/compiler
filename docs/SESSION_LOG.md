@@ -435,3 +435,25 @@ complete, all gates reported (none silently weakened). 3.7-3.9 remain
 number) -- substantial remaining scope, continuing per the original
 instruction ("Execute M1 §3 in order... If §3 completes, continue with
 §4").
+
+**§3.7 (relation storage and indices):** no numeric gate stated;
+completion criterion (as for §3.2/§3.4): compiles, has DESIGN.md, meets
+the item's own stated requirements, exercised by unit tests since real
+data doesn't exist until §3.8. `src/ir/relation.go`: `Value`
+(int64-or-interned-symbol), `StringTable`, `Relation` with exactly one
+index (column 0, naive by explicit permission) and dedup-on-insert (set
+semantics). `src/ir/profile.go`: `EmitProfile` matches Soufflé's own `-p`
+JSON shape field-for-field so `harness/parse_profile.py`/
+`tuple_report.py` need zero changes to read `dlc`'s own output.
+
+- **Instrumentation requirement, verified structurally, not just by
+  convention:** `Insert` has no code path into `Stats` at all --
+  `TestInsertNeverTouchesStats` confirms EDB loads (which only ever call
+  `Insert`) cannot inflate a derived-tuple count by construction, not by
+  every call site remembering a flag correctly.
+- **"Both copy conventions" (§3.7) deferred, disclosed:** `dlc`'s
+  evaluator has no code path yet that could produce a `COPY_T`-shaped
+  relation, so excl/incl trivially coincide today -- noted in DESIGN.md,
+  not fabricated ahead of there being anything to report.
+- 8 Go unit tests, all pass. `go build`/`go vet`/`go test ./...` all
+  clean.
