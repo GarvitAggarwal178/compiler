@@ -591,3 +591,18 @@ exactly.
   Neither the benchmark family nor the hostile corpus exercises this
   shape, so it hasn't been hit by anything tested, but it is a real,
   disclosed gap, not silently assumed correct.
+
+**§4 item 3 (extend the differential harness to the full benchmark
+family, every pre-registered scale point):** `harness/
+m1_4_3_full_family_differential.py`, `dlc run` (naive) vs real Soufflé,
+ascending per shape, 120s cap per point (this task's own choice, never
+retried higher on a DNF). **16/16 comparable points matched, 0
+disagreements**, across all 5 pre-registered shapes. 4 DNFs, one per
+shape except `culprit_cycle` (completed all 5 of its own points) --
+every DNF lands exactly where NIGHT-BATCH-02 T4's already-committed
+measurements predicted it would (tens-of-millions-of-tuples territory,
+no query planning in a tree-walking interpreter). Full table:
+`measurements/m1-4.3-full-family-differential-summary.json`.
+
+**M1 (all of §3 and §4) complete.** Final report per §7:
+`docs/reports/m1-progress.md`.
