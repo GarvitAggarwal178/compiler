@@ -274,3 +274,32 @@ layout per M1-BUILD.md §2, wrote the three Lane A marker files (doc.go x2
 "// Lane A — human-authored. See docs/M1-BUILD.md §1." comment — no stubs,
 no algorithm sketches. `go build ./...` and `go vet ./...` both clean.
 Logged: docs/DECISIONS.md.
+
+**§3.1 (token and lexer):** gate PASSED. `harness/lex_coverage.py` (new --
+see report for why not a reuse of `parse_coverage.py`) ran the built `dlc
+lex` over all 195 `IN_GRAMMAR.txt` files plus all 39 `tests/hostile/`
+files: 0/234 panics. `token`/`lexer`/`cmd/dlc` packages written, each with
+`DESIGN.md`; Go unit tests in `src/lexer/lexer_test.go` (9 tests, all
+pass) cover the `.`-vs-directive disambiguation, multi-char operators,
+underscore-vs-identifier, error-token recovery, and the two documented
+disagreements with Soufflé's lexer (unterminated block comment, non-ASCII
+bytes). Found and flagged (not fixed, not blocking): 42/195 "in-grammar"
+files produce lex-error tokens -- `IN_GRAMMAR.txt` (NIGHT-BATCH-01 T5's
+mechanical scan) missed aggregates, records, `#include`, and pragma
+directives as exclusion factors, all explicitly out of blueprint §4's
+grammar. This does not fail §3.1's gate (panics only) but means §3.3's
+gate one ("all 195 parse with zero errors") is very likely unachievable
+as literally stated without a corpus correction -- flagged now, ahead of
+that gate, not discovered cold when it fails.
+
+**§3.2 (AST):** no independently-stated numeric gate (M1-BUILD.md gives
+none for this item); completion criterion taken as "compiles, has
+DESIGN.md, and provides what §3.3-3.9 need" per the item's own framing
+("the AST shape is what four downstream passes are written against").
+`Program`/`Decl`/`Clause`/`Atom`/`Literal`(`Atom`/`NegatedAtom`/
+`Constraint`)/`Term`/`Arith`(`BinaryExpr`/`UnaryExpr`/`Var`/`NumberLit`/
+`StringLit`)/`Wildcard`, every node with a `Span()`. Also added
+`ast.Equal`, a span-ignoring structural comparison §3.3 gate two's
+round-trip check will need (a straight `reflect.DeepEqual` can never pass
+that gate, since a reparse always produces different spans). 4 Go unit
+tests, all pass. `go build`/`go vet`/`go test` all clean.
