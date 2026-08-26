@@ -52,6 +52,50 @@ func TestZeroArityDeclAndAtom(t *testing.T) {
 	}
 }
 
+func TestInputOutputEmptyParensAccepted(t *testing.T) {
+	// NIGHT-BATCH-03 T6: the dominant real-world idiom (`m1-progress.md`,
+	// 105/175 gate-one failures), `.input Name()` / `.output Name()`.
+	prog := mustParse(t, ".decl p(a:number)\n.input p()\n.output p()\np(1).\n")
+	if len(prog.Decls) != 3 {
+		t.Fatalf("expected 3 decls, got %+v", prog.Decls)
+	}
+	if prog.Decls[1].Kind != ast.DeclInput || prog.Decls[1].Name != "p" {
+		t.Fatalf("expected DeclInput p, got %+v", prog.Decls[1])
+	}
+	if prog.Decls[2].Kind != ast.DeclOutput || prog.Decls[2].Name != "p" {
+		t.Fatalf("expected DeclOutput p, got %+v", prog.Decls[2])
+	}
+}
+
+func TestInputOutputNonEmptyParensDiscarded(t *testing.T) {
+	// Real Souffle also allows I/O directive options inside the parens
+	// (e.g. filename="x.csv") -- this grammar has no such concept, so the
+	// content must be skipped, not merely tolerated when empty.
+	prog := mustParse(t, `.decl p(a:number)
+.input p(IO=file, filename="x.csv")
+p(1).
+`)
+	if len(prog.Decls) != 2 || prog.Decls[1].Kind != ast.DeclInput || prog.Decls[1].Name != "p" {
+		t.Fatalf("expected DeclInput p with options discarded, got %+v", prog.Decls)
+	}
+}
+
+func TestInputOutputNestedParensBalanced(t *testing.T) {
+	prog := mustParse(t, ".decl p(a:number)\n.input p(x=(1+2))\np(1).\n")
+	if len(prog.Decls) != 2 {
+		t.Fatalf("expected 2 decls, got %+v", prog.Decls)
+	}
+}
+
+func TestInputOutputWithoutParensStillAccepted(t *testing.T) {
+	// The pre-existing bare form (`.input p`) must keep working --
+	// parens are optional, not required.
+	prog := mustParse(t, ".decl p(a:number)\n.input p\np(1).\n")
+	if len(prog.Decls) != 2 || prog.Decls[1].Kind != ast.DeclInput {
+		t.Fatalf("expected bare .input to still parse, got %+v", prog.Decls)
+	}
+}
+
 func TestNegationAndConstraintDisambiguation(t *testing.T) {
 	prog := mustParse(t, ".decl q(a:number)\n.decl p(a:number)\np(X) :- q(X), !q(X), X > 0.\n")
 	body := prog.Clauses[0].Body

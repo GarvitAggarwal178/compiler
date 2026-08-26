@@ -165,7 +165,39 @@ func (p *Parser) parseDecl() (*ast.Decl, bool) {
 		if kw.Kind == token.OUTPUT {
 			kind = ast.DeclOutput
 		}
-		return &ast.Decl{Kind: kind, Name: nameTok.Text, Sp: token.Span{Start: start, End: nameTok.Span.End}}, true
+		end := nameTok.Span.End
+		// NIGHT-BATCH-03 T6: `.input name(...)` / `.output name(...)`
+		// accept an optional parenthesised list, parsed and discarded --
+		// real Souffle uses this for I/O directive options (e.g.
+		// `filename="x.csv"`); this grammar has no I/O-option concept,
+		// so the content is skipped rather than modeled. Handles nested
+		// parens (a token-level balance count, not a raw-text scan, so a
+		// string literal containing '(' is never miscounted -- it is
+		// already one STRING token by the time the parser sees it).
+		if p.cur().Kind == token.LPAREN {
+			p.advance()
+			depth := 1
+			for depth > 0 {
+				if p.cur().Kind == token.ERROR {
+					t := p.cur()
+					p.errorAt(t.Span, "lex error: "+t.Message)
+					return nil, false
+				}
+				if p.atEOF() {
+					p.errorAt(p.cur().Span, "unterminated '(' in .input/.output directive")
+					return nil, false
+				}
+				switch p.cur().Kind {
+				case token.LPAREN:
+					depth++
+				case token.RPAREN:
+					depth--
+				}
+				end = p.cur().Span.End
+				p.advance()
+			}
+		}
+		return &ast.Decl{Kind: kind, Name: nameTok.Text, Sp: token.Span{Start: start, End: end}}, true
 	}
 	p.errorAt(p.cur().Span, "expected '.decl', '.input', or '.output'")
 	return nil, false
