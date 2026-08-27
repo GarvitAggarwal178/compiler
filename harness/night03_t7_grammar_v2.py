@@ -192,6 +192,28 @@ def has_unsupported_string_escape(text):
     return False
 
 
+def has_no_top_level_construct(text: str) -> bool:
+    """NIGHT-BATCH-04 D1: night03-T7-grammar-v2.md's 2 residual cross-check
+    gaps (`syntactic/issue2408/issue2408.dl` = the single line "x",
+    `syntactic/syntax10/syntax10.dl` = a leading bare "*") are non-empty
+    garbage that no NAMED construct-violation category matches, because
+    they don't attempt any construct at all -- not a category this
+    predicate was missing, but a structural fact provable directly from
+    section 4's own grammar: `program ::= decl* clause*`, and EVERY decl
+    ('.decl'/'.input'/'.output'/'.include') and EVERY clause (terminated
+    by a bare '.') contains at least one literal '.' character. A
+    non-whitespace file (after comment-stripping) with ZERO '.' characters
+    therefore cannot be assembled from any decl or clause at all -- this
+    is not empirical (found no counterexample in this corpus), it is
+    guaranteed by the grammar itself. A genuinely EMPTY (or comment-only)
+    file is explicitly NOT flagged: `decl* clause*` allows zero
+    repetitions, so an empty program is grammatically valid and does
+    parse (confirmed: `dlc` accepts an empty input) -- only non-empty
+    content with no period anywhere is excluded."""
+    stripped = text.strip()
+    return bool(stripped) and "." not in stripped
+
+
 def has_unterminated_block_comment(raw_text):
     """Not a grammar-production violation -- a lexer-level disagreement
     (src/lexer/DESIGN.md's own documented, deliberate divergence: dlc
@@ -213,6 +235,8 @@ def classify(text: str, raw_text: str = None):
         found["unsupported_string_escape"] = 1
     if raw_text is not None and has_unterminated_block_comment(raw_text):
         found["unterminated_block_comment"] = 1
+    if has_no_top_level_construct(text):
+        found["no_top_level_construct"] = 1
     return found
 
 
