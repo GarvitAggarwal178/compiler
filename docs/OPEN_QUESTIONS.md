@@ -286,6 +286,29 @@ shapes + `p2.dl`, smallest scale point) is a hard gate on this change,
 checked before any of the above numbers are trusted: a relaxation that
 changes an answer means the lemma (`M4 sips.md` §1) was misapplied.
 
+**Resolved 2026-08-27, recorded as a partial miss** (PUNCH-LIST-2 item
+3): measured `T_dlc` on `p2.dl` = **974 (incl-sup)**, **252 (excl-sup)**
+(`measurements/m4-sips/gate/summary.json`). The prediction ("`T_dlc ≈
+300–700`") never named a supplementary-counting convention — both
+conventions existed as concepts by the time of measurement, but Q12's own
+text does not say which one its range refers to. Checked literally
+against the stated `300–700` bound: **neither measured value falls
+inside it** — 974 is above the top (700), 252 is below the bottom
+(300). This is not "correct under one convention, wrong under the
+other" — it is a miss under both, in opposite directions, which is if
+anything a sharper demonstration of why naming a convention matters than
+a near-miss would have been: guessing incl-sup would call the prediction
+too conservative (reality landed higher), guessing excl-sup would call it
+too aggressive (reality landed lower), and neither guess is actually
+inside the stated range. **Not recorded as correct under excl-sup** —
+252 being close to `p4prime.dl`'s 285 (a separate, true finding,
+`docs/reports/m4-sips.md`'s "Q12, closed" section /
+`docs/reports/FINAL.md` §6 item 1) is a different comparison from
+"is 252 inside the pre-registered 300–700 band," and the two must not be
+conflated. Cause: an underspecified prediction, not a wrong mechanism —
+the relaxation itself is independently confirmed correct (§2's rule
+reproduces the table exactly at the occurrence level, `m4-sips.md`).
+
 ## 2026-08-27 — Q8, CLOSED (NIGHT-BATCH-04 D4 / A's ancestor comparison)
 
 **Q8** asked whether `ancestor_nonancestor`'s modest measured contribution
