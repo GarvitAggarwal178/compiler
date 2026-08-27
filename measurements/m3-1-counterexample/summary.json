@@ -1,0 +1,104 @@
+{
+  "attempted": 10,
+  "agreed": 5,
+  "agreed_of_attempted": "5/10",
+  "unstratifiable": 5,
+  "disagreements": [],
+  "results": [
+    {
+      "name": "p6a1_base",
+      "no_op_passthrough": true,
+      "comparable": true,
+      "answers_identical": true,
+      "T_none": 26974,
+      "T_dlc": 26974
+    },
+    {
+      "name": "p6a1b_base",
+      "no_op_passthrough": true,
+      "comparable": true,
+      "answers_identical": true,
+      "T_none": 26805,
+      "T_dlc": 26805
+    },
+    {
+      "name": "p6a2_base",
+      "no_op_passthrough": true,
+      "comparable": true,
+      "answers_identical": true,
+      "T_none": 26486,
+      "T_dlc": 26486
+    },
+    {
+      "name": "p6start_base",
+      "no_op_passthrough": true,
+      "comparable": true,
+      "answers_identical": true,
+      "T_none": 26608,
+      "T_dlc": 26608
+    },
+    {
+      "name": "cc_arity3_twobound",
+      "no_op_passthrough": false,
+      "comparable": false,
+      "answers_identical": null,
+      "T_none": null,
+      "T_dlc": null,
+      "unstratifiable": true,
+      "candidate_stderr": "----------------^---------\nWarning: Variable y only occurs once in file transformed.dl at line 44\nsup_s_bb_r0_1(x, l) :- sup_s_bb_r0_0(x, l), q_bfb(x, y, l).\n-----------------------------------------------------^------\nError: Unable to stratify relation(s) {magic_q_bfb,magic_s_bb,p_bfb,q_bfb,s_bb,sup_p_bfb_r1_1,sup_p_bfb_r1_2,sup_p_bfb_r1_3,sup_q_bfb_r0_0,sup_q_bfb_r0_1,sup_q_bfb_r1_0,sup_q_bfb_r1_1,sup_q_bfb_r1_2,sup_s_bb_r0_0,sup_s_bb_r0_1,sup_s_bb_r0_2}\nRelation s_bb in file transformed.dl at line 25\n.decl s_bb(c0:number, c1:number)\n------^--------------------------\nhas cyclic negation in file transformed.dl at line 37\nsup_p_bfb_r1_2(x, l, z) :- sup_p_bfb_r1_1(x, l, z), !s_bb(z, l).\n-----------------------------------------------------^-----------\n1 errors generated, evaluation aborted\n",
+      "original_stderr": ""
+    },
+    {
+      "name": "cc_edb_negated",
+      "no_op_passthrough": false,
+      "comparable": true,
+      "answers_identical": true,
+      "T_none": 870,
+      "T_dlc": 54
+    },
+    {
+      "name": "cc_longer_cycle",
+      "no_op_passthrough": false,
+      "comparable": false,
+      "answers_identical": null,
+      "T_none": null,
+      "T_dlc": null,
+      "unstratifiable": true,
+      "candidate_stderr": " 45\nmagic_s_b(z) :- sup_p_bf_r1_1(x, z).\n------------------------------^------\nWarning: Variable x only occurs once in file transformed.dl at line 46\nmagic_r1_bf(z) :- sup_p_bf_r1_2(x, z).\n--------------------------------^------\nError: Unable to stratify relation(s) {magic_r1_bf,magic_r2_bf,magic_s_b,p_bf,r1_bf,r2_bf,s_b,sup_p_bf_r1_1,sup_p_bf_r1_2,sup_p_bf_r1_3,sup_r1_bf_r0_0,sup_r1_bf_r0_1,sup_r1_bf_r1_0,sup_r1_bf_r1_1,sup_r1_bf_r1_2,sup_r2_bf_r0_0,sup_r2_bf_r0_1,sup_s_b_r0_0,sup_s_b_r0_1,sup_s_b_r0_2}\nRelation s_b in file transformed.dl at line 26\n.decl s_b(c0:number)\n------^--------------\nhas cyclic negation in file transformed.dl at line 42\nsup_p_bf_r1_2(x, z) :- sup_p_bf_r1_1(x, z), !s_b(z).\n---------------------------------------------^-------\n1 errors generated, evaluation aborted\n",
+      "original_stderr": ""
+    },
+    {
+      "name": "cc_neg_early",
+      "no_op_passthrough": false,
+      "comparable": false,
+      "answers_identical": null,
+      "T_none": null,
+      "T_dlc": null,
+      "unstratifiable": true,
+      "candidate_stderr": "umber, y:number)\n------^---------------------\nWarning: Variable x only occurs once in file transformed.dl at line 39\nmagic_s_b(z) :- sup_p_bf_r1_1(x, z).\n------------------------------^------\nWarning: Variable x only occurs once in file transformed.dl at line 40\nmagic_q_bf(z) :- sup_p_bf_r1_2(x, z).\n-------------------------------^------\nError: Unable to stratify relation(s) {magic_q_bf,q_bf,s_b,sup_p_bf_r1_2,sup_q_bf_r0_0,sup_q_bf_r0_1,sup_q_bf_r1_0,sup_q_bf_r1_1,sup_q_bf_r1_2,sup_s_b_r0_1,sup_s_b_r0_2}\nRelation s_b in file transformed.dl at line 24\n.decl s_b(c0:number)\n------^--------------\nhas cyclic negation in file transformed.dl at line 37\nsup_p_bf_r1_2(x, z) :- sup_p_bf_r1_1(x, z), !s_b(z).\n---------------------------------------------^-------\n1 errors generated, evaluation aborted\n",
+      "original_stderr": ""
+    },
+    {
+      "name": "cc_query_bothbound",
+      "no_op_passthrough": false,
+      "comparable": false,
+      "answers_identical": null,
+      "T_none": null,
+      "T_dlc": null,
+      "unstratifiable": true,
+      "candidate_stderr": "q_bf(z) :- sup_p_bf_r1_2(x, z).\n-------------------------------^------\nWarning: Variable y only occurs once in file transformed.dl at line 80\nmagic_q_bf(x) :- sup_q_bb_r1_0(x, y).\n----------------------------------^---\nError: Unable to stratify relation(s) {magic_q_bb,magic_q_bf,magic_s_b,p_bf,q_bf,s_b,sup_p_bb_r1_1,sup_p_bb_r1_2,sup_p_bf_r1_1,sup_p_bf_r1_2,sup_p_bf_r1_3,sup_q_bb_r1_0,sup_q_bf_r0_0,sup_q_bf_r0_1,sup_q_bf_r1_0,sup_q_bf_r1_1,sup_q_bf_r1_2,sup_s_b_r0_0,sup_s_b_r0_1,sup_s_b_r0_2}\nRelation s_b in file transformed.dl at line 33\n.decl s_b(c0:number)\n------^--------------\nhas cyclic negation in file transformed.dl at line 52\nsup_p_bb_r1_2(x, y, z) :- sup_p_bb_r1_1(x, y, z), !s_b(z).\n---------------------------------------------------^-------\n1 errors generated, evaluation aborted\n",
+      "original_stderr": ""
+    },
+    {
+      "name": "cc_third_relation",
+      "no_op_passthrough": false,
+      "comparable": false,
+      "answers_identical": null,
+      "T_none": null,
+      "T_dlc": null,
+      "unstratifiable": true,
+      "candidate_stderr": "ly occurs once in file transformed.dl at line 40\nmagic_s_b(z) :- sup_q2_bf_r1_1(x, z).\n-------------------------------^------\nWarning: Variable x only occurs once in file transformed.dl at line 41\nmagic_p_bf(z) :- sup_q2_bf_r1_2(x, z).\n--------------------------------^------\nError: Unable to stratify relation(s) {magic_p_bf,magic_s_b,p_bf,q2_bf,s_b,sup_p_bf_r0_0,sup_p_bf_r0_1,sup_p_bf_r1_0,sup_p_bf_r1_1,sup_p_bf_r1_2,sup_q2_bf_r1_1,sup_q2_bf_r1_2,sup_q2_bf_r1_3,sup_s_b_r0_0,sup_s_b_r0_1,sup_s_b_r0_2}\nRelation s_b in file transformed.dl at line 25\n.decl s_b(c0:number)\n------^--------------\nhas cyclic negation in file transformed.dl at line 37\nsup_q2_bf_r1_2(x, z) :- sup_q2_bf_r1_1(x, z), !s_b(z).\n-----------------------------------------------^-------\n1 errors generated, evaluation aborted\n",
+      "original_stderr": ""
+    }
+  ]
+}

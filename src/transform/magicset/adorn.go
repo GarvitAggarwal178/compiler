@@ -40,6 +40,17 @@ func (a Adornment) String() string {
 	return string(s)
 }
 
+// AllBound reports whether every position of a is bound -- the property
+// M2-M3-BUILD.md §5 requires of every negated atom's adornment.
+func (a Adornment) AllBound() bool {
+	for _, b := range a {
+		if !b {
+			return false
+		}
+	}
+	return true
+}
+
 func (a Adornment) equal(o Adornment) bool {
 	if len(a) != len(o) {
 		return false
@@ -388,5 +399,35 @@ func varsInLit(lit ast.Literal) []string {
 		walk(v.Right)
 	}
 	sort.Strings(out) // deterministic even though insertion order above is already deterministic -- belt and suspenders for a value only used to test set membership by BoundAfter's caller
+	return out
+}
+
+// NegatedOccurrenceAdornment is one negated IDB atom occurrence's own
+// computed adornment, exported for src/transform/guard's M3.1 assertion
+// (M2-M3-BUILD.md §5) -- the occurrence type itself stays unexported
+// (adorn.go's own internal bookkeeping), this is the minimal read-only
+// view guard needs and nothing more.
+type NegatedOccurrenceAdornment struct {
+	Pred   string
+	Adorn  Adornment
+	Rule   *ast.Clause // the source clause the occurrence appears in, for a diagnostic
+}
+
+// NegatedOccurrenceAdornments returns every negated IDB atom occurrence's
+// adornment discovered anywhere in r, across every adorned predicate's
+// every contributing rule.
+func (r *AdornResult) NegatedOccurrenceAdornments() []NegatedOccurrenceAdornment {
+	var out []NegatedOccurrenceAdornment
+	for _, key := range r.Order {
+		for _, ar := range r.Rules[key] {
+			for _, occ := range ar.Occurrences {
+				if occ.negated {
+					out = append(out, NegatedOccurrenceAdornment{
+						Pred: occ.target.pred, Adorn: adornFromKey(occ.target), Rule: ar.Source,
+					})
+				}
+			}
+		}
+	}
 	return out
 }

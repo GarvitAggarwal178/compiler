@@ -1,0 +1,14 @@
+.decl edge(a:number, b:number)
+.input edge
+.decl node(a:number)
+.input node
+.decl reach(a:number, b:number)
+.decl target(b:number)
+.decl orphan(b:number)
+.decl ans(b:number)
+.output ans
+reach(x, y) :- edge(x, y).
+reach(x, y) :- reach(x, z), edge(z, y).
+target(y) :- reach(1, y).
+orphan(y) :- node(y), !reach(2, y).
+ans(y) :- target(y), orphan(y).
