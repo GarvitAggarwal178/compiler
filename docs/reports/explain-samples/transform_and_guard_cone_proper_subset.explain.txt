@@ -1,7 +1,13 @@
 QUERY pred=p rel=p_bf
-WORKLIST iterations=6
+QUERY pred=tc rel=tc_bf
+QUERY pred=direct rel=direct_bf
+WORKLIST iterations=8
 ADORN rel=p_bf rules=2
 MAGIC rel=magic_p_bf for_rel=p_bf
+ADORN rel=tc_bf rules=2
+MAGIC rel=magic_tc_bf for_rel=tc_bf
+ADORN rel=direct_bf rules=1
+MAGIC rel=magic_direct_bf for_rel=direct_bf
 ADORN rel=gate1_b rules=1
 MAGIC rel=magic_gate1_b for_rel=gate1_b
 ADORN rel=s_b rules=1
@@ -12,11 +18,9 @@ ADORN rel=gate1b_b rules=2
 MAGIC rel=magic_gate1b_b for_rel=gate1b_b
 ADORN rel=gate1b_f rules=2
 MAGIC rel=magic_gate1b_f for_rel=gate1b_f
-UNTOUCHED pred=out2
-UNTOUCHED pred=direct
-UNTOUCHED pred=out3
 UNTOUCHED pred=out
-UNTOUCHED pred=tc
+UNTOUCHED pred=out2
+UNTOUCHED pred=out3
 NEGATED pred=s pre_adorn=b adorn=b relaxed=false reason=all-positions-restricting
 GUARD verdict=UNSTRATIFIABLE clause=a
 GUARD culprit={p,q,s} cone={gate1,gate1b} declined_fraction=0.500

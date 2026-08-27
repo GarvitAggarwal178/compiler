@@ -67,15 +67,20 @@ func GenerateMixed(prog *ast.Program, schemas map[string]*sema.RelationSchema, r
 	// Pass-through predicates: original clauses byte-for-byte (same AST
 	// nodes, not copies) for every predicate that is EITHER never
 	// adorned at all (Untouched) OR adorned but declined to FALLBACK.
-	// The query's own projection rule is excluded here even when its own
-	// target predicate is declined -- it is emitted once, correctly
-	// routed, at the very end (either re-emitted rewritten to the
+	// EVERY query's own projection rule is excluded here (PUNCH-LIST.md
+	// P1: not just the first/only one) even when its own target
+	// predicate is declined -- each is emitted once, correctly routed, in
+	// the per-query loop below (either re-emitted rewritten to the
 	// adorned relation, or as the untouched original, depending on
-	// whether the query's OWN target predicate ended up declined).
+	// whether THAT query's OWN target predicate ended up declined).
+	queryProjectionRules := map[*ast.Clause]bool{}
+	for _, q := range result.Queries {
+		queryProjectionRules[q.ProjectionRule] = true
+	}
 	passthroughNames := sortedKeys(unionSets(result.Untouched, declined))
 	for _, name := range passthroughNames {
 		for _, c := range prog.Clauses {
-			if c.Head.Name == name && c != result.Query.ProjectionRule {
+			if c.Head.Name == name && !queryProjectionRules[c] {
 				g.out.Clauses = append(g.out.Clauses, c)
 			}
 		}
@@ -95,21 +100,28 @@ func GenerateMixed(prog *ast.Program, schemas map[string]*sema.RelationSchema, r
 		}
 	}
 
-	if g.declined[result.Query.Key.pred] {
-		// The query's own target predicate is FALLBACK: no magic seed
-		// (nothing demand-restricted to seed), and the original
-		// projection rule (query constant hardcoded, reading the
-		// original relation directly) is exactly right, unchanged.
-		g.out.Clauses = append(g.out.Clauses, result.Query.ProjectionRule)
-	} else {
-		// The query's own seed fact: magic_q^α0(c̄) from the query atom's
-		// constant arguments.
-		g.emitSeed(result.Query)
-		// The original query-projection rule, rewritten to reference the
-		// adorned relation instead of the original predicate name -- same
-		// convention the hand-guarded files already use (q_nonancestor(y):-
-		// nonancestor_bf(1,y), not nonancestor(1,y)).
-		g.emitQueryProjection(result.Query)
+	// PUNCH-LIST.md P1: one seed/projection per query, not just the
+	// first -- a program with two independent `.output` branches gets
+	// both independently demand-restricted (or independently declined),
+	// exactly as if each had been the program's only query.
+	for _, q := range result.Queries {
+		if g.declined[q.Key.pred] {
+			// This query's own target predicate is FALLBACK: no magic seed
+			// (nothing demand-restricted to seed), and the original
+			// projection rule (query constant hardcoded, reading the
+			// original relation directly) is exactly right, unchanged.
+			g.out.Clauses = append(g.out.Clauses, q.ProjectionRule)
+		} else {
+			// This query's own seed fact: magic_q^α0(c̄) from the query
+			// atom's constant arguments.
+			g.emitSeed(q)
+			// The original query-projection rule, rewritten to reference
+			// the adorned relation instead of the original predicate name
+			// -- same convention the hand-guarded files already use
+			// (q_nonancestor(y):-nonancestor_bf(1,y), not
+			// nonancestor(1,y)).
+			g.emitQueryProjection(q)
+		}
 	}
 
 	return g.out, g.origin

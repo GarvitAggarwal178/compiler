@@ -69,8 +69,8 @@ func Decide(prog *ast.Program) (*DecideResult, error) {
 	if len(diags) > 0 {
 		return nil, errFromDiags("guard: BuildSymbolTable failed on an already-accepted program", diags)
 	}
-	query := magicset.FindQuery(prog)
-	adorned, err := magicset.Adorn(prog, query)
+	queries := magicset.FindQueries(prog)
+	adorned, err := magicset.Adorn(prog, queries)
 	if err != nil {
 		return nil, err
 	}

@@ -71,7 +71,7 @@ func HasPositiveCycle(prog *ast.Program) map[string]bool {
 
 // CulpritCycleResult is clause (a)'s verdict on one program.
 type CulpritCycleResult struct {
-	NoBindableQuery     bool              // magicset.FindQuery found nothing -- transform was a no-op, trivially stratifiable
+	NoBindableQuery     bool              // magicset.FindQueries found nothing -- transform was a no-op, trivially stratifiable
 	PreconditionSkipped bool              // no relation in the source has a positive cycle at all -- the full adorn-and-check path was skipped, trivially stratifiable
 	Transformed         *ast.Program      // the candidate transformed program (== the source, unchanged, if NoBindableQuery or PreconditionSkipped)
 	RelationOrigin      map[string]string // every relation in Transformed -> its original source predicate (magicset.Generate's own output); nil if NoBindableQuery/PreconditionSkipped (Transformed == prog, every relation is already its own origin)
@@ -93,8 +93,8 @@ func CheckCulpritCycle(prog *ast.Program) (*CulpritCycleResult, error) {
 	if len(diags) > 0 {
 		return nil, errFromDiags("guard: BuildSymbolTable failed on an already-accepted program", diags)
 	}
-	query := magicset.FindQuery(prog)
-	if query == nil {
+	queries := magicset.FindQueries(prog)
+	if len(queries) == 0 {
 		return &CulpritCycleResult{NoBindableQuery: true, Transformed: prog, Stratifiable: true}, nil
 	}
 
@@ -113,7 +113,7 @@ func CheckCulpritCycle(prog *ast.Program) (*CulpritCycleResult, error) {
 		return &CulpritCycleResult{PreconditionSkipped: true, Transformed: prog, Stratifiable: true}, nil
 	}
 
-	adorned, err := magicset.Adorn(prog, query)
+	adorned, err := magicset.Adorn(prog, queries)
 	if err != nil {
 		return nil, err
 	}

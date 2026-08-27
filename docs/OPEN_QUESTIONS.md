@@ -336,3 +336,15 @@ always full-extent by definition). A future M-phase extension to support
 multiple independently-seeded queries (one worklist run per query
 candidate, unioning the results) would let a "sibling" branch actually
 benefit from demand restriction -- not attempted this session.
+
+**Resolved 2026-08-27** (`docs/punch list.md` P1, `docs/reports/
+punch-list-p1.md`): `FindQuery` replaced by `FindQueries`, which collects
+every bindable query candidate rather than returning the first; `Adorn`
+seeds the worklist from all of them. Answer-identical confirmed on all 9
+comparable cases (5 `BENCHMARK_FAMILY` shapes + `p2.dl` + 3 comparable
+`CONE_CORPUS` constructions). Direct consequence: task B's "sibling"
+relations (`tc`, `direct`) are now properly demand-restricted instead of
+Untouched, and `T_guarded < T_none` now holds on 9/12 of task B's
+measured points (was 0/12) -- the guard's contribution is measured for
+the first time. Margin shrinks with scale (~1.7x at n=20 to ~1.02x at
+n=100), reported as a real trend in `punch-list-p1.md`, not smoothed.

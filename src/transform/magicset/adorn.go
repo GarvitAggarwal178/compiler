@@ -123,7 +123,7 @@ type QueryInfo struct {
 // contributing rules, and which predicates were never reached (their
 // original rules pass through unchanged).
 type AdornResult struct {
-	Query      *QueryInfo
+	Queries    []*QueryInfo // PUNCH-LIST.md P1: every bindable query seeded, not just the first
 	Order      []adornedKey
 	Rules      map[adornedKey][]*AdornedRule
 	Untouched  map[string]bool // predicate names never adorned
@@ -132,21 +132,27 @@ type AdornResult struct {
 
 const worklistCap = 10000
 
-// FindQuery identifies the program's bindable query per M2-M3-BUILD.md
-// §2: a rule whose head is a `.output` relation and whose body is a
-// single positive atom with at least one constant argument, projected
-// from that output relation. Deterministic: if more than one candidate
-// exists, the first in source order wins (this corpus never has more
-// than one; ties are broken this way rather than left to map iteration
-// order). Returns nil if none exists -- the caller's job is then a no-op
-// pass-through, not an error (§2: "expected on the positive fragment").
-func FindQuery(prog *ast.Program) *QueryInfo {
+// FindQueries identifies EVERY bindable query candidate in prog, per
+// M2-M3-BUILD.md §2's own definition: a rule whose head is a `.output`
+// relation and whose body is a single positive atom with at least one
+// constant argument, projected from that output relation. PUNCH-LIST.md
+// P1: a program can have more than one independent `.output` branch,
+// each with its own bindable query (e.g. task B's "sibling" constructions,
+// `out(y):-p(1,y).` and `out2(y):-tc(1,y).` in the same program) -- the
+// worklist must be seeded from ALL of them, not just the first, or a
+// second branch is silently left "Untouched" (full extent, no demand
+// restriction at all) regardless of whether it could have been cheaply
+// restricted. Order is source order (deterministic); an empty result
+// means the caller's job is a no-op pass-through, not an error (§2:
+// "expected on the positive fragment").
+func FindQueries(prog *ast.Program) []*QueryInfo {
 	outputs := map[string]bool{}
 	for _, d := range prog.Decls {
 		if d.Kind == ast.DeclOutput {
 			outputs[d.Name] = true
 		}
 	}
+	var queries []*QueryInfo
 	for _, c := range prog.Clauses {
 		if !outputs[c.Head.Name] || len(c.Body) != 1 {
 			continue
@@ -166,13 +172,13 @@ func FindQuery(prog *ast.Program) *QueryInfo {
 		if !hasConst {
 			continue
 		}
-		return &QueryInfo{
+		queries = append(queries, &QueryInfo{
 			ProjectionRule: c,
 			QueryAtom:      atom,
 			Key:            keyOf(atom.Name, adorn),
-		}
+		})
 	}
-	return nil
+	return queries
 }
 
 func isConstant(t ast.Term) bool {
@@ -184,13 +190,19 @@ func isConstant(t ast.Term) bool {
 }
 
 // Adorn runs the worklist algorithm (M2-M3-BUILD.md §2) starting from
-// query, over every clause in prog whose head is an IDB relation
-// (relations with no defining clause -- EDB/.input-only -- are never
-// adorned; magic sets only ever restricts IDB predicates). Returns an
-// error only if the worklist cap is hit (adornment blowup, blueprint
-// failure mode #3) -- everything else about a well-typed, allowed,
-// stratifiable input program is expected to succeed.
-func Adorn(prog *ast.Program, query *QueryInfo) (*AdornResult, error) {
+// EVERY query in queries (PUNCH-LIST.md P1: seed collection, not a change
+// to the algorithm itself -- the worklist already accepts multiple
+// initial pushes, deduped the same way any two occurrences discovering
+// the same (predicate,adornment) pair already are), over every clause in
+// prog whose head is an IDB relation (relations with no defining clause
+// -- EDB/.input-only -- are never adorned; magic sets only ever restricts
+// IDB predicates). Returns an error only if the worklist cap is hit
+// (adornment blowup, blueprint failure mode #3) -- everything else about
+// a well-typed, allowed, stratifiable input program is expected to
+// succeed. queries may be empty (no bindable query anywhere) -- Adorn
+// still runs, trivially: nothing is ever pushed, every IDB predicate ends
+// up Untouched, matching the pre-P1 "no-op pass-through" contract exactly.
+func Adorn(prog *ast.Program, queries []*QueryInfo) (*AdornResult, error) {
 	rulesByHead := map[string][]*ast.Clause{}
 	idb := map[string]bool{}
 	for _, c := range prog.Clauses {
@@ -204,7 +216,7 @@ func Adorn(prog *ast.Program, query *QueryInfo) (*AdornResult, error) {
 	}
 
 	result := &AdornResult{
-		Query:     query,
+		Queries:   queries,
 		Rules:     map[adornedKey][]*AdornedRule{},
 		Untouched: map[string]bool{},
 	}
@@ -224,7 +236,9 @@ func Adorn(prog *ast.Program, query *QueryInfo) (*AdornResult, error) {
 			adorn Adornment
 		}{pred, a})
 	}
-	push(query.Key.pred, adornFromKey(query.Key))
+	for _, q := range queries {
+		push(q.Key.pred, adornFromKey(q.Key))
+	}
 
 	for len(worklist) > 0 {
 		if result.Iterations >= worklistCap {

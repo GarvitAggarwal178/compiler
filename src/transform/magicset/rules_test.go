@@ -20,11 +20,11 @@ func generateFor(t *testing.T, src string) (*sema.SymbolTable, string) {
 	if len(diags) != 0 {
 		t.Fatalf("symtab diagnostics: %v", diags)
 	}
-	q := FindQuery(prog)
-	if q == nil {
+	qs := FindQueries(prog)
+	if len(qs) == 0 {
 		t.Fatal("expected a bindable query")
 	}
-	result, err := Adorn(prog, q)
+	result, err := Adorn(prog, qs)
 	if err != nil {
 		t.Fatalf("Adorn error: %v", err)
 	}
@@ -44,8 +44,8 @@ func TestGenerateOutputPassesEverySemaCheck(t *testing.T) {
 	if len(diags) != 0 {
 		t.Fatalf("symtab diagnostics: %v", diags)
 	}
-	q := FindQuery(prog)
-	result, err := Adorn(prog, q)
+	qs := FindQueries(prog)
+	result, err := Adorn(prog, qs)
 	if err != nil {
 		t.Fatalf("Adorn error: %v", err)
 	}

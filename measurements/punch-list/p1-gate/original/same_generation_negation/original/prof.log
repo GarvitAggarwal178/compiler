@@ -1,0 +1,363 @@
+{
+ "root": {
+  "program": {
+   "configuration": {
+    "": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/same_generation_negation.dl",
+    "fact-dir": "/root/compiler/fixtures/benchmark-family/same_generation_negation/d4_b4",
+    "include-dir": ".",
+    "jobs": "1",
+    "libraries": "functors",
+    "library-dir": ".",
+    "output-dir": "/root/compiler/measurements/punch-list/p1-gate/original/same_generation_negation/original",
+    "profile": "prof.log",
+    "relationCount": "5",
+    "ruleCount": "6",
+    "version": "2.5",
+    "warn": "all",
+    "wno": "none"
+   },
+   "relation": {
+    "notsg": {
+     "maxRSS": {
+      "post": 13360,
+      "pre": 13360
+     },
+     "non-recursive-rule": {
+      "notsg(x,y) :- \n   person(x),\n   person(y),\n   !sg(x,y).": {
+       "atom-frequency": {
+        "notsg(x,y) :- \n   person(x),\n   person(y),\n   !sg(x,y).": {
+         "person": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 13360,
+        "pre": 13360
+       },
+       "num-tuples": 20620,
+       "runtime": { "start": 22105312788, "end": 22105315594},
+       "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/same_generation_negation.dl [31:1-31:46]"
+      }
+     },
+     "num-tuples": 20620,
+     "reads": 0,
+     "runtime": { "start": 22105312787, "end": 22105315608},
+     "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/same_generation_negation.dl [30:7-30:12]"
+    },
+    "parent": {
+     "loadtime": { "start": 22105297533, "end": 22105298269},
+     "num-tuples": 225,
+     "reads": 0,
+     "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/same_generation_negation.dl [20:7-20:13]"
+    },
+    "person": {
+     "loadtime": { "start": 22105298279, "end": 22105298602},
+     "num-tuples": 226,
+     "reads": 0,
+     "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/same_generation_negation.dl [23:7-23:13]"
+    },
+    "q_notsg": {
+     "maxRSS": {
+      "post": 13360,
+      "pre": 13360
+     },
+     "non-recursive-rule": {
+      "q_notsg(y) :- \n   notsg(0,y).": {
+       "atom-frequency": {
+        "q_notsg(y) :- \n   notsg(0,y).": {
+         "notsg": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 13360,
+        "pre": 13360
+       },
+       "num-tuples": 225,
+       "runtime": { "start": 22105315726, "end": 22105315742},
+       "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/same_generation_negation.dl [35:1-35:26]"
+      }
+     },
+     "num-tuples": 225,
+     "reads": 0,
+     "runtime": { "start": 22105315708, "end": 22105315752},
+     "savetime": { "start": 22105315757, "end": 22105315939},
+     "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/same_generation_negation.dl [33:7-33:14]"
+    },
+    "sg": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 22105300351, "end": 22105300400},
+       "maxRSS": {
+        "post": 12208,
+        "pre": 12080
+       },
+       "num-tuples": 706,
+       "recursive-rule": {
+        "sg(x,y) :- \n   parent(x,xp),\n   parent(y,yp),\n   sg(xp,yp),\n   x != y.": {
+         "0": {
+          "atom-frequency": {
+           "@new_sg(x,y) :- \n   parent(x,xp),\n   parent(y,yp),\n   @delta_sg(xp,yp),\n   x != y.": {
+            "parent": {
+             "level": 0,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 12208,
+           "pre": 12080
+          },
+          "num-tuples": 706,
+          "runtime": { "start": 22105298660, "end": 22105300321},
+          "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/same_generation_negation.dl [28:1-28:58]"
+         }
+        }
+       },
+       "runtime": { "start": 22105298659, "end": 22105300331}
+      },
+      "1": {
+       "copytime": { "start": 22105302249, "end": 22105302441},
+       "maxRSS": {
+        "post": 12208,
+        "pre": 12208
+       },
+       "num-tuples": 2564,
+       "recursive-rule": {
+        "sg(x,y) :- \n   parent(x,xp),\n   parent(y,yp),\n   sg(xp,yp),\n   x != y.": {
+         "0": {
+          "maxRSS": {
+           "post": 12208,
+           "pre": 12208
+          },
+          "num-tuples": 2564,
+          "runtime": { "start": 22105300405, "end": 22105302222},
+          "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/same_generation_negation.dl [28:1-28:58]"
+         }
+        }
+       },
+       "runtime": { "start": 22105300404, "end": 22105302230}
+      },
+      "2": {
+       "copytime": { "start": 22105304991, "end": 22105305592},
+       "maxRSS": {
+        "post": 12464,
+        "pre": 12208
+       },
+       "num-tuples": 8820,
+       "recursive-rule": {
+        "sg(x,y) :- \n   parent(x,xp),\n   parent(y,yp),\n   sg(xp,yp),\n   x != y.": {
+         "0": {
+          "maxRSS": {
+           "post": 12464,
+           "pre": 12208
+          },
+          "num-tuples": 8820,
+          "runtime": { "start": 22105302455, "end": 22105304959},
+          "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/same_generation_negation.dl [28:1-28:58]"
+         }
+        }
+       },
+       "runtime": { "start": 22105302446, "end": 22105304968}
+      },
+      "3": {
+       "copytime": { "start": 22105309166, "end": 22105310448},
+       "maxRSS": {
+        "post": 12976,
+        "pre": 12592
+       },
+       "num-tuples": 18140,
+       "recursive-rule": {
+        "sg(x,y) :- \n   parent(x,xp),\n   parent(y,yp),\n   sg(xp,yp),\n   x != y.": {
+         "0": {
+          "maxRSS": {
+           "post": 12976,
+           "pre": 12592
+          },
+          "num-tuples": 18140,
+          "runtime": { "start": 22105305607, "end": 22105309083},
+          "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/same_generation_negation.dl [28:1-28:58]"
+         }
+        }
+       },
+       "runtime": { "start": 22105305597, "end": 22105309094}
+      },
+      "4": {
+       "maxRSS": {
+        "post": 13360,
+        "pre": 13360
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "sg(x,y) :- \n   parent(x,xp),\n   parent(y,yp),\n   sg(xp,yp),\n   x != y.": {
+         "0": {
+          "maxRSS": {
+           "post": 13360,
+           "pre": 13360
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 22105310486, "end": 22105312713},
+          "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/same_generation_negation.dl [28:1-28:58]"
+         }
+        }
+       },
+       "runtime": { "start": 22105310458, "end": 22105312725}
+      }
+     },
+     "maxRSS": {
+      "post": 12080,
+      "pre": 12080
+     },
+     "non-recursive-rule": {
+      "sg(x,x) :- \n   person(x).": {
+       "atom-frequency": {
+        "sg(x,x) :- \n   person(x).": {
+         "person": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12080,
+        "pre": 12080
+       },
+       "num-tuples": 226,
+       "runtime": { "start": 22105298621, "end": 22105298638},
+       "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/same_generation_negation.dl [27:1-27:22]"
+      }
+     },
+     "num-tuples": 226,
+     "reads": 81306,
+     "runtime": { "start": 22105298610, "end": 22105298646},
+     "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/same_generation_negation.dl [26:7-26:9]"
+    }
+   },
+   "runtime": { "start": 22105297528, "end": 22105315980},
+   "starttime": { "time": 22105297499},
+   "usage": {
+    "timepoint": {
+     "22105297516": {
+      "maxRSS": 11436,
+      "systemtime": 0,
+      "usertime": 2811
+     },
+     "22105298347": {
+      "maxRSS": 12080,
+      "systemtime": 0,
+      "usertime": 5118
+     },
+     "22105298679": {
+      "maxRSS": 12208,
+      "systemtime": 0,
+      "usertime": 5518
+     },
+     "22105299953": {
+      "maxRSS": 12208,
+      "systemtime": 0,
+      "usertime": 5547
+     },
+     "22105300402": {
+      "maxRSS": 12208,
+      "systemtime": 0,
+      "usertime": 7303
+     },
+     "22105301645": {
+      "maxRSS": 12208,
+      "systemtime": 0,
+      "usertime": 7324
+     },
+     "22105302265": {
+      "maxRSS": 12208,
+      "systemtime": 0,
+      "usertime": 9184
+     },
+     "22105302510": {
+      "maxRSS": 12208,
+      "systemtime": 0,
+      "usertime": 9411
+     },
+     "22105303677": {
+      "maxRSS": 12336,
+      "systemtime": 0,
+      "usertime": 9427
+     },
+     "22105304934": {
+      "maxRSS": 12464,
+      "systemtime": 0,
+      "usertime": 10988
+     },
+     "22105305049": {
+      "maxRSS": 12464,
+      "systemtime": 0,
+      "usertime": 11994
+     },
+     "22105305703": {
+      "maxRSS": 12592,
+      "systemtime": 0,
+      "usertime": 12627
+     },
+     "22105306903": {
+      "maxRSS": 12720,
+      "systemtime": 0,
+      "usertime": 12644
+     },
+     "22105308571": {
+      "maxRSS": 12848,
+      "systemtime": 0,
+      "usertime": 15066
+     },
+     "22105309181": {
+      "maxRSS": 12976,
+      "systemtime": 0,
+      "usertime": 16257
+     },
+     "22105310412": {
+      "maxRSS": 13360,
+      "systemtime": 0,
+      "usertime": 16281
+     },
+     "22105310521": {
+      "maxRSS": 13360,
+      "systemtime": 0,
+      "usertime": 17624
+     },
+     "22105311728": {
+      "maxRSS": 13360,
+      "systemtime": 0,
+      "usertime": 17644
+     },
+     "22105312860": {
+      "maxRSS": 13360,
+      "systemtime": 0,
+      "usertime": 19962
+     },
+     "22105314109": {
+      "maxRSS": 13360,
+      "systemtime": 0,
+      "usertime": 19981
+     },
+     "22105315305": {
+      "maxRSS": 13360,
+      "systemtime": 0,
+      "usertime": 20017
+     },
+     "22105315744": {
+      "maxRSS": 13360,
+      "systemtime": 0,
+      "usertime": 22991
+     },
+     "22105315781": {
+      "maxRSS": 13360,
+      "systemtime": 0,
+      "usertime": 23021
+     }
+    }
+   }
+  }
+ }
+}

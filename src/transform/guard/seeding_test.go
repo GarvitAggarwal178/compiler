@@ -25,8 +25,8 @@ q_nonancestor(y) :- nonancestor(1,y).
 	if len(errs) != 0 {
 		t.Fatalf("parse errors: %v", errs)
 	}
-	q := magicset.FindQuery(prog)
-	result, err := magicset.Adorn(prog, q)
+	qs := magicset.FindQueries(prog)
+	result, err := magicset.Adorn(prog, qs)
 	if err != nil {
 		t.Fatalf("Adorn error: %v", err)
 	}
@@ -55,8 +55,8 @@ q_nonancestor(y) :- nonancestor(1,y).
 	if len(errs) != 0 {
 		t.Fatalf("parse errors: %v", errs)
 	}
-	q := magicset.FindQuery(prog)
-	result, err := magicset.Adorn(prog, q)
+	qs := magicset.FindQueries(prog)
+	result, err := magicset.Adorn(prog, qs)
 	if err != nil {
 		t.Fatalf("Adorn error: %v", err)
 	}
@@ -100,8 +100,8 @@ q_nonancestor(y) :- nonancestor(1,y).
 	if len(errs) != 0 {
 		t.Fatalf("parse errors: %v", errs)
 	}
-	q := magicset.FindQuery(prog)
-	result, err := magicset.Adorn(prog, q)
+	qs := magicset.FindQueries(prog)
+	result, err := magicset.Adorn(prog, qs)
 	if err != nil {
 		t.Fatalf("Adorn error: %v", err)
 	}

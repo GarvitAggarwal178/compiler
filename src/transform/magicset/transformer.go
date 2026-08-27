@@ -23,11 +23,11 @@ func (Transformer) Transform(prog *ast.Program, _ *sema.StratumResult) (*ast.Pro
 		return nil, fmt.Errorf("magicset: input program failed BuildSymbolTable, which should be impossible for an "+
 			"already-accepted program: %v", diags)
 	}
-	query := FindQuery(prog)
-	if query == nil {
+	queries := FindQueries(prog)
+	if len(queries) == 0 {
 		return prog, nil
 	}
-	result, err := Adorn(prog, query)
+	result, err := Adorn(prog, queries)
 	if err != nil {
 		return nil, err
 	}

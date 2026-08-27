@@ -33,12 +33,12 @@ func TestReportAdornedPredicates(t *testing.T) {
 		if len(errs) != 0 {
 			t.Fatalf("%s: parse errors: %v", f, errs)
 		}
-		q := FindQuery(prog)
-		if q == nil {
+		qs := FindQueries(prog)
+		if len(qs) == 0 {
 			fmt.Printf("%s: no bindable query, no-op\n", f)
 			continue
 		}
-		result, err := Adorn(prog, q)
+		result, err := Adorn(prog, qs)
 		if err != nil {
 			t.Fatalf("%s: adorn error: %v", f, err)
 		}

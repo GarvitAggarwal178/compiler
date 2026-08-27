@@ -496,7 +496,7 @@ func runEmit(path, transformerName string) {
 //     anything declines, the culprit set, the cone, and the declined
 //     fraction (M2-M3-BUILD.md §6/§7).
 //
-// A program with no bindable query (magicset.FindQuery returns nil) gets
+// A program with no bindable query (magicset.FindQueries returns empty) gets
 // a single NOQUERY line instead of TRANSFORM/GUARD output -- there is
 // nothing for either mode to report (M2-M3-BUILD.md §2: "expected on the
 // positive fragment").
@@ -537,17 +537,19 @@ func runExplain(path string) {
 	_ = stratResult
 
 	// TRANSFORM mode.
-	query := magicset.FindQuery(prog)
-	if query == nil {
+	queries := magicset.FindQueries(prog)
+	if len(queries) == 0 {
 		fmt.Println("NOQUERY reason=\"no .output relation with a single, constant-bearing atom body\"")
 		return
 	}
-	result, err := magicset.Adorn(prog, query)
+	result, err := magicset.Adorn(prog, queries)
 	if err != nil {
 		fmt.Printf("TRANSFORM_ERROR message=%q\n", err.Error())
 		return
 	}
-	fmt.Printf("QUERY pred=%s rel=%s\n", query.QueryAtom.Name, query.Key.RelName())
+	for _, q := range queries {
+		fmt.Printf("QUERY pred=%s rel=%s\n", q.QueryAtom.Name, q.Key.RelName())
+	}
 	fmt.Printf("WORKLIST iterations=%d\n", result.Iterations)
 	for _, key := range result.Order {
 		fmt.Printf("ADORN rel=%s rules=%d\n", key.RelName(), len(result.Rules[key]))
