@@ -803,3 +803,101 @@ cause investigation before any further headline claims cite it.
 
 **Single next action:** human decides whether to continue into §10-11 or
 treat M3 as complete and move to writeup.
+
+---
+
+## NIGHT-BATCH-04, 2026-08-27
+
+Executed A, B, D, E, H per the batch's own priority order (never-drop:
+A, B; no-drop: D, E; H mandatory). **C (all-free duplication) and F
+(C codegen for transformed programs) dropped deliberately** — both
+explicitly marked droppable in the batch's own order-of-work table, time
+went to the never-drop/no-drop items instead. **G (presentation
+artifact) dropped** for the same reason (explicitly "first cut only,
+droppable").
+
+**A (M4-SIPS): DONE.** Q12 pre-registered before implementation
+(commit `22c42d4`). `src/transform/magicset/adorn.go`: demand relaxation
+on negated occurrences (`restricting` provenance tracked through the
+SIPS walk; a bound position relaxes to free iff its variable's only
+binder is an unrestricted full-extent scan). `occurrence`/
+`NegatedOccurrenceAdornment` carry both `PreAdorn` (always all-bound,
+the original M3.1 invariant) and `Adorn` (post-relaxation, what actually
+keys the magic relation). `guard/seeding.go`: `AssertNegationAllBound`
+REPLACED by `AssertNegationSeeding`, checking both invariant halves.
+`harness/tuple_report.py`/`m2_accept.py`/`night_m3_5_headline.py`: both
+supplementary-counting conventions reported (incl-sup/excl-sup), neither
+chosen. Gate: 5/5 comparable cases answer-identical (hard requirement,
+passed); 32/32 headline points re-run, 0 DNFs, 32/32 identical.
+`reachability_complement` moves from 0.75-0.82x to 46x-1,343x;
+`ancestor_nonancestor` from 0.96-15.67x to 16.6x-887.8x;
+`transitive_closure_bound`'s ~0.49x "anomaly" confirmed to be the
+counting convention (excl-sup = 101 exactly = T_souffle at all 5 points).
+Q8 closed (v1 hand guard confirmed suboptimal, not the shape's inherent
+band). Two genuine misses disclosed: p2.dl landed at 56.9x against an
+80-180x predicted floor; `same_generation_negation` does not fully
+collapse to one adornment (a structural fact about its own recursive
+rule, out of relaxation's scope). Report: `docs/reports/m4-sips.md`.
+Commits: `22c42d4`, `f9b8996`, plus gate/headline commit.
+
+**D (reconciliations): DONE.** T7's 2 residual cross-check gaps fixed
+with a 24th, grammar-derived predicate category
+(`no_top_level_construct`) -- `|V2|` 21->19, cross-check 19/19 (100%),
+now matching VERIFY-01 section V3's independently-found 19 exactly (both
+methods named the identical 2 garbage files). Two other apparent
+discrepancies (T7 vs VERIFY-01's count, m2-headline.md's 5/6 vs
+SESSION_LOG's 5/5) confirmed to be non-contradictions -- different
+denominators, both already correct. Q8 status recorded explicitly.
+Report: `docs/reports/night04-D-reconciliations.md`.
+
+**B (cone corpus): DONE.** 4 new programs, `tests/corpus/CONE_CORPUS/`,
+scale points pre-registered before measurement. First construction (per
+the task's own literal suggestion) swept the new relation into an
+ENLARGED CULPRIT SET, not a cone -- diagnosed via the raw unstratifiable-
+SCC dump: any IDB atom read from a rule that already sits on the
+transform-induced negative cycle gets a magic-seed backward edge that
+closes a new loop through it. Fixed: read the new relation from the
+culprit predicate's non-recursive, non-cycle-participating rule instead
+-- confirmed via the same dump (culprit set unchanged, cone genuinely
+separate). Built all 4 required shapes (cone-only, sibling-only,
+both, and a two-hop proper-subset cone). Gate 1: cone cross-checked
+against `harness/cone_metric.py`, 4/4 exact agreement. Gate 2: 12/12
+points answer-identical. `T_guarded < T_none`: 0/12 -- reported as a
+finding (two identified structural causes: declined relations are always
+full-extent by definition; "sibling" relations are never actually
+demand-restricted under `magicset.FindQuery`'s single-query limitation,
+confirmed by reading the emitted program directly -- new
+`OPEN_QUESTIONS.md` entry). Blast radius recomputed: 38 declined
+relations (was 22), cone-size distribution 12x0/2x1/1x2 (was always 0).
+Report: `docs/reports/night04-B-cone-corpus.md`.
+
+**E (`dlc explain`): DONE.** `src/cmd/dlc/main.go`'s `runExplain` --
+plain text, one fact per line, no new checking/transform logic, always
+runs both `magicset.Adorn` and `guard.Decide` (no `--transformer=` flag,
+unlike `emit`/`run`). Three modes: REJECTION (all four grounds), TRANSFORM
+(adorned predicates, worklist, magic relations, per-negated-occurrence
+pre/post relaxation), GUARD (per-predicate decision, culprit, cone,
+declined fraction). 7 samples committed under
+`docs/reports/explain-samples/`, covering every mode and every rejection
+ground; one sample independently reconfirms B's single-query finding via
+a completely separate code path. Report:
+`docs/reports/night04-E-explain.md`.
+
+**H (final report draft): DONE, with disclosed gaps.** `docs/reports/
+FINAL.md` assembled from committed material only -- every number cites
+its source report, none computed fresh. Marked at top: sections 4
+(soundness problem/guard) and 6 (findings with mechanisms) are the
+sections the human must read before presenting. Explicitly names C, F,
+G as dropped and why, in both the report itself and here.
+
+**What is now unblocked:** the presentation artifact (G), if the human
+elects to build it -- `dlc explain`'s output and every measurement JSON
+cited in `FINAL.md` are committed and ready. The all-free duplication
+cone strategy (C) and C codegen for transformed programs (F), both
+still droppable, both still unattempted. The single-query `FindQuery`
+limitation (found this session) is a real, scoped M-phase candidate if
+the project continues past this batch.
+
+**Single next action:** human decides whether this batch's output
+(`FINAL.md` plus everything it cites) is sufficient for the writeup and
+demo, or whether to spend remaining time on G/C/F before presenting.
