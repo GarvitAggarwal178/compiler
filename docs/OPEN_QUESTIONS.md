@@ -253,3 +253,35 @@ directly gives `T_guard ≈ 3,200` at n=500 and `≈ 18,200` at n=8,000, i.e.
 `T_souffle/T_guard ≈ 32×` and `≈ 1,400×` respectively, moving this shape into
 the same band as `reachability_complement` and `same_generation_negation` and
 dissolving Q8.
+
+## 2026-08-27 — Q12, pre-registered before implementation (NIGHT-BATCH-04 / M4-SIPS)
+
+**Q12.** The mechanical `bb` adornment on negated occurrences (M2's own
+finding, `docs/reports/m2-headline.md`) forces a cross product in the
+supplementary chain: on `p2.dl`,
+`sup_reach_bb_r1_1(x,y,z) :- sup_reach_bb_r1_0(x,y), reach_bf(x,z)` is
+200 × 170 ≈ 34,000 tuples against a total `T_dlc` of 55,411, and `y` is
+unused by `reach_bf`. Prediction, recorded before implementing
+`M4 sips.md` §2's demand-relaxation rule: applying the relaxation
+collapses `reach` to a single `bf` adornment, eliminates the cross
+product, and brings `T_dlc` on `p2.dl` to within 3× of `p4prime.dl`'s
+231 — i.e. `T_dlc ≈ 300–700`, a reduction of roughly 80–180× from
+55,411. Same mechanism predicted on `reachability_complement` (currently
+two adornments, `reach_bb`+`reach_bf`, per
+`measurements/m4-sips/before/reachability_complement.transformed.dl`)
+and `ancestor_nonancestor` (currently `ancestor_bb`+`ancestor_bf` per
+`measurements/m4-sips/before/ancestor_nonancestor.transformed.dl`); on
+the latter, `dlc` is predicted to approach v1's `T_guard` (25,500 at
+n=500) rather than its current 105,552 (`docs/reports/m2-headline.md`).
+`same_generation_negation` currently has `sg_bb`+`sg_bf`
+(`measurements/m4-sips/before/same_generation_negation.transformed.dl`)
+and is predicted to collapse to `sg_bf` alone by the identical
+mechanism. If the rule does not reproduce all three collapses, report
+which one fails rather than adjusting the rule to rescue the prediction
+(`M4 sips.md` §2: "If the rule does not reproduce all three, it is
+wrong").
+
+Answer set-equality (`harness/m2_accept.py`, all 5 `BENCHMARK_FAMILY`
+shapes + `p2.dl`, smallest scale point) is a hard gate on this change,
+checked before any of the above numbers are trusted: a relaxation that
+changes an answer means the lemma (`M4 sips.md` §1) was misapplied.
