@@ -45,14 +45,21 @@ func TestFindQueryNoOpWhenNoBoundQuery(t *testing.T) {
 	}
 }
 
-// TestAdornNegatedOccurrenceIsAllBound pins M2-M3-BUILD.md §5's central
-// claim directly at the adornment level: !ancestor(x,y) inside
-// nonancestor's rule has BOTH x and y already grounded (by person(x) and
-// person(y), both of which SIPS is forced to schedule first -- a negated
-// atom's variables must be grounded before it can be evaluated at all),
-// so the computed adornment is bb, not the bf a reader might expect by
-// analogy to the query's own bf binding pattern.
-func TestAdornNegatedOccurrenceIsAllBound(t *testing.T) {
+// TestAdornNegatedOccurrenceRelaxesToBF pins M4-SIPS.md §2's demand
+// relaxation directly at the adornment level. !ancestor(x,y) inside
+// nonancestor's rule has BOTH x and y already grounded before it fires
+// (by person(x) and person(y) -- a negated atom's variables must be
+// grounded before it can be evaluated at all, M2-M3-BUILD.md §5's
+// original claim, still true of the PRE-relaxation adornment). But y's
+// only binder is person(y), an unrestricted full-extent scan (x is
+// already bound from the query's magic seed when person(x) runs) -- so
+// M4-SIPS.md §2 relaxes y's position to free, and the adornment ACTUALLY
+// USED to generate ancestor's magic relation is bf, not the bb this test
+// originally pinned before M4-SIPS (git history: "AdornNegatedOccurrence
+// IsAllBound"). The pre-relaxation value is still bb, asserted directly
+// via NegatedOccurrenceAdornments in adorn_report_test.go /
+// guard/seeding_test.go, not re-duplicated here.
+func TestAdornNegatedOccurrenceRelaxesToBF(t *testing.T) {
 	prog, errs := parser.Parse([]byte(ancestorNonancestorSrc))
 	if len(errs) != 0 {
 		t.Fatalf("parse errors: %v", errs)
@@ -69,8 +76,8 @@ func TestAdornNegatedOccurrenceIsAllBound(t *testing.T) {
 	for _, k := range result.Order {
 		if k.pred == "ancestor" {
 			found = true
-			if k.adorn != "bb" {
-				t.Fatalf("expected ancestor adorned bb (both args grounded before the negation fires), got %s", k.adorn)
+			if k.adorn != "bf" {
+				t.Fatalf("expected ancestor adorned bf (y relaxed -- its only binder is person(y), a full-extent scan), got %s", k.adorn)
 			}
 		}
 	}

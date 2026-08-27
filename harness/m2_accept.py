@@ -110,6 +110,18 @@ def accept(original: Path, candidate: Path, facts_dir: Path, workdir: Path):
             profile_orig["T_excl_copy"] / profile_cand["T_excl_copy"]
             if profile_cand["T_excl_copy"] else None
         ),
+        # M4-SIPS.md section 5: report both supplementary-counting
+        # conventions, never chosen for the caller. "_incl_sup" is a
+        # renamed alias of the fields just above (dlc's existing default
+        # already includes supplementary relations); "_excl_sup" is new.
+        "T_original_incl_sup": profile_orig["T_excl_copy"],
+        "T_candidate_incl_sup": profile_cand["T_excl_copy"],
+        "T_original_excl_sup": profile_orig["T_excl_copy_excl_sup"],
+        "T_candidate_excl_sup": profile_cand["T_excl_copy_excl_sup"],
+        "ratio_original_over_candidate_excl_sup": (
+            profile_orig["T_excl_copy_excl_sup"] / profile_cand["T_excl_copy_excl_sup"]
+            if profile_cand["T_excl_copy_excl_sup"] else None
+        ),
         "per_relation_original": profile_orig["per_relation"],
         "per_relation_candidate": profile_cand["per_relation"],
     })

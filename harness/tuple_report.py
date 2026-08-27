@@ -13,6 +13,21 @@ Program-level summary: T (excl-copy) = sum over all non-input relations
 excluding COPY_T ones; T (incl-copy) = sum including them;
 E_recoverable = sum over `@neglabel.`-prefixed relations only.
 
+M4-SIPS.md section 5 amendment: also reports the supplementary-predicate
+counting convention alongside excl-copy/incl-copy. `dlc` materializes a
+`sup_*`-named relation per body-literal checkpoint in its magic-set
+transform (src/transform/magicset/rules.go); Soufflé's own automatic
+transform has no equivalent generated relation, so counting them
+unconditionally handicaps `dlc` against Soufflé in every three-column
+table (this project does not choose a convention -- report both,
+labeled, same as excl-copy/incl-copy already are). `T_excl_copy` (the
+project's existing default, used everywhere already) is renamed nowhere
+-- it is exactly "T_dlc (incl-sup)" for a `dlc`-emitted profile.
+`T_excl_copy_excl_sup` is the new field: excl-copy PLUS excluding every
+`sup_`-named relation's total (magic relations are still counted --
+only the internal per-literal checkpoint chain is excluded). Matching
+convention name in reports: "T_dlc (excl-sup)".
+
 This is Lane B instrumentation reading Soufflé's own output format. It
 implements no Datalog semantics itself.
 """
@@ -59,6 +74,17 @@ def is_input_relation(rel: dict) -> bool:
     return "loadtime" in rel and "non-recursive-rule" not in rel and "iteration" not in rel
 
 
+def is_supplementary_relation(name: str) -> bool:
+    """dlc's own naming convention (adorn.go/rules.go): every
+    supplementary checkpoint relation is named `sup_<pred>_<adorn>_r<rule
+    index>_<literal index>`, a plain identifier with no '@' -- Soufflé's
+    own internal names never collide with this (Soufflé's synthetic
+    relations are always '@'-prefixed), so a bare prefix match is exact
+    for a dlc-emitted program and a no-op (matches nothing) on a plain
+    Soufflé profile."""
+    return name.startswith("sup_")
+
+
 def analyze(log_path: Path):
     with open(log_path) as f:
         doc = json.load(f)
@@ -74,6 +100,7 @@ def analyze(log_path: Path):
             "is_input": is_input_relation(rel),
             "is_copy": is_copy_relation(rel),
             "is_neglabel": name.startswith("@neglabel."),
+            "is_supplementary": is_supplementary_relation(name),
         }
 
     t_excl_copy = sum(
@@ -81,6 +108,10 @@ def analyze(log_path: Path):
     )
     t_incl_copy = sum(
         v["total"] for v in per_relation.values() if not v["is_input"]
+    )
+    t_excl_copy_excl_sup = sum(
+        v["total"] for v in per_relation.values()
+        if not v["is_input"] and not v["is_copy"] and not v["is_supplementary"]
     )
     e_recoverable = sum(
         v["total"] for v in per_relation.values() if v["is_neglabel"]
@@ -93,6 +124,7 @@ def analyze(log_path: Path):
         "log_path": str(log_path),
         "relation_count": len(cfg.get("relationCount", "")) and cfg.get("relationCount"),
         "T_excl_copy": t_excl_copy,
+        "T_excl_copy_excl_sup": t_excl_copy_excl_sup,
         "T_incl_copy": t_incl_copy,
         "E_recoverable": e_recoverable,
         "neglabel_relations": neglabel_relations,

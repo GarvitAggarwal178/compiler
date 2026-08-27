@@ -118,7 +118,9 @@ def run_point(dl_path, facts_dir, answer_rel, base):
     r_none = run_souffle(dl_path, facts_dir, wd_none, magic=False)
     row["status_none"] = r_none["status"]
     if r_none["status"] == "ok":
-        row["T_none"] = tuple_analyze(wd_none / "prof.log")["T_excl_copy"]
+        prof_none = tuple_analyze(wd_none / "prof.log")
+        row["T_none"] = prof_none["T_excl_copy"]
+        row["T_none_excl_sup"] = prof_none["T_excl_copy_excl_sup"]
         row["ans_none"] = sorted_lines(wd_none / f"{answer_rel}.csv")
 
     # T_souffle: Souffle's own automatic transform.
@@ -126,7 +128,9 @@ def run_point(dl_path, facts_dir, answer_rel, base):
     r_souffle = run_souffle(dl_path, facts_dir, wd_souffle, magic=True)
     row["status_souffle"] = r_souffle["status"]
     if r_souffle["status"] == "ok":
-        row["T_souffle"] = tuple_analyze(wd_souffle / "prof.log")["T_excl_copy"]
+        prof_souffle = tuple_analyze(wd_souffle / "prof.log")
+        row["T_souffle"] = prof_souffle["T_excl_copy"]
+        row["T_souffle_excl_sup"] = prof_souffle["T_excl_copy_excl_sup"]
 
     # T_dlc: dlc emit --transformer=guarded, Souffle evaluates (T2 protocol).
     guarded_path, guarded_doc = dlc_emit(dl_path, "guarded", base / "emit_guarded")
@@ -138,7 +142,15 @@ def run_point(dl_path, facts_dir, answer_rel, base):
     r_dlc = run_souffle(guarded_path, facts_dir, wd_dlc, magic=False)
     row["status_dlc"] = r_dlc["status"]
     if r_dlc["status"] == "ok":
-        row["T_dlc"] = tuple_analyze(wd_dlc / "prof.log")["T_excl_copy"]
+        prof_dlc = tuple_analyze(wd_dlc / "prof.log")
+        # M4-SIPS.md section 5: report both supplementary-counting
+        # conventions. T_dlc (this key, unchanged name/meaning) is
+        # "incl-sup" -- dlc's existing default, every relation counted;
+        # T_dlc_excl_sup additionally excludes every sup_*-named
+        # checkpoint relation dlc's magic-set transform materializes and
+        # Soufflé's own transform has no equivalent of.
+        row["T_dlc"] = prof_dlc["T_excl_copy"]
+        row["T_dlc_excl_sup"] = prof_dlc["T_excl_copy_excl_sup"]
         row["ans_dlc"] = sorted_lines(wd_dlc / f"{answer_rel}.csv")
         if "ans_none" in row:
             row["answers_identical"] = row["ans_none"] == row["ans_dlc"]

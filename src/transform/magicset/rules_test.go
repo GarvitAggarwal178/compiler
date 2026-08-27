@@ -51,9 +51,14 @@ func TestGenerateOutputPassesEverySemaCheck(t *testing.T) {
 	}
 	out, origin := Generate(prog, st.Relations, result)
 
-	if origin["nonancestor_bf"] != "nonancestor" || origin["magic_ancestor_bb"] != "ancestor" || origin["ancestor_bb"] != "ancestor" {
-		t.Fatalf("RelationOrigin mismatch: nonancestor_bf=%q, magic_ancestor_bb=%q, ancestor_bb=%q",
-			origin["nonancestor_bf"], origin["magic_ancestor_bb"], origin["ancestor_bb"])
+	// ancestor_bf/magic_ancestor_bf, not _bb: M4-SIPS.md §2's demand
+	// relaxation collapses !ancestor(x,y)'s adornment (y's only binder is
+	// person(y), a full-extent scan) before Generate ever sees it -- this
+	// test pins RelationOrigin's mistagging-bug regression guard
+	// (M2-M3-BUILD.md §7-prep commit), updated for the relaxed name.
+	if origin["nonancestor_bf"] != "nonancestor" || origin["magic_ancestor_bf"] != "ancestor" || origin["ancestor_bf"] != "ancestor" {
+		t.Fatalf("RelationOrigin mismatch: nonancestor_bf=%q, magic_ancestor_bf=%q, ancestor_bf=%q",
+			origin["nonancestor_bf"], origin["magic_ancestor_bf"], origin["ancestor_bf"])
 	}
 	if origin["parent"] != "parent" || origin["person"] != "person" {
 		t.Fatalf("expected EDB relations to map to themselves, got parent=%q person=%q", origin["parent"], origin["person"])

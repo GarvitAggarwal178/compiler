@@ -86,12 +86,17 @@ func (k adornedKey) MagicRelName() string { return "magic_" + k.pred + "_" + k.a
 
 // occurrence records one IDB atom's adorned occurrence within a specific
 // rule body, in SIPS order -- positive or negated, both treated
-// identically (M2-M3-BUILD.md §5).
+// identically for the *worklist* mechanism (M2-M3-BUILD.md §5). Negated
+// occurrences additionally carry preAdorn: the un-relaxed, always-all-
+// bound adornment computed by adornmentOf, kept alongside the (possibly
+// relaxed) target so guard's M3.1 assertion can check both halves of
+// M4-SIPS.md §1's invariant. Unused (nil) for positive occurrences.
 type occurrence struct {
 	literalIndex int // position within OrderedBody
 	negated      bool
 	atom         *ast.Atom
-	target       adornedKey // the (predicate, adornment) this occurrence demands
+	target       adornedKey // the (predicate, adornment) this occurrence demands -- post-relaxation for negated occurrences
+	preAdorn     Adornment  // negated occurrences only: the adornment before M4-SIPS.md §2's relaxation, always all-bound
 }
 
 // AdornedRule is one (predicate, adornment) pair's contribution from one
@@ -292,8 +297,19 @@ func adornOneRule(clause *ast.Clause, key adornedKey, adorn Adornment, idb map[s
 	ar.BoundAfter = append(ar.BoundAfter, append([]string{}, boundOrder...))
 
 	bound := map[string]bool{}
+	// restricting tracks, per bound variable, whether its binder actually
+	// carries demand information (M4-SIPS.md §2): the magic atom (here,
+	// the head's own bound-position variables, initBound -- ultimately
+	// traceable to the query's magic seed) or a join with an already-
+	// restricting variable are restricting; a variable whose only binder
+	// is an unrestricted full-extent scan is not. Used exclusively to
+	// relax NEGATED occurrence adornments (relaxNegatedAdornment below);
+	// positive occurrence adornment is untouched by this tracking and
+	// keeps computing exact demand via adornmentOf, as before.
+	restricting := map[string]bool{}
 	for k := range initBound {
 		bound[k] = true
+		restricting[k] = true
 	}
 	for i, lit := range ordered {
 		switch v := lit.(type) {
@@ -308,12 +324,40 @@ func adornOneRule(clause *ast.Clause, key adornedKey, adorn Adornment, idb map[s
 				ar.Occurrences = append(ar.Occurrences, occurrence{literalIndex: i, negated: false, atom: v, target: target})
 				push(v.Name, beta)
 			}
+			// Restricting-provenance classification runs over EVERY
+			// positive atom, EDB or IDB alike -- M4-SIPS.md §2's own
+			// worked table classifies `node(y)` (EDB) as the full-extent
+			// scan that makes `y` non-restricting. An atom "has support"
+			// if at least one of its own argument positions is already
+			// bound by something restricting (or is a literal constant);
+			// a variable this atom newly binds inherits that verdict.
+			support := atomHasRestrictingSupport(v.Terms, bound, restricting)
+			for _, t := range v.Terms {
+				if vv, ok := t.(*ast.Var); ok && !bound[vv.Name] {
+					restricting[vv.Name] = support
+				}
+			}
 		case *ast.NegatedAtom:
 			if idb[v.Atom.Name] {
-				beta := adornmentOf(v.Atom, bound)
+				preAdorn := adornmentOf(v.Atom, bound)
+				beta := relaxNegatedAdornment(v.Atom, preAdorn, restricting)
 				target := keyOf(v.Atom.Name, beta)
-				ar.Occurrences = append(ar.Occurrences, occurrence{literalIndex: i, negated: true, atom: v.Atom, target: target})
+				ar.Occurrences = append(ar.Occurrences, occurrence{literalIndex: i, negated: true, atom: v.Atom, target: target, preAdorn: preAdorn})
 				push(v.Atom.Name, beta)
+			}
+		case *ast.Constraint:
+			// A `=` constraint's grounded side inherits restricting-ness
+			// from the already-bound side that grounds it -- same
+			// asymmetry addBoundVars/canScheduleConstraint already apply
+			// (only '=' contributes, the grounded side must be a bare
+			// variable). Constraints with other operators test, they
+			// never bind, so there is nothing to classify.
+			if v.Op == "=" {
+				if bv, ok := v.Left.(*ast.Var); ok && !bound[bv.Name] && arithVarsBound(v.Right, bound) {
+					restricting[bv.Name] = arithAllRestricting(v.Right, restricting)
+				} else if bv, ok := v.Right.(*ast.Var); ok && !bound[bv.Name] && arithVarsBound(v.Left, bound) {
+					restricting[bv.Name] = arithAllRestricting(v.Left, restricting)
+				}
 			}
 		}
 		addBoundVars(lit, bound)
@@ -364,6 +408,68 @@ func adornmentOf(a *ast.Atom, bound map[string]bool) Adornment {
 	return beta
 }
 
+// atomHasRestrictingSupport reports whether at least one of terms is
+// already bound AND carries demand information (a constant, or a
+// variable/arith expression classified restricting) -- M4-SIPS.md §2's
+// "full-extent scan" test is the negation of this: an atom with NO
+// restricting support enumerates its relation's entire extent.
+func atomHasRestrictingSupport(terms []ast.Term, bound, restricting map[string]bool) bool {
+	for _, t := range terms {
+		if a, ok := t.(ast.Arith); ok && arithVarsBound(a, bound) && arithAllRestricting(a, restricting) {
+			return true
+		}
+	}
+	return false
+}
+
+// arithAllRestricting reports whether every variable in a is currently
+// classified restricting (constants are trivially restricting -- a
+// literal always carries demand information). Only meaningful once
+// arithVarsBound(a, bound) already holds; mirrors arithVarsBound's own
+// recursion (sips.go) but over the restricting map instead of bound.
+func arithAllRestricting(a ast.Arith, restricting map[string]bool) bool {
+	switch v := a.(type) {
+	case *ast.Var:
+		return restricting[v.Name]
+	case *ast.NumberLit, *ast.StringLit:
+		return true
+	case *ast.BinaryExpr:
+		return arithAllRestricting(v.Left, restricting) && arithAllRestricting(v.Right, restricting)
+	case *ast.UnaryExpr:
+		return arithAllRestricting(v.X, restricting)
+	}
+	return true
+}
+
+// relaxNegatedAdornment implements M4-SIPS.md §2: a bound position in
+// preAdorn is downgraded to free if the position's term is a variable
+// that is not restricting -- its only binder in the SIPS prefix was an
+// unrestricted full-extent scan and therefore carries no demand
+// information. Constant terms stay bound unconditionally (a literal is
+// always restricting). preAdorn itself is never mutated -- guard's M3.1
+// assertion needs it exactly as computed, before relaxation, to check
+// M4-SIPS.md §1's invariant (all-bound before, only ever b->f after).
+//
+// Sound by M4-SIPS.md §1's lemma: replacing a bound position with free
+// can only ever make the magic set demand a SUPERSET of instantiations,
+// never fewer, and completeness under negation requires the magic set to
+// cover the queried instantiations, not equal them.
+func relaxNegatedAdornment(atom *ast.Atom, preAdorn Adornment, restricting map[string]bool) Adornment {
+	relaxed := make(Adornment, len(preAdorn))
+	for i, b := range preAdorn {
+		if !b {
+			continue // already free; nothing to relax
+		}
+		if a, ok := atom.Terms[i].(ast.Arith); ok {
+			relaxed[i] = arithAllRestricting(a, restricting)
+		}
+		// A Wildcard term can't reach here: adornmentOf already sets
+		// preAdorn[i] = false for a wildcard, so the !b guard above
+		// already skipped it.
+	}
+	return relaxed
+}
+
 func varsInLit(lit ast.Literal) []string {
 	var out []string
 	seen := map[string]bool{}
@@ -404,13 +510,22 @@ func varsInLit(lit ast.Literal) []string {
 
 // NegatedOccurrenceAdornment is one negated IDB atom occurrence's own
 // computed adornment, exported for src/transform/guard's M3.1 assertion
-// (M2-M3-BUILD.md §5) -- the occurrence type itself stays unexported
-// (adorn.go's own internal bookkeeping), this is the minimal read-only
-// view guard needs and nothing more.
+// (M2-M3-BUILD.md §5, amended by M4-SIPS.md §1) -- the occurrence type
+// itself stays unexported (adorn.go's own internal bookkeeping), this is
+// the minimal read-only view guard needs and nothing more.
+//
+// Adorn is what actually gets a magic relation generated (post-relaxation
+// -- M4-SIPS.md §2). PreAdorn is the un-relaxed adornment computed
+// directly from allowedness's grounding guarantee, and must always be
+// all-bound; Adorn must never be bound at a position PreAdorn was not
+// (relaxation only ever turns b into f, never the reverse). Both halves
+// of M4-SIPS.md §1's invariant are checked by guard, not here -- adorn.go
+// only reports the two values honestly.
 type NegatedOccurrenceAdornment struct {
-	Pred  string
-	Adorn Adornment
-	Rule  *ast.Clause // the source clause the occurrence appears in, for a diagnostic
+	Pred     string
+	Adorn    Adornment
+	PreAdorn Adornment
+	Rule     *ast.Clause // the source clause the occurrence appears in, for a diagnostic
 }
 
 // NegatedOccurrenceAdornments returns every negated IDB atom occurrence's
@@ -423,7 +538,7 @@ func (r *AdornResult) NegatedOccurrenceAdornments() []NegatedOccurrenceAdornment
 			for _, occ := range ar.Occurrences {
 				if occ.negated {
 					out = append(out, NegatedOccurrenceAdornment{
-						Pred: occ.target.pred, Adorn: adornFromKey(occ.target), Rule: ar.Source,
+						Pred: occ.target.pred, Adorn: adornFromKey(occ.target), PreAdorn: occ.preAdorn, Rule: ar.Source,
 					})
 				}
 			}
