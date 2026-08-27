@@ -1,0 +1,299 @@
+{
+ "root": {
+  "program": {
+   "configuration": {
+    "": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/transitive_closure_bound.dl",
+    "fact-dir": "/root/compiler/fixtures/benchmark-family/transitive_closure_bound/n8000",
+    "include-dir": ".",
+    "jobs": "1",
+    "libraries": "functors",
+    "library-dir": ".",
+    "magic-transform": "*",
+    "output-dir": "/root/compiler/measurements/m3-5-headline/family/transitive_closure_bound/n8000/souffle",
+    "profile": "prof.log",
+    "relationCount": "3",
+    "ruleCount": "6",
+    "version": "2.5",
+    "warn": "all",
+    "wno": "none"
+   },
+   "relation": {
+    "@magic.tc.{bf}": {
+     "maxRSS": {
+      "post": 14692,
+      "pre": 14692
+     },
+     "non-recursive-rule": {
+      "@magic.tc.{bf}(1).": {
+       "maxRSS": {
+        "post": 14692,
+        "pre": 14692
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 29301331888, "end": 29301331895},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 1,
+     "runtime": { "start": 29301331887, "end": 29301331903},
+     "source-locator": " [1:1-1:1]"
+    },
+    "edge": {
+     "loadtime": { "start": 29301331908, "end": 29301335910},
+     "num-tuples": 16000,
+     "reads": 0,
+     "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/transitive_closure_bound.dl [17:7-17:11]"
+    },
+    "q_tc": {
+     "maxRSS": {
+      "post": 14692,
+      "pre": 14692
+     },
+     "non-recursive-rule": {
+      "q_tc(y) :- \n   tc.{bf}(@abdul0,y),\n   @abdul0 = 1.": {
+       "atom-frequency": {
+        "q_tc(y) :- \n   tc.{bf}(@abdul0,y),\n   @abdul0 = 1.": {
+         "tc.{bf}": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 14692,
+        "pre": 14692
+       },
+       "num-tuples": 50,
+       "runtime": { "start": 29301336198, "end": 29301336202},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 50,
+     "reads": 0,
+     "runtime": { "start": 29301336188, "end": 29301336210},
+     "savetime": { "start": 29301336215, "end": 29301336292},
+     "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/transitive_closure_bound.dl [24:7-24:11]"
+    },
+    "tc.{bf}": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 29301336015, "end": 29301336017},
+       "maxRSS": {
+        "post": 14692,
+        "pre": 14692
+       },
+       "num-tuples": 17,
+       "recursive-rule": {
+        "tc.{bf}(x,y) :- \n   @magic.tc.{bf}(x),\n   tc.{bf}(x,z),\n   edge(z,y).": {
+         "0": {
+          "atom-frequency": {
+           "@new_tc.{bf}(x,y) :- \n   @magic.tc.{bf}(x),\n   @delta_tc.{bf}(x,z),\n   edge(z,y).": {
+            "@delta_tc.{bf}": {
+             "level": 1,
+             "num-tuples": 0
+            },
+            "@magic.tc.{bf}": {
+             "level": 0,
+             "num-tuples": 0
+            },
+            "edge": {
+             "level": 2,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 14692,
+           "pre": 14692
+          },
+          "num-tuples": 17,
+          "runtime": { "start": 29301335969, "end": 29301335979},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 29301335959, "end": 29301335989}
+      },
+      "1": {
+       "copytime": { "start": 29301336057, "end": 29301336060},
+       "maxRSS": {
+        "post": 14692,
+        "pre": 14692
+       },
+       "num-tuples": 20,
+       "recursive-rule": {
+        "tc.{bf}(x,y) :- \n   @magic.tc.{bf}(x),\n   tc.{bf}(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 14692,
+           "pre": 14692
+          },
+          "num-tuples": 20,
+          "runtime": { "start": 29301336022, "end": 29301336032},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 29301336021, "end": 29301336039}
+      },
+      "2": {
+       "copytime": { "start": 29301336097, "end": 29301336099},
+       "maxRSS": {
+        "post": 14692,
+        "pre": 14692
+       },
+       "num-tuples": 6,
+       "recursive-rule": {
+        "tc.{bf}(x,y) :- \n   @magic.tc.{bf}(x),\n   tc.{bf}(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 14692,
+           "pre": 14692
+          },
+          "num-tuples": 6,
+          "runtime": { "start": 29301336064, "end": 29301336072},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 29301336063, "end": 29301336079}
+      },
+      "3": {
+       "maxRSS": {
+        "post": 14692,
+        "pre": 14692
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "tc.{bf}(x,y) :- \n   @magic.tc.{bf}(x),\n   tc.{bf}(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 14692,
+           "pre": 14692
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 29301336111, "end": 29301336114},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 29301336102, "end": 29301336124}
+      }
+     },
+     "maxRSS": {
+      "post": 14692,
+      "pre": 14692
+     },
+     "non-recursive-rule": {
+      "tc.{bf}(x,y) :- \n   @magic.tc.{bf}(x),\n   edge(x,y).": {
+       "atom-frequency": {
+        "tc.{bf}(x,y) :- \n   @magic.tc.{bf}(x),\n   edge(x,y).": {
+         "@magic.tc.{bf}": {
+          "level": 0,
+          "num-tuples": 0
+         },
+         "edge": {
+          "level": 1,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 14692,
+        "pre": 14692
+       },
+       "num-tuples": 7,
+       "runtime": { "start": 29301335937, "end": 29301335945},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 7,
+     "reads": 149,
+     "runtime": { "start": 29301335923, "end": 29301335954},
+     "source-locator": " [1:1-1:1]"
+    }
+   },
+   "runtime": { "start": 29301331881, "end": 29301336297},
+   "starttime": { "time": 29301331853},
+   "usage": {
+    "timepoint": {
+     "29301331869": {
+      "maxRSS": 14692,
+      "systemtime": 0,
+      "usertime": 2406
+     },
+     "29301331928": {
+      "maxRSS": 14692,
+      "systemtime": 0,
+      "usertime": 4164
+     },
+     "29301333012": {
+      "maxRSS": 14692,
+      "systemtime": 121,
+      "usertime": 4164
+     },
+     "29301334119": {
+      "maxRSS": 14692,
+      "systemtime": 137,
+      "usertime": 4164
+     },
+     "29301335211": {
+      "maxRSS": 14692,
+      "systemtime": 152,
+      "usertime": 4164
+     },
+     "29301335944": {
+      "maxRSS": 14692,
+      "systemtime": 4115,
+      "usertime": 4164
+     },
+     "29301335973": {
+      "maxRSS": 14692,
+      "systemtime": 4150,
+      "usertime": 4164
+     },
+     "29301336019": {
+      "maxRSS": 14692,
+      "systemtime": 4202,
+      "usertime": 4173
+     },
+     "29301336060": {
+      "maxRSS": 14692,
+      "systemtime": 4252,
+      "usertime": 4173
+     },
+     "29301336064": {
+      "maxRSS": 14692,
+      "systemtime": 4260,
+      "usertime": 4173
+     },
+     "29301336096": {
+      "maxRSS": 14692,
+      "systemtime": 4293,
+      "usertime": 4173
+     },
+     "29301336119": {
+      "maxRSS": 14692,
+      "systemtime": 4326,
+      "usertime": 4173
+     },
+     "29301336144": {
+      "maxRSS": 14692,
+      "systemtime": 4362,
+      "usertime": 4173
+     },
+     "29301336203": {
+      "maxRSS": 14692,
+      "systemtime": 4432,
+      "usertime": 4173
+     },
+     "29301336229": {
+      "maxRSS": 14692,
+      "systemtime": 4456,
+      "usertime": 4173
+     }
+    }
+   }
+  }
+ }
+}

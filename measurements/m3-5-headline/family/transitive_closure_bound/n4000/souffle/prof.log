@@ -1,0 +1,311 @@
+{
+ "root": {
+  "program": {
+   "configuration": {
+    "": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/transitive_closure_bound.dl",
+    "fact-dir": "/root/compiler/fixtures/benchmark-family/transitive_closure_bound/n4000",
+    "include-dir": ".",
+    "jobs": "1",
+    "libraries": "functors",
+    "library-dir": ".",
+    "magic-transform": "*",
+    "output-dir": "/root/compiler/measurements/m3-5-headline/family/transitive_closure_bound/n4000/souffle",
+    "profile": "prof.log",
+    "relationCount": "3",
+    "ruleCount": "6",
+    "version": "2.5",
+    "warn": "all",
+    "wno": "none"
+   },
+   "relation": {
+    "@magic.tc.{bf}": {
+     "maxRSS": {
+      "post": 14696,
+      "pre": 14696
+     },
+     "non-recursive-rule": {
+      "@magic.tc.{bf}(1).": {
+       "maxRSS": {
+        "post": 14696,
+        "pre": 14696
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 29283173865, "end": 29283173871},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 1,
+     "runtime": { "start": 29283173864, "end": 29283173881},
+     "source-locator": " [1:1-1:1]"
+    },
+    "edge": {
+     "loadtime": { "start": 29283173885, "end": 29283175782},
+     "num-tuples": 8000,
+     "reads": 0,
+     "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/transitive_closure_bound.dl [17:7-17:11]"
+    },
+    "q_tc": {
+     "maxRSS": {
+      "post": 14696,
+      "pre": 14696
+     },
+     "non-recursive-rule": {
+      "q_tc(y) :- \n   tc.{bf}(@abdul0,y),\n   @abdul0 = 1.": {
+       "atom-frequency": {
+        "q_tc(y) :- \n   tc.{bf}(@abdul0,y),\n   @abdul0 = 1.": {
+         "tc.{bf}": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 14696,
+        "pre": 14696
+       },
+       "num-tuples": 50,
+       "runtime": { "start": 29283176109, "end": 29283176113},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 50,
+     "reads": 0,
+     "runtime": { "start": 29283176099, "end": 29283176121},
+     "savetime": { "start": 29283176126, "end": 29283176922},
+     "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/transitive_closure_bound.dl [24:7-24:11]"
+    },
+    "tc.{bf}": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 29283175878, "end": 29283175880},
+       "maxRSS": {
+        "post": 14696,
+        "pre": 14696
+       },
+       "num-tuples": 22,
+       "recursive-rule": {
+        "tc.{bf}(x,y) :- \n   @magic.tc.{bf}(x),\n   tc.{bf}(x,z),\n   edge(z,y).": {
+         "0": {
+          "atom-frequency": {
+           "@new_tc.{bf}(x,y) :- \n   @magic.tc.{bf}(x),\n   @delta_tc.{bf}(x,z),\n   edge(z,y).": {
+            "@delta_tc.{bf}": {
+             "level": 1,
+             "num-tuples": 0
+            },
+            "@magic.tc.{bf}": {
+             "level": 0,
+             "num-tuples": 0
+            },
+            "edge": {
+             "level": 2,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 14696,
+           "pre": 14696
+          },
+          "num-tuples": 22,
+          "runtime": { "start": 29283175838, "end": 29283175848},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 29283175829, "end": 29283175858}
+      },
+      "1": {
+       "copytime": { "start": 29283175931, "end": 29283175933},
+       "maxRSS": {
+        "post": 14696,
+        "pre": 14696
+       },
+       "num-tuples": 16,
+       "recursive-rule": {
+        "tc.{bf}(x,y) :- \n   @magic.tc.{bf}(x),\n   tc.{bf}(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 14696,
+           "pre": 14696
+          },
+          "num-tuples": 16,
+          "runtime": { "start": 29283175894, "end": 29283175904},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 29283175885, "end": 29283175912}
+      },
+      "2": {
+       "copytime": { "start": 29283175967, "end": 29283175968},
+       "maxRSS": {
+        "post": 14696,
+        "pre": 14696
+       },
+       "num-tuples": 3,
+       "recursive-rule": {
+        "tc.{bf}(x,y) :- \n   @magic.tc.{bf}(x),\n   tc.{bf}(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 14696,
+           "pre": 14696
+          },
+          "num-tuples": 3,
+          "runtime": { "start": 29283175936, "end": 29283175943},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 29283175936, "end": 29283175950}
+      },
+      "3": {
+       "copytime": { "start": 29283176058, "end": 29283176059},
+       "maxRSS": {
+        "post": 14696,
+        "pre": 14696
+       },
+       "num-tuples": 1,
+       "recursive-rule": {
+        "tc.{bf}(x,y) :- \n   @magic.tc.{bf}(x),\n   tc.{bf}(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 14696,
+           "pre": 14696
+          },
+          "num-tuples": 1,
+          "runtime": { "start": 29283175984, "end": 29283175987},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 29283175971, "end": 29283175995}
+      },
+      "4": {
+       "maxRSS": {
+        "post": 14696,
+        "pre": 14696
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "tc.{bf}(x,y) :- \n   @magic.tc.{bf}(x),\n   tc.{bf}(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 14696,
+           "pre": 14696
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 29283176063, "end": 29283176065},
+          "source-locator": " [1:1-1:1]"
+         }
+        }
+       },
+       "runtime": { "start": 29283176063, "end": 29283176072}
+      }
+     },
+     "maxRSS": {
+      "post": 14696,
+      "pre": 14696
+     },
+     "non-recursive-rule": {
+      "tc.{bf}(x,y) :- \n   @magic.tc.{bf}(x),\n   edge(x,y).": {
+       "atom-frequency": {
+        "tc.{bf}(x,y) :- \n   @magic.tc.{bf}(x),\n   edge(x,y).": {
+         "@magic.tc.{bf}": {
+          "level": 0,
+          "num-tuples": 0
+         },
+         "edge": {
+          "level": 1,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 14696,
+        "pre": 14696
+       },
+       "num-tuples": 8,
+       "runtime": { "start": 29283175806, "end": 29283175815},
+       "source-locator": " [1:1-1:1]"
+      }
+     },
+     "num-tuples": 8,
+     "reads": 149,
+     "runtime": { "start": 29283175792, "end": 29283175823},
+     "source-locator": " [1:1-1:1]"
+    }
+   },
+   "runtime": { "start": 29283173859, "end": 29283176930},
+   "starttime": { "time": 29283173832},
+   "usage": {
+    "timepoint": {
+     "29283173846": {
+      "maxRSS": 14696,
+      "systemtime": 0,
+      "usertime": 2507
+     },
+     "29283173907": {
+      "maxRSS": 14696,
+      "systemtime": 0,
+      "usertime": 4201
+     },
+     "29283175037": {
+      "maxRSS": 14696,
+      "systemtime": 0,
+      "usertime": 4227
+     },
+     "29283175815": {
+      "maxRSS": 14696,
+      "systemtime": 0,
+      "usertime": 6179
+     },
+     "29283175852": {
+      "maxRSS": 14696,
+      "systemtime": 0,
+      "usertime": 6221
+     },
+     "29283175877": {
+      "maxRSS": 14696,
+      "systemtime": 0,
+      "usertime": 6252
+     },
+     "29283175898": {
+      "maxRSS": 14696,
+      "systemtime": 0,
+      "usertime": 6279
+     },
+     "29283175934": {
+      "maxRSS": 14696,
+      "systemtime": 0,
+      "usertime": 6331
+     },
+     "29283175966": {
+      "maxRSS": 14696,
+      "systemtime": 0,
+      "usertime": 6369
+     },
+     "29283175988": {
+      "maxRSS": 14696,
+      "systemtime": 0,
+      "usertime": 6400
+     },
+     "29283176064": {
+      "maxRSS": 14696,
+      "systemtime": 86,
+      "usertime": 6415
+     },
+     "29283176118": {
+      "maxRSS": 14696,
+      "systemtime": 158,
+      "usertime": 6415
+     },
+     "29283176145": {
+      "maxRSS": 14696,
+      "systemtime": 184,
+      "usertime": 6415
+     }
+    }
+   }
+  }
+ }
+}

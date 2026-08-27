@@ -1,0 +1,1204 @@
+{
+ "root": {
+  "program": {
+   "configuration": {
+    "": "/root/compiler/measurements/m3-5-headline/family/transitive_closure_bound/n500/emit_guarded/transformed.dl",
+    "fact-dir": "/root/compiler/fixtures/benchmark-family/transitive_closure_bound/n500",
+    "include-dir": ".",
+    "jobs": "1",
+    "libraries": "functors",
+    "library-dir": ".",
+    "output-dir": "/root/compiler/measurements/m3-5-headline/family/transitive_closure_bound/n500/dlc",
+    "profile": "prof.log",
+    "relationCount": "7",
+    "ruleCount": "13",
+    "version": "2.5",
+    "warn": "all",
+    "wno": "none"
+   },
+   "relation": {
+    "edge": {
+     "loadtime": { "start": 29277561125, "end": 29277561403},
+     "num-tuples": 1000,
+     "reads": 0,
+     "source-locator": "/root/compiler/measurements/m3-5-headline/family/transitive_closure_bound/n500/emit_guarded/transformed.dl [1:7-1:11]"
+    },
+    "magic_tc_bf": {
+     "maxRSS": {
+      "post": 14020,
+      "pre": 14020
+     },
+     "non-recursive-rule": {
+      "magic_tc_bf(1).": {
+       "maxRSS": {
+        "post": 14020,
+        "pre": 14020
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 29277561424, "end": 29277561428},
+       "source-locator": "/root/compiler/measurements/m3-5-headline/family/transitive_closure_bound/n500/emit_guarded/transformed.dl [21:1-21:16]"
+      }
+     },
+     "num-tuples": 1,
+     "reads": 0,
+     "runtime": { "start": 29277561411, "end": 29277561437},
+     "source-locator": "/root/compiler/measurements/m3-5-headline/family/transitive_closure_bound/n500/emit_guarded/transformed.dl [12:7-12:18]"
+    },
+    "q_tc": {
+     "maxRSS": {
+      "post": 14020,
+      "pre": 14020
+     },
+     "non-recursive-rule": {
+      "q_tc(y) :- \n   tc_bf(1,y).": {
+       "atom-frequency": {
+        "q_tc(y) :- \n   tc_bf(1,y).": {
+         "tc_bf": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 14020,
+        "pre": 14020
+       },
+       "num-tuples": 50,
+       "runtime": { "start": 29277562722, "end": 29277562726},
+       "source-locator": "/root/compiler/measurements/m3-5-headline/family/transitive_closure_bound/n500/emit_guarded/transformed.dl [22:1-22:24]"
+      }
+     },
+     "num-tuples": 50,
+     "reads": 0,
+     "runtime": { "start": 29277562713, "end": 29277562734},
+     "savetime": { "start": 29277562738, "end": 29277562819},
+     "source-locator": "/root/compiler/measurements/m3-5-headline/family/transitive_closure_bound/n500/emit_guarded/transformed.dl [4:7-4:11]"
+    },
+    "sup_tc_bf_r0_1": {
+     "maxRSS": {
+      "post": 14020,
+      "pre": 14020
+     },
+     "non-recursive-rule": {
+      "sup_tc_bf_r0_1(x,y) :- \n   magic_tc_bf(x),\n   edge(x,y).": {
+       "atom-frequency": {
+        "sup_tc_bf_r0_1(x,y) :- \n   magic_tc_bf(x),\n   edge(x,y).": {
+         "edge": {
+          "level": 1,
+          "num-tuples": 0
+         },
+         "magic_tc_bf": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 14020,
+        "pre": 14020
+       },
+       "num-tuples": 6,
+       "runtime": { "start": 29277561443, "end": 29277561449},
+       "source-locator": "/root/compiler/measurements/m3-5-headline/family/transitive_closure_bound/n500/emit_guarded/transformed.dl [14:1-14:55]"
+      }
+     },
+     "num-tuples": 6,
+     "reads": 0,
+     "runtime": { "start": 29277561443, "end": 29277561455},
+     "source-locator": "/root/compiler/measurements/m3-5-headline/family/transitive_closure_bound/n500/emit_guarded/transformed.dl [7:7-7:21]"
+    },
+    "sup_tc_bf_r1_1": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 29277561549, "end": 29277561550},
+       "maxRSS": {
+        "post": 14020,
+        "pre": 14020
+       },
+       "num-tuples": 6,
+       "recursive-rule": {
+        "sup_tc_bf_r1_1(x,z) :- \n   magic_tc_bf(x),\n   tc_bf(x,z).": {
+         "0": {
+          "atom-frequency": {
+           "@new_sup_tc_bf_r1_1(x,z) :- \n   magic_tc_bf(x),\n   @delta_tc_bf(x,z).": {
+            "@delta_tc_bf": {
+             "level": 1,
+             "num-tuples": 0
+            },
+            "magic_tc_bf": {
+             "level": 0,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 14020,
+           "pre": 14020
+          },
+          "num-tuples": 6,
+          "runtime": { "start": 29277561475, "end": 29277561480},
+          "source-locator": "/root/compiler/measurements/m3-5-headline/family/transitive_closure_bound/n500/emit_guarded/transformed.dl [17:1-17:56]"
+         }
+        }
+       },
+       "runtime": { "start": 29277561474, "end": 29277561487}
+      },
+      "1": {
+       "copytime": { "start": 29277561646, "end": 29277561647},
+       "maxRSS": {
+        "post": 14020,
+        "pre": 14020
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "sup_tc_bf_r1_1(x,z) :- \n   magic_tc_bf(x),\n   tc_bf(x,z).": {
+         "0": {
+          "maxRSS": {
+           "post": 14020,
+           "pre": 14020
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 29277561570, "end": 29277561571},
+          "source-locator": "/root/compiler/measurements/m3-5-headline/family/transitive_closure_bound/n500/emit_guarded/transformed.dl [17:1-17:56]"
+         }
+        }
+       },
+       "runtime": { "start": 29277561561, "end": 29277561578}
+      },
+      "10": {
+       "maxRSS": {
+        "post": 14020,
+        "pre": 14020
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "sup_tc_bf_r1_1(x,z) :- \n   magic_tc_bf(x),\n   tc_bf(x,z).": {
+         "0": {
+          "maxRSS": {
+           "post": 14020,
+           "pre": 14020
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 29277562610, "end": 29277562611},
+          "source-locator": "/root/compiler/measurements/m3-5-headline/family/transitive_closure_bound/n500/emit_guarded/transformed.dl [17:1-17:56]"
+         }
+        }
+       },
+       "runtime": { "start": 29277562601, "end": 29277562619}
+      },
+      "2": {
+       "copytime": { "start": 29277561753, "end": 29277561762},
+       "maxRSS": {
+        "post": 14020,
+        "pre": 14020
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "sup_tc_bf_r1_1(x,z) :- \n   magic_tc_bf(x),\n   tc_bf(x,z).": {
+         "0": {
+          "maxRSS": {
+           "post": 14020,
+           "pre": 14020
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 29277561670, "end": 29277561671},
+          "source-locator": "/root/compiler/measurements/m3-5-headline/family/transitive_closure_bound/n500/emit_guarded/transformed.dl [17:1-17:56]"
+         }
+        }
+       },
+       "runtime": { "start": 29277561670, "end": 29277561678}
+      },
+      "3": {
+       "copytime": { "start": 29277561871, "end": 29277561872},
+       "maxRSS": {
+        "post": 14020,
+        "pre": 14020
+       },
+       "num-tuples": 22,
+       "recursive-rule": {
+        "sup_tc_bf_r1_1(x,z) :- \n   magic_tc_bf(x),\n   tc_bf(x,z).": {
+         "0": {
+          "maxRSS": {
+           "post": 14020,
+           "pre": 14020
+          },
+          "num-tuples": 22,
+          "runtime": { "start": 29277561779, "end": 29277561783},
+          "source-locator": "/root/compiler/measurements/m3-5-headline/family/transitive_closure_bound/n500/emit_guarded/transformed.dl [17:1-17:56]"
+         }
+        }
+       },
+       "runtime": { "start": 29277561777, "end": 29277561789}
+      },
+      "4": {
+       "copytime": { "start": 29277561997, "end": 29277561998},
+       "maxRSS": {
+        "post": 14020,
+        "pre": 14020
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "sup_tc_bf_r1_1(x,z) :- \n   magic_tc_bf(x),\n   tc_bf(x,z).": {
+         "0": {
+          "maxRSS": {
+           "post": 14020,
+           "pre": 14020
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 29277561897, "end": 29277561898},
+          "source-locator": "/root/compiler/measurements/m3-5-headline/family/transitive_closure_bound/n500/emit_guarded/transformed.dl [17:1-17:56]"
+         }
+        }
+       },
+       "runtime": { "start": 29277561895, "end": 29277561905}
+      },
+      "5": {
+       "copytime": { "start": 29277562125, "end": 29277562126},
+       "maxRSS": {
+        "post": 14020,
+        "pre": 14020
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "sup_tc_bf_r1_1(x,z) :- \n   magic_tc_bf(x),\n   tc_bf(x,z).": {
+         "0": {
+          "maxRSS": {
+           "post": 14020,
+           "pre": 14020
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 29277562031, "end": 29277562032},
+          "source-locator": "/root/compiler/measurements/m3-5-headline/family/transitive_closure_bound/n500/emit_guarded/transformed.dl [17:1-17:56]"
+         }
+        }
+       },
+       "runtime": { "start": 29277562022, "end": 29277562040}
+      },
+      "6": {
+       "copytime": { "start": 29277562243, "end": 29277562245},
+       "maxRSS": {
+        "post": 14020,
+        "pre": 14020
+       },
+       "num-tuples": 21,
+       "recursive-rule": {
+        "sup_tc_bf_r1_1(x,z) :- \n   magic_tc_bf(x),\n   tc_bf(x,z).": {
+         "0": {
+          "maxRSS": {
+           "post": 14020,
+           "pre": 14020
+          },
+          "num-tuples": 21,
+          "runtime": { "start": 29277562160, "end": 29277562163},
+          "source-locator": "/root/compiler/measurements/m3-5-headline/family/transitive_closure_bound/n500/emit_guarded/transformed.dl [17:1-17:56]"
+         }
+        }
+       },
+       "runtime": { "start": 29277562151, "end": 29277562171}
+      },
+      "7": {
+       "copytime": { "start": 29277562323, "end": 29277562332},
+       "maxRSS": {
+        "post": 14020,
+        "pre": 14020
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "sup_tc_bf_r1_1(x,z) :- \n   magic_tc_bf(x),\n   tc_bf(x,z).": {
+         "0": {
+          "maxRSS": {
+           "post": 14020,
+           "pre": 14020
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 29277562255, "end": 29277562255},
+          "source-locator": "/root/compiler/measurements/m3-5-headline/family/transitive_closure_bound/n500/emit_guarded/transformed.dl [17:1-17:56]"
+         }
+        }
+       },
+       "runtime": { "start": 29277562255, "end": 29277562262}
+      },
+      "8": {
+       "copytime": { "start": 29277562450, "end": 29277562451},
+       "maxRSS": {
+        "post": 14020,
+        "pre": 14020
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "sup_tc_bf_r1_1(x,z) :- \n   magic_tc_bf(x),\n   tc_bf(x,z).": {
+         "0": {
+          "maxRSS": {
+           "post": 14020,
+           "pre": 14020
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 29277562354, "end": 29277562355},
+          "source-locator": "/root/compiler/measurements/m3-5-headline/family/transitive_closure_bound/n500/emit_guarded/transformed.dl [17:1-17:56]"
+         }
+        }
+       },
+       "runtime": { "start": 29277562345, "end": 29277562365}
+      },
+      "9": {
+       "copytime": { "start": 29277562578, "end": 29277562578},
+       "maxRSS": {
+        "post": 14020,
+        "pre": 14020
+       },
+       "num-tuples": 1,
+       "recursive-rule": {
+        "sup_tc_bf_r1_1(x,z) :- \n   magic_tc_bf(x),\n   tc_bf(x,z).": {
+         "0": {
+          "maxRSS": {
+           "post": 14020,
+           "pre": 14020
+          },
+          "num-tuples": 1,
+          "runtime": { "start": 29277562483, "end": 29277562484},
+          "source-locator": "/root/compiler/measurements/m3-5-headline/family/transitive_closure_bound/n500/emit_guarded/transformed.dl [17:1-17:56]"
+         }
+        }
+       },
+       "runtime": { "start": 29277562474, "end": 29277562493}
+      }
+     },
+     "num-tuples": 0,
+     "reads": 50,
+     "source-locator": "/root/compiler/measurements/m3-5-headline/family/transitive_closure_bound/n500/emit_guarded/transformed.dl [10:7-10:21]"
+    },
+    "sup_tc_bf_r1_2": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 29277561554, "end": 29277561554},
+       "maxRSS": {
+        "post": 14020,
+        "pre": 14020
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "sup_tc_bf_r1_2(x,y) :- \n   sup_tc_bf_r1_1(x,z),\n   edge(z,y).": {
+         "0": {
+          "atom-frequency": {
+           "@new_sup_tc_bf_r1_2(x,y) :- \n   @delta_sup_tc_bf_r1_1(x,z),\n   edge(z,y).": {
+            "@delta_sup_tc_bf_r1_1": {
+             "level": 0,
+             "num-tuples": 0
+            },
+            "edge": {
+             "level": 1,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 14020,
+           "pre": 14020
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 29277561501, "end": 29277561502},
+          "source-locator": "/root/compiler/measurements/m3-5-headline/family/transitive_closure_bound/n500/emit_guarded/transformed.dl [18:1-18:58]"
+         }
+        }
+       },
+       "runtime": { "start": 29277561492, "end": 29277561510}
+      },
+      "1": {
+       "copytime": { "start": 29277561650, "end": 29277561660},
+       "maxRSS": {
+        "post": 14020,
+        "pre": 14020
+       },
+       "num-tuples": 25,
+       "recursive-rule": {
+        "sup_tc_bf_r1_2(x,y) :- \n   sup_tc_bf_r1_1(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 14020,
+           "pre": 14020
+          },
+          "num-tuples": 25,
+          "runtime": { "start": 29277561592, "end": 29277561597},
+          "source-locator": "/root/compiler/measurements/m3-5-headline/family/transitive_closure_bound/n500/emit_guarded/transformed.dl [18:1-18:58]"
+         }
+        }
+       },
+       "runtime": { "start": 29277561583, "end": 29277561606}
+      },
+      "10": {
+       "maxRSS": {
+        "post": 14020,
+        "pre": 14020
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "sup_tc_bf_r1_2(x,y) :- \n   sup_tc_bf_r1_1(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 14020,
+           "pre": 14020
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 29277562632, "end": 29277562634},
+          "source-locator": "/root/compiler/measurements/m3-5-headline/family/transitive_closure_bound/n500/emit_guarded/transformed.dl [18:1-18:58]"
+         }
+        }
+       },
+       "runtime": { "start": 29277562624, "end": 29277562648}
+      },
+      "2": {
+       "copytime": { "start": 29277561767, "end": 29277561768},
+       "maxRSS": {
+        "post": 14020,
+        "pre": 14020
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "sup_tc_bf_r1_2(x,y) :- \n   sup_tc_bf_r1_1(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 14020,
+           "pre": 14020
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 29277561691, "end": 29277561692},
+          "source-locator": "/root/compiler/measurements/m3-5-headline/family/transitive_closure_bound/n500/emit_guarded/transformed.dl [18:1-18:58]"
+         }
+        }
+       },
+       "runtime": { "start": 29277561682, "end": 29277561700}
+      },
+      "3": {
+       "copytime": { "start": 29277561876, "end": 29277561885},
+       "maxRSS": {
+        "post": 14020,
+        "pre": 14020
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "sup_tc_bf_r1_2(x,y) :- \n   sup_tc_bf_r1_1(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 14020,
+           "pre": 14020
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 29277561802, "end": 29277561803},
+          "source-locator": "/root/compiler/measurements/m3-5-headline/family/transitive_closure_bound/n500/emit_guarded/transformed.dl [18:1-18:58]"
+         }
+        }
+       },
+       "runtime": { "start": 29277561793, "end": 29277561811}
+      },
+      "4": {
+       "copytime": { "start": 29277562002, "end": 29277562013},
+       "maxRSS": {
+        "post": 14020,
+        "pre": 14020
+       },
+       "num-tuples": 22,
+       "recursive-rule": {
+        "sup_tc_bf_r1_2(x,y) :- \n   sup_tc_bf_r1_1(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 14020,
+           "pre": 14020
+          },
+          "num-tuples": 22,
+          "runtime": { "start": 29277561917, "end": 29277561928},
+          "source-locator": "/root/compiler/measurements/m3-5-headline/family/transitive_closure_bound/n500/emit_guarded/transformed.dl [18:1-18:58]"
+         }
+        }
+       },
+       "runtime": { "start": 29277561908, "end": 29277561937}
+      },
+      "5": {
+       "copytime": { "start": 29277562130, "end": 29277562139},
+       "maxRSS": {
+        "post": 14020,
+        "pre": 14020
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "sup_tc_bf_r1_2(x,y) :- \n   sup_tc_bf_r1_1(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 14020,
+           "pre": 14020
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 29277562053, "end": 29277562054},
+          "source-locator": "/root/compiler/measurements/m3-5-headline/family/transitive_closure_bound/n500/emit_guarded/transformed.dl [18:1-18:58]"
+         }
+        }
+       },
+       "runtime": { "start": 29277562044, "end": 29277562062}
+      },
+      "6": {
+       "copytime": { "start": 29277562248, "end": 29277562249},
+       "maxRSS": {
+        "post": 14020,
+        "pre": 14020
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "sup_tc_bf_r1_2(x,y) :- \n   sup_tc_bf_r1_1(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 14020,
+           "pre": 14020
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 29277562184, "end": 29277562185},
+          "source-locator": "/root/compiler/measurements/m3-5-headline/family/transitive_closure_bound/n500/emit_guarded/transformed.dl [18:1-18:58]"
+         }
+        }
+       },
+       "runtime": { "start": 29277562175, "end": 29277562193}
+      },
+      "7": {
+       "copytime": { "start": 29277562337, "end": 29277562338},
+       "maxRSS": {
+        "post": 14020,
+        "pre": 14020
+       },
+       "num-tuples": 3,
+       "recursive-rule": {
+        "sup_tc_bf_r1_2(x,y) :- \n   sup_tc_bf_r1_1(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 14020,
+           "pre": 14020
+          },
+          "num-tuples": 3,
+          "runtime": { "start": 29277562265, "end": 29277562272},
+          "source-locator": "/root/compiler/measurements/m3-5-headline/family/transitive_closure_bound/n500/emit_guarded/transformed.dl [18:1-18:58]"
+         }
+        }
+       },
+       "runtime": { "start": 29277562265, "end": 29277562277}
+      },
+      "8": {
+       "copytime": { "start": 29277562455, "end": 29277562464},
+       "maxRSS": {
+        "post": 14020,
+        "pre": 14020
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "sup_tc_bf_r1_2(x,y) :- \n   sup_tc_bf_r1_1(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 14020,
+           "pre": 14020
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 29277562379, "end": 29277562379},
+          "source-locator": "/root/compiler/measurements/m3-5-headline/family/transitive_closure_bound/n500/emit_guarded/transformed.dl [18:1-18:58]"
+         }
+        }
+       },
+       "runtime": { "start": 29277562369, "end": 29277562388}
+      },
+      "9": {
+       "copytime": { "start": 29277562582, "end": 29277562591},
+       "maxRSS": {
+        "post": 14020,
+        "pre": 14020
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "sup_tc_bf_r1_2(x,y) :- \n   sup_tc_bf_r1_1(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 14020,
+           "pre": 14020
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 29277562506, "end": 29277562507},
+          "source-locator": "/root/compiler/measurements/m3-5-headline/family/transitive_closure_bound/n500/emit_guarded/transformed.dl [18:1-18:58]"
+         }
+        }
+       },
+       "runtime": { "start": 29277562498, "end": 29277562517}
+      }
+     },
+     "num-tuples": 0,
+     "reads": 149,
+     "source-locator": "/root/compiler/measurements/m3-5-headline/family/transitive_closure_bound/n500/emit_guarded/transformed.dl [11:7-11:21]"
+    },
+    "tc_bf": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 29277561557, "end": 29277561558},
+       "maxRSS": {
+        "post": 14020,
+        "pre": 14020
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "tc_bf(x,y) :- \n   sup_tc_bf_r1_2(x,y).": {
+         "0": {
+          "atom-frequency": {
+           "@new_tc_bf(x,y) :- \n   @delta_sup_tc_bf_r1_2(x,y).": {
+            "@delta_sup_tc_bf_r1_2": {
+             "level": 0,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 14020,
+           "pre": 14020
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 29277561524, "end": 29277561525},
+          "source-locator": "/root/compiler/measurements/m3-5-headline/family/transitive_closure_bound/n500/emit_guarded/transformed.dl [20:1-20:37]"
+         }
+        }
+       },
+       "runtime": { "start": 29277561514, "end": 29277561533}
+      },
+      "1": {
+       "copytime": { "start": 29277561665, "end": 29277561666},
+       "maxRSS": {
+        "post": 14020,
+        "pre": 14020
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "tc_bf(x,y) :- \n   sup_tc_bf_r1_2(x,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 14020,
+           "pre": 14020
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 29277561611, "end": 29277561611},
+          "source-locator": "/root/compiler/measurements/m3-5-headline/family/transitive_closure_bound/n500/emit_guarded/transformed.dl [20:1-20:37]"
+         }
+        }
+       },
+       "runtime": { "start": 29277561610, "end": 29277561617}
+      },
+      "10": {
+       "maxRSS": {
+        "post": 14020,
+        "pre": 14020
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "tc_bf(x,y) :- \n   sup_tc_bf_r1_2(x,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 14020,
+           "pre": 14020
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 29277562661, "end": 29277562662},
+          "source-locator": "/root/compiler/measurements/m3-5-headline/family/transitive_closure_bound/n500/emit_guarded/transformed.dl [20:1-20:37]"
+         }
+        }
+       },
+       "runtime": { "start": 29277562653, "end": 29277562670}
+      },
+      "2": {
+       "copytime": { "start": 29277561772, "end": 29277561774},
+       "maxRSS": {
+        "post": 14020,
+        "pre": 14020
+       },
+       "num-tuples": 22,
+       "recursive-rule": {
+        "tc_bf(x,y) :- \n   sup_tc_bf_r1_2(x,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 14020,
+           "pre": 14020
+          },
+          "num-tuples": 22,
+          "runtime": { "start": 29277561714, "end": 29277561717},
+          "source-locator": "/root/compiler/measurements/m3-5-headline/family/transitive_closure_bound/n500/emit_guarded/transformed.dl [20:1-20:37]"
+         }
+        }
+       },
+       "runtime": { "start": 29277561705, "end": 29277561725}
+      },
+      "3": {
+       "copytime": { "start": 29277561890, "end": 29277561891},
+       "maxRSS": {
+        "post": 14020,
+        "pre": 14020
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "tc_bf(x,y) :- \n   sup_tc_bf_r1_2(x,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 14020,
+           "pre": 14020
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 29277561824, "end": 29277561825},
+          "source-locator": "/root/compiler/measurements/m3-5-headline/family/transitive_closure_bound/n500/emit_guarded/transformed.dl [20:1-20:37]"
+         }
+        }
+       },
+       "runtime": { "start": 29277561816, "end": 29277561833}
+      },
+      "4": {
+       "copytime": { "start": 29277562018, "end": 29277562018},
+       "maxRSS": {
+        "post": 14020,
+        "pre": 14020
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "tc_bf(x,y) :- \n   sup_tc_bf_r1_2(x,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 14020,
+           "pre": 14020
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 29277561950, "end": 29277561951},
+          "source-locator": "/root/compiler/measurements/m3-5-headline/family/transitive_closure_bound/n500/emit_guarded/transformed.dl [20:1-20:37]"
+         }
+        }
+       },
+       "runtime": { "start": 29277561941, "end": 29277561959}
+      },
+      "5": {
+       "copytime": { "start": 29277562144, "end": 29277562146},
+       "maxRSS": {
+        "post": 14020,
+        "pre": 14020
+       },
+       "num-tuples": 21,
+       "recursive-rule": {
+        "tc_bf(x,y) :- \n   sup_tc_bf_r1_2(x,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 14020,
+           "pre": 14020
+          },
+          "num-tuples": 21,
+          "runtime": { "start": 29277562075, "end": 29277562079},
+          "source-locator": "/root/compiler/measurements/m3-5-headline/family/transitive_closure_bound/n500/emit_guarded/transformed.dl [20:1-20:37]"
+         }
+        }
+       },
+       "runtime": { "start": 29277562067, "end": 29277562087}
+      },
+      "6": {
+       "copytime": { "start": 29277562251, "end": 29277562252},
+       "maxRSS": {
+        "post": 14020,
+        "pre": 14020
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "tc_bf(x,y) :- \n   sup_tc_bf_r1_2(x,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 14020,
+           "pre": 14020
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 29277562206, "end": 29277562207},
+          "source-locator": "/root/compiler/measurements/m3-5-headline/family/transitive_closure_bound/n500/emit_guarded/transformed.dl [20:1-20:37]"
+         }
+        }
+       },
+       "runtime": { "start": 29277562197, "end": 29277562216}
+      },
+      "7": {
+       "copytime": { "start": 29277562341, "end": 29277562342},
+       "maxRSS": {
+        "post": 14020,
+        "pre": 14020
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "tc_bf(x,y) :- \n   sup_tc_bf_r1_2(x,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 14020,
+           "pre": 14020
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 29277562280, "end": 29277562281},
+          "source-locator": "/root/compiler/measurements/m3-5-headline/family/transitive_closure_bound/n500/emit_guarded/transformed.dl [20:1-20:37]"
+         }
+        }
+       },
+       "runtime": { "start": 29277562280, "end": 29277562286}
+      },
+      "8": {
+       "copytime": { "start": 29277562469, "end": 29277562470},
+       "maxRSS": {
+        "post": 14020,
+        "pre": 14020
+       },
+       "num-tuples": 1,
+       "recursive-rule": {
+        "tc_bf(x,y) :- \n   sup_tc_bf_r1_2(x,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 14020,
+           "pre": 14020
+          },
+          "num-tuples": 1,
+          "runtime": { "start": 29277562401, "end": 29277562404},
+          "source-locator": "/root/compiler/measurements/m3-5-headline/family/transitive_closure_bound/n500/emit_guarded/transformed.dl [20:1-20:37]"
+         }
+        }
+       },
+       "runtime": { "start": 29277562392, "end": 29277562412}
+      },
+      "9": {
+       "copytime": { "start": 29277562597, "end": 29277562597},
+       "maxRSS": {
+        "post": 14020,
+        "pre": 14020
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "tc_bf(x,y) :- \n   sup_tc_bf_r1_2(x,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 14020,
+           "pre": 14020
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 29277562530, "end": 29277562530},
+          "source-locator": "/root/compiler/measurements/m3-5-headline/family/transitive_closure_bound/n500/emit_guarded/transformed.dl [20:1-20:37]"
+         }
+        }
+       },
+       "runtime": { "start": 29277562521, "end": 29277562539}
+      }
+     },
+     "maxRSS": {
+      "post": 14020,
+      "pre": 14020
+     },
+     "non-recursive-rule": {
+      "tc_bf(x,y) :- \n   sup_tc_bf_r0_1(x,y).": {
+       "atom-frequency": {
+        "tc_bf(x,y) :- \n   sup_tc_bf_r0_1(x,y).": {
+         "sup_tc_bf_r0_1": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 14020,
+        "pre": 14020
+       },
+       "num-tuples": 6,
+       "runtime": { "start": 29277561464, "end": 29277561465},
+       "source-locator": "/root/compiler/measurements/m3-5-headline/family/transitive_closure_bound/n500/emit_guarded/transformed.dl [15:1-15:37]"
+      }
+     },
+     "num-tuples": 6,
+     "reads": 50,
+     "runtime": { "start": 29277561463, "end": 29277561470},
+     "source-locator": "/root/compiler/measurements/m3-5-headline/family/transitive_closure_bound/n500/emit_guarded/transformed.dl [8:7-8:12]"
+    }
+   },
+   "runtime": { "start": 29277561120, "end": 29277562828},
+   "starttime": { "time": 29277561090},
+   "usage": {
+    "timepoint": {
+     "29277561104": {
+      "maxRSS": 14020,
+      "systemtime": 7941,
+      "usertime": 0
+     },
+     "29277561130": {
+      "maxRSS": 14020,
+      "systemtime": 9001,
+      "usertime": 0
+     },
+     "29277561469": {
+      "maxRSS": 14020,
+      "systemtime": 9358,
+      "usertime": 0
+     },
+     "29277561508": {
+      "maxRSS": 14020,
+      "systemtime": 9408,
+      "usertime": 0
+     },
+     "29277561550": {
+      "maxRSS": 14020,
+      "systemtime": 9467,
+      "usertime": 0
+     },
+     "29277561577": {
+      "maxRSS": 14020,
+      "systemtime": 9499,
+      "usertime": 0
+     },
+     "29277561601": {
+      "maxRSS": 14020,
+      "systemtime": 9537,
+      "usertime": 0
+     },
+     "29277561635": {
+      "maxRSS": 14020,
+      "systemtime": 9590,
+      "usertime": 0
+     },
+     "29277561645": {
+      "maxRSS": 14020,
+      "systemtime": 9604,
+      "usertime": 0
+     },
+     "29277561667": {
+      "maxRSS": 14020,
+      "systemtime": 9634,
+      "usertime": 0
+     },
+     "29277561698": {
+      "maxRSS": 14020,
+      "systemtime": 9668,
+      "usertime": 0
+     },
+     "29277561722": {
+      "maxRSS": 14020,
+      "systemtime": 9702,
+      "usertime": 0
+     },
+     "29277561746": {
+      "maxRSS": 14020,
+      "systemtime": 9739,
+      "usertime": 0
+     },
+     "29277561769": {
+      "maxRSS": 14020,
+      "systemtime": 9771,
+      "usertime": 0
+     },
+     "29277561782": {
+      "maxRSS": 14020,
+      "systemtime": 9793,
+      "usertime": 0
+     },
+     "29277561807": {
+      "maxRSS": 14020,
+      "systemtime": 9821,
+      "usertime": 0
+     },
+     "29277561829": {
+      "maxRSS": 14020,
+      "systemtime": 9850,
+      "usertime": 0
+     },
+     "29277561851": {
+      "maxRSS": 14020,
+      "systemtime": 9878,
+      "usertime": 0
+     },
+     "29277561870": {
+      "maxRSS": 14020,
+      "systemtime": 9903,
+      "usertime": 0
+     },
+     "29277561890": {
+      "maxRSS": 14020,
+      "systemtime": 9930,
+      "usertime": 0
+     },
+     "29277561900": {
+      "maxRSS": 14020,
+      "systemtime": 9950,
+      "usertime": 0
+     },
+     "29277561922": {
+      "maxRSS": 14020,
+      "systemtime": 9974,
+      "usertime": 0
+     },
+     "29277561955": {
+      "maxRSS": 14020,
+      "systemtime": 10014,
+      "usertime": 0
+     },
+     "29277561977": {
+      "maxRSS": 14020,
+      "systemtime": 10042,
+      "usertime": 0
+     },
+     "29277561996": {
+      "maxRSS": 14020,
+      "systemtime": 10067,
+      "usertime": 0
+     },
+     "29277562015": {
+      "maxRSS": 14020,
+      "systemtime": 10095,
+      "usertime": 0
+     },
+     "29277562036": {
+      "maxRSS": 14020,
+      "systemtime": 10122,
+      "usertime": 0
+     },
+     "29277562058": {
+      "maxRSS": 14020,
+      "systemtime": 10151,
+      "usertime": 0
+     },
+     "29277562080": {
+      "maxRSS": 14020,
+      "systemtime": 10182,
+      "usertime": 0
+     },
+     "29277562105": {
+      "maxRSS": 14020,
+      "systemtime": 10210,
+      "usertime": 0
+     },
+     "29277562124": {
+      "maxRSS": 14020,
+      "systemtime": 10236,
+      "usertime": 0
+     },
+     "29277562143": {
+      "maxRSS": 14020,
+      "systemtime": 10261,
+      "usertime": 0
+     },
+     "29277562165": {
+      "maxRSS": 14020,
+      "systemtime": 10294,
+      "usertime": 0
+     },
+     "29277562189": {
+      "maxRSS": 14020,
+      "systemtime": 10322,
+      "usertime": 0
+     },
+     "29277562211": {
+      "maxRSS": 14020,
+      "systemtime": 10351,
+      "usertime": 0
+     },
+     "29277562275": {
+      "maxRSS": 14020,
+      "systemtime": 10445,
+      "usertime": 0
+     },
+     "29277562304": {
+      "maxRSS": 14020,
+      "systemtime": 10484,
+      "usertime": 0
+     },
+     "29277562337": {
+      "maxRSS": 14020,
+      "systemtime": 10519,
+      "usertime": 0
+     },
+     "29277562359": {
+      "maxRSS": 14020,
+      "systemtime": 10551,
+      "usertime": 0
+     },
+     "29277562383": {
+      "maxRSS": 14020,
+      "systemtime": 10582,
+      "usertime": 0
+     },
+     "29277562406": {
+      "maxRSS": 14020,
+      "systemtime": 10612,
+      "usertime": 0
+     },
+     "29277562430": {
+      "maxRSS": 14020,
+      "systemtime": 10641,
+      "usertime": 0
+     },
+     "29277562449": {
+      "maxRSS": 14020,
+      "systemtime": 10666,
+      "usertime": 0
+     },
+     "29277562468": {
+      "maxRSS": 14020,
+      "systemtime": 10692,
+      "usertime": 0
+     },
+     "29277562487": {
+      "maxRSS": 14020,
+      "systemtime": 10719,
+      "usertime": 0
+     },
+     "29277562511": {
+      "maxRSS": 14020,
+      "systemtime": 10750,
+      "usertime": 0
+     },
+     "29277562535": {
+      "maxRSS": 14020,
+      "systemtime": 10780,
+      "usertime": 0
+     },
+     "29277562557": {
+      "maxRSS": 14020,
+      "systemtime": 10809,
+      "usertime": 0
+     },
+     "29277562577": {
+      "maxRSS": 14020,
+      "systemtime": 10835,
+      "usertime": 0
+     },
+     "29277562596": {
+      "maxRSS": 14020,
+      "systemtime": 10861,
+      "usertime": 0
+     },
+     "29277562614": {
+      "maxRSS": 14020,
+      "systemtime": 10887,
+      "usertime": 0
+     },
+     "29277562637": {
+      "maxRSS": 14020,
+      "systemtime": 10918,
+      "usertime": 0
+     },
+     "29277562667": {
+      "maxRSS": 14020,
+      "systemtime": 10953,
+      "usertime": 0
+     },
+     "29277562690": {
+      "maxRSS": 14020,
+      "systemtime": 10982,
+      "usertime": 0
+     },
+     "29277562709": {
+      "maxRSS": 14020,
+      "systemtime": 11007,
+      "usertime": 0
+     },
+     "29277562727": {
+      "maxRSS": 14020,
+      "systemtime": 11036,
+      "usertime": 0
+     },
+     "29277562752": {
+      "maxRSS": 14020,
+      "systemtime": 11056,
+      "usertime": 0
+     }
+    }
+   }
+  }
+ }
+}

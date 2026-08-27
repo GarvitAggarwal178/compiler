@@ -1,0 +1,754 @@
+{
+ "root": {
+  "program": {
+   "configuration": {
+    "": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/culprit_cycle.dl",
+    "fact-dir": "/root/compiler/fixtures/benchmark-family/culprit_cycle/n100",
+    "include-dir": ".",
+    "jobs": "1",
+    "libraries": "functors",
+    "library-dir": ".",
+    "output-dir": "/root/compiler/measurements/m3-5-headline/family/culprit_cycle/n100/none",
+    "profile": "prof.log",
+    "relationCount": "7",
+    "ruleCount": "10",
+    "version": "2.5",
+    "warn": "all",
+    "wno": "none"
+   },
+   "relation": {
+    "base": {
+     "loadtime": { "start": 29334339694, "end": 29334340478},
+     "num-tuples": 150,
+     "reads": 0,
+     "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/culprit_cycle.dl [16:7-16:11]"
+    },
+    "blocked": {
+     "loadtime": { "start": 29334340489, "end": 29334340983},
+     "num-tuples": 12,
+     "reads": 2299,
+     "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/culprit_cycle.dl [18:7-18:14]"
+    },
+    "e": {
+     "loadtime": { "start": 29334340994, "end": 29334341397},
+     "num-tuples": 150,
+     "reads": 0,
+     "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/culprit_cycle.dl [17:7-17:8]"
+    },
+    "out": {
+     "maxRSS": {
+      "post": 16368,
+      "pre": 16368
+     },
+     "non-recursive-rule": {
+      "out(y) :- \n   p(1,y).": {
+       "atom-frequency": {
+        "out(y) :- \n   p(1,y).": {
+         "p": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 16368,
+        "pre": 16368
+       },
+       "num-tuples": 3,
+       "runtime": { "start": 29334343082, "end": 29334343083},
+       "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/culprit_cycle.dl [32:1-32:18]"
+      }
+     },
+     "num-tuples": 3,
+     "reads": 0,
+     "runtime": { "start": 29334343072, "end": 29334343092},
+     "savetime": { "start": 29334343106, "end": 29334343177},
+     "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/culprit_cycle.dl [31:7-31:10]"
+    },
+    "p": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 29334342997, "end": 29334343010},
+       "maxRSS": {
+        "post": 16368,
+        "pre": 16368
+       },
+       "num-tuples": 120,
+       "recursive-rule": {
+        "p(x,y) :- \n   p(x,z),\n   !s(z),\n   q(z,y).": {
+         "0": {
+          "atom-frequency": {
+           "@new_p(x,y) :- \n   @delta_p(x,z),\n   !s(z),\n   q(z,y).": {
+            "@delta_p": {
+             "level": 0,
+             "num-tuples": 0
+            },
+            "q": {
+             "level": 1,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 16368,
+           "pre": 16368
+          },
+          "num-tuples": 120,
+          "runtime": { "start": 29334342936, "end": 29334342968},
+          "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/culprit_cycle.dl [29:1-29:33]"
+         }
+        }
+       },
+       "runtime": { "start": 29334342927, "end": 29334342978}
+      },
+      "1": {
+       "maxRSS": {
+        "post": 16368,
+        "pre": 16368
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "p(x,y) :- \n   p(x,z),\n   !s(z),\n   q(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 16368,
+           "pre": 16368
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 29334343014, "end": 29334343040},
+          "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/culprit_cycle.dl [29:1-29:33]"
+         }
+        }
+       },
+       "runtime": { "start": 29334343013, "end": 29334343048}
+      }
+     },
+     "maxRSS": {
+      "post": 16368,
+      "pre": 16368
+     },
+     "non-recursive-rule": {
+      "p(x,y) :- \n   e(x,y).": {
+       "atom-frequency": {
+        "p(x,y) :- \n   e(x,y).": {
+         "e": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 16368,
+        "pre": 16368
+       },
+       "num-tuples": 150,
+       "runtime": { "start": 29334342898, "end": 29334342906},
+       "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/culprit_cycle.dl [28:1-28:18]"
+      }
+     },
+     "num-tuples": 150,
+     "reads": 293,
+     "runtime": { "start": 29334342889, "end": 29334342915},
+     "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/culprit_cycle.dl [27:7-27:8]"
+    },
+    "q": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 29334341540, "end": 29334341558},
+       "maxRSS": {
+        "post": 16368,
+        "pre": 16368
+       },
+       "num-tuples": 191,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "atom-frequency": {
+           "@new_q(x,y) :- \n   @delta_q(x,z),\n   base(z,y).": {
+            "@delta_q": {
+             "level": 0,
+             "num-tuples": 0
+            },
+            "base": {
+             "level": 1,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 16368,
+           "pre": 16368
+          },
+          "num-tuples": 191,
+          "runtime": { "start": 29334341461, "end": 29334341511},
+          "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/culprit_cycle.dl [22:1-22:29]"
+         }
+        }
+       },
+       "runtime": { "start": 29334341451, "end": 29334341520}
+      },
+      "1": {
+       "copytime": { "start": 29334341653, "end": 29334341672},
+       "maxRSS": {
+        "post": 16368,
+        "pre": 16368
+       },
+       "num-tuples": 244,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 16368,
+           "pre": 16368
+          },
+          "num-tuples": 244,
+          "runtime": { "start": 29334341571, "end": 29334341624},
+          "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/culprit_cycle.dl [22:1-22:29]"
+         }
+        }
+       },
+       "runtime": { "start": 29334341562, "end": 29334341633}
+      },
+      "10": {
+       "copytime": { "start": 29334342667, "end": 29334342670},
+       "maxRSS": {
+        "post": 16368,
+        "pre": 16368
+       },
+       "num-tuples": 16,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 16368,
+           "pre": 16368
+          },
+          "num-tuples": 16,
+          "runtime": { "start": 29334342631, "end": 29334342639},
+          "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/culprit_cycle.dl [22:1-22:29]"
+         }
+        }
+       },
+       "runtime": { "start": 29334342621, "end": 29334342649}
+      },
+      "11": {
+       "copytime": { "start": 29334342704, "end": 29334342706},
+       "maxRSS": {
+        "post": 16368,
+        "pre": 16368
+       },
+       "num-tuples": 8,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 16368,
+           "pre": 16368
+          },
+          "num-tuples": 8,
+          "runtime": { "start": 29334342674, "end": 29334342678},
+          "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/culprit_cycle.dl [22:1-22:29]"
+         }
+        }
+       },
+       "runtime": { "start": 29334342674, "end": 29334342686}
+      },
+      "12": {
+       "copytime": { "start": 29334342742, "end": 29334342743},
+       "maxRSS": {
+        "post": 16368,
+        "pre": 16368
+       },
+       "num-tuples": 4,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 16368,
+           "pre": 16368
+          },
+          "num-tuples": 4,
+          "runtime": { "start": 29334342712, "end": 29334342714},
+          "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/culprit_cycle.dl [22:1-22:29]"
+         }
+        }
+       },
+       "runtime": { "start": 29334342710, "end": 29334342721}
+      },
+      "13": {
+       "copytime": { "start": 29334342785, "end": 29334342786},
+       "maxRSS": {
+        "post": 16368,
+        "pre": 16368
+       },
+       "num-tuples": 2,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 16368,
+           "pre": 16368
+          },
+          "num-tuples": 2,
+          "runtime": { "start": 29334342756, "end": 29334342758},
+          "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/culprit_cycle.dl [22:1-22:29]"
+         }
+        }
+       },
+       "runtime": { "start": 29334342747, "end": 29334342766}
+      },
+      "14": {
+       "maxRSS": {
+        "post": 16368,
+        "pre": 16368
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 16368,
+           "pre": 16368
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 29334342789, "end": 29334342790},
+          "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/culprit_cycle.dl [22:1-22:29]"
+         }
+        }
+       },
+       "runtime": { "start": 29334342789, "end": 29334342798}
+      },
+      "2": {
+       "copytime": { "start": 29334341778, "end": 29334341806},
+       "maxRSS": {
+        "post": 16368,
+        "pre": 16368
+       },
+       "num-tuples": 311,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 16368,
+           "pre": 16368
+          },
+          "num-tuples": 311,
+          "runtime": { "start": 29334341685, "end": 29334341750},
+          "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/culprit_cycle.dl [22:1-22:29]"
+         }
+        }
+       },
+       "runtime": { "start": 29334341676, "end": 29334341758}
+      },
+      "3": {
+       "copytime": { "start": 29334341924, "end": 29334341955},
+       "maxRSS": {
+        "post": 16368,
+        "pre": 16368
+       },
+       "num-tuples": 342,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 16368,
+           "pre": 16368
+          },
+          "num-tuples": 342,
+          "runtime": { "start": 29334341820, "end": 29334341897},
+          "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/culprit_cycle.dl [22:1-22:29]"
+         }
+        }
+       },
+       "runtime": { "start": 29334341810, "end": 29334341905}
+      },
+      "4": {
+       "copytime": { "start": 29334342080, "end": 29334342111},
+       "maxRSS": {
+        "post": 16368,
+        "pre": 16368
+       },
+       "num-tuples": 319,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 16368,
+           "pre": 16368
+          },
+          "num-tuples": 319,
+          "runtime": { "start": 29334341970, "end": 29334342053},
+          "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/culprit_cycle.dl [22:1-22:29]"
+         }
+        }
+       },
+       "runtime": { "start": 29334341959, "end": 29334342060}
+      },
+      "5": {
+       "copytime": { "start": 29334342225, "end": 29334342252},
+       "maxRSS": {
+        "post": 16368,
+        "pre": 16368
+       },
+       "num-tuples": 261,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 16368,
+           "pre": 16368
+          },
+          "num-tuples": 261,
+          "runtime": { "start": 29334342123, "end": 29334342198},
+          "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/culprit_cycle.dl [22:1-22:29]"
+         }
+        }
+       },
+       "runtime": { "start": 29334342114, "end": 29334342206}
+      },
+      "6": {
+       "copytime": { "start": 29334342353, "end": 29334342375},
+       "maxRSS": {
+        "post": 16368,
+        "pre": 16368
+       },
+       "num-tuples": 198,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 16368,
+           "pre": 16368
+          },
+          "num-tuples": 198,
+          "runtime": { "start": 29334342265, "end": 29334342323},
+          "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/culprit_cycle.dl [22:1-22:29]"
+         }
+        }
+       },
+       "runtime": { "start": 29334342256, "end": 29334342332}
+      },
+      "7": {
+       "copytime": { "start": 29334342459, "end": 29334342474},
+       "maxRSS": {
+        "post": 16368,
+        "pre": 16368
+       },
+       "num-tuples": 131,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 16368,
+           "pre": 16368
+          },
+          "num-tuples": 131,
+          "runtime": { "start": 29334342388, "end": 29334342432},
+          "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/culprit_cycle.dl [22:1-22:29]"
+         }
+        }
+       },
+       "runtime": { "start": 29334342379, "end": 29334342440}
+      },
+      "8": {
+       "copytime": { "start": 29334342543, "end": 29334342555},
+       "maxRSS": {
+        "post": 16368,
+        "pre": 16368
+       },
+       "num-tuples": 80,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 16368,
+           "pre": 16368
+          },
+          "num-tuples": 80,
+          "runtime": { "start": 29334342487, "end": 29334342515},
+          "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/culprit_cycle.dl [22:1-22:29]"
+         }
+        }
+       },
+       "runtime": { "start": 29334342478, "end": 29334342524}
+      },
+      "9": {
+       "copytime": { "start": 29334342612, "end": 29334342618},
+       "maxRSS": {
+        "post": 16368,
+        "pre": 16368
+       },
+       "num-tuples": 42,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 16368,
+           "pre": 16368
+          },
+          "num-tuples": 42,
+          "runtime": { "start": 29334342567, "end": 29334342585},
+          "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/culprit_cycle.dl [22:1-22:29]"
+         }
+        }
+       },
+       "runtime": { "start": 29334342559, "end": 29334342593}
+      }
+     },
+     "maxRSS": {
+      "post": 16368,
+      "pre": 16368
+     },
+     "non-recursive-rule": {
+      "q(x,y) :- \n   base(x,y).": {
+       "atom-frequency": {
+        "q(x,y) :- \n   base(x,y).": {
+         "base": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 16368,
+        "pre": 16368
+       },
+       "num-tuples": 150,
+       "runtime": { "start": 29334341418, "end": 29334341430},
+       "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/culprit_cycle.dl [21:1-21:21]"
+      }
+     },
+     "num-tuples": 150,
+     "reads": 3021,
+     "runtime": { "start": 29334341406, "end": 29334341439},
+     "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/culprit_cycle.dl [20:7-20:8]"
+    },
+    "s": {
+     "maxRSS": {
+      "post": 16368,
+      "pre": 16368
+     },
+     "non-recursive-rule": {
+      "s(x) :- \n   q(x,y),\n   blocked(y).": {
+       "atom-frequency": {
+        "s(x) :- \n   q(x,y),\n   blocked(y).": {
+         "q": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 16368,
+        "pre": 16368
+       },
+       "num-tuples": 60,
+       "runtime": { "start": 29334342805, "end": 29334342879},
+       "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/culprit_cycle.dl [25:1-25:28]"
+      }
+     },
+     "num-tuples": 60,
+     "reads": 270,
+     "runtime": { "start": 29334342805, "end": 29334342885},
+     "source-locator": "/root/compiler/tests/corpus/BENCHMARK_FAMILY/culprit_cycle.dl [24:7-24:8]"
+    }
+   },
+   "runtime": { "start": 29334339688, "end": 29334343182},
+   "starttime": { "time": 29334339657},
+   "usage": {
+    "timepoint": {
+     "29334339671": {
+      "maxRSS": 16368,
+      "systemtime": 2248,
+      "usertime": 0
+     },
+     "29334340509": {
+      "maxRSS": 16368,
+      "systemtime": 4686,
+      "usertime": 0
+     },
+     "29334341014": {
+      "maxRSS": 16368,
+      "systemtime": 5022,
+      "usertime": 0
+     },
+     "29334341429": {
+      "maxRSS": 16368,
+      "systemtime": 5305,
+      "usertime": 0
+     },
+     "29334341469": {
+      "maxRSS": 16368,
+      "systemtime": 5363,
+      "usertime": 0
+     },
+     "29334341541": {
+      "maxRSS": 16368,
+      "systemtime": 5454,
+      "usertime": 0
+     },
+     "29334341574": {
+      "maxRSS": 16368,
+      "systemtime": 5494,
+      "usertime": 0
+     },
+     "29334341652": {
+      "maxRSS": 16368,
+      "systemtime": 5581,
+      "usertime": 0
+     },
+     "29334341695": {
+      "maxRSS": 16368,
+      "systemtime": 5629,
+      "usertime": 0
+     },
+     "29334341778": {
+      "maxRSS": 16368,
+      "systemtime": 5734,
+      "usertime": 0
+     },
+     "29334341854": {
+      "maxRSS": 16368,
+      "systemtime": 5798,
+      "usertime": 0
+     },
+     "29334341926": {
+      "maxRSS": 16368,
+      "systemtime": 5924,
+      "usertime": 0
+     },
+     "29334341977": {
+      "maxRSS": 16368,
+      "systemtime": 5988,
+      "usertime": 0
+     },
+     "29334342082": {
+      "maxRSS": 16368,
+      "systemtime": 6111,
+      "usertime": 0
+     },
+     "29334342154": {
+      "maxRSS": 16368,
+      "systemtime": 6180,
+      "usertime": 0
+     },
+     "29334342224": {
+      "maxRSS": 16368,
+      "systemtime": 6298,
+      "usertime": 0
+     },
+     "29334342272": {
+      "maxRSS": 16368,
+      "systemtime": 6351,
+      "usertime": 0
+     },
+     "29334342356": {
+      "maxRSS": 16368,
+      "systemtime": 6450,
+      "usertime": 0
+     },
+     "29334342395": {
+      "maxRSS": 16368,
+      "systemtime": 6496,
+      "usertime": 0
+     },
+     "29334342458": {
+      "maxRSS": 16368,
+      "systemtime": 6568,
+      "usertime": 0
+     },
+     "29334342492": {
+      "maxRSS": 16368,
+      "systemtime": 6612,
+      "usertime": 0
+     },
+     "29334342542": {
+      "maxRSS": 16368,
+      "systemtime": 6669,
+      "usertime": 0
+     },
+     "29334342572": {
+      "maxRSS": 16368,
+      "systemtime": 6706,
+      "usertime": 0
+     },
+     "29334342613": {
+      "maxRSS": 16368,
+      "systemtime": 6759,
+      "usertime": 0
+     },
+     "29334342639": {
+      "maxRSS": 16368,
+      "systemtime": 6796,
+      "usertime": 0
+     },
+     "29334342667": {
+      "maxRSS": 16368,
+      "systemtime": 6829,
+      "usertime": 0
+     },
+     "29334342676": {
+      "maxRSS": 16368,
+      "systemtime": 6851,
+      "usertime": 0
+     },
+     "29334342705": {
+      "maxRSS": 16368,
+      "systemtime": 6887,
+      "usertime": 0
+     },
+     "29334342715": {
+      "maxRSS": 16368,
+      "systemtime": 6904,
+      "usertime": 0
+     },
+     "29334342740": {
+      "maxRSS": 16368,
+      "systemtime": 6930,
+      "usertime": 0
+     },
+     "29334342760": {
+      "maxRSS": 16368,
+      "systemtime": 6961,
+      "usertime": 0
+     },
+     "29334342808": {
+      "maxRSS": 16368,
+      "systemtime": 7031,
+      "usertime": 0
+     },
+     "29334342904": {
+      "maxRSS": 16368,
+      "systemtime": 7151,
+      "usertime": 0
+     },
+     "29334342944": {
+      "maxRSS": 16368,
+      "systemtime": 7199,
+      "usertime": 0
+     },
+     "29334343011": {
+      "maxRSS": 16368,
+      "systemtime": 7288,
+      "usertime": 0
+     },
+     "29334343067": {
+      "maxRSS": 16368,
+      "systemtime": 7356,
+      "usertime": 0
+     },
+     "29334343086": {
+      "maxRSS": 16368,
+      "systemtime": 7385,
+      "usertime": 0
+     },
+     "29334343122": {
+      "maxRSS": 16368,
+      "systemtime": 7416,
+      "usertime": 0
+     }
+    }
+   }
+  }
+ }
+}
