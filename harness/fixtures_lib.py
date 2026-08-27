@@ -185,6 +185,80 @@ def gen_culprit_cycle_facts_labeled(seed, n=20, num_labels=3, target_base=30, ta
     return base_edges, e_edges, blocked
 
 
+def gen_cone_corpus_facts(seed, n=20, target_base=30, target_e=30,
+                           blocked_fraction=0.2, gate_fraction=0.15,
+                           gate_edges=20, sibling_edges=40):
+    """NIGHT-BATCH-04 B: one generator serving all four
+    tests/corpus/CONE_CORPUS/ programs -- they share the same
+    culprit-cycle core (base/e/blocked, identical construction to
+    gen_culprit_cycle_facts) and differ only in which of the extra
+    relations below their own .decl/.input lines actually use. Returns a
+    dict of relation name -> rows; each program's own fixture directory
+    is written from the subset of keys its own .dl file declares.
+
+    - base, e, blocked: the culprit-cycle core, identical construction to
+      gen_culprit_cycle_facts (same rand_edges shape, same blocked_fraction
+      convention).
+    - gate_seed, gate_edge: feed the recursive `gate` IDB relation
+      (cc_cone_only.dl, cc_both.dl) -- read from `p`'s non-recursive
+      base-case rule (see cc_cone_only.dl's header comment for why that
+      placement, not `s`'s rule, is required for a genuine cone).
+    - chain_seed, chain_edge: a SECOND, independent recursive relation
+      (`gate1b`, feeding `gate1`) for the two-hop cone variant
+      (cc_cone_proper_subset.dl).
+    - sibling_edge, sibling2_edge: plain edge relations for the `tc`/
+      `direct` sibling branches (cc_sibling_emptycone.dl, cc_both.dl,
+      cc_cone_proper_subset.dl) -- deliberately their own relation
+      names, sharing nothing with the culprit core, so no dependency
+      edge can accidentally form between a sibling branch and the
+      declined one.
+    """
+    rng = random.Random(seed)
+
+    def rand_edges(count):
+        edges, edge_set = [], set()
+        attempts, max_attempts = count * 20 + 2000, count * 20 + 2000
+        tries = 0
+        while len(edges) < count and tries < max_attempts:
+            tries += 1
+            a, b = rng.randint(1, n), rng.randint(1, n)
+            if a == b:
+                continue
+            e = (a, b)
+            if e in edge_set:
+                continue
+            edge_set.add(e)
+            edges.append(e)
+        return edges
+
+    base_edges = rand_edges(target_base)
+    e_edges = rand_edges(target_e)
+    if not any(a == 1 for a, _ in e_edges):
+        e_edges.append((1, rng.randint(2, n)))
+    blocked = [(i,) for i in range(1, n + 1) if rng.random() < blocked_fraction]
+
+    gate_seed_rows = [(i,) for i in range(1, n + 1) if rng.random() < gate_fraction]
+    gate_edge_rows = rand_edges(gate_edges)
+
+    chain_seed_rows = [(i,) for i in range(1, n + 1) if rng.random() < gate_fraction]
+    chain_edge_rows = rand_edges(gate_edges)
+
+    sibling_edge_rows = rand_edges(sibling_edges)
+    if not any(a == 1 for a, _ in sibling_edge_rows):
+        sibling_edge_rows.append((1, rng.randint(2, n)))
+
+    sibling2_edge_rows = rand_edges(sibling_edges)
+    if not any(a == 1 for a, _ in sibling2_edge_rows):
+        sibling2_edge_rows.append((1, rng.randint(2, n)))
+
+    return {
+        "base": base_edges, "e": e_edges, "blocked": blocked,
+        "gate_seed": gate_seed_rows, "gate_edge": gate_edge_rows,
+        "chain_seed": chain_seed_rows, "chain_edge": chain_edge_rows,
+        "sibling_edge": sibling_edge_rows, "sibling2_edge": sibling2_edge_rows,
+    }
+
+
 def bfs_reachable(edges, source):
     adj = {}
     for a, b in edges:

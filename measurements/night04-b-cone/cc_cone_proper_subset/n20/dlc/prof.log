@@ -1,0 +1,962 @@
+{
+ "root": {
+  "program": {
+   "configuration": {
+    "": "/root/compiler/measurements/night04-b-cone/cc_cone_proper_subset/n20/emit_guarded/transformed.dl",
+    "fact-dir": "/root/compiler/fixtures/cone_corpus/cc_cone_proper_subset/n20",
+    "include-dir": ".",
+    "jobs": "1",
+    "libraries": "functors",
+    "library-dir": ".",
+    "output-dir": "/root/compiler/measurements/night04-b-cone/cc_cone_proper_subset/n20/dlc",
+    "profile": "prof.log",
+    "relationCount": "15",
+    "ruleCount": "20",
+    "version": "2.5",
+    "warn": "all",
+    "wno": "none"
+   },
+   "relation": {
+    "base": {
+     "loadtime": { "start": 18399187437, "end": 18399187556},
+     "num-tuples": 30,
+     "reads": 0,
+     "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_proper_subset/n20/emit_guarded/transformed.dl [1:7-1:11]"
+    },
+    "blocked": {
+     "loadtime": { "start": 18399187566, "end": 18399187594},
+     "num-tuples": 2,
+     "reads": 199,
+     "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_proper_subset/n20/emit_guarded/transformed.dl [5:7-5:14]"
+    },
+    "chain_edge": {
+     "loadtime": { "start": 18399187601, "end": 18399187627},
+     "num-tuples": 20,
+     "reads": 0,
+     "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_proper_subset/n20/emit_guarded/transformed.dl [9:7-9:17]"
+    },
+    "chain_seed": {
+     "loadtime": { "start": 18399187633, "end": 18399187654},
+     "num-tuples": 2,
+     "reads": 0,
+     "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_proper_subset/n20/emit_guarded/transformed.dl [7:7-7:17]"
+    },
+    "e": {
+     "loadtime": { "start": 18399187661, "end": 18399187676},
+     "num-tuples": 31,
+     "reads": 0,
+     "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_proper_subset/n20/emit_guarded/transformed.dl [3:7-3:8]"
+    },
+    "gate1b": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 18399187838, "end": 18399187840},
+       "maxRSS": {
+        "post": 12700,
+        "pre": 12444
+       },
+       "num-tuples": 2,
+       "recursive-rule": {
+        "gate1b(x) :- \n   gate1b(y),\n   chain_edge(y,x).": {
+         "0": {
+          "atom-frequency": {
+           "@new_gate1b(x) :- \n   @delta_gate1b(y),\n   chain_edge(y,x).": {
+            "@delta_gate1b": {
+             "level": 0,
+             "num-tuples": 0
+            },
+            "chain_edge": {
+             "level": 1,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 12700,
+           "pre": 12444
+          },
+          "num-tuples": 2,
+          "runtime": { "start": 18399187798, "end": 18399187806},
+          "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_proper_subset/n20/emit_guarded/transformed.dl [31:1-31:42]"
+         }
+        }
+       },
+       "runtime": { "start": 18399187788, "end": 18399187818}
+      },
+      "1": {
+       "maxRSS": {
+        "post": 12700,
+        "pre": 12700
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "gate1b(x) :- \n   gate1b(y),\n   chain_edge(y,x).": {
+         "0": {
+          "maxRSS": {
+           "post": 12700,
+           "pre": 12700
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 18399187853, "end": 18399187855},
+          "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_proper_subset/n20/emit_guarded/transformed.dl [31:1-31:42]"
+         }
+        }
+       },
+       "runtime": { "start": 18399187844, "end": 18399187864}
+      }
+     },
+     "maxRSS": {
+      "post": 12444,
+      "pre": 12444
+     },
+     "non-recursive-rule": {
+      "gate1b(x) :- \n   chain_seed(x).": {
+       "atom-frequency": {
+        "gate1b(x) :- \n   chain_seed(x).": {
+         "chain_seed": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12444,
+        "pre": 12444
+       },
+       "num-tuples": 2,
+       "runtime": { "start": 18399187769, "end": 18399187773},
+       "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_proper_subset/n20/emit_guarded/transformed.dl [30:1-30:28]"
+      }
+     },
+     "num-tuples": 2,
+     "reads": 34,
+     "runtime": { "start": 18399187759, "end": 18399187782},
+     "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_proper_subset/n20/emit_guarded/transformed.dl [16:7-16:13]"
+    },
+    "out": {
+     "maxRSS": {
+      "post": 12700,
+      "pre": 12700
+     },
+     "non-recursive-rule": {
+      "out(y) :- \n   p(1,y).": {
+       "atom-frequency": {
+        "out(y) :- \n   p(1,y).": {
+         "p": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12700,
+        "pre": 12700
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 18399188921, "end": 18399188922},
+       "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_proper_subset/n20/emit_guarded/transformed.dl [41:1-41:19]"
+      }
+     },
+     "num-tuples": 1,
+     "reads": 0,
+     "runtime": { "start": 18399188920, "end": 18399188929},
+     "savetime": { "start": 18399188933, "end": 18399188961},
+     "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_proper_subset/n20/emit_guarded/transformed.dl [20:7-20:10]"
+    },
+    "out2": {
+     "maxRSS": {
+      "post": 12700,
+      "pre": 12700
+     },
+     "non-recursive-rule": {
+      "out2(y) :- \n   tc(1,y).": {
+       "atom-frequency": {
+        "out2(y) :- \n   tc(1,y).": {
+         "tc": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12700,
+        "pre": 12700
+       },
+       "num-tuples": 13,
+       "runtime": { "start": 18399188765, "end": 18399188767},
+       "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_proper_subset/n20/emit_guarded/transformed.dl [32:1-32:21]"
+      }
+     },
+     "num-tuples": 13,
+     "reads": 0,
+     "runtime": { "start": 18399188764, "end": 18399188774},
+     "savetime": { "start": 18399188778, "end": 18399188819},
+     "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_proper_subset/n20/emit_guarded/transformed.dl [23:7-23:11]"
+    },
+    "out3": {
+     "maxRSS": {
+      "post": 12700,
+      "pre": 12700
+     },
+     "non-recursive-rule": {
+      "out3(y) :- \n   sibling2_edge(1,y).": {
+       "atom-frequency": {
+        "out3(y) :- \n   sibling2_edge(1,y).": {
+         "sibling2_edge": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12700,
+        "pre": 12700
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 18399187885, "end": 18399187886},
+       "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_proper_subset/n20/emit_guarded/transformed.dl [33:1-33:25]"
+      }
+     },
+     "num-tuples": 1,
+     "reads": 0,
+     "runtime": { "start": 18399187884, "end": 18399187893},
+     "savetime": { "start": 18399187897, "end": 18399187970},
+     "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_proper_subset/n20/emit_guarded/transformed.dl [26:7-26:11]"
+    },
+    "p": {
+     "iteration": {
+      "0": {
+       "maxRSS": {
+        "post": 12700,
+        "pre": 12700
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "p(x,y) :- \n   p(x,z),\n   !s(z),\n   q(z,y).": {
+         "0": {
+          "atom-frequency": {
+           "@new_p(x,y) :- \n   @delta_p(x,z),\n   !s(z),\n   q(z,y).": {
+            "@delta_p": {
+             "level": 0,
+             "num-tuples": 0
+            },
+            "q": {
+             "level": 1,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 12700,
+           "pre": 12700
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 18399188889, "end": 18399188891},
+          "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_proper_subset/n20/emit_guarded/transformed.dl [35:1-35:36]"
+         }
+        }
+       },
+       "runtime": { "start": 18399188879, "end": 18399188899}
+      }
+     },
+     "maxRSS": {
+      "post": 12700,
+      "pre": 12700
+     },
+     "non-recursive-rule": {
+      "p(x,y) :- \n   e(x,y),\n   gate1b(x).": {
+       "atom-frequency": {
+        "p(x,y) :- \n   e(x,y),\n   gate1b(x).": {
+         "e": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12700,
+        "pre": 12700
+       },
+       "num-tuples": 7,
+       "runtime": { "start": 18399188864, "end": 18399188866},
+       "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_proper_subset/n20/emit_guarded/transformed.dl [34:1-34:30]"
+      }
+     },
+     "num-tuples": 7,
+     "reads": 0,
+     "runtime": { "start": 18399188855, "end": 18399188874},
+     "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_proper_subset/n20/emit_guarded/transformed.dl [19:7-19:8]"
+    },
+    "q": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 18399188077, "end": 18399188081},
+       "maxRSS": {
+        "post": 12700,
+        "pre": 12700
+       },
+       "num-tuples": 46,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "atom-frequency": {
+           "@new_q(x,y) :- \n   @delta_q(x,z),\n   base(z,y).": {
+            "@delta_q": {
+             "level": 0,
+             "num-tuples": 0
+            },
+            "base": {
+             "level": 1,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 12700,
+           "pre": 12700
+          },
+          "num-tuples": 46,
+          "runtime": { "start": 18399188043, "end": 18399188059},
+          "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_proper_subset/n20/emit_guarded/transformed.dl [37:1-37:32]"
+         }
+        }
+       },
+       "runtime": { "start": 18399188031, "end": 18399188068}
+      },
+      "1": {
+       "copytime": { "start": 18399188138, "end": 18399188143},
+       "maxRSS": {
+        "post": 12700,
+        "pre": 12700
+       },
+       "num-tuples": 51,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12700,
+           "pre": 12700
+          },
+          "num-tuples": 51,
+          "runtime": { "start": 18399188094, "end": 18399188110},
+          "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_proper_subset/n20/emit_guarded/transformed.dl [37:1-37:32]"
+         }
+        }
+       },
+       "runtime": { "start": 18399188085, "end": 18399188118}
+      },
+      "2": {
+       "copytime": { "start": 18399188200, "end": 18399188205},
+       "maxRSS": {
+        "post": 12700,
+        "pre": 12700
+       },
+       "num-tuples": 44,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12700,
+           "pre": 12700
+          },
+          "num-tuples": 44,
+          "runtime": { "start": 18399188156, "end": 18399188171},
+          "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_proper_subset/n20/emit_guarded/transformed.dl [37:1-37:32]"
+         }
+        }
+       },
+       "runtime": { "start": 18399188146, "end": 18399188178}
+      },
+      "3": {
+       "copytime": { "start": 18399188255, "end": 18399188259},
+       "maxRSS": {
+        "post": 12700,
+        "pre": 12700
+       },
+       "num-tuples": 21,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12700,
+           "pre": 12700
+          },
+          "num-tuples": 21,
+          "runtime": { "start": 18399188218, "end": 18399188228},
+          "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_proper_subset/n20/emit_guarded/transformed.dl [37:1-37:32]"
+         }
+        }
+       },
+       "runtime": { "start": 18399188208, "end": 18399188236}
+      },
+      "4": {
+       "copytime": { "start": 18399188303, "end": 18399188305},
+       "maxRSS": {
+        "post": 12700,
+        "pre": 12700
+       },
+       "num-tuples": 6,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12700,
+           "pre": 12700
+          },
+          "num-tuples": 6,
+          "runtime": { "start": 18399188271, "end": 18399188277},
+          "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_proper_subset/n20/emit_guarded/transformed.dl [37:1-37:32]"
+         }
+        }
+       },
+       "runtime": { "start": 18399188262, "end": 18399188284}
+      },
+      "5": {
+       "copytime": { "start": 18399188348, "end": 18399188349},
+       "maxRSS": {
+        "post": 12700,
+        "pre": 12700
+       },
+       "num-tuples": 1,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12700,
+           "pre": 12700
+          },
+          "num-tuples": 1,
+          "runtime": { "start": 18399188318, "end": 18399188320},
+          "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_proper_subset/n20/emit_guarded/transformed.dl [37:1-37:32]"
+         }
+        }
+       },
+       "runtime": { "start": 18399188309, "end": 18399188328}
+      },
+      "6": {
+       "maxRSS": {
+        "post": 12700,
+        "pre": 12700
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12700,
+           "pre": 12700
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 18399188361, "end": 18399188362},
+          "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_proper_subset/n20/emit_guarded/transformed.dl [37:1-37:32]"
+         }
+        }
+       },
+       "runtime": { "start": 18399188352, "end": 18399188370}
+      }
+     },
+     "maxRSS": {
+      "post": 12700,
+      "pre": 12700
+     },
+     "non-recursive-rule": {
+      "q(x,y) :- \n   base(x,y).": {
+       "atom-frequency": {
+        "q(x,y) :- \n   base(x,y).": {
+         "base": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12700,
+        "pre": 12700
+       },
+       "num-tuples": 30,
+       "runtime": { "start": 18399187985, "end": 18399187989},
+       "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_proper_subset/n20/emit_guarded/transformed.dl [36:1-36:23]"
+      }
+     },
+     "num-tuples": 30,
+     "reads": 327,
+     "runtime": { "start": 18399187975, "end": 18399187997},
+     "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_proper_subset/n20/emit_guarded/transformed.dl [15:7-15:8]"
+    },
+    "s": {
+     "maxRSS": {
+      "post": 12700,
+      "pre": 12700
+     },
+     "non-recursive-rule": {
+      "s(x) :- \n   q(x,y),\n   blocked(y).": {
+       "atom-frequency": {
+        "s(x) :- \n   q(x,y),\n   blocked(y).": {
+         "q": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12700,
+        "pre": 12700
+       },
+       "num-tuples": 12,
+       "runtime": { "start": 18399188834, "end": 18399188841},
+       "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_proper_subset/n20/emit_guarded/transformed.dl [38:1-38:29]"
+      }
+     },
+     "num-tuples": 12,
+     "reads": 7,
+     "runtime": { "start": 18399188824, "end": 18399188850},
+     "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_proper_subset/n20/emit_guarded/transformed.dl [18:7-18:8]"
+    },
+    "sibling2_edge": {
+     "loadtime": { "start": 18399187681, "end": 18399187713},
+     "num-tuples": 41,
+     "reads": 0,
+     "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_proper_subset/n20/emit_guarded/transformed.dl [13:7-13:20]"
+    },
+    "sibling_edge": {
+     "loadtime": { "start": 18399187721, "end": 18399187753},
+     "num-tuples": 40,
+     "reads": 0,
+     "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_proper_subset/n20/emit_guarded/transformed.dl [11:7-11:19]"
+    },
+    "tc": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 18399188457, "end": 18399188463},
+       "maxRSS": {
+        "post": 12700,
+        "pre": 12700
+       },
+       "num-tuples": 63,
+       "recursive-rule": {
+        "tc(x,y) :- \n   tc(x,z),\n   sibling_edge(z,y).": {
+         "0": {
+          "atom-frequency": {
+           "@new_tc(x,y) :- \n   @delta_tc(x,z),\n   sibling_edge(z,y).": {
+            "@delta_tc": {
+             "level": 0,
+             "num-tuples": 0
+            },
+            "sibling_edge": {
+             "level": 1,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 12700,
+           "pre": 12700
+          },
+          "num-tuples": 63,
+          "runtime": { "start": 18399188415, "end": 18399188429},
+          "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_proper_subset/n20/emit_guarded/transformed.dl [40:1-40:42]"
+         }
+        }
+       },
+       "runtime": { "start": 18399188406, "end": 18399188437}
+      },
+      "1": {
+       "copytime": { "start": 18399188520, "end": 18399188526},
+       "maxRSS": {
+        "post": 12700,
+        "pre": 12700
+       },
+       "num-tuples": 65,
+       "recursive-rule": {
+        "tc(x,y) :- \n   tc(x,z),\n   sibling_edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12700,
+           "pre": 12700
+          },
+          "num-tuples": 65,
+          "runtime": { "start": 18399188475, "end": 18399188493},
+          "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_proper_subset/n20/emit_guarded/transformed.dl [40:1-40:42]"
+         }
+        }
+       },
+       "runtime": { "start": 18399188466, "end": 18399188501}
+      },
+      "2": {
+       "copytime": { "start": 18399188584, "end": 18399188590},
+       "maxRSS": {
+        "post": 12700,
+        "pre": 12700
+       },
+       "num-tuples": 48,
+       "recursive-rule": {
+        "tc(x,y) :- \n   tc(x,z),\n   sibling_edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12700,
+           "pre": 12700
+          },
+          "num-tuples": 48,
+          "runtime": { "start": 18399188539, "end": 18399188557},
+          "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_proper_subset/n20/emit_guarded/transformed.dl [40:1-40:42]"
+         }
+        }
+       },
+       "runtime": { "start": 18399188530, "end": 18399188565}
+      },
+      "3": {
+       "copytime": { "start": 18399188643, "end": 18399188647},
+       "maxRSS": {
+        "post": 12700,
+        "pre": 12700
+       },
+       "num-tuples": 20,
+       "recursive-rule": {
+        "tc(x,y) :- \n   tc(x,z),\n   sibling_edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12700,
+           "pre": 12700
+          },
+          "num-tuples": 20,
+          "runtime": { "start": 18399188603, "end": 18399188616},
+          "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_proper_subset/n20/emit_guarded/transformed.dl [40:1-40:42]"
+         }
+        }
+       },
+       "runtime": { "start": 18399188594, "end": 18399188623}
+      },
+      "4": {
+       "copytime": { "start": 18399188694, "end": 18399188696},
+       "maxRSS": {
+        "post": 12700,
+        "pre": 12700
+       },
+       "num-tuples": 9,
+       "recursive-rule": {
+        "tc(x,y) :- \n   tc(x,z),\n   sibling_edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12700,
+           "pre": 12700
+          },
+          "num-tuples": 9,
+          "runtime": { "start": 18399188660, "end": 18399188667},
+          "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_proper_subset/n20/emit_guarded/transformed.dl [40:1-40:42]"
+         }
+        }
+       },
+       "runtime": { "start": 18399188651, "end": 18399188674}
+      },
+      "5": {
+       "copytime": { "start": 18399188729, "end": 18399188730},
+       "maxRSS": {
+        "post": 12700,
+        "pre": 12700
+       },
+       "num-tuples": 7,
+       "recursive-rule": {
+        "tc(x,y) :- \n   tc(x,z),\n   sibling_edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12700,
+           "pre": 12700
+          },
+          "num-tuples": 7,
+          "runtime": { "start": 18399188700, "end": 18399188704},
+          "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_proper_subset/n20/emit_guarded/transformed.dl [40:1-40:42]"
+         }
+        }
+       },
+       "runtime": { "start": 18399188699, "end": 18399188710}
+      },
+      "6": {
+       "maxRSS": {
+        "post": 12700,
+        "pre": 12700
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "tc(x,y) :- \n   tc(x,z),\n   sibling_edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12700,
+           "pre": 12700
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 18399188737, "end": 18399188738},
+          "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_proper_subset/n20/emit_guarded/transformed.dl [40:1-40:42]"
+         }
+        }
+       },
+       "runtime": { "start": 18399188734, "end": 18399188745}
+      }
+     },
+     "maxRSS": {
+      "post": 12700,
+      "pre": 12700
+     },
+     "non-recursive-rule": {
+      "tc(x,y) :- \n   sibling_edge(x,y).": {
+       "atom-frequency": {
+        "tc(x,y) :- \n   sibling_edge(x,y).": {
+         "sibling_edge": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12700,
+        "pre": 12700
+       },
+       "num-tuples": 40,
+       "runtime": { "start": 18399188391, "end": 18399188393},
+       "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_proper_subset/n20/emit_guarded/transformed.dl [39:1-39:32]"
+      }
+     },
+     "num-tuples": 40,
+     "reads": 434,
+     "runtime": { "start": 18399188390, "end": 18399188400},
+     "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_proper_subset/n20/emit_guarded/transformed.dl [22:7-22:9]"
+    }
+   },
+   "runtime": { "start": 18399187431, "end": 18399188965},
+   "starttime": { "time": 18399187388},
+   "usage": {
+    "timepoint": {
+     "18399187417": {
+      "maxRSS": 11668,
+      "systemtime": 0,
+      "usertime": 3165
+     },
+     "18399187588": {
+      "maxRSS": 12444,
+      "systemtime": 0,
+      "usertime": 6750
+     },
+     "18399187621": {
+      "maxRSS": 12444,
+      "systemtime": 0,
+      "usertime": 6798
+     },
+     "18399187657": {
+      "maxRSS": 12444,
+      "systemtime": 0,
+      "usertime": 6866
+     },
+     "18399187697": {
+      "maxRSS": 12444,
+      "systemtime": 0,
+      "usertime": 6904
+     },
+     "18399187743": {
+      "maxRSS": 12444,
+      "systemtime": 0,
+      "usertime": 6953
+     },
+     "18399187774": {
+      "maxRSS": 12444,
+      "systemtime": 0,
+      "usertime": 7013
+     },
+     "18399187802": {
+      "maxRSS": 12572,
+      "systemtime": 0,
+      "usertime": 7047
+     },
+     "18399187837": {
+      "maxRSS": 12700,
+      "systemtime": 0,
+      "usertime": 7087
+     },
+     "18399187858": {
+      "maxRSS": 12700,
+      "systemtime": 0,
+      "usertime": 7115
+     },
+     "18399187882": {
+      "maxRSS": 12700,
+      "systemtime": 0,
+      "usertime": 7143
+     },
+     "18399187911": {
+      "maxRSS": 12700,
+      "systemtime": 0,
+      "usertime": 7168
+     },
+     "18399187990": {
+      "maxRSS": 12700,
+      "systemtime": 0,
+      "usertime": 7265
+     },
+     "18399188070": {
+      "maxRSS": 12700,
+      "systemtime": 0,
+      "usertime": 7355
+     },
+     "18399188101": {
+      "maxRSS": 12700,
+      "systemtime": 0,
+      "usertime": 7398
+     },
+     "18399188140": {
+      "maxRSS": 12700,
+      "systemtime": 0,
+      "usertime": 7451
+     },
+     "18399188161": {
+      "maxRSS": 12700,
+      "systemtime": 0,
+      "usertime": 7477
+     },
+     "18399188201": {
+      "maxRSS": 12700,
+      "systemtime": 0,
+      "usertime": 7529
+     },
+     "18399188223": {
+      "maxRSS": 12700,
+      "systemtime": 0,
+      "usertime": 7554
+     },
+     "18399188254": {
+      "maxRSS": 12700,
+      "systemtime": 0,
+      "usertime": 7592
+     },
+     "18399188276": {
+      "maxRSS": 12700,
+      "systemtime": 0,
+      "usertime": 7623
+     },
+     "18399188302": {
+      "maxRSS": 12700,
+      "systemtime": 0,
+      "usertime": 7656
+     },
+     "18399188323": {
+      "maxRSS": 12700,
+      "systemtime": 0,
+      "usertime": 7685
+     },
+     "18399188347": {
+      "maxRSS": 12700,
+      "systemtime": 0,
+      "usertime": 7713
+     },
+     "18399188366": {
+      "maxRSS": 12700,
+      "systemtime": 0,
+      "usertime": 7740
+     },
+     "18399188388": {
+      "maxRSS": 12700,
+      "systemtime": 0,
+      "usertime": 7768
+     },
+     "18399188422": {
+      "maxRSS": 12700,
+      "systemtime": 0,
+      "usertime": 7809
+     },
+     "18399188458": {
+      "maxRSS": 12700,
+      "systemtime": 0,
+      "usertime": 7859
+     },
+     "18399188480": {
+      "maxRSS": 12700,
+      "systemtime": 0,
+      "usertime": 7884
+     },
+     "18399188521": {
+      "maxRSS": 12700,
+      "systemtime": 0,
+      "usertime": 7937
+     },
+     "18399188543": {
+      "maxRSS": 12700,
+      "systemtime": 0,
+      "usertime": 7963
+     },
+     "18399188583": {
+      "maxRSS": 12700,
+      "systemtime": 0,
+      "usertime": 8009
+     },
+     "18399188608": {
+      "maxRSS": 12700,
+      "systemtime": 0,
+      "usertime": 8042
+     },
+     "18399188644": {
+      "maxRSS": 12700,
+      "systemtime": 0,
+      "usertime": 8090
+     },
+     "18399188666": {
+      "maxRSS": 12700,
+      "systemtime": 0,
+      "usertime": 8115
+     },
+     "18399188695": {
+      "maxRSS": 12700,
+      "systemtime": 0,
+      "usertime": 8157
+     },
+     "18399188701": {
+      "maxRSS": 12700,
+      "systemtime": 0,
+      "usertime": 8170
+     },
+     "18399188728": {
+      "maxRSS": 12700,
+      "systemtime": 0,
+      "usertime": 8198
+     },
+     "18399188739": {
+      "maxRSS": 12700,
+      "systemtime": 0,
+      "usertime": 8221
+     },
+     "18399188765": {
+      "maxRSS": 12700,
+      "systemtime": 0,
+      "usertime": 8255
+     },
+     "18399188793": {
+      "maxRSS": 12700,
+      "systemtime": 0,
+      "usertime": 8276
+     },
+     "18399188840": {
+      "maxRSS": 12700,
+      "systemtime": 0,
+      "usertime": 8341
+     },
+     "18399188870": {
+      "maxRSS": 12700,
+      "systemtime": 0,
+      "usertime": 8382
+     },
+     "18399188893": {
+      "maxRSS": 12700,
+      "systemtime": 0,
+      "usertime": 8414
+     },
+     "18399188918": {
+      "maxRSS": 12700,
+      "systemtime": 0,
+      "usertime": 8443
+     },
+     "18399188948": {
+      "maxRSS": 12700,
+      "systemtime": 0,
+      "usertime": 8471
+     }
+    }
+   }
+  }
+ }
+}

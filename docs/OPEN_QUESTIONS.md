@@ -312,3 +312,27 @@ rather than seed `nonancestor`'s restriction directly the way `dlc`'s
 correct mechanical SIPS relaxation now does. `dlc` vs v1's full-scale
 comparison (n=500..8,000: `T_souffle/T_dlc` grows from 16.6× to 887.8×)
 is in `m4-sips.md` section "Q8, closed" and its headline table.
+
+## 2026-08-27 — `magicset.FindQuery` seeds only one query per program
+
+Found while constructing `tests/corpus/CONE_CORPUS/`'s "sibling" programs
+(NIGHT-BATCH-04 B, `docs/reports/night04-B-cone-corpus.md`).
+`FindQuery`'s own doc comment already discloses "if more than one
+candidate exists, the first in source order wins (this corpus never has
+more than one)" -- true of every prior corpus program, but NOT true of a
+program with two independent `.output` branches each with their own
+bindable single-atom body (e.g. `out(y):-p(1,y).` and
+`out2(y):-tc(1,y).`). Confirmed by reading the emitted program directly:
+the second branch's predicate (`tc`) is never adorned at all -- its
+original, full-extent rules are copied through unchanged (same treatment
+as an ordinary "Untouched" predicate), regardless of whether it could
+have been independently, cheaply demand-restricted. Not fixed here (out
+of NIGHT-BATCH-04 B's scope, and M2-M3-BUILD.md §2 was written and
+implemented around a single-query assumption throughout, not just in
+`FindQuery`). Consequence measured directly: this is one of two
+independent reasons `T_guarded < T_none` could not be achieved on any of
+B's four constructions (the other being that FALLBACK relations are
+always full-extent by definition). A future M-phase extension to support
+multiple independently-seeded queries (one worklist run per query
+candidate, unioning the results) would let a "sibling" branch actually
+benefit from demand restriction -- not attempted this session.

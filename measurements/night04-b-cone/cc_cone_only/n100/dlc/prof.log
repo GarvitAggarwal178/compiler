@@ -1,0 +1,1170 @@
+{
+ "root": {
+  "program": {
+   "configuration": {
+    "": "/root/compiler/measurements/night04-b-cone/cc_cone_only/n100/emit_guarded/transformed.dl",
+    "fact-dir": "/root/compiler/fixtures/cone_corpus/cc_cone_only/n100",
+    "include-dir": ".",
+    "jobs": "1",
+    "libraries": "functors",
+    "library-dir": ".",
+    "output-dir": "/root/compiler/measurements/night04-b-cone/cc_cone_only/n100/dlc",
+    "profile": "prof.log",
+    "relationCount": "10",
+    "ruleCount": "14",
+    "version": "2.5",
+    "warn": "all",
+    "wno": "none"
+   },
+   "relation": {
+    "base": {
+     "loadtime": { "start": 18398887777, "end": 18398887896},
+     "num-tuples": 150,
+     "reads": 0,
+     "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_only/n100/emit_guarded/transformed.dl [1:7-1:11]"
+    },
+    "blocked": {
+     "loadtime": { "start": 18398887904, "end": 18398887943},
+     "num-tuples": 28,
+     "reads": 3746,
+     "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_only/n100/emit_guarded/transformed.dl [5:7-5:14]"
+    },
+    "e": {
+     "loadtime": { "start": 18398887951, "end": 18398888029},
+     "num-tuples": 150,
+     "reads": 0,
+     "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_only/n100/emit_guarded/transformed.dl [3:7-3:8]"
+    },
+    "gate": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 18398888200, "end": 18398888206},
+       "maxRSS": {
+        "post": 12184,
+        "pre": 12056
+       },
+       "num-tuples": 4,
+       "recursive-rule": {
+        "gate(x) :- \n   gate(y),\n   gate_edge(y,x).": {
+         "0": {
+          "atom-frequency": {
+           "@new_gate(x) :- \n   @delta_gate(y),\n   gate_edge(y,x).": {
+            "@delta_gate": {
+             "level": 0,
+             "num-tuples": 0
+            },
+            "gate_edge": {
+             "level": 1,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 12184,
+           "pre": 12056
+          },
+          "num-tuples": 4,
+          "runtime": { "start": 18398888156, "end": 18398888166},
+          "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_only/n100/emit_guarded/transformed.dl [18:1-18:37]"
+         }
+        }
+       },
+       "runtime": { "start": 18398888145, "end": 18398888178}
+      },
+      "1": {
+       "maxRSS": {
+        "post": 12184,
+        "pre": 12184
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "gate(x) :- \n   gate(y),\n   gate_edge(y,x).": {
+         "0": {
+          "maxRSS": {
+           "post": 12184,
+           "pre": 12184
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 18398888223, "end": 18398888224},
+          "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_only/n100/emit_guarded/transformed.dl [18:1-18:37]"
+         }
+        }
+       },
+       "runtime": { "start": 18398888213, "end": 18398888232}
+      }
+     },
+     "maxRSS": {
+      "post": 12056,
+      "pre": 11928
+     },
+     "non-recursive-rule": {
+      "gate(x) :- \n   gate_seed(x).": {
+       "atom-frequency": {
+        "gate(x) :- \n   gate_seed(x).": {
+         "gate_seed": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12056,
+        "pre": 11928
+       },
+       "num-tuples": 18,
+       "runtime": { "start": 18398888118, "end": 18398888123},
+       "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_only/n100/emit_guarded/transformed.dl [17:1-17:25]"
+      }
+     },
+     "num-tuples": 18,
+     "reads": 155,
+     "runtime": { "start": 18398888108, "end": 18398888138},
+     "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_only/n100/emit_guarded/transformed.dl [12:7-12:11]"
+    },
+    "gate_edge": {
+     "loadtime": { "start": 18398888038, "end": 18398888072},
+     "num-tuples": 20,
+     "reads": 0,
+     "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_only/n100/emit_guarded/transformed.dl [9:7-9:16]"
+    },
+    "gate_seed": {
+     "loadtime": { "start": 18398888079, "end": 18398888102},
+     "num-tuples": 18,
+     "reads": 0,
+     "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_only/n100/emit_guarded/transformed.dl [7:7-7:16]"
+    },
+    "out": {
+     "maxRSS": {
+      "post": 12312,
+      "pre": 12312
+     },
+     "non-recursive-rule": {
+      "out(y) :- \n   p(1,y).": {
+       "atom-frequency": {
+        "out(y) :- \n   p(1,y).": {
+         "p": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12312,
+        "pre": 12312
+       },
+       "num-tuples": 0,
+       "runtime": { "start": 18398890886, "end": 18398890888},
+       "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_only/n100/emit_guarded/transformed.dl [24:1-24:19]"
+      }
+     },
+     "num-tuples": 0,
+     "reads": 0,
+     "runtime": { "start": 18398890876, "end": 18398890896},
+     "savetime": { "start": 18398890900, "end": 18398890965},
+     "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_only/n100/emit_guarded/transformed.dl [15:7-15:10]"
+    },
+    "p": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 18398890832, "end": 18398890833},
+       "maxRSS": {
+        "post": 12312,
+        "pre": 12312
+       },
+       "num-tuples": 2,
+       "recursive-rule": {
+        "p(x,y) :- \n   p(x,z),\n   !s(z),\n   q(z,y).": {
+         "0": {
+          "atom-frequency": {
+           "@new_p(x,y) :- \n   @delta_p(x,z),\n   !s(z),\n   q(z,y).": {
+            "@delta_p": {
+             "level": 0,
+             "num-tuples": 0
+            },
+            "q": {
+             "level": 1,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 12312,
+           "pre": 12312
+          },
+          "num-tuples": 2,
+          "runtime": { "start": 18398890797, "end": 18398890803},
+          "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_only/n100/emit_guarded/transformed.dl [20:1-20:36]"
+         }
+        }
+       },
+       "runtime": { "start": 18398890787, "end": 18398890813}
+      },
+      "1": {
+       "maxRSS": {
+        "post": 12312,
+        "pre": 12312
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "p(x,y) :- \n   p(x,z),\n   !s(z),\n   q(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12312,
+           "pre": 12312
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 18398890838, "end": 18398890840},
+          "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_only/n100/emit_guarded/transformed.dl [20:1-20:36]"
+         }
+        }
+       },
+       "runtime": { "start": 18398890837, "end": 18398890847}
+      }
+     },
+     "maxRSS": {
+      "post": 12312,
+      "pre": 12312
+     },
+     "non-recursive-rule": {
+      "p(x,y) :- \n   e(x,y),\n   gate(x).": {
+       "atom-frequency": {
+        "p(x,y) :- \n   e(x,y),\n   gate(x).": {
+         "e": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12312,
+        "pre": 12312
+       },
+       "num-tuples": 31,
+       "runtime": { "start": 18398890763, "end": 18398890772},
+       "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_only/n100/emit_guarded/transformed.dl [19:1-19:29]"
+      }
+     },
+     "num-tuples": 31,
+     "reads": 6,
+     "runtime": { "start": 18398890753, "end": 18398890781},
+     "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_only/n100/emit_guarded/transformed.dl [14:7-14:8]"
+    },
+    "q": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 18398888360, "end": 18398888379},
+       "maxRSS": {
+        "post": 12184,
+        "pre": 12184
+       },
+       "num-tuples": 220,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "atom-frequency": {
+           "@new_q(x,y) :- \n   @delta_q(x,z),\n   base(z,y).": {
+            "@delta_q": {
+             "level": 0,
+             "num-tuples": 0
+            },
+            "base": {
+             "level": 1,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 12184,
+           "pre": 12184
+          },
+          "num-tuples": 220,
+          "runtime": { "start": 18398888289, "end": 18398888333},
+          "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_only/n100/emit_guarded/transformed.dl [22:1-22:32]"
+         }
+        }
+       },
+       "runtime": { "start": 18398888279, "end": 18398888341}
+      },
+      "1": {
+       "copytime": { "start": 18398888480, "end": 18398888504},
+       "maxRSS": {
+        "post": 12184,
+        "pre": 12184
+       },
+       "num-tuples": 285,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12184,
+           "pre": 12184
+          },
+          "num-tuples": 285,
+          "runtime": { "start": 18398888392, "end": 18398888453},
+          "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_only/n100/emit_guarded/transformed.dl [22:1-22:32]"
+         }
+        }
+       },
+       "runtime": { "start": 18398888383, "end": 18398888461}
+      },
+      "10": {
+       "copytime": { "start": 18398889822, "end": 18398889837},
+       "maxRSS": {
+        "post": 12312,
+        "pre": 12312
+       },
+       "num-tuples": 122,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12312,
+           "pre": 12312
+          },
+          "num-tuples": 122,
+          "runtime": { "start": 18398889751, "end": 18398889792},
+          "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_only/n100/emit_guarded/transformed.dl [22:1-22:32]"
+         }
+        }
+       },
+       "runtime": { "start": 18398889741, "end": 18398889800}
+      },
+      "11": {
+       "copytime": { "start": 18398889914, "end": 18398889929},
+       "maxRSS": {
+        "post": 12312,
+        "pre": 12312
+       },
+       "num-tuples": 107,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12312,
+           "pre": 12312
+          },
+          "num-tuples": 107,
+          "runtime": { "start": 18398889850, "end": 18398889885},
+          "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_only/n100/emit_guarded/transformed.dl [22:1-22:32]"
+         }
+        }
+       },
+       "runtime": { "start": 18398889841, "end": 18398889895}
+      },
+      "12": {
+       "copytime": { "start": 18398889999, "end": 18398890012},
+       "maxRSS": {
+        "post": 12312,
+        "pre": 12312
+       },
+       "num-tuples": 88,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12312,
+           "pre": 12312
+          },
+          "num-tuples": 88,
+          "runtime": { "start": 18398889942, "end": 18398889972},
+          "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_only/n100/emit_guarded/transformed.dl [22:1-22:32]"
+         }
+        }
+       },
+       "runtime": { "start": 18398889932, "end": 18398889979}
+      },
+      "13": {
+       "copytime": { "start": 18398890087, "end": 18398890097},
+       "maxRSS": {
+        "post": 12312,
+        "pre": 12312
+       },
+       "num-tuples": 73,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12312,
+           "pre": 12312
+          },
+          "num-tuples": 73,
+          "runtime": { "start": 18398890024, "end": 18398890050},
+          "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_only/n100/emit_guarded/transformed.dl [22:1-22:32]"
+         }
+        }
+       },
+       "runtime": { "start": 18398890016, "end": 18398890066}
+      },
+      "14": {
+       "copytime": { "start": 18398890159, "end": 18398890166},
+       "maxRSS": {
+        "post": 12312,
+        "pre": 12312
+       },
+       "num-tuples": 55,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12312,
+           "pre": 12312
+          },
+          "num-tuples": 55,
+          "runtime": { "start": 18398890110, "end": 18398890130},
+          "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_only/n100/emit_guarded/transformed.dl [22:1-22:32]"
+         }
+        }
+       },
+       "runtime": { "start": 18398890100, "end": 18398890138}
+      },
+      "15": {
+       "copytime": { "start": 18398890225, "end": 18398890235},
+       "maxRSS": {
+        "post": 12312,
+        "pre": 12312
+       },
+       "num-tuples": 50,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12312,
+           "pre": 12312
+          },
+          "num-tuples": 50,
+          "runtime": { "start": 18398890179, "end": 18398890197},
+          "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_only/n100/emit_guarded/transformed.dl [22:1-22:32]"
+         }
+        }
+       },
+       "runtime": { "start": 18398890170, "end": 18398890205}
+      },
+      "16": {
+       "copytime": { "start": 18398890290, "end": 18398890296},
+       "maxRSS": {
+        "post": 12312,
+        "pre": 12312
+       },
+       "num-tuples": 44,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12312,
+           "pre": 12312
+          },
+          "num-tuples": 44,
+          "runtime": { "start": 18398890248, "end": 18398890263},
+          "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_only/n100/emit_guarded/transformed.dl [22:1-22:32]"
+         }
+        }
+       },
+       "runtime": { "start": 18398890239, "end": 18398890270}
+      },
+      "17": {
+       "copytime": { "start": 18398890350, "end": 18398890355},
+       "maxRSS": {
+        "post": 12312,
+        "pre": 12312
+       },
+       "num-tuples": 37,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12312,
+           "pre": 12312
+          },
+          "num-tuples": 37,
+          "runtime": { "start": 18398890309, "end": 18398890322},
+          "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_only/n100/emit_guarded/transformed.dl [22:1-22:32]"
+         }
+        }
+       },
+       "runtime": { "start": 18398890300, "end": 18398890329}
+      },
+      "18": {
+       "copytime": { "start": 18398890385, "end": 18398890389},
+       "maxRSS": {
+        "post": 12312,
+        "pre": 12312
+       },
+       "num-tuples": 31,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12312,
+           "pre": 12312
+          },
+          "num-tuples": 31,
+          "runtime": { "start": 18398890359, "end": 18398890370},
+          "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_only/n100/emit_guarded/transformed.dl [22:1-22:32]"
+         }
+        }
+       },
+       "runtime": { "start": 18398890359, "end": 18398890378}
+      },
+      "19": {
+       "copytime": { "start": 18398890424, "end": 18398890428},
+       "maxRSS": {
+        "post": 12312,
+        "pre": 12312
+       },
+       "num-tuples": 19,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12312,
+           "pre": 12312
+          },
+          "num-tuples": 19,
+          "runtime": { "start": 18398890392, "end": 18398890400},
+          "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_only/n100/emit_guarded/transformed.dl [22:1-22:32]"
+         }
+        }
+       },
+       "runtime": { "start": 18398890391, "end": 18398890406}
+      },
+      "2": {
+       "copytime": { "start": 18398888614, "end": 18398888645},
+       "maxRSS": {
+        "post": 12184,
+        "pre": 12184
+       },
+       "num-tuples": 333,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12184,
+           "pre": 12184
+          },
+          "num-tuples": 333,
+          "runtime": { "start": 18398888517, "end": 18398888586},
+          "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_only/n100/emit_guarded/transformed.dl [22:1-22:32]"
+         }
+        }
+       },
+       "runtime": { "start": 18398888507, "end": 18398888594}
+      },
+      "20": {
+       "copytime": { "start": 18398890476, "end": 18398890478},
+       "maxRSS": {
+        "post": 12312,
+        "pre": 12312
+       },
+       "num-tuples": 13,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12312,
+           "pre": 12312
+          },
+          "num-tuples": 13,
+          "runtime": { "start": 18398890441, "end": 18398890447},
+          "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_only/n100/emit_guarded/transformed.dl [22:1-22:32]"
+         }
+        }
+       },
+       "runtime": { "start": 18398890432, "end": 18398890455}
+      },
+      "21": {
+       "copytime": { "start": 18398890513, "end": 18398890514},
+       "maxRSS": {
+        "post": 12312,
+        "pre": 12312
+       },
+       "num-tuples": 4,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12312,
+           "pre": 12312
+          },
+          "num-tuples": 4,
+          "runtime": { "start": 18398890483, "end": 18398890486},
+          "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_only/n100/emit_guarded/transformed.dl [22:1-22:32]"
+         }
+        }
+       },
+       "runtime": { "start": 18398890482, "end": 18398890493}
+      },
+      "22": {
+       "copytime": { "start": 18398890557, "end": 18398890559},
+       "maxRSS": {
+        "post": 12312,
+        "pre": 12312
+       },
+       "num-tuples": 2,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12312,
+           "pre": 12312
+          },
+          "num-tuples": 2,
+          "runtime": { "start": 18398890528, "end": 18398890530},
+          "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_only/n100/emit_guarded/transformed.dl [22:1-22:32]"
+         }
+        }
+       },
+       "runtime": { "start": 18398890518, "end": 18398890538}
+      },
+      "23": {
+       "maxRSS": {
+        "post": 12312,
+        "pre": 12312
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12312,
+           "pre": 12312
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 18398890572, "end": 18398890573},
+          "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_only/n100/emit_guarded/transformed.dl [22:1-22:32]"
+         }
+        }
+       },
+       "runtime": { "start": 18398890562, "end": 18398890582}
+      },
+      "3": {
+       "copytime": { "start": 18398888768, "end": 18398888803},
+       "maxRSS": {
+        "post": 12184,
+        "pre": 12184
+       },
+       "num-tuples": 361,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12184,
+           "pre": 12184
+          },
+          "num-tuples": 361,
+          "runtime": { "start": 18398888659, "end": 18398888741},
+          "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_only/n100/emit_guarded/transformed.dl [22:1-22:32]"
+         }
+        }
+       },
+       "runtime": { "start": 18398888649, "end": 18398888749}
+      },
+      "4": {
+       "copytime": { "start": 18398888934, "end": 18398888977},
+       "maxRSS": {
+        "post": 12184,
+        "pre": 12184
+       },
+       "num-tuples": 394,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12184,
+           "pre": 12184
+          },
+          "num-tuples": 394,
+          "runtime": { "start": 18398888817, "end": 18398888909},
+          "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_only/n100/emit_guarded/transformed.dl [22:1-22:32]"
+         }
+        }
+       },
+       "runtime": { "start": 18398888807, "end": 18398888915}
+      },
+      "5": {
+       "copytime": { "start": 18398889115, "end": 18398889151},
+       "maxRSS": {
+        "post": 12184,
+        "pre": 12184
+       },
+       "num-tuples": 371,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12184,
+           "pre": 12184
+          },
+          "num-tuples": 371,
+          "runtime": { "start": 18398888990, "end": 18398889086},
+          "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_only/n100/emit_guarded/transformed.dl [22:1-22:32]"
+         }
+        }
+       },
+       "runtime": { "start": 18398888980, "end": 18398889094}
+      },
+      "6": {
+       "copytime": { "start": 18398889283, "end": 18398889321},
+       "maxRSS": {
+        "post": 12312,
+        "pre": 12312
+       },
+       "num-tuples": 333,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12312,
+           "pre": 12312
+          },
+          "num-tuples": 333,
+          "runtime": { "start": 18398889164, "end": 18398889254},
+          "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_only/n100/emit_guarded/transformed.dl [22:1-22:32]"
+         }
+        }
+       },
+       "runtime": { "start": 18398889155, "end": 18398889262}
+      },
+      "7": {
+       "copytime": { "start": 18398889447, "end": 18398889482},
+       "maxRSS": {
+        "post": 12312,
+        "pre": 12312
+       },
+       "num-tuples": 279,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12312,
+           "pre": 12312
+          },
+          "num-tuples": 279,
+          "runtime": { "start": 18398889334, "end": 18398889418},
+          "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_only/n100/emit_guarded/transformed.dl [22:1-22:32]"
+         }
+        }
+       },
+       "runtime": { "start": 18398889325, "end": 18398889427}
+      },
+      "8": {
+       "copytime": { "start": 18398889593, "end": 18398889622},
+       "maxRSS": {
+        "post": 12312,
+        "pre": 12312
+       },
+       "num-tuples": 214,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12312,
+           "pre": 12312
+          },
+          "num-tuples": 214,
+          "runtime": { "start": 18398889494, "end": 18398889563},
+          "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_only/n100/emit_guarded/transformed.dl [22:1-22:32]"
+         }
+        }
+       },
+       "runtime": { "start": 18398889485, "end": 18398889572}
+      },
+      "9": {
+       "copytime": { "start": 18398889718, "end": 18398889737},
+       "maxRSS": {
+        "post": 12312,
+        "pre": 12312
+       },
+       "num-tuples": 161,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12312,
+           "pre": 12312
+          },
+          "num-tuples": 161,
+          "runtime": { "start": 18398889635, "end": 18398889688},
+          "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_only/n100/emit_guarded/transformed.dl [22:1-22:32]"
+         }
+        }
+       },
+       "runtime": { "start": 18398889626, "end": 18398889696}
+      }
+     },
+     "maxRSS": {
+      "post": 12184,
+      "pre": 12184
+     },
+     "non-recursive-rule": {
+      "q(x,y) :- \n   base(x,y).": {
+       "atom-frequency": {
+        "q(x,y) :- \n   base(x,y).": {
+         "base": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12184,
+        "pre": 12184
+       },
+       "num-tuples": 150,
+       "runtime": { "start": 18398888254, "end": 18398888262},
+       "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_only/n100/emit_guarded/transformed.dl [21:1-21:23]"
+      }
+     },
+     "num-tuples": 150,
+     "reads": 5283,
+     "runtime": { "start": 18398888253, "end": 18398888269},
+     "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_only/n100/emit_guarded/transformed.dl [11:7-11:8]"
+    },
+    "s": {
+     "maxRSS": {
+      "post": 12312,
+      "pre": 12312
+     },
+     "non-recursive-rule": {
+      "s(x) :- \n   q(x,y),\n   blocked(y).": {
+       "atom-frequency": {
+        "s(x) :- \n   q(x,y),\n   blocked(y).": {
+         "q": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12312,
+        "pre": 12312
+       },
+       "num-tuples": 65,
+       "runtime": { "start": 18398890603, "end": 18398890741},
+       "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_only/n100/emit_guarded/transformed.dl [23:1-23:29]"
+      }
+     },
+     "num-tuples": 65,
+     "reads": 33,
+     "runtime": { "start": 18398890602, "end": 18398890749},
+     "source-locator": "/root/compiler/measurements/night04-b-cone/cc_cone_only/n100/emit_guarded/transformed.dl [13:7-13:8]"
+    }
+   },
+   "runtime": { "start": 18398887770, "end": 18398890969},
+   "starttime": { "time": 18398887721},
+   "usage": {
+    "timepoint": {
+     "18398887779": {
+      "maxRSS": 11612,
+      "systemtime": 0,
+      "usertime": 5634
+     },
+     "18398887930": {
+      "maxRSS": 11928,
+      "systemtime": 0,
+      "usertime": 5803
+     },
+     "18398887970": {
+      "maxRSS": 11928,
+      "systemtime": 0,
+      "usertime": 5863
+     },
+     "18398888068": {
+      "maxRSS": 11928,
+      "systemtime": 0,
+      "usertime": 5962
+     },
+     "18398888097": {
+      "maxRSS": 11928,
+      "systemtime": 0,
+      "usertime": 6014
+     },
+     "18398888123": {
+      "maxRSS": 12056,
+      "systemtime": 0,
+      "usertime": 6066
+     },
+     "18398888161": {
+      "maxRSS": 12056,
+      "systemtime": 0,
+      "usertime": 6106
+     },
+     "18398888199": {
+      "maxRSS": 12184,
+      "systemtime": 0,
+      "usertime": 6154
+     },
+     "18398888227": {
+      "maxRSS": 12184,
+      "systemtime": 0,
+      "usertime": 6192
+     },
+     "18398888251": {
+      "maxRSS": 12184,
+      "systemtime": 0,
+      "usertime": 6221
+     },
+     "18398888294": {
+      "maxRSS": 12184,
+      "systemtime": 0,
+      "usertime": 6271
+     },
+     "18398888360": {
+      "maxRSS": 12184,
+      "systemtime": 0,
+      "usertime": 6343
+     },
+     "18398888400": {
+      "maxRSS": 12184,
+      "systemtime": 0,
+      "usertime": 6387
+     },
+     "18398888479": {
+      "maxRSS": 12184,
+      "systemtime": 0,
+      "usertime": 6475
+     },
+     "18398888560": {
+      "maxRSS": 12184,
+      "systemtime": 0,
+      "usertime": 6533
+     },
+     "18398888621": {
+      "maxRSS": 12184,
+      "systemtime": 0,
+      "usertime": 6641
+     },
+     "18398888665": {
+      "maxRSS": 12184,
+      "systemtime": 0,
+      "usertime": 6696
+     },
+     "18398888767": {
+      "maxRSS": 12184,
+      "systemtime": 0,
+      "usertime": 6806
+     },
+     "18398888821": {
+      "maxRSS": 12184,
+      "systemtime": 0,
+      "usertime": 6868
+     },
+     "18398888934": {
+      "maxRSS": 12184,
+      "systemtime": 0,
+      "usertime": 6986
+     },
+     "18398888995": {
+      "maxRSS": 12184,
+      "systemtime": 0,
+      "usertime": 7058
+     },
+     "18398889114": {
+      "maxRSS": 12184,
+      "systemtime": 0,
+      "usertime": 7184
+     },
+     "18398889168": {
+      "maxRSS": 12312,
+      "systemtime": 0,
+      "usertime": 7245
+     },
+     "18398889281": {
+      "maxRSS": 12312,
+      "systemtime": 0,
+      "usertime": 7364
+     },
+     "18398889339": {
+      "maxRSS": 12312,
+      "systemtime": 0,
+      "usertime": 7429
+     },
+     "18398889447": {
+      "maxRSS": 12312,
+      "systemtime": 0,
+      "usertime": 7543
+     },
+     "18398889508": {
+      "maxRSS": 12312,
+      "systemtime": 0,
+      "usertime": 7610
+     },
+     "18398889594": {
+      "maxRSS": 12312,
+      "systemtime": 0,
+      "usertime": 7722
+     },
+     "18398889640": {
+      "maxRSS": 12312,
+      "systemtime": 0,
+      "usertime": 7771
+     },
+     "18398889722": {
+      "maxRSS": 12312,
+      "systemtime": 0,
+      "usertime": 7864
+     },
+     "18398889758": {
+      "maxRSS": 12312,
+      "systemtime": 0,
+      "usertime": 7909
+     },
+     "18398889821": {
+      "maxRSS": 12312,
+      "systemtime": 0,
+      "usertime": 7980
+     },
+     "18398889855": {
+      "maxRSS": 12312,
+      "systemtime": 0,
+      "usertime": 8023
+     },
+     "18398889916": {
+      "maxRSS": 12312,
+      "systemtime": 0,
+      "usertime": 8097
+     },
+     "18398889948": {
+      "maxRSS": 12312,
+      "systemtime": 0,
+      "usertime": 8134
+     },
+     "18398889998": {
+      "maxRSS": 12312,
+      "systemtime": 0,
+      "usertime": 8192
+     },
+     "18398890029": {
+      "maxRSS": 12312,
+      "systemtime": 0,
+      "usertime": 8231
+     },
+     "18398890085": {
+      "maxRSS": 12312,
+      "systemtime": 0,
+      "usertime": 8293
+     },
+     "18398890114": {
+      "maxRSS": 12312,
+      "systemtime": 0,
+      "usertime": 8331
+     },
+     "18398890156": {
+      "maxRSS": 12312,
+      "systemtime": 0,
+      "usertime": 8379
+     },
+     "18398890184": {
+      "maxRSS": 12312,
+      "systemtime": 0,
+      "usertime": 8414
+     },
+     "18398890223": {
+      "maxRSS": 12312,
+      "systemtime": 0,
+      "usertime": 8459
+     },
+     "18398890253": {
+      "maxRSS": 12312,
+      "systemtime": 0,
+      "usertime": 8500
+     },
+     "18398890289": {
+      "maxRSS": 12312,
+      "systemtime": 0,
+      "usertime": 8543
+     },
+     "18398890313": {
+      "maxRSS": 12312,
+      "systemtime": 0,
+      "usertime": 8574
+     },
+     "18398890390": {
+      "maxRSS": 12312,
+      "systemtime": 0,
+      "usertime": 8679
+     },
+     "18398890425": {
+      "maxRSS": 12312,
+      "systemtime": 0,
+      "usertime": 8730
+     },
+     "18398890448": {
+      "maxRSS": 12312,
+      "systemtime": 0,
+      "usertime": 8761
+     },
+     "18398890477": {
+      "maxRSS": 12312,
+      "systemtime": 0,
+      "usertime": 8800
+     },
+     "18398890484": {
+      "maxRSS": 12312,
+      "systemtime": 0,
+      "usertime": 8813
+     },
+     "18398890510": {
+      "maxRSS": 12312,
+      "systemtime": 0,
+      "usertime": 8841
+     },
+     "18398890533": {
+      "maxRSS": 12312,
+      "systemtime": 0,
+      "usertime": 8874
+     },
+     "18398890557": {
+      "maxRSS": 12312,
+      "systemtime": 0,
+      "usertime": 8902
+     },
+     "18398890576": {
+      "maxRSS": 12312,
+      "systemtime": 0,
+      "usertime": 8930
+     },
+     "18398890601": {
+      "maxRSS": 12312,
+      "systemtime": 0,
+      "usertime": 8960
+     },
+     "18398890773": {
+      "maxRSS": 12312,
+      "systemtime": 0,
+      "usertime": 9144
+     },
+     "18398890803": {
+      "maxRSS": 12312,
+      "systemtime": 0,
+      "usertime": 9185
+     },
+     "18398890833": {
+      "maxRSS": 12312,
+      "systemtime": 0,
+      "usertime": 9227
+     },
+     "18398890840": {
+      "maxRSS": 12312,
+      "systemtime": 0,
+      "usertime": 9240
+     },
+     "18398890868": {
+      "maxRSS": 12312,
+      "systemtime": 0,
+      "usertime": 9268
+     },
+     "18398890893": {
+      "maxRSS": 12312,
+      "systemtime": 0,
+      "usertime": 9303
+     },
+     "18398890915": {
+      "maxRSS": 12312,
+      "systemtime": 0,
+      "usertime": 9323
+     }
+    }
+   }
+  }
+ }
+}

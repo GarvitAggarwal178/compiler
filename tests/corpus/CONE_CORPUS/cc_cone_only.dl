@@ -1,0 +1,64 @@
+// NIGHT-BATCH-04 B, construction 1: nonempty cone, no sibling.
+//
+// CONSTRUCTED for this task -- not from a published source, per the
+// 2026-08-22 ruling section 3.1 disclosure rule. Derived from
+// tests/corpus/BENCHMARK_FAMILY/culprit_cycle.dl (P5): identical
+// culprit SCC ({p,q,s}, same negative cycle via magic_q -> !s -> s ->
+// magic_q under the magic transform), but `s`'s second argument is now
+// `gate` -- an IDB relation defined by its OWN recursive rule -- instead
+// of `blocked`, an EDB relation. Every CULPRIT_CANDIDATES program before
+// this batch read only EDB relations at this position, which is why
+// `m3-headline.md`'s guard-firing table reports cone={} on all of them
+// (M2-M3-BUILD.md §7's fallback cone has nothing to traverse into).
+// `gate` sits strictly below the declined SCC in the dependency graph
+// and is read by nothing else -- ConeClosure({p,q,s}) must discover it.
+//
+// PLACEMENT MATTERS, empirically confirmed before committing to it (not
+// assumed): `gate` is read from `p`'s NON-recursive base-case rule
+// (`p(x,y):-e(x,y),gate(x)`), not from `s`'s rule as a first draft tried.
+// Reading it from `s` (or from `q`, whose every rule already participates
+// in the negative cycle) instead SWEEPS `gate` into an ENLARGED CULPRIT
+// SET, not a cone -- confirmed directly via `CheckCulpritCycle`'s raw
+// unstratifiable-SCC dump, which then contains `gate_b`/`gate_f`/
+// `magic_gate_*`/`sup_gate_*` members alongside `p_bf`/`q_bf`/`s_b`. The
+// mechanism: EVERY rule of `s` (and every rule of `q`, since `q_bf` is
+// itself the cyclic relation) already sits ON the transform-induced
+// negative cycle (`magic_q ->~ s -> q -> magic_q`, culprit_cycle.dl's own
+// header derivation) -- any new IDB atom read from inside one of THOSE
+// rules gets a magic-seed backward edge (`magic_callee <- caller's own
+// supplementary checkpoint`) sourced from a checkpoint that is itself fed
+// by, and feeds back into, that same cycle, closing a NEW loop through
+// the callee. `p`'s base-case rule (`r0`, `p(x,y):-e(x,y)`) is the one
+// clause among the three predicates that does NOT itself sit on the
+// cycle (only `p`'s recursive rule `r1`, which contains the negation,
+// does) -- its magic seed comes only from the query's own constant seed
+// fact, never from a cycle-fed checkpoint, so a new relation read there
+// has nowhere to loop back through. See
+// `docs/reports/night04-B-cone-corpus.md`'s "what did not work" section
+// for the full derivation and the failed first construction.
+//
+// Fixture: harness/fixtures_lib.py's gen_cone_corpus_facts.
+
+.decl base(x:number, y:number)         .input base
+.decl e(x:number, y:number)            .input e
+.decl blocked(x:number)                .input blocked
+.decl gate_seed(x:number)              .input gate_seed
+.decl gate_edge(x:number, y:number)    .input gate_edge
+
+.decl q(x:number, y:number)
+q(x,y) :- base(x,y).
+q(x,y) :- q(x,z), base(z,y).
+
+.decl gate(x:number)
+gate(x) :- gate_seed(x).
+gate(x) :- gate(y), gate_edge(y,x).
+
+.decl s(x:number)
+s(x) :- q(x,y), blocked(y).
+
+.decl p(x:number, y:number)
+p(x,y) :- e(x,y), gate(x).
+p(x,y) :- p(x,z), !s(z), q(z,y).
+
+.decl out(y:number)   .output out
+out(y) :- p(1,y).
