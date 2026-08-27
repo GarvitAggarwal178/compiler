@@ -901,3 +901,61 @@ the project continues past this batch.
 **Single next action:** human decides whether this batch's output
 (`FINAL.md` plus everything it cites) is sufficient for the writeup and
 demo, or whether to spend remaining time on G/C/F before presenting.
+
+---
+
+## PUNCH-LIST, 2026-08-27
+
+Executed P1-P6 in order, per instruction (P1 first, P2-P5 one
+documentation commit, P6 last). All six done.
+
+**P1: DONE.** `magicset.FindQuery` (single candidate) replaced by
+`FindQueries` (every bindable query candidate); `Adorn` seeds the
+worklist from all of them -- seed collection, not a new algorithm. Gate:
+9/9 comparable cases answer-identical (hard requirement). Consequence:
+task B's "sibling" relations are now properly demand-restricted instead
+of Untouched, and `T_guarded < T_none` now holds on 9/12 of task B's
+points (was 0/12) -- the guard's contribution measured for the first
+time, margin shrinking with scale (~1.7x at n=20 to ~1.02x at n=100).
+32-point headline confirmed byte-identical (no program in that family has
+a second query). Report: `docs/reports/punch-list-p1.md`.
+
+**P2-P5: DONE**, one commit. Three internal FINAL.md contradictions
+found and fixed by re-deriving every ratio from committed measurement
+JSON rather than trusting prior prose: firing-program count (13 vs
+10/16, both wrong, correct is 11/16 -- `cc_sibling_emptycone` fires with
+an empty cone, previously miscounted as non-firing); cone-size
+distribution summed to 15 instead of 16 (corrected to 13x0/2x1/1x2); the
+p2.dl 56.9x figure disambiguated from the unrelated 46.0x contribution
+ratio, both stated with the raw T_dlc=974 integer alongside Q12's
+predicted 300-700. P3: T_dlc (excl-sup) for p2.dl/reachability_complement
+= 252, already below p4prime.dl's same-fixture 285. P4: section 6 item 3
+reframed exactly per the punch list's replacement text (incl-sup
+headline, excl-sup scoped to transitive_closure_bound only, the
+~8,741x figure deleted). P5: Q8's mechanism confirmed against the emitted
+programs directly (v1's nonancestor_bf costs 50x|person| via the
+propagated m_ancestor set, confirmed against VERIFY-01 V4's 50x455 to
+within 1; dlc's own magic_nonancestor_bf seeds from the query constant
+alone, 50x smaller at that stage); corpus size disambiguated (19 strict,
+89/195 parse-coverage, 5 programs / 16 points is what the differential
+gate actually ran against -- three different numbers). One incidental
+citation fix (a nonexistent report filename) found during the
+re-derivation pass. Report: inline in `docs/reports/FINAL.md`'s own
+revision markers.
+
+**P6: DONE.** `harness/build_presentation.py` -> `docs/reports/
+presentation.html`, one static file, no server/framework/build step,
+well under the two-hour cap. Four things visible: rejection (all four
+grounds with dlc explain output), three-column metric (5 shapes, full
+32-point sweep), guard firing/declining (16-program blast radius + 4/4
+cone cross-check), two findings with mechanisms (bb->bf before/after,
+cone T_guarded-vs-T_none). Computes nothing new -- every cell read from
+an already-committed file. Report: `docs/reports/punch-list-p6.md`.
+
+**What is now unblocked:** `docs/reports/presentation.html` is ready to
+show; `docs/reports/FINAL.md` is now internally consistent and current.
+No open contradictions remain in either document as of this entry.
+
+**Single next action:** human decides whether the project is done for
+this phase, or whether to continue into further measurement/writeup work
+not yet requested.
