@@ -285,3 +285,30 @@ Answer set-equality (`harness/m2_accept.py`, all 5 `BENCHMARK_FAMILY`
 shapes + `p2.dl`, smallest scale point) is a hard gate on this change,
 checked before any of the above numbers are trusted: a relaxation that
 changes an answer means the lemma (`M4 sips.md` §1) was misapplied.
+
+## 2026-08-27 — Q8, CLOSED (NIGHT-BATCH-04 D4 / A's ancestor comparison)
+
+**Q8** asked whether `ancestor_nonancestor`'s modest measured contribution
+band (4×–62×, `docs/reports/night02-T5-guarded.md`) is inherent to the
+shape's recursive structure, or a sign that `ancestor_nonancestor_guarded.dl`
+(v1)'s hand-written guard is itself suboptimal. T5 (NIGHT-BATCH-03) tested
+one specific hypothesis (Q11: a first-argument-invariant-style seed) and
+found it unsound (answer-wrong), leaving Q8 explicitly unresolved --
+"Q8 stands unchanged" (`docs/reports/night03-T5-ancestor-seed.md`).
+
+**Resolved by `docs/reports/m4-sips.md`'s direct comparison**, same
+fixture (n=500), same methodology, both SOUND (answer-identical, unlike
+Q11's v2): v1's hand guard measures `T_guard = 25,500`
+(`measurements/m4-sips/v1_check/`, exactly reproducing the number already
+cited above). `dlc`'s mechanical transform, after `M4 sips.md` §2's
+demand relaxation (a sound rule, not a rescue construction), measures
+`T_dlc = 6,102` (incl-sup) / `2,752` (excl-sup) at the same point --
+**4.2×–9.3× below v1, not "near" it.** Per NIGHT-BATCH-04 A's own
+pre-stated decision rule ("if it lands well below, v1 is suboptimal after
+all"): **v1 is suboptimal.** The modest 4×–62× band was not inherent to
+`ancestor`'s recursion shape; it was a cost of v1's choice to propagate
+`m_ancestor` across the recursion (the same choice Q11 already flagged)
+rather than seed `nonancestor`'s restriction directly the way `dlc`'s
+correct mechanical SIPS relaxation now does. `dlc` vs v1's full-scale
+comparison (n=500..8,000: `T_souffle/T_dlc` grows from 16.6× to 887.8×)
+is in `m4-sips.md` section "Q8, closed" and its headline table.

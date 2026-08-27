@@ -1,0 +1,56 @@
+.decl base(x:number, y:number)
+.input base
+.decl link(x:number, y:number)
+.input link
+.decl blocked(x:number)
+.input blocked
+.decl q(x:number, y:number)
+.decl s(x:number)
+.decl p(x:number, y:number)
+.decl out(y:number)
+.output out
+.decl sup_p_bf_r0_0(c0:number)
+.decl sup_p_bf_r0_1(c0:number, c1:number)
+.decl p_bf(c0:number, c1:number)
+.decl sup_p_bf_r1_0(c0:number)
+.decl sup_p_bf_r1_1(c0:number, c1:number)
+.decl sup_p_bf_r1_2(c0:number, c1:number)
+.decl sup_p_bf_r1_3(c0:number, c1:number)
+.decl magic_s_b(c0:number)
+.decl magic_q_bf(c0:number)
+.decl sup_s_b_r0_0(c0:number)
+.decl sup_s_b_r0_1(c0:number, c1:number)
+.decl sup_s_b_r0_2(c0:number)
+.decl s_b(c0:number)
+.decl sup_q_bf_r0_0(c0:number)
+.decl sup_q_bf_r0_1(c0:number, c1:number)
+.decl q_bf(c0:number, c1:number)
+.decl sup_q_bf_r1_0(c0:number)
+.decl sup_q_bf_r1_1(c0:number, c1:number)
+.decl sup_q_bf_r1_2(c0:number, c1:number)
+.decl magic_p_bf(c0:number)
+sup_p_bf_r0_0(x) :- magic_p_bf(x).
+sup_p_bf_r0_1(x, y) :- sup_p_bf_r0_0(x), link(x, y).
+p_bf(x, y) :- sup_p_bf_r0_1(x, y).
+sup_p_bf_r1_0(x) :- magic_p_bf(x).
+sup_p_bf_r1_1(x, z) :- sup_p_bf_r1_0(x), link(x, z).
+sup_p_bf_r1_2(x, z) :- sup_p_bf_r1_1(x, z), !s_b(z).
+sup_p_bf_r1_3(x, y) :- sup_p_bf_r1_2(x, z), q_bf(z, y).
+magic_s_b(z) :- sup_p_bf_r1_1(x, z).
+magic_q_bf(z) :- sup_p_bf_r1_2(x, z).
+p_bf(x, y) :- sup_p_bf_r1_3(x, y).
+sup_s_b_r0_0(x) :- magic_s_b(x).
+sup_s_b_r0_1(x, y) :- sup_s_b_r0_0(x), q_bf(x, y).
+sup_s_b_r0_2(x) :- sup_s_b_r0_1(x, y), blocked(y).
+magic_q_bf(x) :- sup_s_b_r0_0(x).
+s_b(x) :- sup_s_b_r0_2(x).
+sup_q_bf_r0_0(x) :- magic_q_bf(x).
+sup_q_bf_r0_1(x, y) :- sup_q_bf_r0_0(x), base(x, y).
+q_bf(x, y) :- sup_q_bf_r0_1(x, y).
+sup_q_bf_r1_0(x) :- magic_q_bf(x).
+sup_q_bf_r1_1(x, z) :- sup_q_bf_r1_0(x), q_bf(x, z).
+sup_q_bf_r1_2(x, y) :- sup_q_bf_r1_1(x, z), base(z, y).
+magic_q_bf(x) :- sup_q_bf_r1_0(x).
+q_bf(x, y) :- sup_q_bf_r1_2(x, y).
+magic_p_bf(1).
+out(y) :- p_bf(1, y).

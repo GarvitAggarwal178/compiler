@@ -1,0 +1,17 @@
+.decl base(x:number, y:number, l:number)
+.input base
+.decl e(x:number, y:number, l:number)
+.input e
+.decl blocked(x:number, l:number)
+.input blocked
+.decl q(x:number, y:number, l:number)
+.decl s(x:number, l:number)
+.decl p(x:number, y:number, l:number)
+.decl out(y:number)
+.output out
+p(x, y, l) :- e(x, y, l).
+p(x, y, l) :- p(x, z, l), !s(z, l), q(z, y, l).
+q(x, y, l) :- base(x, y, l).
+q(x, y, l) :- q(x, z, l), base(z, y, l).
+s(x, l) :- q(x, y, l), blocked(x, l).
+out(y) :- p(1, y, 1).

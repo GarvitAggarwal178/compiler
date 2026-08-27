@@ -1,0 +1,555 @@
+{
+ "root": {
+  "program": {
+   "configuration": {
+    "": "/root/compiler/tests/corpus/CULPRIT_CANDIDATES/cc_neg_early.dl",
+    "fact-dir": "/root/compiler/fixtures/culprit_candidates/cc_neg_early",
+    "include-dir": ".",
+    "jobs": "1",
+    "libraries": "functors",
+    "library-dir": ".",
+    "output-dir": "/root/compiler/measurements/m3-5-headline-m4/candidates/cc_neg_early/none",
+    "profile": "prof.log",
+    "relationCount": "7",
+    "ruleCount": "8",
+    "version": "2.5",
+    "warn": "all",
+    "wno": "none"
+   },
+   "relation": {
+    "base": {
+     "loadtime": { "start": 17309642220, "end": 17309642989},
+     "num-tuples": 75,
+     "reads": 0,
+     "source-locator": "/root/compiler/tests/corpus/CULPRIT_CANDIDATES/cc_neg_early.dl [15:7-15:11]"
+    },
+    "blocked": {
+     "loadtime": { "start": 17309643000, "end": 17309643182},
+     "num-tuples": 11,
+     "reads": 385,
+     "source-locator": "/root/compiler/tests/corpus/CULPRIT_CANDIDATES/cc_neg_early.dl [17:7-17:14]"
+    },
+    "link": {
+     "loadtime": { "start": 17309643190, "end": 17309643511},
+     "num-tuples": 76,
+     "reads": 0,
+     "source-locator": "/root/compiler/tests/corpus/CULPRIT_CANDIDATES/cc_neg_early.dl [16:7-16:11]"
+    },
+    "out": {
+     "maxRSS": {
+      "post": 16928,
+      "pre": 16928
+     },
+     "non-recursive-rule": {
+      "out(y) :- \n   p(1,y).": {
+       "atom-frequency": {
+        "out(y) :- \n   p(1,y).": {
+         "p": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 16928,
+        "pre": 16928
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 17309644175, "end": 17309644176},
+       "source-locator": "/root/compiler/tests/corpus/CULPRIT_CANDIDATES/cc_neg_early.dl [31:1-31:18]"
+      }
+     },
+     "num-tuples": 1,
+     "reads": 0,
+     "runtime": { "start": 17309644165, "end": 17309644185},
+     "savetime": { "start": 17309644190, "end": 17309644244},
+     "source-locator": "/root/compiler/tests/corpus/CULPRIT_CANDIDATES/cc_neg_early.dl [30:7-30:10]"
+    },
+    "p": {
+     "maxRSS": {
+      "post": 16928,
+      "pre": 16928
+     },
+     "non-recursive-rule": {
+      "p(x,y) :- \n   link(x,y).": {
+       "atom-frequency": {
+        "p(x,y) :- \n   link(x,y).": {
+         "link": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 16928,
+        "pre": 16928
+       },
+       "num-tuples": 76,
+       "runtime": { "start": 17309644133, "end": 17309644137},
+       "source-locator": "/root/compiler/tests/corpus/CULPRIT_CANDIDATES/cc_neg_early.dl [27:1-27:21]"
+      },
+      "p(x,y) :- \n   link(x,z),\n   !s(z),\n   q(z,y).": {
+       "atom-frequency": {
+        "p(x,y) :- \n   link(x,z),\n   !s(z),\n   q(z,y).": {
+         "link": {
+          "level": 0,
+          "num-tuples": 0
+         },
+         "q": {
+          "level": 1,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 16928,
+        "pre": 16928
+       },
+       "num-tuples": 14,
+       "runtime": { "start": 17309644144, "end": 17309644154},
+       "source-locator": "/root/compiler/tests/corpus/CULPRIT_CANDIDATES/cc_neg_early.dl [28:1-28:36]"
+      }
+     },
+     "num-tuples": 90,
+     "reads": 0,
+     "runtime": { "start": 17309644123, "end": 17309644160},
+     "source-locator": "/root/compiler/tests/corpus/CULPRIT_CANDIDATES/cc_neg_early.dl [26:7-26:8]"
+    },
+    "q": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 17309643627, "end": 17309643635},
+       "maxRSS": {
+        "post": 16928,
+        "pre": 16928
+       },
+       "num-tuples": 79,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "atom-frequency": {
+           "@new_q(x,y) :- \n   @delta_q(x,z),\n   base(z,y).": {
+            "@delta_q": {
+             "level": 0,
+             "num-tuples": 0
+            },
+            "base": {
+             "level": 1,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 16928,
+           "pre": 16928
+          },
+          "num-tuples": 79,
+          "runtime": { "start": 17309643571, "end": 17309643598},
+          "source-locator": "/root/compiler/tests/corpus/CULPRIT_CANDIDATES/cc_neg_early.dl [21:1-21:29]"
+         }
+        }
+       },
+       "runtime": { "start": 17309643562, "end": 17309643607}
+      },
+      "1": {
+       "copytime": { "start": 17309643694, "end": 17309643704},
+       "maxRSS": {
+        "post": 16928,
+        "pre": 16928
+       },
+       "num-tuples": 77,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 16928,
+           "pre": 16928
+          },
+          "num-tuples": 77,
+          "runtime": { "start": 17309643648, "end": 17309643667},
+          "source-locator": "/root/compiler/tests/corpus/CULPRIT_CANDIDATES/cc_neg_early.dl [21:1-21:29]"
+         }
+        }
+       },
+       "runtime": { "start": 17309643639, "end": 17309643675}
+      },
+      "10": {
+       "maxRSS": {
+        "post": 16928,
+        "pre": 16928
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 16928,
+           "pre": 16928
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 17309644083, "end": 17309644083},
+          "source-locator": "/root/compiler/tests/corpus/CULPRIT_CANDIDATES/cc_neg_early.dl [21:1-21:29]"
+         }
+        }
+       },
+       "runtime": { "start": 17309644082, "end": 17309644089}
+      },
+      "2": {
+       "copytime": { "start": 17309643759, "end": 17309643766},
+       "maxRSS": {
+        "post": 16928,
+        "pre": 16928
+       },
+       "num-tuples": 52,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 16928,
+           "pre": 16928
+          },
+          "num-tuples": 52,
+          "runtime": { "start": 17309643717, "end": 17309643733},
+          "source-locator": "/root/compiler/tests/corpus/CULPRIT_CANDIDATES/cc_neg_early.dl [21:1-21:29]"
+         }
+        }
+       },
+       "runtime": { "start": 17309643708, "end": 17309643740}
+      },
+      "3": {
+       "copytime": { "start": 17309643816, "end": 17309643821},
+       "maxRSS": {
+        "post": 16928,
+        "pre": 16928
+       },
+       "num-tuples": 39,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 16928,
+           "pre": 16928
+          },
+          "num-tuples": 39,
+          "runtime": { "start": 17309643778, "end": 17309643790},
+          "source-locator": "/root/compiler/tests/corpus/CULPRIT_CANDIDATES/cc_neg_early.dl [21:1-21:29]"
+         }
+        }
+       },
+       "runtime": { "start": 17309643769, "end": 17309643798}
+      },
+      "4": {
+       "copytime": { "start": 17309643870, "end": 17309643874},
+       "maxRSS": {
+        "post": 16928,
+        "pre": 16928
+       },
+       "num-tuples": 26,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 16928,
+           "pre": 16928
+          },
+          "num-tuples": 26,
+          "runtime": { "start": 17309643834, "end": 17309643844},
+          "source-locator": "/root/compiler/tests/corpus/CULPRIT_CANDIDATES/cc_neg_early.dl [21:1-21:29]"
+         }
+        }
+       },
+       "runtime": { "start": 17309643825, "end": 17309643851}
+      },
+      "5": {
+       "copytime": { "start": 17309643919, "end": 17309643922},
+       "maxRSS": {
+        "post": 16928,
+        "pre": 16928
+       },
+       "num-tuples": 17,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 16928,
+           "pre": 16928
+          },
+          "num-tuples": 17,
+          "runtime": { "start": 17309643886, "end": 17309643893},
+          "source-locator": "/root/compiler/tests/corpus/CULPRIT_CANDIDATES/cc_neg_early.dl [21:1-21:29]"
+         }
+        }
+       },
+       "runtime": { "start": 17309643877, "end": 17309643901}
+      },
+      "6": {
+       "copytime": { "start": 17309643965, "end": 17309643968},
+       "maxRSS": {
+        "post": 16928,
+        "pre": 16928
+       },
+       "num-tuples": 10,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 16928,
+           "pre": 16928
+          },
+          "num-tuples": 10,
+          "runtime": { "start": 17309643934, "end": 17309643939},
+          "source-locator": "/root/compiler/tests/corpus/CULPRIT_CANDIDATES/cc_neg_early.dl [21:1-21:29]"
+         }
+        }
+       },
+       "runtime": { "start": 17309643925, "end": 17309643946}
+      },
+      "7": {
+       "copytime": { "start": 17309644033, "end": 17309644044},
+       "maxRSS": {
+        "post": 16928,
+        "pre": 16928
+       },
+       "num-tuples": 6,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 16928,
+           "pre": 16928
+          },
+          "num-tuples": 6,
+          "runtime": { "start": 17309643980, "end": 17309643984},
+          "source-locator": "/root/compiler/tests/corpus/CULPRIT_CANDIDATES/cc_neg_early.dl [21:1-21:29]"
+         }
+        }
+       },
+       "runtime": { "start": 17309643971, "end": 17309643991}
+      },
+      "8": {
+       "copytime": { "start": 17309644064, "end": 17309644065},
+       "maxRSS": {
+        "post": 16928,
+        "pre": 16928
+       },
+       "num-tuples": 3,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 16928,
+           "pre": 16928
+          },
+          "num-tuples": 3,
+          "runtime": { "start": 17309644049, "end": 17309644051},
+          "source-locator": "/root/compiler/tests/corpus/CULPRIT_CANDIDATES/cc_neg_early.dl [21:1-21:29]"
+         }
+        }
+       },
+       "runtime": { "start": 17309644048, "end": 17309644058}
+      },
+      "9": {
+       "copytime": { "start": 17309644080, "end": 17309644080},
+       "maxRSS": {
+        "post": 16928,
+        "pre": 16928
+       },
+       "num-tuples": 1,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 16928,
+           "pre": 16928
+          },
+          "num-tuples": 1,
+          "runtime": { "start": 17309644068, "end": 17309644069},
+          "source-locator": "/root/compiler/tests/corpus/CULPRIT_CANDIDATES/cc_neg_early.dl [21:1-21:29]"
+         }
+        }
+       },
+       "runtime": { "start": 17309644068, "end": 17309644074}
+      }
+     },
+     "maxRSS": {
+      "post": 16928,
+      "pre": 16928
+     },
+     "non-recursive-rule": {
+      "q(x,y) :- \n   base(x,y).": {
+       "atom-frequency": {
+        "q(x,y) :- \n   base(x,y).": {
+         "base": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 16928,
+        "pre": 16928
+       },
+       "num-tuples": 75,
+       "runtime": { "start": 17309643535, "end": 17309643544},
+       "source-locator": "/root/compiler/tests/corpus/CULPRIT_CANDIDATES/cc_neg_early.dl [20:1-20:21]"
+      }
+     },
+     "num-tuples": 75,
+     "reads": 461,
+     "runtime": { "start": 17309643520, "end": 17309643553},
+     "source-locator": "/root/compiler/tests/corpus/CULPRIT_CANDIDATES/cc_neg_early.dl [19:7-19:8]"
+    },
+    "s": {
+     "maxRSS": {
+      "post": 16928,
+      "pre": 16928
+     },
+     "non-recursive-rule": {
+      "s(x) :- \n   q(x,y),\n   blocked(y).": {
+       "atom-frequency": {
+        "s(x) :- \n   q(x,y),\n   blocked(y).": {
+         "q": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 16928,
+        "pre": 16928
+       },
+       "num-tuples": 34,
+       "runtime": { "start": 17309644096, "end": 17309644114},
+       "source-locator": "/root/compiler/tests/corpus/CULPRIT_CANDIDATES/cc_neg_early.dl [24:1-24:28]"
+      }
+     },
+     "num-tuples": 34,
+     "reads": 76,
+     "runtime": { "start": 17309644095, "end": 17309644119},
+     "source-locator": "/root/compiler/tests/corpus/CULPRIT_CANDIDATES/cc_neg_early.dl [23:7-23:8]"
+    }
+   },
+   "runtime": { "start": 17309642216, "end": 17309644248},
+   "starttime": { "time": 17309642189},
+   "usage": {
+    "timepoint": {
+     "17309642234": {
+      "maxRSS": 16928,
+      "systemtime": 0,
+      "usertime": 3938
+     },
+     "17309643024": {
+      "maxRSS": 16928,
+      "systemtime": 0,
+      "usertime": 4492
+     },
+     "17309643210": {
+      "maxRSS": 16928,
+      "systemtime": 0,
+      "usertime": 4588
+     },
+     "17309643542": {
+      "maxRSS": 16928,
+      "systemtime": 0,
+      "usertime": 4853
+     },
+     "17309643578": {
+      "maxRSS": 16928,
+      "systemtime": 0,
+      "usertime": 4897
+     },
+     "17309643628": {
+      "maxRSS": 16928,
+      "systemtime": 0,
+      "usertime": 4960
+     },
+     "17309643653": {
+      "maxRSS": 16928,
+      "systemtime": 0,
+      "usertime": 4987
+     },
+     "17309643693": {
+      "maxRSS": 16928,
+      "systemtime": 0,
+      "usertime": 5035
+     },
+     "17309643721": {
+      "maxRSS": 16928,
+      "systemtime": 0,
+      "usertime": 5068
+     },
+     "17309643758": {
+      "maxRSS": 16928,
+      "systemtime": 0,
+      "usertime": 5110
+     },
+     "17309643782": {
+      "maxRSS": 16928,
+      "systemtime": 0,
+      "usertime": 5140
+     },
+     "17309643815": {
+      "maxRSS": 16928,
+      "systemtime": 0,
+      "usertime": 5178
+     },
+     "17309643838": {
+      "maxRSS": 16928,
+      "systemtime": 0,
+      "usertime": 5206
+     },
+     "17309643869": {
+      "maxRSS": 16928,
+      "systemtime": 0,
+      "usertime": 5242
+     },
+     "17309643890": {
+      "maxRSS": 16928,
+      "systemtime": 0,
+      "usertime": 5270
+     },
+     "17309643918": {
+      "maxRSS": 16928,
+      "systemtime": 0,
+      "usertime": 5303
+     },
+     "17309643938": {
+      "maxRSS": 16928,
+      "systemtime": 0,
+      "usertime": 5328
+     },
+     "17309643964": {
+      "maxRSS": 16928,
+      "systemtime": 0,
+      "usertime": 5359
+     },
+     "17309643984": {
+      "maxRSS": 16928,
+      "systemtime": 0,
+      "usertime": 5388
+     },
+     "17309644020": {
+      "maxRSS": 16928,
+      "systemtime": 21,
+      "usertime": 5404
+     },
+     "17309644097": {
+      "maxRSS": 16928,
+      "systemtime": 128,
+      "usertime": 5404
+     },
+     "17309644143": {
+      "maxRSS": 16928,
+      "systemtime": 187,
+      "usertime": 5404
+     },
+     "17309644184": {
+      "maxRSS": 16928,
+      "systemtime": 241,
+      "usertime": 5404
+     }
+    }
+   }
+  }
+ }
+}
