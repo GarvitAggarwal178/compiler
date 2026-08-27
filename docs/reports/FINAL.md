@@ -1,8 +1,13 @@
 # `dlc` — final report
 
-Date: 2026-08-27. Assembled from committed material only — every number
-below cites the report or measurement ID it came from; none is computed
-fresh in this document.
+Date: 2026-08-27, revised same day per `docs/punch list.md` P1–P5.
+Assembled from committed material only — every number below cites the
+report or measurement ID it came from; none is computed fresh in this
+document. **This revision fixes three internal contradictions in the
+first draft** (a firing-program miscount, a cone-size distribution that
+summed to 15 instead of 16, and a stale "0/12" guard-contribution finding
+that PUNCH-LIST P1 overturned) — each correction is marked inline where
+it occurs, not silently applied.
 
 **Read before presenting, at minimum: §4 (the soundness problem) and §6
 (findings with mechanisms).** These are the two sections a hostile
@@ -33,7 +38,7 @@ components (blueprint §4's grammar, closed by design — no feature has
 been added to it outside two narrow, explicitly-authorized amendments:
 optional zero-arity relations and optional parenthesized
 `.input`/`.output Name()` syntax, `M1-BUILD.md` §3.3 and
-`docs/reports/night03-T6-grammar-amendment.md`).
+`docs/reports/night03-T6-parens.md`).
 
 The differentiator this project measures is Soufflé's own documented
 behavior around **negation and magic sets**: Soufflé's magic-set
@@ -142,7 +147,9 @@ answer.
 
 **Blast radius.** Across the 16-program corpus measured this session
 (12 pre-existing + 4 constructed for task B), 38 relations decline across
-13 firing programs, declined fraction 0.43–0.80 per firing program
+**11 firing programs** (recounted directly from the committed
+`bin/conecheck` JSON for this revision — see P2 below), declined
+fraction 0.43–0.80 per firing program
 (`docs/reports/night04-B-cone-corpus.md`). **The guard is not vacuous**
 (failure mode #1's stated risk) — it fires on every program with a
 genuine culprit-cycle shape and on none without one, 7/7 agreement with
@@ -151,11 +158,16 @@ m3-2-culprit-detection.md`).
 
 ## 5. Results
 
-Every number below cites `docs/reports/m4-sips.md` or
-`docs/reports/night04-B-cone-corpus.md`, both fully re-derived this
-session; the pre-M4 numbers they supersede are `docs/reports/
-m3-headline.md` (kept, not overwritten, per `MEASUREMENTS.md`'s
-append-only rule).
+Every number below cites `docs/reports/m4-sips.md`,
+`docs/reports/night04-B-cone-corpus.md`, or
+`docs/reports/punch-list-p1.md`; the pre-M4 numbers they supersede are
+`docs/reports/m3-headline.md` (kept, not overwritten, per
+`MEASUREMENTS.md`'s append-only rule). **Per PUNCH-LIST.md P2**: every
+ratio in this section and §6 was re-derived directly from the committed
+measurement JSON (`measurements/m4-sips/`, `measurements/night04-b-cone/`,
+`measurements/punch-list/`) for this revision, not copied forward from
+this document's own earlier prose — the three corrections above (firing
+count, cone-size sum, the P1 rewrite) are what that re-derivation found.
 
 **Three-column table** (`T_none`/`T_souffle`/`T_dlc`, contribution =
 `T_souffle/T_dlc`, `incl-sup` convention — `dlc`'s existing default,
@@ -178,26 +190,50 @@ excl-sup brings it to exactly 1.00× (101==101 at every one of 5 scale
 points).
 
 **Guard-firing table**: fires only on culprit-cycle-shaped programs
-(10/16 in the enlarged corpus), always clause (a). Cone: empty on all 12
-pre-existing programs, non-empty on 3/4 constructed ones (sizes 1, 1, 2 —
-task B).
+(**11/16** in the enlarged corpus — recounted directly from
+`bin/conecheck`'s committed JSON for this revision, correcting an
+undercount in an earlier draft of this document that said 10/16 and,
+separately, 13 in §4; both are now 11, the same set:
+`culprit_cycle`, `cc_arity3_twobound`, `cc_longer_cycle`, `cc_neg_early`,
+`cc_query_bothbound`, `cc_third_relation`, `cc_mixed_fallback`,
+`cc_cone_only`, `cc_sibling_emptycone`, `cc_both`,
+`cc_cone_proper_subset` — note `cc_sibling_emptycone` DOES fire, culprit
+`{p,q,s}`, it just has an empty cone), always clause (a).
 
-**Blast-radius distribution** (recomputed over 16 programs, task B): 38
-declined relations total, cone-size distribution 12×0 / 2×1 / 1×2 — see
-§4 above and `docs/reports/night04-B-cone-corpus.md`'s full table.
+**Blast-radius distribution** (recomputed over 16 programs, task B,
+corrected in this revision — the number below now sums to 16, an earlier
+draft's `12×0/2×1/1×2` summed to 15): 38 declined relations total,
+cone-size distribution **13×0 / 2×1 / 1×2** — see §4 above and
+`docs/reports/night04-B-cone-corpus.md`'s full table (13 = the 5
+non-firing programs plus the 8 firing programs whose culprit SCC already
+equals its full reachable IDB set).
 
-**Cone results** (task B): the fallback cone mechanism is exactly
-correct (4/4 cross-check against an independent Python implementation,
-`harness/cone_metric.py`) and genuinely non-vacuous when constructed for
-(non-empty and even a two-hop, proper-subset cone were built and
-verified) — but **`T_guarded < T_none` held on 0/12 measured points**,
-for two identified, structural reasons: declined relations are always
-full-extent by definition, and "sibling" relations (a second `.output`
-branch) are never actually demand-restricted at all under the current
-single-query limitation of `magicset.FindQuery` (confirmed by reading the
-emitted program directly, independently reconfirmed by `dlc explain`,
-task E). Reported as a finding about the guard, per instruction, not
-softened.
+**Cone results, and the guard's contribution (task B, then PUNCH-LIST P1).**
+The fallback cone mechanism is exactly correct (4/4 cross-check against
+an independent Python implementation, `harness/cone_metric.py`, unchanged
+by P1) and genuinely non-vacuous when constructed for (non-empty and even
+a two-hop, proper-subset cone were built and verified). Task B initially
+measured **`T_guarded < T_none` on 0/12 points**, tracing the cause to
+`magicset.FindQuery` seeding only the first bindable query candidate — a
+"sibling" `.output` branch was left Untouched (full extent) rather than
+independently demand-restricted. PUNCH-LIST P1 fixed exactly this
+(`FindQueries`, seed collection from every candidate, gated on
+answer-identity across all 9 comparable original+B cases before trusting
+the number) — **`T_guarded < T_none` now holds on 9/12 points**, on
+every construction with a sibling branch, at every scale point measured:
+
+| program | n=20 | n=50 | n=100 |
+|---|---|---|---|
+| `cc_sibling_emptycone` | 1.70× | 1.28× | 1.02× |
+| `cc_both` | 1.68× | 1.30× | 1.02× |
+| `cc_cone_proper_subset` | 1.75× | 1.31× | 1.02× |
+
+(`cc_cone_only`, no sibling by design, is unchanged at 1.00× — the
+control, not a counterexample; full table
+`docs/reports/punch-list-p1.md`.) The margin shrinks with scale at every
+sibling-bearing construction — the guard's contribution here is real and
+directionally consistent, but modest and scale-shrinking, unlike M4-SIPS's
+negation relaxation, whose contribution grows with scale (§6 item 1).
 
 ## 6. Findings with mechanisms — this section carries the presentation
 
@@ -214,11 +250,45 @@ softened.
    `reachability_complement`/`p2.dl` and `ancestor_nonancestor` to a
    single adornment each (matching the hand-written guards' own shape)
    and moves their measured contribution from **sub-1×-to-16×** to
-   **46×-to-1,343×** and **17×-to-888×** respectively. It does **not**
-   fully collapse `same_generation_negation` — a genuine, disclosed
-   partial result: that shape's own recursive rule structurally requires
-   a second adornment regardless (`docs/reports/m4-sips.md`'s "what did
-   not work").
+   **46×-to-1,343×** and **17×-to-888×** respectively (both figures are
+   `T_souffle/T_dlc`, the contribution ratio — see below for the
+   distinct, before/after ratio). It does **not** fully collapse
+   `same_generation_negation` — a genuine, disclosed partial result: that
+   shape's own recursive rule structurally requires a second adornment
+   regardless (`docs/reports/m4-sips.md`'s "what did not work").
+
+   **`p2.dl`, predicted vs. measured, stated without conflating two
+   different ratios (PUNCH-LIST.md P2 item 3):** `docs/OPEN_QUESTIONS.md`
+   Q12 predicted, before implementation, `T_dlc ≈ 300–700` (incl-sup), an
+   **80–180× reduction from the PRE-relaxation `T_dlc` of 55,411**
+   (`measurements/m4-sips/before_gate/`) — this is a before/after ratio
+   on `dlc`'s own number, not `T_souffle/T_dlc`. Measured: raw
+   `T_dlc` (incl-sup) = **974** (`measurements/m4-sips/gate/summary.json`,
+   `T_candidate`), a **56.9× reduction from 55,411** — same order of
+   magnitude as predicted, below the stated floor, reported as a miss,
+   not adjusted after the fact. The separate `T_souffle/T_dlc`
+   **contribution** ratio at this same point is `44,811/974` = **46.0×**
+   (the number in the three-column table above) — a different quantity
+   entirely, included here only to be explicit that "56.9×" and "46.0×"
+   are not the same ratio and neither should be read as the other.
+
+   **Under excl-sup, the residual gap to the hand transform is almost
+   entirely supplementary accounting (PUNCH-LIST.md P3):** `T_dlc`
+   (excl-sup) for `p2.dl` = **252**, for `reachability_complement` at
+   n=250 = **252** (identical — the two shapes are structurally the same
+   program, confirmed in M2); `p4prime.dl` (the hand guard) measured on
+   the identical n=250 fixture = **285**
+   (`measurements/m4-sips/p4prime_check/`). **252 is already below 285.**
+   The demand relaxation does not merely approach the hand transform's
+   own cost under this convention, it goes slightly under it — the
+   entire remaining gap under the project's headline (incl-sup)
+   convention, 974 vs. 285, is attributable to `dlc`'s supplementary
+   checkpoint relations, which the hand-written guard has none of by
+   construction (it was never generated through a supplementary chain at
+   all). Q12's own stated comparison target (231) came from a different,
+   earlier (Phase 0) fixture, not the n=250 one used everywhere else in
+   this session — 285 is the correct same-fixture figure and the one
+   used here.
 2. **Cone collapse is not what "the cone is always empty" looked like.**
    Every naturally-arising culprit-cycle program measured before this
    session had an empty fallback cone, because its culprit SCC already
@@ -231,15 +301,24 @@ softened.
    real mechanism of how magic-rule backward edges interact with an
    already-cyclic caller, verified via the raw unstratifiable-SCC dump,
    not inferred.
-3. **The supplementary counting effect.** `dlc`'s magic-set transform
-   materializes a `sup_*` checkpoint relation per body-literal boundary;
-   Soufflé's own transform has no equivalent generated relation. Counting
-   them (the project's existing default convention, "incl-sup") makes
-   every single reported contribution ratio *understated* relative to
-   Soufflé's own accounting — confirmed exactly on
-   `transitive_closure_bound` (0.49× incl-sup → 1.00× excl-sup, exact) and
-   directionally on `same_generation_negation` (2,185.6× incl-sup →
-   ~8,741× excl-sup at depth=7).
+3. **The supplementary counting convention, scoped to one job
+   (PUNCH-LIST.md P4).** `incl-sup` stays the headline convention
+   everywhere in this document. Supplementary predicates materialize real
+   tuples and are a real cost of `dlc`'s chosen implementation strategy —
+   excluding them to make a ratio larger elsewhere would be choosing a
+   convention after seeing the result, which this project does not do.
+   `excl-sup` has exactly one job: isolating demand-restriction from
+   implementation strategy, which is what explains
+   `transitive_closure_bound` — used there, and nowhere else in this
+   report. The claim, stronger because both halves have a named
+   mechanism: **`dlc` is measurably worse than Soufflé's own transform on
+   the positive fragment (0.49×, stable across all 5 scale points),
+   because its supplementary chain materializes checkpoint relations
+   Soufflé does not generate. It is better by orders of magnitude on
+   stratified negation, because Soufflé does not demand-restrict negated
+   relations at all.** These are two different mechanisms on two
+   different fragments of the language, not one number requiring a
+   convention choice to look good.
 4. **0/817 real-world culprit-cycle prevalence.** A structural census
    over the full Soufflé test corpus (195 in-grammar + 622 full tree,
    `docs/reports/night03-T4-culprit-corpus.md`) found the culprit-cycle
@@ -251,6 +330,18 @@ softened.
    vanishingly rare. Stated plainly: the guard's *correctness* is
    thoroughly demonstrated; its *necessity* on any known real-world
    program is not.
+5. **The guard's own contribution, measured for the first time
+   (PUNCH-LIST.md P1).** Task B's `T_guarded < T_none` finding held on
+   0/12 points, traced to `magicset.FindQuery` seeding only the first
+   bindable query — a second `.output` branch was left Untouched (full
+   extent) rather than independently restricted. Fixing this (seed
+   collection from every query candidate, not a new algorithm) flips the
+   result: **9/12 points now show `T_guarded < T_none`**, 1.02×–1.75×,
+   on every construction with a sibling branch. The margin shrinks as `n`
+   grows (the declined portion's cost is roughly fixed per program while
+   the sibling's own computation grows around it) — reported as a real,
+   modest, scale-shrinking effect, not smoothed into one headline number
+   (`docs/reports/punch-list-p1.md`).
 
 ## 7. What did not work
 
@@ -264,7 +355,26 @@ softened.
 - **Q8 — closed this session**, in the "v1 is suboptimal" direction:
   `dlc`'s post-relaxation mechanical transform beats v1's hand guard by
   4.2×–9.3× at n=500, growing to 887.8× contribution at n=8,000
-  (`docs/reports/m4-sips.md`, `docs/OPEN_QUESTIONS.md`).
+  (`docs/reports/m4-sips.md`, `docs/OPEN_QUESTIONS.md`). **Mechanism
+  (PUNCH-LIST.md P5), confirmed against the emitted programs directly,
+  not just against the aggregate numbers**: v1's own rule is
+  `nonancestor_bf(x,y):-m_ancestor(x),person(x),person(y),!ancestor_bf(x,y)`
+  — `x` is restricted to `m_ancestor`'s propagated, ancestor-reachable
+  50-member set, but the rule's own cost is dominated by `person(y)`
+  ranging freely, giving a `50 × |person|` cost (VERIFY-01 §V4: measured
+  `nonancestor_bf=22,749` at n=500, `50×455=22,750` — matches to within
+  1, confirming the mechanism exactly). `dlc`'s emitted program
+  (`measurements/m4-sips/after/ancestor_nonancestor.transformed.dl`)
+  seeds `magic_nonancestor_bf(1).` directly from the query constant — a
+  **single** value, not a 50-member set — giving `nonancestor_bf`'s own
+  cost as `1 × |person|`, exactly 50× smaller at that stage. `ancestor_bf`
+  itself still grows to the same ~50-member reachable set eventually (via
+  its own recursive rule's magic-seed propagation, `magic_ancestor_bf(z)
+  :- sup_ancestor_bf_r1_1(x,z)`), so the two transforms do comparable work
+  computing `ancestor`'s reachable set — the entire measured advantage is
+  `nonancestor`'s own top-level scan being gated by the query's single
+  constant instead of the propagated 50-member set. The hypothesis is
+  confirmed, not merely plausible.
 - **The corpus predicate's repeated failures.** The mechanical
   regex-based §4-compliance predicate needed three corrective passes
   before it reproduced the parser's own verdict exactly (19/622,
@@ -282,21 +392,25 @@ softened.
   (`docs/reports/openrulebench-preregistration.md`). Neither was ever a
   hard dependency — the pre-registered `BENCHMARK_FAMILY` corpus carried
   measurement instead.
-- **`T_guarded < T_none` never achieved** on any of B's four constructed
-  cone-bearing programs — see §5/§6, reported as a finding, not chased
-  with further variants per instruction.
+- **`T_guarded < T_none` initially achieved on 0/12 of B's points** —
+  traced to a real bug (`FindQuery`'s single-candidate limitation, not a
+  fundamental property of the guard as first reported) and fixed by
+  PUNCH-LIST.md P1; now 9/12. See §5/§6 item 5. Recorded here as a
+  correction to this document's own earlier draft, not silently dropped.
 - **`same_generation_negation` does not fully collapse** to one
   adornment under M4's relaxation — a genuine, disclosed partial result
   (§6 item 1).
 
 ## 8. Limitations, stated before anyone asks
 
-- **Single-query limitation.** `magicset.FindQuery` seeds only the first
-  bindable query candidate found in source order; a second independent
-  `.output` branch in the same program is never demand-restricted at all
-  (`docs/OPEN_QUESTIONS.md`, found via task B). This is the decisive
-  reason the fallback cone's practical value could not be demonstrated
-  this session.
+- **Single-query limitation — fixed this session (PUNCH-LIST.md P1),
+  noted for the record.** `magicset.FindQuery` originally seeded only the
+  first bindable query candidate found in source order, leaving a second
+  independent `.output` branch Untouched (full extent). Replaced by
+  `FindQueries` (seed collection from every candidate), gated on
+  answer-identity across 9 comparable cases before trusting the result.
+  This was the decisive reason the fallback cone's practical value could
+  not be demonstrated in task B; after the fix, it can be (§5/§6 item 5).
 - **No cost-based SIPS**, by design (`docs/m2 m3.md` §3) — `dlc`'s
   mechanical transform is provably beaten by a hand-written guard on
   every shape and scale point measured (up to several thousand-fold on
@@ -319,3 +433,21 @@ softened.
 - **No presentation artifact was built this session** (task G, dropped)
   — `dlc explain`'s output and every measurement JSON cited above are
   committed and ready for one.
+- **Corpus size, disambiguated (PUNCH-LIST.md P5).** Three different
+  numbers describe three different things and must not be conflated: the
+  strictly blueprint-§4-compliant corpus is **19** programs (`docs/
+  reports/night04-D-reconciliations.md`); **89/195** files in
+  `IN_GRAMMAR.txt` parse after the `.input`/`.output Name()` parens
+  amendment (`docs/reports/night03-T6-parens.md`) — a parse-coverage
+  measure over the real-world Soufflé corpus, unrelated to strict §4
+  compliance; and the naive/semi-naive differential gate (M1 §4.3, this
+  project's actual correctness/performance oracle) ran against **5**
+  programs — the pre-registered `BENCHMARK_FAMILY` shapes
+  (`same_generation_negation`, `transitive_closure_bound`,
+  `ancestor_nonancestor`, `reachability_complement`, `culprit_cycle`),
+  **16/16 comparable scale points matched, 0 disagreements**
+  (`docs/reports/m1-progress.md` §4 item 3) — not the 195-file grammar
+  corpus at all. The differential gate's correctness claim rests on 5
+  hand-selected, pre-registered shapes; the 19/89/195 numbers characterize
+  a completely separate question (how much of real-world Soufflé code this
+  project's grammar admits), not the differential's own sample size.
