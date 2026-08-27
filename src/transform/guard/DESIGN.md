@@ -52,6 +52,59 @@ the same question about the same program. **7/7 agreed** (all 6
 `CULPRIT_CANDIDATES` programs plus `culprit_cycle.dl` itself), 0
 disagreements — full numbers in `docs/reports/m3-2-culprit-detection.md`.
 
+## `decide.go` — M3.3, per-SCC decision and the fallback cone
+
+**The decision.** `Decide` reuses `CheckCulpritCycle`; if the fully-
+transformed program is unstratifiable, every original predicate with a
+generated relation inside an unstratifiable SCC (`UnstratifiableSCCs`,
+mapped back via `RelationOrigin`) is a **culprit**. `ConeClosure` computes
+the downward dependency closure of the culprit set over the SOURCE
+precedence graph, following the full (positive+negative) edge relation —
+`declined = culprit ∪ cone`. Cross-checked exactly against `harness/
+cone_metric.py`'s own already-validated NIGHT-BATCH-03 T9 result on
+`culprit_cycle.dl` with `{p}` declined: **both compute `{q, s}`, exactly**
+(`TestConeClosureMatchesHarnessCulpritCycle`) — the required "dlc's own
+cone computation and the harness's must agree exactly" gate.
+
+**Building the final mixed program.** `magicset.GenerateMixed` (a
+declined-aware variant of `Generate`, sharing all of `rules.go`'s
+machinery) skips a declined predicate's entire adorned/magic/supplementary
+apparatus and emits its ORIGINAL clauses instead; any occurrence inside a
+still-TRANSFORM'd predicate's rule that targets a declined predicate is
+left referencing the original, unrenamed atom (`occ.atom` already carries
+the correct name and terms — "declined" is implemented as *not rewriting*,
+not as a separate code path). This is the mechanism M2-M3-BUILD.md §8
+depends on: a mixed program's untransformed relations read their full,
+correctly-materialized extent because they are read by their own original
+name, the same name §3.9's evaluator (or Soufflé) already computes in
+full wherever else the program uses it.
+
+## M3.3's actual measured outcome, stated plainly
+
+On `culprit_cycle.dl` (and every one of NIGHT-BATCH-03 T4's 5 structurally-
+matching `CULPRIT_CANDIDATES` programs), the unstratifiable SCC of the
+transformed program is **not** confined to one relation — it entangles
+`p`'s, `q`'s, and `s`'s own adorned/magic/supplementary relations together
+(they were mutually dependent through the negative cycle to begin with).
+The culprit set computed directly from that SCC is therefore already
+`{p, q, s}` — **all** of the shape's IDB predicates — and the cone adds
+nothing further (`ConeClosure` returns empty on top of it). The guard's
+own numbers, honestly reported (`docs/reports/m3-3-decide.md`): on every
+one of these 6 programs, `T_guarded == T_none` exactly — **zero
+contribution over the untransformed baseline**, because the whole program
+falls back. This is blueprint failure mode #1's own stated risk
+("if the guard declines everything, the project has no contribution"),
+observed narrowly and specifically on the culprit-cycle-shaped subset of
+the corpus, not universally: the same guard, unmodified, produces the
+identical benefit `magicset`'s own transform already delivers on every one
+of the 5 `BENCHMARK_FAMILY` shapes that do NOT trigger a culprit cycle
+(confirmed byte-identical `dlc emit` output, `--transformer=guarded` vs.
+`--transformer=magicset`, on all 4 applicable shapes) and on the one
+negative control (`cc_edb_negated.dl`, 870→54, unaffected by the guard).
+The guard is not vacuous in general — it is exactly as generous as it can
+safely be, and it happens that this particular family of hand-constructed
+culprit-cycle shapes offers it nothing to save.
+
 ## Counterexample search (M2-M3-BUILD.md §5, required)
 
 `harness/night_m3_1_counterexample.py`: the 4 `tests/programs/p6*_base.dl`

@@ -17,6 +17,7 @@ import (
 	"dlc/src/sema"
 	"dlc/src/token"
 	"dlc/src/transform"
+	"dlc/src/transform/guard"
 	"dlc/src/transform/magicset"
 )
 
@@ -345,6 +346,7 @@ func runCodegen(path, outPath string) {
 var transformerRegistry = map[string]transform.Transformer{
 	"passthrough": transform.PassThrough{},
 	"magicset":    magicset.Transformer{},
+	"guarded":     guard.Transformer{},
 }
 
 type emitOutput struct {

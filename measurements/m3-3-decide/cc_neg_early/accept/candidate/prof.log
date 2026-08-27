@@ -1,0 +1,570 @@
+{
+ "root": {
+  "program": {
+   "configuration": {
+    "": "/root/compiler/measurements/m3-3-decide/cc_neg_early/emit_guarded/transformed.dl",
+    "fact-dir": "/root/compiler/fixtures/culprit_candidates/cc_neg_early",
+    "include-dir": ".",
+    "jobs": "1",
+    "libraries": "functors",
+    "library-dir": ".",
+    "output-dir": "/root/compiler/measurements/m3-3-decide/cc_neg_early/accept/candidate",
+    "profile": "prof.log",
+    "relationCount": "7",
+    "ruleCount": "8",
+    "version": "2.5",
+    "warn": "all",
+    "wno": "none"
+   },
+   "relation": {
+    "base": {
+     "loadtime": { "start": 28282700168, "end": 28282700269},
+     "num-tuples": 75,
+     "reads": 0,
+     "source-locator": "/root/compiler/measurements/m3-3-decide/cc_neg_early/emit_guarded/transformed.dl [1:7-1:11]"
+    },
+    "blocked": {
+     "loadtime": { "start": 28282700278, "end": 28282700307},
+     "num-tuples": 11,
+     "reads": 385,
+     "source-locator": "/root/compiler/measurements/m3-3-decide/cc_neg_early/emit_guarded/transformed.dl [5:7-5:14]"
+    },
+    "link": {
+     "loadtime": { "start": 28282700314, "end": 28282700337},
+     "num-tuples": 76,
+     "reads": 0,
+     "source-locator": "/root/compiler/measurements/m3-3-decide/cc_neg_early/emit_guarded/transformed.dl [3:7-3:11]"
+    },
+    "out": {
+     "maxRSS": {
+      "post": 12324,
+      "pre": 12324
+     },
+     "non-recursive-rule": {
+      "out(y) :- \n   p(1,y).": {
+       "atom-frequency": {
+        "out(y) :- \n   p(1,y).": {
+         "p": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12324,
+        "pre": 12324
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 28282701007, "end": 28282701009},
+       "source-locator": "/root/compiler/measurements/m3-3-decide/cc_neg_early/emit_guarded/transformed.dl [17:1-17:19]"
+      }
+     },
+     "num-tuples": 1,
+     "reads": 0,
+     "runtime": { "start": 28282700998, "end": 28282701018},
+     "savetime": { "start": 28282701022, "end": 28282701100},
+     "source-locator": "/root/compiler/measurements/m3-3-decide/cc_neg_early/emit_guarded/transformed.dl [10:7-10:10]"
+    },
+    "p": {
+     "maxRSS": {
+      "post": 12324,
+      "pre": 12324
+     },
+     "non-recursive-rule": {
+      "p(x,y) :- \n   link(x,y).": {
+       "atom-frequency": {
+        "p(x,y) :- \n   link(x,y).": {
+         "link": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12324,
+        "pre": 12324
+       },
+       "num-tuples": 76,
+       "runtime": { "start": 28282700954, "end": 28282700959},
+       "source-locator": "/root/compiler/measurements/m3-3-decide/cc_neg_early/emit_guarded/transformed.dl [12:1-12:23]"
+      },
+      "p(x,y) :- \n   link(x,z),\n   !s(z),\n   q(z,y).": {
+       "atom-frequency": {
+        "p(x,y) :- \n   link(x,z),\n   !s(z),\n   q(z,y).": {
+         "link": {
+          "level": 0,
+          "num-tuples": 0
+         },
+         "q": {
+          "level": 1,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12324,
+        "pre": 12324
+       },
+       "num-tuples": 14,
+       "runtime": { "start": 28282700966, "end": 28282700985},
+       "source-locator": "/root/compiler/measurements/m3-3-decide/cc_neg_early/emit_guarded/transformed.dl [13:1-13:39]"
+      }
+     },
+     "num-tuples": 90,
+     "reads": 0,
+     "runtime": { "start": 28282700945, "end": 28282700993},
+     "source-locator": "/root/compiler/measurements/m3-3-decide/cc_neg_early/emit_guarded/transformed.dl [9:7-9:8]"
+    },
+    "q": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 28282700445, "end": 28282700453},
+       "maxRSS": {
+        "post": 12196,
+        "pre": 12068
+       },
+       "num-tuples": 79,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "atom-frequency": {
+           "@new_q(x,y) :- \n   @delta_q(x,z),\n   base(z,y).": {
+            "@delta_q": {
+             "level": 0,
+             "num-tuples": 0
+            },
+            "base": {
+             "level": 1,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 12196,
+           "pre": 12068
+          },
+          "num-tuples": 79,
+          "runtime": { "start": 28282700388, "end": 28282700416},
+          "source-locator": "/root/compiler/measurements/m3-3-decide/cc_neg_early/emit_guarded/transformed.dl [15:1-15:32]"
+         }
+        }
+       },
+       "runtime": { "start": 28282700378, "end": 28282700425}
+      },
+      "1": {
+       "copytime": { "start": 28282700515, "end": 28282700526},
+       "maxRSS": {
+        "post": 12196,
+        "pre": 12196
+       },
+       "num-tuples": 77,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12196,
+           "pre": 12196
+          },
+          "num-tuples": 77,
+          "runtime": { "start": 28282700467, "end": 28282700486},
+          "source-locator": "/root/compiler/measurements/m3-3-decide/cc_neg_early/emit_guarded/transformed.dl [15:1-15:32]"
+         }
+        }
+       },
+       "runtime": { "start": 28282700457, "end": 28282700495}
+      },
+      "10": {
+       "maxRSS": {
+        "post": 12324,
+        "pre": 12324
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12324,
+           "pre": 12324
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 28282700887, "end": 28282700889},
+          "source-locator": "/root/compiler/measurements/m3-3-decide/cc_neg_early/emit_guarded/transformed.dl [15:1-15:32]"
+         }
+        }
+       },
+       "runtime": { "start": 28282700878, "end": 28282700897}
+      },
+      "2": {
+       "copytime": { "start": 28282700571, "end": 28282700579},
+       "maxRSS": {
+        "post": 12324,
+        "pre": 12324
+       },
+       "num-tuples": 52,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12324,
+           "pre": 12324
+          },
+          "num-tuples": 52,
+          "runtime": { "start": 28282700538, "end": 28282700555},
+          "source-locator": "/root/compiler/measurements/m3-3-decide/cc_neg_early/emit_guarded/transformed.dl [15:1-15:32]"
+         }
+        }
+       },
+       "runtime": { "start": 28282700530, "end": 28282700563}
+      },
+      "3": {
+       "copytime": { "start": 28282700631, "end": 28282700636},
+       "maxRSS": {
+        "post": 12324,
+        "pre": 12324
+       },
+       "num-tuples": 39,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12324,
+           "pre": 12324
+          },
+          "num-tuples": 39,
+          "runtime": { "start": 28282700592, "end": 28282700604},
+          "source-locator": "/root/compiler/measurements/m3-3-decide/cc_neg_early/emit_guarded/transformed.dl [15:1-15:32]"
+         }
+        }
+       },
+       "runtime": { "start": 28282700582, "end": 28282700612}
+      },
+      "4": {
+       "copytime": { "start": 28282700674, "end": 28282700678},
+       "maxRSS": {
+        "post": 12324,
+        "pre": 12324
+       },
+       "num-tuples": 26,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12324,
+           "pre": 12324
+          },
+          "num-tuples": 26,
+          "runtime": { "start": 28282700648, "end": 28282700658},
+          "source-locator": "/root/compiler/measurements/m3-3-decide/cc_neg_early/emit_guarded/transformed.dl [15:1-15:32]"
+         }
+        }
+       },
+       "runtime": { "start": 28282700639, "end": 28282700666}
+      },
+      "5": {
+       "copytime": { "start": 28282700710, "end": 28282700713},
+       "maxRSS": {
+        "post": 12324,
+        "pre": 12324
+       },
+       "num-tuples": 17,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12324,
+           "pre": 12324
+          },
+          "num-tuples": 17,
+          "runtime": { "start": 28282700681, "end": 28282700687},
+          "source-locator": "/root/compiler/measurements/m3-3-decide/cc_neg_early/emit_guarded/transformed.dl [15:1-15:32]"
+         }
+        }
+       },
+       "runtime": { "start": 28282700681, "end": 28282700692}
+      },
+      "6": {
+       "copytime": { "start": 28282700750, "end": 28282700753},
+       "maxRSS": {
+        "post": 12324,
+        "pre": 12324
+       },
+       "num-tuples": 10,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12324,
+           "pre": 12324
+          },
+          "num-tuples": 10,
+          "runtime": { "start": 28282700719, "end": 28282700724},
+          "source-locator": "/root/compiler/measurements/m3-3-decide/cc_neg_early/emit_guarded/transformed.dl [15:1-15:32]"
+         }
+        }
+       },
+       "runtime": { "start": 28282700717, "end": 28282700731}
+      },
+      "7": {
+       "copytime": { "start": 28282700796, "end": 28282700799},
+       "maxRSS": {
+        "post": 12324,
+        "pre": 12324
+       },
+       "num-tuples": 6,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12324,
+           "pre": 12324
+          },
+          "num-tuples": 6,
+          "runtime": { "start": 28282700766, "end": 28282700770},
+          "source-locator": "/root/compiler/measurements/m3-3-decide/cc_neg_early/emit_guarded/transformed.dl [15:1-15:32]"
+         }
+        }
+       },
+       "runtime": { "start": 28282700756, "end": 28282700778}
+      },
+      "8": {
+       "copytime": { "start": 28282700841, "end": 28282700842},
+       "maxRSS": {
+        "post": 12324,
+        "pre": 12324
+       },
+       "num-tuples": 3,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12324,
+           "pre": 12324
+          },
+          "num-tuples": 3,
+          "runtime": { "start": 28282700811, "end": 28282700814},
+          "source-locator": "/root/compiler/measurements/m3-3-decide/cc_neg_early/emit_guarded/transformed.dl [15:1-15:32]"
+         }
+        }
+       },
+       "runtime": { "start": 28282700802, "end": 28282700822}
+      },
+      "9": {
+       "copytime": { "start": 28282700873, "end": 28282700874},
+       "maxRSS": {
+        "post": 12324,
+        "pre": 12324
+       },
+       "num-tuples": 1,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12324,
+           "pre": 12324
+          },
+          "num-tuples": 1,
+          "runtime": { "start": 28282700846, "end": 28282700848},
+          "source-locator": "/root/compiler/measurements/m3-3-decide/cc_neg_early/emit_guarded/transformed.dl [15:1-15:32]"
+         }
+        }
+       },
+       "runtime": { "start": 28282700846, "end": 28282700854}
+      }
+     },
+     "maxRSS": {
+      "post": 12068,
+      "pre": 12068
+     },
+     "non-recursive-rule": {
+      "q(x,y) :- \n   base(x,y).": {
+       "atom-frequency": {
+        "q(x,y) :- \n   base(x,y).": {
+         "base": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12068,
+        "pre": 12068
+       },
+       "num-tuples": 75,
+       "runtime": { "start": 28282700352, "end": 28282700361},
+       "source-locator": "/root/compiler/measurements/m3-3-decide/cc_neg_early/emit_guarded/transformed.dl [14:1-14:23]"
+      }
+     },
+     "num-tuples": 75,
+     "reads": 461,
+     "runtime": { "start": 28282700342, "end": 28282700370},
+     "source-locator": "/root/compiler/measurements/m3-3-decide/cc_neg_early/emit_guarded/transformed.dl [7:7-7:8]"
+    },
+    "s": {
+     "maxRSS": {
+      "post": 12324,
+      "pre": 12324
+     },
+     "non-recursive-rule": {
+      "s(x) :- \n   q(x,y),\n   blocked(y).": {
+       "atom-frequency": {
+        "s(x) :- \n   q(x,y),\n   blocked(y).": {
+         "q": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12324,
+        "pre": 12324
+       },
+       "num-tuples": 34,
+       "runtime": { "start": 28282700917, "end": 28282700934},
+       "source-locator": "/root/compiler/measurements/m3-3-decide/cc_neg_early/emit_guarded/transformed.dl [16:1-16:29]"
+      }
+     },
+     "num-tuples": 34,
+     "reads": 76,
+     "runtime": { "start": 28282700916, "end": 28282700940},
+     "source-locator": "/root/compiler/measurements/m3-3-decide/cc_neg_early/emit_guarded/transformed.dl [8:7-8:8]"
+    }
+   },
+   "runtime": { "start": 28282700162, "end": 28282701104},
+   "starttime": { "time": 28282700130},
+   "usage": {
+    "timepoint": {
+     "28282700169": {
+      "maxRSS": 11528,
+      "systemtime": 2066,
+      "usertime": 2066
+     },
+     "28282700315": {
+      "maxRSS": 12068,
+      "systemtime": 2158,
+      "usertime": 2158
+     },
+     "28282700366": {
+      "maxRSS": 12068,
+      "systemtime": 2191,
+      "usertime": 2191
+     },
+     "28282700397": {
+      "maxRSS": 12196,
+      "systemtime": 2211,
+      "usertime": 2211
+     },
+     "28282700445": {
+      "maxRSS": 12196,
+      "systemtime": 2241,
+      "usertime": 2241
+     },
+     "28282700471": {
+      "maxRSS": 12196,
+      "systemtime": 2258,
+      "usertime": 2258
+     },
+     "28282700516": {
+      "maxRSS": 12196,
+      "systemtime": 2285,
+      "usertime": 2285
+     },
+     "28282700567": {
+      "maxRSS": 12324,
+      "systemtime": 2315,
+      "usertime": 2315
+     },
+     "28282700573": {
+      "maxRSS": 12324,
+      "systemtime": 2322,
+      "usertime": 2322
+     },
+     "28282700595": {
+      "maxRSS": 12324,
+      "systemtime": 2335,
+      "usertime": 2335
+     },
+     "28282700630": {
+      "maxRSS": 12324,
+      "systemtime": 2355,
+      "usertime": 2355
+     },
+     "28282700678": {
+      "maxRSS": 12324,
+      "systemtime": 2387,
+      "usertime": 2387
+     },
+     "28282700712": {
+      "maxRSS": 12324,
+      "systemtime": 2410,
+      "usertime": 2410
+     },
+     "28282700722": {
+      "maxRSS": 12324,
+      "systemtime": 2418,
+      "usertime": 2418
+     },
+     "28282700748": {
+      "maxRSS": 12324,
+      "systemtime": 2435,
+      "usertime": 2435
+     },
+     "28282700770": {
+      "maxRSS": 12324,
+      "systemtime": 2450,
+      "usertime": 2450
+     },
+     "28282700795": {
+      "maxRSS": 12324,
+      "systemtime": 2464,
+      "usertime": 2464
+     },
+     "28282700816": {
+      "maxRSS": 12324,
+      "systemtime": 2479,
+      "usertime": 2479
+     },
+     "28282700844": {
+      "maxRSS": 12324,
+      "systemtime": 2496,
+      "usertime": 2496
+     },
+     "28282700871": {
+      "maxRSS": 12324,
+      "systemtime": 2512,
+      "usertime": 2512
+     },
+     "28282700892": {
+      "maxRSS": 12324,
+      "systemtime": 2526,
+      "usertime": 2526
+     },
+     "28282700914": {
+      "maxRSS": 12324,
+      "systemtime": 2540,
+      "usertime": 2540
+     },
+     "28282700958": {
+      "maxRSS": 12324,
+      "systemtime": 2568,
+      "usertime": 2568
+     },
+     "28282700980": {
+      "maxRSS": 12324,
+      "systemtime": 2575,
+      "usertime": 2575
+     },
+     "28282701011": {
+      "maxRSS": 12324,
+      "systemtime": 2599,
+      "usertime": 2599
+     },
+     "28282701035": {
+      "maxRSS": 12324,
+      "systemtime": 2609,
+      "usertime": 2609
+     }
+    }
+   }
+  }
+ }
+}

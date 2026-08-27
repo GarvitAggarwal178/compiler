@@ -1,0 +1,628 @@
+{
+ "root": {
+  "program": {
+   "configuration": {
+    "": "/root/compiler/tests/corpus/CULPRIT_CANDIDATES/cc_query_bothbound.dl",
+    "fact-dir": "/root/compiler/fixtures/culprit_candidates/cc_query_bothbound",
+    "include-dir": ".",
+    "jobs": "1",
+    "libraries": "functors",
+    "library-dir": ".",
+    "output-dir": "/root/compiler/measurements/m3-3-decide/cc_query_bothbound/accept/original",
+    "profile": "prof.log",
+    "relationCount": "7",
+    "ruleCount": "10",
+    "version": "2.5",
+    "warn": "all",
+    "wno": "none"
+   },
+   "relation": {
+    "base": {
+     "loadtime": { "start": 28282712351, "end": 28282712465},
+     "num-tuples": 75,
+     "reads": 0,
+     "source-locator": "/root/compiler/tests/corpus/CULPRIT_CANDIDATES/cc_query_bothbound.dl [12:7-12:11]"
+    },
+    "blocked": {
+     "loadtime": { "start": 28282712474, "end": 28282712500},
+     "num-tuples": 11,
+     "reads": 385,
+     "source-locator": "/root/compiler/tests/corpus/CULPRIT_CANDIDATES/cc_query_bothbound.dl [14:7-14:14]"
+    },
+    "e": {
+     "loadtime": { "start": 28282712506, "end": 28282712540},
+     "num-tuples": 76,
+     "reads": 0,
+     "source-locator": "/root/compiler/tests/corpus/CULPRIT_CANDIDATES/cc_query_bothbound.dl [13:7-13:8]"
+    },
+    "out": {
+     "maxRSS": {
+      "post": 12276,
+      "pre": 12276
+     },
+     "non-recursive-rule": {
+      "out() :- \n   p(1,5).": {
+       "maxRSS": {
+        "post": 12276,
+        "pre": 12276
+       },
+       "num-tuples": 0,
+       "runtime": { "start": 28282713363, "end": 28282713365},
+       "source-locator": "/root/compiler/tests/corpus/CULPRIT_CANDIDATES/cc_query_bothbound.dl [28:1-28:17]"
+      }
+     },
+     "num-tuples": 0,
+     "reads": 0,
+     "runtime": { "start": 28282713354, "end": 28282713372},
+     "savetime": { "start": 28282713377, "end": 28282713419},
+     "source-locator": "/root/compiler/tests/corpus/CULPRIT_CANDIDATES/cc_query_bothbound.dl [27:7-27:10]"
+    },
+    "p": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 28282713272, "end": 28282713275},
+       "maxRSS": {
+        "post": 12276,
+        "pre": 12276
+       },
+       "num-tuples": 14,
+       "recursive-rule": {
+        "p(x,y) :- \n   p(x,z),\n   !s(z),\n   q(z,y).": {
+         "0": {
+          "atom-frequency": {
+           "@new_p(x,y) :- \n   @delta_p(x,z),\n   !s(z),\n   q(z,y).": {
+            "@delta_p": {
+             "level": 0,
+             "num-tuples": 0
+            },
+            "q": {
+             "level": 1,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 12276,
+           "pre": 12276
+          },
+          "num-tuples": 14,
+          "runtime": { "start": 28282713235, "end": 28282713246},
+          "source-locator": "/root/compiler/tests/corpus/CULPRIT_CANDIDATES/cc_query_bothbound.dl [25:1-25:33]"
+         }
+        }
+       },
+       "runtime": { "start": 28282713226, "end": 28282713254}
+      },
+      "1": {
+       "maxRSS": {
+        "post": 12276,
+        "pre": 12276
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "p(x,y) :- \n   p(x,z),\n   !s(z),\n   q(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12276,
+           "pre": 12276
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 28282713287, "end": 28282713290},
+          "source-locator": "/root/compiler/tests/corpus/CULPRIT_CANDIDATES/cc_query_bothbound.dl [25:1-25:33]"
+         }
+        }
+       },
+       "runtime": { "start": 28282713278, "end": 28282713298}
+      }
+     },
+     "maxRSS": {
+      "post": 12276,
+      "pre": 12276
+     },
+     "non-recursive-rule": {
+      "p(x,y) :- \n   e(x,y).": {
+       "atom-frequency": {
+        "p(x,y) :- \n   e(x,y).": {
+         "e": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12276,
+        "pre": 12276
+       },
+       "num-tuples": 76,
+       "runtime": { "start": 28282713206, "end": 28282713211},
+       "source-locator": "/root/compiler/tests/corpus/CULPRIT_CANDIDATES/cc_query_bothbound.dl [24:1-24:18]"
+      }
+     },
+     "num-tuples": 76,
+     "reads": 19,
+     "runtime": { "start": 28282713198, "end": 28282713219},
+     "source-locator": "/root/compiler/tests/corpus/CULPRIT_CANDIDATES/cc_query_bothbound.dl [23:7-23:8]"
+    },
+    "q": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 28282712647, "end": 28282712654},
+       "maxRSS": {
+        "post": 12276,
+        "pre": 12148
+       },
+       "num-tuples": 79,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "atom-frequency": {
+           "@new_q(x,y) :- \n   @delta_q(x,z),\n   base(z,y).": {
+            "@delta_q": {
+             "level": 0,
+             "num-tuples": 0
+            },
+            "base": {
+             "level": 1,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 12276,
+           "pre": 12148
+          },
+          "num-tuples": 79,
+          "runtime": { "start": 28282712591, "end": 28282712618},
+          "source-locator": "/root/compiler/tests/corpus/CULPRIT_CANDIDATES/cc_query_bothbound.dl [18:1-18:29]"
+         }
+        }
+       },
+       "runtime": { "start": 28282712582, "end": 28282712627}
+      },
+      "1": {
+       "copytime": { "start": 28282712717, "end": 28282712725},
+       "maxRSS": {
+        "post": 12276,
+        "pre": 12276
+       },
+       "num-tuples": 77,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12276,
+           "pre": 12276
+          },
+          "num-tuples": 77,
+          "runtime": { "start": 28282712668, "end": 28282712687},
+          "source-locator": "/root/compiler/tests/corpus/CULPRIT_CANDIDATES/cc_query_bothbound.dl [18:1-18:29]"
+         }
+        }
+       },
+       "runtime": { "start": 28282712659, "end": 28282712695}
+      },
+      "10": {
+       "maxRSS": {
+        "post": 12276,
+        "pre": 12276
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12276,
+           "pre": 12276
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 28282713140, "end": 28282713141},
+          "source-locator": "/root/compiler/tests/corpus/CULPRIT_CANDIDATES/cc_query_bothbound.dl [18:1-18:29]"
+         }
+        }
+       },
+       "runtime": { "start": 28282713131, "end": 28282713149}
+      },
+      "2": {
+       "copytime": { "start": 28282712781, "end": 28282712788},
+       "maxRSS": {
+        "post": 12276,
+        "pre": 12276
+       },
+       "num-tuples": 52,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12276,
+           "pre": 12276
+          },
+          "num-tuples": 52,
+          "runtime": { "start": 28282712738, "end": 28282712753},
+          "source-locator": "/root/compiler/tests/corpus/CULPRIT_CANDIDATES/cc_query_bothbound.dl [18:1-18:29]"
+         }
+        }
+       },
+       "runtime": { "start": 28282712729, "end": 28282712761}
+      },
+      "3": {
+       "copytime": { "start": 28282712857, "end": 28282712862},
+       "maxRSS": {
+        "post": 12276,
+        "pre": 12276
+       },
+       "num-tuples": 39,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12276,
+           "pre": 12276
+          },
+          "num-tuples": 39,
+          "runtime": { "start": 28282712800, "end": 28282712830},
+          "source-locator": "/root/compiler/tests/corpus/CULPRIT_CANDIDATES/cc_query_bothbound.dl [18:1-18:29]"
+         }
+        }
+       },
+       "runtime": { "start": 28282712791, "end": 28282712838}
+      },
+      "4": {
+       "copytime": { "start": 28282712910, "end": 28282712914},
+       "maxRSS": {
+        "post": 12276,
+        "pre": 12276
+       },
+       "num-tuples": 26,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12276,
+           "pre": 12276
+          },
+          "num-tuples": 26,
+          "runtime": { "start": 28282712875, "end": 28282712885},
+          "source-locator": "/root/compiler/tests/corpus/CULPRIT_CANDIDATES/cc_query_bothbound.dl [18:1-18:29]"
+         }
+        }
+       },
+       "runtime": { "start": 28282712865, "end": 28282712892}
+      },
+      "5": {
+       "copytime": { "start": 28282712960, "end": 28282712962},
+       "maxRSS": {
+        "post": 12276,
+        "pre": 12276
+       },
+       "num-tuples": 17,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12276,
+           "pre": 12276
+          },
+          "num-tuples": 17,
+          "runtime": { "start": 28282712926, "end": 28282712933},
+          "source-locator": "/root/compiler/tests/corpus/CULPRIT_CANDIDATES/cc_query_bothbound.dl [18:1-18:29]"
+         }
+        }
+       },
+       "runtime": { "start": 28282712917, "end": 28282712941}
+      },
+      "6": {
+       "copytime": { "start": 28282712995, "end": 28282713006},
+       "maxRSS": {
+        "post": 12276,
+        "pre": 12276
+       },
+       "num-tuples": 10,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12276,
+           "pre": 12276
+          },
+          "num-tuples": 10,
+          "runtime": { "start": 28282712975, "end": 28282712980},
+          "source-locator": "/root/compiler/tests/corpus/CULPRIT_CANDIDATES/cc_query_bothbound.dl [18:1-18:29]"
+         }
+        }
+       },
+       "runtime": { "start": 28282712966, "end": 28282712987}
+      },
+      "7": {
+       "copytime": { "start": 28282713041, "end": 28282713044},
+       "maxRSS": {
+        "post": 12276,
+        "pre": 12276
+       },
+       "num-tuples": 6,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12276,
+           "pre": 12276
+          },
+          "num-tuples": 6,
+          "runtime": { "start": 28282713011, "end": 28282713015},
+          "source-locator": "/root/compiler/tests/corpus/CULPRIT_CANDIDATES/cc_query_bothbound.dl [18:1-18:29]"
+         }
+        }
+       },
+       "runtime": { "start": 28282713011, "end": 28282713023}
+      },
+      "8": {
+       "copytime": { "start": 28282713085, "end": 28282713087},
+       "maxRSS": {
+        "post": 12276,
+        "pre": 12276
+       },
+       "num-tuples": 3,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12276,
+           "pre": 12276
+          },
+          "num-tuples": 3,
+          "runtime": { "start": 28282713056, "end": 28282713059},
+          "source-locator": "/root/compiler/tests/corpus/CULPRIT_CANDIDATES/cc_query_bothbound.dl [18:1-18:29]"
+         }
+        }
+       },
+       "runtime": { "start": 28282713047, "end": 28282713067}
+      },
+      "9": {
+       "copytime": { "start": 28282713127, "end": 28282713128},
+       "maxRSS": {
+        "post": 12276,
+        "pre": 12276
+       },
+       "num-tuples": 1,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 12276,
+           "pre": 12276
+          },
+          "num-tuples": 1,
+          "runtime": { "start": 28282713099, "end": 28282713101},
+          "source-locator": "/root/compiler/tests/corpus/CULPRIT_CANDIDATES/cc_query_bothbound.dl [18:1-18:29]"
+         }
+        }
+       },
+       "runtime": { "start": 28282713090, "end": 28282713108}
+      }
+     },
+     "maxRSS": {
+      "post": 12148,
+      "pre": 12020
+     },
+     "non-recursive-rule": {
+      "q(x,y) :- \n   base(x,y).": {
+       "atom-frequency": {
+        "q(x,y) :- \n   base(x,y).": {
+         "base": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12148,
+        "pre": 12020
+       },
+       "num-tuples": 75,
+       "runtime": { "start": 28282712556, "end": 28282712565},
+       "source-locator": "/root/compiler/tests/corpus/CULPRIT_CANDIDATES/cc_query_bothbound.dl [17:1-17:21]"
+      }
+     },
+     "num-tuples": 75,
+     "reads": 461,
+     "runtime": { "start": 28282712546, "end": 28282712574},
+     "source-locator": "/root/compiler/tests/corpus/CULPRIT_CANDIDATES/cc_query_bothbound.dl [16:7-16:8]"
+    },
+    "s": {
+     "maxRSS": {
+      "post": 12276,
+      "pre": 12276
+     },
+     "non-recursive-rule": {
+      "s(x) :- \n   q(x,y),\n   blocked(y).": {
+       "atom-frequency": {
+        "s(x) :- \n   q(x,y),\n   blocked(y).": {
+         "q": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 12276,
+        "pre": 12276
+       },
+       "num-tuples": 34,
+       "runtime": { "start": 28282713169, "end": 28282713187},
+       "source-locator": "/root/compiler/tests/corpus/CULPRIT_CANDIDATES/cc_query_bothbound.dl [21:1-21:28]"
+      }
+     },
+     "num-tuples": 34,
+     "reads": 90,
+     "runtime": { "start": 28282713169, "end": 28282713193},
+     "source-locator": "/root/compiler/tests/corpus/CULPRIT_CANDIDATES/cc_query_bothbound.dl [20:7-20:8]"
+    }
+   },
+   "runtime": { "start": 28282712345, "end": 28282713423},
+   "starttime": { "time": 28282712313},
+   "usage": {
+    "timepoint": {
+     "28282712326": {
+      "maxRSS": 11432,
+      "systemtime": 0,
+      "usertime": 3878
+     },
+     "28282712351": {
+      "maxRSS": 11560,
+      "systemtime": 0,
+      "usertime": 4206
+     },
+     "28282712375": {
+      "maxRSS": 11688,
+      "systemtime": 0,
+      "usertime": 4223
+     },
+     "28282712493": {
+      "maxRSS": 12020,
+      "systemtime": 0,
+      "usertime": 4357
+     },
+     "28282712520": {
+      "maxRSS": 12020,
+      "systemtime": 0,
+      "usertime": 4396
+     },
+     "28282712561": {
+      "maxRSS": 12148,
+      "systemtime": 0,
+      "usertime": 4453
+     },
+     "28282712596": {
+      "maxRSS": 12148,
+      "systemtime": 0,
+      "usertime": 4495
+     },
+     "28282712646": {
+      "maxRSS": 12276,
+      "systemtime": 0,
+      "usertime": 4553
+     },
+     "28282712675": {
+      "maxRSS": 12276,
+      "systemtime": 0,
+      "usertime": 4588
+     },
+     "28282712719": {
+      "maxRSS": 12276,
+      "systemtime": 0,
+      "usertime": 4649
+     },
+     "28282712745": {
+      "maxRSS": 12276,
+      "systemtime": 0,
+      "usertime": 4679
+     },
+     "28282712781": {
+      "maxRSS": 12276,
+      "systemtime": 0,
+      "usertime": 4732
+     },
+     "28282712805": {
+      "maxRSS": 12276,
+      "systemtime": 0,
+      "usertime": 4764
+     },
+     "28282712856": {
+      "maxRSS": 12276,
+      "systemtime": 0,
+      "usertime": 4821
+     },
+     "28282712880": {
+      "maxRSS": 12276,
+      "systemtime": 0,
+      "usertime": 4854
+     },
+     "28282712910": {
+      "maxRSS": 12276,
+      "systemtime": 0,
+      "usertime": 4890
+     },
+     "28282712931": {
+      "maxRSS": 12276,
+      "systemtime": 0,
+      "usertime": 4918
+     },
+     "28282712959": {
+      "maxRSS": 12276,
+      "systemtime": 0,
+      "usertime": 4952
+     },
+     "28282712985": {
+      "maxRSS": 12276,
+      "systemtime": 0,
+      "usertime": 4989
+     },
+     "28282713011": {
+      "maxRSS": 12276,
+      "systemtime": 0,
+      "usertime": 5033
+     },
+     "28282713040": {
+      "maxRSS": 12276,
+      "systemtime": 0,
+      "usertime": 5066
+     },
+     "28282713061": {
+      "maxRSS": 12276,
+      "systemtime": 0,
+      "usertime": 5096
+     },
+     "28282713085": {
+      "maxRSS": 12276,
+      "systemtime": 0,
+      "usertime": 5123
+     },
+     "28282713103": {
+      "maxRSS": 12276,
+      "systemtime": 0,
+      "usertime": 5151
+     },
+     "28282713126": {
+      "maxRSS": 12276,
+      "systemtime": 0,
+      "usertime": 5178
+     },
+     "28282713145": {
+      "maxRSS": 12276,
+      "systemtime": 0,
+      "usertime": 5205
+     },
+     "28282713168": {
+      "maxRSS": 12276,
+      "systemtime": 0,
+      "usertime": 5234
+     },
+     "28282713211": {
+      "maxRSS": 12276,
+      "systemtime": 0,
+      "usertime": 5289
+     },
+     "28282713240": {
+      "maxRSS": 12276,
+      "systemtime": 0,
+      "usertime": 5320
+     },
+     "28282713272": {
+      "maxRSS": 12276,
+      "systemtime": 0,
+      "usertime": 5364
+     },
+     "28282713292": {
+      "maxRSS": 12276,
+      "systemtime": 0,
+      "usertime": 5388
+     },
+     "28282713316": {
+      "maxRSS": 12276,
+      "systemtime": 0,
+      "usertime": 5416
+     }
+    }
+   }
+  }
+ }
+}

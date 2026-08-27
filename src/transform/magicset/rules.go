@@ -29,7 +29,28 @@ import (
 // into "this ORIGINAL predicate must fall back" without re-deriving
 // magicset's own naming convention a second time.
 func Generate(prog *ast.Program, schemas map[string]*sema.RelationSchema, result *AdornResult) (*ast.Program, map[string]string) {
-	g := &genState{schemas: schemas, declaredRel: map[string]bool{}, origin: map[string]string{}, out: &ast.Program{}}
+	return GenerateMixed(prog, schemas, result, nil)
+}
+
+// GenerateMixed is Generate, parameterized by declined -- the set of
+// ORIGINAL source predicate names guard's M3.3 decision has chosen to
+// FALLBACK (read at full, untransformed extent) rather than TRANSFORM.
+// nil/empty declined reduces to plain Generate's pure-M2 behaviour.
+//
+// A declined predicate's entire adorned/magic/supplementary apparatus is
+// skipped and its ORIGINAL clauses are emitted instead (same pass-through
+// treatment "untouched" predicates already get). Any occurrence inside a
+// still-TRANSFORM'd predicate's rule that targets a declined predicate is
+// left referencing the ORIGINAL atom, unrenamed and un-magic-ruled --
+// `occ.atom` already carries the original name and terms (it is the atom
+// as it appeared in the SOURCE rule body before any renaming), so
+// "declined" literally means "don't rewrite this occurrence," not a
+// separate code path. This is the mechanism M2-M3-BUILD.md §8 depends on:
+// the untransformed rule reads the declined relation's full extent
+// because it is reading the SAME relation name §3.9's evaluator already
+// materializes in full for that predicate elsewhere in the program.
+func GenerateMixed(prog *ast.Program, schemas map[string]*sema.RelationSchema, result *AdornResult, declined map[string]bool) (*ast.Program, map[string]string) {
+	g := &genState{schemas: schemas, declaredRel: map[string]bool{}, origin: map[string]string{}, out: &ast.Program{}, declined: declined}
 
 	// Every original declaration survives unchanged -- including the
 	// original (now possibly rule-less) name of an adorned predicate;
@@ -43,15 +64,16 @@ func Generate(prog *ast.Program, schemas map[string]*sema.RelationSchema, result
 
 	st := &sema.SymbolTable{Relations: schemas}
 
-	// Untouched predicates: original clauses pass through byte-for-byte
-	// (same AST nodes, not copies -- immutable from here on). The
-	// query's own projection rule is excluded even though its head
-	// relation (the `.output` relation) is itself untouched -- it gets
-	// re-emitted, rewritten, by emitQueryProjection below; including
-	// both would leave the ORIGINAL (dead, since the predicate it reads
-	// no longer has any defining rules) clause alongside the real one.
-	untouchedNames := sortedKeys(result.Untouched)
-	for _, name := range untouchedNames {
+	// Pass-through predicates: original clauses byte-for-byte (same AST
+	// nodes, not copies) for every predicate that is EITHER never
+	// adorned at all (Untouched) OR adorned but declined to FALLBACK.
+	// The query's own projection rule is excluded here even when its own
+	// target predicate is declined -- it is emitted once, correctly
+	// routed, at the very end (either re-emitted rewritten to the
+	// adorned relation, or as the untouched original, depending on
+	// whether the query's OWN target predicate ended up declined).
+	passthroughNames := sortedKeys(unionSets(result.Untouched, declined))
+	for _, name := range passthroughNames {
 		for _, c := range prog.Clauses {
 			if c.Head.Name == name && c != result.Query.ProjectionRule {
 				g.out.Clauses = append(g.out.Clauses, c)
@@ -61,23 +83,34 @@ func Generate(prog *ast.Program, schemas map[string]*sema.RelationSchema, result
 
 	// Adorned predicates, processed in worklist order (deterministic,
 	// and matches the order a human reading the gate's own report sees
-	// them discovered in).
+	// them discovered in) -- skipping any predicate that is declined
+	// (its original clauses were already emitted above).
 	for _, key := range result.Order {
+		if g.declined[key.pred] {
+			continue
+		}
 		for ruleIdx, ar := range result.Rules[key] {
 			varTypes := sema.ClauseVarTypes(st, ar.Source)
 			g.emitAdornedRule(key, ruleIdx, ar, varTypes)
 		}
 	}
 
-	// The query's own seed fact: magic_q^α0(c̄) from the query atom's
-	// constant arguments.
-	g.emitSeed(result.Query)
-
-	// The original query-projection rule, rewritten to reference the
-	// adorned relation instead of the original predicate name -- same
-	// convention the hand-guarded files already use (q_nonancestor(y):-
-	// nonancestor_bf(1,y), not nonancestor(1,y)).
-	g.emitQueryProjection(result.Query)
+	if g.declined[result.Query.Key.pred] {
+		// The query's own target predicate is FALLBACK: no magic seed
+		// (nothing demand-restricted to seed), and the original
+		// projection rule (query constant hardcoded, reading the
+		// original relation directly) is exactly right, unchanged.
+		g.out.Clauses = append(g.out.Clauses, result.Query.ProjectionRule)
+	} else {
+		// The query's own seed fact: magic_q^α0(c̄) from the query atom's
+		// constant arguments.
+		g.emitSeed(result.Query)
+		// The original query-projection rule, rewritten to reference the
+		// adorned relation instead of the original predicate name -- same
+		// convention the hand-guarded files already use (q_nonancestor(y):-
+		// nonancestor_bf(1,y), not nonancestor(1,y)).
+		g.emitQueryProjection(result.Query)
+	}
 
 	return g.out, g.origin
 }
@@ -86,7 +119,19 @@ type genState struct {
 	schemas     map[string]*sema.RelationSchema
 	declaredRel map[string]bool
 	origin      map[string]string // generated relation name -> original source predicate
+	declined    map[string]bool   // original source predicates decided FALLBACK (nil/empty for plain Generate)
 	out         *ast.Program
+}
+
+func unionSets(a, b map[string]bool) map[string]bool {
+	out := map[string]bool{}
+	for k := range a {
+		out[k] = true
+	}
+	for k := range b {
+		out[k] = true
+	}
+	return out
 }
 
 // declareRelation declares name (if not already declared) with the given
@@ -172,7 +217,7 @@ func (g *genState) emitAdornedRule(key adornedKey, ruleIdx int, ar *AdornedRule,
 	g.addClause(mkAtomFromNames(supName(0), V[0]), []ast.Literal{mkAtomFromTerms(key.MagicRelName(), boundHeadTerms)})
 
 	for k := 1; k <= n; k++ {
-		lit := rewriteLiteralForAdornment(ar, k-1)
+		lit := rewriteLiteralForAdornment(ar, k-1, g.declined)
 		g.declareRelation(supName(k), varTypesFor(V[k]), key.pred)
 		body := []ast.Literal{mkAtomFromNames(supName(k-1), V[k-1]), lit}
 		g.addClause(mkAtomFromNames(supName(k), V[k]), body)
@@ -183,7 +228,14 @@ func (g *genState) emitAdornedRule(key adornedKey, ruleIdx int, ar *AdornedRule,
 	// literal position. Tagged with occ.target.pred, NOT key.pred --
 	// this magic relation belongs to the predicate being DEMANDED, not
 	// the rule doing the demanding (see declareRelation's own comment).
+	// Skipped entirely when the target is declined: nothing would ever
+	// read magic_<declined>, since rewriteLiteralForAdornment above
+	// leaves the consuming literal referencing the original (undemanded,
+	// full-extent) relation instead.
 	for _, occ := range ar.Occurrences {
+		if g.declined[occ.target.pred] {
+			continue
+		}
 		k := occ.literalIndex
 		beta := adornFromKey(occ.target)
 		boundArgs := boundTermsAt(occ.atom.Terms, beta)
@@ -218,10 +270,19 @@ func (g *genState) emitQueryProjection(q *QueryInfo) {
 	g.addClause(q.ProjectionRule.Head, []ast.Literal{renamed})
 }
 
-func rewriteLiteralForAdornment(ar *AdornedRule, idx int) ast.Literal {
+// rewriteLiteralForAdornment returns body[idx] rewritten to reference its
+// occurrence's adorned relation name, UNLESS that occurrence's target
+// predicate is declined -- in which case the literal is returned
+// unchanged (occ.atom already carries the original name and terms; a
+// declined predicate is read at its own full, untransformed extent, per
+// M2-M3-BUILD.md §7's fallback-cone mechanism).
+func rewriteLiteralForAdornment(ar *AdornedRule, idx int, declined map[string]bool) ast.Literal {
 	lit := ar.OrderedBody[idx]
 	for _, occ := range ar.Occurrences {
 		if occ.literalIndex == idx {
+			if declined[occ.target.pred] {
+				return lit
+			}
 			renamed := &ast.Atom{Name: occ.target.RelName(), Terms: occ.atom.Terms}
 			if occ.negated {
 				return &ast.NegatedAtom{Atom: renamed}
