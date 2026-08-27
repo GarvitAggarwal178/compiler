@@ -34,4 +34,20 @@ in `main.go` changes), and prints the result with `parser.Print`. This is
 the front half of the M3 measurement protocol: `dlc` decides and emits,
 Soufflé evaluates — `emit` never runs `dlc`'s own evaluator. Default
 transformer is `passthrough` (`transform.PassThrough`); select another with
-`--transformer=<name>`.
+`--transformer=<name>`. Registry entries as of M3: `passthrough`, `magicset`
+(M2's ungated transform), `guarded` (the full M3 pipeline — magicset,
+guarded by `src/transform/guard`'s culprit-cycle detection and per-SCC
+TRANSFORM/FALLBACK decision).
+
+**`run`/`run-seminaive` (§3.8/§3.9, extended M3.4).** Both now also accept
+an optional trailing `--transformer=<name>` (shared parsing,
+`transformerFlag`, with `emit`), defaulting to `passthrough`. After the
+usual parse+sema pipeline accepts the ORIGINAL program, the named
+`Transformer` is applied and `sema.CheckStratification` is re-run on its
+OUTPUT — never reusing the pre-transform `StratumResult`, since a real
+transform changes the precedence graph (`src/transform/DESIGN.md`'s own
+documented caller contract). The transformed/possibly-mixed program is
+then evaluated by the same `RunNaive`/`RunSemiNaive` any other program
+uses — no second evaluation path exists for a mixed (partially
+transformed, partially fallback) program (`src/eval/fallback.go`,
+`docs/reports/m3-4-fallback.md`).

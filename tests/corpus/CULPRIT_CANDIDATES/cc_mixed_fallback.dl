@@ -1,0 +1,44 @@
+// CULPRIT_CANDIDATES: cc_mixed_fallback
+//
+// M3.4 fallback-evaluation test case: a SINGLE program combining a
+// genuine culprit-cycle group (p/q/s, identical shape to culprit_cycle.dl)
+// with a genuine safe group (ancestor/nonancestor, identical shape to
+// ancestor_nonancestor.dl) feeding into ONE query via a conjunction
+// relation (combo). The guard's per-SCC decision declines only {p,q,s}
+// (confirmed: ConeClosure({p,q,s}) does not reach combo/ans, since the
+// dependency edge runs combo->p, not p->combo) -- ancestor/nonancestor/
+// combo/ans stay in transformed (magic-set) form. This is the one program
+// in this corpus that actually produces a MIXED program (some relations
+// transformed, some fallback) rather than an all-or-nothing decline,
+// specifically to give M3.4 something non-trivial to evaluate.
+
+.decl base(x:number, y:number)     .input base
+.decl e(x:number, y:number)        .input e
+.decl blocked(x:number)            .input blocked
+
+.decl q(x:number, y:number)
+q(x,y) :- base(x,y).
+q(x,y) :- q(x,z), base(z,y).
+
+.decl s(x:number)
+s(x) :- q(x,y), blocked(y).
+
+.decl p(x:number, y:number)
+p(x,y) :- e(x,y).
+p(x,y) :- p(x,z), !s(z), q(z,y).
+
+.decl parent(child:number, par:number)   .input parent
+.decl person(x:number)                   .input person
+
+.decl ancestor(x:number, y:number)
+ancestor(x,y) :- parent(x,y).
+ancestor(x,y) :- parent(x,z), ancestor(z,y).
+
+.decl nonancestor(x:number, y:number)
+nonancestor(x,y) :- person(x), person(y), !ancestor(x,y).
+
+.decl combo(x:number, y:number)
+combo(x,y) :- p(x,y), nonancestor(x,y).
+
+.decl ans(y:number)   .output ans
+ans(y) :- combo(1,y).

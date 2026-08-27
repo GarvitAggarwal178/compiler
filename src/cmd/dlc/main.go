@@ -38,17 +38,17 @@ func main() {
 	case "check":
 		runCheck(path)
 	case "run":
-		if len(os.Args) != 5 {
-			fmt.Fprintln(os.Stderr, "usage: dlc run <file> <factsDir> <outDir>")
+		if len(os.Args) < 5 || len(os.Args) > 6 {
+			fmt.Fprintln(os.Stderr, "usage: dlc run <file> <factsDir> <outDir> [--transformer=name]")
 			os.Exit(2)
 		}
-		runRun(path, os.Args[3], os.Args[4], false)
+		runRun(path, os.Args[3], os.Args[4], false, transformerFlag(os.Args[5:]))
 	case "run-seminaive":
-		if len(os.Args) != 5 {
-			fmt.Fprintln(os.Stderr, "usage: dlc run-seminaive <file> <factsDir> <outDir>")
+		if len(os.Args) < 5 || len(os.Args) > 6 {
+			fmt.Fprintln(os.Stderr, "usage: dlc run-seminaive <file> <factsDir> <outDir> [--transformer=name]")
 			os.Exit(2)
 		}
-		runRun(path, os.Args[3], os.Args[4], true)
+		runRun(path, os.Args[3], os.Args[4], true, transformerFlag(os.Args[5:]))
 	case "codegen":
 		if len(os.Args) != 4 {
 			fmt.Fprintln(os.Stderr, "usage: dlc codegen <file> <outfile.c>")
@@ -56,13 +56,7 @@ func main() {
 		}
 		runCodegen(path, os.Args[3])
 	case "emit":
-		transformerName := "passthrough"
-		for _, a := range os.Args[3:] {
-			if v, ok := strings.CutPrefix(a, "--transformer="); ok {
-				transformerName = v
-			}
-		}
-		runEmit(path, transformerName)
+		runEmit(path, transformerFlag(os.Args[3:]))
 	default:
 		fmt.Fprintf(os.Stderr, "unknown subcommand %q\n", subcommand)
 		os.Exit(2)
@@ -170,7 +164,21 @@ type runOutput struct {
 // ever compared on identical everything else (differential.py's own
 // gate-one re-check, and the T_naive-vs-T_semi-naive headline number
 // both depend on that).
-func runRun(path, factsDir, outDir string, semiNaive bool) {
+// transformerFlag scans args (the tail of os.Args after the fixed
+// positional ones) for "--transformer=name", defaulting to "passthrough"
+// if absent -- shared by run/run-seminaive/emit so all three subcommands
+// accept the flag identically.
+func transformerFlag(args []string) string {
+	name := "passthrough"
+	for _, a := range args {
+		if v, ok := strings.CutPrefix(a, "--transformer="); ok {
+			name = v
+		}
+	}
+	return name
+}
+
+func runRun(path, factsDir, outDir string, semiNaive bool, transformerName string) {
 	defer func() {
 		if r := recover(); r != nil {
 			out := runOutput{Status: "panic", Panic: fmt.Sprintf("%v", r)}
@@ -216,10 +224,42 @@ func runRun(path, factsDir, outDir string, semiNaive bool) {
 		return
 	}
 
-	schemas, _ := sema.BuildSymbolTable(prog)
+	// Apply the named Transformer, then re-run sema.CheckStratification on
+	// its OUTPUT rather than reusing stratResult -- a real transform
+	// changes the precedence graph (new magic-seed relations), so the
+	// pre-transform StratumResult is invalid for the transformed program.
+	// This is exactly the contract transform.Transformer's own doc
+	// comment documents and defers to the caller (src/transform/
+	// DESIGN.md); this is that caller, wired in now that a real
+	// Transformer exists to justify it (transformer.go's own DESIGN.md
+	// note: "the natural place to wire it in is exactly when Lane A's
+	// real Transformer lands").
+	transformer, ok := transformerRegistry[transformerName]
+	if !ok {
+		out := runOutput{Status: "eval_error", Panic: fmt.Sprintf("unknown transformer %q", transformerName)}
+		enc, _ := json.Marshal(out)
+		fmt.Println(string(enc))
+		os.Exit(2)
+	}
+	transformed, terr := transformer.Transform(prog, stratResult)
+	if terr != nil {
+		out := runOutput{Status: "eval_error", Panic: terr.Error()}
+		enc, _ := json.Marshal(out)
+		fmt.Println(string(enc))
+		os.Exit(1)
+	}
+	transformedSchemas, _ := sema.BuildSymbolTable(transformed)
+	_, transformedStrat := sema.CheckStratification(transformed)
+	if transformedStrat == nil {
+		out := runOutput{Status: "eval_error", Panic: "transformer produced an unstratifiable program -- this should be impossible for --transformer=guarded, which is required to only ever return a stratifiable result"}
+		enc, _ := json.Marshal(out)
+		fmt.Println(string(enc))
+		os.Exit(1)
+	}
+
 	inputNames := map[string]bool{}
 	outputNames := map[string]bool{}
-	for _, d := range prog.Decls {
+	for _, d := range transformed.Decls {
 		switch d.Kind {
 		case ast.DeclInput:
 			inputNames[d.Name] = true
@@ -228,19 +268,19 @@ func runRun(path, factsDir, outDir string, semiNaive bool) {
 		}
 	}
 
-	evaluator := eval.NewEvaluator(schemas.Relations)
-	if err := evaluator.LoadFacts(factsDir, schemas.Relations, inputNames); err != nil {
+	evaluator := eval.NewEvaluator(transformedSchemas.Relations)
+	if err := evaluator.LoadFacts(factsDir, transformedSchemas.Relations, inputNames); err != nil {
 		out := runOutput{Status: "eval_error", Panic: err.Error()}
 		enc, _ := json.Marshal(out)
 		fmt.Println(string(enc))
 		os.Exit(1)
 	}
 	if semiNaive {
-		evaluator.RunSemiNaive(prog, stratResult)
+		evaluator.RunSemiNaive(transformed, transformedStrat)
 	} else {
-		evaluator.RunNaive(prog, stratResult.Stratum)
+		evaluator.RunNaive(transformed, transformedStrat.Stratum)
 	}
-	if err := evaluator.WriteOutput(outDir, schemas.Relations, outputNames); err != nil {
+	if err := evaluator.WriteOutput(outDir, transformedSchemas.Relations, outputNames); err != nil {
 		out := runOutput{Status: "eval_error", Panic: err.Error()}
 		enc, _ := json.Marshal(out)
 		fmt.Println(string(enc))
