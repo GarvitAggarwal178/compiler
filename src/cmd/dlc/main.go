@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+	"sort"
 
 	"strings"
 
@@ -57,6 +58,8 @@ func main() {
 		runCodegen(path, os.Args[3])
 	case "emit":
 		runEmit(path, transformerFlag(os.Args[3:]))
+	case "explain":
+		runExplain(path)
 	default:
 		fmt.Fprintf(os.Stderr, "unknown subcommand %q\n", subcommand)
 		os.Exit(2)
@@ -470,6 +473,150 @@ func runEmit(path, transformerName string) {
 		os.Exit(1)
 	}
 	fmt.Println(string(enc))
+}
+
+// runExplain is NIGHT-BATCH-04 E's entry point: a debugging/presentation
+// tool, not a measurement path (contrast runEmit/runRun, which print one
+// machine-readable JSON document). Plain text to stdout, one fact per
+// line, a fixed "TAG key=val key=val ..." shape per line so a later
+// consumer (G's presentation script) can split on the first space and
+// then on "=" without a real parser. Three modes, chosen by what the
+// program's own front end decides, not by a flag:
+//
+//   - REJECTION: the program fails an existing sema check. One REJECT
+//     line per diagnostic (all four grounds already share Category/
+//     Span/Message -- this mode adds nothing new, it just re-renders
+//     what runCheck already computes, as fact lines instead of JSON).
+//   - TRANSFORM: an accepted program with a bindable query. One line per
+//     adorned (predicate,adornment) pair discovered by the worklist, one
+//     WORKLIST line with the iteration count, one MAGIC line per magic
+//     relation generated, and one NEGATED line per negated occurrence
+//     naming its pre- and post-relaxation adornment (M4-SIPS.md §1/§2).
+//   - GUARD: guard.Decide's per-predicate TRANSFORM/FALLBACK verdict; if
+//     anything declines, the culprit set, the cone, and the declined
+//     fraction (M2-M3-BUILD.md §6/§7).
+//
+// A program with no bindable query (magicset.FindQuery returns nil) gets
+// a single NOQUERY line instead of TRANSFORM/GUARD output -- there is
+// nothing for either mode to report (M2-M3-BUILD.md §2: "expected on the
+// positive fragment").
+func runExplain(path string) {
+	defer func() {
+		if r := recover(); r != nil {
+			fmt.Printf("PANIC message=%q\n", fmt.Sprintf("%v", r))
+			os.Exit(1)
+		}
+	}()
+
+	src, err := os.ReadFile(path)
+	if err != nil {
+		fmt.Printf("READ_ERROR message=%q\n", err.Error())
+		os.Exit(1)
+	}
+
+	prog, perrs := parser.Parse(src)
+	if len(perrs) > 0 {
+		for _, e := range perrs {
+			fmt.Printf("REJECT ground=parse span=%s message=%q\n", spanText(e.Span), e.Message)
+		}
+		return
+	}
+
+	var diags []sema.Diagnostic
+	diags = append(diags, sema.CheckDeclType(prog)...)
+	diags = append(diags, sema.CheckAllowedness(prog)...)
+	stratDiags, stratResult := sema.CheckStratification(prog)
+	diags = append(diags, stratDiags...)
+	if len(diags) > 0 {
+		// REJECTION mode.
+		for _, d := range diags {
+			fmt.Printf("REJECT ground=%s span=%s message=%q\n", d.Category, spanText(d.Span), d.Message)
+		}
+		return
+	}
+	_ = stratResult
+
+	// TRANSFORM mode.
+	query := magicset.FindQuery(prog)
+	if query == nil {
+		fmt.Println("NOQUERY reason=\"no .output relation with a single, constant-bearing atom body\"")
+		return
+	}
+	result, err := magicset.Adorn(prog, query)
+	if err != nil {
+		fmt.Printf("TRANSFORM_ERROR message=%q\n", err.Error())
+		return
+	}
+	fmt.Printf("QUERY pred=%s rel=%s\n", query.QueryAtom.Name, query.Key.RelName())
+	fmt.Printf("WORKLIST iterations=%d\n", result.Iterations)
+	for _, key := range result.Order {
+		fmt.Printf("ADORN rel=%s rules=%d\n", key.RelName(), len(result.Rules[key]))
+		fmt.Printf("MAGIC rel=%s for_rel=%s\n", key.MagicRelName(), key.RelName())
+	}
+	for pred := range result.Untouched {
+		fmt.Printf("UNTOUCHED pred=%s\n", pred)
+	}
+	for _, occ := range result.NegatedOccurrenceAdornments() {
+		relaxed := occ.Adorn.String() != occ.PreAdorn.String()
+		reason := "all-positions-restricting"
+		if relaxed {
+			reason = "non-restricting-full-scan-position-relaxed"
+		}
+		fmt.Printf("NEGATED pred=%s pre_adorn=%s adorn=%s relaxed=%t reason=%s\n",
+			occ.Pred, occ.PreAdorn.String(), occ.Adorn.String(), relaxed, reason)
+	}
+
+	// GUARD mode.
+	decideResult, err := guard.Decide(prog)
+	if err != nil {
+		fmt.Printf("GUARD_ERROR message=%q\n", err.Error())
+		return
+	}
+	if len(decideResult.DeclinedRelations) == 0 {
+		fmt.Println("GUARD verdict=STRATIFIABLE")
+	} else {
+		fmt.Println("GUARD verdict=UNSTRATIFIABLE clause=a")
+		idb := map[string]bool{}
+		for _, c := range prog.Clauses {
+			idb[c.Head.Name] = true
+		}
+		fmt.Printf("GUARD culprit=%s cone=%s declined_fraction=%.3f\n",
+			joinedSortedKeys(decideResult.CulpritPredicates),
+			joinedSortedKeys(decideResult.ConeRelations),
+			float64(len(decideResult.DeclinedRelations))/float64(len(idb)))
+	}
+	idbAll := map[string]bool{}
+	for _, c := range prog.Clauses {
+		idbAll[c.Head.Name] = true
+	}
+	for _, pred := range sortedKeysOf(idbAll) {
+		action := "TRANSFORM"
+		if decideResult.DeclinedRelations[pred] {
+			action = "FALLBACK"
+		}
+		fmt.Printf("DECISION pred=%s action=%s\n", pred, action)
+	}
+}
+
+func spanText(s token.Span) string {
+	return fmt.Sprintf("%d:%d-%d:%d", s.Start.Line, s.Start.Col, s.End.Line, s.End.Col)
+}
+
+func joinedSortedKeys(m map[string]bool) string {
+	keys := sortedKeysOf(m)
+	if len(keys) == 0 {
+		return "{}"
+	}
+	return "{" + strings.Join(keys, ",") + "}"
+}
+
+func sortedKeysOf(m map[string]bool) []string {
+	out := make([]string, 0, len(m))
+	for k := range m {
+		out = append(out, k)
+	}
+	sort.Strings(out)
+	return out
 }
 
 type jsonDiagnostic struct {

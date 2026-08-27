@@ -1,0 +1,12 @@
+QUERY pred=nonancestor rel=nonancestor_bf
+WORKLIST iterations=2
+ADORN rel=nonancestor_bf rules=1
+MAGIC rel=magic_nonancestor_bf for_rel=nonancestor_bf
+ADORN rel=ancestor_bf rules=2
+MAGIC rel=magic_ancestor_bf for_rel=ancestor_bf
+UNTOUCHED pred=q_nonancestor
+NEGATED pred=ancestor pre_adorn=bb adorn=bf relaxed=true reason=non-restricting-full-scan-position-relaxed
+GUARD verdict=STRATIFIABLE
+DECISION pred=ancestor action=TRANSFORM
+DECISION pred=nonancestor action=TRANSFORM
+DECISION pred=q_nonancestor action=TRANSFORM

@@ -51,3 +51,22 @@ then evaluated by the same `RunNaive`/`RunSemiNaive` any other program
 uses — no second evaluation path exists for a mixed (partially
 transformed, partially fallback) program (`src/eval/fallback.go`,
 `docs/reports/m3-4-fallback.md`).
+
+**`explain` (NIGHT-BATCH-04 E).** A debugging/presentation tool, not a
+measurement path — plain text, one fact per line (`TAG key=val ...`),
+not the JSON-document contract every other subcommand follows (nothing
+in `harness/` parses this format as a measurement; a later presentation
+script may). No `--transformer=` flag: unlike `emit`/`run`, `explain`
+always runs both `magicset.Adorn` (unconditionally, not gated by a
+chosen transformer) and `guard.Decide` — a user asking "why did this
+happen" wants the real mechanical adornment and the real guard verdict,
+not a choice between them. Three modes chosen by what the front end
+decides, not a flag: REJECTION (one `REJECT` line per diagnostic,
+covering the parser and all four sema grounds, same
+`Category`/`Span`/`Message` fields `runCheck`'s JSON already carries, a
+different rendering not new information), TRANSFORM (adorned predicates,
+worklist iterations, magic relations, and per negated occurrence its
+pre-/post-relaxation adornment — M4-SIPS.md §1/§2), GUARD (per-predicate
+TRANSFORM/FALLBACK, culprit set, cone, declined fraction when the guard
+fires). Samples for every mode and all four rejection grounds committed
+under `docs/reports/explain-samples/` (`docs/reports/night04-E-explain.md`).

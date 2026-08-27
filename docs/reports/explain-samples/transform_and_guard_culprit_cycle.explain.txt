@@ -1,0 +1,16 @@
+QUERY pred=p rel=p_bf
+WORKLIST iterations=3
+ADORN rel=p_bf rules=2
+MAGIC rel=magic_p_bf for_rel=p_bf
+ADORN rel=s_b rules=1
+MAGIC rel=magic_s_b for_rel=s_b
+ADORN rel=q_bf rules=2
+MAGIC rel=magic_q_bf for_rel=q_bf
+UNTOUCHED pred=out
+NEGATED pred=s pre_adorn=b adorn=b relaxed=false reason=all-positions-restricting
+GUARD verdict=UNSTRATIFIABLE clause=a
+GUARD culprit={p,q,s} cone={} declined_fraction=0.750
+DECISION pred=out action=TRANSFORM
+DECISION pred=p action=FALLBACK
+DECISION pred=q action=FALLBACK
+DECISION pred=s action=FALLBACK
