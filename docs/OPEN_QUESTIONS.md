@@ -348,3 +348,36 @@ Untouched, and `T_guarded < T_none` now holds on 9/12 of task B's
 measured points (was 0/12) -- the guard's contribution is measured for
 the first time. Margin shrinks with scale (~1.7x at n=20 to ~1.02x at
 n=100), reported as a real trend in `punch-list-p1.md`, not smoothed.
+
+## 2026-08-27 — Q13, pre-registered before measurement (PUNCH-LIST-2 item 2)
+
+**Q13.** PUNCH-LIST-2 item 1 (`docs/reports/punch-list-2-item1.md`)
+found the shrinking margin's cause is a fixture artifact: task B's
+sibling fixture (`gen_cone_corpus_facts`) holds `sibling_edges` fixed at
+40 regardless of scale point, so as `n` grows the sibling's own graph
+sparsifies and its reachable-from-1 set *shrinks* (266->250->71), while
+the declined culprit core grows with `n` by design -- both effects push
+`T_none/T_guarded` toward 1.0.
+
+`cc_growing_sibling.dl` (new) is the deliberate opposite:
+`harness/fixtures_lib.py`'s `gen_growing_sibling_facts` PINS the culprit
+core at a fixed size at every scale point (so the declined portion of
+`T_guarded` should be roughly CONSTANT across n=20/50/100, unlike the
+original constructions) while the sibling's own reachable-from-1 set
+grows LINEARLY with `n` via `gen_core_rest_graph(core_size=n)` --
+`tc_bf`'s demand-restricted result is then exactly `n` tuples (one row
+per reachable node), while `tc`'s full/untransformed cost (every
+ancestor-descendant pair in a random recursive tree over `n` nodes) grows
+faster, expected `Θ(n log n)`.
+
+**Prediction, recorded before measurement:** at `n=20/50/100`, the
+declined portion of `T_guarded` stays approximately flat (order
+200-260, matching the smallest declined values already measured in
+the original constructions, since the culprit core's absolute size is
+similar); the ratio `T_none/T_guarded` **grows** with `n` instead of
+shrinking, plausibly reaching noticeably above the ~1.75x ceiling the
+original three constructions never exceeded -- order-of-magnitude
+estimate **2x-5x by n=100**, not a precise commitment on the exact
+figure. If the ratio instead shrinks or stays flat, the prediction is
+wrong and will be reported as such, not rescued by a second
+construction.

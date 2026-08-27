@@ -259,6 +259,57 @@ def gen_cone_corpus_facts(seed, n=20, target_base=30, target_e=30,
     }
 
 
+def gen_growing_sibling_facts(seed, n=20, culprit_n=20, culprit_base=30, culprit_e=30,
+                               blocked_fraction=0.2, sibling_extra_edges=None):
+    """PUNCH-LIST-2 item 2: the deliberate opposite of
+    gen_cone_corpus_facts's fixed-size sibling. Culprit core (base/e/
+    blocked, identical construction to gen_culprit_cycle_facts) is
+    generated at a FIXED size (culprit_n/culprit_base/culprit_e),
+    independent of `seed`+`n` and IDENTICAL at every scale point -- item
+    1 found the declined portion always equals the untransformed cost of
+    those relations exactly, so pinning it isolates the one variable
+    this construction is testing. The sibling's own graph
+    (`sibling_edge`) uses gen_core_rest_graph with core_size=n -- EVERY
+    node 1..n is reachable from node 1 by construction, so the sibling's
+    own reachable-from-1 set grows LINEARLY with n, the deliberate
+    opposite of gen_cone_corpus_facts's fixed-edge-count sibling (which
+    item 1 found actually SHRINKS as n grows, an unscaled-fixture
+    artifact). Returns the same relation-name dict shape as
+    gen_cone_corpus_facts, minus the gate/chain keys this construction's
+    .dl file does not use."""
+    culprit_rng = random.Random(seed * 7919 + 1)  # fixed sub-seed, independent of n
+
+    def rand_edges(rng, count, node_max):
+        edges, edge_set = [], set()
+        attempts, max_attempts = 0, count * 20 + 2000
+        while len(edges) < count and attempts < max_attempts:
+            attempts += 1
+            a, b = rng.randint(1, node_max), rng.randint(1, node_max)
+            if a == b:
+                continue
+            e = (a, b)
+            if e in edge_set:
+                continue
+            edge_set.add(e)
+            edges.append(e)
+        return edges
+
+    base_edges = rand_edges(culprit_rng, culprit_base, culprit_n)
+    e_edges = rand_edges(culprit_rng, culprit_e, culprit_n)
+    if not any(a == 1 for a, _ in e_edges):
+        e_edges.append((1, culprit_rng.randint(2, culprit_n)))
+    blocked = [(i,) for i in range(1, culprit_n + 1) if culprit_rng.random() < blocked_fraction]
+
+    if sibling_extra_edges is None:
+        sibling_extra_edges = n  # target_edges = 2n: the spanning core (n-1 edges) plus n more
+    sibling_edge_rows = gen_core_rest_graph(seed, n=n, core_size=n, target_edges=n + sibling_extra_edges)
+
+    return {
+        "base": base_edges, "e": e_edges, "blocked": blocked,
+        "sibling_edge": sibling_edge_rows,
+    }
+
+
 def bfs_reachable(edges, source):
     adj = {}
     for a, b in edges:

@@ -230,10 +230,53 @@ every construction with a sibling branch, at every scale point measured:
 
 (`cc_cone_only`, no sibling by design, is unchanged at 1.00× — the
 control, not a counterexample; full table
-`docs/reports/punch-list-p1.md`.) The margin shrinks with scale at every
-sibling-bearing construction — the guard's contribution here is real and
-directionally consistent, but modest and scale-shrinking, unlike M4-SIPS's
-negation relaxation, whose contribution grows with scale (§6 item 1).
+`docs/reports/punch-list-p1.md`.)
+
+**Why the margin shrinks here — a characterization, not a bare
+limitation (PUNCH-LIST-2 item 1).** Decomposing `T_guarded` into its
+declined portion (culprit ∪ cone, always full-extent) and its
+transformed portion (the sibling branch) at every point
+(`docs/reports/punch-list-2-item1.md`) finds the declined portion is
+**bit-for-bit identical to the untransformed baseline's own cost for
+those same relations, at every point** — full-extent fallback is
+literally the same computation, not an approximation. It grows with `n`
+by design (the culprit core's own fixtures scale with `n`). The
+transformed portion, however, does **not** stay roughly constant as
+first guessed — it *shrinks* (55 → 10 → 7 tuples), because task B's
+sibling fixture (`gen_cone_corpus_facts`) never scales `sibling_edges`
+with `n`, so the sibling's own graph sparsifies and its reachable-from-1
+set shrinks alongside it. Both effects — a growing denominator and a
+shrinking numerator's-worth-of-savings — push the ratio toward 1.0; the
+mechanism is more specific than "the guard's contribution is modest,"
+it is "the guard's contribution here is bounded by an unscaled fixture,"
+a property of this construction, not of demand restriction in general.
+
+**Confirmed by construction: the direction reverses when the
+transformed branch is what scales (PUNCH-LIST-2 item 2).**
+`cc_growing_sibling.dl` pins the culprit core at a fixed size and lets
+the sibling's own reachable-from-1 set grow *linearly* with `n`
+(`gen_core_rest_graph(core_size=n)`) — the deliberate opposite of task
+B's fixture. Pre-registered prediction (`docs/OPEN_QUESTIONS.md` Q13):
+ratio grows, order-of-magnitude 2×–5× by n=100. Measured
+(`docs/reports/punch-list-2-item2.md`):
+
+| n | `T_none` | `T_guarded` | declined portion | transformed portion | `T_none/T_guarded` |
+|---|---|---|---|---|---|
+| 20 | 584 | 273 | 181 | 92 | **2.14×** |
+| 50 | 2,660 | 417 | 208 | 209 | **6.38×** |
+| 100 | 8,577 | 676 | 269 | 407 | **12.69×** |
+
+**The ratio grows monotonically — 2.14× → 6.38× → 12.69× — the exact
+opposite of the sibling-bearing constructions above**, direction and
+mechanism confirmed, magnitude underestimated (12.69× against a
+predicted 2×–5×, reported as measured, not adjusted). Algorithmic reason:
+a full transitive closure over a random recursive tree has
+worse-than-linear (many-to-many ancestor/descendant) growth, while the
+demand-restricted single-source view is exactly one row per reachable
+node — linear. **The guard's contribution is real, and whether it grows
+or shrinks with scale is a property of the shape being transformed, not
+of the guard mechanism** — this project measured a construction on each
+side of that line, not just one.
 
 ## 6. Findings with mechanisms — this section carries the presentation
 
@@ -331,17 +374,32 @@ negation relaxation, whose contribution grows with scale (§6 item 1).
    thoroughly demonstrated; its *necessity* on any known real-world
    program is not.
 5. **The guard's own contribution, measured for the first time
-   (PUNCH-LIST.md P1).** Task B's `T_guarded < T_none` finding held on
-   0/12 points, traced to `magicset.FindQuery` seeding only the first
-   bindable query — a second `.output` branch was left Untouched (full
-   extent) rather than independently restricted. Fixing this (seed
-   collection from every query candidate, not a new algorithm) flips the
-   result: **9/12 points now show `T_guarded < T_none`**, 1.02×–1.75×,
-   on every construction with a sibling branch. The margin shrinks as `n`
-   grows (the declined portion's cost is roughly fixed per program while
-   the sibling's own computation grows around it) — reported as a real,
-   modest, scale-shrinking effect, not smoothed into one headline number
-   (`docs/reports/punch-list-p1.md`).
+   (PUNCH-LIST.md P1), and why its scaling direction depends on the
+   shape being transformed (PUNCH-LIST-2 items 1–2).** Task B's
+   `T_guarded < T_none` finding held on 0/12 points, traced to
+   `magicset.FindQuery` seeding only the first bindable query — a second
+   `.output` branch was left Untouched (full extent) rather than
+   independently restricted. Fixing this (seed collection from every
+   query candidate, not a new algorithm) flips the result: **9/12 points
+   now show `T_guarded < T_none`**, 1.02×–1.75×, on every construction
+   with a sibling branch, but the margin *shrinks* as `n` grows. Traced
+   to a specific, verified cause, not a general property: the declined
+   portion is bit-for-bit identical to the untransformed cost of those
+   same relations and grows with `n` by design, while the transformed
+   sibling's cost *shrinks* because its own fixture (`sibling_edges`) was
+   never scaled with `n` — an unscaled-fixture artifact, not a property
+   of demand restriction. **Confirmed by building the opposite
+   construction**: `cc_growing_sibling.dl` pins the culprit core fixed
+   and lets the sibling's own reachable set grow linearly with `n`
+   instead — the ratio then **grows** monotonically, 2.14× → 6.38× →
+   12.69× across the same `n=20/50/100` range (predicted 2×–5× by
+   n=100, direction and mechanism confirmed, magnitude underestimated).
+   Whether the guard's contribution grows or shrinks with scale is a
+   property of the transformed shape's own query cost (linear
+   single-source lookup vs. worse-than-linear full closure), not of the
+   guard mechanism itself (`docs/reports/punch-list-p1.md`,
+   `docs/reports/punch-list-2-item1.md`,
+   `docs/reports/punch-list-2-item2.md`).
 
 ## 7. What did not work
 
