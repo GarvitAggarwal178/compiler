@@ -1,0 +1,38 @@
+Warning: No rules/facts defined for relation q in file transformed.dl at line 7
+.decl q(x:number, y:number)
+------^---------------------
+Warning: No rules/facts defined for relation s in file transformed.dl at line 8
+.decl s(x:number)
+------^-----------
+Warning: No rules/facts defined for relation p in file transformed.dl at line 9
+.decl p(x:number, y:number)
+------^---------------------
+Warning: Variable y only occurs once in file transformed.dl at line 54
+magic_p_bf(x) :- sup_p_bb_r1_0(x, y).
+----------------------------------^---
+Warning: Variable x only occurs once in file transformed.dl at line 55
+magic_s_b(z) :- sup_p_bb_r1_1(x, y, z).
+------------------------------^---------
+Warning: Variable y only occurs once in file transformed.dl at line 55
+magic_s_b(z) :- sup_p_bb_r1_1(x, y, z).
+---------------------------------^------
+Warning: Variable x only occurs once in file transformed.dl at line 56
+magic_q_bb(z, y) :- sup_p_bb_r1_2(x, y, z).
+----------------------------------^---------
+Warning: Variable x only occurs once in file transformed.dl at line 66
+magic_s_b(z) :- sup_p_bf_r1_1(x, z).
+------------------------------^------
+Warning: Variable x only occurs once in file transformed.dl at line 67
+magic_q_bf(z) :- sup_p_bf_r1_2(x, z).
+-------------------------------^------
+Warning: Variable y only occurs once in file transformed.dl at line 80
+magic_q_bf(x) :- sup_q_bb_r1_0(x, y).
+----------------------------------^---
+Error: Unable to stratify relation(s) {magic_q_bb,magic_q_bf,magic_s_b,p_bf,q_bf,s_b,sup_p_bb_r1_1,sup_p_bb_r1_2,sup_p_bf_r1_1,sup_p_bf_r1_2,sup_p_bf_r1_3,sup_q_bb_r1_0,sup_q_bf_r0_0,sup_q_bf_r0_1,sup_q_bf_r1_0,sup_q_bf_r1_1,sup_q_bf_r1_2,sup_s_b_r0_0,sup_s_b_r0_1,sup_s_b_r0_2}
+Relation s_b in file transformed.dl at line 33
+.decl s_b(c0:number)
+------^--------------
+has cyclic negation in file transformed.dl at line 52
+sup_p_bb_r1_2(x, y, z) :- sup_p_bb_r1_1(x, y, z), !s_b(z).
+---------------------------------------------------^-------
+1 errors generated, evaluation aborted

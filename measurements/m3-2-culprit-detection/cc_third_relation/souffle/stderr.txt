@@ -1,0 +1,23 @@
+Warning: No rules/facts defined for relation p in file transformed.dl at line 7
+.decl p(x:number, y:number)
+------^---------------------
+Warning: No rules/facts defined for relation s in file transformed.dl at line 8
+.decl s(x:number)
+------^-----------
+Warning: No rules/facts defined for relation q2 in file transformed.dl at line 9
+.decl q2(x:number, y:number)
+------^----------------------
+Warning: Variable x only occurs once in file transformed.dl at line 40
+magic_s_b(z) :- sup_q2_bf_r1_1(x, z).
+-------------------------------^------
+Warning: Variable x only occurs once in file transformed.dl at line 41
+magic_p_bf(z) :- sup_q2_bf_r1_2(x, z).
+--------------------------------^------
+Error: Unable to stratify relation(s) {magic_p_bf,magic_s_b,p_bf,q2_bf,s_b,sup_p_bf_r0_0,sup_p_bf_r0_1,sup_p_bf_r1_0,sup_p_bf_r1_1,sup_p_bf_r1_2,sup_q2_bf_r1_1,sup_q2_bf_r1_2,sup_q2_bf_r1_3,sup_s_b_r0_0,sup_s_b_r0_1,sup_s_b_r0_2}
+Relation s_b in file transformed.dl at line 25
+.decl s_b(c0:number)
+------^--------------
+has cyclic negation in file transformed.dl at line 37
+sup_q2_bf_r1_2(x, z) :- sup_q2_bf_r1_1(x, z), !s_b(z).
+-----------------------------------------------^-------
+1 errors generated, evaluation aborted

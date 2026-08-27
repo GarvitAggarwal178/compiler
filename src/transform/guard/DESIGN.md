@@ -28,6 +28,30 @@ framing) loudly, at the exact point of violation, rather than downstream
 as a silent wrong answer. `TestAssertNegationAllBoundFindsAtLeastOneOccurrence`
 confirms the check inspects real occurrences, not an empty list.
 
+## `stratify.go` — M3.2, culprit-cycle detection (clause a)
+
+**Cheap precondition.** `HasPositiveCycle` is a small, dedicated
+positive-edges-only precedence graph built directly from `prog.Clauses`
+(not reused from `sema/stratify.go`'s `buildPrecedenceGraph`, whose
+internals are unexported and which mixes both edge polarities) — O(V+E),
+checked before any transform work, per M2-M3-BUILD.md §6's own framing.
+
+**The actual check.** `CheckCulpritCycle` builds the candidate transformed
+program via `magicset.Adorn`+`Generate` and runs `sema.CheckStratification`
+— the pre-existing SOURCE stratifier, applied to the TRANSFORMED AST, per
+§6 ("closes the gap the `Transformer` interface documented: `strata`
+reflects the pre-transform precedence graph"). A no-bindable-query program
+is trivially stratifiable (the transform is a no-op).
+
+**Differential oracle, not self-consistency.** `harness/
+night_m3_2_culprit_detection.py` prints the candidate transformed program
+(`dlc emit --transformer=magicset`), asks `dlc check` for `dlc`'s own
+verdict, and separately feeds the identical text to real Soufflé —
+Soufflé's stratification checker was written by someone else and is asked
+the same question about the same program. **7/7 agreed** (all 6
+`CULPRIT_CANDIDATES` programs plus `culprit_cycle.dl` itself), 0
+disagreements — full numbers in `docs/reports/m3-2-culprit-detection.md`.
+
 ## Counterexample search (M2-M3-BUILD.md §5, required)
 
 `harness/night_m3_1_counterexample.py`: the 4 `tests/programs/p6*_base.dl`
