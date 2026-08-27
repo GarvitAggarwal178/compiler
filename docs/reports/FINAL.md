@@ -300,35 +300,56 @@ side of that line, not just one.
    shape's own recursive rule structurally requires a second adornment
    regardless (`docs/reports/m4-sips.md`'s "what did not work").
 
-   **`p2.dl`, predicted vs. measured, stated without conflating two
-   different ratios (PUNCH-LIST.md P2 item 3):** `docs/OPEN_QUESTIONS.md`
-   Q12 predicted, before implementation, `T_dlc ≈ 300–700` (incl-sup), an
-   **80–180× reduction from the PRE-relaxation `T_dlc` of 55,411**
-   (`measurements/m4-sips/before_gate/`) — this is a before/after ratio
-   on `dlc`'s own number, not `T_souffle/T_dlc`. Measured: raw
-   `T_dlc` (incl-sup) = **974** (`measurements/m4-sips/gate/summary.json`,
-   `T_candidate`), a **56.9× reduction from 55,411** — same order of
-   magnitude as predicted, below the stated floor, reported as a miss,
-   not adjusted after the fact. The separate `T_souffle/T_dlc`
+   **`p2.dl`, predicted vs. measured, a full miss under both
+   supplementary-counting conventions, in opposite directions
+   (PUNCH-LIST.md P2 item 3, corrected by PUNCH-LIST-2 item 3):**
+   `docs/OPEN_QUESTIONS.md` Q12 predicted, before implementation, `T_dlc
+   ≈ 300–700`, an **80–180× reduction from the PRE-relaxation `T_dlc` of
+   55,411** (`measurements/m4-sips/before_gate/`) — this is a before/after
+   ratio on `dlc`'s own number, not `T_souffle/T_dlc`, and the prediction
+   never named a supplementary-counting convention. Measured: raw `T_dlc`
+   = **974 (incl-sup)** / **252 (excl-sup)**
+   (`measurements/m4-sips/gate/summary.json`). **Checked literally
+   against the stated 300–700 bound, neither value falls inside it** —
+   974 is above the top, 252 is below the bottom. This is not "correct
+   under one convention" — it is a miss under both, in opposite
+   directions (56.9× reduction achieved against an 80–180× predicted
+   range: below the floor; 252 against the range's own floor of 300:
+   also below). Recorded exactly this way in `docs/OPEN_QUESTIONS.md`,
+   not smoothed toward either convention. The separate `T_souffle/T_dlc`
    **contribution** ratio at this same point is `44,811/974` = **46.0×**
    (the number in the three-column table above) — a different quantity
    entirely, included here only to be explicit that "56.9×" and "46.0×"
    are not the same ratio and neither should be read as the other.
 
-   **Under excl-sup, the residual gap to the hand transform is almost
-   entirely supplementary accounting (PUNCH-LIST.md P3):** `T_dlc`
-   (excl-sup) for `p2.dl` = **252**, for `reachability_complement` at
-   n=250 = **252** (identical — the two shapes are structurally the same
-   program, confirmed in M2); `p4prime.dl` (the hand guard) measured on
-   the identical n=250 fixture = **285**
-   (`measurements/m4-sips/p4prime_check/`). **252 is already below 285.**
-   The demand relaxation does not merely approach the hand transform's
-   own cost under this convention, it goes slightly under it — the
-   entire remaining gap under the project's headline (incl-sup)
-   convention, 974 vs. 285, is attributable to `dlc`'s supplementary
-   checkpoint relations, which the hand-written guard has none of by
-   construction (it was never generated through a supplementary chain at
-   all). Q12's own stated comparison target (231) came from a different,
+   **Demand restriction now matches the hand guard; total materialization
+   is still worse, for a named reason — and the arc between the two is
+   the project's result (PUNCH-LIST.md P3, reframed by PUNCH-LIST-2 item
+   4a).** State both conventions in one sentence: `dlc`'s demand
+   restriction now **matches** the hand-written guard (`T_dlc` excl-sup
+   **252** vs. `p4prime.dl`'s **285** on the identical n=250 fixture,
+   `measurements/m4-sips/p4prime_check/` — "matches", not "beats": a 12%
+   difference is inside the noise a different SIPS literal ordering could
+   produce, not a claimed improvement), while `dlc`'s total
+   materialization is still worse (**974** incl-sup vs. 285) because the
+   supplementary chain that makes the transform *general* — it works for
+   any program, not just this one hand-derived shape — costs checkpoint
+   relations a hand transform, written for one specific program, does not
+   need.
+
+   **The arc, stated explicitly, because it is the project's result:**
+   before M4-SIPS's relaxation, `dlc`'s mechanical transform on this
+   shape was **194× worse than the hand guard at n=250** (`T_dlc`
+   55,411 vs. `T_guard` 285, `docs/reports/m3-headline.md`) and
+   **5,317× worse at n=8,000** (51,131,165 vs. 9,615) — the gap *widened*
+   with scale. One structural rule about which bindings carry demand
+   information (§3 above) closed that gap to **parity** (252 vs. 285,
+   excl-sup) at n=250, with the residual incl-sup gap fully attributable
+   to a named, general mechanism (the supplementary chain), not to an
+   unexplained residue. `same_generation_negation`'s and
+   `ancestor_nonancestor`'s parallel gaps close by the identical
+   mechanism, to a smaller but real degree each (the three-column table
+   above; Q8, §7). Q12's own stated comparison target (231) came from a different,
    earlier (Phase 0) fixture, not the n=250 one used everywhere else in
    this session — 285 is the correct same-fixture figure and the one
    used here.
@@ -403,6 +424,15 @@ side of that line, not just one.
 
 ## 7. What did not work
 
+- **Q12 recorded as a partial miss, both conventions, opposite
+  directions (PUNCH-LIST-2 item 3).** Predicted `T_dlc ≈ 300–700` on
+  `p2.dl`; measured 974 (incl-sup, above the top) and 252 (excl-sup,
+  below the bottom) — neither falls inside the stated range. Not
+  recorded as correct under either convention: 252's closeness to
+  `p4prime.dl`'s 285 is a real, separate finding (§6 item 1), not
+  evidence the pre-registered range itself was right. Cause: the
+  prediction never named which convention its range referred to,
+  underspecified rather than wrong in mechanism (`docs/OPEN_QUESTIONS.md`).
 - **Q11 falsified.** A pre-registered prediction that
   `ancestor_nonancestor`'s hand guard (v1) propagates a seed across a
   first-argument-invariant recursion (analogous to `p4prime.dl`'s
@@ -491,21 +521,47 @@ side of that line, not just one.
 - **No presentation artifact was built this session** (task G, dropped)
   — `dlc explain`'s output and every measurement JSON cited above are
   committed and ready for one.
-- **Corpus size, disambiguated (PUNCH-LIST.md P5).** Three different
-  numbers describe three different things and must not be conflated: the
-  strictly blueprint-§4-compliant corpus is **19** programs (`docs/
-  reports/night04-D-reconciliations.md`); **89/195** files in
-  `IN_GRAMMAR.txt` parse after the `.input`/`.output Name()` parens
-  amendment (`docs/reports/night03-T6-parens.md`) — a parse-coverage
-  measure over the real-world Soufflé corpus, unrelated to strict §4
-  compliance; and the naive/semi-naive differential gate (M1 §4.3, this
-  project's actual correctness/performance oracle) ran against **5**
-  programs — the pre-registered `BENCHMARK_FAMILY` shapes
-  (`same_generation_negation`, `transitive_closure_bound`,
+- **Corpus size and checking volume — two numbers with different jobs,
+  both labelled, not one under-claiming figure (PUNCH-LIST.md P5,
+  extended by PUNCH-LIST-2 item 4b).**
+
+  **External program coverage: 5.** The naive/semi-naive differential
+  gate (M1 §4.3, this project's correctness/performance oracle against
+  real Soufflé for the naive/semi-naive comparison specifically) ran
+  against **5** external programs — the pre-registered `BENCHMARK_FAMILY`
+  shapes (`same_generation_negation`, `transitive_closure_bound`,
   `ancestor_nonancestor`, `reachability_complement`, `culprit_cycle`),
   **16/16 comparable scale points matched, 0 disagreements**
-  (`docs/reports/m1-progress.md` §4 item 3) — not the 195-file grammar
-  corpus at all. The differential gate's correctness claim rests on 5
-  hand-selected, pre-registered shapes; the 19/89/195 numbers characterize
-  a completely separate question (how much of real-world Soufflé code this
-  project's grammar admits), not the differential's own sample size.
+  (`docs/reports/m1-progress.md` §4 item 3). This is the number that
+  answers "how many distinct external programs did this specific
+  oracle exercise" — small and disclosed as small, not padded by
+  restating it at every scale point.
+
+  **Total answer/verdict-identity checks against Soufflé, all corpora
+  combined: 93.** A different question — "how much checking actually
+  happened, project-wide" — summed from every already-committed
+  Soufflé-oracle gate: the 32-point transform headline sweep
+  (`measurements/m3-5-headline-m4/summary.json`, all answer-identical) +
+  PUNCH-LIST P1's 9 comparable re-gate points
+  (`measurements/punch-list/p1-gate/summary.json`) + the 39-file hostile
+  corpus's parser-verdict agreement against Soufflé's own recorded
+  accept/reject behaviour (`docs/reports/night02-T2-hostile.md`,
+  `M1-BUILD.md` gate three, 35/39 agree, 2 expected semantic-gap
+  disagreements, 1 documented lexer divergence — all 39 accounted for,
+  not silently dropped) + the 13-case rejection corpus's
+  ground-classification agreement against Soufflé
+  (`docs/reports/night02-T9-diagnostics.md`, 13/13 consistent) =
+  **32 + 9 + 39 + 13 = 93**.
+
+  These two numbers measure different things and neither substitutes for
+  the other: 5 is external-program *coverage* (how many distinct real
+  programs), 93 is *checking volume* (how many oracle comparisons ran,
+  across every gate, including many repeated scale points on a small
+  number of shapes). Separately, corpus-admissibility numbers — the
+  strictly blueprint-§4-compliant corpus is **19** programs
+  (`docs/reports/night04-D-reconciliations.md`); **89/195** files in
+  `IN_GRAMMAR.txt` parse after the `.input`/`.output Name()` parens
+  amendment (`docs/reports/night03-T6-parens.md`) — answer a third,
+  unrelated question (how much of real-world Soufflé code this project's
+  grammar admits) and must not be read as either coverage or checking
+  volume.
