@@ -19,8 +19,17 @@ import (
 // itself a plain, legal dlc program -- no '@'-prefixed names, ready to be
 // printed (parser.Print) and fed to Soufflé (M2-M3-BUILD.md §1's naming
 // section).
-func Generate(prog *ast.Program, schemas map[string]*sema.RelationSchema, result *AdornResult) *ast.Program {
-	g := &genState{schemas: schemas, declaredRel: map[string]bool{}, out: &ast.Program{}}
+//
+// Also returns RelationOrigin: every generated relation name (adorned,
+// magic, supplementary) mapped back to the ORIGINAL source predicate it
+// was derived from -- e.g. "ancestor_bb", "magic_ancestor_bb", and every
+// "sup_ancestor_bb_r*_*" all map to "ancestor". EDB and untouched
+// relations map to themselves. This is guard's (M3.3) only way to
+// translate "this generated relation sits in an unstratifiable SCC" back
+// into "this ORIGINAL predicate must fall back" without re-deriving
+// magicset's own naming convention a second time.
+func Generate(prog *ast.Program, schemas map[string]*sema.RelationSchema, result *AdornResult) (*ast.Program, map[string]string) {
+	g := &genState{schemas: schemas, declaredRel: map[string]bool{}, origin: map[string]string{}, out: &ast.Program{}}
 
 	// Every original declaration survives unchanged -- including the
 	// original (now possibly rule-less) name of an adorned predicate;
@@ -29,6 +38,7 @@ func Generate(prog *ast.Program, schemas map[string]*sema.RelationSchema, result
 	for _, d := range prog.Decls {
 		g.out.Decls = append(g.out.Decls, d)
 		g.declaredRel[d.Name] = true
+		g.origin[d.Name] = d.Name
 	}
 
 	st := &sema.SymbolTable{Relations: schemas}
@@ -69,20 +79,32 @@ func Generate(prog *ast.Program, schemas map[string]*sema.RelationSchema, result
 	// nonancestor_bf(1,y), not nonancestor(1,y)).
 	g.emitQueryProjection(result.Query)
 
-	return g.out
+	return g.out, g.origin
 }
 
 type genState struct {
 	schemas     map[string]*sema.RelationSchema
 	declaredRel map[string]bool
+	origin      map[string]string // generated relation name -> original source predicate
 	out         *ast.Program
 }
 
-func (g *genState) declareRelation(name string, types []string) {
+// declareRelation declares name (if not already declared) with the given
+// column types, tagging it as derived from originPred in g.origin.
+// originPred is passed explicitly by every call site (never inferred
+// ambiently) because a single AdornedRule's emission touches relations
+// belonging to MULTIPLE original predicates at once -- e.g. processing
+// nonancestor's rule declares magic_ancestor_bb, which belongs to
+// "ancestor", not "nonancestor" (a bug caught before this ever shipped:
+// an earlier draft used one ambient "current predicate" set once per
+// worklist item, which mistagged every occurrence's magic relation with
+// the RULE's predicate instead of the OCCURRENCE's target predicate).
+func (g *genState) declareRelation(name string, types []string, originPred string) {
 	if g.declaredRel[name] {
 		return
 	}
 	g.declaredRel[name] = true
+	g.origin[name] = originPred
 	var params []ast.Param
 	for i, t := range types {
 		params = append(params, ast.Param{Name: fmt.Sprintf("c%d", i), Type: t})
@@ -146,24 +168,26 @@ func (g *genState) emitAdornedRule(key adornedKey, ruleIdx int, ar *AdornedRule,
 	// bound positions (var or constant, whichever is there) -- NOT V_0,
 	// which is names-only and used for sup_0's own head/param list.
 	boundHeadTerms := boundTermsAt(ar.Source.Head.Terms, adornFromKey(key))
-	g.declareRelation(supName(0), varTypesFor(V[0]))
+	g.declareRelation(supName(0), varTypesFor(V[0]), key.pred)
 	g.addClause(mkAtomFromNames(supName(0), V[0]), []ast.Literal{mkAtomFromTerms(key.MagicRelName(), boundHeadTerms)})
 
 	for k := 1; k <= n; k++ {
 		lit := rewriteLiteralForAdornment(ar, k-1)
-		g.declareRelation(supName(k), varTypesFor(V[k]))
+		g.declareRelation(supName(k), varTypesFor(V[k]), key.pred)
 		body := []ast.Literal{mkAtomFromNames(supName(k-1), V[k-1]), lit}
 		g.addClause(mkAtomFromNames(supName(k), V[k]), body)
 	}
 
 	// Magic rules: one per IDB occurrence (both polarities), fed from
 	// the sup checkpoint immediately BEFORE that occurrence's own
-	// literal position.
+	// literal position. Tagged with occ.target.pred, NOT key.pred --
+	// this magic relation belongs to the predicate being DEMANDED, not
+	// the rule doing the demanding (see declareRelation's own comment).
 	for _, occ := range ar.Occurrences {
 		k := occ.literalIndex
 		beta := adornFromKey(occ.target)
 		boundArgs := boundTermsAt(occ.atom.Terms, beta)
-		g.declareRelation(occ.target.MagicRelName(), typesForBoundPositions(g.schemas[occ.target.pred], beta))
+		g.declareRelation(occ.target.MagicRelName(), typesForBoundPositions(g.schemas[occ.target.pred], beta), occ.target.pred)
 		g.addClause(mkAtomFromTerms(occ.target.MagicRelName(), boundArgs), []ast.Literal{mkAtomFromNames(supName(k), V[k])})
 	}
 
@@ -171,7 +195,7 @@ func (g *genState) emitAdornedRule(key adornedKey, ruleIdx int, ar *AdornedRule,
 	// exactly (Datalog binds head<->body by variable NAME, not by
 	// matching argument order across different atoms, so V_n's internal
 	// ordering need not match t̄'s).
-	g.declareRelation(key.RelName(), typesInOrder(g.schemas[key.pred]))
+	g.declareRelation(key.RelName(), typesInOrder(g.schemas[key.pred]), key.pred)
 	g.addClause(&ast.Atom{Name: key.RelName(), Terms: ar.Source.Head.Terms}, []ast.Literal{mkAtomFromNames(supName(n), V[n])})
 }
 
@@ -181,7 +205,7 @@ func (g *genState) emitAdornedRule(key adornedKey, ruleIdx int, ar *AdornedRule,
 func (g *genState) emitSeed(q *QueryInfo) {
 	beta := adornFromKey(q.Key)
 	boundArgs := boundTermsAt(q.QueryAtom.Terms, beta)
-	g.declareRelation(q.Key.MagicRelName(), typesForBoundPositions(g.schemas[q.Key.pred], beta))
+	g.declareRelation(q.Key.MagicRelName(), typesForBoundPositions(g.schemas[q.Key.pred], beta), q.Key.pred)
 	g.addClause(mkAtomFromTerms(q.Key.MagicRelName(), boundArgs), nil)
 }
 

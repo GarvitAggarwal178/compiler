@@ -67,9 +67,9 @@ func (a Adornment) equal(o Adornment) bool {
 // relation -- the unit of dedup for the worklist and the map key for
 // AdornResult.Rules.
 type adornedKey struct {
-	pred   string
-	adorn  string
-	arity  int
+	pred  string
+	adorn string
+	arity int
 }
 
 func keyOf(pred string, a Adornment) adornedKey {
@@ -98,10 +98,10 @@ type occurrence struct {
 // of that predicate's original defining clauses.
 type AdornedRule struct {
 	Key         adornedKey
-	Source      *ast.Clause    // the original clause (unordered body)
-	OrderedBody []ast.Literal  // SIPS order
-	Occurrences []occurrence   // IDB atom occurrences within OrderedBody (both polarities)
-	BoundAfter  [][]string     // BoundAfter[i] = ordered, deduped var list bound after processing OrderedBody[:i]; BoundAfter[0] = the head's bound-position variables under Key.adorn
+	Source      *ast.Clause   // the original clause (unordered body)
+	OrderedBody []ast.Literal // SIPS order
+	Occurrences []occurrence  // IDB atom occurrences within OrderedBody (both polarities)
+	BoundAfter  [][]string    // BoundAfter[i] = ordered, deduped var list bound after processing OrderedBody[:i]; BoundAfter[0] = the head's bound-position variables under Key.adorn
 }
 
 // QueryInfo identifies the program's bindable query: a rule whose body is
@@ -205,8 +205,8 @@ func Adorn(prog *ast.Program, query *QueryInfo) (*AdornResult, error) {
 	}
 	processed := map[adornedKey]bool{}
 	var worklist []struct {
-		pred   string
-		adorn  Adornment
+		pred  string
+		adorn Adornment
 	}
 	push := func(pred string, a Adornment) {
 		k := keyOf(pred, a)
@@ -408,9 +408,9 @@ func varsInLit(lit ast.Literal) []string {
 // (adorn.go's own internal bookkeeping), this is the minimal read-only
 // view guard needs and nothing more.
 type NegatedOccurrenceAdornment struct {
-	Pred   string
-	Adorn  Adornment
-	Rule   *ast.Clause // the source clause the occurrence appears in, for a diagnostic
+	Pred  string
+	Adorn Adornment
+	Rule  *ast.Clause // the source clause the occurrence appears in, for a diagnostic
 }
 
 // NegatedOccurrenceAdornments returns every negated IDB atom occurrence's

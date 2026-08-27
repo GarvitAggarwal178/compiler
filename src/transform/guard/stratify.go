@@ -3,6 +3,8 @@
 package guard
 
 import (
+	"sort"
+
 	"dlc/src/ast"
 	"dlc/src/sema"
 	"dlc/src/transform/magicset"
@@ -69,11 +71,13 @@ func HasPositiveCycle(prog *ast.Program) map[string]bool {
 
 // CulpritCycleResult is clause (a)'s verdict on one program.
 type CulpritCycleResult struct {
-	NoBindableQuery     bool         // magicset.FindQuery found nothing -- transform was a no-op, trivially stratifiable
-	PreconditionSkipped bool         // no relation in the source has a positive cycle at all -- the full adorn-and-check path was skipped, trivially stratifiable
-	Transformed         *ast.Program // the candidate transformed program (== the source, unchanged, if NoBindableQuery or PreconditionSkipped)
+	NoBindableQuery     bool              // magicset.FindQuery found nothing -- transform was a no-op, trivially stratifiable
+	PreconditionSkipped bool              // no relation in the source has a positive cycle at all -- the full adorn-and-check path was skipped, trivially stratifiable
+	Transformed         *ast.Program      // the candidate transformed program (== the source, unchanged, if NoBindableQuery or PreconditionSkipped)
+	RelationOrigin      map[string]string // every relation in Transformed -> its original source predicate (magicset.Generate's own output); nil if NoBindableQuery/PreconditionSkipped (Transformed == prog, every relation is already its own origin)
 	Stratifiable        bool
-	Message             string // sema.CheckStratification's own diagnostic text, if not stratifiable -- already names the offending SCC set (sema/stratify.go's own message format)
+	Message             string     // sema.CheckStratification's own diagnostic text, if not stratifiable -- already names the FIRST offending SCC (sema/stratify.go's own message format)
+	UnstratifiableSCCs  [][]string // EVERY SCC of Transformed's full precedence graph with an internal negative edge -- M3.3's per-SCC decision needs all of them, not just the first sema.CheckStratification happens to report
 }
 
 // CheckCulpritCycle builds the candidate transformed program (magicset.
@@ -113,12 +117,121 @@ func CheckCulpritCycle(prog *ast.Program) (*CulpritCycleResult, error) {
 	if err != nil {
 		return nil, err
 	}
-	transformed := magicset.Generate(prog, schemas.Relations, adorned)
+	transformed, origin := magicset.Generate(prog, schemas.Relations, adorned)
 	stratDiags, _ := sema.CheckStratification(transformed)
 	if len(stratDiags) == 0 {
-		return &CulpritCycleResult{Transformed: transformed, Stratifiable: true}, nil
+		return &CulpritCycleResult{Transformed: transformed, RelationOrigin: origin, Stratifiable: true}, nil
 	}
-	return &CulpritCycleResult{Transformed: transformed, Stratifiable: false, Message: stratDiags[0].Message}, nil
+	sccs := AllUnstratifiableSCCs(transformed)
+	return &CulpritCycleResult{
+		Transformed: transformed, RelationOrigin: origin, Stratifiable: false,
+		Message: stratDiags[0].Message, UnstratifiableSCCs: sccs,
+	}, nil
+}
+
+// AllUnstratifiableSCCs returns every SCC of prog's full (positive AND
+// negative) precedence graph that contains at least one internal negative
+// edge -- every "culprit" SCC, not just the first sema.CheckStratification
+// happens to report (that function returns on the first violation it
+// finds; M3.3's per-SCC decision needs the complete set). A small,
+// dedicated Tarjan over prog's own precedence graph -- not reused from
+// sema/stratify.go's internal (unexported) implementation, same
+// small-dedicated-copy precedent as HasPositiveCycle above.
+func AllUnstratifiableSCCs(prog *ast.Program) [][]string {
+	nodes := map[string]bool{}
+	type edge struct {
+		to       string
+		negative bool
+	}
+	adjacency := map[string][]edge{}
+	for _, c := range prog.Clauses {
+		nodes[c.Head.Name] = true
+	}
+	for _, c := range prog.Clauses {
+		head := c.Head.Name
+		for _, lit := range c.Body {
+			switch v := lit.(type) {
+			case *ast.Atom:
+				if nodes[v.Name] {
+					adjacency[head] = append(adjacency[head], edge{to: v.Name})
+				}
+			case *ast.NegatedAtom:
+				if nodes[v.Atom.Name] {
+					adjacency[head] = append(adjacency[head], edge{to: v.Atom.Name, negative: true})
+				}
+			}
+		}
+	}
+
+	// Standard Tarjan.
+	index := 0
+	indices := map[string]int{}
+	lowlink := map[string]int{}
+	onStack := map[string]bool{}
+	var stack []string
+	var sccMembers [][]string
+	sccOf := map[string]int{}
+
+	var names []string
+	for n := range nodes {
+		names = append(names, n)
+	}
+	sort.Strings(names)
+
+	var strongconnect func(v string)
+	strongconnect = func(v string) {
+		indices[v] = index
+		lowlink[v] = index
+		index++
+		stack = append(stack, v)
+		onStack[v] = true
+		for _, e := range adjacency[v] {
+			if _, seen := indices[e.to]; !seen {
+				strongconnect(e.to)
+				if lowlink[e.to] < lowlink[v] {
+					lowlink[v] = lowlink[e.to]
+				}
+			} else if onStack[e.to] {
+				if indices[e.to] < lowlink[v] {
+					lowlink[v] = indices[e.to]
+				}
+			}
+		}
+		if lowlink[v] == indices[v] {
+			sccIdx := len(sccMembers)
+			var members []string
+			for {
+				n := len(stack) - 1
+				w := stack[n]
+				stack = stack[:n]
+				onStack[w] = false
+				sccOf[w] = sccIdx
+				members = append(members, w)
+				if w == v {
+					break
+				}
+			}
+			sort.Strings(members)
+			sccMembers = append(sccMembers, members)
+		}
+	}
+	for _, v := range names {
+		if _, seen := indices[v]; !seen {
+			strongconnect(v)
+		}
+	}
+
+	var result [][]string
+	seen := map[int]bool{}
+	for from, edges := range adjacency {
+		for _, e := range edges {
+			if e.negative && sccOf[from] == sccOf[e.to] && !seen[sccOf[from]] {
+				seen[sccOf[from]] = true
+				result = append(result, sccMembers[sccOf[from]])
+			}
+		}
+	}
+	return result
 }
 
 func errFromDiags(prefix string, diags []sema.Diagnostic) error {

@@ -31,5 +31,6 @@ func (Transformer) Transform(prog *ast.Program, _ *sema.StratumResult) (*ast.Pro
 	if err != nil {
 		return nil, err
 	}
-	return Generate(prog, schemas.Relations, result), nil
+	out, _ := Generate(prog, schemas.Relations, result)
+	return out, nil
 }

@@ -28,7 +28,7 @@ func generateFor(t *testing.T, src string) (*sema.SymbolTable, string) {
 	if err != nil {
 		t.Fatalf("Adorn error: %v", err)
 	}
-	out := Generate(prog, st.Relations, result)
+	out, _ := Generate(prog, st.Relations, result)
 	return st, parser.Print(out)
 }
 
@@ -49,7 +49,15 @@ func TestGenerateOutputPassesEverySemaCheck(t *testing.T) {
 	if err != nil {
 		t.Fatalf("Adorn error: %v", err)
 	}
-	out := Generate(prog, st.Relations, result)
+	out, origin := Generate(prog, st.Relations, result)
+
+	if origin["nonancestor_bf"] != "nonancestor" || origin["magic_ancestor_bb"] != "ancestor" || origin["ancestor_bb"] != "ancestor" {
+		t.Fatalf("RelationOrigin mismatch: nonancestor_bf=%q, magic_ancestor_bb=%q, ancestor_bb=%q",
+			origin["nonancestor_bf"], origin["magic_ancestor_bb"], origin["ancestor_bb"])
+	}
+	if origin["parent"] != "parent" || origin["person"] != "person" {
+		t.Fatalf("expected EDB relations to map to themselves, got parent=%q person=%q", origin["parent"], origin["person"])
+	}
 
 	// Round-trips through the printer too -- the output must remain a
 	// legal dlc program after being printed and reparsed, since that is
