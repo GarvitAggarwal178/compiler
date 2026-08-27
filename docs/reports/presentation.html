@@ -474,6 +474,68 @@ a(x) :- a(x), !a(x).</pre>
             <td class="center">&check;</td></tr></tbody>
       </table>
     </div>
+    <div class="card">
+      <h4>Finding 2b &mdash; why the margin shrinks here, decomposed (PUNCH-LIST-2 item 1)</h4>
+      <p>The declined portion (always full extent) is bit-for-bit identical to the
+      untransformed baseline's own cost at every point &mdash; it grows with
+      <code>n</code> by design. The transformed sibling portion does <em>not</em>
+      stay constant as first guessed: it shrinks, because the sibling's own
+      fixture was never scaled with <code>n</code> in this construction. Both
+      effects push the ratio toward 1.0.</p>
+      <table>
+        <thead><tr><th>program</th><th>n</th><th>declined portion</th><th>transformed portion</th><th>T_none/T_guarded</th></tr></thead>
+        <tbody><tr>
+            <td>cc_sibling_emptycone</td><td>20</td>
+            <td>248</td><td>55</td>
+            <td class="ratio">1.70&times;</td></tr><tr>
+            <td>cc_sibling_emptycone</td><td>50</td>
+            <td>851</td><td>10</td>
+            <td class="ratio">1.28&times;</td></tr><tr>
+            <td>cc_sibling_emptycone</td><td>100</td>
+            <td>3,988</td><td>7</td>
+            <td class="ratio">1.02&times;</td></tr><tr>
+            <td>cc_both</td><td>20</td>
+            <td>254</td><td>55</td>
+            <td class="ratio">1.68&times;</td></tr><tr>
+            <td>cc_both</td><td>50</td>
+            <td>787</td><td>9</td>
+            <td class="ratio">1.30&times;</td></tr><tr>
+            <td>cc_both</td><td>100</td>
+            <td>3,866</td><td>5</td>
+            <td class="ratio">1.02&times;</td></tr><tr>
+            <td>cc_cone_proper_subset</td><td>20</td>
+            <td>222</td><td>57</td>
+            <td class="ratio">1.75&times;</td></tr><tr>
+            <td>cc_cone_proper_subset</td><td>50</td>
+            <td>760</td><td>12</td>
+            <td class="ratio">1.31&times;</td></tr><tr>
+            <td>cc_cone_proper_subset</td><td>100</td>
+            <td>3,854</td><td>9</td>
+            <td class="ratio">1.02&times;</td></tr></tbody>
+      </table>
+    </div>
+    <div class="card">
+      <h4>Finding 2c &mdash; the opposite construction: the margin grows instead (PUNCH-LIST-2 item 2)</h4>
+      <p><code>cc_growing_sibling.dl</code> pins the culprit core fixed and lets the
+      sibling's own reachable set grow linearly with <code>n</code> &mdash; the
+      deliberate opposite of the fixture above. Predicted (Q13) 2&times;&ndash;5&times;
+      by n=100; measured direction and mechanism confirmed, magnitude underestimated.</p>
+      <table>
+        <thead><tr><th>n</th><th>T_none</th><th>T_guarded</th><th>declined portion</th><th>transformed portion</th><th>T_none/T_guarded</th></tr></thead>
+        <tbody><tr>
+            <td>20</td><td>584</td><td>273</td>
+            <td>181</td><td>92</td>
+            <td class="ratio">2.14&times;</td></tr><tr>
+            <td>50</td><td>2,660</td><td>417</td>
+            <td>208</td><td>209</td>
+            <td class="ratio">6.38&times;</td></tr><tr>
+            <td>100</td><td>8,577</td><td>676</td>
+            <td>269</td><td>407</td>
+            <td class="ratio">12.69&times;</td></tr></tbody>
+      </table>
+      <p class="msg">Whether the guard's contribution grows or shrinks with scale is a
+      property of the shape being transformed, not of the guard mechanism itself.</p>
+    </div>
 </section>
 
 </main>

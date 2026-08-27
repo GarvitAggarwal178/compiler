@@ -27,6 +27,8 @@ CONE_JSON = REPO / "measurements" / "night04-b-cone" / "summary.json"
 BLAST_DIR = REPO / "measurements" / "night04-b-cone" / "blast_radius"
 BEFORE_DIR = REPO / "measurements" / "m4-sips" / "before"
 AFTER_DIR = REPO / "measurements" / "m4-sips" / "after"
+DECOMPOSE_JSON = REPO / "measurements" / "punch-list-2" / "p1-decompose" / "summary.json"
+GROWING_JSON = REPO / "measurements" / "punch-list-2" / "item2-growing-sibling" / "summary.json"
 OUT_PATH = REPO / "docs" / "reports" / "presentation.html"
 
 REJECTION_SAMPLES = [
@@ -172,6 +174,24 @@ def build_findings_section():
             <td>{r.get('T_none', '-'):,}</td><td>{r.get('T_dlc', '-'):,}</td>
             <td class="center">{mark}</td></tr>""")
 
+    decompose = json.loads(DECOMPOSE_JSON.read_text()) if DECOMPOSE_JSON.is_file() else []
+    decompose_rows = []
+    for r in decompose:
+        ratio = r["T_none"] / r["T_guarded"] if r["T_guarded"] else 0
+        decompose_rows.append(f"""<tr>
+            <td>{esc(r['program'])}</td><td>{r['n']}</td>
+            <td>{r['declined_portion']:,}</td><td>{r['transformed_portion']:,}</td>
+            <td class="ratio">{ratio:.2f}&times;</td></tr>""")
+
+    growing = json.loads(GROWING_JSON.read_text()) if GROWING_JSON.is_file() else []
+    growing_rows = []
+    for r in growing:
+        ratio = r["ratio_T_none_over_T_guarded"]
+        growing_rows.append(f"""<tr>
+            <td>{r['n']}</td><td>{r['T_none']:,}</td><td>{r['T_guarded']:,}</td>
+            <td>{r['declined_portion']:,}</td><td>{r['transformed_portion']:,}</td>
+            <td class="ratio">{ratio:.2f}&times;</td></tr>""")
+
     return f"""
     <div class="card">
       <h4>Finding 1 &mdash; the <code>bb</code>&rarr;<code>bf</code> demand relaxation, before and after</h4>
@@ -195,6 +215,32 @@ def build_findings_section():
         <thead><tr><th>program</th><th>n</th><th>T_none</th><th>T_guarded (T_dlc)</th><th>T_guarded &lt; T_none?</th></tr></thead>
         <tbody>{''.join(cone_rows)}</tbody>
       </table>
+    </div>
+    <div class="card">
+      <h4>Finding 2b &mdash; why the margin shrinks here, decomposed (PUNCH-LIST-2 item 1)</h4>
+      <p>The declined portion (always full extent) is bit-for-bit identical to the
+      untransformed baseline's own cost at every point &mdash; it grows with
+      <code>n</code> by design. The transformed sibling portion does <em>not</em>
+      stay constant as first guessed: it shrinks, because the sibling's own
+      fixture was never scaled with <code>n</code> in this construction. Both
+      effects push the ratio toward 1.0.</p>
+      <table>
+        <thead><tr><th>program</th><th>n</th><th>declined portion</th><th>transformed portion</th><th>T_none/T_guarded</th></tr></thead>
+        <tbody>{''.join(decompose_rows)}</tbody>
+      </table>
+    </div>
+    <div class="card">
+      <h4>Finding 2c &mdash; the opposite construction: the margin grows instead (PUNCH-LIST-2 item 2)</h4>
+      <p><code>cc_growing_sibling.dl</code> pins the culprit core fixed and lets the
+      sibling's own reachable set grow linearly with <code>n</code> &mdash; the
+      deliberate opposite of the fixture above. Predicted (Q13) 2&times;&ndash;5&times;
+      by n=100; measured direction and mechanism confirmed, magnitude underestimated.</p>
+      <table>
+        <thead><tr><th>n</th><th>T_none</th><th>T_guarded</th><th>declined portion</th><th>transformed portion</th><th>T_none/T_guarded</th></tr></thead>
+        <tbody>{''.join(growing_rows)}</tbody>
+      </table>
+      <p class="msg">Whether the guard's contribution grows or shrinks with scale is a
+      property of the shape being transformed, not of the guard mechanism itself.</p>
     </div>"""
 
 
