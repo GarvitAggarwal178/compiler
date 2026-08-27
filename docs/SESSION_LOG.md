@@ -701,3 +701,105 @@ history/logs) replaced with a pointer to `docs/SESSION_LOG.md` and
 Full report: `docs/reports/night03-summary.md`. Continuing per instruction
 into `docs/m2 m3.md` sections 2-9 (Lane A retired, all of `src/` now Lane
 B).
+
+## 2026-08-27 (continued) — M2-M3-BUILD sections 2-9, Lane A fully retired
+
+Same session as the NIGHT-BATCH-03 entries above. `docs/m2 m3.md` section
+0 retires Lane A entirely -- `src/transform/magicset/`, `src/transform/
+guard/`, `src/eval/fallback.go` all implemented this session, marker
+files deleted.
+
+**M2 (sections 2-4): DONE.** `src/transform/magicset/`: `adorn.go`
+(worklist adornment, occurrence-level tracking, EDB atoms never pushed,
+10,000-pair cap), `sips.go` (source-order + early-bound-constraint +
+negated-literal-after-grounding, no cost model per instruction),
+`rules.go` (magic rules + supplementary chain; the V_i projection's
+off-by-one, re-derived correctly from first principles before any
+generated code existed -- full derivation in DESIGN.md), `transformer.go`
+(`--transformer=magicset`). Validated via `harness/m2_accept.py` on 5
+`BENCHMARK_FAMILY` shapes + `p2.dl`: 5/5 comparable cases answer-identical.
+Found and fixed a real relation-origin mistagging bug while adding
+`RelationOrigin` export (an occurrence's magic relation was tagged with
+the enclosing RULE's predicate instead of the occurrence's TARGET
+predicate) -- caught by a dedicated test before it could corrupt M3's
+cone computation. `ancestor_nonancestor`/`reachability_complement`/`p2.dl`
+mechanically adorn `bb` (both grounding atoms precede the negation), a
+real measured cost gap vs. the hand guards' `bf` (up to ~194x), disclosed
+not hidden. `culprit_cycle.dl`'s mechanical transform is unstratifiable --
+the exact designed-for signal for the guard. 12 Go unit tests. Report:
+`docs/reports/m2-headline.md`. Commit `b096057`.
+
+**M3.1 (section 5): DONE.** `src/transform/guard/seeding.go`:
+`AssertNegationAllBound`, the required gate on the central soundness claim
+(3-sentence argument in DESIGN.md). Counterexample search (`harness/
+night_m3_1_counterexample.py`): 4 `p6*_base.dl` + 6 `CULPRIT_CANDIDATES`
+programs, 0 disagreements (4 no-op pass-throughs, 1 agreed, 5 correctly
+unstratifiable matching NIGHT-BATCH-03 T4's structural predictions
+exactly). Report: `docs/reports/m3-1-seeding.md`. Commit `4fee827`.
+
+**M3.2 (section 6): DONE.** `src/transform/guard/stratify.go`:
+`HasPositiveCycle` (cheap O(V+E) precondition), `CheckCulpritCycle`
+(builds the candidate transform, runs `sema.CheckStratification` on it
+directly), `AllUnstratifiableSCCs` (every culprit SCC, not just the
+first). Differential oracle vs real Soufflé: 7/7 agreed (6
+`CULPRIT_CANDIDATES` + `culprit_cycle.dl`), 0 disagreements. Report:
+`docs/reports/m3-2-culprit-detection.md`. Commit `a76921a`.
+
+**M3.3 (section 7): DONE.** `src/transform/guard/decide.go`: `Decide`
+(culprit SCC -> original predicates via `RelationOrigin`, `ConeClosure` ->
+downward closure over the source graph). `ConeClosure` cross-checked
+exactly against NIGHT-BATCH-03 T9's already-committed `harness/
+cone_metric.py` result on `culprit_cycle.dl` `{p}` declined: both compute
+`{q,s}` exactly. `magicset.GenerateMixed` (declined-aware variant of
+`Generate`) builds the final mixed program. `--transformer=guarded`
+registered. Gate: 7/7 answer-identical; on the 6 genuine culprit-cycle
+programs `T_guarded==T_none` exactly (whole unstratifiable SCC already
+equals every IDB relation in this family); 0 regression confirmed
+byte-identical on the 4 non-culprit `BENCHMARK_FAMILY` shapes. Report:
+`docs/reports/m3-3-decide.md`. Commit `94d4e4b` (prep: `745931b`).
+
+**M3.4 (section 8): DONE.** Verified first, per instruction: a mixed
+program is an ordinary `*ast.Program`, the existing SCC-ordered evaluator
+needs no changes. No corpus program produced a genuine (non-trivial) mix
+before this task; added `tests/corpus/CULPRIT_CANDIDATES/
+cc_mixed_fallback.dl` specifically to exercise one. Wired
+`--transformer=<name>` into `dlc run`/`run-seminaive` (re-derives
+stratification on the transformed output, never reuses the pre-transform
+one). `src/eval/fallback.go` documents the verification, contains no new
+evaluation logic. Three independent confirmations agree (dlc's own
+evaluator via Go test and CLI, Soufflé on the untransformed original,
+Soufflé on the guarded-emitted program). Report: `docs/reports/
+m3-4-fallback.md`. Commit `213061a`.
+
+**M3.5 (section 9), the headline run: DONE.** `harness/
+night_m3_5_headline.py`: full T2-protocol sweep, all 5 `BENCHMARK_FAMILY`
+shapes at every `SCALE_POINTS.json` point (25) + 7 `CULPRIT_CANDIDATES`
+programs. **32/32 points, 0 DNFs up to n=8,000, 32/32 answer-identical**
+-- the first time this project's own evaluator is not the measurement
+bottleneck. Guard fires only on culprit-cycle-shaped programs (6/12),
+always clause (a), cone always empty. Blast-radius integer: **22 declined
+relations** across the corpus, 0%-80% per firing program. Hand transform
+beats `dlc`'s mechanical one on every shape/scale point measured (up to
+~5,300x on `reachability_complement`) -- reported plainly. One real,
+unexplained finding: `transitive_closure_bound` is consistently ~0.49x
+worse than Soufflé's own transform at all 5 scale points, not
+investigated to root cause. Every `T_none`/`T_souffle` value cross-
+confirmed exactly against already-committed `night02-T5-guarded.md`
+numbers. Report: `docs/reports/m3-headline.md`. Commit `853ddbc`.
+
+**Stopped at §12's item 8 ("the whole thesis") deliberately.** Items 9-11
+(presentation artifact, all-free duplication strategy, C codegen for
+transformed programs) are explicitly marked droppable/optional in
+M2-M3-BUILD.md's own order-of-work table; §10 (presentation artifact) is
+explicitly gated on a blast-radius integer existing, which it now does,
+but is scoped as a separate "two days capped" follow-on, not a
+same-session continuation.
+
+**What is now unblocked:** the presentation artifact (§10), if the human
+elects to spend the two-day budget on it; the all-free-duplication cone
+strategy as an alternative to measure alongside cone-untransform (§7,
+droppable); the `transitive_closure_bound` regression is worth a root-
+cause investigation before any further headline claims cite it.
+
+**Single next action:** human decides whether to continue into §10-11 or
+treat M3 as complete and move to writeup.
