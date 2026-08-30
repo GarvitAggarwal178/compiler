@@ -36,7 +36,7 @@ Ordered by how much a reviewer would push on it, not by when it was found.
    one program; measured 974 (incl-sup) and 252 (excl-sup) — neither falls
    inside the stated range, a miss under both conventions in opposite
    directions, not a partial success under either
-   (`docs/OPEN_QUESTIONS.md`, `results/superseded.md`).
+   (`record/OPEN_QUESTIONS.md`, `results/superseded.md`).
 
 5. **C codegen was never wired to the transform path.** The pipeline
    story (parse → transform → evaluate) is complete only for the

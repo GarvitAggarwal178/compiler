@@ -39,7 +39,7 @@ hand-guarded `ancestor_nonancestor_guarded.dl` (which restricts only the
 first argument) might expect by analogy. This is not a bug: it is the
 textbook algorithm's literal, correct answer, pinned by
 `TestAdornNegatedOccurrenceIsAllBound`. The measured consequence is real
-and reported without softening in `docs/reports/m2-headline.md`: `dlc`'s
+and reported without softening in `experiments/43-magic-set-transform.md`: `dlc`'s
 mechanical transform is markedly less effective than the hand guard on
 this specific shape (and on `reachability_complement`/`p2.dl`, which share
 the identical `person(x),person(y),!reach(x,y)`-shaped pattern) — the hand

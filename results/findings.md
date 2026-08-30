@@ -42,7 +42,7 @@ program in the grammar, not one hand-derived shape — costs checkpoint
 relations a hand transform, written for one specific program, does not
 need.
 
-`p2.dl`'s own pre-registered prediction (Q12, `docs/OPEN_QUESTIONS.md`)
+`p2.dl`'s own pre-registered prediction (Q12, `record/OPEN_QUESTIONS.md`)
 was a **full miss under both counting conventions, in opposite
 directions**: predicted `T_dlc ≈ 300–700`; measured 974 (incl-sup, above
 the top) and 252 (excl-sup, below the bottom). Neither value falls inside

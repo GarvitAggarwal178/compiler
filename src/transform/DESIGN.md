@@ -1,7 +1,7 @@
 # package transform (top level only — not magicset/ or guard/)
 
 `magicset/` and `guard/` are Lane A (empty `doc.go` markers only,
-docs/M1-BUILD.md §1). This file (`transformer.go`, at the `transform`
+specs/02-m1-build.md §1). This file (`transformer.go`, at the `transform`
 package level, a sibling of those two subpackages, not inside either) is
 Lane B: the interface Lane A will implement, plus a placeholder so the
 pipeline runs without it.

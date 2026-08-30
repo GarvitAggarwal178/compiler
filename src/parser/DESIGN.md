@@ -38,8 +38,8 @@ parens — and M1-BUILD.md §3.3 authorizes exactly one amendment (the term-
 list-in-an-atom one), not this. `dlc` therefore rejects the parenthesized
 form; this is a second, independent reason (beyond the aggregate/record/
 `#include`/pragma gap already found at the lexer stage, §3.1,
-`docs/OPEN_QUESTIONS.md` 2026-08-26) that gate one's literal "195/195"
-will not be hit — see `docs/reports/m1-progress.md` for the actual count
+`record/OPEN_QUESTIONS.md` 2026-08-26) that gate one's literal "195/195"
+will not be hit — see `experiments/31-m1-front-end-and-evaluators.md` for the actual count
 and its breakdown by cause.
 
 **Error recovery is per top-level construct, not per-literal.** §3.3

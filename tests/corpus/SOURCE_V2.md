@@ -2,7 +2,7 @@
 
 Corrected version of `IN_GRAMMAR.txt`'s predicate — NOT a replacement.
 **Both files survive**, exactly as this project kept 11-of-149 alongside
-36-of-612 (`docs/reports/corpus-ruling-2026-08-21.md` precedent).
+36-of-612 (`experiments/13-corpus-split-ruling.md` precedent).
 `IN_GRAMMAR.txt` is untouched and stays committed.
 
 **Why a second predicate, not a fix to the first:** VERIFY-01 established
@@ -12,7 +12,7 @@ categories while §4 implies at least nine more. The exclusion criterion
 (blueprint §4's grammar) was fixed in advance and never changed; the
 mechanical predicate implementing it was incomplete. This is the same class
 of fix as `corpus_predicate.py`'s sort-determinism fix
-(`docs/SESSION_LOG.md`, 2026-08-21) — a bug in a predicate, not a
+(`record/SESSION_LOG.md`, 2026-08-21) — a bug in a predicate, not a
 re-litigation of the criterion itself.
 
 **Source tree:** same as `SOURCE.md` — Soufflé `2.5`, sparse-checked-out
@@ -40,7 +40,7 @@ residual files are hostile/deliberately-malformed test fixtures
 `syntactic/syntax10/syntax10.dl` starts with a bare `*`) with no
 generalizable grammar-production category to assign them to — disclosed as
 a known, accepted gap rather than force-fit into a synthetic category (see
-`docs/reports/night03-T7-grammar-v2.md`).
+`experiments/39-corrected-grammar-predicate.md`).
 
 **Process note:** the predicate converged iteratively — first pass:
 43/622 admitted, 19/43 (44%) cross-check parsed. Investigated every

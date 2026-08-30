@@ -1,13 +1,13 @@
 # Measurement corpus — canonical benchmark family
 
-Pre-registered 2026-08-22 (`docs/reports/corpus-ruling-v1.5.md` §3.2, adopting
+Pre-registered 2026-08-22 (`experiments/17-corpus-closed-version-risk-opened.md` §3.2, adopting
 Phase 0.7 fallback (1)). **Not run.** No `T_none`/`T_souffle`/`T_guard`/
 `E_recoverable` number exists for any shape here except `reachability_complement`
-(which reuses NIGHT-BATCH-01 T6's already-run sweep, `docs/reports/
-night01-T6-scaling.md`).
+(which reuses NIGHT-BATCH-01 T6's already-run sweep,
+`experiments/10-guard-scaling-first-measurement.md`).
 
-Replaces the OpenRuleBench attempt (`docs/reports/
-openrulebench-preregistration.md`) as the measurement corpus, per the
+Replaces the OpenRuleBench attempt
+(`experiments/14-openrulebench-unobtainable.md`) as the measurement corpus, per the
 2026-08-21 ruling: *the rules are external, the fact generators are ours, and
 both facts are disclosed.*
 

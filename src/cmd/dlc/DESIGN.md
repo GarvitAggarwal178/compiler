@@ -50,7 +50,7 @@ documented caller contract). The transformed/possibly-mixed program is
 then evaluated by the same `RunNaive`/`RunSemiNaive` any other program
 uses — no second evaluation path exists for a mixed (partially
 transformed, partially fallback) program (`src/eval/fallback.go`,
-`docs/reports/m3-4-fallback.md`).
+`experiments/47-fallback-evaluation.md`).
 
 **`explain` (NIGHT-BATCH-04 E).** A debugging/presentation tool, not a
 measurement path — plain text, one fact per line (`TAG key=val ...`),
@@ -69,4 +69,4 @@ worklist iterations, magic relations, and per negated occurrence its
 pre-/post-relaxation adornment — M4-SIPS.md §1/§2), GUARD (per-predicate
 TRANSFORM/FALLBACK, culprit set, cone, declined fraction when the guard
 fires). Samples for every mode and all four rejection grounds committed
-under `docs/reports/explain-samples/` (`docs/reports/night04-E-explain.md`).
+under `experiments/explain-samples/` (`experiments/52-dlc-explain-rejection-transform-guard-modes.md`).

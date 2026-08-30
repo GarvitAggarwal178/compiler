@@ -22,7 +22,7 @@ entirely in the lexer, exactly as §3.1 asks — the parser never sees a
 `.` and has to guess what it meant.
 
 **Two deliberate disagreements with Soufflé's own lexer**, both discovered
-by NIGHT-BATCH-02 T2 (`docs/reports/night02-T2-hostile.md`) and kept
+by NIGHT-BATCH-02 T2 (`experiments/26-hostile-source-corpus.md`) and kept
 because gate three of §3.3 explicitly permits disagreement ("report it,
 do not adjust to match"):
 

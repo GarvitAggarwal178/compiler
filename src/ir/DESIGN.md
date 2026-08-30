@@ -35,7 +35,7 @@ isEDB bool)` flag) would make the same guarantee only as strong as every
 call site remembering to pass the right bool.
 
 **`RelationStats.Total()` reuses this project's own established metric**
-(`docs/MEASUREMENTS.md` throughout): seed-rule tuples plus every semi-
+(`record/MEASUREMENTS.md` throughout): seed-rule tuples plus every semi-
 naive iteration's delta, summed once. Naive evaluation (§3.8) has no
 notion of "iteration" in the semi-naive sense, so it is expected to
 record everything through `RecordIterationInsert(0)` (a single bucket) —
@@ -54,7 +54,7 @@ comparable").
 
 **Deferred, disclosed rather than silently skipped: "report both copy
 conventions where a copy exists" (§3.7).** This project's
-excl-copy/incl-copy distinction (`docs/MEASUREMENTS.md`,
+excl-copy/incl-copy distinction (`record/MEASUREMENTS.md`,
 `harness/tuple_report.py`'s `is_copy_relation`) exists because Soufflé's
 own compiler sometimes emits a `COPY_T`-shaped synthetic relation (a
 single-literal pass-through rule from an adorned/interm_out relation,

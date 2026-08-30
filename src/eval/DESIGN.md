@@ -1,6 +1,6 @@
 # package eval
 
-`fallback.go` is Lane A (docs/M1-BUILD.md §1) and contains only the
+`fallback.go` is Lane A (specs/02-m1-build.md §1) and contains only the
 marker comment. Everything else here — `naive.go` (§3.8), `seminaive.go`
 (§3.9), `io.go` — is Lane B.
 
@@ -131,7 +131,7 @@ which has no self-join to get wrong).
 
 **A `Wildcard` in *head* position falls back to a fixed value
 (`NumberValue(0)`) instead of panicking.** Real Soufflé rejects this
-construct outright (`docs/reports/night02-T2-hostile.md`,
+construct outright (`experiments/26-hostile-source-corpus.md`,
 `semantic_wildcard_in_head.dl`) but sema (§3.4-§3.6, as implemented)
 doesn't check for it — adding that check was out of scope creep for this
 item. The fallback exists purely so a program containing this construct

@@ -44,7 +44,7 @@ exactly the case this note used to warn about) so a regression produces a
 different answer *set*, not just a different row order; all 4 confirmed
 to fail before the fix and pass after, and independently cross-checked
 against real Soufflé on the same program
-(`docs/reports/night03-T8-symbol-order.md`).
+(`experiments/40-codegen-symbol-ordering-gap.md`).
 
 **No fixed-size scratch buffer anywhere, on purpose — a real bug caught
 before it was ever run.** A first draft's `_lookup_c0` helper collected

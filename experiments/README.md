@@ -71,4 +71,4 @@ measurement.
 | 54 | `54-presentation-artifact-build.md` | Does the static presentation artifact build correctly from committed JSON? | Yes | current |
 | 55 | `55-mass-ratio-characterization-decomposition.md` | Why does the guard's margin shrink with scale on the original constructions? | Declined portion grows by design; transformed portion shrinks due to an unscaled fixture parameter | current |
 | 56 | `56-mass-ratio-characterization-construction.md` | Does the margin grow instead, if the transformed branch is made to scale? | Yes — 2.14×→12.69×, confirming the mechanism on the opposite construction | current |
-| 57 | `57-final-report-whole-project-synthesis.md` | What does the whole project add up to? | Whole-project synthesis; source for `results/findings.md`, `claims.md`, `superseded.md` | current (synthesis, superseded in form by `results/`, not in content) |
+| 57 | `57-final-report-whole-project-synthesis.md` | What does the whole project add up to? | Whole-project synthesis; source for `results/findings.md`, `results/claims.md`, `results/superseded.md` | current (synthesis, superseded in form by `results/`, not in content) |

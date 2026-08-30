@@ -50,7 +50,7 @@ verdict, and separately feeds the identical text to real Soufflé —
 Soufflé's stratification checker was written by someone else and is asked
 the same question about the same program. **7/7 agreed** (all 6
 `CULPRIT_CANDIDATES` programs plus `culprit_cycle.dl` itself), 0
-disagreements — full numbers in `docs/reports/m3-2-culprit-detection.md`.
+disagreements — full numbers in `experiments/45-culprit-cycle-detection.md`.
 
 ## `decide.go` — M3.3, per-SCC decision and the fallback cone
 
@@ -89,7 +89,7 @@ transformed program is **not** confined to one relation — it entangles
 The culprit set computed directly from that SCC is therefore already
 `{p, q, s}` — **all** of the shape's IDB predicates — and the cone adds
 nothing further (`ConeClosure` returns empty on top of it). The guard's
-own numbers, honestly reported (`docs/reports/m3-3-decide.md`): on every
+own numbers, honestly reported (`experiments/46-per-scc-decision-and-fallback-cone.md`): on every
 one of these 6 programs, `T_guarded == T_none` exactly — **zero
 contribution over the untransformed baseline**, because the whole program
 falls back. This is blueprint failure mode #1's own stated risk
@@ -115,7 +115,7 @@ real transform vs. the untransformed original, `harness/m2_accept.py`.
 **10 attempted, 5 comparable-and-agreed, 5 correctly unstratifiable
 (exactly the 5 programs NIGHT-BATCH-03 T4's structural classifier
 predicted would trigger a culprit cycle), 0 disagreements.** Full
-provenance and numbers: `docs/reports/m3-1-seeding.md`. This is the
+provenance and numbers: `experiments/44-seed-collection-negated-occurrences.md`. This is the
 counterexample search five bounded Phase 0.6 attempts already failed to
 find — extending it with 6 more constructed programs specifically
 designed to trigger the mechanism found no new one either.

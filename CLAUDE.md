@@ -7,7 +7,7 @@
 > `docs/project-log.md`.
 
 You are working on `dlc`, a Datalog compiler built as a semester compiler-design
-project. Read `docs/dlc-blueprint.md` before anything else. It is the source of truth
+project. Read `docs/02-design.md` before anything else. It is the source of truth
 for scope, metrics, milestones and kill conditions. This file governs *how* you work.
 
 If this file and the blueprint conflict, stop and ask. Do not resolve it yourself.
@@ -32,7 +32,7 @@ If this file and the blueprint conflict, stop and ask. Do not resolve it yoursel
    wrong and you stop.
 5. **Scope is closed.** The grammar in blueprint §4 is fixed. No functors, no
    aggregates, no records, no components. If you believe a feature is needed, append
-   to `docs/OPEN_QUESTIONS.md` and continue with what exists.
+   to `record/OPEN_QUESTIONS.md` and continue with what exists.
 
 ---
 
@@ -63,7 +63,10 @@ respond with the diagnosis and the test that proves it, and stop.
   set-comparison, corpus runner, golden-file management
 - `measurements/` — raw command outputs, provenance
 - `tools/` — build scripts, CI, lint
-- `docs/` — reports, logs, tables (except the blueprint, which is Lane A)
+- `docs/` — syntheses and narrative (except `02-design.md`, which is Lane A)
+- `experiments/`, `specs/`, `results/` — renamed reports, build plans, and
+  conclusions respectively (see `docs/rename-map.csv` for the 2026-08-30
+  restructure that moved them out of `docs/reports/`)
 - Test *bodies* anywhere, including tests targeting Lane A code
 - Instrumentation plumbing that Lane A code calls into (counter sinks, JSON emit),
   provided the counting logic itself stays in Lane A
@@ -78,16 +81,20 @@ learning objective.
 
 ```
 dlc/
-  CLAUDE.md
+  CLAUDE.md                 # this file — live, keeps evolving here
+  README.md                 # front door
   docs/
-    dlc-blueprint.md        # Lane A, source of truth
-    SESSION_LOG.md          # append-only, one entry per working session
-    MEASUREMENTS.md         # every integer, with provenance ID
-    DECISIONS.md            # append-only, one line per irreversible choice
-    OPEN_QUESTIONS.md       # append-only, things you noticed and did not act on
-    reports/
-      probe0.md
-      m1.md ...
+    02-design.md            # Lane A, source of truth (current-state; see below)
+    01-problem.md, 03-methodology.md, 04-related-work.md, 05-limitations.md
+    design-history.md       # blueprint's old version deltas
+    project-log.md          # session-by-session narrative
+    06-reproduce.md
+    rename-map.csv          # old path -> new path, for the 2026-08-30 restructure
+  specs/                    # build plans that directed each phase of work
+  record/                   # append-only: SESSION_LOG.md, MEASUREMENTS.md,
+                             # DECISIONS.md, OPEN_QUESTIONS.md, ESCALATIONS.md
+  experiments/              # every experiment report, renamed by content
+  results/                  # findings.md, claims.md, superseded.md, presentation.html
   src/                      # Lane A
   harness/                  # Lane B
   tests/
@@ -97,6 +104,13 @@ dlc/
     cmd.txt  stdout.txt  stderr.txt  env.txt  meta.json
   fixtures/                 # seeded generators + generated .facts
 ```
+
+The layout above is current as of the 2026-08-30 restructure
+(`docs/restructure-notes.md`). `docs/dlc-blueprint.md` no longer exists —
+its content was split into `docs/02-design.md` (current-state) and
+`docs/design-history.md` (version deltas). `docs/reports/` no longer
+exists — its contents moved into `experiments/`, `specs/`, `record/`, and
+`results/` per `docs/rename-map.csv`.
 
 ---
 
@@ -114,7 +128,10 @@ reachable-set from node 1 must be verified to be roughly 50 before the run — i
 not, regenerate rather than reporting a meaningless ratio.
 
 Produce `docs/reports/probe0.md` containing exactly the six answers in blueprint §12,
-each with its measurement ID. Then **stop**.
+each with its measurement ID. Then **stop**. [Historical note, 2026-08-30: this
+phase's actual report split into three files, now `experiments/01-souffle-
+negation-behaviour.md`, `experiments/02-output-forces-materialization.md`,
+`experiments/03-completeness-counterexample-search.md` — see `experiments/README.md`.]
 
 Phase 0 has no Lane A code. If you find yourself writing a parser, you have gone
 wrong.
@@ -123,7 +140,9 @@ wrong.
 
 Lane A (human): lexer, parser, type check, allowedness, naive fixpoint, semi-naive.
 Lane B (you): differential harness against Soufflé, corpus runner, tuple-count
-extraction, rejection-test suite, `docs/reports/m1.md`.
+extraction, rejection-test suite, `docs/reports/m1.md`. [Historical note,
+2026-08-30: the actual M1 report is `experiments/31-m1-front-end-and-
+evaluators.md`.]
 
 Gate: `T_naive` vs `T_semi-naive` on a fixed program set, plus counts of programs
 rejected by each of the four semantic checks, plus set-equality against Soufflé on
@@ -198,11 +217,12 @@ Three test categories, all required:
 
 ## 7. Reporting
 
-`docs/MEASUREMENTS.md` is a table: measurement ID, date, command, program, config,
+`record/MEASUREMENTS.md` is a table: measurement ID, date, command, program, config,
 integer, and a one-line interpretation. Append-only. Never edit a past row; if a
 number is superseded, add a new row and reference the old ID.
 
-`docs/reports/<phase>.md` is written for a hostile reader. Structure:
+`experiments/NN-<content>.md` (or, before the 2026-08-30 restructure,
+`docs/reports/<phase>.md`) is written for a hostile reader. Structure:
 
 - What was measured and under what configuration, with IDs
 - The integers, in a table, side by side across configurations

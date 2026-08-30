@@ -10,7 +10,7 @@ range), and `Token` itself.
 `ERROR` tokens.** M1-BUILD.md §3.1 calls this out directly ("retrofitting
 spans is miserable") and it is the right call for a second reason too:
 `sema`'s diagnostics (arity, type, allowedness, stratification — see
-`docs/reports/night02-T9-diagnostics.md`) all point at a specific source
+`experiments/28-souffle-diagnostic-catalogue.md`) all point at a specific source
 location, and threading that back to a token that never recorded one would
 mean rebuilding position information from scratch at every later pass.
 Paying the cost once, in the lexer, is cheaper than paying it four times

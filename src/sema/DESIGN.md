@@ -12,7 +12,7 @@ would buy nothing.
 `.decl name(...)` introduces a schema; `.input name` / `.output name`
 only *mark* an existing schema as externally loaded or exposed. Two
 `.decl name(...)` for the same name is `DuplicateDecl` (matches Soufflé's
-own "Redefinition of relation" — `docs/reports/night02-T9-diagnostics.md`);
+own "Redefinition of relation" — `experiments/28-souffle-diagnostic-catalogue.md`);
 an `.input`/`.output` with no matching `.decl` anywhere is
 `UndeclaredRelation`, not folded into duplicate-detection — they are
 different mistakes with different fixes, and the diagnostic catalogue's
@@ -25,7 +25,7 @@ between the two uses — Datalog variables are clause-scoped. `checkClause`
 builds a fresh `varTypes` map per clause and discards it afterward; there
 is no global type environment. This mirrors Soufflé's own diagnostic for
 `type_number_vs_symbol_across_rule`
-(`docs/reports/night02-T9-diagnostics.md`), which is specifically about
+(`experiments/28-souffle-diagnostic-catalogue.md`), which is specifically about
 one variable's uses *within one rule* conflicting, not across rules.
 
 **Non-obvious decision, pinned by a specific rejection case: arithmetic
@@ -62,11 +62,11 @@ misleading type diagnostic on top of the real arity one.
 
 ## Allowedness (`allowedness.go`, §3.5)
 
-Implements the fixpoint definition in `docs/DECISIONS.md` literally --
+Implements the fixpoint definition in `record/DECISIONS.md` literally --
 `G0` from positive-atom arguments, then repeated `V = E` grounding until
 no change, then "every variable in the clause must be in `G`." Four
-asymmetries, each forced by a specific probe program (`docs/reports/
-J1-allowedness-probe.md`, `docs/reports/night02-T1-allowedness.md`), and
+asymmetries, each forced by a specific probe program
+(`experiments/19-allowedness-probe.md`, `experiments/21-allowedness-derivation.md`), and
 each visible as a separate, deliberate line of code rather than folded
 into one clever-looking condition:
 

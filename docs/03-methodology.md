@@ -62,7 +62,7 @@ picking the flattering one:
   (`transitive_closure_bound`'s ~0.49× figure, which `excl-sup` resolves
   to exactly 1.00×). Choosing a convention after seeing which one looks
   better is exactly the failure mode this project's own documentation
-  discipline (`docs/OPEN_QUESTIONS.md` Q12, `results/superseded.md`) was
+  discipline (`record/OPEN_QUESTIONS.md` Q12, `results/superseded.md`) was
   written to catch.
 
 ## Metrics
@@ -80,7 +80,7 @@ Fixture generators are seeded from a constant recorded in the fixture
 file; two runs of the same command must produce byte-identical output.
 Scale points, corpus subdirectories, and — for constructed test cases —
 the predicted result are committed *before* the measurement runs, not
-chosen after seeing it. Two concrete instances: `docs/OPEN_QUESTIONS.md`
+chosen after seeing it. Two concrete instances: `record/OPEN_QUESTIONS.md`
 Q13 predicted a 2×–5× ratio growth for a not-yet-built construction before
 it was measured (measured 12.69×, `experiments/56-mass-ratio-
 characterization-construction.md`); the corpus-admissibility predicate

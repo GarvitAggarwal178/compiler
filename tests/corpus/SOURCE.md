@@ -6,7 +6,7 @@ directory has been run.
 
 **Source:** `https://github.com/souffle-lang/souffle`, tag `2.5`, commit
 `5682a9f12e2668ecdd26348fe63cc508bc0fcf47` (matches the installed `souffle --version`
-= 2.5, see `docs/DECISIONS.md`). Only the `tests/` subtree was fetched:
+= 2.5, see `record/DECISIONS.md`). Only the `tests/` subtree was fetched:
 
 ```
 git clone --depth 1 --branch 2.5 --filter=blob:none --sparse \
@@ -30,4 +30,4 @@ over the entire `tests/` tree (36 included) once the narrower scope was recogniz
 an unrequested restriction, not something the Phase 0.6 directive asked for. The
 predicate logic (`check_program`) was not changed between the two runs — only which
 directories were treated as candidates. Both counts and the reasoning are in
-`docs/reports/probe0_6.md`.
+`experiments/03-completeness-counterexample-search.md`.
