@@ -232,15 +232,26 @@ every construction with a sibling branch, at every scale point measured:
 control, not a counterexample; full table
 `docs/reports/punch-list-p1.md`.)
 
-**Why the margin shrinks here — a characterization, not a bare
-limitation (PUNCH-LIST-2 item 1).** Decomposing `T_guarded` into its
-declined portion (culprit ∪ cone, always full-extent) and its
-transformed portion (the sibling branch) at every point
-(`docs/reports/punch-list-2-item1.md`) finds the declined portion is
-**bit-for-bit identical to the untransformed baseline's own cost for
-those same relations, at every point** — full-extent fallback is
-literally the same computation, not an approximation. It grows with `n`
-by design (the culprit core's own fixtures scale with `n`). The
+**The guard's contribution as a mass ratio — one characterization, both
+curves (PUNCH-LIST-2 items 1–2, consolidated 2026-08-30).** The decaying
+margin above and the growing one below were originally reported as two
+separate findings. They are one result with a control:
+
+> The guard's contribution equals the ratio of transformed mass to
+> declined mass. Declined relations are full-extent by definition and
+> grow with the program; transformed relations grow only with their own
+> demanded set. Whichever grows faster determines whether the
+> contribution rises or falls with scale. Both directions were
+> constructed and measured.
+
+*Direction one — declined mass grows faster (PUNCH-LIST-2 item 1).*
+Decomposing `T_guarded` into its declined portion (culprit ∪ cone,
+always full-extent) and its transformed portion (the sibling branch) at
+every point (`docs/reports/punch-list-2-item1.md`) finds the declined
+portion is **bit-for-bit identical to the untransformed baseline's own
+cost for those same relations, at every point** — full-extent fallback
+is literally the same computation, not an approximation. It grows with
+`n` by design (the culprit core's own fixtures scale with `n`). The
 transformed portion, however, does **not** stay roughly constant as
 first guessed — it *shrinks* (55 → 10 → 7 tuples), because task B's
 sibling fixture (`gen_cone_corpus_facts`) never scales `sibling_edges`
@@ -251,14 +262,23 @@ mechanism is more specific than "the guard's contribution is modest,"
 it is "the guard's contribution here is bounded by an unscaled fixture,"
 a property of this construction, not of demand restriction in general.
 
-**Confirmed by construction: the direction reverses when the
-transformed branch is what scales (PUNCH-LIST-2 item 2).**
+*Direction two — transformed mass grows faster (PUNCH-LIST-2 item 2).*
 `cc_growing_sibling.dl` pins the culprit core at a fixed size and lets
 the sibling's own reachable-from-1 set grow *linearly* with `n`
 (`gen_core_rest_graph(core_size=n)`) — the deliberate opposite of task
 B's fixture. Pre-registered prediction (`docs/OPEN_QUESTIONS.md` Q13):
 ratio grows, order-of-magnitude 2×–5× by n=100. Measured
 (`docs/reports/punch-list-2-item2.md`):
+
+**Both curves, side by side:**
+
+| n | `cc_sibling_emptycone` / `cc_both` / `cc_cone_proper_subset` (`T_none/T_guarded`, declining) | `cc_growing_sibling` (`T_none/T_guarded`, growing) |
+|---|---|---|
+| 20 | 1.70× / 1.68× / 1.75× | **2.14×** |
+| 50 | 1.28× / 1.30× / 1.31× | **6.38×** |
+| 100 | 1.02× / 1.02× / 1.02× | **12.69×** |
+
+The growing-sibling construction's own decomposition, for completeness:
 
 | n | `T_none` | `T_guarded` | declined portion | transformed portion | `T_none/T_guarded` |
 |---|---|---|---|---|---|

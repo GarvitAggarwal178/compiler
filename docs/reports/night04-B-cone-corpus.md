@@ -1,3 +1,19 @@
+> **SUPERSEDED (2026-08-30) — this report's own headline finding no
+> longer holds.** §"Cone results" below concludes `T_guarded < T_none`
+> fails on 12/12 points and reports that as a finding about the guard's
+> practical value. `PUNCH-LIST.md` P1 traced that result to a bug —
+> `magicset.FindQuery` seeding only the first bindable query candidate,
+> leaving a sibling `.output` branch Untouched at full extent — and
+> fixed it (`FindQueries`, seed collection from every candidate). After
+> the fix, `T_guarded < T_none` holds on **9/12** points. See
+> `docs/reports/punch-list-p1.md` for the corrected measurement and
+> `docs/reports/FINAL.md` §5/§6 item 5 for the finding as currently
+> understood. **The body below is left exactly as originally written**
+> (append-only discipline applies to reports as much as to
+> `MEASUREMENTS.md`) — read it as the record of what was measured and
+> concluded before the bug was found, not as the project's current
+> position.
+
 # NIGHT-BATCH-04 B — the cone corpus
 
 Date: 2026-08-27. Four new programs, `tests/corpus/CONE_CORPUS/`, scale
