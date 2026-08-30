@@ -1,5 +1,11 @@
 # CLAUDE.md — operating contract for `dlc`
 
+> This file is the agent's live working file and keeps evolving here at the
+> repo root. `specs/01-agent-contract.md` is an archived snapshot taken at
+> restructure time (2026-08-30) — not kept in sync automatically. For the
+> readable, narrative history of how this project actually went, see
+> `docs/project-log.md`.
+
 You are working on `dlc`, a Datalog compiler built as a semester compiler-design
 project. Read `docs/dlc-blueprint.md` before anything else. It is the source of truth
 for scope, metrics, milestones and kill conditions. This file governs *how* you work.
