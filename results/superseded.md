@@ -1,0 +1,24 @@
+# Superseded
+
+Every retracted or replaced number in this project, what replaced it, and
+why. **This is a feature of the project, not an embarrassment.** The
+project's own documentation discipline (`CLAUDE.md` §7, "never edit a past
+row" in `record/MEASUREMENTS.md`) means nothing here was quietly fixed —
+each row below is a correction that was marked in place, in the report or
+decision that made it, at the time it was found. Presenting them together
+is deliberate epistemic hygiene: a reader who finds one of these numbers
+cited elsewhere should land here, not have to hunt through session
+history to learn it was corrected.
+
+| Was | Corrected to | Why | Where |
+|---|---|---|---|
+| "Production engines decline to transform anything touching negation" (founding premise) | Soufflé transforms the negation-*bearing* relation; it just never demand-restricts the *negated* one | Probe 0 tested the premise directly and it was wrong, on day one | `docs/design-history.md` (blueprint v1.1); `experiments/01-souffle-negation-behaviour.md` |
+| "Soufflé can exit 0 on a genuine stratification error" | Soufflé consistently exits 1 on a stratification error; the `rc=0` reading was a Bash-tool/`wsl.exe` bridge artifact from live-streamed terminal output | Re-run 5 times with output redirected to files instead of streamed live — every re-run returned `rc=1` | `docs/project-log.md`; `experiments/28-souffle-diagnostic-catalogue.md` |
+| `T_none = n²` reported as an observed scaling result | Reframed as **definitional** for this program shape — `reach`/`unreach` partition `node × node`, so the quantity follows from the construction, not from anything about the graph or the transform | Stated explicitly the first time this benchmark family's numbers were reported, to prevent a definitional fact being read as an empirical finding | `docs/02-design.md` (P2-scale note); original in blueprint §12 |
+| `T_none / T_guard` proposed as the headline contribution ratio | `T_souffle / T_guard` — the contribution the guard adds **on top of** Soufflé's own transform, not on top of no transform at all | `T_none/T_guard` credits the guard with the reduction Soufflé's own transform already buys; reporting it as headline would be claiming credit for Beeri–Ramakrishnan | `docs/design-history.md` (blueprint v1.2) |
+| `T_guarded < T_none` on 0/12 measured points (task B), reported as a finding about the guard's practical value | `T_guarded < T_none` on 9/12 points, 1.02×–1.75× | Traced to `magicset.FindQuery` seeding only the first bindable query candidate, leaving a sibling `.output` branch at full extent — a bug, not a property of the guard | `experiments/51-cone-corpus-superseded.md` (superseding header), `experiments/53-multi-query-seeding.md` |
+| Q11: hand guard v1 propagates a seed across a first-argument-invariant recursion analogous to `p4prime.dl`'s `reach` | **Falsified.** The actual committed recursion is not of that shape; the constructed "fix" (v2) is answer-wrong at every scale point | Tested exactly as pre-registered, found wrong, not adjusted after the fact | `experiments/37-ancestor-seed-prediction-falsified.md` |
+| Q12: predicted `T_dlc ≈ 300–700` on `p2.dl` | **A miss under both counting conventions, in opposite directions** — measured 974 (incl-sup, above the top) and 252 (excl-sup, below the bottom). Not recorded as correct under either; 252's closeness to `p4prime.dl`'s 285 is a separate, real finding (`results/findings.md` item 1), not evidence the pre-registered range was right | The prediction never named a supplementary-counting convention — an underspecified prediction, not a wrong mechanism | `docs/OPEN_QUESTIONS.md`; `results/findings.md` item 1 |
+| `IN_GRAMMAR.txt`'s 195 files read as "195 programs strictly in the project's grammar" | 19/195 are strictly blueprint-§4-compliant; 89/195 parse after the parenthesized-directive amendment; the corpus's own name overstates its content | Direct verification against both a regex census and `dlc`'s real parser, cross-checked | `experiments/32-verification-pass.md` |
+| Zero-arity relation count: 11 of 195 in-grammar files | **12** — a 12th file (`syntactic/doc_comment_dangling3/other.dl`) was missed by the original grep-based census | Confirmed by direct read of the source file | `experiments/32-verification-pass.md`; `record/DECISIONS.md` |
+| Corpus/checking-volume figures (19 / 89 / 5) presented as if they answered one question | Split into three explicitly separate, labelled numbers: external-program coverage (5), total checking volume across all corpora (93), and corpus-admissibility (19 strict / 89 parenthesized-amendment) | Each answers a different question; conflating them understates or overstates the project's actual validation depending on which pair gets compared | `results/findings.md`; `experiments/57-final-report-whole-project-synthesis.md` §8 |
