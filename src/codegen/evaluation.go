@@ -6,6 +6,7 @@ import (
 	"strings"
 
 	"dlc/src/ast"
+	"dlc/src/plan"
 	"dlc/src/sema"
 )
 
@@ -62,6 +63,7 @@ func (g *generator) emitEvaluation(prog *ast.Program, strata *sema.StratumResult
 // pipeline already guarantees this for any program that reached
 // codegen).
 func (g *generator) emitFactClause(c *ast.Clause) {
+	g.comment(c)
 	id := cIdent(c.Head.Name)
 	schema := g.schemas[c.Head.Name]
 	if len(schema.Params) == 0 {
@@ -69,6 +71,7 @@ func (g *generator) emitFactClause(c *ast.Clause) {
 		return
 	}
 	g.w("\t{")
+	g.w("\tif (%s) {", g.validTerms(c.Head.Terms, map[string]string{}))
 	g.w("\t\tTuple_%s t;", id)
 	for i, term := range c.Head.Terms {
 		expr := g.constExpr(term)
@@ -76,16 +79,11 @@ func (g *generator) emitFactClause(c *ast.Clause) {
 	}
 	g.w("\t\t%s_insert(t);", id)
 	g.w("\t}")
+	g.w("\t}")
 }
 
 func (g *generator) constExpr(term ast.Term) string {
-	switch v := term.(type) {
-	case *ast.NumberLit:
-		return strconv.FormatInt(v.Value, 10)
-	case *ast.StringLit:
-		return fmt.Sprintf("intern(%q)", v.Value)
-	}
-	return "0" // unreachable for a fact clause post-parse; defensive, not a panic
+	return g.groundExprTerm(term, map[string]string{})
 }
 
 // emitRuleClause emits one clause's contribution to its stratum's
@@ -93,8 +91,11 @@ func (g *generator) constExpr(term ast.Term) string {
 // (small, deliberate duplication -- see DESIGN.md), then recursively
 // nest one C construct per literal.
 func (g *generator) emitRuleClause(c *ast.Clause) {
-	g.curVarTypes = sema.ClauseVarTypes(&sema.SymbolTable{Relations: g.schemas}, c)
+	g.comment(c)
 	ordered := safeOrderForCodegen(c.Body)
+	planned := *c
+	planned.Body = ordered
+	g.curVarTypes = sema.ClauseVarTypes(&sema.SymbolTable{Relations: g.schemas}, &planned)
 	var sb indentWriter
 	sb.level = 3
 	g.emitLiteral(&sb, ordered, 0, map[string]string{}, c)
@@ -131,25 +132,27 @@ func (g *generator) emitLiteral(w *indentWriter, body []ast.Literal, idx int, bo
 			g.emitLiteral(w, body, idx+1, nb, headClause)
 		})
 	case *ast.NegatedAtom:
-		id := cIdent(v.Atom.Name)
-		schema := g.schemas[v.Atom.Name]
-		w.line("{")
-		w.level++
-		if len(schema.Params) == 0 {
-			w.line("if (!%s_present) {", id)
-		} else {
-			w.line("Tuple_%s neg_t;", id)
-			for i, term := range v.Atom.Terms {
-				w.line("neg_t.c[%d] = %s;", i, g.groundExprTerm(term, bound))
+		g.withValidTerms(w, v.Atom.Terms, bound, func() {
+			id := cIdent(v.Atom.Name)
+			schema := g.schemas[v.Atom.Name]
+			w.line("{")
+			w.level++
+			if len(schema.Params) == 0 {
+				w.line("if (!%s_present) {", id)
+			} else {
+				w.line("Tuple_%s neg_t;", id)
+				for i, term := range v.Atom.Terms {
+					w.line("neg_t.c[%d] = %s;", i, g.groundExprTerm(term, bound))
+				}
+				w.line("if (!%s_contains(neg_t)) {", id)
 			}
-			w.line("if (!%s_contains(neg_t)) {", id)
-		}
-		w.level++
-		g.emitLiteral(w, body, idx+1, bound, headClause)
-		w.level--
-		w.line("}")
-		w.level--
-		w.line("}")
+			w.level++
+			g.emitLiteral(w, body, idx+1, bound, headClause)
+			w.level--
+			w.line("}")
+			w.level--
+			w.line("}")
+		})
 	case *ast.Constraint:
 		g.emitConstraint(w, v, bound, func(nb map[string]string) {
 			g.emitLiteral(w, body, idx+1, nb, headClause)
@@ -163,6 +166,16 @@ func (g *generator) emitLiteral(w *indentWriter, body []ast.Literal, idx int, bo
 // checking already-bound terms/constants for equality, then calls cont
 // with the (possibly extended) bound map for the loop body.
 func (g *generator) emitAtomJoin(w *indentWriter, a *ast.Atom, bound map[string]string, cont func(map[string]string)) {
+	var ready []ast.Term
+	for _, term := range a.Terms {
+		if expr, ok := term.(ast.Arith); ok && arithFullyBound(expr, bound) {
+			ready = append(ready, term)
+		}
+	}
+	g.withValidTerms(w, ready, bound, func() { g.emitAtomJoinUnchecked(w, a, bound, cont) })
+}
+
+func (g *generator) emitAtomJoinUnchecked(w *indentWriter, a *ast.Atom, bound map[string]string, cont func(map[string]string)) {
 	id := cIdent(a.Name)
 	schema := g.schemas[a.Name]
 	if len(schema.Params) == 0 {
@@ -192,6 +205,15 @@ func (g *generator) emitAtomJoin(w *indentWriter, a *ast.Atom, bound map[string]
 
 	nb := cloneBound(bound)
 	guard := ""
+	// Bind every bare column before testing arithmetic, including inputs
+	// which occur in a later column of this same atom.
+	for i, term := range a.Terms {
+		if v, ok := term.(*ast.Var); ok {
+			if _, exists := nb[v.Name]; !exists {
+				nb[v.Name] = fmt.Sprintf("%s.c[%d]", rowVar, i)
+			}
+		}
+	}
 	for i, term := range a.Terms {
 		colExpr := fmt.Sprintf("%s.c[%d]", rowVar, i)
 		if i == 0 && firstIsBound {
@@ -207,7 +229,7 @@ func (g *generator) emitAtomJoin(w *indentWriter, a *ast.Atom, bound map[string]
 				nb[tv.Name] = colExpr
 			}
 		default:
-			guard += fmt.Sprintf(" && (%s) == (%s)", colExpr, g.groundExprTerm(term, bound))
+			guard += fmt.Sprintf(" && (%s) && (%s) == (%s)", g.validTerms([]ast.Term{term}, nb), colExpr, g.groundExprTerm(term, nb))
 		}
 	}
 	if guard != "" {
@@ -233,6 +255,10 @@ func (g *generator) emitAtomJoin(w *indentWriter, a *ast.Atom, bound map[string]
 // the rest of this nesting level); everything else is a boolean test,
 // wrapped in an if(){...cont...}.
 func (g *generator) emitConstraint(w *indentWriter, c *ast.Constraint, bound map[string]string, cont func(map[string]string)) {
+	g.withValidTerms(w, []ast.Term{c.Left, c.Right}, bound, func() { g.emitConstraintUnchecked(w, c, bound, cont) })
+}
+
+func (g *generator) emitConstraintUnchecked(w *indentWriter, c *ast.Constraint, bound map[string]string, cont func(map[string]string)) {
 	if c.Op == "=" {
 		if v, ok := c.Left.(*ast.Var); ok {
 			if _, already := bound[v.Name]; !already {
@@ -309,6 +335,10 @@ func cOp(op string) string {
 // inserts it, marking the stratum's fixpoint "changed" flag on a
 // genuinely new insertion.
 func (g *generator) emitDerive(w *indentWriter, c *ast.Clause, bound map[string]string) {
+	g.withValidTerms(w, c.Head.Terms, bound, func() { g.emitDeriveUnchecked(w, c, bound) })
+}
+
+func (g *generator) emitDeriveUnchecked(w *indentWriter, c *ast.Clause, bound map[string]string) {
 	id := cIdent(c.Head.Name)
 	schema := g.schemas[c.Head.Name]
 	if len(schema.Params) == 0 {
@@ -326,15 +356,12 @@ func (g *generator) emitDerive(w *indentWriter, c *ast.Clause, bound map[string]
 	w.line("}")
 }
 
-// groundExprTerm handles a head Term, which may be a Wildcard (real
-// Soufflé rejects this, sema doesn't check for it yet -- same disclosed
-// fallback as eval.buildTuple, see DESIGN.md: emit a fixed 0 rather than
-// mis-generating C).
+// groundExprTerm requires a validated head term; unsupported nodes fail explicitly.
 func (g *generator) groundExprTerm(term ast.Term, bound map[string]string) string {
 	if a, ok := term.(ast.Arith); ok {
 		return g.groundExpr(a, bound)
 	}
-	return "0"
+	panic("codegen: unsupported expression in checked program")
 }
 
 // groundExpr renders an Arith fully evaluable in the current bound
@@ -345,17 +372,21 @@ func (g *generator) groundExpr(a ast.Arith, bound map[string]string) string {
 		if expr, ok := bound[v.Name]; ok {
 			return expr
 		}
-		return "0" // unreachable post-allowedness/safeOrder for a real program
+		panic("codegen: unbound variable " + v.Name)
 	case *ast.NumberLit:
+		if v.Value == -1<<63 {
+			return "INT64_MIN"
+		}
 		return strconv.FormatInt(v.Value, 10)
 	case *ast.StringLit:
-		return fmt.Sprintf("intern(%q)", v.Value)
+		return fmt.Sprintf("intern(%s)", cStringLiteral(v.Value))
 	case *ast.UnaryExpr:
-		return fmt.Sprintf("(-(%s))", g.groundExpr(v.X, bound))
+		return fmt.Sprintf("dlc_neg(%s)", g.groundExpr(v.X, bound))
 	case *ast.BinaryExpr:
-		return fmt.Sprintf("((%s) %s (%s))", g.groundExpr(v.Left, bound), v.Op, g.groundExpr(v.Right, bound))
+		helper := map[string]string{"+": "dlc_add", "-": "dlc_sub", "*": "dlc_mul", "/": "dlc_div", "%": "dlc_mod"}[v.Op]
+		return fmt.Sprintf("%s(%s,%s)", helper, g.groundExpr(v.Left, bound), g.groundExpr(v.Right, bound))
 	}
-	return "0"
+	panic("codegen: unsupported expression in checked program")
 }
 
 // boundExprOf reports the C expression for term if it is already fully
@@ -374,18 +405,11 @@ func (g *generator) boundExprOf(term ast.Term, bound map[string]string) (string,
 }
 
 func arithFullyBound(a ast.Arith, bound map[string]string) bool {
-	switch v := a.(type) {
-	case *ast.Var:
-		_, ok := bound[v.Name]
-		return ok
-	case *ast.NumberLit, *ast.StringLit:
-		return true
-	case *ast.UnaryExpr:
-		return arithFullyBound(v.X, bound)
-	case *ast.BinaryExpr:
-		return arithFullyBound(v.Left, bound) && arithFullyBound(v.Right, bound)
+	available := make(map[string]bool, len(bound))
+	for name := range bound {
+		available[name] = true
 	}
-	return false
+	return plan.ArithBound(a, available)
 }
 
 func cloneBound(b map[string]string) map[string]string {
@@ -408,89 +432,11 @@ func sanitize(name string) string {
 	return sb.String()
 }
 
-// safeOrderForCodegen is eval.safeOrder's algorithm, reimplemented here
-// rather than shared -- see DESIGN.md for why this small duplication was
-// accepted instead of exporting eval's unexported helper.
+// safeOrderForCodegen uses the same planner as Go evaluation and SIPS.
 func safeOrderForCodegen(body []ast.Literal) []ast.Literal {
-	bound := map[string]bool{}
-	var scheduled []ast.Literal
-	remaining := append([]ast.Literal{}, body...)
-	for len(remaining) > 0 {
-		var stillRemaining []ast.Literal
-		progressed := false
-		for _, lit := range remaining {
-			if canScheduleForCodegen(lit, bound) {
-				scheduled = append(scheduled, lit)
-				addBoundVarsForCodegen(lit, bound)
-				progressed = true
-			} else {
-				stillRemaining = append(stillRemaining, lit)
-			}
-		}
-		remaining = stillRemaining
-		if !progressed {
-			scheduled = append(scheduled, remaining...)
-			break
-		}
+	result, err := plan.Body(body, nil)
+	if err != nil {
+		panic(err)
 	}
-	return scheduled
-}
-
-func canScheduleForCodegen(lit ast.Literal, bound map[string]bool) bool {
-	switch v := lit.(type) {
-	case *ast.Atom:
-		return true
-	case *ast.NegatedAtom:
-		for _, t := range v.Atom.Terms {
-			if a, ok := t.(ast.Arith); ok && !arithVarsBoundForCodegen(a, bound) {
-				return false
-			}
-		}
-		return true
-	case *ast.Constraint:
-		if v.Op == "=" {
-			if vv, ok := v.Left.(*ast.Var); ok && !bound[vv.Name] && arithVarsBoundForCodegen(v.Right, bound) {
-				return true
-			}
-			if vv, ok := v.Right.(*ast.Var); ok && !bound[vv.Name] && arithVarsBoundForCodegen(v.Left, bound) {
-				return true
-			}
-		}
-		return arithVarsBoundForCodegen(v.Left, bound) && arithVarsBoundForCodegen(v.Right, bound)
-	}
-	return true
-}
-
-func arithVarsBoundForCodegen(a ast.Arith, bound map[string]bool) bool {
-	switch v := a.(type) {
-	case *ast.Var:
-		return bound[v.Name]
-	case *ast.NumberLit, *ast.StringLit:
-		return true
-	case *ast.BinaryExpr:
-		return arithVarsBoundForCodegen(v.Left, bound) && arithVarsBoundForCodegen(v.Right, bound)
-	case *ast.UnaryExpr:
-		return arithVarsBoundForCodegen(v.X, bound)
-	}
-	return true
-}
-
-func addBoundVarsForCodegen(lit ast.Literal, bound map[string]bool) {
-	switch v := lit.(type) {
-	case *ast.Atom:
-		for _, t := range v.Terms {
-			if vv, ok := t.(*ast.Var); ok {
-				bound[vv.Name] = true
-			}
-		}
-	case *ast.Constraint:
-		if v.Op == "=" {
-			if vv, ok := v.Left.(*ast.Var); ok {
-				bound[vv.Name] = true
-			}
-			if vv, ok := v.Right.(*ast.Var); ok {
-				bound[vv.Name] = true
-			}
-		}
-	}
+	return result.Literals
 }

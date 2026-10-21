@@ -125,3 +125,18 @@ func TestTypeErrorSpansAreNonZero(t *testing.T) {
 		t.Fatalf("expected a real span, got zero-value %v", diags[0].Span)
 	}
 }
+
+func TestComparisonOperandTypes(t *testing.T) {
+	for _, source := range []string{
+		".decl p(x:number)\np(1).\n.decl out(x:number)\nout(x) :- p(x),x=\"a\".\n",
+		".decl out(x:symbol)\nout(y) :- y=x,x=1.\n",
+	} {
+		p, errs := parser.Parse([]byte(source))
+		if len(errs) > 0 {
+			t.Fatal(errs)
+		}
+		if diags := CheckDeclType(p); len(diags) == 0 {
+			t.Fatal("mixed number/symbol comparison must be rejected")
+		}
+	}
+}

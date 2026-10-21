@@ -17,6 +17,7 @@ import (
 	"sort"
 
 	"dlc/src/ast"
+	"dlc/src/plan"
 )
 
 // Adornment is one bit per predicate argument position: true = bound on
@@ -102,6 +103,7 @@ type occurrence struct {
 // AdornedRule is one (predicate, adornment) pair's contribution from one
 // of that predicate's original defining clauses.
 type AdornedRule struct {
+	Plan        *plan.Result
 	Key         adornedKey
 	Source      *ast.Clause   // the original clause (unordered body)
 	OrderedBody []ast.Literal // SIPS order
@@ -147,6 +149,10 @@ const worklistCap = 10000
 // "expected on the positive fragment").
 func FindQueries(prog *ast.Program) []*QueryInfo {
 	outputs := map[string]bool{}
+	idb := map[string]bool{}
+	for _, c := range prog.Clauses {
+		idb[c.Head.Name] = true
+	}
 	for _, d := range prog.Decls {
 		if d.Kind == ast.DeclOutput {
 			outputs[d.Name] = true
@@ -158,7 +164,7 @@ func FindQueries(prog *ast.Program) []*QueryInfo {
 			continue
 		}
 		atom, ok := c.Body[0].(*ast.Atom)
-		if !ok {
+		if !ok || !idb[atom.Name] {
 			continue
 		}
 		adorn := make(Adornment, len(atom.Terms))
@@ -182,9 +188,24 @@ func FindQueries(prog *ast.Program) []*QueryInfo {
 }
 
 func isConstant(t ast.Term) bool {
-	switch t.(type) {
+	switch v := t.(type) {
 	case *ast.NumberLit, *ast.StringLit:
 		return true
+	case *ast.UnaryExpr:
+		if v.Op != "-" {
+			return false
+		}
+		return signedNumber(v.X)
+	}
+	return false
+}
+
+func signedNumber(t ast.Arith) bool {
+	switch v := t.(type) {
+	case *ast.NumberLit:
+		return true
+	case *ast.UnaryExpr:
+		return v.Op == "-" && signedNumber(v.X)
 	}
 	return false
 }
@@ -306,8 +327,12 @@ func adornOneRule(clause *ast.Clause, key adornedKey, adorn Adornment, idb map[s
 		}
 	}
 
-	ordered := OrderBody(clause.Body, initBound)
-	ar := &AdornedRule{Key: key, Source: clause, OrderedBody: ordered}
+	bodyPlan, err := plan.Body(clause.Body, initBound)
+	if err != nil {
+		panic(err)
+	}
+	ordered := bodyPlan.Literals
+	ar := &AdornedRule{Plan: bodyPlan, Key: key, Source: clause, OrderedBody: ordered}
 	ar.BoundAfter = append(ar.BoundAfter, append([]string{}, boundOrder...))
 
 	bound := map[string]bool{}

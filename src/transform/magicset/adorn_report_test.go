@@ -15,7 +15,7 @@ import (
 // TestReportAdornedPredicates -v`, not part of the regular suite's
 // correctness assertions.
 func TestReportAdornedPredicates(t *testing.T) {
-	repo := "/root/compiler"
+	repo := filepath.Join("..", "..", "..")
 	files := []string{
 		"tests/corpus/BENCHMARK_FAMILY/same_generation_negation.dl",
 		"tests/corpus/BENCHMARK_FAMILY/transitive_closure_bound.dl",

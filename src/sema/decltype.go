@@ -7,6 +7,7 @@ package sema
 
 import (
 	"fmt"
+	"strings"
 
 	"dlc/src/ast"
 	"dlc/src/token"
@@ -146,7 +147,45 @@ func runClauseChecker(st *SymbolTable, c *ast.Clause) *clauseChecker {
 		}
 	}
 	cc.checkAtomOccurrence(st, c.Head)
+	// Comparisons constrain both operands to the same type. Propagate through
+	// equality/comparison chains after collecting all declared column types.
+	for changed := true; changed; {
+		changed = false
+		for _, lit := range c.Body {
+			if v, ok := lit.(*ast.Constraint); ok {
+				lt, rt := cc.expressionType(v.Left), cc.expressionType(v.Right)
+				if x, ok := v.Left.(*ast.Var); ok && lt == "" && rt != "" {
+					cc.requireVarType(x.Name, rt, x.Sp)
+					changed = true
+				}
+				if x, ok := v.Right.(*ast.Var); ok && rt == "" && lt != "" {
+					cc.requireVarType(x.Name, lt, x.Sp)
+					changed = true
+				}
+			}
+		}
+	}
+	for _, lit := range c.Body {
+		if v, ok := lit.(*ast.Constraint); ok {
+			lt, rt := cc.expressionType(v.Left), cc.expressionType(v.Right)
+			if lt != "" && rt != "" && lt != rt {
+				cc.diags = append(cc.diags, Diagnostic{Span: v.Sp, Category: TypeMismatch, Message: fmt.Sprintf("comparison operands have different types: %s and %s", lt, rt)})
+			}
+		}
+	}
 	return cc
+}
+
+func (cc *clauseChecker) expressionType(a ast.Arith) string {
+	switch v := a.(type) {
+	case *ast.Var:
+		return cc.varTypes[v.Name]
+	case *ast.StringLit:
+		return "symbol"
+	case *ast.NumberLit, *ast.UnaryExpr, *ast.BinaryExpr:
+		return "number"
+	}
+	return ""
 }
 
 func (cc *clauseChecker) checkAtomOccurrence(st *SymbolTable, a *ast.Atom) {
@@ -185,6 +224,9 @@ func (cc *clauseChecker) checkTermAgainstType(term ast.Term, wantType string) {
 			})
 		}
 	case *ast.StringLit:
+		if strings.ContainsRune(v.Value, 0) {
+			cc.diags = append(cc.diags, Diagnostic{Span: v.Sp, Category: TypeMismatch, Message: "NUL bytes in symbol literals are unsupported"})
+		}
 		if wantType != "symbol" {
 			cc.diags = append(cc.diags, Diagnostic{
 				Span: v.Sp, Category: TypeMismatch,
@@ -220,6 +262,10 @@ func (cc *clauseChecker) checkTermAgainstType(term ast.Term, wantType string) {
 // treated the same as `X = Y + 1`).
 func (cc *clauseChecker) checkConstraintSide(a ast.Arith) {
 	switch v := a.(type) {
+	case *ast.StringLit:
+		if strings.ContainsRune(v.Value, 0) {
+			cc.diags = append(cc.diags, Diagnostic{Span: v.Sp, Category: TypeMismatch, Message: "NUL bytes in symbol literals are unsupported"})
+		}
 	case *ast.BinaryExpr, *ast.UnaryExpr:
 		cc.forceArithNumber(v)
 	}

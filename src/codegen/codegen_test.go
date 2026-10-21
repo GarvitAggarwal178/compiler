@@ -209,11 +209,8 @@ func TestCodegenSelfJoin(t *testing.T) {
 }
 
 func TestCodegenZeroArity(t *testing.T) {
-	// Zero-arity output is a single degenerate case (a "row" with zero
-	// columns is indistinguishable, in a naive line-based reading, from
-	// an empty file) -- checked directly against the raw file rather
-	// than through compileAndRun's general sorted-lines-or-nil helper,
-	// which cannot tell "one zero-column row" from "no rows" apart.
+	// A nullary tuple is written as (), matching Souffle 2.5.
+
 	if _, err := exec.LookPath("cc"); err != nil {
 		t.Skip("no C compiler available")
 	}
@@ -249,7 +246,7 @@ func TestCodegenZeroArity(t *testing.T) {
 	if err != nil {
 		t.Fatalf("reading q.csv: %v", err)
 	}
-	if string(data) != "\n" {
-		t.Fatalf("expected q.csv to contain exactly one blank line (one zero-arity tuple), got %q", string(data))
+	if string(data) != "()\n" {
+		t.Fatalf("expected one Souffle-compatible zero-arity tuple, got %q", string(data))
 	}
 }

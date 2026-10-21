@@ -2,8 +2,10 @@ package sema
 
 import (
 	"fmt"
+	"sort"
 
 	"dlc/src/ast"
+	"dlc/src/plan"
 	"dlc/src/token"
 )
 
@@ -15,7 +17,7 @@ const Allowedness Category = "allowedness"
 // (docs/reports/J1-allowedness-probe.md, docs/reports/
 // night02-T1-allowedness.md):
 //
-//	G0 = variables occurring as an argument of a positive body atom.
+//	G0 = bare variable arguments of positive body atoms (no arithmetic inversion).
 //	G(i+1) = G(i) U { V : the body contains a constraint V = E or E = V
 //	         where V is a bare variable and vars(E) subset-of G(i) }.
 //	G = the limit of the sequence.
@@ -27,15 +29,36 @@ const Allowedness Category = "allowedness"
 func CheckAllowedness(prog *ast.Program) []Diagnostic {
 	var diags []Diagnostic
 	for _, c := range prog.Clauses {
-		diags = append(diags, checkClauseAllowedness(c)...)
+		local := checkClauseAllowedness(c)
+		if len(local) == 0 {
+			if _, err := plan.Body(c.Body, nil); err != nil {
+				local = append(local, Diagnostic{Span: c.Sp, Category: Allowedness, Message: err.Error()})
+			}
+		}
+		diags = append(diags, local...)
 	}
 	return diags
 }
 
 func checkClauseAllowedness(c *ast.Clause) []Diagnostic {
 	g := map[string]bool{}
+	var diags []Diagnostic
+	for _, term := range c.Head.Terms {
+		if _, ok := term.(*ast.Wildcard); ok {
+			diags = append(diags, Diagnostic{Span: term.Span(), Category: Allowedness, Message: "wildcards are not allowed in a rule or fact head"})
+		}
+	}
+	for _, lit := range c.Body {
+		if neg, ok := lit.(*ast.NegatedAtom); ok {
+			for _, term := range neg.Atom.Terms {
+				if _, wild := term.(*ast.Wildcard); wild {
+					diags = append(diags, Diagnostic{Span: term.Span(), Category: Allowedness, Message: "wildcards in negated atoms are not supported; use explicitly grounded arguments"})
+				}
+			}
+		}
+	}
 
-	// G0: every variable occurring as (or within) an argument of a
+	// G0: every bare variable argument of a
 	// POSITIVE body atom. A NegatedAtom is a distinct Go type from Atom
 	// (ast/DESIGN.md's sum-type-as-interface design), so this type
 	// switch excludes negated atoms automatically -- negation never
@@ -44,7 +67,9 @@ func checkClauseAllowedness(c *ast.Clause) []Diagnostic {
 	for _, lit := range c.Body {
 		if atom, ok := lit.(*ast.Atom); ok {
 			for _, term := range atom.Terms {
-				collectVars(term, g)
+				if v, ok := term.(*ast.Var); ok {
+					g[v.Name] = true
+				}
 			}
 		}
 	}
@@ -83,8 +108,13 @@ func checkClauseAllowedness(c *ast.Clause) []Diagnostic {
 	allVars := map[string]token.Span{}
 	collectAllVars(c, allVars)
 
-	var diags []Diagnostic
-	for name, span := range allVars {
+	names := make([]string, 0, len(allVars))
+	for name := range allVars {
+		names = append(names, name)
+	}
+	sort.Strings(names)
+	for _, name := range names {
+		span := allVars[name]
 		if !g[name] {
 			diags = append(diags, Diagnostic{
 				Span: span, Category: Allowedness,
@@ -114,17 +144,7 @@ func groundBareSide(side, other ast.Arith, g map[string]bool) bool {
 // grounded in g. A constant-only expression (no vars at all) is
 // vacuously true.
 func varsSubsetOf(a ast.Arith, g map[string]bool) bool {
-	switch v := a.(type) {
-	case *ast.Var:
-		return g[v.Name]
-	case *ast.NumberLit, *ast.StringLit:
-		return true
-	case *ast.BinaryExpr:
-		return varsSubsetOf(v.Left, g) && varsSubsetOf(v.Right, g)
-	case *ast.UnaryExpr:
-		return varsSubsetOf(v.X, g)
-	}
-	return true
+	return plan.ArithBound(a, g)
 }
 
 // collectVars adds every Var name reachable inside term to into,

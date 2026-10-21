@@ -1,0 +1,495 @@
+{
+ "root": {
+  "program": {
+   "configuration": {
+    "": "/root/compiler/measurements/final-2026-10-20/integrated-compaction/culprit_n20/guarded.dl",
+    "fact-dir": "/root/compiler/fixtures/benchmark-family/culprit_cycle/n20",
+    "include-dir": ".",
+    "jobs": "1",
+    "libraries": "functors",
+    "library-dir": ".",
+    "output-dir": "/root/compiler/measurements/final-2026-10-20/integrated-compaction/culprit_n20/guarded",
+    "profile": "/root/compiler/measurements/final-2026-10-20/integrated-compaction/culprit_n20/guarded/profile.json",
+    "relationCount": "7",
+    "ruleCount": "10",
+    "version": "2.5",
+    "warn": "all",
+    "wno": "none"
+   },
+   "relation": {
+    "base": {
+     "loadtime": { "start": 145462825100, "end": 145462825221},
+     "num-tuples": 30,
+     "reads": 0,
+     "source-locator": "/root/compiler/measurements/final-2026-10-20/integrated-compaction/culprit_n20/guarded.dl [1:7-1:11]"
+    },
+    "blocked": {
+     "loadtime": { "start": 145462825232, "end": 145462825264},
+     "num-tuples": 4,
+     "reads": 236,
+     "source-locator": "/root/compiler/measurements/final-2026-10-20/integrated-compaction/culprit_n20/guarded.dl [5:7-5:14]"
+    },
+    "e": {
+     "loadtime": { "start": 145462825274, "end": 145462825295},
+     "num-tuples": 31,
+     "reads": 0,
+     "source-locator": "/root/compiler/measurements/final-2026-10-20/integrated-compaction/culprit_n20/guarded.dl [3:7-3:8]"
+    },
+    "out": {
+     "maxRSS": {
+      "post": 25952,
+      "pre": 25952
+     },
+     "non-recursive-rule": {
+      "out(y) :- \n   p(1,y).": {
+       "atom-frequency": {
+        "out(y) :- \n   p(1,y).": {
+         "p": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 25952,
+        "pre": 25952
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 145462825965, "end": 145462825967},
+       "source-locator": "/root/compiler/measurements/final-2026-10-20/integrated-compaction/culprit_n20/guarded.dl [17:1-17:19]"
+      }
+     },
+     "num-tuples": 1,
+     "reads": 0,
+     "runtime": { "start": 145462825965, "end": 145462825977},
+     "savetime": { "start": 145462825984, "end": 145462826088},
+     "source-locator": "/root/compiler/measurements/final-2026-10-20/integrated-compaction/culprit_n20/guarded.dl [10:7-10:10]"
+    },
+    "p": {
+     "iteration": {
+      "0": {
+       "maxRSS": {
+        "post": 25952,
+        "pre": 25952
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "p(x,y) :- \n   p(x,z),\n   !s(z),\n   q(z,y).": {
+         "0": {
+          "atom-frequency": {
+           "@new_p(x,y) :- \n   @delta_p(x,z),\n   !s(z),\n   q(z,y).": {
+            "@delta_p": {
+             "level": 0,
+             "num-tuples": 0
+            },
+            "q": {
+             "level": 1,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 25952,
+           "pre": 25952
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 145462825926, "end": 145462825930},
+          "source-locator": "/root/compiler/measurements/final-2026-10-20/integrated-compaction/culprit_n20/guarded.dl [13:1-13:36]"
+         }
+        }
+       },
+       "runtime": { "start": 145462825925, "end": 145462825939}
+      }
+     },
+     "maxRSS": {
+      "post": 25952,
+      "pre": 25952
+     },
+     "non-recursive-rule": {
+      "p(x,y) :- \n   e(x,y).": {
+       "atom-frequency": {
+        "p(x,y) :- \n   e(x,y).": {
+         "e": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 25952,
+        "pre": 25952
+       },
+       "num-tuples": 31,
+       "runtime": { "start": 145462825903, "end": 145462825906},
+       "source-locator": "/root/compiler/measurements/final-2026-10-20/integrated-compaction/culprit_n20/guarded.dl [12:1-12:20]"
+      }
+     },
+     "num-tuples": 31,
+     "reads": 0,
+     "runtime": { "start": 145462825891, "end": 145462825917},
+     "source-locator": "/root/compiler/measurements/final-2026-10-20/integrated-compaction/culprit_n20/guarded.dl [9:7-9:8]"
+    },
+    "q": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 145462825428, "end": 145462825434},
+       "maxRSS": {
+        "post": 25952,
+        "pre": 25952
+       },
+       "num-tuples": 40,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "atom-frequency": {
+           "@new_q(x,y) :- \n   @delta_q(x,z),\n   base(z,y).": {
+            "@delta_q": {
+             "level": 0,
+             "num-tuples": 0
+            },
+            "base": {
+             "level": 1,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 25952,
+           "pre": 25952
+          },
+          "num-tuples": 40,
+          "runtime": { "start": 145462825364, "end": 145462825388},
+          "source-locator": "/root/compiler/measurements/final-2026-10-20/integrated-compaction/culprit_n20/guarded.dl [15:1-15:32]"
+         }
+        }
+       },
+       "runtime": { "start": 145462825352, "end": 145462825401}
+      },
+      "1": {
+       "copytime": { "start": 145462825491, "end": 145462825497},
+       "maxRSS": {
+        "post": 25952,
+        "pre": 25952
+       },
+       "num-tuples": 48,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 25952,
+           "pre": 25952
+          },
+          "num-tuples": 48,
+          "runtime": { "start": 145462825440, "end": 145462825456},
+          "source-locator": "/root/compiler/measurements/final-2026-10-20/integrated-compaction/culprit_n20/guarded.dl [15:1-15:32]"
+         }
+        }
+       },
+       "runtime": { "start": 145462825440, "end": 145462825465}
+      },
+      "2": {
+       "copytime": { "start": 145462825553, "end": 145462825559},
+       "maxRSS": {
+        "post": 25952,
+        "pre": 25952
+       },
+       "num-tuples": 37,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 25952,
+           "pre": 25952
+          },
+          "num-tuples": 37,
+          "runtime": { "start": 145462825503, "end": 145462825519},
+          "source-locator": "/root/compiler/measurements/final-2026-10-20/integrated-compaction/culprit_n20/guarded.dl [15:1-15:32]"
+         }
+        }
+       },
+       "runtime": { "start": 145462825502, "end": 145462825529}
+      },
+      "3": {
+       "copytime": { "start": 145462825611, "end": 145462825616},
+       "maxRSS": {
+        "post": 25952,
+        "pre": 25952
+       },
+       "num-tuples": 26,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 25952,
+           "pre": 25952
+          },
+          "num-tuples": 26,
+          "runtime": { "start": 145462825565, "end": 145462825578},
+          "source-locator": "/root/compiler/measurements/final-2026-10-20/integrated-compaction/culprit_n20/guarded.dl [15:1-15:32]"
+         }
+        }
+       },
+       "runtime": { "start": 145462825564, "end": 145462825586}
+      },
+      "4": {
+       "copytime": { "start": 145462825663, "end": 145462825668},
+       "maxRSS": {
+        "post": 25952,
+        "pre": 25952
+       },
+       "num-tuples": 20,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 25952,
+           "pre": 25952
+          },
+          "num-tuples": 20,
+          "runtime": { "start": 145462825621, "end": 145462825630},
+          "source-locator": "/root/compiler/measurements/final-2026-10-20/integrated-compaction/culprit_n20/guarded.dl [15:1-15:32]"
+         }
+        }
+       },
+       "runtime": { "start": 145462825620, "end": 145462825638}
+      },
+      "5": {
+       "copytime": { "start": 145462825716, "end": 145462825719},
+       "maxRSS": {
+        "post": 25952,
+        "pre": 25952
+       },
+       "num-tuples": 15,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 25952,
+           "pre": 25952
+          },
+          "num-tuples": 15,
+          "runtime": { "start": 145462825674, "end": 145462825682},
+          "source-locator": "/root/compiler/measurements/final-2026-10-20/integrated-compaction/culprit_n20/guarded.dl [15:1-15:32]"
+         }
+        }
+       },
+       "runtime": { "start": 145462825673, "end": 145462825691}
+      },
+      "6": {
+       "copytime": { "start": 145462825766, "end": 145462825770},
+       "maxRSS": {
+        "post": 25952,
+        "pre": 25952
+       },
+       "num-tuples": 15,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 25952,
+           "pre": 25952
+          },
+          "num-tuples": 15,
+          "runtime": { "start": 145462825725, "end": 145462825732},
+          "source-locator": "/root/compiler/measurements/final-2026-10-20/integrated-compaction/culprit_n20/guarded.dl [15:1-15:32]"
+         }
+        }
+       },
+       "runtime": { "start": 145462825724, "end": 145462825741}
+      },
+      "7": {
+       "copytime": { "start": 145462825816, "end": 145462825819},
+       "maxRSS": {
+        "post": 25952,
+        "pre": 25952
+       },
+       "num-tuples": 5,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 25952,
+           "pre": 25952
+          },
+          "num-tuples": 5,
+          "runtime": { "start": 145462825776, "end": 145462825782},
+          "source-locator": "/root/compiler/measurements/final-2026-10-20/integrated-compaction/culprit_n20/guarded.dl [15:1-15:32]"
+         }
+        }
+       },
+       "runtime": { "start": 145462825776, "end": 145462825792}
+      },
+      "8": {
+       "maxRSS": {
+        "post": 25952,
+        "pre": 25952
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 25952,
+           "pre": 25952
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 145462825824, "end": 145462825827},
+          "source-locator": "/root/compiler/measurements/final-2026-10-20/integrated-compaction/culprit_n20/guarded.dl [15:1-15:32]"
+         }
+        }
+       },
+       "runtime": { "start": 145462825824, "end": 145462825836}
+      }
+     },
+     "maxRSS": {
+      "post": 25952,
+      "pre": 25952
+     },
+     "non-recursive-rule": {
+      "q(x,y) :- \n   base(x,y).": {
+       "atom-frequency": {
+        "q(x,y) :- \n   base(x,y).": {
+         "base": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 25952,
+        "pre": 25952
+       },
+       "num-tuples": 30,
+       "runtime": { "start": 145462825321, "end": 145462825330},
+       "source-locator": "/root/compiler/measurements/final-2026-10-20/integrated-compaction/culprit_n20/guarded.dl [14:1-14:23]"
+      }
+     },
+     "num-tuples": 30,
+     "reads": 345,
+     "runtime": { "start": 145462825302, "end": 145462825341},
+     "source-locator": "/root/compiler/measurements/final-2026-10-20/integrated-compaction/culprit_n20/guarded.dl [7:7-7:8]"
+    },
+    "s": {
+     "maxRSS": {
+      "post": 25952,
+      "pre": 25952
+     },
+     "non-recursive-rule": {
+      "s(x) :- \n   q(x,y),\n   blocked(y).": {
+       "atom-frequency": {
+        "s(x) :- \n   q(x,y),\n   blocked(y).": {
+         "q": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 25952,
+        "pre": 25952
+       },
+       "num-tuples": 18,
+       "runtime": { "start": 145462825862, "end": 145462825875},
+       "source-locator": "/root/compiler/measurements/final-2026-10-20/integrated-compaction/culprit_n20/guarded.dl [16:1-16:29]"
+      }
+     },
+     "num-tuples": 18,
+     "reads": 31,
+     "runtime": { "start": 145462825862, "end": 145462825885},
+     "source-locator": "/root/compiler/measurements/final-2026-10-20/integrated-compaction/culprit_n20/guarded.dl [8:7-8:8]"
+    }
+   },
+   "runtime": { "start": 145462825091, "end": 145462826094},
+   "starttime": { "time": 145462825043},
+   "usage": {
+    "timepoint": {
+     "145462825069": {
+      "maxRSS": 25952,
+      "systemtime": 0,
+      "usertime": 3596
+     },
+     "145462825265": {
+      "maxRSS": 25952,
+      "systemtime": 0,
+      "usertime": 4891
+     },
+     "145462825277": {
+      "maxRSS": 25952,
+      "systemtime": 0,
+      "usertime": 4913
+     },
+     "145462825337": {
+      "maxRSS": 25952,
+      "systemtime": 0,
+      "usertime": 4982
+     },
+     "145462825379": {
+      "maxRSS": 25952,
+      "systemtime": 0,
+      "usertime": 5033
+     },
+     "145462825436": {
+      "maxRSS": 25952,
+      "systemtime": 0,
+      "usertime": 5118
+     },
+     "145462825498": {
+      "maxRSS": 25952,
+      "systemtime": 0,
+      "usertime": 5198
+     },
+     "145462825563": {
+      "maxRSS": 25952,
+      "systemtime": 0,
+      "usertime": 5283
+     },
+     "145462825619": {
+      "maxRSS": 25952,
+      "systemtime": 0,
+      "usertime": 5357
+     },
+     "145462825671": {
+      "maxRSS": 25952,
+      "systemtime": 0,
+      "usertime": 5425
+     },
+     "145462825724": {
+      "maxRSS": 25952,
+      "systemtime": 0,
+      "usertime": 5492
+     },
+     "145462825773": {
+      "maxRSS": 25952,
+      "systemtime": 0,
+      "usertime": 5559
+     },
+     "145462825824": {
+      "maxRSS": 25952,
+      "systemtime": 0,
+      "usertime": 5630
+     },
+     "145462825868": {
+      "maxRSS": 25952,
+      "systemtime": 0,
+      "usertime": 5684
+     },
+     "145462825919": {
+      "maxRSS": 25952,
+      "systemtime": 0,
+      "usertime": 5762
+     },
+     "145462825971": {
+      "maxRSS": 25952,
+      "systemtime": 0,
+      "usertime": 5829
+     },
+     "145462826011": {
+      "maxRSS": 25952,
+      "systemtime": 0,
+      "usertime": 5863
+     }
+    }
+   }
+  }
+ }
+}

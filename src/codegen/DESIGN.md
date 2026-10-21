@@ -1,3 +1,10 @@
+> Pass-one maintenance: the CLI can now feed guarded, revalidated ASTs into
+> this backend. I/O now uses dynamic lines/exact column counts and checked int64
+> parsing; zero-arity output uses Souffle's `()` encoding. Generated arithmetic
+> matches Go wrapping semantics and skips division/modulo-by-zero derivations.
+> See `docs/07-pass1-review.md` for the verified boundary. Historical design
+> discussion below predates these fixes where stated otherwise.
+
 # package codegen
 
 Emits a standalone C program from an already-checked `*ast.Program` --
@@ -57,23 +64,18 @@ codegen (`emitAtomJoin`) walks the hash bucket's linked list directly
 inline instead of through any intermediate buffer, so there is no size
 bound to exceed regardless of relation size.
 
-**`safeOrderForCodegen` duplicates `eval.safeOrder`'s algorithm rather
-than importing/exporting it.** Both need the identical greedy
-literal-reordering logic (a negated atom or a grounding-role constraint
-schedules only once every variable it needs is already bound; a positive
-atom is always immediately schedulable) for the identical reason (naive
-left-to-right evaluation order is not what allowedness's fixpoint,
-`sema/DESIGN.md`, guarantees). Exporting `eval`'s version was considered
-and rejected: `codegen` operates on `ast.Literal`/`ast.Term` directly to
-emit *text*, not to build Go-side bindings the way `eval.evalBody` does,
-so the two callers' actual needs diverge past the shared reordering
-step, and forcing one shared exported function to serve both would
-couple two otherwise-independent packages for a ~30-line algorithm. The
-duplication is small and disclosed here rather than hidden.
+**Body scheduling is shared through `src/plan`.** The C emitter, Go evaluators
+and SIPS retain stable scheduling for executable source bodies. A stalled
+arithmetic-column cycle becomes fresh column variables and deferred equality
+filters. Codegen infers types from the actual planned body, so fresh variables
+have valid schema types. Missing bindings fail explicitly; division/modulo-zero
+continues to filter the derivation. See `docs/09-review2.md`.
 
-**Head-position `Wildcard` gets the same fixed-value fallback as
-`eval.buildTuple`** (`groundExprTerm` emits `"0"`) — same reasoning,
-`eval/DESIGN.md`: real Soufflé rejects this construct outright and sema
-doesn't check for it yet; codegen degrades to "compiles and produces a
-wrong-but-harmless tuple" rather than emitting invalid C or crashing the
-generator.
+**Head-position `Wildcard` is rejected before code generation.**
+`CheckAllowedness` now diagnoses this unsupported construct. Callers bypassing the checked CLI pipeline receive an explicit invariant
+failure for unsupported head terms instead of a generated zero.
+
+`GenerateWithReport` adds comments linking emitted clauses to transform-owned
+roles/source-rule IDs. The CLI also includes the exact source SHA-256 and selected
+mode. Comments provide provenance, not a second compilation path. The actual
+resulting schemas/strata are validated before both guarded and compact C emission.

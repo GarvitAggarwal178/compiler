@@ -67,23 +67,16 @@ func TestInputOutputEmptyParensAccepted(t *testing.T) {
 	}
 }
 
-func TestInputOutputNonEmptyParensDiscarded(t *testing.T) {
-	// Real Souffle also allows I/O directive options inside the parens
-	// (e.g. filename="x.csv") -- this grammar has no such concept, so the
-	// content must be skipped, not merely tolerated when empty.
-	prog := mustParse(t, `.decl p(a:number)
+func TestInputOutputOptionsRejected(t *testing.T) {
+	for _, source := range []string{
+		`.decl p(a:number)
 .input p(IO=file, filename="x.csv")
 p(1).
-`)
-	if len(prog.Decls) != 2 || prog.Decls[1].Kind != ast.DeclInput || prog.Decls[1].Name != "p" {
-		t.Fatalf("expected DeclInput p with options discarded, got %+v", prog.Decls)
-	}
-}
-
-func TestInputOutputNestedParensBalanced(t *testing.T) {
-	prog := mustParse(t, ".decl p(a:number)\n.input p(x=(1+2))\np(1).\n")
-	if len(prog.Decls) != 2 {
-		t.Fatalf("expected 2 decls, got %+v", prog.Decls)
+`, ".decl p(a:number)\n.input p(x=(1+2))\np(1).\n",
+	} {
+		if _, errs := Parse([]byte(source)); len(errs) == 0 {
+			t.Fatal("unsupported I/O options must be diagnosed")
+		}
 	}
 }
 

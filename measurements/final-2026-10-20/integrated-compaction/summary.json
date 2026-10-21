@@ -1,0 +1,2266 @@
+{
+  "mode": "integrated guarded-compact",
+  "oracle_available": true,
+  "benchmarks": [
+    {
+      "case": "reachability_n250",
+      "source": "tests/corpus/BENCHMARK_FAMILY/reachability_complement.dl",
+      "facts": "fixtures/p2-scale-250",
+      "oracle_checked": true,
+      "T_original": 62534,
+      "T_guarded": 974,
+      "T_compact": 752,
+      "go_work": {
+        "passthrough/run": {
+          "materialized": 62534,
+          "attempts": 1786767,
+          "per_relation": {
+            "edge": 0,
+            "node": 0,
+            "q_unreach": 34,
+            "reach": 44742,
+            "unreach": 17758
+          }
+        },
+        "passthrough/run-seminaive": {
+          "materialized": 62534,
+          "attempts": 110237,
+          "per_relation": {
+            "edge": 0,
+            "node": 0,
+            "q_unreach": 34,
+            "reach": 44742,
+            "unreach": 17758
+          }
+        },
+        "guarded/run": {
+          "materialized": 1011,
+          "attempts": 14441,
+          "per_relation": {
+            "edge": 0,
+            "magic_reach_bf": 1,
+            "magic_unreach_bf": 1,
+            "node": 0,
+            "q_unreach": 34,
+            "reach": 0,
+            "reach_bf": 216,
+            "sup_reach_bf_r0_0": 1,
+            "sup_reach_bf_r0_1": 5,
+            "sup_reach_bf_r1_0": 1,
+            "sup_reach_bf_r1_1": 216,
+            "sup_reach_bf_r1_2": 216,
+            "sup_unreach_bf_r0_0": 1,
+            "sup_unreach_bf_r0_1": 1,
+            "sup_unreach_bf_r0_2": 250,
+            "sup_unreach_bf_r0_3": 34,
+            "unreach": 0,
+            "unreach_bf": 34
+          }
+        },
+        "guarded/run-seminaive": {
+          "materialized": 1011,
+          "attempts": 1494,
+          "per_relation": {
+            "edge": 0,
+            "magic_reach_bf": 1,
+            "magic_unreach_bf": 1,
+            "node": 0,
+            "q_unreach": 34,
+            "reach": 0,
+            "reach_bf": 216,
+            "sup_reach_bf_r0_0": 1,
+            "sup_reach_bf_r0_1": 5,
+            "sup_reach_bf_r1_0": 1,
+            "sup_reach_bf_r1_1": 216,
+            "sup_reach_bf_r1_2": 216,
+            "sup_unreach_bf_r0_0": 1,
+            "sup_unreach_bf_r0_1": 1,
+            "sup_unreach_bf_r0_2": 250,
+            "sup_unreach_bf_r0_3": 34,
+            "unreach": 0,
+            "unreach_bf": 34
+          }
+        },
+        "guarded-compact/run": {
+          "materialized": 752,
+          "attempts": 11280,
+          "per_relation": {
+            "edge": 0,
+            "magic_reach_bf": 1,
+            "magic_unreach_bf": 1,
+            "node": 0,
+            "q_unreach": 34,
+            "reach": 0,
+            "reach_bf": 216,
+            "sup_reach_bf_r1_2": 216,
+            "sup_unreach_bf_r0_2": 250,
+            "unreach": 0,
+            "unreach_bf": 34
+          }
+        },
+        "guarded-compact/run-seminaive": {
+          "materialized": 752,
+          "attempts": 1235,
+          "per_relation": {
+            "edge": 0,
+            "magic_reach_bf": 1,
+            "magic_unreach_bf": 1,
+            "node": 0,
+            "q_unreach": 34,
+            "reach": 0,
+            "reach_bf": 216,
+            "sup_reach_bf_r1_2": 216,
+            "sup_unreach_bf_r0_2": 250,
+            "unreach": 0,
+            "unreach_bf": 34
+          }
+        }
+      },
+      "compaction_actions": [
+        {
+          "source_rule_id": "rule_2",
+          "relation": "sup_unreach_bf_r0_0",
+          "action": "remove",
+          "reason": "exact identity alias",
+          "definition_id": "checkpoint_step/sup_unreach_bf_r0_0/rule_2/",
+          "consumer_ids": [
+            "checkpoint_step/sup_unreach_bf_r0_1/rule_2/rule_2/body_0"
+          ]
+        },
+        {
+          "source_rule_id": "rule_2",
+          "relation": "sup_unreach_bf_r0_1",
+          "action": "remove",
+          "reason": "projection-preserving single positive use",
+          "definition_id": "checkpoint_step/sup_unreach_bf_r0_1/rule_2/rule_2/body_0",
+          "consumer_ids": [
+            "checkpoint_step/sup_unreach_bf_r0_2/rule_2/rule_2/body_1"
+          ]
+        },
+        {
+          "source_rule_id": "rule_2",
+          "relation": "sup_unreach_bf_r0_3",
+          "action": "remove",
+          "reason": "projection-preserving single positive use",
+          "definition_id": "checkpoint_step/sup_unreach_bf_r0_3/rule_2/rule_2/body_2",
+          "consumer_ids": [
+            "specialized_result/unreach_bf/rule_2/"
+          ]
+        },
+        {
+          "source_rule_id": "rule_0",
+          "relation": "sup_reach_bf_r0_0",
+          "action": "remove",
+          "reason": "exact identity alias",
+          "definition_id": "checkpoint_step/sup_reach_bf_r0_0/rule_0/",
+          "consumer_ids": [
+            "checkpoint_step/sup_reach_bf_r0_1/rule_0/rule_0/body_0"
+          ]
+        },
+        {
+          "source_rule_id": "rule_0",
+          "relation": "sup_reach_bf_r0_1",
+          "action": "remove",
+          "reason": "projection-preserving single positive use",
+          "definition_id": "checkpoint_step/sup_reach_bf_r0_1/rule_0/rule_0/body_0",
+          "consumer_ids": [
+            "specialized_result/reach_bf/rule_0/"
+          ]
+        },
+        {
+          "source_rule_id": "rule_1",
+          "relation": "sup_reach_bf_r1_0",
+          "action": "remove",
+          "reason": "exact identity alias",
+          "definition_id": "checkpoint_step/sup_reach_bf_r1_0/rule_1/",
+          "consumer_ids": [
+            "checkpoint_step/sup_reach_bf_r1_1/rule_1/rule_1/body_0",
+            "demand_propagation/magic_reach_bf/rule_1/rule_1/body_0"
+          ]
+        },
+        {
+          "source_rule_id": "rule_1",
+          "relation": "sup_reach_bf_r1_1",
+          "action": "remove",
+          "reason": "projection-preserving single positive use",
+          "definition_id": "checkpoint_step/sup_reach_bf_r1_1/rule_1/rule_1/body_0",
+          "consumer_ids": [
+            "checkpoint_step/sup_reach_bf_r1_2/rule_1/rule_1/body_1"
+          ]
+        },
+        {
+          "relation": "edge",
+          "action": "skip",
+          "reason": "source relation"
+        },
+        {
+          "relation": "node",
+          "action": "skip",
+          "reason": "source relation"
+        },
+        {
+          "relation": "reach",
+          "action": "skip",
+          "reason": "source relation"
+        },
+        {
+          "relation": "unreach",
+          "action": "skip",
+          "reason": "source relation"
+        },
+        {
+          "relation": "q_unreach",
+          "action": "skip",
+          "reason": "source relation"
+        },
+        {
+          "relation": "magic_unreach_bf",
+          "action": "skip",
+          "reason": "not a generated checkpoint"
+        },
+        {
+          "relation": "sup_unreach_bf_r0_2",
+          "action": "skip",
+          "reason": "shared or unused non-alias"
+        },
+        {
+          "relation": "magic_reach_bf",
+          "action": "skip",
+          "reason": "not a generated checkpoint"
+        },
+        {
+          "relation": "unreach_bf",
+          "action": "skip",
+          "reason": "not a generated checkpoint"
+        },
+        {
+          "relation": "reach_bf",
+          "action": "skip",
+          "reason": "not a generated checkpoint"
+        },
+        {
+          "relation": "sup_reach_bf_r1_2",
+          "action": "skip",
+          "reason": "existential projection preserves dedup barrier"
+        }
+      ],
+      "source_sha256": "a233c5236dfcdb4bd6e2a7851fd2bbd7a2d83e43f5305db0f1a51c92a8769252",
+      "fact_sha256": {
+        "edge.facts": "c172dbbaf3cb69e03b64cf6ac6258913f3c7eab49ccc4d97f5f5c7168ed8959a",
+        "node.facts": "8545afdd83c11ab6109351dac4510b5673f080d098ded1c098fd61202579e878"
+      },
+      "all_outputs_equal": true
+    },
+    {
+      "case": "ancestor_n500",
+      "source": "tests/corpus/BENCHMARK_FAMILY/ancestor_nonancestor.dl",
+      "facts": "fixtures/benchmark-family/ancestor_nonancestor/n500",
+      "oracle_checked": true,
+      "T_original": 250450,
+      "T_guarded": 6102,
+      "T_compact": 6101,
+      "go_work": {
+        "passthrough/run": {
+          "materialized": 250450,
+          "attempts": 1969412,
+          "per_relation": {
+            "ancestor": 100349,
+            "nonancestor": 149651,
+            "parent": 0,
+            "person": 0,
+            "q_nonancestor": 450
+          }
+        },
+        "passthrough/run-seminaive": {
+          "materialized": 250450,
+          "attempts": 318769,
+          "per_relation": {
+            "ancestor": 100349,
+            "nonancestor": 149651,
+            "parent": 0,
+            "person": 0,
+            "q_nonancestor": 450
+          }
+        },
+        "guarded/run": {
+          "materialized": 6802,
+          "attempts": 72487,
+          "per_relation": {
+            "ancestor": 0,
+            "ancestor_bf": 2251,
+            "magic_ancestor_bf": 50,
+            "magic_nonancestor_bf": 1,
+            "nonancestor": 0,
+            "nonancestor_bf": 450,
+            "parent": 0,
+            "person": 0,
+            "q_nonancestor": 450,
+            "sup_ancestor_bf_r0_0": 50,
+            "sup_ancestor_bf_r0_1": 149,
+            "sup_ancestor_bf_r1_0": 50,
+            "sup_ancestor_bf_r1_1": 149,
+            "sup_ancestor_bf_r1_2": 2250,
+            "sup_nonancestor_bf_r0_0": 1,
+            "sup_nonancestor_bf_r0_1": 1,
+            "sup_nonancestor_bf_r0_2": 500,
+            "sup_nonancestor_bf_r0_3": 450
+          }
+        },
+        "guarded/run-seminaive": {
+          "materialized": 6802,
+          "attempts": 11752,
+          "per_relation": {
+            "ancestor": 0,
+            "ancestor_bf": 2251,
+            "magic_ancestor_bf": 50,
+            "magic_nonancestor_bf": 1,
+            "nonancestor": 0,
+            "nonancestor_bf": 450,
+            "parent": 0,
+            "person": 0,
+            "q_nonancestor": 450,
+            "sup_ancestor_bf_r0_0": 50,
+            "sup_ancestor_bf_r0_1": 149,
+            "sup_ancestor_bf_r1_0": 50,
+            "sup_ancestor_bf_r1_1": 149,
+            "sup_ancestor_bf_r1_2": 2250,
+            "sup_nonancestor_bf_r0_0": 1,
+            "sup_nonancestor_bf_r0_1": 1,
+            "sup_nonancestor_bf_r0_2": 500,
+            "sup_nonancestor_bf_r0_3": 450
+          }
+        },
+        "guarded-compact/run": {
+          "materialized": 6101,
+          "attempts": 69414,
+          "per_relation": {
+            "ancestor": 0,
+            "ancestor_bf": 2251,
+            "magic_ancestor_bf": 50,
+            "magic_nonancestor_bf": 1,
+            "nonancestor": 0,
+            "nonancestor_bf": 450,
+            "parent": 0,
+            "person": 0,
+            "q_nonancestor": 450,
+            "sup_ancestor_bf_r1_1": 149,
+            "sup_ancestor_bf_r1_2": 2250,
+            "sup_nonancestor_bf_r0_2": 500
+          }
+        },
+        "guarded-compact/run-seminaive": {
+          "materialized": 6101,
+          "attempts": 11051,
+          "per_relation": {
+            "ancestor": 0,
+            "ancestor_bf": 2251,
+            "magic_ancestor_bf": 50,
+            "magic_nonancestor_bf": 1,
+            "nonancestor": 0,
+            "nonancestor_bf": 450,
+            "parent": 0,
+            "person": 0,
+            "q_nonancestor": 450,
+            "sup_ancestor_bf_r1_1": 149,
+            "sup_ancestor_bf_r1_2": 2250,
+            "sup_nonancestor_bf_r0_2": 500
+          }
+        }
+      },
+      "compaction_actions": [
+        {
+          "source_rule_id": "rule_2",
+          "relation": "sup_nonancestor_bf_r0_0",
+          "action": "remove",
+          "reason": "exact identity alias",
+          "definition_id": "checkpoint_step/sup_nonancestor_bf_r0_0/rule_2/",
+          "consumer_ids": [
+            "checkpoint_step/sup_nonancestor_bf_r0_1/rule_2/rule_2/body_0"
+          ]
+        },
+        {
+          "source_rule_id": "rule_2",
+          "relation": "sup_nonancestor_bf_r0_1",
+          "action": "remove",
+          "reason": "projection-preserving single positive use",
+          "definition_id": "checkpoint_step/sup_nonancestor_bf_r0_1/rule_2/rule_2/body_0",
+          "consumer_ids": [
+            "checkpoint_step/sup_nonancestor_bf_r0_2/rule_2/rule_2/body_1"
+          ]
+        },
+        {
+          "source_rule_id": "rule_2",
+          "relation": "sup_nonancestor_bf_r0_3",
+          "action": "remove",
+          "reason": "projection-preserving single positive use",
+          "definition_id": "checkpoint_step/sup_nonancestor_bf_r0_3/rule_2/rule_2/body_2",
+          "consumer_ids": [
+            "specialized_result/nonancestor_bf/rule_2/"
+          ]
+        },
+        {
+          "source_rule_id": "rule_0",
+          "relation": "sup_ancestor_bf_r0_0",
+          "action": "remove",
+          "reason": "exact identity alias",
+          "definition_id": "checkpoint_step/sup_ancestor_bf_r0_0/rule_0/",
+          "consumer_ids": [
+            "checkpoint_step/sup_ancestor_bf_r0_1/rule_0/rule_0/body_0"
+          ]
+        },
+        {
+          "source_rule_id": "rule_0",
+          "relation": "sup_ancestor_bf_r0_1",
+          "action": "remove",
+          "reason": "projection-preserving single positive use",
+          "definition_id": "checkpoint_step/sup_ancestor_bf_r0_1/rule_0/rule_0/body_0",
+          "consumer_ids": [
+            "specialized_result/ancestor_bf/rule_0/"
+          ]
+        },
+        {
+          "source_rule_id": "rule_1",
+          "relation": "sup_ancestor_bf_r1_0",
+          "action": "remove",
+          "reason": "exact identity alias",
+          "definition_id": "checkpoint_step/sup_ancestor_bf_r1_0/rule_1/",
+          "consumer_ids": [
+            "checkpoint_step/sup_ancestor_bf_r1_1/rule_1/rule_1/body_0"
+          ]
+        },
+        {
+          "relation": "parent",
+          "action": "skip",
+          "reason": "source relation"
+        },
+        {
+          "relation": "person",
+          "action": "skip",
+          "reason": "source relation"
+        },
+        {
+          "relation": "ancestor",
+          "action": "skip",
+          "reason": "source relation"
+        },
+        {
+          "relation": "nonancestor",
+          "action": "skip",
+          "reason": "source relation"
+        },
+        {
+          "relation": "q_nonancestor",
+          "action": "skip",
+          "reason": "source relation"
+        },
+        {
+          "relation": "magic_nonancestor_bf",
+          "action": "skip",
+          "reason": "not a generated checkpoint"
+        },
+        {
+          "relation": "sup_nonancestor_bf_r0_2",
+          "action": "skip",
+          "reason": "shared or unused non-alias"
+        },
+        {
+          "relation": "magic_ancestor_bf",
+          "action": "skip",
+          "reason": "not a generated checkpoint"
+        },
+        {
+          "relation": "nonancestor_bf",
+          "action": "skip",
+          "reason": "not a generated checkpoint"
+        },
+        {
+          "relation": "ancestor_bf",
+          "action": "skip",
+          "reason": "not a generated checkpoint"
+        },
+        {
+          "relation": "sup_ancestor_bf_r1_1",
+          "action": "skip",
+          "reason": "shared or unused non-alias"
+        },
+        {
+          "relation": "sup_ancestor_bf_r1_2",
+          "action": "skip",
+          "reason": "existential projection preserves dedup barrier"
+        }
+      ],
+      "source_sha256": "5e0c0e80d38a8e89eced416aedc69a336cf4458c9544282fc63034db9e0bc644",
+      "fact_sha256": {
+        "parent.facts": "5412fee7e507e66469e541cb603316c32ed6f3256b07e1d718e06676f86e5833",
+        "person.facts": "e198818c87e533b7ab0c72b1ccf0888c7a849d936e10ced3fa3be16544deaf2c"
+      },
+      "all_outputs_equal": true
+    },
+    {
+      "case": "same_generation_d4",
+      "source": "tests/corpus/BENCHMARK_FAMILY/same_generation_negation.dl",
+      "facts": "fixtures/benchmark-family/same_generation_negation/d4_b4",
+      "oracle_checked": true,
+      "T_original": 51301,
+      "T_guarded": 681,
+      "T_compact": 679,
+      "go_work": {
+        "passthrough/run": {
+          "materialized": 51301,
+          "attempts": 102602,
+          "per_relation": {
+            "notsg": 20620,
+            "parent": 0,
+            "person": 0,
+            "q_notsg": 225,
+            "sg": 30456
+          }
+        },
+        "passthrough/run-seminaive": {
+          "materialized": 51301,
+          "attempts": 51301,
+          "per_relation": {
+            "notsg": 20620,
+            "parent": 0,
+            "person": 0,
+            "q_notsg": 225,
+            "sg": 30456
+          }
+        },
+        "guarded/run": {
+          "materialized": 909,
+          "attempts": 2269,
+          "per_relation": {
+            "magic_notsg_bf": 1,
+            "magic_sg_bb": 0,
+            "magic_sg_bf": 1,
+            "notsg": 0,
+            "notsg_bf": 225,
+            "parent": 0,
+            "person": 0,
+            "q_notsg": 225,
+            "sg": 0,
+            "sg_bb": 0,
+            "sg_bf": 1,
+            "sup_notsg_bf_r0_0": 1,
+            "sup_notsg_bf_r0_1": 1,
+            "sup_notsg_bf_r0_2": 226,
+            "sup_notsg_bf_r0_3": 225,
+            "sup_sg_bb_r0_0": 0,
+            "sup_sg_bb_r0_1": 0,
+            "sup_sg_bb_r1_0": 0,
+            "sup_sg_bb_r1_1": 0,
+            "sup_sg_bb_r1_2": 0,
+            "sup_sg_bb_r1_3": 0,
+            "sup_sg_bb_r1_4": 0,
+            "sup_sg_bf_r0_0": 1,
+            "sup_sg_bf_r0_1": 1,
+            "sup_sg_bf_r1_0": 1,
+            "sup_sg_bf_r1_1": 0,
+            "sup_sg_bf_r1_2": 0,
+            "sup_sg_bf_r1_3": 0,
+            "sup_sg_bf_r1_4": 0
+          }
+        },
+        "guarded/run-seminaive": {
+          "materialized": 909,
+          "attempts": 1134,
+          "per_relation": {
+            "magic_notsg_bf": 1,
+            "magic_sg_bb": 0,
+            "magic_sg_bf": 1,
+            "notsg": 0,
+            "notsg_bf": 225,
+            "parent": 0,
+            "person": 0,
+            "q_notsg": 225,
+            "sg": 0,
+            "sg_bb": 0,
+            "sg_bf": 1,
+            "sup_notsg_bf_r0_0": 1,
+            "sup_notsg_bf_r0_1": 1,
+            "sup_notsg_bf_r0_2": 226,
+            "sup_notsg_bf_r0_3": 225,
+            "sup_sg_bb_r0_0": 0,
+            "sup_sg_bb_r0_1": 0,
+            "sup_sg_bb_r1_0": 0,
+            "sup_sg_bb_r1_1": 0,
+            "sup_sg_bb_r1_2": 0,
+            "sup_sg_bb_r1_3": 0,
+            "sup_sg_bb_r1_4": 0,
+            "sup_sg_bf_r0_0": 1,
+            "sup_sg_bf_r0_1": 1,
+            "sup_sg_bf_r1_0": 1,
+            "sup_sg_bf_r1_1": 0,
+            "sup_sg_bf_r1_2": 0,
+            "sup_sg_bf_r1_3": 0,
+            "sup_sg_bf_r1_4": 0
+          }
+        },
+        "guarded-compact/run": {
+          "materialized": 679,
+          "attempts": 1809,
+          "per_relation": {
+            "magic_notsg_bf": 1,
+            "magic_sg_bb": 0,
+            "magic_sg_bf": 1,
+            "notsg": 0,
+            "notsg_bf": 225,
+            "parent": 0,
+            "person": 0,
+            "q_notsg": 225,
+            "sg": 0,
+            "sg_bb": 0,
+            "sg_bf": 1,
+            "sup_notsg_bf_r0_2": 226,
+            "sup_sg_bb_r1_2": 0,
+            "sup_sg_bb_r1_3": 0,
+            "sup_sg_bf_r1_2": 0,
+            "sup_sg_bf_r1_3": 0
+          }
+        },
+        "guarded-compact/run-seminaive": {
+          "materialized": 679,
+          "attempts": 904,
+          "per_relation": {
+            "magic_notsg_bf": 1,
+            "magic_sg_bb": 0,
+            "magic_sg_bf": 1,
+            "notsg": 0,
+            "notsg_bf": 225,
+            "parent": 0,
+            "person": 0,
+            "q_notsg": 225,
+            "sg": 0,
+            "sg_bb": 0,
+            "sg_bf": 1,
+            "sup_notsg_bf_r0_2": 226,
+            "sup_sg_bb_r1_2": 0,
+            "sup_sg_bb_r1_3": 0,
+            "sup_sg_bf_r1_2": 0,
+            "sup_sg_bf_r1_3": 0
+          }
+        }
+      },
+      "compaction_actions": [
+        {
+          "source_rule_id": "rule_2",
+          "relation": "sup_notsg_bf_r0_0",
+          "action": "remove",
+          "reason": "exact identity alias",
+          "definition_id": "checkpoint_step/sup_notsg_bf_r0_0/rule_2/",
+          "consumer_ids": [
+            "checkpoint_step/sup_notsg_bf_r0_1/rule_2/rule_2/body_0"
+          ]
+        },
+        {
+          "source_rule_id": "rule_2",
+          "relation": "sup_notsg_bf_r0_1",
+          "action": "remove",
+          "reason": "projection-preserving single positive use",
+          "definition_id": "checkpoint_step/sup_notsg_bf_r0_1/rule_2/rule_2/body_0",
+          "consumer_ids": [
+            "checkpoint_step/sup_notsg_bf_r0_2/rule_2/rule_2/body_1"
+          ]
+        },
+        {
+          "source_rule_id": "rule_2",
+          "relation": "sup_notsg_bf_r0_3",
+          "action": "remove",
+          "reason": "projection-preserving single positive use",
+          "definition_id": "checkpoint_step/sup_notsg_bf_r0_3/rule_2/rule_2/body_2",
+          "consumer_ids": [
+            "specialized_result/notsg_bf/rule_2/"
+          ]
+        },
+        {
+          "source_rule_id": "rule_0",
+          "relation": "sup_sg_bf_r0_0",
+          "action": "remove",
+          "reason": "exact identity alias",
+          "definition_id": "checkpoint_step/sup_sg_bf_r0_0/rule_0/",
+          "consumer_ids": [
+            "checkpoint_step/sup_sg_bf_r0_1/rule_0/rule_0/body_0"
+          ]
+        },
+        {
+          "source_rule_id": "rule_0",
+          "relation": "sup_sg_bf_r0_1",
+          "action": "remove",
+          "reason": "projection-preserving single positive use",
+          "definition_id": "checkpoint_step/sup_sg_bf_r0_1/rule_0/rule_0/body_0",
+          "consumer_ids": [
+            "specialized_result/sg_bf/rule_0/"
+          ]
+        },
+        {
+          "source_rule_id": "rule_1",
+          "relation": "sup_sg_bf_r1_0",
+          "action": "remove",
+          "reason": "exact identity alias",
+          "definition_id": "checkpoint_step/sup_sg_bf_r1_0/rule_1/",
+          "consumer_ids": [
+            "checkpoint_step/sup_sg_bf_r1_1/rule_1/rule_1/body_0"
+          ]
+        },
+        {
+          "source_rule_id": "rule_1",
+          "relation": "sup_sg_bf_r1_1",
+          "action": "remove",
+          "reason": "projection-preserving single positive use",
+          "definition_id": "checkpoint_step/sup_sg_bf_r1_1/rule_1/rule_1/body_0",
+          "consumer_ids": [
+            "checkpoint_step/sup_sg_bf_r1_2/rule_1/rule_1/body_1"
+          ]
+        },
+        {
+          "source_rule_id": "rule_1",
+          "relation": "sup_sg_bf_r1_4",
+          "action": "remove",
+          "reason": "projection-preserving single positive use",
+          "definition_id": "checkpoint_step/sup_sg_bf_r1_4/rule_1/rule_1/body_3",
+          "consumer_ids": [
+            "specialized_result/sg_bf/rule_1/"
+          ]
+        },
+        {
+          "source_rule_id": "rule_0",
+          "relation": "sup_sg_bb_r0_0",
+          "action": "remove",
+          "reason": "projection-preserving single positive use",
+          "definition_id": "checkpoint_step/sup_sg_bb_r0_0/rule_0/",
+          "consumer_ids": [
+            "checkpoint_step/sup_sg_bb_r0_1/rule_0/rule_0/body_0"
+          ]
+        },
+        {
+          "source_rule_id": "rule_0",
+          "relation": "sup_sg_bb_r0_1",
+          "action": "remove",
+          "reason": "projection-preserving single positive use",
+          "definition_id": "checkpoint_step/sup_sg_bb_r0_1/rule_0/rule_0/body_0",
+          "consumer_ids": [
+            "specialized_result/sg_bb/rule_0/"
+          ]
+        },
+        {
+          "source_rule_id": "rule_1",
+          "relation": "sup_sg_bb_r1_0",
+          "action": "remove",
+          "reason": "exact identity alias",
+          "definition_id": "checkpoint_step/sup_sg_bb_r1_0/rule_1/",
+          "consumer_ids": [
+            "checkpoint_step/sup_sg_bb_r1_1/rule_1/rule_1/body_0"
+          ]
+        },
+        {
+          "source_rule_id": "rule_1",
+          "relation": "sup_sg_bb_r1_1",
+          "action": "remove",
+          "reason": "projection-preserving single positive use",
+          "definition_id": "checkpoint_step/sup_sg_bb_r1_1/rule_1/rule_1/body_0",
+          "consumer_ids": [
+            "checkpoint_step/sup_sg_bb_r1_2/rule_1/rule_1/body_1"
+          ]
+        },
+        {
+          "source_rule_id": "rule_1",
+          "relation": "sup_sg_bb_r1_4",
+          "action": "remove",
+          "reason": "projection-preserving single positive use",
+          "definition_id": "checkpoint_step/sup_sg_bb_r1_4/rule_1/rule_1/body_3",
+          "consumer_ids": [
+            "specialized_result/sg_bb/rule_1/"
+          ]
+        },
+        {
+          "relation": "parent",
+          "action": "skip",
+          "reason": "source relation"
+        },
+        {
+          "relation": "person",
+          "action": "skip",
+          "reason": "source relation"
+        },
+        {
+          "relation": "sg",
+          "action": "skip",
+          "reason": "source relation"
+        },
+        {
+          "relation": "notsg",
+          "action": "skip",
+          "reason": "source relation"
+        },
+        {
+          "relation": "q_notsg",
+          "action": "skip",
+          "reason": "source relation"
+        },
+        {
+          "relation": "magic_notsg_bf",
+          "action": "skip",
+          "reason": "not a generated checkpoint"
+        },
+        {
+          "relation": "sup_notsg_bf_r0_2",
+          "action": "skip",
+          "reason": "shared or unused non-alias"
+        },
+        {
+          "relation": "magic_sg_bf",
+          "action": "skip",
+          "reason": "not a generated checkpoint"
+        },
+        {
+          "relation": "notsg_bf",
+          "action": "skip",
+          "reason": "not a generated checkpoint"
+        },
+        {
+          "relation": "sg_bf",
+          "action": "skip",
+          "reason": "not a generated checkpoint"
+        },
+        {
+          "relation": "sup_sg_bf_r1_2",
+          "action": "skip",
+          "reason": "shared or unused non-alias"
+        },
+        {
+          "relation": "sup_sg_bf_r1_3",
+          "action": "skip",
+          "reason": "existential projection preserves dedup barrier"
+        },
+        {
+          "relation": "magic_sg_bb",
+          "action": "skip",
+          "reason": "not a generated checkpoint"
+        },
+        {
+          "relation": "sg_bb",
+          "action": "skip",
+          "reason": "not a generated checkpoint"
+        },
+        {
+          "relation": "sup_sg_bb_r1_2",
+          "action": "skip",
+          "reason": "shared or unused non-alias"
+        },
+        {
+          "relation": "sup_sg_bb_r1_3",
+          "action": "skip",
+          "reason": "existential projection preserves dedup barrier"
+        }
+      ],
+      "source_sha256": "ea6f6b81725ed1b80b4d8665b42250038d4be2753e8c955b6afda3314bf2b449",
+      "fact_sha256": {
+        "parent.facts": "287840862bcb34f627f8a5f32287ce4cdc293fd32cecad9fa19a644128bf0ac0",
+        "person.facts": "3051538fb8571f32e65dfe502b8626a4e65f73b4a9bc48e60427e1c098e712ec"
+      },
+      "all_outputs_equal": true
+    },
+    {
+      "case": "positive_n500",
+      "source": "tests/corpus/BENCHMARK_FAMILY/transitive_closure_bound.dl",
+      "facts": "fixtures/benchmark-family/transitive_closure_bound/n500",
+      "oracle_checked": true,
+      "T_original": 86618,
+      "T_guarded": 207,
+      "T_compact": 151,
+      "go_work": {
+        "passthrough/run": {
+          "materialized": 86618,
+          "attempts": 3541194,
+          "per_relation": {
+            "edge": 0,
+            "q_tc": 50,
+            "tc": 86568
+          }
+        },
+        "passthrough/run-seminaive": {
+          "materialized": 86618,
+          "attempts": 187059,
+          "per_relation": {
+            "edge": 0,
+            "q_tc": 50,
+            "tc": 86568
+          }
+        },
+        "guarded/run": {
+          "materialized": 209,
+          "attempts": 1288,
+          "per_relation": {
+            "edge": 0,
+            "magic_tc_bf": 1,
+            "q_tc": 50,
+            "sup_tc_bf_r0_0": 1,
+            "sup_tc_bf_r0_1": 6,
+            "sup_tc_bf_r1_0": 1,
+            "sup_tc_bf_r1_1": 50,
+            "sup_tc_bf_r1_2": 50,
+            "tc": 0,
+            "tc_bf": 50
+          }
+        },
+        "guarded/run-seminaive": {
+          "materialized": 209,
+          "attempts": 315,
+          "per_relation": {
+            "edge": 0,
+            "magic_tc_bf": 1,
+            "q_tc": 50,
+            "sup_tc_bf_r0_0": 1,
+            "sup_tc_bf_r0_1": 6,
+            "sup_tc_bf_r1_0": 1,
+            "sup_tc_bf_r1_1": 50,
+            "sup_tc_bf_r1_2": 50,
+            "tc": 0,
+            "tc_bf": 50
+          }
+        },
+        "guarded-compact/run": {
+          "materialized": 151,
+          "attempts": 808,
+          "per_relation": {
+            "edge": 0,
+            "magic_tc_bf": 1,
+            "q_tc": 50,
+            "sup_tc_bf_r1_2": 50,
+            "tc": 0,
+            "tc_bf": 50
+          }
+        },
+        "guarded-compact/run-seminaive": {
+          "materialized": 151,
+          "attempts": 257,
+          "per_relation": {
+            "edge": 0,
+            "magic_tc_bf": 1,
+            "q_tc": 50,
+            "sup_tc_bf_r1_2": 50,
+            "tc": 0,
+            "tc_bf": 50
+          }
+        }
+      },
+      "compaction_actions": [
+        {
+          "source_rule_id": "rule_0",
+          "relation": "sup_tc_bf_r0_0",
+          "action": "remove",
+          "reason": "exact identity alias",
+          "definition_id": "checkpoint_step/sup_tc_bf_r0_0/rule_0/",
+          "consumer_ids": [
+            "checkpoint_step/sup_tc_bf_r0_1/rule_0/rule_0/body_0"
+          ]
+        },
+        {
+          "source_rule_id": "rule_0",
+          "relation": "sup_tc_bf_r0_1",
+          "action": "remove",
+          "reason": "projection-preserving single positive use",
+          "definition_id": "checkpoint_step/sup_tc_bf_r0_1/rule_0/rule_0/body_0",
+          "consumer_ids": [
+            "specialized_result/tc_bf/rule_0/"
+          ]
+        },
+        {
+          "source_rule_id": "rule_1",
+          "relation": "sup_tc_bf_r1_0",
+          "action": "remove",
+          "reason": "exact identity alias",
+          "definition_id": "checkpoint_step/sup_tc_bf_r1_0/rule_1/",
+          "consumer_ids": [
+            "checkpoint_step/sup_tc_bf_r1_1/rule_1/rule_1/body_0",
+            "demand_propagation/magic_tc_bf/rule_1/rule_1/body_0"
+          ]
+        },
+        {
+          "source_rule_id": "rule_1",
+          "relation": "sup_tc_bf_r1_1",
+          "action": "remove",
+          "reason": "projection-preserving single positive use",
+          "definition_id": "checkpoint_step/sup_tc_bf_r1_1/rule_1/rule_1/body_0",
+          "consumer_ids": [
+            "checkpoint_step/sup_tc_bf_r1_2/rule_1/rule_1/body_1"
+          ]
+        },
+        {
+          "relation": "edge",
+          "action": "skip",
+          "reason": "source relation"
+        },
+        {
+          "relation": "tc",
+          "action": "skip",
+          "reason": "source relation"
+        },
+        {
+          "relation": "q_tc",
+          "action": "skip",
+          "reason": "source relation"
+        },
+        {
+          "relation": "magic_tc_bf",
+          "action": "skip",
+          "reason": "not a generated checkpoint"
+        },
+        {
+          "relation": "tc_bf",
+          "action": "skip",
+          "reason": "not a generated checkpoint"
+        },
+        {
+          "relation": "sup_tc_bf_r1_2",
+          "action": "skip",
+          "reason": "existential projection preserves dedup barrier"
+        }
+      ],
+      "source_sha256": "995f27ab7a8cbe9b1f83e16da157a910603db6cad4712b770892da05cd330f61",
+      "fact_sha256": {
+        "edge.facts": "1640ccc2986615974d1410ec7b3060237e4b1a61523aecf63a146a9139078759"
+      },
+      "all_outputs_equal": true
+    },
+    {
+      "case": "culprit_n20",
+      "source": "tests/corpus/BENCHMARK_FAMILY/culprit_cycle.dl",
+      "facts": "fixtures/benchmark-family/culprit_cycle/n20",
+      "oracle_checked": true,
+      "T_original": 286,
+      "T_guarded": 286,
+      "T_compact": 286,
+      "go_work": {
+        "passthrough/run": {
+          "materialized": 286,
+          "attempts": 2680,
+          "per_relation": {
+            "base": 0,
+            "blocked": 0,
+            "e": 0,
+            "out": 1,
+            "p": 31,
+            "q": 236,
+            "s": 18
+          }
+        },
+        "passthrough/run-seminaive": {
+          "materialized": 286,
+          "attempts": 443,
+          "per_relation": {
+            "base": 0,
+            "blocked": 0,
+            "e": 0,
+            "out": 1,
+            "p": 31,
+            "q": 236,
+            "s": 18
+          }
+        },
+        "guarded/run": {
+          "materialized": 286,
+          "attempts": 2680,
+          "per_relation": {
+            "base": 0,
+            "blocked": 0,
+            "e": 0,
+            "out": 1,
+            "p": 31,
+            "q": 236,
+            "s": 18
+          }
+        },
+        "guarded/run-seminaive": {
+          "materialized": 286,
+          "attempts": 443,
+          "per_relation": {
+            "base": 0,
+            "blocked": 0,
+            "e": 0,
+            "out": 1,
+            "p": 31,
+            "q": 236,
+            "s": 18
+          }
+        },
+        "guarded-compact/run": {
+          "materialized": 286,
+          "attempts": 2680,
+          "per_relation": {
+            "base": 0,
+            "blocked": 0,
+            "e": 0,
+            "out": 1,
+            "p": 31,
+            "q": 236,
+            "s": 18
+          }
+        },
+        "guarded-compact/run-seminaive": {
+          "materialized": 286,
+          "attempts": 443,
+          "per_relation": {
+            "base": 0,
+            "blocked": 0,
+            "e": 0,
+            "out": 1,
+            "p": 31,
+            "q": 236,
+            "s": 18
+          }
+        }
+      },
+      "compaction_actions": [
+        {
+          "relation": "base",
+          "action": "skip",
+          "reason": "source relation"
+        },
+        {
+          "relation": "e",
+          "action": "skip",
+          "reason": "source relation"
+        },
+        {
+          "relation": "blocked",
+          "action": "skip",
+          "reason": "source relation"
+        },
+        {
+          "relation": "q",
+          "action": "skip",
+          "reason": "source relation"
+        },
+        {
+          "relation": "s",
+          "action": "skip",
+          "reason": "source relation"
+        },
+        {
+          "relation": "p",
+          "action": "skip",
+          "reason": "source relation"
+        },
+        {
+          "relation": "out",
+          "action": "skip",
+          "reason": "source relation"
+        }
+      ],
+      "source_sha256": "aa4acc5990b510a58b16b4007cf2be1210381dcf5c7942a86d8c347377d882b6",
+      "fact_sha256": {
+        "base.facts": "d864f390696a47c2f7f14078de4b121b2534300e18eb9f8e68f522b7ba7f268c",
+        "blocked.facts": "db9994ec183d9d2b37aa1c395daba0f9089ca0f6ce5c2e26aff1ea6ba06791ab",
+        "e.facts": "8e619f86eaeffb6787b51615205ef44ab5b7b7bbf05514a887e28e9e385c8a15"
+      },
+      "all_outputs_equal": true
+    },
+    {
+      "case": "growing_n20",
+      "source": "tests/corpus/CONE_CORPUS/cc_growing_sibling.dl",
+      "facts": "fixtures/cone_corpus/cc_growing_sibling/n20",
+      "oracle_checked": true,
+      "T_original": 584,
+      "T_guarded": 273,
+      "T_compact": 245,
+      "go_work": {
+        "passthrough/run": {
+          "materialized": 584,
+          "attempts": 14028,
+          "per_relation": {
+            "base": 0,
+            "blocked": 0,
+            "e": 0,
+            "out": 3,
+            "out2": 20,
+            "p": 33,
+            "q": 136,
+            "s": 12,
+            "sibling_edge": 0,
+            "tc": 380
+          }
+        },
+        "passthrough/run-seminaive": {
+          "materialized": 584,
+          "attempts": 2686,
+          "per_relation": {
+            "base": 0,
+            "blocked": 0,
+            "e": 0,
+            "out": 3,
+            "out2": 20,
+            "p": 33,
+            "q": 136,
+            "s": 12,
+            "sibling_edge": 0,
+            "tc": 380
+          }
+        },
+        "guarded/run": {
+          "materialized": 275,
+          "attempts": 2206,
+          "per_relation": {
+            "base": 0,
+            "blocked": 0,
+            "e": 0,
+            "magic_tc_bf": 1,
+            "out": 3,
+            "out2": 20,
+            "p": 33,
+            "q": 136,
+            "s": 12,
+            "sibling_edge": 0,
+            "sup_tc_bf_r0_0": 1,
+            "sup_tc_bf_r0_1": 8,
+            "sup_tc_bf_r1_0": 1,
+            "sup_tc_bf_r1_1": 20,
+            "sup_tc_bf_r1_2": 20,
+            "tc": 0,
+            "tc_bf": 20
+          }
+        },
+        "guarded/run-seminaive": {
+          "materialized": 275,
+          "attempts": 485,
+          "per_relation": {
+            "base": 0,
+            "blocked": 0,
+            "e": 0,
+            "magic_tc_bf": 1,
+            "out": 3,
+            "out2": 20,
+            "p": 33,
+            "q": 136,
+            "s": 12,
+            "sibling_edge": 0,
+            "sup_tc_bf_r0_0": 1,
+            "sup_tc_bf_r0_1": 8,
+            "sup_tc_bf_r1_0": 1,
+            "sup_tc_bf_r1_1": 20,
+            "sup_tc_bf_r1_2": 20,
+            "tc": 0,
+            "tc_bf": 20
+          }
+        },
+        "guarded-compact/run": {
+          "materialized": 245,
+          "attempts": 2068,
+          "per_relation": {
+            "base": 0,
+            "blocked": 0,
+            "e": 0,
+            "magic_tc_bf": 1,
+            "out": 3,
+            "out2": 20,
+            "p": 33,
+            "q": 136,
+            "s": 12,
+            "sibling_edge": 0,
+            "sup_tc_bf_r1_2": 20,
+            "tc": 0,
+            "tc_bf": 20
+          }
+        },
+        "guarded-compact/run-seminaive": {
+          "materialized": 245,
+          "attempts": 455,
+          "per_relation": {
+            "base": 0,
+            "blocked": 0,
+            "e": 0,
+            "magic_tc_bf": 1,
+            "out": 3,
+            "out2": 20,
+            "p": 33,
+            "q": 136,
+            "s": 12,
+            "sibling_edge": 0,
+            "sup_tc_bf_r1_2": 20,
+            "tc": 0,
+            "tc_bf": 20
+          }
+        }
+      },
+      "compaction_actions": [
+        {
+          "source_rule_id": "rule_6",
+          "relation": "sup_tc_bf_r0_0",
+          "action": "remove",
+          "reason": "exact identity alias",
+          "definition_id": "checkpoint_step/sup_tc_bf_r0_0/rule_6/",
+          "consumer_ids": [
+            "checkpoint_step/sup_tc_bf_r0_1/rule_6/rule_6/body_0"
+          ]
+        },
+        {
+          "source_rule_id": "rule_6",
+          "relation": "sup_tc_bf_r0_1",
+          "action": "remove",
+          "reason": "projection-preserving single positive use",
+          "definition_id": "checkpoint_step/sup_tc_bf_r0_1/rule_6/rule_6/body_0",
+          "consumer_ids": [
+            "specialized_result/tc_bf/rule_6/"
+          ]
+        },
+        {
+          "source_rule_id": "rule_7",
+          "relation": "sup_tc_bf_r1_0",
+          "action": "remove",
+          "reason": "exact identity alias",
+          "definition_id": "checkpoint_step/sup_tc_bf_r1_0/rule_7/",
+          "consumer_ids": [
+            "checkpoint_step/sup_tc_bf_r1_1/rule_7/rule_7/body_0",
+            "demand_propagation/magic_tc_bf/rule_7/rule_7/body_0"
+          ]
+        },
+        {
+          "source_rule_id": "rule_7",
+          "relation": "sup_tc_bf_r1_1",
+          "action": "remove",
+          "reason": "projection-preserving single positive use",
+          "definition_id": "checkpoint_step/sup_tc_bf_r1_1/rule_7/rule_7/body_0",
+          "consumer_ids": [
+            "checkpoint_step/sup_tc_bf_r1_2/rule_7/rule_7/body_1"
+          ]
+        },
+        {
+          "relation": "base",
+          "action": "skip",
+          "reason": "source relation"
+        },
+        {
+          "relation": "e",
+          "action": "skip",
+          "reason": "source relation"
+        },
+        {
+          "relation": "blocked",
+          "action": "skip",
+          "reason": "source relation"
+        },
+        {
+          "relation": "sibling_edge",
+          "action": "skip",
+          "reason": "source relation"
+        },
+        {
+          "relation": "q",
+          "action": "skip",
+          "reason": "source relation"
+        },
+        {
+          "relation": "s",
+          "action": "skip",
+          "reason": "source relation"
+        },
+        {
+          "relation": "p",
+          "action": "skip",
+          "reason": "source relation"
+        },
+        {
+          "relation": "out",
+          "action": "skip",
+          "reason": "source relation"
+        },
+        {
+          "relation": "tc",
+          "action": "skip",
+          "reason": "source relation"
+        },
+        {
+          "relation": "out2",
+          "action": "skip",
+          "reason": "source relation"
+        },
+        {
+          "relation": "magic_tc_bf",
+          "action": "skip",
+          "reason": "not a generated checkpoint"
+        },
+        {
+          "relation": "tc_bf",
+          "action": "skip",
+          "reason": "not a generated checkpoint"
+        },
+        {
+          "relation": "sup_tc_bf_r1_2",
+          "action": "skip",
+          "reason": "existential projection preserves dedup barrier"
+        }
+      ],
+      "source_sha256": "228f3e70dd342d116617c174954ce1680fdc198bf3db43da84361bed0a64f302",
+      "fact_sha256": {
+        "base.facts": "e0d5f5ea46ee557b7b83011ec3d8760127f8047604f69672c8bfcf91ce362694",
+        "blocked.facts": "9f4e475d8ca0b30037150ee6c6b535feb43cf91046f6c6497c6d92b0e8229d45",
+        "e.facts": "c548cdc883944b7af117bb3e78893e4a67be9737fe3ab59c5576422a88fc72cf",
+        "sibling_edge.facts": "c7499d955af12056b468cd160bdeb5fe1a3f032aa71e67db0960ea6e80bec6cb"
+      },
+      "all_outputs_equal": true
+    },
+    {
+      "case": "growing_n50",
+      "source": "tests/corpus/CONE_CORPUS/cc_growing_sibling.dl",
+      "facts": "fixtures/cone_corpus/cc_growing_sibling/n50",
+      "oracle_checked": true,
+      "T_original": 2660,
+      "T_guarded": 417,
+      "T_compact": 361,
+      "go_work": {
+        "passthrough/run": {
+          "materialized": 2660,
+          "attempts": 36669,
+          "per_relation": {
+            "base": 0,
+            "blocked": 0,
+            "e": 0,
+            "out": 2,
+            "out2": 50,
+            "p": 31,
+            "q": 161,
+            "s": 16,
+            "sibling_edge": 0,
+            "tc": 2400
+          }
+        },
+        "passthrough/run-seminaive": {
+          "materialized": 2660,
+          "attempts": 7678,
+          "per_relation": {
+            "base": 0,
+            "blocked": 0,
+            "e": 0,
+            "out": 2,
+            "out2": 50,
+            "p": 31,
+            "q": 161,
+            "s": 16,
+            "sibling_edge": 0,
+            "tc": 2400
+          }
+        },
+        "guarded/run": {
+          "materialized": 419,
+          "attempts": 3156,
+          "per_relation": {
+            "base": 0,
+            "blocked": 0,
+            "e": 0,
+            "magic_tc_bf": 1,
+            "out": 2,
+            "out2": 50,
+            "p": 31,
+            "q": 161,
+            "s": 16,
+            "sibling_edge": 0,
+            "sup_tc_bf_r0_0": 1,
+            "sup_tc_bf_r0_1": 6,
+            "sup_tc_bf_r1_0": 1,
+            "sup_tc_bf_r1_1": 50,
+            "sup_tc_bf_r1_2": 50,
+            "tc": 0,
+            "tc_bf": 50
+          }
+        },
+        "guarded/run-seminaive": {
+          "materialized": 419,
+          "attempts": 642,
+          "per_relation": {
+            "base": 0,
+            "blocked": 0,
+            "e": 0,
+            "magic_tc_bf": 1,
+            "out": 2,
+            "out2": 50,
+            "p": 31,
+            "q": 161,
+            "s": 16,
+            "sibling_edge": 0,
+            "sup_tc_bf_r0_0": 1,
+            "sup_tc_bf_r0_1": 6,
+            "sup_tc_bf_r1_0": 1,
+            "sup_tc_bf_r1_1": 50,
+            "sup_tc_bf_r1_2": 50,
+            "tc": 0,
+            "tc_bf": 50
+          }
+        },
+        "guarded-compact/run": {
+          "materialized": 361,
+          "attempts": 2336,
+          "per_relation": {
+            "base": 0,
+            "blocked": 0,
+            "e": 0,
+            "magic_tc_bf": 1,
+            "out": 2,
+            "out2": 50,
+            "p": 31,
+            "q": 161,
+            "s": 16,
+            "sibling_edge": 0,
+            "sup_tc_bf_r1_2": 50,
+            "tc": 0,
+            "tc_bf": 50
+          }
+        },
+        "guarded-compact/run-seminaive": {
+          "materialized": 361,
+          "attempts": 584,
+          "per_relation": {
+            "base": 0,
+            "blocked": 0,
+            "e": 0,
+            "magic_tc_bf": 1,
+            "out": 2,
+            "out2": 50,
+            "p": 31,
+            "q": 161,
+            "s": 16,
+            "sibling_edge": 0,
+            "sup_tc_bf_r1_2": 50,
+            "tc": 0,
+            "tc_bf": 50
+          }
+        }
+      },
+      "compaction_actions": [
+        {
+          "source_rule_id": "rule_6",
+          "relation": "sup_tc_bf_r0_0",
+          "action": "remove",
+          "reason": "exact identity alias",
+          "definition_id": "checkpoint_step/sup_tc_bf_r0_0/rule_6/",
+          "consumer_ids": [
+            "checkpoint_step/sup_tc_bf_r0_1/rule_6/rule_6/body_0"
+          ]
+        },
+        {
+          "source_rule_id": "rule_6",
+          "relation": "sup_tc_bf_r0_1",
+          "action": "remove",
+          "reason": "projection-preserving single positive use",
+          "definition_id": "checkpoint_step/sup_tc_bf_r0_1/rule_6/rule_6/body_0",
+          "consumer_ids": [
+            "specialized_result/tc_bf/rule_6/"
+          ]
+        },
+        {
+          "source_rule_id": "rule_7",
+          "relation": "sup_tc_bf_r1_0",
+          "action": "remove",
+          "reason": "exact identity alias",
+          "definition_id": "checkpoint_step/sup_tc_bf_r1_0/rule_7/",
+          "consumer_ids": [
+            "checkpoint_step/sup_tc_bf_r1_1/rule_7/rule_7/body_0",
+            "demand_propagation/magic_tc_bf/rule_7/rule_7/body_0"
+          ]
+        },
+        {
+          "source_rule_id": "rule_7",
+          "relation": "sup_tc_bf_r1_1",
+          "action": "remove",
+          "reason": "projection-preserving single positive use",
+          "definition_id": "checkpoint_step/sup_tc_bf_r1_1/rule_7/rule_7/body_0",
+          "consumer_ids": [
+            "checkpoint_step/sup_tc_bf_r1_2/rule_7/rule_7/body_1"
+          ]
+        },
+        {
+          "relation": "base",
+          "action": "skip",
+          "reason": "source relation"
+        },
+        {
+          "relation": "e",
+          "action": "skip",
+          "reason": "source relation"
+        },
+        {
+          "relation": "blocked",
+          "action": "skip",
+          "reason": "source relation"
+        },
+        {
+          "relation": "sibling_edge",
+          "action": "skip",
+          "reason": "source relation"
+        },
+        {
+          "relation": "q",
+          "action": "skip",
+          "reason": "source relation"
+        },
+        {
+          "relation": "s",
+          "action": "skip",
+          "reason": "source relation"
+        },
+        {
+          "relation": "p",
+          "action": "skip",
+          "reason": "source relation"
+        },
+        {
+          "relation": "out",
+          "action": "skip",
+          "reason": "source relation"
+        },
+        {
+          "relation": "tc",
+          "action": "skip",
+          "reason": "source relation"
+        },
+        {
+          "relation": "out2",
+          "action": "skip",
+          "reason": "source relation"
+        },
+        {
+          "relation": "magic_tc_bf",
+          "action": "skip",
+          "reason": "not a generated checkpoint"
+        },
+        {
+          "relation": "tc_bf",
+          "action": "skip",
+          "reason": "not a generated checkpoint"
+        },
+        {
+          "relation": "sup_tc_bf_r1_2",
+          "action": "skip",
+          "reason": "existential projection preserves dedup barrier"
+        }
+      ],
+      "source_sha256": "228f3e70dd342d116617c174954ce1680fdc198bf3db43da84361bed0a64f302",
+      "fact_sha256": {
+        "base.facts": "03aaadbf90e91bc5d19d69eacaaec345f4e7e9376ef09a8c47b6fb4616d4624a",
+        "blocked.facts": "ede7d3424289f1717acfc1f28691e3dc903e0efe22369eee4db8e3d27a118217",
+        "e.facts": "d09b6693da9a712f067f90b89d7185ac07892e4a08f5efc382f5b2fcbaa55361",
+        "sibling_edge.facts": "1a30d9ff74720a9ce2b022ec94a4ff6d4138bd36072c3c80d8c736a77ffad722"
+      },
+      "all_outputs_equal": true
+    },
+    {
+      "case": "growing_n100",
+      "source": "tests/corpus/CONE_CORPUS/cc_growing_sibling.dl",
+      "facts": "fixtures/cone_corpus/cc_growing_sibling/n100",
+      "oracle_checked": true,
+      "T_original": 8577,
+      "T_guarded": 676,
+      "T_compact": 571,
+      "go_work": {
+        "passthrough/run": {
+          "materialized": 8577,
+          "attempts": 178081,
+          "per_relation": {
+            "base": 0,
+            "blocked": 0,
+            "e": 0,
+            "out": 1,
+            "out2": 100,
+            "p": 30,
+            "q": 222,
+            "s": 17,
+            "sibling_edge": 0,
+            "tc": 8207
+          }
+        },
+        "passthrough/run-seminaive": {
+          "materialized": 8577,
+          "attempts": 17105,
+          "per_relation": {
+            "base": 0,
+            "blocked": 0,
+            "e": 0,
+            "out": 1,
+            "out2": 100,
+            "p": 30,
+            "q": 222,
+            "s": 17,
+            "sibling_edge": 0,
+            "tc": 8207
+          }
+        },
+        "guarded/run": {
+          "materialized": 678,
+          "attempts": 6099,
+          "per_relation": {
+            "base": 0,
+            "blocked": 0,
+            "e": 0,
+            "magic_tc_bf": 1,
+            "out": 1,
+            "out2": 100,
+            "p": 30,
+            "q": 222,
+            "s": 17,
+            "sibling_edge": 0,
+            "sup_tc_bf_r0_0": 1,
+            "sup_tc_bf_r0_1": 5,
+            "sup_tc_bf_r1_0": 1,
+            "sup_tc_bf_r1_1": 100,
+            "sup_tc_bf_r1_2": 100,
+            "tc": 0,
+            "tc_bf": 100
+          }
+        },
+        "guarded/run-seminaive": {
+          "materialized": 678,
+          "attempts": 1000,
+          "per_relation": {
+            "base": 0,
+            "blocked": 0,
+            "e": 0,
+            "magic_tc_bf": 1,
+            "out": 1,
+            "out2": 100,
+            "p": 30,
+            "q": 222,
+            "s": 17,
+            "sibling_edge": 0,
+            "sup_tc_bf_r0_0": 1,
+            "sup_tc_bf_r0_1": 5,
+            "sup_tc_bf_r1_0": 1,
+            "sup_tc_bf_r1_1": 100,
+            "sup_tc_bf_r1_2": 100,
+            "tc": 0,
+            "tc_bf": 100
+          }
+        },
+        "guarded-compact/run": {
+          "materialized": 571,
+          "attempts": 5508,
+          "per_relation": {
+            "base": 0,
+            "blocked": 0,
+            "e": 0,
+            "magic_tc_bf": 1,
+            "out": 1,
+            "out2": 100,
+            "p": 30,
+            "q": 222,
+            "s": 17,
+            "sibling_edge": 0,
+            "sup_tc_bf_r1_2": 100,
+            "tc": 0,
+            "tc_bf": 100
+          }
+        },
+        "guarded-compact/run-seminaive": {
+          "materialized": 571,
+          "attempts": 893,
+          "per_relation": {
+            "base": 0,
+            "blocked": 0,
+            "e": 0,
+            "magic_tc_bf": 1,
+            "out": 1,
+            "out2": 100,
+            "p": 30,
+            "q": 222,
+            "s": 17,
+            "sibling_edge": 0,
+            "sup_tc_bf_r1_2": 100,
+            "tc": 0,
+            "tc_bf": 100
+          }
+        }
+      },
+      "compaction_actions": [
+        {
+          "source_rule_id": "rule_6",
+          "relation": "sup_tc_bf_r0_0",
+          "action": "remove",
+          "reason": "exact identity alias",
+          "definition_id": "checkpoint_step/sup_tc_bf_r0_0/rule_6/",
+          "consumer_ids": [
+            "checkpoint_step/sup_tc_bf_r0_1/rule_6/rule_6/body_0"
+          ]
+        },
+        {
+          "source_rule_id": "rule_6",
+          "relation": "sup_tc_bf_r0_1",
+          "action": "remove",
+          "reason": "projection-preserving single positive use",
+          "definition_id": "checkpoint_step/sup_tc_bf_r0_1/rule_6/rule_6/body_0",
+          "consumer_ids": [
+            "specialized_result/tc_bf/rule_6/"
+          ]
+        },
+        {
+          "source_rule_id": "rule_7",
+          "relation": "sup_tc_bf_r1_0",
+          "action": "remove",
+          "reason": "exact identity alias",
+          "definition_id": "checkpoint_step/sup_tc_bf_r1_0/rule_7/",
+          "consumer_ids": [
+            "checkpoint_step/sup_tc_bf_r1_1/rule_7/rule_7/body_0",
+            "demand_propagation/magic_tc_bf/rule_7/rule_7/body_0"
+          ]
+        },
+        {
+          "source_rule_id": "rule_7",
+          "relation": "sup_tc_bf_r1_1",
+          "action": "remove",
+          "reason": "projection-preserving single positive use",
+          "definition_id": "checkpoint_step/sup_tc_bf_r1_1/rule_7/rule_7/body_0",
+          "consumer_ids": [
+            "checkpoint_step/sup_tc_bf_r1_2/rule_7/rule_7/body_1"
+          ]
+        },
+        {
+          "relation": "base",
+          "action": "skip",
+          "reason": "source relation"
+        },
+        {
+          "relation": "e",
+          "action": "skip",
+          "reason": "source relation"
+        },
+        {
+          "relation": "blocked",
+          "action": "skip",
+          "reason": "source relation"
+        },
+        {
+          "relation": "sibling_edge",
+          "action": "skip",
+          "reason": "source relation"
+        },
+        {
+          "relation": "q",
+          "action": "skip",
+          "reason": "source relation"
+        },
+        {
+          "relation": "s",
+          "action": "skip",
+          "reason": "source relation"
+        },
+        {
+          "relation": "p",
+          "action": "skip",
+          "reason": "source relation"
+        },
+        {
+          "relation": "out",
+          "action": "skip",
+          "reason": "source relation"
+        },
+        {
+          "relation": "tc",
+          "action": "skip",
+          "reason": "source relation"
+        },
+        {
+          "relation": "out2",
+          "action": "skip",
+          "reason": "source relation"
+        },
+        {
+          "relation": "magic_tc_bf",
+          "action": "skip",
+          "reason": "not a generated checkpoint"
+        },
+        {
+          "relation": "tc_bf",
+          "action": "skip",
+          "reason": "not a generated checkpoint"
+        },
+        {
+          "relation": "sup_tc_bf_r1_2",
+          "action": "skip",
+          "reason": "existential projection preserves dedup barrier"
+        }
+      ],
+      "source_sha256": "228f3e70dd342d116617c174954ce1680fdc198bf3db43da84361bed0a64f302",
+      "fact_sha256": {
+        "base.facts": "4fe59c026cf194647f7d12ac8895bc46434a30ab21959c74b4a2bb5eaa30bb08",
+        "blocked.facts": "b332fdd81704e57bc1aa034e931d436ebbd2e0b25a2ec4cc99c369430e1ca11b",
+        "e.facts": "eee0431f63ef38dc3d07e8253b4615a027b1d881ebe643a078afdcbc8fa58e22",
+        "sibling_edge.facts": "4b067134587d8ec71dfa37653fc56376a7a4152d3b9c293ef34561a4b18b78c4"
+      },
+      "all_outputs_equal": true
+    }
+  ],
+  "random_graphs": [
+    {
+      "seed": 0,
+      "nodes": 9,
+      "edges": 6,
+      "checked_paths": [
+        "naive",
+        "semi",
+        "guarded-naive",
+        "guarded-semi",
+        "compact",
+        "compact-naive",
+        "C",
+        "oracle"
+      ],
+      "independent_answers_equal": true
+    },
+    {
+      "seed": 1,
+      "nodes": 9,
+      "edges": 12,
+      "checked_paths": [
+        "naive",
+        "semi",
+        "guarded-naive",
+        "guarded-semi",
+        "compact",
+        "compact-naive",
+        "C",
+        "oracle"
+      ],
+      "independent_answers_equal": true
+    },
+    {
+      "seed": 2,
+      "nodes": 9,
+      "edges": 10,
+      "checked_paths": [
+        "naive",
+        "semi",
+        "guarded-naive",
+        "guarded-semi",
+        "compact",
+        "compact-naive",
+        "C",
+        "oracle"
+      ],
+      "independent_answers_equal": true
+    },
+    {
+      "seed": 3,
+      "nodes": 9,
+      "edges": 12,
+      "checked_paths": [
+        "naive",
+        "semi",
+        "guarded-naive",
+        "guarded-semi",
+        "compact",
+        "compact-naive",
+        "C",
+        "oracle"
+      ],
+      "independent_answers_equal": true
+    },
+    {
+      "seed": 4,
+      "nodes": 9,
+      "edges": 8,
+      "checked_paths": [
+        "naive",
+        "semi",
+        "guarded-naive",
+        "guarded-semi",
+        "compact",
+        "compact-naive",
+        "C",
+        "oracle"
+      ],
+      "independent_answers_equal": true
+    },
+    {
+      "seed": 5,
+      "nodes": 9,
+      "edges": 12,
+      "checked_paths": [
+        "naive",
+        "semi",
+        "guarded-naive",
+        "guarded-semi",
+        "compact",
+        "compact-naive",
+        "C",
+        "oracle"
+      ],
+      "independent_answers_equal": true
+    },
+    {
+      "seed": 6,
+      "nodes": 9,
+      "edges": 8,
+      "checked_paths": [
+        "naive",
+        "semi",
+        "guarded-naive",
+        "guarded-semi",
+        "compact",
+        "compact-naive",
+        "oracle"
+      ],
+      "independent_answers_equal": true
+    },
+    {
+      "seed": 7,
+      "nodes": 9,
+      "edges": 10,
+      "checked_paths": [
+        "naive",
+        "semi",
+        "guarded-naive",
+        "guarded-semi",
+        "compact",
+        "compact-naive",
+        "oracle"
+      ],
+      "independent_answers_equal": true
+    },
+    {
+      "seed": 8,
+      "nodes": 9,
+      "edges": 7,
+      "checked_paths": [
+        "naive",
+        "semi",
+        "guarded-naive",
+        "guarded-semi",
+        "compact",
+        "compact-naive",
+        "oracle"
+      ],
+      "independent_answers_equal": true
+    },
+    {
+      "seed": 9,
+      "nodes": 9,
+      "edges": 14,
+      "checked_paths": [
+        "naive",
+        "semi",
+        "guarded-naive",
+        "guarded-semi",
+        "compact",
+        "compact-naive",
+        "oracle"
+      ],
+      "independent_answers_equal": true
+    },
+    {
+      "seed": 10,
+      "nodes": 9,
+      "edges": 8,
+      "checked_paths": [
+        "naive",
+        "semi",
+        "guarded-naive",
+        "guarded-semi",
+        "compact",
+        "compact-naive",
+        "oracle"
+      ],
+      "independent_answers_equal": true
+    },
+    {
+      "seed": 11,
+      "nodes": 9,
+      "edges": 13,
+      "checked_paths": [
+        "naive",
+        "semi",
+        "guarded-naive",
+        "guarded-semi",
+        "compact",
+        "compact-naive",
+        "oracle"
+      ],
+      "independent_answers_equal": true
+    },
+    {
+      "seed": 12,
+      "nodes": 9,
+      "edges": 13,
+      "checked_paths": [
+        "naive",
+        "semi",
+        "guarded-naive",
+        "guarded-semi",
+        "compact",
+        "compact-naive",
+        "oracle"
+      ],
+      "independent_answers_equal": true
+    },
+    {
+      "seed": 13,
+      "nodes": 9,
+      "edges": 6,
+      "checked_paths": [
+        "naive",
+        "semi",
+        "guarded-naive",
+        "guarded-semi",
+        "compact",
+        "compact-naive",
+        "oracle"
+      ],
+      "independent_answers_equal": true
+    },
+    {
+      "seed": 14,
+      "nodes": 9,
+      "edges": 4,
+      "checked_paths": [
+        "naive",
+        "semi",
+        "guarded-naive",
+        "guarded-semi",
+        "compact",
+        "compact-naive",
+        "oracle"
+      ],
+      "independent_answers_equal": true
+    },
+    {
+      "seed": 15,
+      "nodes": 9,
+      "edges": 9,
+      "checked_paths": [
+        "naive",
+        "semi",
+        "guarded-naive",
+        "guarded-semi",
+        "compact",
+        "compact-naive",
+        "oracle"
+      ],
+      "independent_answers_equal": true
+    },
+    {
+      "seed": 16,
+      "nodes": 9,
+      "edges": 13,
+      "checked_paths": [
+        "naive",
+        "semi",
+        "guarded-naive",
+        "guarded-semi",
+        "compact",
+        "compact-naive",
+        "oracle"
+      ],
+      "independent_answers_equal": true
+    },
+    {
+      "seed": 17,
+      "nodes": 9,
+      "edges": 12,
+      "checked_paths": [
+        "naive",
+        "semi",
+        "guarded-naive",
+        "guarded-semi",
+        "compact",
+        "compact-naive",
+        "oracle"
+      ],
+      "independent_answers_equal": true
+    },
+    {
+      "seed": 18,
+      "nodes": 9,
+      "edges": 2,
+      "checked_paths": [
+        "naive",
+        "semi",
+        "guarded-naive",
+        "guarded-semi",
+        "compact",
+        "compact-naive",
+        "oracle"
+      ],
+      "independent_answers_equal": true
+    },
+    {
+      "seed": 19,
+      "nodes": 9,
+      "edges": 7,
+      "checked_paths": [
+        "naive",
+        "semi",
+        "guarded-naive",
+        "guarded-semi",
+        "compact",
+        "compact-naive",
+        "oracle"
+      ],
+      "independent_answers_equal": true
+    },
+    {
+      "seed": 20,
+      "nodes": 9,
+      "edges": 9,
+      "checked_paths": [
+        "naive",
+        "semi",
+        "guarded-naive",
+        "guarded-semi",
+        "compact",
+        "compact-naive",
+        "oracle"
+      ],
+      "independent_answers_equal": true
+    },
+    {
+      "seed": 21,
+      "nodes": 9,
+      "edges": 9,
+      "checked_paths": [
+        "naive",
+        "semi",
+        "guarded-naive",
+        "guarded-semi",
+        "compact",
+        "compact-naive",
+        "oracle"
+      ],
+      "independent_answers_equal": true
+    },
+    {
+      "seed": 22,
+      "nodes": 9,
+      "edges": 13,
+      "checked_paths": [
+        "naive",
+        "semi",
+        "guarded-naive",
+        "guarded-semi",
+        "compact",
+        "compact-naive",
+        "oracle"
+      ],
+      "independent_answers_equal": true
+    },
+    {
+      "seed": 23,
+      "nodes": 9,
+      "edges": 12,
+      "checked_paths": [
+        "naive",
+        "semi",
+        "guarded-naive",
+        "guarded-semi",
+        "compact",
+        "compact-naive",
+        "oracle"
+      ],
+      "independent_answers_equal": true
+    }
+  ],
+  "projection_control": {
+    "guarded_attempts": 162,
+    "compact_attempts": 141
+  },
+  "browser_verified": false,
+  "oracle_version": "----------------------------------------------------------------------------\nVersion: 2.5 (2.5)\nWord size: 64 bits\nOptions enabled: ffi openmp ncurses sqlite zlib\n----------------------------------------------------------------------------\nCopyright (c) 2016-25 The Souffle Developers.\nCopyright (c) 2013-16 Oracle and/or its affiliates.\nAll rights reserved.\n============================================================================\n\n",
+  "cc_version": "cc (Ubuntu 15.2.0-16ubuntu1) 15.2.0",
+  "status": "PASS"
+}

@@ -90,11 +90,7 @@ q_nonancestor(y) :- nonancestor(1,y).
 	}
 }
 
-func TestCheckCulpritCyclePreconditionSkipsNonRecursiveProgram(t *testing.T) {
-	// No relation here is in a positive cycle at all (p, q, ans are all
-	// non-recursive) -- the cheap precondition must skip the full
-	// adorn-and-check path entirely, not just happen to return
-	// Stratifiable=true via the general path.
+func TestCheckCulpritCycleTransformsNonRecursiveProgram(t *testing.T) {
 	src := ".decl p(x:number,y:number)\n.decl ans(y:number)\n.output ans\n" +
 		"p(1,2).\nans(y) :- p(1,y).\n"
 	prog, errs := parser.Parse([]byte(src))
@@ -105,8 +101,8 @@ func TestCheckCulpritCyclePreconditionSkipsNonRecursiveProgram(t *testing.T) {
 	if err != nil {
 		t.Fatalf("CheckCulpritCycle error: %v", err)
 	}
-	if !result.PreconditionSkipped {
-		t.Fatal("expected the cheap precondition to skip a program with no positive cycle anywhere")
+	if result.PreconditionSkipped || result.Transformed == prog {
+		t.Fatal("acyclic programs must still receive demand optimization")
 	}
 	if !result.Stratifiable {
 		t.Fatal("expected a precondition-skipped result to be trivially stratifiable")

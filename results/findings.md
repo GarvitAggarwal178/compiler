@@ -1,3 +1,9 @@
+> These are the original experiment claims and numbers. The 19 October 2026
+> maintenance fixes are described in `docs/07-pass1-review.md`. Eight selected
+> configurations were rerun; the largest historic scale points were not rerun.
+> Earlier claims about general output preservation and a disconnected C backend
+> must be read in light of that review.
+
 # Findings
 
 Four findings, each with the claim, the numbers, and the experiment record

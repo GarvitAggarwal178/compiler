@@ -25,3 +25,11 @@ func (Transformer) Transform(prog *ast.Program, _ *sema.StratumResult) (*ast.Pro
 	}
 	return result.FinalProgram, nil
 }
+
+func (Transformer) TransformReported(p *ast.Program, _ *sema.StratumResult) (*transform.Outcome, error) {
+	r, err := Decide(p)
+	if err != nil {
+		return nil, err
+	}
+	return &transform.Outcome{Program: r.FinalProgram, Candidate: r.CandidateProgram, CandidateReport: r.CandidateReport, Report: r.Report}, nil
+}

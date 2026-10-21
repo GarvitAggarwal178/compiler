@@ -91,3 +91,13 @@ func TestAllowednessDiagnosticSpanIsNonZero(t *testing.T) {
 		t.Fatalf("expected a real span, got zero-value %v", diags[0].Span)
 	}
 }
+
+func TestUnsupportedOrUngroundedTermsRejected(t *testing.T) {
+	for _, src := range []string{
+		".decl p(x:number)\np(_).\n",
+		".decl p(x:number)\np(1).\n.decl q()\nq() :- !p(_).\n",
+		".decl p(x:number)\np(1).\n.decl q(x:number)\nq(x) :- p(x+1).\n",
+	} {
+		expectRejected(t, src)
+	}
+}

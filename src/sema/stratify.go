@@ -61,8 +61,8 @@ func CheckStratification(prog *ast.Program) ([]Diagnostic, *StratumResult) {
 	g := buildPrecedenceGraph(prog)
 	sccOf, sccMembers := tarjanSCC(g)
 
-	for from, edges := range g.adjacency {
-		for _, e := range edges {
+	for _, from := range sortedGraphNames(g) {
+		for _, e := range sortedEdges(g.adjacency[from]) {
 			if e.negative && sccOf[from] == sccOf[e.to] {
 				members := append([]string{}, sccMembers[sccOf[from]]...)
 				sort.Strings(members)
@@ -212,6 +212,15 @@ func tarjanSCC(g *graph) (map[string]int, [][]string) {
 			strongconnect(v)
 		}
 	}
+	for _, members := range sccMembers {
+		sort.Strings(members)
+	}
+	sort.Slice(sccMembers, func(i, j int) bool { return sccMembers[i][0] < sccMembers[j][0] })
+	for i, members := range sccMembers {
+		for _, name := range members {
+			sccOf[name] = i
+		}
+	}
 	return sccOf, sccMembers
 }
 
@@ -261,4 +270,27 @@ func computeStrata(g *graph, sccOf map[string]int, sccMembers [][]string) map[st
 		}
 	}
 	return result
+}
+
+func sortedGraphNames(g *graph) []string {
+	names := make([]string, 0, len(g.nodes))
+	for n := range g.nodes {
+		names = append(names, n)
+	}
+	sort.Strings(names)
+	return names
+}
+func sortedEdges(edges []edge) []edge {
+	out := append([]edge{}, edges...)
+	sort.SliceStable(out, func(i, j int) bool {
+		a, b := out[i], out[j]
+		if a.to != b.to {
+			return a.to < b.to
+		}
+		if a.negative != b.negative {
+			return !a.negative
+		}
+		return a.span.Start.Offset < b.span.Start.Offset
+	})
+	return out
 }

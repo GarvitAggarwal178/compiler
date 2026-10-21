@@ -1,8 +1,9 @@
 # package eval
 
-`fallback.go` is Lane A (specs/02-m1-build.md §1) and contains only the
-marker comment. Everything else here — `naive.go` (§3.8), `seminaive.go`
-(§3.9), `io.go` — is Lane B.
+`naive.go` and `seminaive.go` implement the two Go fixed-point evaluators.
+`io.go` loads and writes TSV data; `fallback.go` is retained for historical
+context. The guarded transform produces an ordinary program for these
+evaluators. The older Lane A/B labels in milestone records are historical.
 
 ## The SCC-vs-stratum evaluation-order bug (§3.9, found by the
 differential harness, not by inspection)
@@ -63,11 +64,11 @@ allowed as `q(Y), X = Y + 1.` (probe case b). But a naive left-to-right
 *evaluator* cannot process `X = Y + 1` before anything has bound `Y`: at
 that point in the walk, `Y` isn't in `bindings` yet, and there is nothing
 sensible to do with an equation whose right-hand side isn't computable.
-`safeOrder` greedily schedules whatever literal is currently safe (a
-positive atom always is; a negated atom or a non-grounding constraint
-only once every variable it needs is already bound; a grounding `V = E`
-constraint once `E`'s variables are bound, even if `V` itself isn't yet)
-and repeats until the whole body is scheduled. `TestEquationBeforeGroundingAtomSafeOrder`
+`safeOrder` delegates to the shared `src/plan` scheduler. Bare columns bind
+before their arithmetic tests. If stable scheduling stalls on an arithmetic cycle,
+positive compound columns are lowered to fresh variables and equality filters;
+the source AST stays intact. A remaining planning or missing-binding invariant
+failure is explicit. Division/modulo-zero still filters a derivation. `TestEquationBeforeGroundingAtomSafeOrder`
 pins this directly against probe case (b)'s own shape.
 
 **The `=` constraint has two different runtime behaviors, matching its
@@ -129,12 +130,6 @@ this against a 5-node chain computed via `p(x,y):-p(x,z),p(z,y).`
 specifically (not the edge-driven `p(x,y):-p(x,z),edge(z,y).` shape,
 which has no self-join to get wrong).
 
-**A `Wildcard` in *head* position falls back to a fixed value
-(`NumberValue(0)`) instead of panicking.** Real Soufflé rejects this
-construct outright (`experiments/26-hostile-source-corpus.md`,
-`semantic_wildcard_in_head.dl`) but sema (§3.4-§3.6, as implemented)
-doesn't check for it — adding that check was out of scope creep for this
-item. The fallback exists purely so a program containing this construct
-degrades to "produces a wrong-but-harmless tuple" rather than a crash,
-consistent with "never panic" as the higher-priority invariant when the
-two goals conflict.
+**Head wildcards are rejected by semantic analysis.** The older evaluator
+fallback described here was superseded in the pass-one maintenance:
+`CheckAllowedness` now diagnoses a wildcard head term before execution.

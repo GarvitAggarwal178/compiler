@@ -17,20 +17,26 @@ type Transformer struct{}
 
 var _ transform.Transformer = Transformer{}
 
-func (Transformer) Transform(prog *ast.Program, _ *sema.StratumResult) (*ast.Program, error) {
+func (t Transformer) Transform(prog *ast.Program, strata *sema.StratumResult) (*ast.Program, error) {
+	out, err := t.TransformReported(prog, strata)
+	if err != nil {
+		return nil, err
+	}
+	return out.Program, nil
+}
+func (Transformer) TransformReported(prog *ast.Program, _ *sema.StratumResult) (*transform.Outcome, error) {
 	schemas, diags := sema.BuildSymbolTable(prog)
 	if len(diags) > 0 {
-		return nil, fmt.Errorf("magicset: input program failed BuildSymbolTable, which should be impossible for an "+
-			"already-accepted program: %v", diags)
+		return nil, fmt.Errorf("magicset: input schema invalid: %v", diags)
 	}
 	queries := FindQueries(prog)
 	if len(queries) == 0 {
-		return prog, nil
+		return &transform.Outcome{Program: prog, Report: transform.IdentityReport(prog, "magicset")}, nil
 	}
 	result, err := Adorn(prog, queries)
 	if err != nil {
 		return nil, err
 	}
-	out, _ := Generate(prog, schemas.Relations, result)
-	return out, nil
+	p, _, report := GenerateMixedReported(prog, schemas.Relations, result, nil)
+	return &transform.Outcome{Program: p, Candidate: p, CandidateReport: report, Report: report}, nil
 }

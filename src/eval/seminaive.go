@@ -94,12 +94,14 @@ func (e *Evaluator) semiNaiveSCC(clauses []*ast.Clause, sccOf map[string]int) {
 	delta := map[string]*ir.Relation{}
 	for name := range sccRelNames {
 		delta[name] = ir.NewRelation(name, e.Relations[name].Arity)
+		// An .input relation may also have recursive rules. Loaded rows
+		// must seed the first delta, without counting them as derivations.
+		for _, tup := range e.Relations[name].All() {
+			delta[name].Insert(tup)
+		}
 	}
 
-	// Seed round: every relation in this SCC starts empty (nothing
-	// outside the SCC could have contributed to it -- only same-SCC
-	// recursive clauses can, and those haven't run yet), so every tuple
-	// a seed clause derives here is new by definition.
+	// Seed rules add any rows not already loaded from an input file.
 	for _, p := range seed {
 		headRel := e.Relations[p.clause.Head.Name]
 		e.evalBody(p.ordered, 0, map[string]ir.Value{}, nil, func(bindings map[string]ir.Value) {

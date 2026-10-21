@@ -2,22 +2,24 @@
 package main
 
 import (
+	"crypto/sha256"
 	"encoding/json"
 	"fmt"
 	"os"
-	"sort"
 
 	"strings"
 
 	"dlc/src/ast"
 	"dlc/src/codegen"
 	"dlc/src/eval"
+	"dlc/src/inspect"
 	"dlc/src/ir"
 	"dlc/src/lexer"
 	"dlc/src/parser"
 	"dlc/src/sema"
 	"dlc/src/token"
 	"dlc/src/transform"
+	"dlc/src/transform/compact"
 	"dlc/src/transform/guard"
 	"dlc/src/transform/magicset"
 )
@@ -28,8 +30,17 @@ func main() {
 		os.Exit(2)
 	}
 	subcommand, path := os.Args[1], os.Args[2]
+	switch subcommand {
+	case "lex", "parse", "roundtrip", "check", "explain":
+		if len(os.Args) != 3 {
+			fmt.Fprintf(os.Stderr, "usage: dlc %s <file>\n", subcommand)
+			os.Exit(2)
+		}
+	}
 
 	switch subcommand {
+	case "inspect":
+		runInspect(path, transformerFlag(os.Args[3:]))
 	case "lex":
 		runLex(path)
 	case "parse":
@@ -51,11 +62,11 @@ func main() {
 		}
 		runRun(path, os.Args[3], os.Args[4], true, transformerFlag(os.Args[5:]))
 	case "codegen":
-		if len(os.Args) != 4 {
-			fmt.Fprintln(os.Stderr, "usage: dlc codegen <file> <outfile.c>")
+		if len(os.Args) < 4 || len(os.Args) > 5 {
+			fmt.Fprintln(os.Stderr, "usage: dlc codegen <file> <outfile.c> [--transformer=name]")
 			os.Exit(2)
 		}
-		runCodegen(path, os.Args[3])
+		runCodegen(path, os.Args[3], transformerFlag(os.Args[4:]))
 	case "emit":
 		runEmit(path, transformerFlag(os.Args[3:]))
 	case "explain":
@@ -143,6 +154,9 @@ func runLex(path string) {
 		os.Exit(1)
 	}
 	fmt.Println(string(enc))
+	if out.ErrorCount > 0 {
+		os.Exit(1)
+	}
 }
 
 type runOutput struct {
@@ -173,12 +187,62 @@ type runOutput struct {
 // accept the flag identically.
 func transformerFlag(args []string) string {
 	name := "passthrough"
+	if len(args) > 1 {
+		fmt.Fprintln(os.Stderr, "expected at most one --transformer flag")
+		os.Exit(2)
+	}
 	for _, a := range args {
 		if v, ok := strings.CutPrefix(a, "--transformer="); ok {
 			name = v
+		} else {
+			fmt.Fprintf(os.Stderr, "unknown argument %q\n", a)
+			os.Exit(2)
 		}
 	}
+	if _, ok := transformerRegistry[name]; !ok {
+		fmt.Fprintf(os.Stderr, "unknown transformer %q\n", name)
+		os.Exit(2)
+	}
 	return name
+}
+
+// applyTransformer is shared by execution, C generation and emission. Never
+// reuse source schemas/strata for a rewritten AST. Only experimental raw
+// emission may expose an unstratifiable candidate for inspection.
+func applyTransformer(prog *ast.Program, strata *sema.StratumResult, name string, allowUnstratifiable bool) (*ast.Program, *sema.SymbolTable, *sema.StratumResult, error) {
+	p, st, ss, _, err := applyTransformerDetailed(prog, strata, name, allowUnstratifiable)
+	return p, st, ss, err
+}
+func applyTransformerDetailed(prog *ast.Program, strata *sema.StratumResult, name string, allowUnstratifiable bool) (*ast.Program, *sema.SymbolTable, *sema.StratumResult, *transform.Report, error) {
+	tr, ok := transformerRegistry[name]
+	if !ok {
+		return nil, nil, nil, nil, fmt.Errorf("unknown transformer %q", name)
+	}
+	var q *ast.Program
+	var report *transform.Report
+	var err error
+	if reporting, ok := tr.(transform.ReportingTransformer); ok {
+		var out *transform.Outcome
+		out, err = reporting.TransformReported(prog, strata)
+		if err == nil {
+			q, report = out.Program, out.Report
+		}
+	} else {
+		q, err = tr.Transform(prog, strata)
+	}
+	if err != nil {
+		return nil, nil, nil, nil, err
+	}
+	diags := append(sema.CheckDeclType(q), sema.CheckAllowedness(q)...)
+	sd, qs := sema.CheckStratification(q)
+	if !allowUnstratifiable {
+		diags = append(diags, sd...)
+	}
+	if len(diags) > 0 {
+		return nil, nil, nil, nil, fmt.Errorf("transformed program failed semantic checks: %v", diags)
+	}
+	st, _ := sema.BuildSymbolTable(q)
+	return q, st, qs, report, nil
 }
 
 func runRun(path, factsDir, outDir string, semiNaive bool, transformerName string) {
@@ -207,7 +271,7 @@ func runRun(path, factsDir, outDir string, semiNaive bool, transformerName strin
 		}
 		enc, _ := json.Marshal(out)
 		fmt.Println(string(enc))
-		return
+		os.Exit(1)
 	}
 
 	var diags []sema.Diagnostic
@@ -224,7 +288,7 @@ func runRun(path, factsDir, outDir string, semiNaive bool, transformerName strin
 		}
 		enc, _ := json.Marshal(out)
 		fmt.Println(string(enc))
-		return
+		os.Exit(1)
 	}
 
 	// Apply the named Transformer, then re-run sema.CheckStratification on
@@ -237,24 +301,9 @@ func runRun(path, factsDir, outDir string, semiNaive bool, transformerName strin
 	// Transformer exists to justify it (transformer.go's own DESIGN.md
 	// note: "the natural place to wire it in is exactly when Lane A's
 	// real Transformer lands").
-	transformer, ok := transformerRegistry[transformerName]
-	if !ok {
-		out := runOutput{Status: "eval_error", Panic: fmt.Sprintf("unknown transformer %q", transformerName)}
-		enc, _ := json.Marshal(out)
-		fmt.Println(string(enc))
-		os.Exit(2)
-	}
-	transformed, terr := transformer.Transform(prog, stratResult)
+	transformed, transformedSchemas, transformedStrat, terr := applyTransformer(prog, stratResult, transformerName, false)
 	if terr != nil {
 		out := runOutput{Status: "eval_error", Panic: terr.Error()}
-		enc, _ := json.Marshal(out)
-		fmt.Println(string(enc))
-		os.Exit(1)
-	}
-	transformedSchemas, _ := sema.BuildSymbolTable(transformed)
-	_, transformedStrat := sema.CheckStratification(transformed)
-	if transformedStrat == nil {
-		out := runOutput{Status: "eval_error", Panic: "transformer produced an unstratifiable program -- this should be impossible for --transformer=guarded, which is required to only ever return a stratifiable result"}
 		enc, _ := json.Marshal(out)
 		fmt.Println(string(enc))
 		os.Exit(1)
@@ -289,7 +338,12 @@ func runRun(path, factsDir, outDir string, semiNaive bool, transformerName strin
 		fmt.Println(string(enc))
 		os.Exit(1)
 	}
-	writeProfile(evaluator, outDir)
+	if err := writeProfile(evaluator, outDir); err != nil {
+		out := runOutput{Status: "eval_error", Panic: err.Error()}
+		enc, _ := json.Marshal(out)
+		fmt.Println(string(enc))
+		os.Exit(1)
+	}
 
 	out := runOutput{Status: "ok", DerivationAttempts: evaluator.DerivationAttempts}
 	enc, _ := json.Marshal(out)
@@ -300,13 +354,13 @@ func runRun(path, factsDir, outDir string, semiNaive bool, transformerName strin
 // profile shape (ir.EmitProfile) -- harness/parse_profile.py and
 // harness/tuple_report.py, already written against real Soufflé output,
 // read this file unmodified.
-func writeProfile(evaluator *eval.Evaluator, outDir string) {
+func writeProfile(evaluator *eval.Evaluator, outDir string) error {
 	doc := ir.EmitProfile(evaluator.Relations)
 	enc, err := json.MarshalIndent(doc, "", "  ")
 	if err != nil {
-		return
+		return err
 	}
-	_ = os.WriteFile(outDir+"/profile.json", enc, 0o644)
+	return os.WriteFile(outDir+"/profile.json", enc, 0o644)
 }
 
 type codegenOutput struct {
@@ -322,7 +376,7 @@ type codegenOutput struct {
 // is exactly one already-accepted by every other subcommand -- codegen
 // never sees a program the rest of the pipeline hasn't already
 // validated.
-func runCodegen(path, outPath string) {
+func runCodegen(path, outPath, transformerName string) {
 	defer func() {
 		if r := recover(); r != nil {
 			out := codegenOutput{Status: "panic", Panic: fmt.Sprintf("%v", r)}
@@ -348,7 +402,7 @@ func runCodegen(path, outPath string) {
 		}
 		enc, _ := json.Marshal(out)
 		fmt.Println(string(enc))
-		return
+		os.Exit(1)
 	}
 
 	var diags []sema.Diagnostic
@@ -365,11 +419,17 @@ func runCodegen(path, outPath string) {
 		}
 		enc, _ := json.Marshal(out)
 		fmt.Println(string(enc))
-		return
+		os.Exit(1)
 	}
 
-	schemas, _ := sema.BuildSymbolTable(prog)
-	cSource := codegen.Generate(prog, schemas.Relations, stratResult)
+	compiled, schemas, compiledStrata, report, err := applyTransformerDetailed(prog, stratResult, transformerName, false)
+	if err != nil {
+		out := codegenOutput{Status: "transform_error", Panic: err.Error()}
+		enc, _ := json.Marshal(out)
+		fmt.Println(string(enc))
+		os.Exit(1)
+	}
+	cSource := fmt.Sprintf("/* source SHA-256 %x; mode %s; naive evaluation */\n", sha256.Sum256(src), transformerName) + codegen.GenerateWithReport(compiled, schemas.Relations, compiledStrata, report)
 	if err := os.WriteFile(outPath, []byte(cSource), 0o644); err != nil {
 		out := codegenOutput{Status: "eval_error", Panic: err.Error()}
 		enc, _ := json.Marshal(out)
@@ -387,9 +447,10 @@ func runCodegen(path, outPath string) {
 // transform) means adding one entry here -- nothing else in main.go
 // changes, per transform/transformer.go's own design note.
 var transformerRegistry = map[string]transform.Transformer{
-	"passthrough": transform.PassThrough{},
-	"magicset":    magicset.Transformer{},
-	"guarded":     guard.Transformer{},
+	"passthrough":     transform.PassThrough{},
+	"magicset":        magicset.Transformer{},
+	"guarded":         guard.Transformer{},
+	"guarded-compact": compact.Transformer{},
 }
 
 type emitOutput struct {
@@ -431,7 +492,7 @@ func runEmit(path, transformerName string) {
 		}
 		enc, _ := json.Marshal(out)
 		fmt.Println(string(enc))
-		return
+		os.Exit(1)
 	}
 
 	var diags []sema.Diagnostic
@@ -448,22 +509,15 @@ func runEmit(path, transformerName string) {
 		}
 		enc, _ := json.Marshal(out)
 		fmt.Println(string(enc))
-		return
+		os.Exit(1)
 	}
 
-	transformer, ok := transformerRegistry[transformerName]
-	if !ok {
-		out := emitOutput{Status: "transform_error", Panic: fmt.Sprintf("unknown transformer %q", transformerName)}
-		enc, _ := json.Marshal(out)
-		fmt.Println(string(enc))
-		os.Exit(2)
-	}
-	transformed, err := transformer.Transform(prog, stratResult)
+	transformed, _, _, err := applyTransformer(prog, stratResult, transformerName, transformerName == "magicset")
 	if err != nil {
 		out := emitOutput{Status: "transform_error", Panic: err.Error()}
 		enc, _ := json.Marshal(out)
 		fmt.Println(string(enc))
-		return
+		os.Exit(1)
 	}
 
 	out := emitOutput{Status: "ok", Printed: parser.Print(transformed)}
@@ -475,150 +529,80 @@ func runEmit(path, transformerName string) {
 	fmt.Println(string(enc))
 }
 
-// runExplain is NIGHT-BATCH-04 E's entry point: a debugging/presentation
-// tool, not a measurement path (contrast runEmit/runRun, which print one
-// machine-readable JSON document). Plain text to stdout, one fact per
-// line, a fixed "TAG key=val key=val ..." shape per line so a later
-// consumer (G's presentation script) can split on the first space and
-// then on "=" without a real parser. Three modes, chosen by what the
-// program's own front end decides, not by a flag:
-//
-//   - REJECTION: the program fails an existing sema check. One REJECT
-//     line per diagnostic (all four grounds already share Category/
-//     Span/Message -- this mode adds nothing new, it just re-renders
-//     what runCheck already computes, as fact lines instead of JSON).
-//   - TRANSFORM: an accepted program with a bindable query. One line per
-//     adorned (predicate,adornment) pair discovered by the worklist, one
-//     WORKLIST line with the iteration count, one MAGIC line per magic
-//     relation generated, and one NEGATED line per negated occurrence
-//     naming its pre- and post-relaxation adornment (M4-SIPS.md §1/§2).
-//   - GUARD: guard.Decide's per-predicate TRANSFORM/FALLBACK verdict; if
-//     anything declines, the culprit set, the cone, and the declined
-//     fraction (M2-M3-BUILD.md §6/§7).
-//
-// A program with no bindable query (magicset.FindQueries returns empty) gets
-// a single NOQUERY line instead of TRANSFORM/GUARD output -- there is
-// nothing for either mode to report (M2-M3-BUILD.md §2: "expected on the
-// positive fragment").
-func runExplain(path string) {
-	defer func() {
-		if r := recover(); r != nil {
-			fmt.Printf("PANIC message=%q\n", fmt.Sprintf("%v", r))
-			os.Exit(1)
-		}
-	}()
+// runInspect exposes versioned compiler-owned data; runExplain renders a
+// human summary. The demo consumes inspection JSON instead of parsing text.
+func runInspect(path, mode string) {
+	src, err := os.ReadFile(path)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "reading source: %v\n", err)
+		os.Exit(1)
+	}
+	report := inspect.Build(src, transformerRegistry[mode], mode)
+	if err := json.NewEncoder(os.Stdout).Encode(report); err != nil {
+		fmt.Fprintln(os.Stderr, err)
+		os.Exit(1)
+	}
+	if report.Status != "ok" {
+		os.Exit(1)
+	}
+}
 
+func runExplain(path string) {
 	src, err := os.ReadFile(path)
 	if err != nil {
 		fmt.Printf("READ_ERROR message=%q\n", err.Error())
 		os.Exit(1)
 	}
-
-	prog, perrs := parser.Parse(src)
-	if len(perrs) > 0 {
-		for _, e := range perrs {
-			fmt.Printf("REJECT ground=parse span=%s message=%q\n", spanText(e.Span), e.Message)
+	r := inspect.Build(src, guard.Transformer{}, "guarded")
+	if r.Status != "ok" {
+		for _, d := range r.Diagnostics {
+			location := "unavailable"
+			if d.Span != nil {
+				location = fmt.Sprintf("%d:%d-%d:%d", d.Span.Start.Line, d.Span.Start.Col, d.Span.End.Line, d.Span.End.Col)
+			}
+			fmt.Printf("REJECT ground=%s span=%s stage=%s message=%q\n", d.Category, location, d.Stage, d.Message)
 		}
+		os.Exit(1)
+	}
+	fmt.Println("SOURCE status=valid")
+	report := r.Transform
+	if len(report.Queries) == 0 {
+		fmt.Printf("NOQUERY reason=%q\n", report.NoQueryReason)
 		return
 	}
-
-	var diags []sema.Diagnostic
-	diags = append(diags, sema.CheckDeclType(prog)...)
-	diags = append(diags, sema.CheckAllowedness(prog)...)
-	stratDiags, stratResult := sema.CheckStratification(prog)
-	diags = append(diags, stratDiags...)
-	if len(diags) > 0 {
-		// REJECTION mode.
-		for _, d := range diags {
-			fmt.Printf("REJECT ground=%s span=%s message=%q\n", d.Category, spanText(d.Span), d.Message)
+	for _, q := range report.Queries {
+		fmt.Printf("QUERY pred=%s rel=%s\n", q.SourcePredicate, q.ViewID)
+	}
+	fmt.Printf("WORKLIST pops=%d\n", report.WorklistPops)
+	for _, rel := range report.Relations {
+		switch rel.Role {
+		case "adorned":
+			fmt.Printf("ADORN rel=%s source=%s\n", rel.ID, rel.SourcePredicate)
+		case "magic":
+			fmt.Printf("MAGIC rel=%s source=%s\n", rel.ID, rel.SourcePredicate)
 		}
-		return
 	}
-	_ = stratResult
-
-	// TRANSFORM mode.
-	queries := magicset.FindQueries(prog)
-	if len(queries) == 0 {
-		fmt.Println("NOQUERY reason=\"no .output relation with a single, constant-bearing atom body\"")
-		return
+	for _, n := range report.Negations {
+		fmt.Printf("NEGATED pred=%s pre_adorn=%s adorn=%s\n", n.Predicate, strings.Join(n.PreBindings, ""), strings.Join(n.Bindings, ""))
 	}
-	result, err := magicset.Adorn(prog, queries)
-	if err != nil {
-		fmt.Printf("TRANSFORM_ERROR message=%q\n", err.Error())
-		return
+	if r.Candidate != nil {
+		fmt.Printf("CANDIDATE status=%s\n", r.Candidate.Status)
 	}
-	for _, q := range queries {
-		fmt.Printf("QUERY pred=%s rel=%s\n", q.QueryAtom.Name, q.Key.RelName())
-	}
-	fmt.Printf("WORKLIST iterations=%d\n", result.Iterations)
-	for _, key := range result.Order {
-		fmt.Printf("ADORN rel=%s rules=%d\n", key.RelName(), len(result.Rules[key]))
-		fmt.Printf("MAGIC rel=%s for_rel=%s\n", key.MagicRelName(), key.RelName())
-	}
-	for pred := range result.Untouched {
-		fmt.Printf("UNTOUCHED pred=%s\n", pred)
-	}
-	for _, occ := range result.NegatedOccurrenceAdornments() {
-		relaxed := occ.Adorn.String() != occ.PreAdorn.String()
-		reason := "all-positions-restricting"
-		if relaxed {
-			reason = "non-restricting-full-scan-position-relaxed"
-		}
-		fmt.Printf("NEGATED pred=%s pre_adorn=%s adorn=%s relaxed=%t reason=%s\n",
-			occ.Pred, occ.PreAdorn.String(), occ.Adorn.String(), relaxed, reason)
-	}
-
-	// GUARD mode.
-	decideResult, err := guard.Decide(prog)
-	if err != nil {
-		fmt.Printf("GUARD_ERROR message=%q\n", err.Error())
-		return
-	}
-	if len(decideResult.DeclinedRelations) == 0 {
-		fmt.Println("GUARD verdict=STRATIFIABLE")
+	fmt.Printf("FINAL status=%s\n", r.Final.Status)
+	if len(report.Culprits) > 0 {
+		fmt.Printf("GUARD verdict=UNSTRATIFIABLE clause=a culprit=%s cone=%s\n", strings.Join(report.Culprits, ","), strings.Join(report.Cone, ","))
 	} else {
-		fmt.Println("GUARD verdict=UNSTRATIFIABLE clause=a")
-		idb := map[string]bool{}
-		for _, c := range prog.Clauses {
-			idb[c.Head.Name] = true
-		}
-		fmt.Printf("GUARD culprit=%s cone=%s declined_fraction=%.3f\n",
-			joinedSortedKeys(decideResult.CulpritPredicates),
-			joinedSortedKeys(decideResult.ConeRelations),
-			float64(len(decideResult.DeclinedRelations))/float64(len(idb)))
+		fmt.Println("GUARD verdict=STRATIFIABLE")
 	}
-	idbAll := map[string]bool{}
-	for _, c := range prog.Clauses {
-		idbAll[c.Head.Name] = true
-	}
-	for _, pred := range sortedKeysOf(idbAll) {
-		action := "TRANSFORM"
-		if decideResult.DeclinedRelations[pred] {
+	for _, d := range report.Decisions {
+		action := "ORIGINAL"
+		if d.Fallback {
 			action = "FALLBACK"
+		} else if d.Specialized {
+			action = "SPECIALIZED"
 		}
-		fmt.Printf("DECISION pred=%s action=%s\n", pred, action)
+		fmt.Printf("DECISION pred=%s action=%s full_extent_retained=%t reasons=%q\n", d.SourcePredicate, action, d.FullExtentRetained, strings.Join(d.RetainedReasons, "; "))
 	}
-}
-
-func spanText(s token.Span) string {
-	return fmt.Sprintf("%d:%d-%d:%d", s.Start.Line, s.Start.Col, s.End.Line, s.End.Col)
-}
-
-func joinedSortedKeys(m map[string]bool) string {
-	keys := sortedKeysOf(m)
-	if len(keys) == 0 {
-		return "{}"
-	}
-	return "{" + strings.Join(keys, ",") + "}"
-}
-
-func sortedKeysOf(m map[string]bool) []string {
-	out := make([]string, 0, len(m))
-	for k := range m {
-		out = append(out, k)
-	}
-	sort.Strings(out)
-	return out
 }
 
 type jsonDiagnostic struct {
@@ -674,6 +658,9 @@ func runParse(path string) {
 		os.Exit(1)
 	}
 	fmt.Println(string(enc))
+	if len(errs) > 0 {
+		os.Exit(1)
+	}
 }
 
 type jsonSemaDiagnostic struct {
@@ -721,7 +708,7 @@ func runCheck(path string) {
 		}
 		enc, _ := json.Marshal(out)
 		fmt.Println(string(enc))
-		return
+		os.Exit(1)
 	}
 
 	var diags []sema.Diagnostic
@@ -747,6 +734,9 @@ func runCheck(path string) {
 		os.Exit(1)
 	}
 	fmt.Println(string(enc))
+	if out.Status != "ok" {
+		os.Exit(1)
+	}
 }
 
 type roundtripOutput struct {
@@ -789,4 +779,7 @@ func runRoundtrip(path string) {
 		os.Exit(1)
 	}
 	fmt.Println(string(enc))
+	if r.Status != "match" {
+		os.Exit(1)
+	}
 }

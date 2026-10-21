@@ -1,0 +1,1130 @@
+{
+ "root": {
+  "program": {
+   "configuration": {
+    "": "/root/compiler/measurements/pass1-2026-10-19/oracle/growing_n20/transformed.dl",
+    "fact-dir": "/root/compiler/fixtures/cone_corpus/cc_growing_sibling/n20",
+    "include-dir": ".",
+    "jobs": "1",
+    "libraries": "functors",
+    "library-dir": ".",
+    "output-dir": "/root/compiler/measurements/pass1-2026-10-19/oracle/growing_n20/guarded_souffle",
+    "profile": "/root/compiler/measurements/pass1-2026-10-19/oracle/growing_n20/guarded_souffle/profile.json",
+    "relationCount": "14",
+    "ruleCount": "23",
+    "version": "2.5",
+    "warn": "all",
+    "wno": "none"
+   },
+   "relation": {
+    "base": {
+     "loadtime": { "start": 99293772835, "end": 99293773138},
+     "num-tuples": 30,
+     "reads": 0,
+     "source-locator": "/root/compiler/measurements/pass1-2026-10-19/oracle/growing_n20/transformed.dl [1:7-1:11]"
+    },
+    "blocked": {
+     "loadtime": { "start": 99293773159, "end": 99293773238},
+     "num-tuples": 5,
+     "reads": 136,
+     "source-locator": "/root/compiler/measurements/pass1-2026-10-19/oracle/growing_n20/transformed.dl [5:7-5:14]"
+    },
+    "e": {
+     "loadtime": { "start": 99293773250, "end": 99293773306},
+     "num-tuples": 30,
+     "reads": 0,
+     "source-locator": "/root/compiler/measurements/pass1-2026-10-19/oracle/growing_n20/transformed.dl [3:7-3:8]"
+    },
+    "magic_tc_bf": {
+     "maxRSS": {
+      "post": 17680,
+      "pre": 17680
+     },
+     "non-recursive-rule": {
+      "magic_tc_bf(1).": {
+       "maxRSS": {
+        "post": 17680,
+        "pre": 17680
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 99293773342, "end": 99293773356},
+       "source-locator": "/root/compiler/measurements/pass1-2026-10-19/oracle/growing_n20/transformed.dl [38:1-38:16]"
+      }
+     },
+     "num-tuples": 1,
+     "reads": 0,
+     "runtime": { "start": 99293773318, "end": 99293773370},
+     "source-locator": "/root/compiler/measurements/pass1-2026-10-19/oracle/growing_n20/transformed.dl [18:7-18:18]"
+    },
+    "out": {
+     "maxRSS": {
+      "post": 17680,
+      "pre": 17680
+     },
+     "non-recursive-rule": {
+      "out(y) :- \n   p(1,y).": {
+       "atom-frequency": {
+        "out(y) :- \n   p(1,y).": {
+         "p": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 17680,
+        "pre": 17680
+       },
+       "num-tuples": 3,
+       "runtime": { "start": 99293776886, "end": 99293776889},
+       "source-locator": "/root/compiler/measurements/pass1-2026-10-19/oracle/growing_n20/transformed.dl [37:1-37:19]"
+      }
+     },
+     "num-tuples": 3,
+     "reads": 0,
+     "runtime": { "start": 99293776864, "end": 99293776900},
+     "savetime": { "start": 99293776907, "end": 99293777019},
+     "source-locator": "/root/compiler/measurements/pass1-2026-10-19/oracle/growing_n20/transformed.dl [12:7-12:10]"
+    },
+    "out2": {
+     "maxRSS": {
+      "post": 17680,
+      "pre": 17680
+     },
+     "non-recursive-rule": {
+      "out2(y) :- \n   tc_bf(1,y).": {
+       "atom-frequency": {
+        "out2(y) :- \n   tc_bf(1,y).": {
+         "tc_bf": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 17680,
+        "pre": 17680
+       },
+       "num-tuples": 20,
+       "runtime": { "start": 99293775251, "end": 99293775254},
+       "source-locator": "/root/compiler/measurements/pass1-2026-10-19/oracle/growing_n20/transformed.dl [39:1-39:24]"
+      }
+     },
+     "num-tuples": 20,
+     "reads": 0,
+     "runtime": { "start": 99293775238, "end": 99293775264},
+     "savetime": { "start": 99293775270, "end": 99293776639},
+     "source-locator": "/root/compiler/measurements/pass1-2026-10-19/oracle/growing_n20/transformed.dl [15:7-15:11]"
+    },
+    "p": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 99293776797, "end": 99293776799},
+       "maxRSS": {
+        "post": 17680,
+        "pre": 17680
+       },
+       "num-tuples": 3,
+       "recursive-rule": {
+        "p(x,y) :- \n   p(x,z),\n   !s(z),\n   q(z,y).": {
+         "0": {
+          "atom-frequency": {
+           "@new_p(x,y) :- \n   @delta_p(x,z),\n   !s(z),\n   q(z,y).": {
+            "@delta_p": {
+             "level": 0,
+             "num-tuples": 0
+            },
+            "q": {
+             "level": 1,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 17680,
+           "pre": 17680
+          },
+          "num-tuples": 3,
+          "runtime": { "start": 99293776738, "end": 99293776753},
+          "source-locator": "/root/compiler/measurements/pass1-2026-10-19/oracle/growing_n20/transformed.dl [25:1-25:36]"
+         }
+        }
+       },
+       "runtime": { "start": 99293776722, "end": 99293776768}
+      },
+      "1": {
+       "maxRSS": {
+        "post": 17680,
+        "pre": 17680
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "p(x,y) :- \n   p(x,z),\n   !s(z),\n   q(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 17680,
+           "pre": 17680
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 99293776818, "end": 99293776820},
+          "source-locator": "/root/compiler/measurements/pass1-2026-10-19/oracle/growing_n20/transformed.dl [25:1-25:36]"
+         }
+        }
+       },
+       "runtime": { "start": 99293776805, "end": 99293776832}
+      }
+     },
+     "maxRSS": {
+      "post": 17680,
+      "pre": 17680
+     },
+     "non-recursive-rule": {
+      "p(x,y) :- \n   e(x,y).": {
+       "atom-frequency": {
+        "p(x,y) :- \n   e(x,y).": {
+         "e": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 17680,
+        "pre": 17680
+       },
+       "num-tuples": 30,
+       "runtime": { "start": 99293776684, "end": 99293776695},
+       "source-locator": "/root/compiler/measurements/pass1-2026-10-19/oracle/growing_n20/transformed.dl [24:1-24:20]"
+      }
+     },
+     "num-tuples": 30,
+     "reads": 3,
+     "runtime": { "start": 99293776656, "end": 99293776709},
+     "source-locator": "/root/compiler/measurements/pass1-2026-10-19/oracle/growing_n20/transformed.dl [11:7-11:8]"
+    },
+    "q": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 99293773633, "end": 99293773640},
+       "maxRSS": {
+        "post": 17680,
+        "pre": 17680
+       },
+       "num-tuples": 40,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "atom-frequency": {
+           "@new_q(x,y) :- \n   @delta_q(x,z),\n   base(z,y).": {
+            "@delta_q": {
+             "level": 0,
+             "num-tuples": 0
+            },
+            "base": {
+             "level": 1,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 17680,
+           "pre": 17680
+          },
+          "num-tuples": 40,
+          "runtime": { "start": 99293773536, "end": 99293773580},
+          "source-locator": "/root/compiler/measurements/pass1-2026-10-19/oracle/growing_n20/transformed.dl [27:1-27:32]"
+         }
+        }
+       },
+       "runtime": { "start": 99293773519, "end": 99293773596}
+      },
+      "1": {
+       "copytime": { "start": 99293773735, "end": 99293773741},
+       "maxRSS": {
+        "post": 17680,
+        "pre": 17680
+       },
+       "num-tuples": 35,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 17680,
+           "pre": 17680
+          },
+          "num-tuples": 35,
+          "runtime": { "start": 99293773673, "end": 99293773691},
+          "source-locator": "/root/compiler/measurements/pass1-2026-10-19/oracle/growing_n20/transformed.dl [27:1-27:32]"
+         }
+        }
+       },
+       "runtime": { "start": 99293773657, "end": 99293773704}
+      },
+      "2": {
+       "copytime": { "start": 99293773821, "end": 99293773827},
+       "maxRSS": {
+        "post": 17680,
+        "pre": 17680
+       },
+       "num-tuples": 22,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 17680,
+           "pre": 17680
+          },
+          "num-tuples": 22,
+          "runtime": { "start": 99293773763, "end": 99293773776},
+          "source-locator": "/root/compiler/measurements/pass1-2026-10-19/oracle/growing_n20/transformed.dl [27:1-27:32]"
+         }
+        }
+       },
+       "runtime": { "start": 99293773746, "end": 99293773788}
+      },
+      "3": {
+       "copytime": { "start": 99293773954, "end": 99293773959},
+       "maxRSS": {
+        "post": 17680,
+        "pre": 17680
+       },
+       "num-tuples": 8,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 17680,
+           "pre": 17680
+          },
+          "num-tuples": 8,
+          "runtime": { "start": 99293773863, "end": 99293773885},
+          "source-locator": "/root/compiler/measurements/pass1-2026-10-19/oracle/growing_n20/transformed.dl [27:1-27:32]"
+         }
+        }
+       },
+       "runtime": { "start": 99293773834, "end": 99293773905}
+      },
+      "4": {
+       "copytime": { "start": 99293773999, "end": 99293774005},
+       "maxRSS": {
+        "post": 17680,
+        "pre": 17680
+       },
+       "num-tuples": 1,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 17680,
+           "pre": 17680
+          },
+          "num-tuples": 1,
+          "runtime": { "start": 99293773966, "end": 99293773970},
+          "source-locator": "/root/compiler/measurements/pass1-2026-10-19/oracle/growing_n20/transformed.dl [27:1-27:32]"
+         }
+        }
+       },
+       "runtime": { "start": 99293773965, "end": 99293773981}
+      },
+      "5": {
+       "maxRSS": {
+        "post": 17680,
+        "pre": 17680
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 17680,
+           "pre": 17680
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 99293774012, "end": 99293774013},
+          "source-locator": "/root/compiler/measurements/pass1-2026-10-19/oracle/growing_n20/transformed.dl [27:1-27:32]"
+         }
+        }
+       },
+       "runtime": { "start": 99293774011, "end": 99293774021}
+      }
+     },
+     "maxRSS": {
+      "post": 17680,
+      "pre": 17680
+     },
+     "non-recursive-rule": {
+      "q(x,y) :- \n   base(x,y).": {
+       "atom-frequency": {
+        "q(x,y) :- \n   base(x,y).": {
+         "base": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 17680,
+        "pre": 17680
+       },
+       "num-tuples": 30,
+       "runtime": { "start": 99293773486, "end": 99293773495},
+       "source-locator": "/root/compiler/measurements/pass1-2026-10-19/oracle/growing_n20/transformed.dl [26:1-26:23]"
+      }
+     },
+     "num-tuples": 30,
+     "reads": 185,
+     "runtime": { "start": 99293773464, "end": 99293773506},
+     "source-locator": "/root/compiler/measurements/pass1-2026-10-19/oracle/growing_n20/transformed.dl [9:7-9:8]"
+    },
+    "s": {
+     "maxRSS": {
+      "post": 17680,
+      "pre": 17680
+     },
+     "non-recursive-rule": {
+      "s(x) :- \n   q(x,y),\n   blocked(y).": {
+       "atom-frequency": {
+        "s(x) :- \n   q(x,y),\n   blocked(y).": {
+         "q": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 17680,
+        "pre": 17680
+       },
+       "num-tuples": 12,
+       "runtime": { "start": 99293774117, "end": 99293774134},
+       "source-locator": "/root/compiler/measurements/pass1-2026-10-19/oracle/growing_n20/transformed.dl [28:1-28:29]"
+      }
+     },
+     "num-tuples": 12,
+     "reads": 33,
+     "runtime": { "start": 99293774097, "end": 99293774149},
+     "source-locator": "/root/compiler/measurements/pass1-2026-10-19/oracle/growing_n20/transformed.dl [10:7-10:8]"
+    },
+    "sibling_edge": {
+     "loadtime": { "start": 99293773378, "end": 99293773452},
+     "num-tuples": 119,
+     "reads": 0,
+     "source-locator": "/root/compiler/measurements/pass1-2026-10-19/oracle/growing_n20/transformed.dl [7:7-7:19]"
+    },
+    "sup_tc_bf_r0_1": {
+     "maxRSS": {
+      "post": 17680,
+      "pre": 17680
+     },
+     "non-recursive-rule": {
+      "sup_tc_bf_r0_1(x,y) :- \n   magic_tc_bf(x),\n   sibling_edge(x,y).": {
+       "atom-frequency": {
+        "sup_tc_bf_r0_1(x,y) :- \n   magic_tc_bf(x),\n   sibling_edge(x,y).": {
+         "magic_tc_bf": {
+          "level": 0,
+          "num-tuples": 0
+         },
+         "sibling_edge": {
+          "level": 1,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 17680,
+        "pre": 17680
+       },
+       "num-tuples": 8,
+       "runtime": { "start": 99293774062, "end": 99293774069},
+       "source-locator": "/root/compiler/measurements/pass1-2026-10-19/oracle/growing_n20/transformed.dl [30:1-30:63]"
+      }
+     },
+     "num-tuples": 8,
+     "reads": 0,
+     "runtime": { "start": 99293774038, "end": 99293774090},
+     "source-locator": "/root/compiler/measurements/pass1-2026-10-19/oracle/growing_n20/transformed.dl [19:7-19:21]"
+    },
+    "sup_tc_bf_r1_1": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 99293774403, "end": 99293774405},
+       "maxRSS": {
+        "post": 17680,
+        "pre": 17680
+       },
+       "num-tuples": 8,
+       "recursive-rule": {
+        "sup_tc_bf_r1_1(x,z) :- \n   magic_tc_bf(x),\n   tc_bf(x,z).": {
+         "0": {
+          "atom-frequency": {
+           "@new_sup_tc_bf_r1_1(x,z) :- \n   magic_tc_bf(x),\n   @delta_tc_bf(x,z).": {
+            "@delta_tc_bf": {
+             "level": 1,
+             "num-tuples": 0
+            },
+            "magic_tc_bf": {
+             "level": 0,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 17680,
+           "pre": 17680
+          },
+          "num-tuples": 8,
+          "runtime": { "start": 99293774238, "end": 99293774244},
+          "source-locator": "/root/compiler/measurements/pass1-2026-10-19/oracle/growing_n20/transformed.dl [33:1-33:56]"
+         }
+        }
+       },
+       "runtime": { "start": 99293774218, "end": 99293774258}
+      },
+      "1": {
+       "copytime": { "start": 99293774637, "end": 99293774639},
+       "maxRSS": {
+        "post": 17680,
+        "pre": 17680
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "sup_tc_bf_r1_1(x,z) :- \n   magic_tc_bf(x),\n   tc_bf(x,z).": {
+         "0": {
+          "maxRSS": {
+           "post": 17680,
+           "pre": 17680
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 99293774456, "end": 99293774457},
+          "source-locator": "/root/compiler/measurements/pass1-2026-10-19/oracle/growing_n20/transformed.dl [33:1-33:56]"
+         }
+        }
+       },
+       "runtime": { "start": 99293774441, "end": 99293774475}
+      },
+      "2": {
+       "copytime": { "start": 99293774872, "end": 99293774891},
+       "maxRSS": {
+        "post": 17680,
+        "pre": 17680
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "sup_tc_bf_r1_1(x,z) :- \n   magic_tc_bf(x),\n   tc_bf(x,z).": {
+         "0": {
+          "maxRSS": {
+           "post": 17680,
+           "pre": 17680
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 99293774689, "end": 99293774690},
+          "source-locator": "/root/compiler/measurements/pass1-2026-10-19/oracle/growing_n20/transformed.dl [33:1-33:56]"
+         }
+        }
+       },
+       "runtime": { "start": 99293774675, "end": 99293774702}
+      },
+      "3": {
+       "copytime": { "start": 99293775081, "end": 99293775084},
+       "maxRSS": {
+        "post": 17680,
+        "pre": 17680
+       },
+       "num-tuples": 12,
+       "recursive-rule": {
+        "sup_tc_bf_r1_1(x,z) :- \n   magic_tc_bf(x),\n   tc_bf(x,z).": {
+         "0": {
+          "maxRSS": {
+           "post": 17680,
+           "pre": 17680
+          },
+          "num-tuples": 12,
+          "runtime": { "start": 99293774931, "end": 99293774935},
+          "source-locator": "/root/compiler/measurements/pass1-2026-10-19/oracle/growing_n20/transformed.dl [33:1-33:56]"
+         }
+        }
+       },
+       "runtime": { "start": 99293774930, "end": 99293774944}
+      },
+      "4": {
+       "maxRSS": {
+        "post": 17680,
+        "pre": 17680
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "sup_tc_bf_r1_1(x,z) :- \n   magic_tc_bf(x),\n   tc_bf(x,z).": {
+         "0": {
+          "maxRSS": {
+           "post": 17680,
+           "pre": 17680
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 99293775117, "end": 99293775118},
+          "source-locator": "/root/compiler/measurements/pass1-2026-10-19/oracle/growing_n20/transformed.dl [33:1-33:56]"
+         }
+        }
+       },
+       "runtime": { "start": 99293775117, "end": 99293775128}
+      }
+     },
+     "num-tuples": 0,
+     "reads": 20,
+     "source-locator": "/root/compiler/measurements/pass1-2026-10-19/oracle/growing_n20/transformed.dl [22:7-22:21]"
+    },
+    "sup_tc_bf_r1_2": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 99293774412, "end": 99293774427},
+       "maxRSS": {
+        "post": 17680,
+        "pre": 17680
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "sup_tc_bf_r1_2(x,y) :- \n   sup_tc_bf_r1_1(x,z),\n   sibling_edge(z,y).": {
+         "0": {
+          "atom-frequency": {
+           "@new_sup_tc_bf_r1_2(x,y) :- \n   @delta_sup_tc_bf_r1_1(x,z),\n   sibling_edge(z,y).": {
+            "@delta_sup_tc_bf_r1_1": {
+             "level": 0,
+             "num-tuples": 0
+            },
+            "sibling_edge": {
+             "level": 1,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 17680,
+           "pre": 17680
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 99293774283, "end": 99293774285},
+          "source-locator": "/root/compiler/measurements/pass1-2026-10-19/oracle/growing_n20/transformed.dl [34:1-34:66]"
+         }
+        }
+       },
+       "runtime": { "start": 99293774266, "end": 99293774300}
+      },
+      "1": {
+       "copytime": { "start": 99293774643, "end": 99293774660},
+       "maxRSS": {
+        "post": 17680,
+        "pre": 17680
+       },
+       "num-tuples": 20,
+       "recursive-rule": {
+        "sup_tc_bf_r1_2(x,y) :- \n   sup_tc_bf_r1_1(x,z),\n   sibling_edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 17680,
+           "pre": 17680
+          },
+          "num-tuples": 20,
+          "runtime": { "start": 99293774500, "end": 99293774520},
+          "source-locator": "/root/compiler/measurements/pass1-2026-10-19/oracle/growing_n20/transformed.dl [34:1-34:66]"
+         }
+        }
+       },
+       "runtime": { "start": 99293774483, "end": 99293774538}
+      },
+      "2": {
+       "copytime": { "start": 99293774898, "end": 99293774900},
+       "maxRSS": {
+        "post": 17680,
+        "pre": 17680
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "sup_tc_bf_r1_2(x,y) :- \n   sup_tc_bf_r1_1(x,z),\n   sibling_edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 17680,
+           "pre": 17680
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 99293774725, "end": 99293774726},
+          "source-locator": "/root/compiler/measurements/pass1-2026-10-19/oracle/growing_n20/transformed.dl [34:1-34:66]"
+         }
+        }
+       },
+       "runtime": { "start": 99293774708, "end": 99293774740}
+      },
+      "3": {
+       "copytime": { "start": 99293775089, "end": 99293775104},
+       "maxRSS": {
+        "post": 17680,
+        "pre": 17680
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "sup_tc_bf_r1_2(x,y) :- \n   sup_tc_bf_r1_1(x,z),\n   sibling_edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 17680,
+           "pre": 17680
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 99293774964, "end": 99293774968},
+          "source-locator": "/root/compiler/measurements/pass1-2026-10-19/oracle/growing_n20/transformed.dl [34:1-34:66]"
+         }
+        }
+       },
+       "runtime": { "start": 99293774949, "end": 99293774984}
+      },
+      "4": {
+       "maxRSS": {
+        "post": 17680,
+        "pre": 17680
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "sup_tc_bf_r1_2(x,y) :- \n   sup_tc_bf_r1_1(x,z),\n   sibling_edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 17680,
+           "pre": 17680
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 99293775134, "end": 99293775148},
+          "source-locator": "/root/compiler/measurements/pass1-2026-10-19/oracle/growing_n20/transformed.dl [34:1-34:66]"
+         }
+        }
+       },
+       "runtime": { "start": 99293775134, "end": 99293775155}
+      }
+     },
+     "num-tuples": 0,
+     "reads": 119,
+     "source-locator": "/root/compiler/measurements/pass1-2026-10-19/oracle/growing_n20/transformed.dl [23:7-23:21]"
+    },
+    "tc_bf": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 99293774434, "end": 99293774435},
+       "maxRSS": {
+        "post": 17680,
+        "pre": 17680
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "tc_bf(x,y) :- \n   sup_tc_bf_r1_2(x,y).": {
+         "0": {
+          "atom-frequency": {
+           "@new_tc_bf(x,y) :- \n   @delta_sup_tc_bf_r1_2(x,y).": {
+            "@delta_sup_tc_bf_r1_2": {
+             "level": 0,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 17680,
+           "pre": 17680
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 99293774324, "end": 99293774326},
+          "source-locator": "/root/compiler/measurements/pass1-2026-10-19/oracle/growing_n20/transformed.dl [36:1-36:37]"
+         }
+        }
+       },
+       "runtime": { "start": 99293774307, "end": 99293774338}
+      },
+      "1": {
+       "copytime": { "start": 99293774667, "end": 99293774669},
+       "maxRSS": {
+        "post": 17680,
+        "pre": 17680
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "tc_bf(x,y) :- \n   sup_tc_bf_r1_2(x,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 17680,
+           "pre": 17680
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 99293774574, "end": 99293774577},
+          "source-locator": "/root/compiler/measurements/pass1-2026-10-19/oracle/growing_n20/transformed.dl [36:1-36:37]"
+         }
+        }
+       },
+       "runtime": { "start": 99293774547, "end": 99293774591}
+      },
+      "2": {
+       "copytime": { "start": 99293774907, "end": 99293774923},
+       "maxRSS": {
+        "post": 17680,
+        "pre": 17680
+       },
+       "num-tuples": 12,
+       "recursive-rule": {
+        "tc_bf(x,y) :- \n   sup_tc_bf_r1_2(x,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 17680,
+           "pre": 17680
+          },
+          "num-tuples": 12,
+          "runtime": { "start": 99293774761, "end": 99293774779},
+          "source-locator": "/root/compiler/measurements/pass1-2026-10-19/oracle/growing_n20/transformed.dl [36:1-36:37]"
+         }
+        }
+       },
+       "runtime": { "start": 99293774746, "end": 99293774790}
+      },
+      "3": {
+       "copytime": { "start": 99293775110, "end": 99293775111},
+       "maxRSS": {
+        "post": 17680,
+        "pre": 17680
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "tc_bf(x,y) :- \n   sup_tc_bf_r1_2(x,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 17680,
+           "pre": 17680
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 99293775008, "end": 99293775009},
+          "source-locator": "/root/compiler/measurements/pass1-2026-10-19/oracle/growing_n20/transformed.dl [36:1-36:37]"
+         }
+        }
+       },
+       "runtime": { "start": 99293774992, "end": 99293775022}
+      },
+      "4": {
+       "maxRSS": {
+        "post": 17680,
+        "pre": 17680
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "tc_bf(x,y) :- \n   sup_tc_bf_r1_2(x,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 17680,
+           "pre": 17680
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 99293775173, "end": 99293775174},
+          "source-locator": "/root/compiler/measurements/pass1-2026-10-19/oracle/growing_n20/transformed.dl [36:1-36:37]"
+         }
+        }
+       },
+       "runtime": { "start": 99293775159, "end": 99293775185}
+      }
+     },
+     "maxRSS": {
+      "post": 17680,
+      "pre": 17680
+     },
+     "non-recursive-rule": {
+      "tc_bf(x,y) :- \n   sup_tc_bf_r0_1(x,y).": {
+       "atom-frequency": {
+        "tc_bf(x,y) :- \n   sup_tc_bf_r0_1(x,y).": {
+         "sup_tc_bf_r0_1": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 17680,
+        "pre": 17680
+       },
+       "num-tuples": 8,
+       "runtime": { "start": 99293774191, "end": 99293774193},
+       "source-locator": "/root/compiler/measurements/pass1-2026-10-19/oracle/growing_n20/transformed.dl [31:1-31:37]"
+      }
+     },
+     "num-tuples": 8,
+     "reads": 20,
+     "runtime": { "start": 99293774172, "end": 99293774208},
+     "source-locator": "/root/compiler/measurements/pass1-2026-10-19/oracle/growing_n20/transformed.dl [20:7-20:12]"
+    }
+   },
+   "runtime": { "start": 99293772818, "end": 99293777026},
+   "starttime": { "time": 99293772733},
+   "usage": {
+    "timepoint": {
+     "99293772785": {
+      "maxRSS": 17680,
+      "systemtime": 4201,
+      "usertime": 4201
+     },
+     "99293772846": {
+      "maxRSS": 17680,
+      "systemtime": 4627,
+      "usertime": 4627
+     },
+     "99293773228": {
+      "maxRSS": 17680,
+      "systemtime": 4796,
+      "usertime": 4796
+     },
+     "99293773275": {
+      "maxRSS": 17680,
+      "systemtime": 4849,
+      "usertime": 4849
+     },
+     "99293773360": {
+      "maxRSS": 17680,
+      "systemtime": 4908,
+      "usertime": 4908
+     },
+     "99293773493": {
+      "maxRSS": 17680,
+      "systemtime": 5004,
+      "usertime": 5004
+     },
+     "99293773542": {
+      "maxRSS": 17680,
+      "systemtime": 5034,
+      "usertime": 5034
+     },
+     "99293773631": {
+      "maxRSS": 17680,
+      "systemtime": 5100,
+      "usertime": 5100
+     },
+     "99293773680": {
+      "maxRSS": 17680,
+      "systemtime": 5130,
+      "usertime": 5130
+     },
+     "99293773733": {
+      "maxRSS": 17680,
+      "systemtime": 5162,
+      "usertime": 5162
+     },
+     "99293773770": {
+      "maxRSS": 17680,
+      "systemtime": 5186,
+      "usertime": 5186
+     },
+     "99293773820": {
+      "maxRSS": 17680,
+      "systemtime": 5216,
+      "usertime": 5216
+     },
+     "99293773867": {
+      "maxRSS": 17680,
+      "systemtime": 5250,
+      "usertime": 5250
+     },
+     "99293773998": {
+      "maxRSS": 17680,
+      "systemtime": 5323,
+      "usertime": 5323
+     },
+     "99293774071": {
+      "maxRSS": 17680,
+      "systemtime": 5386,
+      "usertime": 5386
+     },
+     "99293774127": {
+      "maxRSS": 17680,
+      "systemtime": 5419,
+      "usertime": 5419
+     },
+     "99293774199": {
+      "maxRSS": 17680,
+      "systemtime": 5463,
+      "usertime": 5463
+     },
+     "99293774244": {
+      "maxRSS": 17680,
+      "systemtime": 5495,
+      "usertime": 5495
+     },
+     "99293774290": {
+      "maxRSS": 17680,
+      "systemtime": 5522,
+      "usertime": 5522
+     },
+     "99293774331": {
+      "maxRSS": 17680,
+      "systemtime": 5549,
+      "usertime": 5549
+     },
+     "99293774371": {
+      "maxRSS": 17680,
+      "systemtime": 5576,
+      "usertime": 5576
+     },
+     "99293774401": {
+      "maxRSS": 17680,
+      "systemtime": 5596,
+      "usertime": 5596
+     },
+     "99293774432": {
+      "maxRSS": 17680,
+      "systemtime": 5618,
+      "usertime": 5618
+     },
+     "99293774469": {
+      "maxRSS": 17680,
+      "systemtime": 5642,
+      "usertime": 5642
+     },
+     "99293774506": {
+      "maxRSS": 17680,
+      "systemtime": 5669,
+      "usertime": 5669
+     },
+     "99293774584": {
+      "maxRSS": 17680,
+      "systemtime": 5715,
+      "usertime": 5715
+     },
+     "99293774624": {
+      "maxRSS": 17680,
+      "systemtime": 5747,
+      "usertime": 5747
+     },
+     "99293774635": {
+      "maxRSS": 17680,
+      "systemtime": 5756,
+      "usertime": 5756
+     },
+     "99293774663": {
+      "maxRSS": 17680,
+      "systemtime": 5774,
+      "usertime": 5774
+     },
+     "99293774694": {
+      "maxRSS": 17680,
+      "systemtime": 5794,
+      "usertime": 5794
+     },
+     "99293774731": {
+      "maxRSS": 17680,
+      "systemtime": 5818,
+      "usertime": 5818
+     },
+     "99293774767": {
+      "maxRSS": 17680,
+      "systemtime": 5834,
+      "usertime": 5834
+     },
+     "99293774820": {
+      "maxRSS": 17680,
+      "systemtime": 5876,
+      "usertime": 5876
+     },
+     "99293774859": {
+      "maxRSS": 17680,
+      "systemtime": 5891,
+      "usertime": 5891
+     },
+     "99293774895": {
+      "maxRSS": 17680,
+      "systemtime": 5928,
+      "usertime": 5928
+     },
+     "99293774929": {
+      "maxRSS": 17680,
+      "systemtime": 5950,
+      "usertime": 5950
+     },
+     "99293774973": {
+      "maxRSS": 17680,
+      "systemtime": 5979,
+      "usertime": 5979
+     },
+     "99293775013": {
+      "maxRSS": 17680,
+      "systemtime": 6006,
+      "usertime": 6006
+     },
+     "99293775051": {
+      "maxRSS": 17680,
+      "systemtime": 6032,
+      "usertime": 6032
+     },
+     "99293775078": {
+      "maxRSS": 17680,
+      "systemtime": 6051,
+      "usertime": 6051
+     },
+     "99293775137": {
+      "maxRSS": 17680,
+      "systemtime": 6092,
+      "usertime": 6092
+     },
+     "99293775180": {
+      "maxRSS": 17680,
+      "systemtime": 6121,
+      "usertime": 6121
+     },
+     "99293775207": {
+      "maxRSS": 17680,
+      "systemtime": 6139,
+      "usertime": 6139
+     },
+     "99293775230": {
+      "maxRSS": 17680,
+      "systemtime": 6155,
+      "usertime": 6155
+     },
+     "99293775255": {
+      "maxRSS": 17680,
+      "systemtime": 6172,
+      "usertime": 6172
+     },
+     "99293775306": {
+      "maxRSS": 17680,
+      "systemtime": 6189,
+      "usertime": 6189
+     },
+     "99293776415": {
+      "maxRSS": 17680,
+      "systemtime": 6189,
+      "usertime": 7331
+     },
+     "99293776699": {
+      "maxRSS": 17680,
+      "systemtime": 6189,
+      "usertime": 7689
+     },
+     "99293776744": {
+      "maxRSS": 17680,
+      "systemtime": 6189,
+      "usertime": 7749
+     },
+     "99293776794": {
+      "maxRSS": 17680,
+      "systemtime": 6189,
+      "usertime": 7810
+     },
+     "99293776823": {
+      "maxRSS": 17680,
+      "systemtime": 6189,
+      "usertime": 7850
+     },
+     "99293776858": {
+      "maxRSS": 17680,
+      "systemtime": 6189,
+      "usertime": 7902
+     },
+     "99293776891": {
+      "maxRSS": 17680,
+      "systemtime": 6189,
+      "usertime": 7948
+     },
+     "99293776925": {
+      "maxRSS": 17680,
+      "systemtime": 6189,
+      "usertime": 7976
+     }
+    }
+   }
+  }
+ }
+}

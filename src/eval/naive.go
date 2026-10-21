@@ -8,6 +8,7 @@ import (
 
 	"dlc/src/ast"
 	"dlc/src/ir"
+	"dlc/src/plan"
 	"dlc/src/sema"
 )
 
@@ -93,110 +94,14 @@ func (e *Evaluator) fixpoint(clauses []*ast.Clause) {
 	}
 }
 
-// safeOrder reorders body so every negated atom and constraint is only
-// scheduled once every variable it needs is already bound by something
-// scheduled before it -- a plain left-to-right walk of an allowed
-// clause's body as originally written can violate this (allowedness's
-// fixpoint, sema/DESIGN.md, is explicitly order-independent; naive
-// evaluation is not). Positive atoms are always immediately schedulable
-// (they only ever add bindings). See DESIGN.md.
+// safeOrder uses the shared executable planner. Compound arithmetic column
+// tests may require lowering before a rule has an executable binding order.
 func safeOrder(body []ast.Literal) []ast.Literal {
-	bound := map[string]bool{}
-	var scheduled []ast.Literal
-	remaining := append([]ast.Literal{}, body...)
-	for len(remaining) > 0 {
-		var stillRemaining []ast.Literal
-		progressed := false
-		for _, lit := range remaining {
-			if canSchedule(lit, bound) {
-				scheduled = append(scheduled, lit)
-				addBoundVars(lit, bound)
-				progressed = true
-			} else {
-				stillRemaining = append(stillRemaining, lit)
-			}
-		}
-		remaining = stillRemaining
-		if !progressed {
-			// Cannot happen for a clause that passed allowedness (a
-			// valid order is guaranteed to exist) -- defensive fallback
-			// rather than an infinite loop or a panic if it somehow does.
-			scheduled = append(scheduled, remaining...)
-			break
-		}
+	result, err := plan.Body(body, nil)
+	if err != nil {
+		panic(err)
 	}
-	return scheduled
-}
-
-func canSchedule(lit ast.Literal, bound map[string]bool) bool {
-	switch v := lit.(type) {
-	case *ast.Atom:
-		return true
-	case *ast.NegatedAtom:
-		return allVarsBound(v.Atom.Terms, bound)
-	case *ast.Constraint:
-		return canScheduleConstraint(v, bound)
-	}
-	return true
-}
-
-func canScheduleConstraint(c *ast.Constraint, bound map[string]bool) bool {
-	if c.Op == "=" {
-		if v, ok := c.Left.(*ast.Var); ok && !bound[v.Name] && arithVarsBound(c.Right, bound) {
-			return true
-		}
-		if v, ok := c.Right.(*ast.Var); ok && !bound[v.Name] && arithVarsBound(c.Left, bound) {
-			return true
-		}
-	}
-	return arithVarsBound(c.Left, bound) && arithVarsBound(c.Right, bound)
-}
-
-func allVarsBound(terms []ast.Term, bound map[string]bool) bool {
-	for _, t := range terms {
-		if a, ok := t.(ast.Arith); ok {
-			if !arithVarsBound(a, bound) {
-				return false
-			}
-		}
-	}
-	return true
-}
-
-func arithVarsBound(a ast.Arith, bound map[string]bool) bool {
-	switch v := a.(type) {
-	case *ast.Var:
-		return bound[v.Name]
-	case *ast.NumberLit, *ast.StringLit:
-		return true
-	case *ast.BinaryExpr:
-		return arithVarsBound(v.Left, bound) && arithVarsBound(v.Right, bound)
-	case *ast.UnaryExpr:
-		return arithVarsBound(v.X, bound)
-	}
-	return true
-}
-
-func addBoundVars(lit ast.Literal, bound map[string]bool) {
-	switch v := lit.(type) {
-	case *ast.Atom:
-		for _, t := range v.Terms {
-			if vv, ok := t.(*ast.Var); ok {
-				bound[vv.Name] = true
-			}
-		}
-	case *ast.Constraint:
-		if v.Op == "=" {
-			if vv, ok := v.Left.(*ast.Var); ok {
-				bound[vv.Name] = true
-			}
-			if vv, ok := v.Right.(*ast.Var); ok {
-				bound[vv.Name] = true
-			}
-		}
-	}
-	// NegatedAtom binds nothing new -- allowedness already required
-	// every one of its variables to be bound before it can be scheduled.
+	return result.Literals
 }
 
 // evalBody walks body[idx:], trying every matching tuple/value at each
@@ -267,6 +172,13 @@ func (e *Evaluator) boundValueOf(term ast.Term, bindings map[string]ir.Value) (i
 	if !ok {
 		return ir.Value{}, false // Wildcard: never "bound"
 	}
+	bound := make(map[string]bool, len(bindings))
+	for name := range bindings {
+		bound[name] = true
+	}
+	if !plan.ArithBound(a, bound) {
+		return ir.Value{}, false
+	}
 	return e.evalArith(a, bindings)
 }
 
@@ -284,11 +196,16 @@ func (e *Evaluator) tryUnify(terms []ast.Term, tup ir.Tuple, bindings map[string
 			} else {
 				newBindings[v.Name] = tup[i]
 			}
-		default:
-			val, ok := e.evalArith(term.(ast.Arith), newBindings)
-			if !ok || val != tup[i] {
-				return nil, false
-			}
+		}
+	}
+	for i, term := range terms {
+		switch term.(type) {
+		case *ast.Wildcard, *ast.Var:
+			continue
+		}
+		val, ok := e.evalArith(term.(ast.Arith), newBindings)
+		if !ok || val != tup[i] {
+			return nil, false
 		}
 	}
 	return newBindings, true
@@ -342,15 +259,7 @@ func (e *Evaluator) buildTuple(head *ast.Atom, bindings map[string]ir.Value) (ir
 	for i, term := range head.Terms {
 		a, ok := term.(ast.Arith)
 		if !ok {
-			// Wildcard in head position: real Soufflé rejects this
-			// outright (docs/reports/night02-T2-hostile.md,
-			// semantic_wildcard_in_head.dl) -- sema doesn't check for it
-			// yet (out of §3.4-3.6's scope as implemented), so the
-			// evaluator falls back to a fixed value rather than
-			// panicking on a construct that should never have reached
-			// evaluation in the first place.
-			tup[i] = ir.NumberValue(0)
-			continue
+			panic("eval: unsupported head term in checked program")
 		}
 		v, ok := e.evalArith(a, bindings)
 		if !ok {
@@ -365,7 +274,10 @@ func (e *Evaluator) evalArith(a ast.Arith, bindings map[string]ir.Value) (ir.Val
 	switch v := a.(type) {
 	case *ast.Var:
 		val, ok := bindings[v.Name]
-		return val, ok
+		if !ok {
+			panic("eval: unbound variable " + v.Name)
+		}
+		return val, true
 	case *ast.NumberLit:
 		return ir.NumberValue(v.Value), true
 	case *ast.StringLit:

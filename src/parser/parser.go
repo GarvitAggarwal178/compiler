@@ -166,36 +166,15 @@ func (p *Parser) parseDecl() (*ast.Decl, bool) {
 			kind = ast.DeclOutput
 		}
 		end := nameTok.Span.End
-		// NIGHT-BATCH-03 T6: `.input name(...)` / `.output name(...)`
-		// accept an optional parenthesised list, parsed and discarded --
-		// real Souffle uses this for I/O directive options (e.g.
-		// `filename="x.csv"`); this grammar has no I/O-option concept,
-		// so the content is skipped rather than modeled. Handles nested
-		// parens (a token-level balance count, not a raw-text scan, so a
-		// string literal containing '(' is never miscounted -- it is
-		// already one STRING token by the time the parser sees it).
+		// Empty parentheses are part of this subset. Options must not be
+		// silently discarded: doing so can read or write the wrong file.
 		if p.cur().Kind == token.LPAREN {
 			p.advance()
-			depth := 1
-			for depth > 0 {
-				if p.cur().Kind == token.ERROR {
-					t := p.cur()
-					p.errorAt(t.Span, "lex error: "+t.Message)
-					return nil, false
-				}
-				if p.atEOF() {
-					p.errorAt(p.cur().Span, "unterminated '(' in .input/.output directive")
-					return nil, false
-				}
-				switch p.cur().Kind {
-				case token.LPAREN:
-					depth++
-				case token.RPAREN:
-					depth--
-				}
-				end = p.cur().Span.End
-				p.advance()
+			if p.cur().Kind != token.RPAREN {
+				p.errorAt(p.cur().Span, "I/O options are unsupported; use a bare directive or empty parentheses")
+				return nil, false
 			}
+			end = p.advance().Span.End
 		}
 		return &ast.Decl{Kind: kind, Name: nameTok.Text, Sp: token.Span{Start: start, End: end}}, true
 	}
@@ -390,6 +369,13 @@ func (p *Parser) parseMultiplicative() (ast.Arith, bool) {
 func (p *Parser) parseUnary() (ast.Arith, bool) {
 	if p.cur().Kind == token.MINUS {
 		minus := p.advance()
+		if p.cur().Kind == token.NUMBER {
+			t := p.cur()
+			if n, err := strconv.ParseUint(t.Text, 10, 64); err == nil && n == uint64(1)<<63 {
+				p.advance()
+				return &ast.NumberLit{Value: -1 << 63, Text: "-" + t.Text, Sp: token.Span{Start: minus.Span.Start, End: t.Span.End}}, true
+			}
+		}
 		x, ok := p.parseUnary()
 		if !ok {
 			return nil, false

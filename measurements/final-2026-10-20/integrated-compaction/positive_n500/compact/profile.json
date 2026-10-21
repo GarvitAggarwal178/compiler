@@ -1,0 +1,613 @@
+{
+ "root": {
+  "program": {
+   "configuration": {
+    "": "/root/compiler/measurements/final-2026-10-20/integrated-compaction/positive_n500/compact.dl",
+    "fact-dir": "/root/compiler/fixtures/benchmark-family/transitive_closure_bound/n500",
+    "include-dir": ".",
+    "jobs": "1",
+    "libraries": "functors",
+    "library-dir": ".",
+    "output-dir": "/root/compiler/measurements/final-2026-10-20/integrated-compaction/positive_n500/compact",
+    "profile": "/root/compiler/measurements/final-2026-10-20/integrated-compaction/positive_n500/compact/profile.json",
+    "relationCount": "5",
+    "ruleCount": "9",
+    "version": "2.5",
+    "warn": "all",
+    "wno": "none"
+   },
+   "relation": {
+    "edge": {
+     "loadtime": { "start": 145459659751, "end": 145459660280},
+     "num-tuples": 1000,
+     "reads": 0,
+     "source-locator": "/root/compiler/measurements/final-2026-10-20/integrated-compaction/positive_n500/compact.dl [1:7-1:11]"
+    },
+    "magic_tc_bf": {
+     "maxRSS": {
+      "post": 25136,
+      "pre": 25136
+     },
+     "non-recursive-rule": {
+      "magic_tc_bf(1).": {
+       "maxRSS": {
+        "post": 25136,
+        "pre": 25136
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 145459660312, "end": 145459660320},
+       "source-locator": "/root/compiler/measurements/final-2026-10-20/integrated-compaction/positive_n500/compact.dl [13:1-13:16]"
+      }
+     },
+     "num-tuples": 1,
+     "reads": 0,
+     "runtime": { "start": 145459660295, "end": 145459660332},
+     "source-locator": "/root/compiler/measurements/final-2026-10-20/integrated-compaction/positive_n500/compact.dl [6:7-6:18]"
+    },
+    "q_tc": {
+     "maxRSS": {
+      "post": 25136,
+      "pre": 25136
+     },
+     "non-recursive-rule": {
+      "q_tc(y) :- \n   tc_bf(1,y).": {
+       "atom-frequency": {
+        "q_tc(y) :- \n   tc_bf(1,y).": {
+         "tc_bf": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 25136,
+        "pre": 25136
+       },
+       "num-tuples": 50,
+       "runtime": { "start": 145459661208, "end": 145459661214},
+       "source-locator": "/root/compiler/measurements/final-2026-10-20/integrated-compaction/positive_n500/compact.dl [14:1-14:24]"
+      }
+     },
+     "num-tuples": 50,
+     "reads": 0,
+     "runtime": { "start": 145459661196, "end": 145459661224},
+     "savetime": { "start": 145459661231, "end": 145459661586},
+     "source-locator": "/root/compiler/measurements/final-2026-10-20/integrated-compaction/positive_n500/compact.dl [4:7-4:11]"
+    },
+    "sup_tc_bf_r1_2": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 145459660488, "end": 145459660502},
+       "maxRSS": {
+        "post": 25136,
+        "pre": 25136
+       },
+       "num-tuples": 25,
+       "recursive-rule": {
+        "sup_tc_bf_r1_2(x,y) :- \n   magic_tc_bf(x),\n   tc_bf(x,z),\n   edge(z,y).": {
+         "0": {
+          "atom-frequency": {
+           "@new_sup_tc_bf_r1_2(x,y) :- \n   magic_tc_bf(x),\n   @delta_tc_bf(x,z),\n   edge(z,y).": {
+            "@delta_tc_bf": {
+             "level": 1,
+             "num-tuples": 0
+            },
+            "edge": {
+             "level": 2,
+             "num-tuples": 0
+            },
+            "magic_tc_bf": {
+             "level": 0,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 25136,
+           "pre": 25136
+          },
+          "num-tuples": 25,
+          "runtime": { "start": 145459660395, "end": 145459660408},
+          "source-locator": "/root/compiler/measurements/final-2026-10-20/integrated-compaction/positive_n500/compact.dl [10:1-10:65]"
+         }
+        }
+       },
+       "runtime": { "start": 145459660383, "end": 145459660422}
+      },
+      "1": {
+       "copytime": { "start": 145459660608, "end": 145459660621},
+       "maxRSS": {
+        "post": 25136,
+        "pre": 25136
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "sup_tc_bf_r1_2(x,y) :- \n   magic_tc_bf(x),\n   tc_bf(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 25136,
+           "pre": 25136
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 145459660531, "end": 145459660532},
+          "source-locator": "/root/compiler/measurements/final-2026-10-20/integrated-compaction/positive_n500/compact.dl [10:1-10:65]"
+         }
+        }
+       },
+       "runtime": { "start": 145459660519, "end": 145459660544}
+      },
+      "2": {
+       "copytime": { "start": 145459660734, "end": 145459660738},
+       "maxRSS": {
+        "post": 25136,
+        "pre": 25136
+       },
+       "num-tuples": 22,
+       "recursive-rule": {
+        "sup_tc_bf_r1_2(x,y) :- \n   magic_tc_bf(x),\n   tc_bf(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 25136,
+           "pre": 25136
+          },
+          "num-tuples": 22,
+          "runtime": { "start": 145459660646, "end": 145459660662},
+          "source-locator": "/root/compiler/measurements/final-2026-10-20/integrated-compaction/positive_n500/compact.dl [10:1-10:65]"
+         }
+        }
+       },
+       "runtime": { "start": 145459660635, "end": 145459660673}
+      },
+      "3": {
+       "copytime": { "start": 145459660839, "end": 145459660851},
+       "maxRSS": {
+        "post": 25136,
+        "pre": 25136
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "sup_tc_bf_r1_2(x,y) :- \n   magic_tc_bf(x),\n   tc_bf(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 25136,
+           "pre": 25136
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 145459660763, "end": 145459660764},
+          "source-locator": "/root/compiler/measurements/final-2026-10-20/integrated-compaction/positive_n500/compact.dl [10:1-10:65]"
+         }
+        }
+       },
+       "runtime": { "start": 145459660762, "end": 145459660774}
+      },
+      "4": {
+       "copytime": { "start": 145459660961, "end": 145459660974},
+       "maxRSS": {
+        "post": 25136,
+        "pre": 25136
+       },
+       "num-tuples": 3,
+       "recursive-rule": {
+        "sup_tc_bf_r1_2(x,y) :- \n   magic_tc_bf(x),\n   tc_bf(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 25136,
+           "pre": 25136
+          },
+          "num-tuples": 3,
+          "runtime": { "start": 145459660879, "end": 145459660889},
+          "source-locator": "/root/compiler/measurements/final-2026-10-20/integrated-compaction/positive_n500/compact.dl [10:1-10:65]"
+         }
+        }
+       },
+       "runtime": { "start": 145459660867, "end": 145459660900}
+      },
+      "5": {
+       "copytime": { "start": 145459661073, "end": 145459661085},
+       "maxRSS": {
+        "post": 25136,
+        "pre": 25136
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "sup_tc_bf_r1_2(x,y) :- \n   magic_tc_bf(x),\n   tc_bf(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 25136,
+           "pre": 25136
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 145459660999, "end": 145459661000},
+          "source-locator": "/root/compiler/measurements/final-2026-10-20/integrated-compaction/positive_n500/compact.dl [10:1-10:65]"
+         }
+        }
+       },
+       "runtime": { "start": 145459660987, "end": 145459661011}
+      },
+      "6": {
+       "maxRSS": {
+        "post": 25136,
+        "pre": 25136
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "sup_tc_bf_r1_2(x,y) :- \n   magic_tc_bf(x),\n   tc_bf(x,z),\n   edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 25136,
+           "pre": 25136
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 145459661116, "end": 145459661118},
+          "source-locator": "/root/compiler/measurements/final-2026-10-20/integrated-compaction/positive_n500/compact.dl [10:1-10:65]"
+         }
+        }
+       },
+       "runtime": { "start": 145459661098, "end": 145459661129}
+      }
+     },
+     "num-tuples": 0,
+     "reads": 149,
+     "source-locator": "/root/compiler/measurements/final-2026-10-20/integrated-compaction/positive_n500/compact.dl [8:7-8:21]"
+    },
+    "tc_bf": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 145459660510, "end": 145459660511},
+       "maxRSS": {
+        "post": 25136,
+        "pre": 25136
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "tc_bf(x,y) :- \n   sup_tc_bf_r1_2(x,y).": {
+         "0": {
+          "atom-frequency": {
+           "@new_tc_bf(x,y) :- \n   @delta_sup_tc_bf_r1_2(x,y).": {
+            "@delta_sup_tc_bf_r1_2": {
+             "level": 0,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 25136,
+           "pre": 25136
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 145459660442, "end": 145459660443},
+          "source-locator": "/root/compiler/measurements/final-2026-10-20/integrated-compaction/positive_n500/compact.dl [12:1-12:37]"
+         }
+        }
+       },
+       "runtime": { "start": 145459660430, "end": 145459660455}
+      },
+      "1": {
+       "copytime": { "start": 145459660627, "end": 145459660630},
+       "maxRSS": {
+        "post": 25136,
+        "pre": 25136
+       },
+       "num-tuples": 22,
+       "recursive-rule": {
+        "tc_bf(x,y) :- \n   sup_tc_bf_r1_2(x,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 25136,
+           "pre": 25136
+          },
+          "num-tuples": 22,
+          "runtime": { "start": 145459660562, "end": 145459660566},
+          "source-locator": "/root/compiler/measurements/final-2026-10-20/integrated-compaction/positive_n500/compact.dl [12:1-12:37]"
+         }
+        }
+       },
+       "runtime": { "start": 145459660550, "end": 145459660577}
+      },
+      "2": {
+       "copytime": { "start": 145459660742, "end": 145459660755},
+       "maxRSS": {
+        "post": 25136,
+        "pre": 25136
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "tc_bf(x,y) :- \n   sup_tc_bf_r1_2(x,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 25136,
+           "pre": 25136
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 145459660690, "end": 145459660692},
+          "source-locator": "/root/compiler/measurements/final-2026-10-20/integrated-compaction/positive_n500/compact.dl [12:1-12:37]"
+         }
+        }
+       },
+       "runtime": { "start": 145459660679, "end": 145459660703}
+      },
+      "3": {
+       "copytime": { "start": 145459660858, "end": 145459660862},
+       "maxRSS": {
+        "post": 25136,
+        "pre": 25136
+       },
+       "num-tuples": 21,
+       "recursive-rule": {
+        "tc_bf(x,y) :- \n   sup_tc_bf_r1_2(x,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 25136,
+           "pre": 25136
+          },
+          "num-tuples": 21,
+          "runtime": { "start": 145459660792, "end": 145459660796},
+          "source-locator": "/root/compiler/measurements/final-2026-10-20/integrated-compaction/positive_n500/compact.dl [12:1-12:37]"
+         }
+        }
+       },
+       "runtime": { "start": 145459660780, "end": 145459660807}
+      },
+      "4": {
+       "copytime": { "start": 145459660981, "end": 145459660982},
+       "maxRSS": {
+        "post": 25136,
+        "pre": 25136
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "tc_bf(x,y) :- \n   sup_tc_bf_r1_2(x,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 25136,
+           "pre": 25136
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 145459660917, "end": 145459660918},
+          "source-locator": "/root/compiler/measurements/final-2026-10-20/integrated-compaction/positive_n500/compact.dl [12:1-12:37]"
+         }
+        }
+       },
+       "runtime": { "start": 145459660906, "end": 145459660930}
+      },
+      "5": {
+       "copytime": { "start": 145459661092, "end": 145459661093},
+       "maxRSS": {
+        "post": 25136,
+        "pre": 25136
+       },
+       "num-tuples": 1,
+       "recursive-rule": {
+        "tc_bf(x,y) :- \n   sup_tc_bf_r1_2(x,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 25136,
+           "pre": 25136
+          },
+          "num-tuples": 1,
+          "runtime": { "start": 145459661028, "end": 145459661030},
+          "source-locator": "/root/compiler/measurements/final-2026-10-20/integrated-compaction/positive_n500/compact.dl [12:1-12:37]"
+         }
+        }
+       },
+       "runtime": { "start": 145459661017, "end": 145459661041}
+      },
+      "6": {
+       "maxRSS": {
+        "post": 25136,
+        "pre": 25136
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "tc_bf(x,y) :- \n   sup_tc_bf_r1_2(x,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 25136,
+           "pre": 25136
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 145459661146, "end": 145459661147},
+          "source-locator": "/root/compiler/measurements/final-2026-10-20/integrated-compaction/positive_n500/compact.dl [12:1-12:37]"
+         }
+        }
+       },
+       "runtime": { "start": 145459661135, "end": 145459661159}
+      }
+     },
+     "maxRSS": {
+      "post": 25136,
+      "pre": 25136
+     },
+     "non-recursive-rule": {
+      "tc_bf(x,y) :- \n   magic_tc_bf(x),\n   edge(x,y).": {
+       "atom-frequency": {
+        "tc_bf(x,y) :- \n   magic_tc_bf(x),\n   edge(x,y).": {
+         "edge": {
+          "level": 1,
+          "num-tuples": 0
+         },
+         "magic_tc_bf": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 25136,
+        "pre": 25136
+       },
+       "num-tuples": 6,
+       "runtime": { "start": 145459660355, "end": 145459660362},
+       "source-locator": "/root/compiler/measurements/final-2026-10-20/integrated-compaction/positive_n500/compact.dl [9:1-9:43]"
+      }
+     },
+     "num-tuples": 6,
+     "reads": 50,
+     "runtime": { "start": 145459660343, "end": 145459660375},
+     "source-locator": "/root/compiler/measurements/final-2026-10-20/integrated-compaction/positive_n500/compact.dl [7:7-7:12]"
+    }
+   },
+   "runtime": { "start": 145459659741, "end": 145459661594},
+   "starttime": { "time": 145459659693},
+   "usage": {
+    "timepoint": {
+     "145459659720": {
+      "maxRSS": 25136,
+      "systemtime": 0,
+      "usertime": 2045
+     },
+     "145459660326": {
+      "maxRSS": 25136,
+      "systemtime": 0,
+      "usertime": 6023
+     },
+     "145459660360": {
+      "maxRSS": 25136,
+      "systemtime": 0,
+      "usertime": 6075
+     },
+     "145459660399": {
+      "maxRSS": 25136,
+      "systemtime": 0,
+      "usertime": 6123
+     },
+     "145459660447": {
+      "maxRSS": 25136,
+      "systemtime": 0,
+      "usertime": 6179
+     },
+     "145459660478": {
+      "maxRSS": 25136,
+      "systemtime": 0,
+      "usertime": 6219
+     },
+     "145459660504": {
+      "maxRSS": 25136,
+      "systemtime": 0,
+      "usertime": 6256
+     },
+     "145459660536": {
+      "maxRSS": 25136,
+      "systemtime": 0,
+      "usertime": 6305
+     },
+     "145459660566": {
+      "maxRSS": 25136,
+      "systemtime": 0,
+      "usertime": 6347
+     },
+     "145459660599": {
+      "maxRSS": 25136,
+      "systemtime": 0,
+      "usertime": 6384
+     },
+     "145459660625": {
+      "maxRSS": 25136,
+      "systemtime": 0,
+      "usertime": 6419
+     },
+     "145459660651": {
+      "maxRSS": 25136,
+      "systemtime": 0,
+      "usertime": 6454
+     },
+     "145459660695": {
+      "maxRSS": 25136,
+      "systemtime": 0,
+      "usertime": 6507
+     },
+     "145459660734": {
+      "maxRSS": 25136,
+      "systemtime": 0,
+      "usertime": 6553
+     },
+     "145459660759": {
+      "maxRSS": 25136,
+      "systemtime": 0,
+      "usertime": 6589
+     },
+     "145459660796": {
+      "maxRSS": 25136,
+      "systemtime": 0,
+      "usertime": 6639
+     },
+     "145459660829": {
+      "maxRSS": 25136,
+      "systemtime": 0,
+      "usertime": 6676
+     },
+     "145459660855": {
+      "maxRSS": 25136,
+      "systemtime": 0,
+      "usertime": 6711
+     },
+     "145459660883": {
+      "maxRSS": 25136,
+      "systemtime": 0,
+      "usertime": 6748
+     },
+     "145459660921": {
+      "maxRSS": 25136,
+      "systemtime": 0,
+      "usertime": 6796
+     },
+     "145459660952": {
+      "maxRSS": 25136,
+      "systemtime": 0,
+      "usertime": 6835
+     },
+     "145459660978": {
+      "maxRSS": 25136,
+      "systemtime": 0,
+      "usertime": 6870
+     },
+     "145459661003": {
+      "maxRSS": 25136,
+      "systemtime": 0,
+      "usertime": 6905
+     },
+     "145459661033": {
+      "maxRSS": 25136,
+      "systemtime": 0,
+      "usertime": 6944
+     },
+     "145459661064": {
+      "maxRSS": 25136,
+      "systemtime": 0,
+      "usertime": 6982
+     },
+     "145459661090": {
+      "maxRSS": 25136,
+      "systemtime": 0,
+      "usertime": 7016
+     },
+     "145459661120": {
+      "maxRSS": 25136,
+      "systemtime": 0,
+      "usertime": 7059
+     },
+     "145459661151": {
+      "maxRSS": 25136,
+      "systemtime": 0,
+      "usertime": 7097
+     },
+     "145459661181": {
+      "maxRSS": 25136,
+      "systemtime": 0,
+      "usertime": 7135
+     },
+     "145459661212": {
+      "maxRSS": 25136,
+      "systemtime": 0,
+      "usertime": 7176
+     },
+     "145459661247": {
+      "maxRSS": 25136,
+      "systemtime": 0,
+      "usertime": 7208
+     }
+    }
+   }
+  }
+ }
+}

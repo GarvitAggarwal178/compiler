@@ -1,0 +1,48 @@
+[
+  {
+    "argv": [
+      "/workspace/scratch/978c3805ceaa/compiler-audit/source/datalog-compiler/bin/dlc",
+      "emit",
+      "/workspace/scratch/978c3805ceaa/compiler-audit/probes/compaction_projection/source.dl",
+      "--transformer=guarded"
+    ],
+    "rc": 0,
+    "stdout": "{\"status\":\"ok\",\"printed\":\".decl edge(x:number, y:number)\\n.input edge\\n.decl node(z:number)\\n.input node\\n.decl p(x:number, z:number)\\n.decl out(z:number)\\n.output out\\n.decl sup_p_bf_r0_0(c0:number)\\n.decl magic_p_bf(c0:number)\\n.decl sup_p_bf_r0_1(c0:number)\\n.decl sup_p_bf_r0_2(c0:number, c1:number)\\n.decl p_bf(c0:number, c1:number)\\nsup_p_bf_r0_0(x) :- magic_p_bf(x).\\nsup_p_bf_r0_1(x) :- sup_p_bf_r0_0(x), edge(x, y).\\nsup_p_bf_r0_2(x, z) :- sup_p_bf_r0_1(x), node(z).\\np_bf(x, z) :- sup_p_bf_r0_2(x, z).\\nmagic_p_bf(1).\\nout(z) :- p_bf(1, z).\\n\"}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "/workspace/scratch/978c3805ceaa/compiler-audit/reference/compact-probe",
+      "/workspace/scratch/978c3805ceaa/compiler-audit/probes/compaction_projection/source.dl",
+      "/workspace/scratch/978c3805ceaa/compiler-audit/probes/compaction_projection/guarded.dl",
+      "/workspace/scratch/978c3805ceaa/compiler-audit/probes/compaction_projection/aggressive.dl"
+    ],
+    "rc": 0,
+    "stdout": "removed=3 checkpoints=[sup_p_bf_r0_0 sup_p_bf_r0_1 sup_p_bf_r0_2]\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "/workspace/scratch/978c3805ceaa/compiler-audit/source/datalog-compiler/bin/dlc",
+      "run-seminaive",
+      "/workspace/scratch/978c3805ceaa/compiler-audit/probes/compaction_projection/guarded.dl",
+      "/workspace/scratch/978c3805ceaa/compiler-audit/probes/compaction_projection/facts",
+      "/workspace/scratch/978c3805ceaa/compiler-audit/probes/compaction_projection/guarded"
+    ],
+    "rc": 0,
+    "stdout": "{\"status\":\"ok\",\"derivation_attempts\":162}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "/workspace/scratch/978c3805ceaa/compiler-audit/source/datalog-compiler/bin/dlc",
+      "run-seminaive",
+      "/workspace/scratch/978c3805ceaa/compiler-audit/probes/compaction_projection/aggressive.dl",
+      "/workspace/scratch/978c3805ceaa/compiler-audit/probes/compaction_projection/facts",
+      "/workspace/scratch/978c3805ceaa/compiler-audit/probes/compaction_projection/aggressive"
+    ],
+    "rc": 0,
+    "stdout": "{\"status\":\"ok\",\"derivation_attempts\":2021}\n",
+    "stderr": ""
+  }
+]

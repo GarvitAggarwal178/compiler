@@ -3,8 +3,10 @@ package eval
 import (
 	"bufio"
 	"fmt"
+	"io"
 	"os"
 	"path/filepath"
+	"sort"
 	"strconv"
 	"strings"
 
@@ -24,7 +26,12 @@ import (
 // exact Soufflé behavior, docs/reports/night02-T2-hostile.md, and it is
 // not what a comparison harness wants here).
 func (e *Evaluator) LoadFacts(factsDir string, schemas map[string]*sema.RelationSchema, inputNames map[string]bool) error {
+	names := make([]string, 0, len(inputNames))
 	for name := range inputNames {
+		names = append(names, name)
+	}
+	sort.Strings(names)
+	for _, name := range names {
 		schema, ok := schemas[name]
 		if !ok {
 			continue
@@ -38,15 +45,27 @@ func (e *Evaluator) LoadFacts(factsDir string, schemas map[string]*sema.Relation
 			return fmt.Errorf("opening %s: %w", path, err)
 		}
 		rel := e.Relations[name]
-		scanner := bufio.NewScanner(f)
+		reader := bufio.NewReader(f)
 		lineNo := 0
-		for scanner.Scan() {
+		for {
+			line, readErr := reader.ReadString('\n')
+			if readErr != nil && readErr != io.EOF {
+				f.Close()
+				return fmt.Errorf("reading %s: %w", path, readErr)
+			}
+			if len(line) == 0 && readErr == io.EOF {
+				break
+			}
 			lineNo++
-			line := scanner.Text()
-			if line == "" {
-				continue
+			line = strings.TrimSuffix(strings.TrimSuffix(line, "\n"), "\r")
+			if strings.ContainsRune(line, 0) {
+				f.Close()
+				return fmt.Errorf("%s:%d: NUL byte in facts", path, lineNo)
 			}
 			cols := strings.Split(line, "\t")
+			if len(schema.Params) == 0 && (line == "" || line == "()") {
+				cols = nil
+			}
 			if len(cols) != len(schema.Params) {
 				f.Close()
 				return fmt.Errorf("%s:%d: expected %d columns, got %d", path, lineNo, len(schema.Params), len(cols))
@@ -67,9 +86,7 @@ func (e *Evaluator) LoadFacts(factsDir string, schemas map[string]*sema.Relation
 			rel.Insert(tup)
 		}
 		f.Close()
-		if err := scanner.Err(); err != nil {
-			return fmt.Errorf("reading %s: %w", path, err)
-		}
+
 	}
 	return nil
 }
@@ -93,6 +110,10 @@ func (e *Evaluator) WriteOutput(outDir string, schemas map[string]*sema.Relation
 		w := bufio.NewWriter(f)
 		if rel != nil {
 			for _, tup := range rel.All() {
+				if len(tup) == 0 {
+					fmt.Fprintln(w, "()")
+					continue
+				}
 				cols := make([]string, len(tup))
 				for i, v := range tup {
 					cols[i] = e.valueString(v)
@@ -100,8 +121,13 @@ func (e *Evaluator) WriteOutput(outDir string, schemas map[string]*sema.Relation
 				fmt.Fprintln(w, strings.Join(cols, "\t"))
 			}
 		}
-		w.Flush()
-		f.Close()
+		if err := w.Flush(); err != nil {
+			f.Close()
+			return fmt.Errorf("writing %s: %w", path, err)
+		}
+		if err := f.Close(); err != nil {
+			return fmt.Errorf("closing %s: %w", path, err)
+		}
 	}
 	return nil
 }

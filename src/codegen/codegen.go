@@ -11,6 +11,7 @@ import (
 
 	"dlc/src/ast"
 	"dlc/src/sema"
+	"dlc/src/transform"
 )
 
 // Generate returns a complete C source file (compiles with a plain
@@ -21,7 +22,23 @@ import (
 // convention), evaluate to a fixpoint per stratum, write every .output
 // relation's <name>.csv to outDir in the same format.
 func Generate(prog *ast.Program, schemas map[string]*sema.RelationSchema, strata *sema.StratumResult) string {
-	g := &generator{schemas: schemas}
+	return GenerateWithReport(prog, schemas, strata, nil)
+}
+
+// GenerateWithReport annotates actual generated clauses with transform-owned
+// source origins. The executable code is identical to Generate.
+func GenerateWithReport(prog *ast.Program, schemas map[string]*sema.RelationSchema, strata *sema.StratumResult, report *transform.Report) string {
+	g := &generator{schemas: schemas, origins: map[*ast.Clause]transform.RuleOrigin{}}
+	for i, c := range prog.Clauses {
+		g.origins[c] = transform.RuleOrigin{ID: transform.RuleID(i), SourceRuleID: transform.RuleID(i), Role: "original"}
+	}
+	if report != nil {
+		for _, o := range report.Rules {
+			if o.Index >= 0 && o.Index < len(prog.Clauses) {
+				g.origins[prog.Clauses[o.Index]] = o
+			}
+		}
+	}
 	for _, d := range prog.Decls {
 		switch d.Kind {
 		case ast.DeclInput:
@@ -38,6 +55,7 @@ func Generate(prog *ast.Program, schemas map[string]*sema.RelationSchema, strata
 	g.emitFactLoading()
 	g.emitEvaluation(prog, strata)
 	g.emitOutput()
+	g.emitCleanup()
 	g.emitMain()
 	return g.sb.String()
 }
@@ -45,6 +63,7 @@ func Generate(prog *ast.Program, schemas map[string]*sema.RelationSchema, strata
 // generator accumulates the emitted C source. Deliberately not
 // concurrent, not reused across calls.
 type generator struct {
+	origins     map[*ast.Clause]transform.RuleOrigin
 	sb          strings.Builder
 	schemas     map[string]*sema.RelationSchema
 	inputNames  []string
@@ -82,4 +101,9 @@ func cIdent(name string) string {
 	// prefixed to avoid collisions with C keywords/the runtime's own
 	// helper names.
 	return "rel_" + name
+}
+
+func (g *generator) comment(c *ast.Clause) {
+	o := g.origins[c]
+	g.w("/* rule %s; role %s; source %s */", o.ID, o.Role, o.SourceRuleID)
 }

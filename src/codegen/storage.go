@@ -39,11 +39,11 @@ func (g *generator) emitRelationStorage() {
 		g.w("")
 		g.w("static int %s_insert(Tuple_%s t) {", id, id) // returns 1 if newly inserted
 		g.w("\tif (%s_contains(t)) return 0;", id)
-		g.w("\tif (%s_len == %s_cap) { %s_cap = %s_cap ? %s_cap * 2 : 16; %s_data = realloc(%s_data, %s_cap * sizeof(Tuple_%s)); }",
+		g.w("\tif (%s_len == %s_cap) { %s_cap = %s_cap ? %s_cap * 2 : 16; %s_data = checked_realloc(%s_data, %s_cap * sizeof(Tuple_%s)); }",
 			id, id, id, id, id, id, id, id, id)
 		g.w("\t%s_data[%s_len] = t;", id, id)
 		g.w("\tunsigned h = (unsigned)((uint64_t)t.c[0] %% %s_HASH_BUCKETS);", id)
-		g.w("\tHNode_%s *n = malloc(sizeof(HNode_%s)); n->row = %s_len; n->next = %s_buckets[h];", id, id, id, id)
+		g.w("\tHNode_%s *n = checked_malloc(sizeof(HNode_%s)); n->row = %s_len; n->next = %s_buckets[h];", id, id, id, id)
 		g.w("\t%s_buckets[h] = n;", id)
 		g.w("\t%s_len++;", id)
 		g.w("\treturn 1;")

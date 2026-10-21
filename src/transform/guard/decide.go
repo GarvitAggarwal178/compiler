@@ -9,11 +9,15 @@ import (
 
 	"dlc/src/ast"
 	"dlc/src/sema"
+	"dlc/src/transform"
 	"dlc/src/transform/magicset"
 )
 
 // DecideResult is M3.3's whole output.
 type DecideResult struct {
+	CandidateProgram    *ast.Program
+	CandidateReport     *transform.Report
+	Report              *transform.Report
 	NoBindableQuery     bool
 	CulpritPredicates   map[string]bool // original predicates directly implicated by an unstratifiable SCC of the transformed program (before cone closure)
 	DeclinedRelations   map[string]bool // Culprit UNION its downward dependency cone -- every original predicate that ends up FALLBACK
@@ -33,53 +37,58 @@ func Decide(prog *ast.Program) (*DecideResult, error) {
 	if err != nil {
 		return nil, err
 	}
-	if cc.NoBindableQuery || cc.PreconditionSkipped {
-		return &DecideResult{
-			NoBindableQuery: cc.NoBindableQuery, CulpritPredicates: map[string]bool{},
-			DeclinedRelations: map[string]bool{}, ConeRelations: map[string]bool{},
-			FinalProgram: cc.Transformed, FinalRelationOrigin: identityOrigin(prog),
-		}, nil
+	result := &DecideResult{NoBindableQuery: cc.NoBindableQuery, CulpritPredicates: map[string]bool{}, DeclinedRelations: map[string]bool{}, ConeRelations: map[string]bool{}, FinalProgram: cc.Transformed, FinalRelationOrigin: cc.RelationOrigin, Report: cc.Report}
+	result.Report.Mode = "guarded"
+	if cc.NoBindableQuery {
+		result.FinalRelationOrigin = identityOrigin(prog)
+		return result, nil
 	}
+	result.CandidateProgram = cc.Transformed
+	result.CandidateReport = cc.Report
 	if cc.Stratifiable {
-		return &DecideResult{
-			CulpritPredicates: map[string]bool{}, DeclinedRelations: map[string]bool{}, ConeRelations: map[string]bool{},
-			FinalProgram: cc.Transformed, FinalRelationOrigin: cc.RelationOrigin,
-		}, nil
+		return result, nil
 	}
-
-	culprit := map[string]bool{}
 	for _, scc := range cc.UnstratifiableSCCs {
 		for _, rel := range scc {
 			if orig, ok := cc.RelationOrigin[rel]; ok {
-				culprit[orig] = true
+				result.CulpritPredicates[orig] = true
 			}
 		}
 	}
-
-	cone := ConeClosure(prog, culprit)
-	declined := map[string]bool{}
-	for k := range culprit {
-		declined[k] = true
+	result.ConeRelations = ConeClosure(prog, result.CulpritPredicates)
+	for k := range result.CulpritPredicates {
+		result.DeclinedRelations[k] = true
 	}
-	for k := range cone {
-		declined[k] = true
+	for k := range result.ConeRelations {
+		result.DeclinedRelations[k] = true
 	}
-
 	schemas, diags := sema.BuildSymbolTable(prog)
 	if len(diags) > 0 {
 		return nil, errFromDiags("guard: BuildSymbolTable failed on an already-accepted program", diags)
 	}
-	queries := magicset.FindQueries(prog)
-	adorned, err := magicset.Adorn(prog, queries)
+	adorned, err := magicset.Adorn(prog, magicset.FindQueries(prog))
 	if err != nil {
 		return nil, err
 	}
-	finalProg, finalOrigin := magicset.GenerateMixed(prog, schemas.Relations, adorned, declined)
-
-	return &DecideResult{
-		CulpritPredicates: culprit, DeclinedRelations: declined, ConeRelations: cone,
-		FinalProgram: finalProg, FinalRelationOrigin: finalOrigin,
-	}, nil
+	result.FinalProgram, result.FinalRelationOrigin, result.Report = magicset.GenerateMixedReported(prog, schemas.Relations, adorned, result.DeclinedRelations)
+	result.Report.Mode = "guarded"
+	for k := range result.CulpritPredicates {
+		result.Report.Culprits = append(result.Report.Culprits, k)
+	}
+	sort.Strings(result.Report.Culprits)
+	for k := range result.ConeRelations {
+		result.Report.Cone = append(result.Report.Cone, k)
+	}
+	sort.Strings(result.Report.Cone)
+	for i := range result.Report.Decisions {
+		d := &result.Report.Decisions[i]
+		if result.CulpritPredicates[d.SourcePredicate] {
+			d.FallbackReason = "candidate negative cycle"
+		} else if result.ConeRelations[d.SourcePredicate] {
+			d.FallbackReason = "dependency cone of candidate negative cycle"
+		}
+	}
+	return result, nil
 }
 
 func identityOrigin(prog *ast.Program) map[string]string {

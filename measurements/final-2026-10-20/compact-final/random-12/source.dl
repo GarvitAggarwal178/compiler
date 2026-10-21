@@ -1,0 +1,19 @@
+.decl node(x:number)
+.input node
+.decl edge(x:number,y:number)
+.input edge
+.decl reach(x:number,y:number)
+reach(x,y) :- edge(x,y).
+reach(x,y) :- reach(x,z),edge(z,y).
+.decl missing(x:number,y:number)
+missing(x,y) :- node(x),node(y),!reach(x,y).
+.decl out(y:number)
+.output out
+out(y) :- missing(1,y).
+.decl other(y:number)
+.output other
+other(y) :- missing(3,y).
+.output reach
+.decl untouched(x:number,y:number)
+.output untouched
+untouched(x,y) :- node(x),node(y),!reach(x,y).

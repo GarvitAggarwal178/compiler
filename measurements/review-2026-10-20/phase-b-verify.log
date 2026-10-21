@@ -1,0 +1,30 @@
+mkdir -p bin
+go build -buildvcs=false -o bin/dlc ./src/cmd/dlc
+go build -buildvcs=false -o bin/conecheck ./tools/conecheck
+go vet ./...
+go test -count=1 ./...
+ok  	dlc/src/ast	0.003s
+ok  	dlc/src/cmd/dlc	0.485s
+?   	dlc/src/cmd/dlc-demo	[no test files]
+ok  	dlc/src/codegen	5.357s
+?   	dlc/src/demo	[no test files]
+ok  	dlc/src/eval	0.017s
+ok  	dlc/src/inspect	0.019s
+ok  	dlc/src/ir	0.017s
+ok  	dlc/src/lexer	0.017s
+ok  	dlc/src/parser	0.017s
+ok  	dlc/src/plan	1.017s
+ok  	dlc/src/sema	0.017s
+?   	dlc/src/token	[no test files]
+ok  	dlc/src/transform	0.018s
+ok  	dlc/src/transform/guard	0.023s
+ok  	dlc/src/transform/magicset	0.004s
+ok  	dlc/tests/demo	1.572s
+ok  	dlc/tests/integration	32.511s
+?   	dlc/tools/conecheck	[no test files]
+python3 -m unittest discover -s harness -p 'test_*.py'
+..
+----------------------------------------------------------------------
+Ran 2 tests in 0.002s
+
+OK

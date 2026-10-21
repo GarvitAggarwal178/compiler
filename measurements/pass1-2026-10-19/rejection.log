@@ -1,0 +1,7 @@
+mkdir -p bin
+go build -buildvcs=false -o bin/dlc ./src/cmd/dlc
+go build -buildvcs=false -o bin/conecheck ./tools/conecheck
+REJECT ground=allowedness span=5:3-5:4 message="variable \"X\" is not range-restricted"
+REJECT ground=arity_mismatch span=5:11-5:17 message="\"foo\" declared with arity 2, used here with 1 argument(s)"
+REJECT ground=unstratifiable span=3:15-3:20 message="relation \"a\" has a negative dependency on \"a\", and both are in the same mutual-recursion cycle {[a]} -- no valid stratum ordering exists"
+REJECT ground=type_mismatch span=5:5-5:6 message="variable \"y\" used as number here, but as symbol elsewhere in the same clause (5:18-5:19)"

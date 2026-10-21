@@ -1,0 +1,1869 @@
+{
+ "root": {
+  "program": {
+   "configuration": {
+    "": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl",
+    "fact-dir": "/root/compiler/fixtures/cone_corpus/cc_growing_sibling/n50",
+    "include-dir": ".",
+    "jobs": "1",
+    "libraries": "functors",
+    "library-dir": ".",
+    "output-dir": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/guarded_souffle",
+    "profile": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/guarded_souffle/profile.json",
+    "relationCount": "14",
+    "ruleCount": "23",
+    "version": "2.5",
+    "warn": "all",
+    "wno": "none"
+   },
+   "relation": {
+    "base": {
+     "loadtime": { "start": 143986506513, "end": 143986506660},
+     "num-tuples": 30,
+     "reads": 0,
+     "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [1:7-1:11]"
+    },
+    "blocked": {
+     "loadtime": { "start": 143986506670, "end": 143986506696},
+     "num-tuples": 4,
+     "reads": 161,
+     "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [5:7-5:14]"
+    },
+    "e": {
+     "loadtime": { "start": 143986506703, "end": 143986506736},
+     "num-tuples": 30,
+     "reads": 0,
+     "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [3:7-3:8]"
+    },
+    "magic_tc_bf": {
+     "maxRSS": {
+      "post": 19564,
+      "pre": 19564
+     },
+     "non-recursive-rule": {
+      "magic_tc_bf(1).": {
+       "maxRSS": {
+        "post": 19564,
+        "pre": 19564
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 143986506741, "end": 143986506746},
+       "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [38:1-38:16]"
+      }
+     },
+     "num-tuples": 1,
+     "reads": 0,
+     "runtime": { "start": 143986506741, "end": 143986506753},
+     "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [18:7-18:18]"
+    },
+    "out": {
+     "maxRSS": {
+      "post": 19564,
+      "pre": 19564
+     },
+     "non-recursive-rule": {
+      "out(y) :- \n   p(1,y).": {
+       "atom-frequency": {
+        "out(y) :- \n   p(1,y).": {
+         "p": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 19564,
+        "pre": 19564
+       },
+       "num-tuples": 2,
+       "runtime": { "start": 143986508990, "end": 143986508991},
+       "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [37:1-37:19]"
+      }
+     },
+     "num-tuples": 2,
+     "reads": 0,
+     "runtime": { "start": 143986508990, "end": 143986508999},
+     "savetime": { "start": 143986509003, "end": 143986509040},
+     "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [12:7-12:10]"
+    },
+    "out2": {
+     "maxRSS": {
+      "post": 19564,
+      "pre": 19564
+     },
+     "non-recursive-rule": {
+      "out2(y) :- \n   tc_bf(1,y).": {
+       "atom-frequency": {
+        "out2(y) :- \n   tc_bf(1,y).": {
+         "tc_bf": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 19564,
+        "pre": 19564
+       },
+       "num-tuples": 50,
+       "runtime": { "start": 143986508738, "end": 143986508741},
+       "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [39:1-39:24]"
+      }
+     },
+     "num-tuples": 50,
+     "reads": 0,
+     "runtime": { "start": 143986508737, "end": 143986508748},
+     "savetime": { "start": 143986508752, "end": 143986508869},
+     "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [15:7-15:11]"
+    },
+    "p": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 143986508946, "end": 143986508947},
+       "maxRSS": {
+        "post": 19564,
+        "pre": 19564
+       },
+       "num-tuples": 1,
+       "recursive-rule": {
+        "p(x,y) :- \n   p(x,z),\n   !s(z),\n   q(z,y).": {
+         "0": {
+          "atom-frequency": {
+           "@new_p(x,y) :- \n   @delta_p(x,z),\n   !s(z),\n   q(z,y).": {
+            "@delta_p": {
+             "level": 0,
+             "num-tuples": 0
+            },
+            "q": {
+             "level": 1,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 19564,
+           "pre": 19564
+          },
+          "num-tuples": 1,
+          "runtime": { "start": 143986508913, "end": 143986508918},
+          "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [25:1-25:36]"
+         }
+        }
+       },
+       "runtime": { "start": 143986508904, "end": 143986508927}
+      },
+      "1": {
+       "maxRSS": {
+        "post": 19564,
+        "pre": 19564
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "p(x,y) :- \n   p(x,z),\n   !s(z),\n   q(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 19564,
+           "pre": 19564
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 143986508960, "end": 143986508961},
+          "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [25:1-25:36]"
+         }
+        }
+       },
+       "runtime": { "start": 143986508951, "end": 143986508969}
+      }
+     },
+     "maxRSS": {
+      "post": 19564,
+      "pre": 19564
+     },
+     "non-recursive-rule": {
+      "p(x,y) :- \n   e(x,y).": {
+       "atom-frequency": {
+        "p(x,y) :- \n   e(x,y).": {
+         "e": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 19564,
+        "pre": 19564
+       },
+       "num-tuples": 30,
+       "runtime": { "start": 143986508886, "end": 143986508889},
+       "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [24:1-24:20]"
+      }
+     },
+     "num-tuples": 30,
+     "reads": 1,
+     "runtime": { "start": 143986508875, "end": 143986508897},
+     "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [11:7-11:8]"
+    },
+    "q": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 143986506897, "end": 143986506901},
+       "maxRSS": {
+        "post": 19564,
+        "pre": 19564
+       },
+       "num-tuples": 39,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "atom-frequency": {
+           "@new_q(x,y) :- \n   @delta_q(x,z),\n   base(z,y).": {
+            "@delta_q": {
+             "level": 0,
+             "num-tuples": 0
+            },
+            "base": {
+             "level": 1,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 19564,
+           "pre": 19564
+          },
+          "num-tuples": 39,
+          "runtime": { "start": 143986506843, "end": 143986506862},
+          "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [27:1-27:32]"
+         }
+        }
+       },
+       "runtime": { "start": 143986506830, "end": 143986506876}
+      },
+      "1": {
+       "copytime": { "start": 143986506931, "end": 143986506935},
+       "maxRSS": {
+        "post": 19564,
+        "pre": 19564
+       },
+       "num-tuples": 35,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 19564,
+           "pre": 19564
+          },
+          "num-tuples": 35,
+          "runtime": { "start": 143986506906, "end": 143986506917},
+          "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [27:1-27:32]"
+         }
+        }
+       },
+       "runtime": { "start": 143986506905, "end": 143986506924}
+      },
+      "2": {
+       "copytime": { "start": 143986506958, "end": 143986506961},
+       "maxRSS": {
+        "post": 19564,
+        "pre": 19564
+       },
+       "num-tuples": 31,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 19564,
+           "pre": 19564
+          },
+          "num-tuples": 31,
+          "runtime": { "start": 143986506938, "end": 143986506947},
+          "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [27:1-27:32]"
+         }
+        }
+       },
+       "runtime": { "start": 143986506938, "end": 143986506952}
+      },
+      "3": {
+       "copytime": { "start": 143986506982, "end": 143986506985},
+       "maxRSS": {
+        "post": 19564,
+        "pre": 19564
+       },
+       "num-tuples": 20,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 19564,
+           "pre": 19564
+          },
+          "num-tuples": 20,
+          "runtime": { "start": 143986506964, "end": 143986506971},
+          "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [27:1-27:32]"
+         }
+        }
+       },
+       "runtime": { "start": 143986506963, "end": 143986506975}
+      },
+      "4": {
+       "copytime": { "start": 143986507029, "end": 143986507031},
+       "maxRSS": {
+        "post": 19564,
+        "pre": 19564
+       },
+       "num-tuples": 6,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 19564,
+           "pre": 19564
+          },
+          "num-tuples": 6,
+          "runtime": { "start": 143986506997, "end": 143986507002},
+          "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [27:1-27:32]"
+         }
+        }
+       },
+       "runtime": { "start": 143986506988, "end": 143986507010}
+      },
+      "5": {
+       "maxRSS": {
+        "post": 19564,
+        "pre": 19564
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 19564,
+           "pre": 19564
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 143986507034, "end": 143986507037},
+          "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [27:1-27:32]"
+         }
+        }
+       },
+       "runtime": { "start": 143986507034, "end": 143986507043}
+      }
+     },
+     "maxRSS": {
+      "post": 19564,
+      "pre": 19564
+     },
+     "non-recursive-rule": {
+      "q(x,y) :- \n   base(x,y).": {
+       "atom-frequency": {
+        "q(x,y) :- \n   base(x,y).": {
+         "base": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 19564,
+        "pre": 19564
+       },
+       "num-tuples": 30,
+       "runtime": { "start": 143986506812, "end": 143986506816},
+       "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [26:1-26:23]"
+      }
+     },
+     "num-tuples": 30,
+     "reads": 245,
+     "runtime": { "start": 143986506803, "end": 143986506823},
+     "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [9:7-9:8]"
+    },
+    "s": {
+     "maxRSS": {
+      "post": 19564,
+      "pre": 19564
+     },
+     "non-recursive-rule": {
+      "s(x) :- \n   q(x,y),\n   blocked(y).": {
+       "atom-frequency": {
+        "s(x) :- \n   q(x,y),\n   blocked(y).": {
+         "q": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 19564,
+        "pre": 19564
+       },
+       "num-tuples": 16,
+       "runtime": { "start": 143986507086, "end": 143986507093},
+       "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [28:1-28:29]"
+      }
+     },
+     "num-tuples": 16,
+     "reads": 31,
+     "runtime": { "start": 143986507076, "end": 143986507101},
+     "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [10:7-10:8]"
+    },
+    "sibling_edge": {
+     "loadtime": { "start": 143986506758, "end": 143986506798},
+     "num-tuples": 149,
+     "reads": 0,
+     "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [7:7-7:19]"
+    },
+    "sup_tc_bf_r0_1": {
+     "maxRSS": {
+      "post": 19564,
+      "pre": 19564
+     },
+     "non-recursive-rule": {
+      "sup_tc_bf_r0_1(x,y) :- \n   magic_tc_bf(x),\n   sibling_edge(x,y).": {
+       "atom-frequency": {
+        "sup_tc_bf_r0_1(x,y) :- \n   magic_tc_bf(x),\n   sibling_edge(x,y).": {
+         "magic_tc_bf": {
+          "level": 0,
+          "num-tuples": 0
+         },
+         "sibling_edge": {
+          "level": 1,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 19564,
+        "pre": 19564
+       },
+       "num-tuples": 6,
+       "runtime": { "start": 143986507062, "end": 143986507064},
+       "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [30:1-30:63]"
+      }
+     },
+     "num-tuples": 6,
+     "reads": 0,
+     "runtime": { "start": 143986507062, "end": 143986507072},
+     "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [19:7-19:21]"
+    },
+    "sup_tc_bf_r1_1": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 143986507178, "end": 143986507179},
+       "maxRSS": {
+        "post": 19564,
+        "pre": 19564
+       },
+       "num-tuples": 6,
+       "recursive-rule": {
+        "sup_tc_bf_r1_1(x,z) :- \n   magic_tc_bf(x),\n   tc_bf(x,z).": {
+         "0": {
+          "atom-frequency": {
+           "@new_sup_tc_bf_r1_1(x,z) :- \n   magic_tc_bf(x),\n   @delta_tc_bf(x,z).": {
+            "@delta_tc_bf": {
+             "level": 1,
+             "num-tuples": 0
+            },
+            "magic_tc_bf": {
+             "level": 0,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 19564,
+           "pre": 19564
+          },
+          "num-tuples": 6,
+          "runtime": { "start": 143986507134, "end": 143986507136},
+          "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [33:1-33:56]"
+         }
+        }
+       },
+       "runtime": { "start": 143986507134, "end": 143986507145}
+      },
+      "1": {
+       "copytime": { "start": 143986507240, "end": 143986507241},
+       "maxRSS": {
+        "post": 19564,
+        "pre": 19564
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "sup_tc_bf_r1_1(x,z) :- \n   magic_tc_bf(x),\n   tc_bf(x,z).": {
+         "0": {
+          "maxRSS": {
+           "post": 19564,
+           "pre": 19564
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 143986507188, "end": 143986507188},
+          "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [33:1-33:56]"
+         }
+        }
+       },
+       "runtime": { "start": 143986507188, "end": 143986507193}
+      },
+      "10": {
+       "copytime": { "start": 143986508351, "end": 143986508352},
+       "maxRSS": {
+        "post": 19564,
+        "pre": 19564
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "sup_tc_bf_r1_1(x,z) :- \n   magic_tc_bf(x),\n   tc_bf(x,z).": {
+         "0": {
+          "maxRSS": {
+           "post": 19564,
+           "pre": 19564
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 143986508253, "end": 143986508254},
+          "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [33:1-33:56]"
+         }
+        }
+       },
+       "runtime": { "start": 143986508244, "end": 143986508262}
+      },
+      "11": {
+       "copytime": { "start": 143986508482, "end": 143986508483},
+       "maxRSS": {
+        "post": 19564,
+        "pre": 19564
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "sup_tc_bf_r1_1(x,z) :- \n   magic_tc_bf(x),\n   tc_bf(x,z).": {
+         "0": {
+          "maxRSS": {
+           "post": 19564,
+           "pre": 19564
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 143986508384, "end": 143986508385},
+          "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [33:1-33:56]"
+         }
+        }
+       },
+       "runtime": { "start": 143986508375, "end": 143986508395}
+      },
+      "12": {
+       "copytime": { "start": 143986508609, "end": 143986508619},
+       "maxRSS": {
+        "post": 19564,
+        "pre": 19564
+       },
+       "num-tuples": 2,
+       "recursive-rule": {
+        "sup_tc_bf_r1_1(x,z) :- \n   magic_tc_bf(x),\n   tc_bf(x,z).": {
+         "0": {
+          "maxRSS": {
+           "post": 19564,
+           "pre": 19564
+          },
+          "num-tuples": 2,
+          "runtime": { "start": 143986508516, "end": 143986508517},
+          "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [33:1-33:56]"
+         }
+        }
+       },
+       "runtime": { "start": 143986508506, "end": 143986508526}
+      },
+      "13": {
+       "maxRSS": {
+        "post": 19564,
+        "pre": 19564
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "sup_tc_bf_r1_1(x,z) :- \n   magic_tc_bf(x),\n   tc_bf(x,z).": {
+         "0": {
+          "maxRSS": {
+           "post": 19564,
+           "pre": 19564
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 143986508643, "end": 143986508643},
+          "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [33:1-33:56]"
+         }
+        }
+       },
+       "runtime": { "start": 143986508642, "end": 143986508650}
+      },
+      "2": {
+       "copytime": { "start": 143986507315, "end": 143986507316},
+       "maxRSS": {
+        "post": 19564,
+        "pre": 19564
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "sup_tc_bf_r1_1(x,z) :- \n   magic_tc_bf(x),\n   tc_bf(x,z).": {
+         "0": {
+          "maxRSS": {
+           "post": 19564,
+           "pre": 19564
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 143986507250, "end": 143986507251},
+          "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [33:1-33:56]"
+         }
+        }
+       },
+       "runtime": { "start": 143986507250, "end": 143986507257}
+      },
+      "3": {
+       "copytime": { "start": 143986507433, "end": 143986507435},
+       "maxRSS": {
+        "post": 19564,
+        "pre": 19564
+       },
+       "num-tuples": 19,
+       "recursive-rule": {
+        "sup_tc_bf_r1_1(x,z) :- \n   magic_tc_bf(x),\n   tc_bf(x,z).": {
+         "0": {
+          "maxRSS": {
+           "post": 19564,
+           "pre": 19564
+          },
+          "num-tuples": 19,
+          "runtime": { "start": 143986507340, "end": 143986507343},
+          "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [33:1-33:56]"
+         }
+        }
+       },
+       "runtime": { "start": 143986507339, "end": 143986507350}
+      },
+      "4": {
+       "copytime": { "start": 143986507566, "end": 143986507567},
+       "maxRSS": {
+        "post": 19564,
+        "pre": 19564
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "sup_tc_bf_r1_1(x,z) :- \n   magic_tc_bf(x),\n   tc_bf(x,z).": {
+         "0": {
+          "maxRSS": {
+           "post": 19564,
+           "pre": 19564
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 143986507467, "end": 143986507467},
+          "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [33:1-33:56]"
+         }
+        }
+       },
+       "runtime": { "start": 143986507457, "end": 143986507475}
+      },
+      "5": {
+       "copytime": { "start": 143986507695, "end": 143986507695},
+       "maxRSS": {
+        "post": 19564,
+        "pre": 19564
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "sup_tc_bf_r1_1(x,z) :- \n   magic_tc_bf(x),\n   tc_bf(x,z).": {
+         "0": {
+          "maxRSS": {
+           "post": 19564,
+           "pre": 19564
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 143986507601, "end": 143986507602},
+          "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [33:1-33:56]"
+         }
+        }
+       },
+       "runtime": { "start": 143986507591, "end": 143986507610}
+      },
+      "6": {
+       "copytime": { "start": 143986507826, "end": 143986507828},
+       "maxRSS": {
+        "post": 19564,
+        "pre": 19564
+       },
+       "num-tuples": 17,
+       "recursive-rule": {
+        "sup_tc_bf_r1_1(x,z) :- \n   magic_tc_bf(x),\n   tc_bf(x,z).": {
+         "0": {
+          "maxRSS": {
+           "post": 19564,
+           "pre": 19564
+          },
+          "num-tuples": 17,
+          "runtime": { "start": 143986507732, "end": 143986507735},
+          "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [33:1-33:56]"
+         }
+        }
+       },
+       "runtime": { "start": 143986507722, "end": 143986507743}
+      },
+      "7": {
+       "copytime": { "start": 143986507957, "end": 143986507958},
+       "maxRSS": {
+        "post": 19564,
+        "pre": 19564
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "sup_tc_bf_r1_1(x,z) :- \n   magic_tc_bf(x),\n   tc_bf(x,z).": {
+         "0": {
+          "maxRSS": {
+           "post": 19564,
+           "pre": 19564
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 143986507859, "end": 143986507860},
+          "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [33:1-33:56]"
+         }
+        }
+       },
+       "runtime": { "start": 143986507850, "end": 143986507867}
+      },
+      "8": {
+       "copytime": { "start": 143986508094, "end": 143986508094},
+       "maxRSS": {
+        "post": 19564,
+        "pre": 19564
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "sup_tc_bf_r1_1(x,z) :- \n   magic_tc_bf(x),\n   tc_bf(x,z).": {
+         "0": {
+          "maxRSS": {
+           "post": 19564,
+           "pre": 19564
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 143986507991, "end": 143986507991},
+          "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [33:1-33:56]"
+         }
+        }
+       },
+       "runtime": { "start": 143986507981, "end": 143986508012}
+      },
+      "9": {
+       "copytime": { "start": 143986508219, "end": 143986508221},
+       "maxRSS": {
+        "post": 19564,
+        "pre": 19564
+       },
+       "num-tuples": 6,
+       "recursive-rule": {
+        "sup_tc_bf_r1_1(x,z) :- \n   magic_tc_bf(x),\n   tc_bf(x,z).": {
+         "0": {
+          "maxRSS": {
+           "post": 19564,
+           "pre": 19564
+          },
+          "num-tuples": 6,
+          "runtime": { "start": 143986508120, "end": 143986508122},
+          "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [33:1-33:56]"
+         }
+        }
+       },
+       "runtime": { "start": 143986508117, "end": 143986508129}
+      }
+     },
+     "num-tuples": 0,
+     "reads": 50,
+     "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [22:7-22:21]"
+    },
+    "sup_tc_bf_r1_2": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 143986507182, "end": 143986507182},
+       "maxRSS": {
+        "post": 19564,
+        "pre": 19564
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "sup_tc_bf_r1_2(x,y) :- \n   sup_tc_bf_r1_1(x,z),\n   sibling_edge(z,y).": {
+         "0": {
+          "atom-frequency": {
+           "@new_sup_tc_bf_r1_2(x,y) :- \n   @delta_sup_tc_bf_r1_1(x,z),\n   sibling_edge(z,y).": {
+            "@delta_sup_tc_bf_r1_1": {
+             "level": 0,
+             "num-tuples": 0
+            },
+            "sibling_edge": {
+             "level": 1,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 19564,
+           "pre": 19564
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 143986507149, "end": 143986507150},
+          "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [34:1-34:66]"
+         }
+        }
+       },
+       "runtime": { "start": 143986507149, "end": 143986507155}
+      },
+      "1": {
+       "copytime": { "start": 143986507243, "end": 143986507245},
+       "maxRSS": {
+        "post": 19564,
+        "pre": 19564
+       },
+       "num-tuples": 19,
+       "recursive-rule": {
+        "sup_tc_bf_r1_2(x,y) :- \n   sup_tc_bf_r1_1(x,z),\n   sibling_edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 19564,
+           "pre": 19564
+          },
+          "num-tuples": 19,
+          "runtime": { "start": 143986507196, "end": 143986507203},
+          "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [34:1-34:66]"
+         }
+        }
+       },
+       "runtime": { "start": 143986507196, "end": 143986507208}
+      },
+      "10": {
+       "copytime": { "start": 143986508355, "end": 143986508365},
+       "maxRSS": {
+        "post": 19564,
+        "pre": 19564
+       },
+       "num-tuples": 2,
+       "recursive-rule": {
+        "sup_tc_bf_r1_2(x,y) :- \n   sup_tc_bf_r1_1(x,z),\n   sibling_edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 19564,
+           "pre": 19564
+          },
+          "num-tuples": 2,
+          "runtime": { "start": 143986508276, "end": 143986508279},
+          "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [34:1-34:66]"
+         }
+        }
+       },
+       "runtime": { "start": 143986508266, "end": 143986508289}
+      },
+      "11": {
+       "copytime": { "start": 143986508487, "end": 143986508497},
+       "maxRSS": {
+        "post": 19564,
+        "pre": 19564
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "sup_tc_bf_r1_2(x,y) :- \n   sup_tc_bf_r1_1(x,z),\n   sibling_edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 19564,
+           "pre": 19564
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 143986508408, "end": 143986508409},
+          "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [34:1-34:66]"
+         }
+        }
+       },
+       "runtime": { "start": 143986508399, "end": 143986508417}
+      },
+      "12": {
+       "copytime": { "start": 143986508624, "end": 143986508624},
+       "maxRSS": {
+        "post": 19564,
+        "pre": 19564
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "sup_tc_bf_r1_2(x,y) :- \n   sup_tc_bf_r1_1(x,z),\n   sibling_edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 19564,
+           "pre": 19564
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 143986508548, "end": 143986508549},
+          "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [34:1-34:66]"
+         }
+        }
+       },
+       "runtime": { "start": 143986508539, "end": 143986508557}
+      },
+      "13": {
+       "maxRSS": {
+        "post": 19564,
+        "pre": 19564
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "sup_tc_bf_r1_2(x,y) :- \n   sup_tc_bf_r1_1(x,z),\n   sibling_edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 19564,
+           "pre": 19564
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 143986508663, "end": 143986508665},
+          "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [34:1-34:66]"
+         }
+        }
+       },
+       "runtime": { "start": 143986508654, "end": 143986508675}
+      },
+      "2": {
+       "copytime": { "start": 143986507320, "end": 143986507321},
+       "maxRSS": {
+        "post": 19564,
+        "pre": 19564
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "sup_tc_bf_r1_2(x,y) :- \n   sup_tc_bf_r1_1(x,z),\n   sibling_edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 19564,
+           "pre": 19564
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 143986507260, "end": 143986507260},
+          "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [34:1-34:66]"
+         }
+        }
+       },
+       "runtime": { "start": 143986507259, "end": 143986507265}
+      },
+      "3": {
+       "copytime": { "start": 143986507438, "end": 143986507448},
+       "maxRSS": {
+        "post": 19564,
+        "pre": 19564
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "sup_tc_bf_r1_2(x,y) :- \n   sup_tc_bf_r1_1(x,z),\n   sibling_edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 19564,
+           "pre": 19564
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 143986507363, "end": 143986507364},
+          "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [34:1-34:66]"
+         }
+        }
+       },
+       "runtime": { "start": 143986507354, "end": 143986507372}
+      },
+      "4": {
+       "copytime": { "start": 143986507571, "end": 143986507582},
+       "maxRSS": {
+        "post": 19564,
+        "pre": 19564
+       },
+       "num-tuples": 23,
+       "recursive-rule": {
+        "sup_tc_bf_r1_2(x,y) :- \n   sup_tc_bf_r1_1(x,z),\n   sibling_edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 19564,
+           "pre": 19564
+          },
+          "num-tuples": 23,
+          "runtime": { "start": 143986507489, "end": 143986507498},
+          "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [34:1-34:66]"
+         }
+        }
+       },
+       "runtime": { "start": 143986507479, "end": 143986507507}
+      },
+      "5": {
+       "copytime": { "start": 143986507699, "end": 143986507712},
+       "maxRSS": {
+        "post": 19564,
+        "pre": 19564
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "sup_tc_bf_r1_2(x,y) :- \n   sup_tc_bf_r1_1(x,z),\n   sibling_edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 19564,
+           "pre": 19564
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 143986507623, "end": 143986507624},
+          "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [34:1-34:66]"
+         }
+        }
+       },
+       "runtime": { "start": 143986507614, "end": 143986507632}
+      },
+      "6": {
+       "copytime": { "start": 143986507831, "end": 143986507841},
+       "maxRSS": {
+        "post": 19564,
+        "pre": 19564
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "sup_tc_bf_r1_2(x,y) :- \n   sup_tc_bf_r1_1(x,z),\n   sibling_edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 19564,
+           "pre": 19564
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 143986507756, "end": 143986507756},
+          "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [34:1-34:66]"
+         }
+        }
+       },
+       "runtime": { "start": 143986507747, "end": 143986507766}
+      },
+      "7": {
+       "copytime": { "start": 143986507962, "end": 143986507972},
+       "maxRSS": {
+        "post": 19564,
+        "pre": 19564
+       },
+       "num-tuples": 6,
+       "recursive-rule": {
+        "sup_tc_bf_r1_2(x,y) :- \n   sup_tc_bf_r1_1(x,z),\n   sibling_edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 19564,
+           "pre": 19564
+          },
+          "num-tuples": 6,
+          "runtime": { "start": 143986507882, "end": 143986507889},
+          "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [34:1-34:66]"
+         }
+        }
+       },
+       "runtime": { "start": 143986507873, "end": 143986507897}
+      },
+      "8": {
+       "copytime": { "start": 143986508097, "end": 143986508107},
+       "maxRSS": {
+        "post": 19564,
+        "pre": 19564
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "sup_tc_bf_r1_2(x,y) :- \n   sup_tc_bf_r1_1(x,z),\n   sibling_edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 19564,
+           "pre": 19564
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 143986508027, "end": 143986508027},
+          "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [34:1-34:66]"
+         }
+        }
+       },
+       "runtime": { "start": 143986508017, "end": 143986508035}
+      },
+      "9": {
+       "copytime": { "start": 143986508224, "end": 143986508234},
+       "maxRSS": {
+        "post": 19564,
+        "pre": 19564
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "sup_tc_bf_r1_2(x,y) :- \n   sup_tc_bf_r1_1(x,z),\n   sibling_edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 19564,
+           "pre": 19564
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 143986508142, "end": 143986508143},
+          "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [34:1-34:66]"
+         }
+        }
+       },
+       "runtime": { "start": 143986508133, "end": 143986508153}
+      }
+     },
+     "num-tuples": 0,
+     "reads": 149,
+     "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [23:7-23:21]"
+    },
+    "tc_bf": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 143986507184, "end": 143986507185},
+       "maxRSS": {
+        "post": 19564,
+        "pre": 19564
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "tc_bf(x,y) :- \n   sup_tc_bf_r1_2(x,y).": {
+         "0": {
+          "atom-frequency": {
+           "@new_tc_bf(x,y) :- \n   @delta_sup_tc_bf_r1_2(x,y).": {
+            "@delta_sup_tc_bf_r1_2": {
+             "level": 0,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 19564,
+           "pre": 19564
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 143986507159, "end": 143986507160},
+          "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [36:1-36:37]"
+         }
+        }
+       },
+       "runtime": { "start": 143986507159, "end": 143986507165}
+      },
+      "1": {
+       "copytime": { "start": 143986507247, "end": 143986507247},
+       "maxRSS": {
+        "post": 19564,
+        "pre": 19564
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "tc_bf(x,y) :- \n   sup_tc_bf_r1_2(x,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 19564,
+           "pre": 19564
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 143986507211, "end": 143986507211},
+          "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [36:1-36:37]"
+         }
+        }
+       },
+       "runtime": { "start": 143986507211, "end": 143986507216}
+      },
+      "10": {
+       "copytime": { "start": 143986508370, "end": 143986508371},
+       "maxRSS": {
+        "post": 19564,
+        "pre": 19564
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "tc_bf(x,y) :- \n   sup_tc_bf_r1_2(x,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 19564,
+           "pre": 19564
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 143986508302, "end": 143986508303},
+          "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [36:1-36:37]"
+         }
+        }
+       },
+       "runtime": { "start": 143986508293, "end": 143986508312}
+      },
+      "11": {
+       "copytime": { "start": 143986508501, "end": 143986508502},
+       "maxRSS": {
+        "post": 19564,
+        "pre": 19564
+       },
+       "num-tuples": 2,
+       "recursive-rule": {
+        "tc_bf(x,y) :- \n   sup_tc_bf_r1_2(x,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 19564,
+           "pre": 19564
+          },
+          "num-tuples": 2,
+          "runtime": { "start": 143986508431, "end": 143986508432},
+          "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [36:1-36:37]"
+         }
+        }
+       },
+       "runtime": { "start": 143986508421, "end": 143986508441}
+      },
+      "12": {
+       "copytime": { "start": 143986508627, "end": 143986508637},
+       "maxRSS": {
+        "post": 19564,
+        "pre": 19564
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "tc_bf(x,y) :- \n   sup_tc_bf_r1_2(x,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 19564,
+           "pre": 19564
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 143986508572, "end": 143986508573},
+          "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [36:1-36:37]"
+         }
+        }
+       },
+       "runtime": { "start": 143986508563, "end": 143986508580}
+      },
+      "13": {
+       "maxRSS": {
+        "post": 19564,
+        "pre": 19564
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "tc_bf(x,y) :- \n   sup_tc_bf_r1_2(x,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 19564,
+           "pre": 19564
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 143986508689, "end": 143986508690},
+          "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [36:1-36:37]"
+         }
+        }
+       },
+       "runtime": { "start": 143986508679, "end": 143986508698}
+      },
+      "2": {
+       "copytime": { "start": 143986507323, "end": 143986507334},
+       "maxRSS": {
+        "post": 19564,
+        "pre": 19564
+       },
+       "num-tuples": 19,
+       "recursive-rule": {
+        "tc_bf(x,y) :- \n   sup_tc_bf_r1_2(x,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 19564,
+           "pre": 19564
+          },
+          "num-tuples": 19,
+          "runtime": { "start": 143986507268, "end": 143986507270},
+          "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [36:1-36:37]"
+         }
+        }
+       },
+       "runtime": { "start": 143986507267, "end": 143986507274}
+      },
+      "3": {
+       "copytime": { "start": 143986507453, "end": 143986507453},
+       "maxRSS": {
+        "post": 19564,
+        "pre": 19564
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "tc_bf(x,y) :- \n   sup_tc_bf_r1_2(x,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 19564,
+           "pre": 19564
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 143986507386, "end": 143986507387},
+          "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [36:1-36:37]"
+         }
+        }
+       },
+       "runtime": { "start": 143986507377, "end": 143986507394}
+      },
+      "4": {
+       "copytime": { "start": 143986507587, "end": 143986507588},
+       "maxRSS": {
+        "post": 19564,
+        "pre": 19564
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "tc_bf(x,y) :- \n   sup_tc_bf_r1_2(x,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 19564,
+           "pre": 19564
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 143986507520, "end": 143986507521},
+          "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [36:1-36:37]"
+         }
+        }
+       },
+       "runtime": { "start": 143986507511, "end": 143986507529}
+      },
+      "5": {
+       "copytime": { "start": 143986507716, "end": 143986507719},
+       "maxRSS": {
+        "post": 19564,
+        "pre": 19564
+       },
+       "num-tuples": 17,
+       "recursive-rule": {
+        "tc_bf(x,y) :- \n   sup_tc_bf_r1_2(x,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 19564,
+           "pre": 19564
+          },
+          "num-tuples": 17,
+          "runtime": { "start": 143986507646, "end": 143986507649},
+          "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [36:1-36:37]"
+         }
+        }
+       },
+       "runtime": { "start": 143986507636, "end": 143986507657}
+      },
+      "6": {
+       "copytime": { "start": 143986507845, "end": 143986507846},
+       "maxRSS": {
+        "post": 19564,
+        "pre": 19564
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "tc_bf(x,y) :- \n   sup_tc_bf_r1_2(x,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 19564,
+           "pre": 19564
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 143986507779, "end": 143986507780},
+          "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [36:1-36:37]"
+         }
+        }
+       },
+       "runtime": { "start": 143986507770, "end": 143986507789}
+      },
+      "7": {
+       "copytime": { "start": 143986507977, "end": 143986507977},
+       "maxRSS": {
+        "post": 19564,
+        "pre": 19564
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "tc_bf(x,y) :- \n   sup_tc_bf_r1_2(x,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 19564,
+           "pre": 19564
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 143986507911, "end": 143986507912},
+          "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [36:1-36:37]"
+         }
+        }
+       },
+       "runtime": { "start": 143986507902, "end": 143986507921}
+      },
+      "8": {
+       "copytime": { "start": 143986508112, "end": 143986508114},
+       "maxRSS": {
+        "post": 19564,
+        "pre": 19564
+       },
+       "num-tuples": 6,
+       "recursive-rule": {
+        "tc_bf(x,y) :- \n   sup_tc_bf_r1_2(x,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 19564,
+           "pre": 19564
+          },
+          "num-tuples": 6,
+          "runtime": { "start": 143986508052, "end": 143986508054},
+          "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [36:1-36:37]"
+         }
+        }
+       },
+       "runtime": { "start": 143986508042, "end": 143986508061}
+      },
+      "9": {
+       "copytime": { "start": 143986508239, "end": 143986508240},
+       "maxRSS": {
+        "post": 19564,
+        "pre": 19564
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "tc_bf(x,y) :- \n   sup_tc_bf_r1_2(x,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 19564,
+           "pre": 19564
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 143986508171, "end": 143986508172},
+          "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [36:1-36:37]"
+         }
+        }
+       },
+       "runtime": { "start": 143986508158, "end": 143986508179}
+      }
+     },
+     "maxRSS": {
+      "post": 19564,
+      "pre": 19564
+     },
+     "non-recursive-rule": {
+      "tc_bf(x,y) :- \n   sup_tc_bf_r0_1(x,y).": {
+       "atom-frequency": {
+        "tc_bf(x,y) :- \n   sup_tc_bf_r0_1(x,y).": {
+         "sup_tc_bf_r0_1": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 19564,
+        "pre": 19564
+       },
+       "num-tuples": 6,
+       "runtime": { "start": 143986507120, "end": 143986507121},
+       "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [31:1-31:37]"
+      }
+     },
+     "num-tuples": 6,
+     "reads": 50,
+     "runtime": { "start": 143986507110, "end": 143986507129},
+     "source-locator": "/root/compiler/measurements/review-2026-10-20/phase-a-oracle/growing_n50/transformed.dl [20:7-20:12]"
+    }
+   },
+   "runtime": { "start": 143986506506, "end": 143986509044},
+   "starttime": { "time": 143986506462},
+   "usage": {
+    "timepoint": {
+     "143986506490": {
+      "maxRSS": 19564,
+      "systemtime": 0,
+      "usertime": 4056
+     },
+     "143986506752": {
+      "maxRSS": 19564,
+      "systemtime": 0,
+      "usertime": 6821
+     },
+     "143986506824": {
+      "maxRSS": 19564,
+      "systemtime": 0,
+      "usertime": 6905
+     },
+     "143986506850": {
+      "maxRSS": 19564,
+      "systemtime": 0,
+      "usertime": 6933
+     },
+     "143986506975": {
+      "maxRSS": 19564,
+      "systemtime": 0,
+      "usertime": 7076
+     },
+     "143986506983": {
+      "maxRSS": 19564,
+      "systemtime": 0,
+      "usertime": 7092
+     },
+     "143986506999": {
+      "maxRSS": 19564,
+      "systemtime": 0,
+      "usertime": 7112
+     },
+     "143986507036": {
+      "maxRSS": 19564,
+      "systemtime": 0,
+      "usertime": 7162
+     },
+     "143986507067": {
+      "maxRSS": 19564,
+      "systemtime": 0,
+      "usertime": 7201
+     },
+     "143986507097": {
+      "maxRSS": 19564,
+      "systemtime": 0,
+      "usertime": 7240
+     },
+     "143986507200": {
+      "maxRSS": 19564,
+      "systemtime": 0,
+      "usertime": 7361
+     },
+     "143986507273": {
+      "maxRSS": 19564,
+      "systemtime": 0,
+      "usertime": 7472
+     },
+     "143986507295": {
+      "maxRSS": 19564,
+      "systemtime": 0,
+      "usertime": 7499
+     },
+     "143986507315": {
+      "maxRSS": 19564,
+      "systemtime": 0,
+      "usertime": 7524
+     },
+     "143986507337": {
+      "maxRSS": 19564,
+      "systemtime": 0,
+      "usertime": 7557
+     },
+     "143986507368": {
+      "maxRSS": 19564,
+      "systemtime": 0,
+      "usertime": 7593
+     },
+     "143986507390": {
+      "maxRSS": 19564,
+      "systemtime": 0,
+      "usertime": 7620
+     },
+     "143986507412": {
+      "maxRSS": 19564,
+      "systemtime": 0,
+      "usertime": 7648
+     },
+     "143986507432": {
+      "maxRSS": 19564,
+      "systemtime": 0,
+      "usertime": 7672
+     },
+     "143986507452": {
+      "maxRSS": 19564,
+      "systemtime": 0,
+      "usertime": 7697
+     },
+     "143986507471": {
+      "maxRSS": 19564,
+      "systemtime": 0,
+      "usertime": 7724
+     },
+     "143986507493": {
+      "maxRSS": 19564,
+      "systemtime": 0,
+      "usertime": 7751
+     },
+     "143986507524": {
+      "maxRSS": 19564,
+      "systemtime": 0,
+      "usertime": 7788
+     },
+     "143986507547": {
+      "maxRSS": 19564,
+      "systemtime": 0,
+      "usertime": 7815
+     },
+     "143986507565": {
+      "maxRSS": 19564,
+      "systemtime": 0,
+      "usertime": 7839
+     },
+     "143986507584": {
+      "maxRSS": 19564,
+      "systemtime": 0,
+      "usertime": 7865
+     },
+     "143986507605": {
+      "maxRSS": 19564,
+      "systemtime": 0,
+      "usertime": 7892
+     },
+     "143986507627": {
+      "maxRSS": 19564,
+      "systemtime": 0,
+      "usertime": 7919
+     },
+     "143986507650": {
+      "maxRSS": 19564,
+      "systemtime": 0,
+      "usertime": 7949
+     },
+     "143986507675": {
+      "maxRSS": 19564,
+      "systemtime": 0,
+      "usertime": 7976
+     },
+     "143986507693": {
+      "maxRSS": 19564,
+      "systemtime": 0,
+      "usertime": 8000
+     },
+     "143986507716": {
+      "maxRSS": 19564,
+      "systemtime": 0,
+      "usertime": 8028
+     },
+     "143986507736": {
+      "maxRSS": 19564,
+      "systemtime": 0,
+      "usertime": 8058
+     },
+     "143986507760": {
+      "maxRSS": 19564,
+      "systemtime": 0,
+      "usertime": 8085
+     },
+     "143986507783": {
+      "maxRSS": 19564,
+      "systemtime": 0,
+      "usertime": 8114
+     },
+     "143986507807": {
+      "maxRSS": 19564,
+      "systemtime": 0,
+      "usertime": 8142
+     },
+     "143986507825": {
+      "maxRSS": 19564,
+      "systemtime": 0,
+      "usertime": 8165
+     },
+     "143986507844": {
+      "maxRSS": 19564,
+      "systemtime": 0,
+      "usertime": 8190
+     },
+     "143986507863": {
+      "maxRSS": 19564,
+      "systemtime": 0,
+      "usertime": 8216
+     },
+     "143986507886": {
+      "maxRSS": 19564,
+      "systemtime": 0,
+      "usertime": 8244
+     },
+     "143986507915": {
+      "maxRSS": 19564,
+      "systemtime": 0,
+      "usertime": 8278
+     },
+     "143986507938": {
+      "maxRSS": 19564,
+      "systemtime": 0,
+      "usertime": 8306
+     },
+     "143986507956": {
+      "maxRSS": 19564,
+      "systemtime": 0,
+      "usertime": 8329
+     },
+     "143986507975": {
+      "maxRSS": 19564,
+      "systemtime": 0,
+      "usertime": 8354
+     },
+     "143986507995": {
+      "maxRSS": 19564,
+      "systemtime": 0,
+      "usertime": 8379
+     },
+     "143986508037": {
+      "maxRSS": 19564,
+      "systemtime": 66,
+      "usertime": 8379
+     },
+     "143986508057": {
+      "maxRSS": 19564,
+      "systemtime": 91,
+      "usertime": 8379
+     },
+     "143986508088": {
+      "maxRSS": 19564,
+      "systemtime": 139,
+      "usertime": 8379
+     },
+     "143986508114": {
+      "maxRSS": 19564,
+      "systemtime": 179,
+      "usertime": 8379
+     },
+     "143986508146": {
+      "maxRSS": 19564,
+      "systemtime": 219,
+      "usertime": 8379
+     },
+     "143986508176": {
+      "maxRSS": 19564,
+      "systemtime": 255,
+      "usertime": 8379
+     },
+     "143986508199": {
+      "maxRSS": 19564,
+      "systemtime": 286,
+      "usertime": 8379
+     },
+     "143986508218": {
+      "maxRSS": 19564,
+      "systemtime": 312,
+      "usertime": 8379
+     },
+     "143986508238": {
+      "maxRSS": 19564,
+      "systemtime": 339,
+      "usertime": 8379
+     },
+     "143986508258": {
+      "maxRSS": 19564,
+      "systemtime": 366,
+      "usertime": 8379
+     },
+     "143986508280": {
+      "maxRSS": 19564,
+      "systemtime": 397,
+      "usertime": 8379
+     },
+     "143986508307": {
+      "maxRSS": 19564,
+      "systemtime": 428,
+      "usertime": 8379
+     },
+     "143986508331": {
+      "maxRSS": 19564,
+      "systemtime": 460,
+      "usertime": 8379
+     },
+     "143986508350": {
+      "maxRSS": 19564,
+      "systemtime": 486,
+      "usertime": 8379
+     },
+     "143986508369": {
+      "maxRSS": 19564,
+      "systemtime": 512,
+      "usertime": 8379
+     },
+     "143986508389": {
+      "maxRSS": 19564,
+      "systemtime": 539,
+      "usertime": 8379
+     },
+     "143986508413": {
+      "maxRSS": 19564,
+      "systemtime": 569,
+      "usertime": 8379
+     },
+     "143986508436": {
+      "maxRSS": 19564,
+      "systemtime": 599,
+      "usertime": 8379
+     },
+     "143986508463": {
+      "maxRSS": 19564,
+      "systemtime": 638,
+      "usertime": 8379
+     },
+     "143986508481": {
+      "maxRSS": 19564,
+      "systemtime": 658,
+      "usertime": 8379
+     },
+     "143986508501": {
+      "maxRSS": 19564,
+      "systemtime": 684,
+      "usertime": 8379
+     },
+     "143986508520": {
+      "maxRSS": 19564,
+      "systemtime": 712,
+      "usertime": 8379
+     },
+     "143986508553": {
+      "maxRSS": 19564,
+      "systemtime": 750,
+      "usertime": 8379
+     },
+     "143986508577": {
+      "maxRSS": 19564,
+      "systemtime": 781,
+      "usertime": 8379
+     },
+     "143986508601": {
+      "maxRSS": 19564,
+      "systemtime": 811,
+      "usertime": 8379
+     },
+     "143986508623": {
+      "maxRSS": 19564,
+      "systemtime": 841,
+      "usertime": 8379
+     },
+     "143986508641": {
+      "maxRSS": 19564,
+      "systemtime": 865,
+      "usertime": 8379
+     },
+     "143986508668": {
+      "maxRSS": 19564,
+      "systemtime": 900,
+      "usertime": 8379
+     },
+     "143986508694": {
+      "maxRSS": 19564,
+      "systemtime": 932,
+      "usertime": 8379
+     },
+     "143986508717": {
+      "maxRSS": 19564,
+      "systemtime": 961,
+      "usertime": 8379
+     },
+     "143986508736": {
+      "maxRSS": 19564,
+      "systemtime": 986,
+      "usertime": 8379
+     },
+     "143986508766": {
+      "maxRSS": 19564,
+      "systemtime": 1016,
+      "usertime": 8379
+     },
+     "143986508890": {
+      "maxRSS": 19564,
+      "systemtime": 1159,
+      "usertime": 8379
+     },
+     "143986508919": {
+      "maxRSS": 19564,
+      "systemtime": 1195,
+      "usertime": 8379
+     },
+     "143986508945": {
+      "maxRSS": 19564,
+      "systemtime": 1225,
+      "usertime": 8379
+     },
+     "143986508965": {
+      "maxRSS": 19564,
+      "systemtime": 1253,
+      "usertime": 8379
+     },
+     "143986508988": {
+      "maxRSS": 19564,
+      "systemtime": 1281,
+      "usertime": 8379
+     },
+     "143986509017": {
+      "maxRSS": 19564,
+      "systemtime": 1309,
+      "usertime": 8379
+     }
+    }
+   }
+  }
+ }
+}

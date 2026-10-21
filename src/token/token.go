@@ -85,9 +85,9 @@ func (k Kind) String() string {
 // and rune columns coincide for every position a Token can legally start
 // or end at.
 type Position struct {
-	Offset int
-	Line   int
-	Col    int
+	Offset int `json:"offset"`
+	Line   int `json:"line"`
+	Col    int `json:"col"`
 }
 
 func (p Position) String() string {
@@ -96,8 +96,8 @@ func (p Position) String() string {
 
 // Span is a half-open [Start, End) source range.
 type Span struct {
-	Start Position
-	End   Position
+	Start Position `json:"start"`
+	End   Position `json:"end"`
 }
 
 func (s Span) String() string {

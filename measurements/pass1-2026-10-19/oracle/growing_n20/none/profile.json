@@ -1,0 +1,575 @@
+{
+ "root": {
+  "program": {
+   "configuration": {
+    "": "/root/compiler/tests/corpus/CONE_CORPUS/cc_growing_sibling.dl",
+    "fact-dir": "/root/compiler/fixtures/cone_corpus/cc_growing_sibling/n20",
+    "include-dir": ".",
+    "jobs": "1",
+    "libraries": "functors",
+    "library-dir": ".",
+    "output-dir": "/root/compiler/measurements/pass1-2026-10-19/oracle/growing_n20/none",
+    "profile": "/root/compiler/measurements/pass1-2026-10-19/oracle/growing_n20/none/profile.json",
+    "relationCount": "10",
+    "ruleCount": "15",
+    "version": "2.5",
+    "warn": "all",
+    "wno": "none"
+   },
+   "relation": {
+    "base": {
+     "loadtime": { "start": 99293733773, "end": 99293733870},
+     "num-tuples": 30,
+     "reads": 0,
+     "source-locator": "/root/compiler/tests/corpus/CONE_CORPUS/cc_growing_sibling.dl [16:7-16:11]"
+    },
+    "blocked": {
+     "loadtime": { "start": 99293733878, "end": 99293733905},
+     "num-tuples": 5,
+     "reads": 136,
+     "source-locator": "/root/compiler/tests/corpus/CONE_CORPUS/cc_growing_sibling.dl [18:7-18:14]"
+    },
+    "e": {
+     "loadtime": { "start": 99293733911, "end": 99293733926},
+     "num-tuples": 30,
+     "reads": 0,
+     "source-locator": "/root/compiler/tests/corpus/CONE_CORPUS/cc_growing_sibling.dl [17:7-17:8]"
+    },
+    "out": {
+     "maxRSS": {
+      "post": 17680,
+      "pre": 17680
+     },
+     "non-recursive-rule": {
+      "out(y) :- \n   p(1,y).": {
+       "atom-frequency": {
+        "out(y) :- \n   p(1,y).": {
+         "p": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 17680,
+        "pre": 17680
+       },
+       "num-tuples": 3,
+       "runtime": { "start": 99293734801, "end": 99293734802},
+       "source-locator": "/root/compiler/tests/corpus/CONE_CORPUS/cc_growing_sibling.dl [33:1-33:18]"
+      }
+     },
+     "num-tuples": 3,
+     "reads": 0,
+     "runtime": { "start": 99293734800, "end": 99293734808},
+     "savetime": { "start": 99293734811, "end": 99293734835},
+     "source-locator": "/root/compiler/tests/corpus/CONE_CORPUS/cc_growing_sibling.dl [32:7-32:10]"
+    },
+    "out2": {
+     "maxRSS": {
+      "post": 17680,
+      "pre": 17680
+     },
+     "non-recursive-rule": {
+      "out2(y) :- \n   tc(1,y).": {
+       "atom-frequency": {
+        "out2(y) :- \n   tc(1,y).": {
+         "tc": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 17680,
+        "pre": 17680
+       },
+       "num-tuples": 20,
+       "runtime": { "start": 99293734567, "end": 99293734569},
+       "source-locator": "/root/compiler/tests/corpus/CONE_CORPUS/cc_growing_sibling.dl [40:1-40:20]"
+      }
+     },
+     "num-tuples": 20,
+     "reads": 0,
+     "runtime": { "start": 99293734567, "end": 99293734576},
+     "savetime": { "start": 99293734580, "end": 99293734684},
+     "source-locator": "/root/compiler/tests/corpus/CONE_CORPUS/cc_growing_sibling.dl [39:7-39:11]"
+    },
+    "p": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 99293734776, "end": 99293734777},
+       "maxRSS": {
+        "post": 17680,
+        "pre": 17680
+       },
+       "num-tuples": 3,
+       "recursive-rule": {
+        "p(x,y) :- \n   p(x,z),\n   !s(z),\n   q(z,y).": {
+         "0": {
+          "atom-frequency": {
+           "@new_p(x,y) :- \n   @delta_p(x,z),\n   !s(z),\n   q(z,y).": {
+            "@delta_p": {
+             "level": 0,
+             "num-tuples": 0
+            },
+            "q": {
+             "level": 1,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 17680,
+           "pre": 17680
+          },
+          "num-tuples": 3,
+          "runtime": { "start": 99293734738, "end": 99293734743},
+          "source-locator": "/root/compiler/tests/corpus/CONE_CORPUS/cc_growing_sibling.dl [30:1-30:33]"
+         }
+        }
+       },
+       "runtime": { "start": 99293734737, "end": 99293734749}
+      },
+      "1": {
+       "maxRSS": {
+        "post": 17680,
+        "pre": 17680
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "p(x,y) :- \n   p(x,z),\n   !s(z),\n   q(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 17680,
+           "pre": 17680
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 99293734781, "end": 99293734783},
+          "source-locator": "/root/compiler/tests/corpus/CONE_CORPUS/cc_growing_sibling.dl [30:1-30:33]"
+         }
+        }
+       },
+       "runtime": { "start": 99293734781, "end": 99293734792}
+      }
+     },
+     "maxRSS": {
+      "post": 17680,
+      "pre": 17680
+     },
+     "non-recursive-rule": {
+      "p(x,y) :- \n   e(x,y).": {
+       "atom-frequency": {
+        "p(x,y) :- \n   e(x,y).": {
+         "e": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 17680,
+        "pre": 17680
+       },
+       "num-tuples": 30,
+       "runtime": { "start": 99293734724, "end": 99293734727},
+       "source-locator": "/root/compiler/tests/corpus/CONE_CORPUS/cc_growing_sibling.dl [29:1-29:18]"
+      }
+     },
+     "num-tuples": 30,
+     "reads": 3,
+     "runtime": { "start": 99293734723, "end": 99293734732},
+     "source-locator": "/root/compiler/tests/corpus/CONE_CORPUS/cc_growing_sibling.dl [28:7-28:8]"
+    },
+    "q": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 99293734075, "end": 99293734079},
+       "maxRSS": {
+        "post": 17680,
+        "pre": 17680
+       },
+       "num-tuples": 40,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "atom-frequency": {
+           "@new_q(x,y) :- \n   @delta_q(x,z),\n   base(z,y).": {
+            "@delta_q": {
+             "level": 0,
+             "num-tuples": 0
+            },
+            "base": {
+             "level": 1,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 17680,
+           "pre": 17680
+          },
+          "num-tuples": 40,
+          "runtime": { "start": 99293734029, "end": 99293734047},
+          "source-locator": "/root/compiler/tests/corpus/CONE_CORPUS/cc_growing_sibling.dl [23:1-23:29]"
+         }
+        }
+       },
+       "runtime": { "start": 99293734020, "end": 99293734056}
+      },
+      "1": {
+       "copytime": { "start": 99293734106, "end": 99293734109},
+       "maxRSS": {
+        "post": 17680,
+        "pre": 17680
+       },
+       "num-tuples": 35,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 17680,
+           "pre": 17680
+          },
+          "num-tuples": 35,
+          "runtime": { "start": 99293734083, "end": 99293734093},
+          "source-locator": "/root/compiler/tests/corpus/CONE_CORPUS/cc_growing_sibling.dl [23:1-23:29]"
+         }
+        }
+       },
+       "runtime": { "start": 99293734083, "end": 99293734099}
+      },
+      "2": {
+       "copytime": { "start": 99293734136, "end": 99293734140},
+       "maxRSS": {
+        "post": 17680,
+        "pre": 17680
+       },
+       "num-tuples": 22,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 17680,
+           "pre": 17680
+          },
+          "num-tuples": 22,
+          "runtime": { "start": 99293734112, "end": 99293734121},
+          "source-locator": "/root/compiler/tests/corpus/CONE_CORPUS/cc_growing_sibling.dl [23:1-23:29]"
+         }
+        }
+       },
+       "runtime": { "start": 99293734112, "end": 99293734128}
+      },
+      "3": {
+       "copytime": { "start": 99293734166, "end": 99293734168},
+       "maxRSS": {
+        "post": 17680,
+        "pre": 17680
+       },
+       "num-tuples": 8,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 17680,
+           "pre": 17680
+          },
+          "num-tuples": 8,
+          "runtime": { "start": 99293734144, "end": 99293734149},
+          "source-locator": "/root/compiler/tests/corpus/CONE_CORPUS/cc_growing_sibling.dl [23:1-23:29]"
+         }
+        }
+       },
+       "runtime": { "start": 99293734143, "end": 99293734156}
+      },
+      "4": {
+       "copytime": { "start": 99293734203, "end": 99293734204},
+       "maxRSS": {
+        "post": 17680,
+        "pre": 17680
+       },
+       "num-tuples": 1,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 17680,
+           "pre": 17680
+          },
+          "num-tuples": 1,
+          "runtime": { "start": 99293734183, "end": 99293734186},
+          "source-locator": "/root/compiler/tests/corpus/CONE_CORPUS/cc_growing_sibling.dl [23:1-23:29]"
+         }
+        }
+       },
+       "runtime": { "start": 99293734172, "end": 99293734194}
+      },
+      "5": {
+       "maxRSS": {
+        "post": 17680,
+        "pre": 17680
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 17680,
+           "pre": 17680
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 99293734207, "end": 99293734208},
+          "source-locator": "/root/compiler/tests/corpus/CONE_CORPUS/cc_growing_sibling.dl [23:1-23:29]"
+         }
+        }
+       },
+       "runtime": { "start": 99293734207, "end": 99293734213}
+      }
+     },
+     "maxRSS": {
+      "post": 17680,
+      "pre": 17680
+     },
+     "non-recursive-rule": {
+      "q(x,y) :- \n   base(x,y).": {
+       "atom-frequency": {
+        "q(x,y) :- \n   base(x,y).": {
+         "base": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 17680,
+        "pre": 17680
+       },
+       "num-tuples": 30,
+       "runtime": { "start": 99293733994, "end": 99293734004},
+       "source-locator": "/root/compiler/tests/corpus/CONE_CORPUS/cc_growing_sibling.dl [22:1-22:21]"
+      }
+     },
+     "num-tuples": 30,
+     "reads": 185,
+     "runtime": { "start": 99293733984, "end": 99293734013},
+     "source-locator": "/root/compiler/tests/corpus/CONE_CORPUS/cc_growing_sibling.dl [21:7-21:8]"
+    },
+    "s": {
+     "maxRSS": {
+      "post": 17680,
+      "pre": 17680
+     },
+     "non-recursive-rule": {
+      "s(x) :- \n   q(x,y),\n   blocked(y).": {
+       "atom-frequency": {
+        "s(x) :- \n   q(x,y),\n   blocked(y).": {
+         "q": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 17680,
+        "pre": 17680
+       },
+       "num-tuples": 12,
+       "runtime": { "start": 99293734703, "end": 99293734710},
+       "source-locator": "/root/compiler/tests/corpus/CONE_CORPUS/cc_growing_sibling.dl [26:1-26:28]"
+      }
+     },
+     "num-tuples": 12,
+     "reads": 33,
+     "runtime": { "start": 99293734691, "end": 99293734718},
+     "source-locator": "/root/compiler/tests/corpus/CONE_CORPUS/cc_growing_sibling.dl [25:7-25:8]"
+    },
+    "sibling_edge": {
+     "loadtime": { "start": 99293733931, "end": 99293733977},
+     "num-tuples": 119,
+     "reads": 0,
+     "source-locator": "/root/compiler/tests/corpus/CONE_CORPUS/cc_growing_sibling.dl [19:7-19:19]"
+    },
+    "tc": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 99293734365, "end": 99293734383},
+       "maxRSS": {
+        "post": 17680,
+        "pre": 17680
+       },
+       "num-tuples": 234,
+       "recursive-rule": {
+        "tc(x,y) :- \n   tc(x,z),\n   sibling_edge(z,y).": {
+         "0": {
+          "atom-frequency": {
+           "@new_tc(x,y) :- \n   @delta_tc(x,z),\n   sibling_edge(z,y).": {
+            "@delta_tc": {
+             "level": 0,
+             "num-tuples": 0
+            },
+            "sibling_edge": {
+             "level": 1,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 17680,
+           "pre": 17680
+          },
+          "num-tuples": 234,
+          "runtime": { "start": 99293734252, "end": 99293734337},
+          "source-locator": "/root/compiler/tests/corpus/CONE_CORPUS/cc_growing_sibling.dl [37:1-37:39]"
+         }
+        }
+       },
+       "runtime": { "start": 99293734242, "end": 99293734346}
+      },
+      "1": {
+       "copytime": { "start": 99293734528, "end": 99293734534},
+       "maxRSS": {
+        "post": 17680,
+        "pre": 17680
+       },
+       "num-tuples": 27,
+       "recursive-rule": {
+        "tc(x,y) :- \n   tc(x,z),\n   sibling_edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 17680,
+           "pre": 17680
+          },
+          "num-tuples": 27,
+          "runtime": { "start": 99293734387, "end": 99293734498},
+          "source-locator": "/root/compiler/tests/corpus/CONE_CORPUS/cc_growing_sibling.dl [37:1-37:39]"
+         }
+        }
+       },
+       "runtime": { "start": 99293734387, "end": 99293734507}
+      },
+      "2": {
+       "maxRSS": {
+        "post": 17680,
+        "pre": 17680
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "tc(x,y) :- \n   tc(x,z),\n   sibling_edge(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 17680,
+           "pre": 17680
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 99293734538, "end": 99293734551},
+          "source-locator": "/root/compiler/tests/corpus/CONE_CORPUS/cc_growing_sibling.dl [37:1-37:39]"
+         }
+        }
+       },
+       "runtime": { "start": 99293734538, "end": 99293734559}
+      }
+     },
+     "maxRSS": {
+      "post": 17680,
+      "pre": 17680
+     },
+     "non-recursive-rule": {
+      "tc(x,y) :- \n   sibling_edge(x,y).": {
+       "atom-frequency": {
+        "tc(x,y) :- \n   sibling_edge(x,y).": {
+         "sibling_edge": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 17680,
+        "pre": 17680
+       },
+       "num-tuples": 119,
+       "runtime": { "start": 99293734221, "end": 99293734227},
+       "source-locator": "/root/compiler/tests/corpus/CONE_CORPUS/cc_growing_sibling.dl [36:1-36:30]"
+      }
+     },
+     "num-tuples": 119,
+     "reads": 2261,
+     "runtime": { "start": 99293734220, "end": 99293734233},
+     "source-locator": "/root/compiler/tests/corpus/CONE_CORPUS/cc_growing_sibling.dl [35:7-35:9]"
+    }
+   },
+   "runtime": { "start": 99293733766, "end": 99293734838},
+   "starttime": { "time": 99293733727},
+   "usage": {
+    "timepoint": {
+     "99293733814": {
+      "maxRSS": 17680,
+      "systemtime": 6020,
+      "usertime": 3010
+     },
+     "99293733962": {
+      "maxRSS": 17680,
+      "systemtime": 6151,
+      "usertime": 3075
+     },
+     "99293734009": {
+      "maxRSS": 17680,
+      "systemtime": 6209,
+      "usertime": 3104
+     },
+     "99293734043": {
+      "maxRSS": 17680,
+      "systemtime": 6234,
+      "usertime": 3117
+     },
+     "99293734150": {
+      "maxRSS": 17680,
+      "systemtime": 6323,
+      "usertime": 3161
+     },
+     "99293734164": {
+      "maxRSS": 17680,
+      "systemtime": 6340,
+      "usertime": 3170
+     },
+     "99293734203": {
+      "maxRSS": 17680,
+      "systemtime": 6377,
+      "usertime": 3188
+     },
+     "99293734217": {
+      "maxRSS": 17680,
+      "systemtime": 6395,
+      "usertime": 3197
+     },
+     "99293734259": {
+      "maxRSS": 17680,
+      "systemtime": 6429,
+      "usertime": 3214
+     },
+     "99293734416": {
+      "maxRSS": 17680,
+      "systemtime": 6528,
+      "usertime": 3264
+     },
+     "99293734565": {
+      "maxRSS": 17680,
+      "systemtime": 6669,
+      "usertime": 3334
+     },
+     "99293734605": {
+      "maxRSS": 17680,
+      "systemtime": 6688,
+      "usertime": 3344
+     },
+     "99293734735": {
+      "maxRSS": 17680,
+      "systemtime": 6800,
+      "usertime": 3400
+     }
+    }
+   }
+  }
+ }
+}

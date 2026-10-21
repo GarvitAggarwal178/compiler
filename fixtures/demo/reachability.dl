@@ -1,0 +1,12 @@
+.decl edge(a:number,b:number)
+.input edge
+.decl node(a:number)
+.input node
+.decl reach(a:number,b:number)
+reach(x,y) :- edge(x,y).
+reach(x,y) :- reach(x,z),edge(z,y).
+.decl missing(a:number,b:number)
+missing(x,y) :- node(x),node(y),!reach(x,y).
+.decl out(y:number)
+.output out
+out(y) :- missing(1,y).

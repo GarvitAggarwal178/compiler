@@ -1,3 +1,8 @@
+> Current 20 October 2026 implementation: shared executable planning, compiler-owned
+> inspection and a local review demo are implemented. `guarded-compact` is a
+> separate conservative checkpoint pass. See `docs/08-demo.md`,
+> `docs/09-review2.md` and `docs/10-final-review.md` for observed verification.
+
 # `dlc` — design, as it stands today
 
 `dlc` is a from-scratch Datalog compiler (Go, single binary, `src/cmd/dlc`)
@@ -18,7 +23,7 @@ every claim below, see `results/claims.md` and `experiments/`.
 ## 1. Source language
 
 ```
-program    ::= decl* clause*
+program    ::= (decl | clause)*
 
 decl       ::= '.decl' ident '(' param (',' param)* ')'
              | '.decl' ident '(' ')'                  // amendment: zero-arity
@@ -80,7 +85,11 @@ grammar accepts — not a coverage or correctness metric; see
 4. **Allowedness** (`sema.CheckAllowedness`) — every variable in a rule
    must be grounded by some positive body literal before it can appear in
    a negated literal, a constraint, or the head. Rejection ground
-   `allowedness`.
+   `allowedness`. Range restriction checks original variables. The shared
+   `src/plan` body planner also checks executable binding order: a stalled positive
+   arithmetic-column cycle is lowered to fresh column variables and equality
+   filters. Go, C and SIPS share this planner; SIPS supplies actual head demand.
+   This forward repair does not invert arithmetic or change the language.
 5. **Stratification** (`sema.CheckStratification`) — Tarjan SCC over the
    full positive+negative precedence graph; a negative edge inside an SCC
    is rejected. Rejection ground `unstratifiable`.
@@ -89,10 +98,24 @@ grammar accepts — not a coverage or correctness metric; see
 8. **Evaluation** — naive and semi-naive (`src/eval`) fixpoint evaluators.
    A mixed program (partially transformed, partially fallback) uses the
    same evaluator unmodified.
-9. **C codegen** (`src/codegen`) — naive evaluation to standalone C, for an
-   *untransformed* program only. Never wired to the transform path; the
-   pipeline story (parse → transform → evaluate) is complete only for the
-   tree-walking evaluator.
+9. **C codegen** (`src/codegen`) — naive evaluation to standalone POSIX C11.
+   `dlc codegen ... --transformer=guarded` applies the guarded rewrite, then
+   rechecks the transformed AST and generates C from its new schemas/strata.
+   Without a flag the existing untransformed behavior is retained.
+
+10. **Optional checkpoint compaction** (`src/transform/compact`) — selected only
+    by `guarded-compact`, after guarded validation. Exact aliases and
+    projection-preserving single uses may be removed. Shared, negative non-alias,
+    wildcard and existential-projection barriers are retained; see the final review.
+
+`src/inspect` consumes frontend data and reporting transformer outcomes. It emits
+schema-version-1 JSON containing source AST/tokens, signed graph/SCC data, separate
+source/candidate/final states, query/SIPS information, generated roles and origins,
+and actual execution plans. The generator owns provenance; inspection does not
+infer roles from relation-name prefixes. Generated nodes do not acquire fake
+source spans. Rule IDs come from source indices or semantic generation roles.
+`src/demo` and the embedded `src/cmd/dlc-demo/web` UI run the actual compiler and
+native tools on immutable temporary snapshots. No Datalog evaluator lives in JS.
 
 All four rejection grounds are demonstrated live via `dlc explain`, one
 committed sample program per ground (`experiments/explain-samples/`).
@@ -183,7 +206,7 @@ their provenance.
 - **No wall-clock timing anywhere.** Every number in this project is a
   derived-tuple count; the hardware (WSL2, hybrid CPU, no PMU) cannot
   support a timing claim.
-- **C codegen is not wired to the transform.** The generated-C path only
-  ever sees an untransformed program.
+- **C uses naive fixed-point execution.** It can now consume the guarded
+  rewrite; generated semi-naive C remains outside this pass.
 - **The guard's necessity is not demonstrated on real code.** Its
   correctness is; see `results/findings.md` item 4.

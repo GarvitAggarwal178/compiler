@@ -1,0 +1,18 @@
+.decl edge(x:number, y:number)
+.input edge
+.decl node(z:number)
+.input node
+.decl p(x:number, z:number)
+.decl out(z:number)
+.output out
+.decl sup_p_bf_r0_0(c0:number)
+.decl magic_p_bf(c0:number)
+.decl sup_p_bf_r0_1(c0:number)
+.decl sup_p_bf_r0_2(c0:number, c1:number)
+.decl p_bf(c0:number, c1:number)
+sup_p_bf_r0_0(x) :- magic_p_bf(x).
+sup_p_bf_r0_1(x) :- sup_p_bf_r0_0(x), edge(x, y).
+sup_p_bf_r0_2(x, z) :- sup_p_bf_r0_1(x), node(z).
+p_bf(x, z) :- sup_p_bf_r0_2(x, z).
+magic_p_bf(1).
+out(z) :- p_bf(1, z).

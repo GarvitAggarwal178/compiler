@@ -1,0 +1,485 @@
+{
+ "root": {
+  "program": {
+   "configuration": {
+    "": "/root/compiler/measurements/pass1-2026-10-19/oracle/culprit_n20/transformed.dl",
+    "fact-dir": "/root/compiler/fixtures/benchmark-family/culprit_cycle/n20",
+    "include-dir": ".",
+    "jobs": "1",
+    "libraries": "functors",
+    "library-dir": ".",
+    "output-dir": "/root/compiler/measurements/pass1-2026-10-19/oracle/culprit_n20/guarded_souffle",
+    "profile": "/root/compiler/measurements/pass1-2026-10-19/oracle/culprit_n20/guarded_souffle/profile.json",
+    "relationCount": "7",
+    "ruleCount": "10",
+    "version": "2.5",
+    "warn": "all",
+    "wno": "none"
+   },
+   "relation": {
+    "base": {
+     "loadtime": { "start": 99292902021, "end": 99292902151},
+     "num-tuples": 30,
+     "reads": 0,
+     "source-locator": "/root/compiler/measurements/pass1-2026-10-19/oracle/culprit_n20/transformed.dl [1:7-1:11]"
+    },
+    "blocked": {
+     "loadtime": { "start": 99292902160, "end": 99292902187},
+     "num-tuples": 4,
+     "reads": 236,
+     "source-locator": "/root/compiler/measurements/pass1-2026-10-19/oracle/culprit_n20/transformed.dl [5:7-5:14]"
+    },
+    "e": {
+     "loadtime": { "start": 99292902194, "end": 99292902209},
+     "num-tuples": 31,
+     "reads": 0,
+     "source-locator": "/root/compiler/measurements/pass1-2026-10-19/oracle/culprit_n20/transformed.dl [3:7-3:8]"
+    },
+    "out": {
+     "maxRSS": {
+      "post": 17680,
+      "pre": 17680
+     },
+     "non-recursive-rule": {
+      "out(y) :- \n   p(1,y).": {
+       "atom-frequency": {
+        "out(y) :- \n   p(1,y).": {
+         "p": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 17680,
+        "pre": 17680
+       },
+       "num-tuples": 1,
+       "runtime": { "start": 99292902719, "end": 99292902721},
+       "source-locator": "/root/compiler/measurements/pass1-2026-10-19/oracle/culprit_n20/transformed.dl [17:1-17:19]"
+      }
+     },
+     "num-tuples": 1,
+     "reads": 0,
+     "runtime": { "start": 99292902718, "end": 99292902727},
+     "savetime": { "start": 99292902731, "end": 99292902860},
+     "source-locator": "/root/compiler/measurements/pass1-2026-10-19/oracle/culprit_n20/transformed.dl [10:7-10:10]"
+    },
+    "p": {
+     "iteration": {
+      "0": {
+       "maxRSS": {
+        "post": 17680,
+        "pre": 17680
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "p(x,y) :- \n   p(x,z),\n   !s(z),\n   q(z,y).": {
+         "0": {
+          "atom-frequency": {
+           "@new_p(x,y) :- \n   @delta_p(x,z),\n   !s(z),\n   q(z,y).": {
+            "@delta_p": {
+             "level": 0,
+             "num-tuples": 0
+            },
+            "q": {
+             "level": 1,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 17680,
+           "pre": 17680
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 99292902696, "end": 99292902700},
+          "source-locator": "/root/compiler/measurements/pass1-2026-10-19/oracle/culprit_n20/transformed.dl [13:1-13:36]"
+         }
+        }
+       },
+       "runtime": { "start": 99292902696, "end": 99292902707}
+      }
+     },
+     "maxRSS": {
+      "post": 17680,
+      "pre": 17680
+     },
+     "non-recursive-rule": {
+      "p(x,y) :- \n   e(x,y).": {
+       "atom-frequency": {
+        "p(x,y) :- \n   e(x,y).": {
+         "e": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 17680,
+        "pre": 17680
+       },
+       "num-tuples": 31,
+       "runtime": { "start": 99292902674, "end": 99292902681},
+       "source-locator": "/root/compiler/measurements/pass1-2026-10-19/oracle/culprit_n20/transformed.dl [12:1-12:20]"
+      }
+     },
+     "num-tuples": 31,
+     "reads": 0,
+     "runtime": { "start": 99292902663, "end": 99292902689},
+     "source-locator": "/root/compiler/measurements/pass1-2026-10-19/oracle/culprit_n20/transformed.dl [9:7-9:8]"
+    },
+    "q": {
+     "iteration": {
+      "0": {
+       "copytime": { "start": 99292902296, "end": 99292902301},
+       "maxRSS": {
+        "post": 17680,
+        "pre": 17680
+       },
+       "num-tuples": 40,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "atom-frequency": {
+           "@new_q(x,y) :- \n   @delta_q(x,z),\n   base(z,y).": {
+            "@delta_q": {
+             "level": 0,
+             "num-tuples": 0
+            },
+            "base": {
+             "level": 1,
+             "num-tuples": 0
+            }
+           }
+          },
+          "maxRSS": {
+           "post": 17680,
+           "pre": 17680
+          },
+          "num-tuples": 40,
+          "runtime": { "start": 99292902247, "end": 99292902266},
+          "source-locator": "/root/compiler/measurements/pass1-2026-10-19/oracle/culprit_n20/transformed.dl [15:1-15:32]"
+         }
+        }
+       },
+       "runtime": { "start": 99292902247, "end": 99292902274}
+      },
+      "1": {
+       "copytime": { "start": 99292902360, "end": 99292902365},
+       "maxRSS": {
+        "post": 17680,
+        "pre": 17680
+       },
+       "num-tuples": 48,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 17680,
+           "pre": 17680
+          },
+          "num-tuples": 48,
+          "runtime": { "start": 99292902318, "end": 99292902331},
+          "source-locator": "/root/compiler/measurements/pass1-2026-10-19/oracle/culprit_n20/transformed.dl [15:1-15:32]"
+         }
+        }
+       },
+       "runtime": { "start": 99292902308, "end": 99292902339}
+      },
+      "2": {
+       "copytime": { "start": 99292902419, "end": 99292902423},
+       "maxRSS": {
+        "post": 17680,
+        "pre": 17680
+       },
+       "num-tuples": 37,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 17680,
+           "pre": 17680
+          },
+          "num-tuples": 37,
+          "runtime": { "start": 99292902379, "end": 99292902391},
+          "source-locator": "/root/compiler/measurements/pass1-2026-10-19/oracle/culprit_n20/transformed.dl [15:1-15:32]"
+         }
+        }
+       },
+       "runtime": { "start": 99292902368, "end": 99292902399}
+      },
+      "3": {
+       "copytime": { "start": 99292902475, "end": 99292902479},
+       "maxRSS": {
+        "post": 17680,
+        "pre": 17680
+       },
+       "num-tuples": 26,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 17680,
+           "pre": 17680
+          },
+          "num-tuples": 26,
+          "runtime": { "start": 99292902437, "end": 99292902447},
+          "source-locator": "/root/compiler/measurements/pass1-2026-10-19/oracle/culprit_n20/transformed.dl [15:1-15:32]"
+         }
+        }
+       },
+       "runtime": { "start": 99292902427, "end": 99292902454}
+      },
+      "4": {
+       "copytime": { "start": 99292902502, "end": 99292902506},
+       "maxRSS": {
+        "post": 17680,
+        "pre": 17680
+       },
+       "num-tuples": 20,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 17680,
+           "pre": 17680
+          },
+          "num-tuples": 20,
+          "runtime": { "start": 99292902482, "end": 99292902490},
+          "source-locator": "/root/compiler/measurements/pass1-2026-10-19/oracle/culprit_n20/transformed.dl [15:1-15:32]"
+         }
+        }
+       },
+       "runtime": { "start": 99292902482, "end": 99292902496}
+      },
+      "5": {
+       "copytime": { "start": 99292902524, "end": 99292902526},
+       "maxRSS": {
+        "post": 17680,
+        "pre": 17680
+       },
+       "num-tuples": 15,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 17680,
+           "pre": 17680
+          },
+          "num-tuples": 15,
+          "runtime": { "start": 99292902508, "end": 99292902514},
+          "source-locator": "/root/compiler/measurements/pass1-2026-10-19/oracle/culprit_n20/transformed.dl [15:1-15:32]"
+         }
+        }
+       },
+       "runtime": { "start": 99292902508, "end": 99292902519}
+      },
+      "6": {
+       "copytime": { "start": 99292902550, "end": 99292902554},
+       "maxRSS": {
+        "post": 17680,
+        "pre": 17680
+       },
+       "num-tuples": 15,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 17680,
+           "pre": 17680
+          },
+          "num-tuples": 15,
+          "runtime": { "start": 99292902529, "end": 99292902533},
+          "source-locator": "/root/compiler/measurements/pass1-2026-10-19/oracle/culprit_n20/transformed.dl [15:1-15:32]"
+         }
+        }
+       },
+       "runtime": { "start": 99292902529, "end": 99292902538}
+      },
+      "7": {
+       "copytime": { "start": 99292902593, "end": 99292902595},
+       "maxRSS": {
+        "post": 17680,
+        "pre": 17680
+       },
+       "num-tuples": 5,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 17680,
+           "pre": 17680
+          },
+          "num-tuples": 5,
+          "runtime": { "start": 99292902557, "end": 99292902562},
+          "source-locator": "/root/compiler/measurements/pass1-2026-10-19/oracle/culprit_n20/transformed.dl [15:1-15:32]"
+         }
+        }
+       },
+       "runtime": { "start": 99292902557, "end": 99292902569}
+      },
+      "8": {
+       "maxRSS": {
+        "post": 17680,
+        "pre": 17680
+       },
+       "num-tuples": 0,
+       "recursive-rule": {
+        "q(x,y) :- \n   q(x,z),\n   base(z,y).": {
+         "0": {
+          "maxRSS": {
+           "post": 17680,
+           "pre": 17680
+          },
+          "num-tuples": 0,
+          "runtime": { "start": 99292902599, "end": 99292902601},
+          "source-locator": "/root/compiler/measurements/pass1-2026-10-19/oracle/culprit_n20/transformed.dl [15:1-15:32]"
+         }
+        }
+       },
+       "runtime": { "start": 99292902598, "end": 99292902608}
+      }
+     },
+     "maxRSS": {
+      "post": 17680,
+      "pre": 17680
+     },
+     "non-recursive-rule": {
+      "q(x,y) :- \n   base(x,y).": {
+       "atom-frequency": {
+        "q(x,y) :- \n   base(x,y).": {
+         "base": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 17680,
+        "pre": 17680
+       },
+       "num-tuples": 30,
+       "runtime": { "start": 99292902215, "end": 99292902224},
+       "source-locator": "/root/compiler/measurements/pass1-2026-10-19/oracle/culprit_n20/transformed.dl [14:1-14:23]"
+      }
+     },
+     "num-tuples": 30,
+     "reads": 345,
+     "runtime": { "start": 99292902214, "end": 99292902231},
+     "source-locator": "/root/compiler/measurements/pass1-2026-10-19/oracle/culprit_n20/transformed.dl [7:7-7:8]"
+    },
+    "s": {
+     "maxRSS": {
+      "post": 17680,
+      "pre": 17680
+     },
+     "non-recursive-rule": {
+      "s(x) :- \n   q(x,y),\n   blocked(y).": {
+       "atom-frequency": {
+        "s(x) :- \n   q(x,y),\n   blocked(y).": {
+         "q": {
+          "level": 0,
+          "num-tuples": 0
+         }
+        }
+       },
+       "maxRSS": {
+        "post": 17680,
+        "pre": 17680
+       },
+       "num-tuples": 18,
+       "runtime": { "start": 99292902633, "end": 99292902645},
+       "source-locator": "/root/compiler/measurements/pass1-2026-10-19/oracle/culprit_n20/transformed.dl [16:1-16:29]"
+      }
+     },
+     "num-tuples": 18,
+     "reads": 31,
+     "runtime": { "start": 99292902632, "end": 99292902655},
+     "source-locator": "/root/compiler/measurements/pass1-2026-10-19/oracle/culprit_n20/transformed.dl [8:7-8:8]"
+    }
+   },
+   "runtime": { "start": 99292902013, "end": 99292902865},
+   "starttime": { "time": 99292901965},
+   "usage": {
+    "timepoint": {
+     "99292902007": {
+      "maxRSS": 17680,
+      "systemtime": 0,
+      "usertime": 5287
+     },
+     "99292902263": {
+      "maxRSS": 17680,
+      "systemtime": 0,
+      "usertime": 7550
+     },
+     "99292902296": {
+      "maxRSS": 17680,
+      "systemtime": 0,
+      "usertime": 7600
+     },
+     "99292902324": {
+      "maxRSS": 17680,
+      "systemtime": 0,
+      "usertime": 7635
+     },
+     "99292902360": {
+      "maxRSS": 17680,
+      "systemtime": 0,
+      "usertime": 7683
+     },
+     "99292902384": {
+      "maxRSS": 17680,
+      "systemtime": 0,
+      "usertime": 7709
+     },
+     "99292902419": {
+      "maxRSS": 17680,
+      "systemtime": 0,
+      "usertime": 7750
+     },
+     "99292902443": {
+      "maxRSS": 17680,
+      "systemtime": 0,
+      "usertime": 7783
+     },
+     "99292902554": {
+      "maxRSS": 17680,
+      "systemtime": 0,
+      "usertime": 7942
+     },
+     "99292902596": {
+      "maxRSS": 17680,
+      "systemtime": 0,
+      "usertime": 8002
+     },
+     "99292902640": {
+      "maxRSS": 17680,
+      "systemtime": 0,
+      "usertime": 8055
+     },
+     "99292902700": {
+      "maxRSS": 17680,
+      "systemtime": 0,
+      "usertime": 8141
+     },
+     "99292902717": {
+      "maxRSS": 17680,
+      "systemtime": 0,
+      "usertime": 8167
+     },
+     "99292902720": {
+      "maxRSS": 17680,
+      "systemtime": 0,
+      "usertime": 8175
+     },
+     "99292902758": {
+      "maxRSS": 17680,
+      "systemtime": 0,
+      "usertime": 8206
+     }
+    }
+   }
+  }
+ }
+}

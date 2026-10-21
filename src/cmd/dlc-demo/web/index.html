@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>dlc · compiler workbench</title>
+    <link rel="stylesheet" href="/style.css">
+    <script defer src="/app.js">
+    </script>
+  </head>
+  <body>
+    <header>
+      <div>
+        <p class="eyebrow">DATALOG → NATIVE C</p>
+        <h1>Compiler workbench</h1>
+        <p>Change a program. Inspect the compiler's decisions. Compare every requested answer.</p>
+      </div>
+      <span class="local">LOCAL · LINUX / WSL</span>
+    </header>
+    <div class="toolbar">
+      <label>Example<select id="example" aria-label="Example">
+        </select>
+      </label>
+      <button id="load-example">Load example</button>
+      <label>Rewrite<select id="mode">
+          <option value="guarded">guarded</option>
+        </select>
+      </label>
+      <button id="inspect">Inspect</button>
+      <button id="run" class="primary">Run &amp; compare</button>
+    </div>
+    <div id="tools" class="tools" aria-label="Tool availability">
+    </div>
+    <div id="status" role="status" aria-live="polite">Checking local tools…</div>
+    <main>
+      <section class="inputs">
+        <h2>
+          <span>01</span> Program &amp; facts</h2>
+        <p id="example-description" class="muted">
+        </p>
+        <label for="source">Datalog source</label>
+        <textarea id="source" spellcheck="false" aria-label="Datalog source">
+        </textarea>
+        <p class="hint">Source spans use UTF-8 byte offsets. Select a rule or AST node to locate it here.</p>
+        <div id="facts">
+        </div>
+        <details id="input-graph-details" open>
+          <summary>Input data graph</summary>
+          <p class="hint">Alternate view of edge.facts and node.facts. Editing this graph changes the facts.</p>
+          <div id="input-graph">
+          </div>
+          <div class="edge-controls">
+            <label>From<select id="edge-from">
+              </select>
+            </label>
+            <label>To<select id="edge-to">
+              </select>
+            </label>
+            <button id="add-edge">Add edge</button>
+          </div>
+          <div id="edge-list">
+          </div>
+        </details>
+      </section>
+      <section class="compilation">
+        <h2>
+          <span>02</span> Explain compilation</h2>
+        <div id="compile-status" class="muted">Inspect the current source to see compiler data.</div>
+        <label for="rule">Source rule</label>
+        <select id="rule">
+        </select>
+        <div id="selected-rule">
+        </div>
+        <details open>
+          <summary>Binding flow &amp; demand</summary>
+          <div id="binding-flow">
+          </div>
+          <div id="queries">
+          </div>
+        </details>
+        <details open>
+          <summary>Signed relation dependencies</summary>
+          <label>Program graph<select id="graph-stage">
+              <option value="source">source</option>
+              <option value="candidate">candidate</option>
+              <option value="final">final</option>
+            </select>
+          </label>
+          <p class="hint">Head → relation read. Dashed edges marked ! are negative. Click an edge to select its source rule.</p>
+          <div id="dependencies">
+          </div>
+        </details>
+        <details open>
+          <summary>Guard &amp; retained full extents</summary>
+          <div id="guard">
+          </div>
+          <div id="decisions">
+          </div>
+        </details>
+        <details>
+          <summary>Source AST · actual compiler nodes</summary>
+          <div id="ast-tree">
+          </div>
+          <pre id="ast-node">
+          </pre>
+        </details>
+        <details>
+          <summary>Tokens · kinds and source locations</summary>
+          <div id="tokens">
+          </div>
+        </details>
+        <details>
+          <summary>Generated rules for the selected source rule</summary>
+          <div id="generated-rules">
+          </div>
+        </details>
+        <details>
+          <summary>Actual rewritten Datalog</summary>
+          <pre id="rewrite">
+          </pre>
+        </details>
+        <details id="compact-details" hidden>
+          <summary>Checkpoint compaction · removals and skips</summary>
+          <div id="compaction">
+          </div>
+        </details>
+      </section>
+      <section class="execution">
+        <h2>
+          <span>03</span> Run &amp; compare</h2>
+        <div id="snapshot" class="snapshot">No execution snapshot.</div>
+        <div id="results">
+          <p class="muted">Run the current inputs to measure real work and compare answers.</p>
+        </div>
+        <div class="native-actions">
+          <button id="native" disabled>Generate &amp; run C</button>
+          <button id="oracle" disabled>Verify with Soufflé</button>
+        </div>
+        <p class="hint">Generated C uses naive fixed-point evaluation. Native and oracle checks report answers; Go work counters belong to Go runs.</p>
+        <div id="external">
+        </div>
+        <details>
+          <summary>Generated C · source provenance and loops</summary>
+          <pre id="c-source">
+          </pre>
+        </details>
+        <details>
+          <summary>Real command outcomes</summary>
+          <div id="commands">
+          </div>
+        </details>
+        <p class="boundary">Counting contract: rule-derived tuple insertions include every checkpoint; loaded rows are excluded. Candidate-head attempts count repeated work. Naive bucket 0 and SCC-local delta buckets are not a global execution trace. Counts do not establish runtime or memory improvement.</p>
+        <p class="boundary">I/O contract: exact LF-delimited serialized row sets, including empty files and empty-symbol rows. Plain TSV cannot encode embedded symbol tabs or LF unambiguously. Unrepresentable columns are shown as escaped bytes.</p>
+      </section>
+    </main>
+    <footer>Compiler-owned inspection · immutable input snapshots · bounded subprocesses · no external services</footer>
+  </body>
+</html>

@@ -1,0 +1,23 @@
+.decl edge(a:number, b:number)
+.input edge
+.decl node(a:number)
+.input node
+.decl reach(a:number, b:number)
+.decl unreach(a:number, b:number)
+.decl q_unreach(b:number)
+.output q_unreach
+.decl magic_unreach_bf(c0:number)
+.decl sup_unreach_bf_r0_2(c0:number, c1:number)
+.decl magic_reach_bf(c0:number)
+.decl unreach_bf(c0:number, c1:number)
+.decl reach_bf(c0:number, c1:number)
+.decl sup_reach_bf_r1_2(c0:number, c1:number)
+sup_unreach_bf_r0_2(x, y) :- magic_unreach_bf(x), node(x), node(y).
+magic_reach_bf(x) :- sup_unreach_bf_r0_2(x, y).
+unreach_bf(x, y) :- sup_unreach_bf_r0_2(x, y), !reach_bf(x, y).
+reach_bf(x, y) :- magic_reach_bf(x), edge(x, y).
+sup_reach_bf_r1_2(x, y) :- magic_reach_bf(x), reach_bf(x, z), edge(z, y).
+magic_reach_bf(x) :- magic_reach_bf(x).
+reach_bf(x, y) :- sup_reach_bf_r1_2(x, y).
+magic_unreach_bf(1).
+q_unreach(y) :- unreach_bf(1, y).

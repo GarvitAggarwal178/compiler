@@ -1,0 +1,14 @@
+.decl edge(a:number, b:number)
+.input edge
+.decl tc(a:number, b:number)
+.decl q_tc(y:number)
+.output q_tc
+.decl magic_tc_bf(c0:number)
+.decl tc_bf(c0:number, c1:number)
+.decl sup_tc_bf_r1_2(c0:number, c1:number)
+tc_bf(x, y) :- magic_tc_bf(x), edge(x, y).
+sup_tc_bf_r1_2(x, y) :- magic_tc_bf(x), tc_bf(x, z), edge(z, y).
+magic_tc_bf(x) :- magic_tc_bf(x).
+tc_bf(x, y) :- sup_tc_bf_r1_2(x, y).
+magic_tc_bf(1).
+q_tc(y) :- tc_bf(1, y).

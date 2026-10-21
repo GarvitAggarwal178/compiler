@@ -9,7 +9,10 @@ import (
 	"sort"
 
 	"dlc/src/ast"
+	"dlc/src/parser"
 	"dlc/src/sema"
+	"dlc/src/transform"
+	"strings"
 )
 
 // Generate builds the full output *ast.Program from prog and an already-
@@ -50,7 +53,44 @@ func Generate(prog *ast.Program, schemas map[string]*sema.RelationSchema, result
 // because it is reading the SAME relation name §3.9's evaluator already
 // materializes in full for that predicate elsewhere in the program.
 func GenerateMixed(prog *ast.Program, schemas map[string]*sema.RelationSchema, result *AdornResult, declined map[string]bool) (*ast.Program, map[string]string) {
-	g := &genState{schemas: schemas, declaredRel: map[string]bool{}, origin: map[string]string{}, out: &ast.Program{}, declined: declined}
+	p, origins, _ := GenerateMixedReported(prog, schemas, result, declined)
+	return p, origins
+}
+
+func GenerateMixedReported(prog *ast.Program, schemas map[string]*sema.RelationSchema, result *AdornResult, declined map[string]bool) (*ast.Program, map[string]string, *transform.Report) {
+	g := &genState{schemas: schemas, declaredRel: map[string]bool{}, origin: map[string]string{}, out: &ast.Program{}, declined: declined, names: AllocateNames(prog, result), report: transform.IdentityReport(prog, "magicset"), sourceIDs: map[*ast.Clause]string{}}
+	g.report.Rules = nil
+	g.report.Relations = nil
+	g.report.Decisions = nil
+	for i, c := range prog.Clauses {
+		g.sourceIDs[c] = transform.RuleID(i)
+	}
+	if len(result.Queries) > 0 {
+		g.report.NoQueryReason = ""
+	}
+	g.report.WorklistPops = result.Iterations
+	for _, o := range result.NegatedOccurrenceAdornments() {
+		pre, post := []string{}, []string{}
+		for _, c := range o.PreAdorn.String() {
+			pre = append(pre, string(c))
+		}
+		for _, c := range o.Adorn.String() {
+			post = append(post, string(c))
+		}
+		g.report.Negations = append(g.report.Negations, transform.Negation{SourceRuleID: g.sourceIDs[o.Rule], Predicate: o.Pred, PreBindings: pre, Bindings: post})
+	}
+	for _, q := range result.Queries {
+		bindings := bindingStrings(q.Key)
+		args := []transform.Argument{}
+		for i, t := range q.QueryAtom.Terms {
+			if q.Key.adorn[i] != 'b' {
+				continue
+			}
+			printed := parserTerm(t)
+			args = append(args, transform.Argument{Position: i, Binding: "b", Type: schemas[q.Key.pred].Params[i].Type, Expression: printed})
+		}
+		g.report.Queries = append(g.report.Queries, transform.Query{SourcePredicate: q.Key.pred, ProjectionRuleID: g.sourceIDs[q.ProjectionRule], Bindings: bindings, DemandArguments: args, ViewID: g.names.Relation(q.Key), MagicID: g.names.Magic(q.Key)})
+	}
 
 	// Every original declaration survives unchanged -- including the
 	// original (now possibly rule-less) name of an adorned predicate;
@@ -60,6 +100,9 @@ func GenerateMixed(prog *ast.Program, schemas map[string]*sema.RelationSchema, r
 		g.out.Decls = append(g.out.Decls, d)
 		g.declaredRel[d.Name] = true
 		g.origin[d.Name] = d.Name
+		if d.Kind == ast.DeclRelation {
+			g.report.Relations = append(g.report.Relations, transform.RelationOrigin{ID: d.Name, Role: "source", SourcePredicate: d.Name})
+		}
 	}
 
 	st := &sema.SymbolTable{Relations: schemas}
@@ -77,11 +120,16 @@ func GenerateMixed(prog *ast.Program, schemas map[string]*sema.RelationSchema, r
 	for _, q := range result.Queries {
 		queryProjectionRules[q.ProjectionRule] = true
 	}
-	passthroughNames := sortedKeys(unionSets(result.Untouched, declined))
+	required := requiredOriginals(prog, result, declined, queryProjectionRules)
+	passthroughNames := sortedKeys(unionSets(unionSets(result.Untouched, declined), required))
 	for _, name := range passthroughNames {
 		for _, c := range prog.Clauses {
-			if c.Head.Name == name && !queryProjectionRules[c] {
-				g.out.Clauses = append(g.out.Clauses, c)
+			if c.Head.Name == name && (!queryProjectionRules[c] || required[name]) {
+				role := "original"
+				if required[name] || declined[name] {
+					role = "retained_original"
+				}
+				g.addOriginal(c, role)
 			}
 		}
 	}
@@ -95,8 +143,26 @@ func GenerateMixed(prog *ast.Program, schemas map[string]*sema.RelationSchema, r
 			continue
 		}
 		for ruleIdx, ar := range result.Rules[key] {
-			varTypes := sema.ClauseVarTypes(st, ar.Source)
+			planned := *ar.Source
+			planned.Body = ar.OrderedBody
+			varTypes := sema.ClauseVarTypes(st, &planned)
 			g.emitAdornedRule(key, ruleIdx, ar, varTypes)
+		}
+		// A relation may have both loaded facts and defining rules. Its
+		// loaded rows must remain visible to its specialized view.
+		for _, d := range prog.Decls {
+			if d.Kind == ast.DeclInput && d.Name == key.pred {
+				var terms, bound []ast.Term
+				for i := range schemas[key.pred].Params {
+					v := &ast.Var{Name: fmt.Sprintf("input_%d", i)}
+					terms = append(terms, v)
+					if key.adorn[i] == 'b' {
+						bound = append(bound, v)
+					}
+				}
+				g.addClause(mkAtomFromTerms(g.names.Relation(key), terms), []ast.Literal{mkAtomFromTerms(g.names.Magic(key), bound), mkAtomFromTerms(key.pred, terms)}, "loaded_input_bridge", "", "")
+				break
+			}
 		}
 	}
 
@@ -105,12 +171,20 @@ func GenerateMixed(prog *ast.Program, schemas map[string]*sema.RelationSchema, r
 	// both independently demand-restricted (or independently declined),
 	// exactly as if each had been the program's only query.
 	for _, q := range result.Queries {
+		if required[q.ProjectionRule.Head.Name] {
+			// The original projection is already retained. Other specialized
+			// consumers can still need this query's seed.
+			if !g.declined[q.Key.pred] {
+				g.emitSeed(q)
+			}
+			continue
+		}
 		if g.declined[q.Key.pred] {
 			// This query's own target predicate is FALLBACK: no magic seed
 			// (nothing demand-restricted to seed), and the original
 			// projection rule (query constant hardcoded, reading the
 			// original relation directly) is exactly right, unchanged.
-			g.out.Clauses = append(g.out.Clauses, q.ProjectionRule)
+			g.addOriginal(q.ProjectionRule, "query_projection")
 		} else {
 			// This query's own seed fact: magic_q^α0(c̄) from the query
 			// atom's constant arguments.
@@ -124,14 +198,59 @@ func GenerateMixed(prog *ast.Program, schemas map[string]*sema.RelationSchema, r
 		}
 	}
 
-	return g.out, g.origin
+	for _, d := range prog.Decls {
+		if d.Kind != ast.DeclRelation {
+			continue
+		}
+		views := []string{}
+		for _, r := range g.report.Relations {
+			if r.Role == "adorned" && r.SourcePredicate == d.Name {
+				views = append(views, r.ID)
+			}
+		}
+		reasons := []string{}
+		if result.Untouched[d.Name] {
+			reasons = append(reasons, "untouched source relation")
+		}
+		if required[d.Name] {
+			reasons = append(reasons, "required original dependency closure")
+		}
+		for _, io := range prog.Decls {
+			if io.Name == d.Name && required[d.Name] {
+				if io.Kind == ast.DeclOutput {
+					reasons = append(reasons, "requested full output")
+				}
+				if io.Kind == ast.DeclInput {
+					reasons = append(reasons, "loaded input extent")
+				}
+			}
+		}
+		if declined[d.Name] {
+			reasons = append(reasons, "guard fallback")
+		}
+		idb := false
+		for _, c := range prog.Clauses {
+			if c.Head.Name == d.Name {
+				idb = true
+				break
+			}
+		}
+		if !idb {
+			reasons = append(reasons, "input-only or empty source relation")
+		}
+		g.report.Decisions = append(g.report.Decisions, transform.Decision{SourcePredicate: d.Name, Specialized: len(views) > 0, FullExtentRetained: len(reasons) > 0, Views: views, RetainedReasons: reasons, Fallback: declined[d.Name]})
+	}
+	return g.out, g.origin, g.report
 }
 
 type genState struct {
+	report      *transform.Report
+	sourceIDs   map[*ast.Clause]string
 	schemas     map[string]*sema.RelationSchema
 	declaredRel map[string]bool
 	origin      map[string]string // generated relation name -> original source predicate
 	declined    map[string]bool   // original source predicates decided FALLBACK (nil/empty for plain Generate)
+	names       *GeneratedNames
 	out         *ast.Program
 }
 
@@ -162,6 +281,7 @@ func (g *genState) declareRelation(name string, types []string, originPred strin
 	}
 	g.declaredRel[name] = true
 	g.origin[name] = originPred
+	g.report.Relations = append(g.report.Relations, g.names.Origins[name])
 	var params []ast.Param
 	for i, t := range types {
 		params = append(params, ast.Param{Name: fmt.Sprintf("c%d", i), Type: t})
@@ -169,8 +289,26 @@ func (g *genState) declareRelation(name string, types []string, originPred strin
 	g.out.Decls = append(g.out.Decls, &ast.Decl{Kind: ast.DeclRelation, Name: name, Params: params})
 }
 
-func (g *genState) addClause(head *ast.Atom, body []ast.Literal) {
-	g.out.Clauses = append(g.out.Clauses, &ast.Clause{Head: head, Body: body})
+func (g *genState) addClause(head *ast.Atom, body []ast.Literal, role, sourceID, literalID string) {
+	c := &ast.Clause{Head: head, Body: body}
+	g.report.Rules = append(g.report.Rules, transform.RuleOrigin{ID: role + "/" + head.Name + "/" + sourceID + "/" + literalID, Text: parser.Print(&ast.Program{Clauses: []*ast.Clause{c}}), Index: len(g.out.Clauses), Head: head.Name, Role: role, SourceRuleID: sourceID, SourceLiteralID: literalID})
+	g.out.Clauses = append(g.out.Clauses, c)
+}
+func (g *genState) addOriginal(c *ast.Clause, role string) {
+	id := g.sourceIDs[c]
+	g.report.Rules = append(g.report.Rules, transform.RuleOrigin{ID: id, Text: parser.Print(&ast.Program{Clauses: []*ast.Clause{c}}), Index: len(g.out.Clauses), Head: c.Head.Name, Role: role, SourceRuleID: id})
+	g.out.Clauses = append(g.out.Clauses, c)
+}
+func bindingStrings(k adornedKey) []string {
+	out := []string{}
+	for _, c := range k.adorn {
+		out = append(out, string(c))
+	}
+	return out
+}
+func parserTerm(t ast.Term) string {
+	p := parser.Print(&ast.Program{Clauses: []*ast.Clause{{Head: &ast.Atom{Name: "term", Terms: []ast.Term{t}}}}})
+	return strings.TrimSuffix(strings.TrimPrefix(strings.TrimSpace(p), "term("), ").")
 }
 
 // emitAdornedRule emits one AdornedRule's full contribution: the
@@ -179,6 +317,8 @@ func (g *genState) addClause(head *ast.Atom, body []ast.Literal) {
 // p^alpha(t̄):-sup_n(V_n) rule.
 func (g *genState) emitAdornedRule(key adornedKey, ruleIdx int, ar *AdornedRule, varTypes map[string]string) {
 	n := len(ar.OrderedBody)
+	sourceID := g.sourceIDs[ar.Source]
+	g.report.SIPS = append(g.report.SIPS, transform.SIPS{SourceRuleID: sourceID, ViewID: g.names.Relation(key), Bindings: bindingStrings(key), Plan: ar.Plan, Lowered: ar.Plan.Lowered, Steps: transform.BindingSteps(ar.Plan, sourceID)})
 	headVars := map[string]bool{}
 	for _, t := range ar.Source.Head.Terms {
 		collectVarNames(t, headVars)
@@ -211,7 +351,7 @@ func (g *genState) emitAdornedRule(key adornedKey, ruleIdx int, ar *AdornedRule,
 		V[k] = vk
 	}
 
-	supName := func(k int) string { return fmt.Sprintf("sup_%s_r%d_%d", key.RelName(), ruleIdx, k) }
+	supName := func(k int) string { return g.names.Checkpoint(key, ruleIdx, k) }
 	varTypesFor := func(names []string) []string {
 		types := make([]string, len(names))
 		for i, n := range names {
@@ -225,14 +365,35 @@ func (g *genState) emitAdornedRule(key adornedKey, ruleIdx int, ar *AdornedRule,
 	// bound positions (var or constant, whichever is there) -- NOT V_0,
 	// which is names-only and used for sup_0's own head/param list.
 	boundHeadTerms := boundTermsAt(ar.Source.Head.Terms, adornFromKey(key))
+	// Arithmetic heads cannot be inverted to bind their input variables.
+	// Admit any seed at such a position, evaluate its inputs normally,
+	// then filter the derived head by the original magic demand below.
+	seedTerms := append([]ast.Term{}, boundHeadTerms...)
+	initial := map[string]bool{}
+	for _, name := range ar.BoundAfter[0] {
+		initial[name] = true
+	}
+	filterHead := false
+	for i, term := range seedTerms {
+		vars := map[string]bool{}
+		collectVarNames(term, vars)
+		for name := range vars {
+			if !initial[name] {
+				seedTerms[i] = &ast.Wildcard{}
+				filterHead = true
+				break
+			}
+		}
+	}
 	g.declareRelation(supName(0), varTypesFor(V[0]), key.pred)
-	g.addClause(mkAtomFromNames(supName(0), V[0]), []ast.Literal{mkAtomFromTerms(key.MagicRelName(), boundHeadTerms)})
+	g.declareRelation(g.names.Magic(key), typesForBoundPositions(g.schemas[key.pred], adornFromKey(key)), key.pred)
+	g.addClause(mkAtomFromNames(supName(0), V[0]), []ast.Literal{mkAtomFromTerms(g.names.Magic(key), seedTerms)}, "checkpoint_step", sourceID, "")
 
 	for k := 1; k <= n; k++ {
-		lit := rewriteLiteralForAdornment(ar, k-1, g.declined)
+		lit := rewriteLiteralForAdornment(ar, k-1, g.declined, g.names)
 		g.declareRelation(supName(k), varTypesFor(V[k]), key.pred)
 		body := []ast.Literal{mkAtomFromNames(supName(k-1), V[k-1]), lit}
-		g.addClause(mkAtomFromNames(supName(k), V[k]), body)
+		g.addClause(mkAtomFromNames(supName(k), V[k]), body, "checkpoint_step", sourceID, fmt.Sprintf("%s/body_%d", sourceID, ar.Plan.Steps[k-1].SourceIndex))
 	}
 
 	// Magic rules: one per IDB occurrence (both polarities), fed from
@@ -251,16 +412,20 @@ func (g *genState) emitAdornedRule(key adornedKey, ruleIdx int, ar *AdornedRule,
 		k := occ.literalIndex
 		beta := adornFromKey(occ.target)
 		boundArgs := boundTermsAt(occ.atom.Terms, beta)
-		g.declareRelation(occ.target.MagicRelName(), typesForBoundPositions(g.schemas[occ.target.pred], beta), occ.target.pred)
-		g.addClause(mkAtomFromTerms(occ.target.MagicRelName(), boundArgs), []ast.Literal{mkAtomFromNames(supName(k), V[k])})
+		g.declareRelation(g.names.Magic(occ.target), typesForBoundPositions(g.schemas[occ.target.pred], beta), occ.target.pred)
+		g.addClause(mkAtomFromTerms(g.names.Magic(occ.target), boundArgs), []ast.Literal{mkAtomFromNames(supName(k), V[k])}, "demand_propagation", sourceID, fmt.Sprintf("%s/body_%d", sourceID, ar.Plan.Steps[k].SourceIndex))
 	}
 
 	// p^alpha(t̄) :- sup_n(V_n). Reuses the ORIGINAL head atom's terms
 	// exactly (Datalog binds head<->body by variable NAME, not by
 	// matching argument order across different atoms, so V_n's internal
 	// ordering need not match t̄'s).
-	g.declareRelation(key.RelName(), typesInOrder(g.schemas[key.pred]), key.pred)
-	g.addClause(&ast.Atom{Name: key.RelName(), Terms: ar.Source.Head.Terms}, []ast.Literal{mkAtomFromNames(supName(n), V[n])})
+	g.declareRelation(g.names.Relation(key), typesInOrder(g.schemas[key.pred]), key.pred)
+	finalBody := []ast.Literal{mkAtomFromNames(supName(n), V[n])}
+	if filterHead {
+		finalBody = append(finalBody, mkAtomFromTerms(g.names.Magic(key), boundHeadTerms))
+	}
+	g.addClause(&ast.Atom{Name: g.names.Relation(key), Terms: ar.Source.Head.Terms}, finalBody, "specialized_result", sourceID, "")
 }
 
 // emitSeed emits the query's magic seed fact: magic_q^alpha0(c̄), c̄ being
@@ -269,8 +434,8 @@ func (g *genState) emitAdornedRule(key adornedKey, ruleIdx int, ar *AdornedRule,
 func (g *genState) emitSeed(q *QueryInfo) {
 	beta := adornFromKey(q.Key)
 	boundArgs := boundTermsAt(q.QueryAtom.Terms, beta)
-	g.declareRelation(q.Key.MagicRelName(), typesForBoundPositions(g.schemas[q.Key.pred], beta), q.Key.pred)
-	g.addClause(mkAtomFromTerms(q.Key.MagicRelName(), boundArgs), nil)
+	g.declareRelation(g.names.Magic(q.Key), typesForBoundPositions(g.schemas[q.Key.pred], beta), q.Key.pred)
+	g.addClause(mkAtomFromTerms(g.names.Magic(q.Key), boundArgs), nil, "query_seed", g.sourceIDs[q.ProjectionRule], "")
 }
 
 // emitQueryProjection re-emits the original query-projection rule
@@ -278,8 +443,8 @@ func (g *genState) emitSeed(q *QueryInfo) {
 // itself) with its single body atom's name redirected to the adorned
 // relation.
 func (g *genState) emitQueryProjection(q *QueryInfo) {
-	renamed := &ast.Atom{Name: q.Key.RelName(), Terms: q.QueryAtom.Terms}
-	g.addClause(q.ProjectionRule.Head, []ast.Literal{renamed})
+	renamed := &ast.Atom{Name: g.names.Relation(q.Key), Terms: q.QueryAtom.Terms}
+	g.addClause(q.ProjectionRule.Head, []ast.Literal{renamed}, "query_projection", g.sourceIDs[q.ProjectionRule], "")
 }
 
 // rewriteLiteralForAdornment returns body[idx] rewritten to reference its
@@ -288,14 +453,14 @@ func (g *genState) emitQueryProjection(q *QueryInfo) {
 // unchanged (occ.atom already carries the original name and terms; a
 // declined predicate is read at its own full, untransformed extent, per
 // M2-M3-BUILD.md §7's fallback-cone mechanism).
-func rewriteLiteralForAdornment(ar *AdornedRule, idx int, declined map[string]bool) ast.Literal {
+func rewriteLiteralForAdornment(ar *AdornedRule, idx int, declined map[string]bool, names *GeneratedNames) ast.Literal {
 	lit := ar.OrderedBody[idx]
 	for _, occ := range ar.Occurrences {
 		if occ.literalIndex == idx {
 			if declined[occ.target.pred] {
 				return lit
 			}
-			renamed := &ast.Atom{Name: occ.target.RelName(), Terms: occ.atom.Terms}
+			renamed := &ast.Atom{Name: names.Relation(occ.target), Terms: occ.atom.Terms}
 			if occ.negated {
 				return &ast.NegatedAtom{Atom: renamed}
 			}
